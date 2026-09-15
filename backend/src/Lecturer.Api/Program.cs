@@ -26,11 +26,11 @@ builder.Services.AddScoped<AskQuestionService>();
 // --- Веб-слой ---
 builder.Services.AddControllers();
 
-// --- Swagger / OpenAPI — интерактивная документация API ---
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// CORS — фронт на другом порту, без этого браузер заблокирует запросы
+
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
@@ -43,7 +43,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Swagger UI — открывается на /swagger
+
 app.UseSwagger();
 app.UseSwaggerUI();
 
