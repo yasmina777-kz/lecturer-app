@@ -1,0 +1,59 @@
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: #0f1115;
+  color: #eaeaea;
+}
+
+.lecture-player-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 32px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.slide-viewer {
+  min-height: 320px;
+  padding: 32px;
+  background: #1a1d24;
+  border-radius: 8px;
+}
+
+.avatar-player {
+  display: flex;
+  justify-content: center;
+}
+
+.avatar-placeholder {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: #3a6df0;
+}
+
+.answering-indicator {
+  text-align: center;
+  color: #9aa0ac;
+}
+
+.ask-button {
+  align-self: center;
+  padding: 12px 24px;
+  border-radius: 24px;
+  border: none;
+  background: #3a6df0;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.ask-button--recording {
+  background: #d94848;
+}
+
+.ask-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
