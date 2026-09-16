@@ -20,10 +20,10 @@ builder.Services.AddHttpClient<ISpeechToTextService, SpeechToTextClient>();
 builder.Services.AddHttpClient<ITextToSpeechService, TextToSpeechClient>();
 builder.Services.AddHttpClient<IAiClient, AiClient>();
 
-// --- Бизнес-логика ---
+
 builder.Services.AddScoped<AskQuestionService>();
 
-// --- Веб-слой ---
+
 builder.Services.AddControllers();
 
 

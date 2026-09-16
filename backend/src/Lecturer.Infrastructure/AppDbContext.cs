@@ -13,14 +13,14 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Lecture 1 --- N Slide
+        
         modelBuilder.Entity<Lecture>()
             .HasMany(l => l.Slides)
             .WithOne()
             .HasForeignKey(s => s.LectureId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        // Слайды упорядочены по OrderIndex — пригодится при выдаче лекции целиком
+        
         modelBuilder.Entity<Slide>()
             .HasIndex(s => new { s.LectureId, s.OrderIndex });
 
