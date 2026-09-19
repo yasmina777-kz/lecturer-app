@@ -529,6 +529,11 @@ a {
   background: var(--primary-dark);
 }
 
+.auth-page button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .error-msg {
   color: var(--error);
   font-size: 13px;
@@ -543,4 +548,101 @@ a {
   font-size: 15px;
   text-align: center;
   padding: 20px 0;
+}
+
+/* ===== Auth page additions ===== */
+
+.auth-brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.field-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.field-hint-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary);
+  cursor: pointer;
+}
+
+.field-hint-link:disabled {
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.password-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input input {
+  width: 100%;
+  padding-right: 76px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 6px;
+  background: none;
+  border: none;
+  padding: 6px 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.password-toggle:hover {
+  color: var(--text);
+  background: var(--surface-high);
+}
+
+.switch-link {
+  text-align: center;
+  margin: 20px 0 0;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.switch-link a {
+  color: var(--primary);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.switch-link a:hover {
+  text-decoration: underline;
+}
+
+/* secondary button used on the register-success screen */
+.auth-page > button[type="button"] {
+  width: 100%;
+  margin-top: 4px;
+  padding: 13px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-low);
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.auth-page > button[type="button"]:hover {
+  background: var(--surface-high);
 }
