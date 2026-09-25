@@ -5,6 +5,7 @@ namespace Lecturer.Core.Entities;
 public class Question
 {
     public Guid Id { get; set; }
+    public Guid? UserId { get; set; }
     public Guid LectureId { get; set; }
     public Guid SlideId { get; set; }
 

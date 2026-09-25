@@ -1,26 +1,19 @@
-import { API_BASE_URL } from "./httpClient";
+import { post } from "./httpClient";
 import type { AskQuestionResponse } from "../types/lecture";
-
-// Отправляем аудио вопроса как multipart/form-data — так его ожидает
-// [FromForm] IFormFile audio в QuestionsController на бэке.
-export async function askQuestion(
+export function askQuestion(
   lectureId: string,
   slideId: string,
-  audioBlob: Blob
-): Promise<AskQuestionResponse> {
-  const formData = new FormData();
-  formData.append("lectureId", lectureId);
-  formData.append("slideId", slideId);
-  formData.append("audio", audioBlob, "question.webm");
-
-  const response = await fetch(`${API_BASE_URL}/questions/ask`, {
-    method: "POST",
-    body: formData,
-  });
-
-  if (!response.ok) {
-    throw new Error(`Ask question failed: ${response.status}`);
-  }
-
-  return response.json() as Promise<AskQuestionResponse>;
+  question: string | Blob,
+) {
+  const body = new FormData();
+  body.append("lectureId", lectureId);
+  body.append("slideId", slideId);
+  if (typeof question === "string") body.append("text", question);
+  else
+    body.append(
+      "audio",
+      question,
+      question.type.includes("mp4") ? "question.mp4" : "question.webm",
+    );
+  return post<AskQuestionResponse>("/questions/ask", body);
 }

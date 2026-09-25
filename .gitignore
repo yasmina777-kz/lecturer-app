@@ -1,20 +1,59 @@
-# C# / .NET
-bin/
-obj/
-*.dll
-*.pdb
-*.user
-
-# Node / TypeScript
+# Dependencies and build output
 node_modules/
 dist/
 .vite/
+[Bb]in/
+[Oo]bj/
+*.dll
+*.pdb
+*.tsbuildinfo
 
+# Local environment and credentials (commit only the template)
+.env
+.env.*
+!.env.example
+local.config.json
+appsettings.Local.json
+appsettings.*.Local.json
+*.key
+*.pem
+*.pfx
+*.p12
 
+# Local database, user data and backups
+App_Data/
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+*.sqlite-shm
+*.sqlite-wal
+*.sqlite3-shm
+*.sqlite3-wal
+backups/
+*.bak
+
+# Tests, coverage and logs
+playwright-report/
+test-results/
+coverage/
+TestResults/
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# IDE and operating system files
 .idea/
 .vs/
 .vscode/
-
-
+*.user
+*.suo
 .DS_Store
-*.log
+._*
+Thumbs.db
+Desktop.ini

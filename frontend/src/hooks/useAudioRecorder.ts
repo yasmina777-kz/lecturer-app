@@ -1,49 +1,82 @@
-import { useRef, useState, useCallback } from "react";
-
-// Инкапсулирует работу с MediaRecorder API браузера.
-// Возвращает функции start/stop и текущее состояние записи,
-// чтобы AskButton не знал деталей работы с микрофоном.
+import { t } from "../i18n";
+import { useEffect, useRef, useState } from "react";
 export function useAudioRecorder() {
-  const [isRecording, setIsRecording] = useState(false);
-  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const chunksRef = useRef<Blob[]>([]);
-
-  const start = useCallback(async () => {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    const recorder = new MediaRecorder(stream);
-    chunksRef.current = [];
-
-    recorder.ondataavailable = (event) => {
-      if (event.data.size > 0) {
-        chunksRef.current.push(event.data);
+  const [isRecording, setRecording] = useState(false);
+  const recorderRef = useRef<MediaRecorder | null>(null);
+  const alive = useRef(true);
+  const pending = useRef(false);
+  const chunks = useRef<Blob[]>([]);
+  useEffect(() => {
+    alive.current = true;
+    return () => {
+      alive.current = false;
+      const r = recorderRef.current;
+      if (r) {
+        r.ondataavailable = null;
+        r.onstop = null;
+        if (r.state !== "inactive") r.stop();
+        r.stream.getTracks().forEach((t) => t.stop());
       }
     };
-
-    recorder.start();
-    mediaRecorderRef.current = recorder;
-    setIsRecording(true);
   }, []);
-
-  // Возвращает Promise с готовым аудио-файлом (Blob), когда запись остановлена
-  const stop = useCallback((): Promise<Blob> => {
+  async function start() {
+    if (pending.current || recorderRef.current?.state === "recording") return;
+    if (
+      !navigator.mediaDevices?.getUserMedia ||
+      typeof MediaRecorder === "undefined"
+    )
+      throw new Error(
+        t(
+          "Запись голоса недоступна. Откройте приложение по HTTPS или задайте вопрос текстом.",
+        ),
+      );
+    pending.current = true;
+    let stream: MediaStream | undefined;
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      if (!alive.current) {
+        stream.getTracks().forEach((t) => t.stop());
+        return;
+      }
+      const mime = ["audio/webm;codecs=opus", "audio/mp4"].find((t) =>
+        MediaRecorder.isTypeSupported(t),
+      );
+      const recorder = new MediaRecorder(
+        stream,
+        mime ? { mimeType: mime } : undefined,
+      );
+      chunks.current = [];
+      recorder.ondataavailable = (e) => {
+        if (e.data.size > 0) chunks.current.push(e.data);
+      };
+      recorderRef.current = recorder;
+      recorder.start(500);
+      setRecording(true);
+    } catch {
+      stream?.getTracks().forEach((t) => t.stop());
+      throw new Error(
+        t(
+          "Нет доступа к микрофону. Разрешите запись в браузере или напишите вопрос.",
+        ),
+      );
+    } finally {
+      pending.current = false;
+    }
+  }
+  function stop(): Promise<Blob> {
     return new Promise((resolve) => {
-      const recorder = mediaRecorderRef.current;
-      if (!recorder) {
+      const r = recorderRef.current;
+      if (!r || r.state === "inactive") {
         resolve(new Blob());
         return;
       }
-
-      recorder.onstop = () => {
-        const blob = new Blob(chunksRef.current, { type: "audio/webm" });
-        // Останавливаем дорожки микрофона, чтобы браузер убрал индикатор записи
-        recorder.stream.getTracks().forEach((track) => track.stop());
-        setIsRecording(false);
-        resolve(blob);
+      r.onstop = () => {
+        r.stream.getTracks().forEach((t) => t.stop());
+        if (alive.current) setRecording(false);
+        resolve(new Blob(chunks.current, { type: r.mimeType }));
       };
-
-      recorder.stop();
+      r.stop();
     });
-  }, []);
-
+  }
   return { isRecording, start, stop };
 }

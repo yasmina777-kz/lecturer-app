@@ -1,3 +1,4 @@
+import { t } from "../i18n";
 import { useAudioRecorder } from "../hooks/useAudioRecorder";
 
 interface AskButtonProps {
@@ -29,7 +30,7 @@ export function AskButton({ disabled, onQuestionRecorded }: AskButtonProps) {
       onClick={handleClick}
       disabled={disabled}
     >
-      {isRecording ? "Остановить и отправить" : "Задать вопрос"}
+      {isRecording ? t("Остановить и отправить") : t("Задать вопрос")}
     </button>
   );
 }

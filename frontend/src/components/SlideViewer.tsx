@@ -1,33 +1,60 @@
+import { t } from "../i18n";
+import { SlideVisual, type TeachingVisual } from "./SlideVisual";
 import type { Slide } from "../types/lecture";
-
-interface SlideContent {
-  heading?: string;
-  bullets?: string[];
-}
-
-interface SlideViewerProps {
-  slide: Slide;
-}
-
-export function SlideViewer({ slide }: SlideViewerProps) {
-  // ContentJson приходит с бэка как строка — распаковываем в объект для рендера
-  let content: SlideContent = {};
+export function slideContent(slide: Slide) {
   try {
-    content = JSON.parse(slide.contentJson) as SlideContent;
+    return JSON.parse(slide.contentJson) as {
+      title?: string;
+      heading?: string;
+      bullets?: string[];
+      visual?: TeachingVisual;
+    };
   } catch {
-    content = {};
+    return {};
   }
-
+}
+export function SlideViewer({
+  slide,
+  index = 0,
+  total = 1,
+  subject = "",
+}: {
+  slide: Slide;
+  index?: number;
+  total?: number;
+  subject?: string;
+}) {
+  const content = slideContent(slide);
   return (
     <div className="slide-viewer">
-      {content.heading && <h2>{content.heading}</h2>}
-      {content.bullets && (
-        <ul>
-          {content.bullets.map((bullet, index) => (
-            <li key={index}>{bullet}</li>
-          ))}
-        </ul>
-      )}
+      <div className="slide-top">
+        <span>{subject}</span>
+        <span>AI MENTOR / {String(index + 1).padStart(2, "0")}</span>
+      </div>
+      <div className={`slide-content ${content.visual ? "has-visual" : ""}`}>
+        <span className="slide-number">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+        <h2>{content.title || content.heading || t("Новая идея")}</h2>
+        <div className="slide-detail-layout">
+          <ul>
+            {content.bullets?.map((b, i) => (
+              <li key={i}>
+                <span>{String(i + 1).padStart(2, "0")}</span>
+                {b}
+              </li>
+            ))}
+          </ul>
+          {content.visual && <SlideVisual visual={content.visual} />}
+        </div>
+      </div>
+      <div className="slide-footer">
+        <span>{t("Одна идея — на шаг ближе к пониманию")}</span>
+        <span>
+          {index + 1} / {total}
+        </span>
+      </div>
+      <div className="slide-decoration" />
     </div>
   );
 }

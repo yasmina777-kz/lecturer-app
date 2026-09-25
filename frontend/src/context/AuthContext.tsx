@@ -1,50 +1,67 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
-import type { UserRole } from "../types/auth";
-
-interface AuthState {
-  token: string | null;
-  role: UserRole | null;
-  fullName: string | null;
+import { t } from "../i18n";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react";
+import { request, post } from "../api/httpClient";
+import type { User } from "../types/auth";
+import { setLanguage } from "../i18n";
+interface AuthContextValue {
+  user: User | null;
+  loading: boolean;
+  error: string;
+  setUser: (user: User) => void;
+  logout: () => Promise<void>;
+  reload: () => Promise<void>;
 }
-
-interface AuthContextValue extends AuthState {
-  setAuth: (token: string, role: UserRole, fullName: string) => void;
-  logout: () => void;
-}
-
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
-
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [state, setState] = useState<AuthState>(() => {
-    const token = localStorage.getItem("token");
-    const role = localStorage.getItem("role") as UserRole | null;
-    const fullName = localStorage.getItem("fullName");
-    return { token, role, fullName };
-  });
-
-  function setAuth(token: string, role: UserRole, fullName: string) {
-    localStorage.setItem("token", token);
-    localStorage.setItem("role", role);
-    localStorage.setItem("fullName", fullName);
-    setState({ token, role, fullName });
+  const [user, updateUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  function setUser(value: User | null) {
+    updateUser(value);
+    if (value?.interfaceLanguage) setLanguage(value.interfaceLanguage);
   }
-
-  function logout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("role");
-    localStorage.removeItem("fullName");
-    setState({ token: null, role: null, fullName: null });
+  async function reload() {
+    setLoading(true);
+    setError("");
+    try {
+      const response = await fetch("/api/auth/me", { credentials: "include" });
+      if (response.status === 401) setUser(null);
+      else if (response.ok) setUser(await response.json());
+      else throw new Error(t("Сервер временно недоступен."));
+    } catch {
+      setError(t("Не удалось подключиться к серверу."));
+    } finally {
+      setLoading(false);
+    }
   }
-
+  useEffect(() => {
+    // Remove tokens from the old MVP; new sessions use an HttpOnly cookie.
+    ["token", "role", "fullName"].forEach((k) => localStorage.removeItem(k));
+    void reload();
+    const expired = () => setUser(null);
+    window.addEventListener("session-expired", expired);
+    return () => window.removeEventListener("session-expired", expired);
+  }, []);
+  async function logout() {
+    await post("/auth/logout");
+    setUser(null);
+  }
   return (
-    <AuthContext.Provider value={{ ...state, setAuth, logout }}>
+    <AuthContext.Provider
+      value={{ user, loading, error, setUser, logout, reload }}
+    >
       {children}
     </AuthContext.Provider>
   );
 }
-
 export function useAuth() {
   const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error("useAuth должен использоваться внутри AuthProvider");
+  if (!ctx) throw new Error("AuthProvider required");
   return ctx;
 }
