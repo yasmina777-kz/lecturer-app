@@ -1,3 +1,5 @@
+import { QualityPanel } from "./QualityPanel";
+import { at } from "../i18n/automation";
 import { t } from "../i18n";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +21,7 @@ export function LectureManagement({
   const [deleting, setDeleting] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [reviewed, setReviewed] = useState(false);
   const [saved, setSaved] = useState(false);
   const navigate = useNavigate();
   if (user?.id !== lecture.ownerId && user?.role !== "Admin") return null;
@@ -26,7 +29,7 @@ export function LectureManagement({
     setBusy(true);
     setError("");
     try {
-      await patch(`/lectures/${lecture.id}`, { title, isPublished: published });
+      await patch(`/lectures/${lecture.id}`, { title, isPublished: published, reviewed });
       onUpdate(title, published);
       setSaved(true);
     } catch (e) {
@@ -77,11 +80,13 @@ export function LectureManagement({
             {t("Опубликовать для всех пользователей")}
           </label>
         )}
+        <QualityPanel lectureId={lecture.id}/>
+        {published && !lecture.isPublished && <label className="checkbox-label"><input type="checkbox" checked={reviewed} onChange={e=>setReviewed(e.target.checked)}/>{at("Я проверил содержание, источники и задания.","I reviewed the content, sources and tasks.","Мазмұнын, дереккөздері мен тапсырмаларын тексердім.")}</label>}
         <ErrorMessage message={error} />
         <div className="manage-actions">
           <button
             className="button secondary small"
-            disabled={busy || title.trim().length < 3}
+            disabled={busy || title.trim().length < 3 || published && !lecture.isPublished && !reviewed}
             onClick={save}
           >
             <Save size={15} />

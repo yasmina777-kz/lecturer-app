@@ -17,6 +17,9 @@ export function useNarrator(
   provider = "browser",
 ) {
   const [speaking, setSpeaking] = useState(false);
+  const [active, setActive] = useState(false);
+  const startTimer = useRef<number>();
+  const startDeadline = useRef<number>();
   const [speechError, setSpeechError] = useState("");
   const position = useRef<SpeechPosition>({ chunks: [], index: 0 });
   const generation = useRef(0);
@@ -31,10 +34,16 @@ export function useNarrator(
   const supported =
     typeof window !== "undefined" && "speechSynthesis" in window;
   function release() {
+    clearTimeout(startTimer.current);
+    clearTimeout(startDeadline.current);
     controller.current?.abort();
     if (audio.current) {
-      audio.current.pause();
       audio.current.onended = null;
+      audio.current.onplaying = null;
+      audio.current.onpause = null;
+      audio.current.onwaiting = null;
+      audio.current.onerror = null;
+      audio.current.pause();
       audio.current.removeAttribute("src");
       audio.current = undefined;
     }
@@ -47,6 +56,7 @@ export function useNarrator(
     release();
     utterance.current = null;
     setSpeaking(false);
+    setActive(false);
   }
   async function run() {
     const token = generation.current;
@@ -55,19 +65,21 @@ export function useNarrator(
       const p = position.current;
       if (p.index >= p.chunks.length) {
         setSpeaking(false);
+        setActive(false);
         onDone.current();
         return;
       }
       const { language, gender, provider, rate } = settings.current;
       const next = () => {
         if (token === generation.current) {
+          clearTimeout(startDeadline.current);
+          setSpeaking(false);
           position.current.index++;
           void speakNext();
         }
       };
       try {
         if (provider === "azure") {
-          setSpeaking(true);
           release();
           const text = p.chunks[p.index];
           const key = `${language}|${gender}|${text}`;
@@ -99,9 +111,16 @@ export function useNarrator(
           audio.current = player;
           player.playbackRate = rate;
           player.onended = next;
+          player.onplaying = () => {
+            if (token === generation.current) setSpeaking(true);
+          };
+          player.onpause = player.onwaiting = () => {
+            if (token === generation.current) setSpeaking(false);
+          };
           player.onerror = () => {
             if (token === generation.current) {
               setSpeaking(false);
+              setActive(false);
               setSpeechError(
                 t(
                   "Не удалось воспроизвести голос. Нажмите «Продолжить» или читайте текст слайда.",
@@ -162,25 +181,35 @@ export function useNarrator(
               "Пол голоса устройства не подтверждён. Для точного выбора мужского или женского голоса подключите Azure Speech.",
             ),
           );
-        u.onend = next;
-        u.onerror = (e) => {
-          if (
-            token === generation.current &&
-            !["interrupted", "canceled"].includes(e.error)
-          ) {
-            setSpeaking(false);
-            setSpeechError(
-              t(
-                "Не удалось воспроизвести голос. Нажмите «Продолжить» или читайте текст слайда.",
-              ),
-            );
-          }
+        u.onstart = u.onresume = () => {
+          if (token !== generation.current) return;
+          clearTimeout(startDeadline.current);
+          setSpeaking(true);
         };
-        setSpeaking(true);
-        window.speechSynthesis.speak(u);
+        u.onpause = () => {
+          if (token === generation.current) setSpeaking(false);
+        };
+        u.onend = next;
+        const failed = () => {
+          if (token !== generation.current) return;
+          cancel();
+          setSpeechError(t("Не удалось воспроизвести голос. Нажмите «Продолжить» или читайте текст слайда."));
+        };
+        u.onerror = failed;
+        // Some engines discard speak() in the same turn as cancel(). Give the
+        // cancellation time to settle; also clear a leftover native pause state.
+        startTimer.current = window.setTimeout(() => {
+          if (token !== generation.current) return;
+          try {
+            if (window.speechSynthesis.paused) window.speechSynthesis.resume();
+            startDeadline.current = window.setTimeout(failed, 8000);
+            window.speechSynthesis.speak(u);
+          } catch { failed(); }
+        }, 80);
       } catch (e) {
         if (token === generation.current) {
           setSpeaking(false);
+          setActive(false);
           setSpeechError(
             e instanceof Error
               ? e.message
@@ -201,6 +230,7 @@ export function useNarrator(
       index: 0,
     };
     onDone.current = done;
+    setActive(true);
     void run();
   }
   function pause() {
@@ -217,6 +247,7 @@ export function useNarrator(
     if (saved)
       position.current = { chunks: [...saved.chunks], index: saved.index };
     if (done) onDone.current = done;
+    setActive(true);
     void run();
   }
   useEffect(() => {
@@ -227,5 +258,5 @@ export function useNarrator(
       release();
     };
   }, [language, gender, provider]);
-  return { speaking, speechError, say, pause, resume, cancel, supported };
+  return { speaking, active, speechError, say, pause, resume, cancel, supported };
 }

@@ -11,7 +11,7 @@ public class SpeechController(SpeechService speech) : ControllerBase
     public async Task<IActionResult> Speak(SpeechRequest dto, CancellationToken ct)
     {
         if (!TeachingPreferences.LanguageValid(dto.Language) || !TeachingPreferences.GenderValid(dto.Gender) || string.IsNullOrWhiteSpace(dto.Text)) return BadRequest(new { message = "Выберите язык и голос." });
-        return File(await speech.Speak(dto.Text, dto.Language, dto.Gender, ct), "audio/mpeg");
+        return File(await speech.Speak(dto.Text, dto.Language, dto.Gender, SessionService.UserId(User), ct), "audio/mpeg");
     }
 }
 public record SpeechRequest([Required, StringLength(4000, MinimumLength = 1)] string Text, string Language, string Gender);

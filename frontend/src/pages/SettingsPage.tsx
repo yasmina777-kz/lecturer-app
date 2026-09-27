@@ -85,6 +85,17 @@ export function SettingsPage() {
             Email
             <input value={user!.email} disabled type="email" />
           </label>
+          <label>
+            {t("Роль")}
+            <input
+              value={t(user!.role === "Admin" ? "Администратор" : user!.role === "Lecturer" ? "Преподаватель" : "Студент")}
+              readOnly
+              aria-describedby="profile-role-hint"
+            />
+          </label>
+          <p id="profile-role-hint" className="form-hint">
+            {t("Роль назначает только администратор через админ-панель.")}
+          </p>
           <div className="divider" />
           <TeachingSetup
             value={teaching}

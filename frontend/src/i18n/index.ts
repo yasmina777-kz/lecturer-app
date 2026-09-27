@@ -1,7 +1,9 @@
 import { useSyncExternalStore } from "react";
 import type { Language } from "../types/auth";
 import { updatesEn, updatesKk } from "./updates";
+import { learningEn, learningKk } from "./learning";
 import { marketingEn, marketingKk } from "./marketing";
+import { automationEn, automationKk } from "./automationMessages";
 import { en, kk } from "./messages";
 const supported = ["ru", "en", "kk"];
 let language: Language = "ru";
@@ -33,9 +35,9 @@ export function setLanguage(next: Language) {
 export function t(source: string, ...values: (string | number)[]): string {
   let text =
     language === "en"
-      ? (updatesEn[source] ?? marketingEn[source] ?? en[source] ?? source)
+      ? (automationEn[source] ?? learningEn[source] ?? updatesEn[source] ?? marketingEn[source] ?? en[source] ?? source)
       : language === "kk"
-        ? (updatesKk[source] ?? marketingKk[source] ?? kk[source] ?? source)
+        ? (automationKk[source] ?? learningKk[source] ?? updatesKk[source] ?? marketingKk[source] ?? kk[source] ?? source)
         : source;
   return text.replace(/\{(\d+)\}/g, (_, n) =>
     String(values[Number(n)] ?? `{${n}}`),

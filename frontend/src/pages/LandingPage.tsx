@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { AvatarPlayer } from "../components/AvatarPlayer";
 import { Brand } from "../components/UI";
+import { ThemeSwitcher } from "../components/ThemeSwitcher";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import { useAuth } from "../context/AuthContext";
 import { t } from "../i18n";
@@ -30,6 +31,7 @@ export default function LandingPage() {
   const [audience, setAudience] = useState<"student" | "teacher">("student");
   const root = useRef<HTMLDivElement>(null);
   useEffect(() => {
+    if (!("IntersectionObserver" in window)) return;
     const observer = new IntersectionObserver(
       (entries) =>
         entries.forEach((entry) => {
@@ -38,7 +40,7 @@ export default function LandingPage() {
             observer.unobserve(entry.target);
           }
         }),
-      { threshold: 0.08 },
+      { threshold: 0, rootMargin: "80px 0px" },
     );
     root.current
       ?.querySelectorAll("[data-reveal]")
@@ -65,6 +67,7 @@ export default function LandingPage() {
           <a href="#for-you">{t("Для кого")}</a>
         </nav>
         <div className="mentor-header-actions">
+          <ThemeSwitcher />
           <LanguageSwitcher />
           <Link className="mentor-signin" to={user ? "/dashboard" : "/login"}>
             {user ? t("В кабинет") : t("Войти")}

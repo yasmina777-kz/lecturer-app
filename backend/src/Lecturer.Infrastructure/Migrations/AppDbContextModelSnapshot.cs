@@ -73,6 +73,187 @@ namespace Lecturer.Infrastructure.Migrations
                     b.ToTable("AiUsage");
                 });
 
+            modelBuilder.Entity("Lecturer.Core.Entities.AutomationSettings", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<long>("MonthlyRequests")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("MonthlySpeechCharacters")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("MonthlyTokens")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AutomationSettings");
+                });
+
+            modelBuilder.Entity("Lecturer.Core.Entities.BudgetPeriod", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<long>("Requests")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("SpeechCharacters")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("Tokens")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BudgetPeriods");
+                });
+
+            modelBuilder.Entity("Lecturer.Core.Entities.Course", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("EndAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Goal")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsPublished")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Language")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Level")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("OwnerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("SourceNames")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SourceText")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("StartAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
+
+                    b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("Lecturer.Core.Entities.CourseModule", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CourseId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("DueAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Error")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("LeaseId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("LeaseUntil")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("LectureId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Minutes")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Objective")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("OrderIndex")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LectureId");
+
+                    b.HasIndex("CourseId", "OrderIndex")
+                        .IsUnique();
+
+                    b.ToTable("CourseModules");
+                });
+
+            modelBuilder.Entity("Lecturer.Core.Entities.GroupAssignment", b =>
+                {
+                    b.Property<Guid>("GroupId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("LectureId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("AssignedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime?>("DueAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("GroupId", "LectureId");
+
+                    b.HasIndex("LectureId");
+
+                    b.ToTable("GroupAssignments");
+                });
+
+            modelBuilder.Entity("Lecturer.Core.Entities.GroupMember", b =>
+                {
+                    b.Property<Guid>("GroupId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("JoinedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("GroupId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("GroupMembers");
+                });
+
             modelBuilder.Entity("Lecturer.Core.Entities.LearningProgress", b =>
                 {
                     b.Property<Guid>("UserId")
@@ -165,6 +346,10 @@ namespace Lecturer.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("SourceText")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Subject")
                         .IsRequired()
                         .HasColumnType("text");
@@ -228,6 +413,71 @@ namespace Lecturer.Infrastructure.Migrations
                     b.ToTable("Questions");
                 });
 
+            modelBuilder.Entity("Lecturer.Core.Entities.QuizAttempt", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("LectureId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LectureId");
+
+                    b.HasIndex("UserId", "CreatedAt");
+
+                    b.ToTable("QuizAttempts");
+                });
+
+            modelBuilder.Entity("Lecturer.Core.Entities.Remediation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Attempts")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ContentJson")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("LectureId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("QuestionIndex")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("ResolvedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LectureId");
+
+                    b.HasIndex("UserId", "LectureId", "QuestionIndex")
+                        .IsUnique();
+
+                    b.ToTable("Remediations");
+                });
+
             modelBuilder.Entity("Lecturer.Core.Entities.Slide", b =>
                 {
                     b.Property<Guid>("Id")
@@ -253,6 +503,61 @@ namespace Lecturer.Infrastructure.Migrations
                     b.HasIndex("LectureId", "OrderIndex");
 
                     b.ToTable("Slides");
+                });
+
+            modelBuilder.Entity("Lecturer.Core.Entities.SpeechCache", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<byte[]>("Audio")
+                        .IsRequired()
+                        .HasColumnType("bytea");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedAt");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("SpeechCache");
+                });
+
+            modelBuilder.Entity("Lecturer.Core.Entities.StudyGroup", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("JoinCode")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<Guid>("OwnerId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("JoinCode")
+                        .IsUnique();
+
+                    b.HasIndex("OwnerId");
+
+                    b.ToTable("StudyGroups");
                 });
 
             modelBuilder.Entity("Lecturer.Core.Entities.User", b =>
@@ -317,7 +622,90 @@ namespace Lecturer.Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Lecturer.Core.Entities.Course", b =>
+                {
+                    b.HasOne("Lecturer.Core.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Lecturer.Core.Entities.CourseModule", b =>
+                {
+                    b.HasOne("Lecturer.Core.Entities.Course", null)
+                        .WithMany("Modules")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Lecturer.Core.Entities.Lecture", null)
+                        .WithMany()
+                        .HasForeignKey("LectureId")
+                        .OnDelete(DeleteBehavior.SetNull);
+                });
+
+            modelBuilder.Entity("Lecturer.Core.Entities.GroupAssignment", b =>
+                {
+                    b.HasOne("Lecturer.Core.Entities.StudyGroup", null)
+                        .WithMany()
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Lecturer.Core.Entities.Lecture", null)
+                        .WithMany()
+                        .HasForeignKey("LectureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Lecturer.Core.Entities.GroupMember", b =>
+                {
+                    b.HasOne("Lecturer.Core.Entities.StudyGroup", null)
+                        .WithMany()
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Lecturer.Core.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Lecturer.Core.Entities.LearningProgress", b =>
+                {
+                    b.HasOne("Lecturer.Core.Entities.Lecture", null)
+                        .WithMany()
+                        .HasForeignKey("LectureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Lecturer.Core.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Lecturer.Core.Entities.QuizAttempt", b =>
+                {
+                    b.HasOne("Lecturer.Core.Entities.Lecture", null)
+                        .WithMany()
+                        .HasForeignKey("LectureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Lecturer.Core.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Lecturer.Core.Entities.Remediation", b =>
                 {
                     b.HasOne("Lecturer.Core.Entities.Lecture", null)
                         .WithMany()
@@ -339,6 +727,29 @@ namespace Lecturer.Infrastructure.Migrations
                         .HasForeignKey("LectureId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Lecturer.Core.Entities.SpeechCache", b =>
+                {
+                    b.HasOne("Lecturer.Core.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Lecturer.Core.Entities.StudyGroup", b =>
+                {
+                    b.HasOne("Lecturer.Core.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Lecturer.Core.Entities.Course", b =>
+                {
+                    b.Navigation("Modules");
                 });
 
             modelBuilder.Entity("Lecturer.Core.Entities.Lecture", b =>

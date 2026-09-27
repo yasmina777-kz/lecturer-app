@@ -1,0 +1,73 @@
+import { useEffect, useRef, useState, type FormEvent } from "react";
+import { Link, useSearchParams } from "react-router-dom";
+import { ArrowLeft, ArrowUpRight, BookOpen, Check, Layers, Sparkles } from "lucide-react";
+import { apiGet, post } from "../api/httpClient";
+import { useAuth } from "../context/AuthContext";
+import { ErrorMessage, Loading, messageOf } from "../components/UI";
+import { QualityChecks, type QualityCheck } from "../components/QualityPanel";
+import { at } from "../i18n/automation";
+import { getLanguage, t } from "../i18n";
+interface CourseCard { id:string;title:string;goal:string;language:string;startAt:string;endAt:string;isPublished:boolean;canManage:boolean;moduleCount:number;readyCount:number }
+interface Module {id:string;orderIndex:number;title:string;objective:string;minutes:number;dueAt:string;lectureId:string|null;busy:boolean;error:string|null;completed:boolean;quality:QualityCheck[]|null}
+interface Estimate {costLow:number|null;costHigh:number|null;inputTokensHigh:number;outputTokensHigh:number}
+interface Course extends CourseCard {sourceNames:string|null;modules:Module[];estimates:Estimate[]|null}
+const date = (v:string) => new Date(v).toLocaleDateString(getLanguage());
+function Cost({items}: {items:Estimate[]}) {
+  const known=items.length>0&&items.every(i=>i.costLow!=null&&i.costHigh!=null);
+  return <p className="form-hint">{at("Оценка генерации лекций", "Lesson generation estimate", "Дәрістерді жасау бағасы")}: {known ? `$${items.reduce((a,i)=>a+i.costLow!,0).toFixed(3)}–$${items.reduce((a,i)=>a+i.costHigh!,0).toFixed(3)}` : at("цена модели не настроена", "model pricing is not configured", "модель бағасы бапталмаған")}. {at("Приблизительно, без озвучки. План курса оплачивается отдельно; фактический расход виден администратору.", "Approximate, excluding speech. The course plan is billed separately; actual usage is shown to the administrator.", "Шамамен, дыбыстаусыз. Курс жоспары бөлек есептеледі; нақты шығын әкімшіге көрінеді.")}</p>;
+}
+export function CoursesPage() {
+  const {user}=useAuth(); const teacher=user?.role!=="Student";
+  const [params,setParams]=useSearchParams(); const id=params.get("course");
+  const [list,setList]=useState<CourseCard[]>([]); const [course,setCourse]=useState<Course|null>(null);
+  const [error,setError]=useState(""); const [notice,setNotice]=useState(""); const [busy,setBusy]=useState(false); const [loading,setLoading]=useState(true);
+  const [showForm,setShowForm]=useState(false); const [reviewed,setReviewed]=useState(false);
+  const [groups,setGroups]=useState<{id:string;name:string;canManage:boolean}[]>([]); const [group,setGroup]=useState("");
+  const [count,setCount]=useState(4); const [minutes,setMinutes]=useState(10); const [estimate,setEstimate]=useState<Estimate|null>(null);
+  const stop=useRef(false); const mounted=useRef(true);
+  useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;stop.current=true;};},[]);
+  async function reload() { if(id) {const c=await apiGet<Course>(`/courses/${id}`);if(mounted.current)setCourse(c);return c;} else {const rows=await apiGet<CourseCard[]>("/courses");if(mounted.current)setList(rows);return null;} }
+  useEffect(()=>{setLoading(true);setCourse(null);setReviewed(false);setError("");void reload().catch(e=>setError(messageOf(e))).finally(()=>setLoading(false));},[id]);
+  useEffect(()=>{if(teacher)apiGet<typeof groups>("/groups").then(setGroups).catch(e=>setError(messageOf(e)));},[teacher]);
+  useEffect(()=>{let alive=true;apiGet<Estimate>(`/lectures/estimate?minutes=${minutes}&materialCharacters=60000&language=${getLanguage()}`).then(e=>{if(alive)setEstimate(e);}).catch(()=>{if(alive)setEstimate(null);});return()=>{alive=false;};},[minutes,getLanguage()]);
+  async function create(e:FormEvent<HTMLFormElement>) {
+    e.preventDefault();setBusy(true);setError("");const form=new FormData(e.currentTarget);
+    form.set("ModuleCount",String(count));form.set("Minutes",String(minutes));
+    form.set("StartAt",new Date(`${form.get("StartAt")}T00:00:00Z`).toISOString());form.set("EndAt",new Date(`${form.get("EndAt")}T23:59:59Z`).toISOString());
+    const files=form.getAll("Files").filter(f=>f instanceof File&&f.size>0) as File[];form.delete("Files");files.forEach(f=>form.append("Files",f));
+    if(files.length>5||files.some(f=>f.size>10*1024*1024)||files.reduce((a,f)=>a+f.size,0)>30000000){setError(at("До 5 файлов, каждый до 10 МБ, всего до 30 МБ.","Up to 5 files, 10 MB each, 30 MB total.","5 файлға дейін, әрқайсысы 10 МБ, жалпы 30 МБ дейін."));setBusy(false);return;}
+    try {const r=await post<{id:string}>("/courses",form);setShowForm(false);setParams({course:r.id});}catch(e){setError(messageOf(e));}finally{setBusy(false);}
+  }
+  async function generate(selected?:Module) {
+    if(!course)return;setBusy(true);setError("");setNotice("");stop.current=false;
+    try {for(const m of selected?[selected]:course.modules.filter(m=>!m.lectureId)){
+      if(stop.current)break;
+      setNotice(`${at("Создаём модуль", "Creating module", "Модуль жасалуда")} ${m.orderIndex+1}: ${m.title}`);
+      await post(`/courses/${course.id}/modules/${m.id}/generate`);await reload();
+    }if(mounted.current)setNotice(at("Готовые модули сохранены.","Completed modules are saved.","Дайын модульдер сақталды."));}
+    catch(e){if(mounted.current){setError(messageOf(e));await reload().catch(()=>{});}}
+    finally{if(mounted.current)setBusy(false);}
+  }
+  async function publish(assign=false) {
+    if(!course)return;setBusy(true);setError("");
+    try{await post(`/courses/${course.id}/${assign?"assign":"publish"}`,{reviewed,groupId:group});await reload();setNotice(assign?at("Курс назначен группе вместе со сроками.","Course and deadlines assigned to the group.","Курс мерзімдерімен бірге топқа тағайындалды."):at("Курс опубликован.","Course published.","Курс жарияланды."));}catch(e){setError(messageOf(e));}finally{setBusy(false);}
+  }
+  return <>
+    <div className="page-heading"><div><span className="eyebrow">AI MENTOR / {at("УЧЕБНЫЙ ПУТЬ","LEARNING PATH","ОҚУ ЖОЛЫ")}</span><h1>{at("Курсы", "Courses", "Курстар")}</h1><p>{at("От нескольких материалов — к последовательной программе обучения.","Turn learning materials into a structured course.","Бірнеше материалдан жүйелі оқу бағдарламасына дейін.")}</p></div>{teacher&&!id&&<button className="button primary" onClick={()=>setShowForm(!showForm)}><Layers size={17}/>{at("Создать курс","Create course","Курс жасау")}</button>}</div>
+    <ErrorMessage message={error}/>{notice&&<p className="notice" role="status">{notice}</p>}
+    {showForm&&!id&&<form className="panel automation-form" onSubmit={create}><h2>{at("Программа курса","Course programme","Курс бағдарламасы")}</h2>
+      <label>{at("Чему научить студента?","What should the student learn?","Студент нені үйренуі керек?")}<textarea name="Goal" required minLength={5} maxLength={1000} rows={3}/></label>
+      <label>{at("Материалы курса","Course materials","Курс материалдары")}<input type="file" name="Files" multiple accept=".pdf,.docx,.pptx,.txt,.md"/></label><p className="form-hint">{at("До 5 файлов, 30 МБ суммарно, 60 000 символов текста. Можно начать только с цели.","Up to 5 files, 30 MB total, 60,000 text characters. You can also start with a goal only.","5 файл, жалпы 30 МБ, 60 000 таңбаға дейін. Тек мақсатпен де бастауға болады.")}</p>
+      <div className="automation-fields"><label>{at("Модулей","Modules","Модульдер")}<input type="number" min={2} max={8} value={count} onChange={e=>setCount(Number(e.target.value))} required/></label><label>{at("Минут на модуль","Minutes per module","Модуль ұзақтығы, минут")}<select value={minutes} onChange={e=>setMinutes(Number(e.target.value))}>{[5,10,15,20,30].map(n=><option key={n}>{n}</option>)}</select></label>
+      <label>{t("Язык")}<select name="Language" defaultValue={user?.teachingLanguage||"ru"}><option value="ru">Русский</option><option value="en">English</option><option value="kk">Қазақша</option></select></label><label>{t("Уровень")}<select name="Level">{["Начальный","Средний","Продвинутый"].map(v=><option key={v} value={v}>{t(v)}</option>)}</select></label>
+      <label>{at("Начало курса","Start date","Басталу күні")}<input name="StartAt" type="date" defaultValue={new Date().toISOString().slice(0,10)} required/></label><label>{at("Завершение курса","End date","Аяқталу күні")}<input name="EndAt" type="date" defaultValue={new Date(Date.now()+28*86400000).toISOString().slice(0,10)} required/></label></div>
+      {estimate&&<Cost items={Array.from({length:count},()=>estimate)}/>}<button className="button primary" disabled={busy}>{busy?t("Создаём…"):at("Составить программу с AI","Plan with AI","AI арқылы жоспар құру")}</button></form>}
+    {loading?<Loading/>:id&&course?<>
+      <button className="text-link" disabled={busy} onClick={()=>{stop.current=true;setParams({});setNotice("");}}><ArrowLeft size={16}/>{at("Все курсы","All courses","Барлық курстар")}</button>
+      <section className="panel course-overview"><span className="tag">{course.isPublished?at("Опубликован","Published","Жарияланған"):at("Черновик","Draft","Жоба")}</span><h2>{course.title}</h2><p>{course.goal}</p><div className="course-meta"><span>{date(course.startAt)} — {date(course.endAt)}</span><span>{course.language.toUpperCase()}</span><span>{course.modules.filter(m=>m.lectureId).length} / {course.modules.length} {at("модулей готовы","modules ready","модуль дайын")}</span></div>{course.sourceNames&&<p className="form-hint">{course.sourceNames}</p>}
+      {course.canManage&&<>{course.estimates&&<Cost items={course.estimates}/>}<div className="manage-actions"><button className="button primary" disabled={busy||course.modules.every(m=>!!m.lectureId)||course.modules.some(m=>m.busy)} onClick={()=>generate()}><Sparkles size={16}/>{at("Создать все лекции","Generate all lessons","Барлық дәрістерді жасау")}</button>{busy&&<button className="button secondary" onClick={()=>{stop.current=true;setNotice(at("Остановимся после текущего модуля.","Stopping after the current module.","Ағымдағы модульден кейін тоқтайды."));}}>{at("Остановить после модуля","Stop after this module","Модульден кейін тоқтату")}</button>}<button className="button secondary" disabled={busy} onClick={()=>reload().catch(e=>setError(messageOf(e)))}>{t("Обновить")}</button></div><p className="form-hint">{at("Модули сохраняются по одному. При закрытии страницы цепочка остановится; текущий запрос может завершиться на сервере. Повторный запуск пропустит готовые лекции.","Modules are saved individually. Leaving stops the sequence; the current request may finish on the server. Resuming skips completed lessons.","Модульдер жеке сақталады. Бет жабылғанда кезек тоқтайды; ағымдағы сұрау серверде аяқталуы мүмкін. Қайта іске қосу дайын дәрістерді өткізеді.")}</p></>}
+      </section><div className="course-modules">{course.modules.map(m=><article key={m.id} className="panel course-module"><div className="section-heading"><span className="module-number">{String(m.orderIndex+1).padStart(2,"0")}</span><span className="tag">{m.completed?<Check size={14}/>:null}{m.minutes} {t("мин")} · {date(m.dueAt)}</span></div><h3>{m.title}</h3><p>{m.objective}</p><div className="manage-actions">{m.lectureId?<Link className="button secondary" to={`/lectures/${m.lectureId}`}><BookOpen size={16}/>{at("Открыть лекцию","Open lesson","Дәрісті ашу")}</Link>:course.canManage?<button className="button secondary" disabled={busy||m.busy} onClick={()=>generate(m)}>{m.busy?at("Создаётся…","Generating…","Жасалуда…"):at("Создать модуль","Generate module","Модуль жасау")}</button>:null}</div>{m.error&&<p className="form-hint">{at("Модуль не завершён. Можно повторить создание.","Module unfinished. You can retry generation.","Модуль аяқталмады. Қайта жасауға болады.")}</p>}{m.quality&&<details><summary>{at("Проверка качества","Quality review","Сапаны тексеру")}</summary><QualityChecks checks={m.quality}/></details>}</article>)}</div>
+      {course.canManage&&<section className="panel automation-publish"><h2>{at("Проверить и передать студентам","Review and share with students","Тексеріп, студенттерге беру")}</h2><label className="checkbox-label"><input type="checkbox" checked={reviewed} onChange={e=>setReviewed(e.target.checked)}/>{at("Я проверил содержание, источники и задания всех модулей.","I reviewed the content, sources and tasks in every module.","Барлық модульдердің мазмұнын, дереккөздері мен тапсырмаларын тексердім.")}</label><p className="form-hint">{at("Публикация открывает курс всем пользователям. Назначение группе даёт доступ только её участникам, если лекции ещё не опубликованы.","Publishing opens the course to all users. Group assignment shares unpublished lessons only with that group.","Жариялау курсты барлық пайдаланушыларға ашады. Жарияланбаған дәрістерді топқа тағайындау тек сол топқа қолжетімді етеді.")}</p><div className="manage-actions"><button className="button primary" disabled={busy||!reviewed||course.modules.some(m=>!m.lectureId)||course.isPublished} onClick={()=>publish()}>{at("Опубликовать курс","Publish course","Курсты жариялау")}</button><select aria-label={at("Группа курса","Course group","Курс тобы")} value={group} onChange={e=>setGroup(e.target.value)}><option value="">{at("Выберите группу","Select a group","Топты таңдаңыз")}</option>{groups.filter(g=>g.canManage).map(g=><option key={g.id} value={g.id}>{g.name}</option>)}</select><button className="button secondary" disabled={busy||!reviewed||!group||course.modules.some(m=>!m.lectureId)} onClick={()=>publish(true)}>{at("Назначить группе","Assign to group","Топқа тағайындау")}</button></div></section>}
+    </>:<div className="course-grid">{list.map(c=><Link key={c.id} className="panel course-card" to={`/courses?course=${c.id}`}><Layers size={25}/><span className="tag">{c.language.toUpperCase()}</span><h2>{c.title}</h2><p>{c.goal}</p><div className="learning-bar"><span style={{width:`${100*c.readyCount/c.moduleCount}%`}}/></div><footer><span>{c.readyCount} / {c.moduleCount} · {date(c.endAt)}</span><ArrowUpRight size={18}/></footer></Link>)}{!list.length&&<div className="panel learning-empty"><Layers/><h2>{at("Курсов пока нет","No courses yet","Курстар әлі жоқ")}</h2><p>{teacher?at("Начните с цели и материалов — AI предложит программу.","Start with a goal and materials — AI will suggest a programme.","Мақсат пен материалдардан бастаңыз — AI бағдарлама ұсынады."):at("Здесь появятся опубликованные и назначенные вашей группе курсы.","Published courses and courses assigned to your group will appear here.","Мұнда жарияланған және тобыңызға тағайындалған курстар көрсетіледі.")}</p></div>}</div>}
+  </>;
+}

@@ -1,3 +1,7 @@
+import { lazy, Suspense } from "react";
+const AutomationPanel = lazy(() => import("../components/AutomationPanel").then(m => ({default:m.AutomationPanel})));
+import { at } from "../i18n/automation";
+import { useNavigate } from "react-router-dom";
 import { AiUsagePanel } from "../components/AiUsagePanel";
 import { t, getLanguage } from "../i18n";
 import { useEffect, useState } from "react";
@@ -45,6 +49,7 @@ interface Overview {
 }
 export function AdminPage() {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [tab, setTab] = useState("overview");
   const [users, setUsers] = useState<AdminUser[]>([]);
   const [lectures, setLectures] = useState<LectureCard[]>([]);
@@ -111,6 +116,7 @@ export function AdminPage() {
           ["lectures", t("Лекции")],
           ["system", t("Сервисы")],
           ["usage", t("Расход AI")],
+          ["automation", at("Автоматизация", "Automation", "Автоматтандыру")],
         ].map(([key, title]) => (
           <button
             key={key}
@@ -136,6 +142,7 @@ export function AdminPage() {
       ) : (
         <>
           {tab === "usage" && <AiUsagePanel />}
+          {tab === "automation" && <Suspense fallback={<Loading/>}><AutomationPanel /></Suspense>}
           {tab === "overview" && (
             <>
               <div className="admin-stats">
@@ -349,9 +356,10 @@ export function AdminPage() {
                                         "Лекция останется доступна владельцу и администратору.",
                                       )
                                     : t(
-                                        "Материалы лекции станут доступны всем пользователям.",
+                                        "Откроется лекция: проверьте качество и подтвердите публикацию в разделе управления.",
                                       ),
                                   run: async () => {
+                                    if (!l.isPublished) { navigate(`/lectures/${l.id}`); return; }
                                     await patch(`/lectures/${l.id}`, {
                                       title: l.title,
                                       isPublished: !l.isPublished,

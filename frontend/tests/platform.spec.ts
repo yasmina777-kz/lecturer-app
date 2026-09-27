@@ -211,6 +211,15 @@ test("administrator roles, blocking and immediate session revocation", async ({
 }) => {
   const userContext = await createRequest.newContext({ baseURL });
   const user = await student(userContext);
+  // Profile updates must never accept role or legacy accountType escalation.
+  const profileUpdate = await userContext.patch("/api/auth/me", {
+    data: { fullName: user.fullName, avatarStyle: "sage", speechRate: 1, role: "Admin", accountType: "Lecturer" },
+  });
+  expect(profileUpdate.status()).toBe(200);
+  expect((await profileUpdate.json()).role).toBe("Student");
+  expect((await userContext.patch(`/api/admin/users/${user.id}`, {
+    data: { role: "Admin", isDisabled: false },
+  })).status()).toBe(403);
   const admin = await loginAdmin(request);
   expect((await request.get("/api/admin/overview")).status()).toBe(200);
   expect(
@@ -301,6 +310,7 @@ test("UI: registration, dashboard, player, pause/question/resume, notes, quiz, s
         cancel: () => clearTimeout(timer),
         speak: (u: any) => {
           (window as any).spoken.push(u.text);
+          u.onstart?.();
           timer = setTimeout(() => u.onend?.(), 1200);
         },
       },
@@ -326,6 +336,11 @@ test("UI: registration, dashboard, player, pause/question/resume, notes, quiz, s
     page.getByRole("button", { name: "Перейти к слайдам" }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Перейти к слайдам" }).click();
+  const lectureForSpeech = await (await page.request.get(`/api/lectures/${demo}`)).json();
+  const narration = lectureForSpeech.slides[0].narrationText as string;
+  await expect.poll(() => page.evaluate(() => (window as any).spoken.at(-1))).toBe(
+    (narration.match(/[^.!?]+[.!?]+\s*|[^.!?]+$/g) || [narration])[0],
+  );
   await page
     .getByRole("button", { name: "Задать вопрос", exact: true })
     .click();

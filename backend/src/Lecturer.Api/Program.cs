@@ -11,6 +11,18 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
+var vercelHosting = builder.Configuration.GetValue<bool>("Hosting:Vercel");
+if (vercelHosting)
+{
+    if (builder.Configuration["Database:Provider"] != "Postgres" || string.IsNullOrWhiteSpace(builder.Configuration.GetConnectionString("Default")))
+        throw new InvalidOperationException("Vercel requires durable Postgres storage. Set ConnectionStrings__Default.");
+    if (string.IsNullOrWhiteSpace(builder.Configuration["Jwt:Key"]))
+        throw new InvalidOperationException("Set a persistent Jwt__Key in Vercel environment variables.");
+    var port = builder.Configuration.GetValue<int?>("PORT") ?? 80;
+    if (port < 1 || port > 65535) throw new InvalidOperationException("PORT must be between 1 and 65535.");
+    builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+}
+
 var dataDir = Path.GetFullPath(builder.Configuration["DataDirectory"] ?? Path.Combine(builder.Environment.ContentRootPath, "App_Data"));
 Directory.CreateDirectory(dataDir);
 var signingKey = builder.Configuration["Jwt:Key"];
@@ -31,6 +43,7 @@ builder.Services.AddDbContext<AppDbContext>(o =>
     else o.UseSqlite($"Data Source={Path.Combine(dataDir, "lecturer.db")}");
 });
 builder.Services.AddScoped<SessionService>();
+builder.Services.AddScoped<UsageBudget>();
 builder.Services.AddHttpClient<SpeechService>(c => c.Timeout = TimeSpan.FromSeconds(40));
 builder.Services.AddHttpClient<AiService>(c => { c.BaseAddress = new Uri((builder.Configuration["AI:BaseUrl"] ?? "https://api.openai.com/v1/").TrimEnd('/') + "/"); c.Timeout = TimeSpan.FromSeconds(150); });
 builder.Services.AddControllers();
@@ -52,6 +65,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 });
 builder.Services.AddAuthorization();
 var origins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? new[] { "http://localhost:5173" };
+if (vercelHosting && Uri.TryCreate(builder.Configuration["Hosting:PublicOrigin"], UriKind.Absolute, out var publicOrigin) && publicOrigin.Scheme == "https")
+    origins = origins.Append(publicOrigin.GetLeftPart(UriPartial.Authority)).Distinct().ToArray();
 builder.Services.AddCors(o => o.AddDefaultPolicy(p => p.WithOrigins(origins).AllowAnyHeader().AllowAnyMethod().AllowCredentials()));
 builder.Services.AddRateLimiter(o =>
 {
@@ -66,13 +81,29 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    if (db.Database.IsNpgsql()) await db.Database.MigrateAsync(); else await SqliteSchemaUpgrade.Apply(db);
-    if (!File.Exists(Path.Combine(dataDir, "demo-seeded")))
+    if (db.Database.IsNpgsql())
+    {
+        // Cold starts can overlap: serialize migrations and first-time demo seeding.
+        await db.Database.OpenConnectionAsync();
+        await db.Database.ExecuteSqlRawAsync("SELECT pg_advisory_lock(71482062)");
+        try
+        {
+            await db.Database.MigrateAsync();
+            if (!await db.Lectures.AnyAsync()) await DemoData.Seed(db);
+        }
+        finally
+        {
+            await db.Database.ExecuteSqlRawAsync("SELECT pg_advisory_unlock(71482062)");
+            await db.Database.CloseConnectionAsync();
+        }
+    }
+    else await SqliteSchemaUpgrade.Apply(db);
+    if (!db.Database.IsNpgsql() && !File.Exists(Path.Combine(dataDir, "demo-seeded")))
     {
         await DemoData.Seed(db);
         File.WriteAllText(Path.Combine(dataDir, "demo-seeded"), "1");
     }
-    if (!File.Exists(Path.Combine(dataDir, "demo-languages-v1")))
+    if (!db.Database.IsNpgsql() && !File.Exists(Path.Combine(dataDir, "demo-languages-v1")))
     {
         await LocalizedDemoData.Seed(db);
         File.WriteAllText(Path.Combine(dataDir, "demo-languages-v1"), "1");
@@ -108,7 +139,7 @@ app.Use(async (ctx, next) =>
     if (ctx.Request.Path.StartsWithSegments("/api") && ctx.Request.Method is not ("GET" or "HEAD" or "OPTIONS"))
     {
         var origin = ctx.Request.Headers.Origin.ToString();
-        var same = $"{ctx.Request.Scheme}://{ctx.Request.Host}";
+        var same = $"{(vercelHosting ? "https" : ctx.Request.Scheme)}://{ctx.Request.Host}";
         if ((!string.IsNullOrEmpty(origin) && origin != same && !origins.Contains(origin)) || ctx.Request.Headers["Sec-Fetch-Site"] == "cross-site")
         { ctx.Response.StatusCode = 403; await ctx.Response.WriteAsJsonAsync(new { message = "Недопустимый источник запроса." }); return; }
     }
@@ -123,4 +154,13 @@ app.UseCors(); app.UseAuthentication(); app.UseRateLimiter(); app.UseAuthorizati
 app.MapGet("/api/health", () => Results.Ok(new { status = "ok" }));
 app.MapGet("/api/capabilities", (AiService ai, SpeechService speech) => Results.Ok(new { aiConfigured = ai.Available, speech = speech.Available ? "azure" : "browser", uploadFormats = new[] { "pdf", "docx", "pptx", "txt", "md" } })).RequireAuthorization();
 app.MapControllers();
+// Serve the bundled React app on the same origin as the API in the cloud image.
+if (Directory.Exists(Path.Combine(app.Environment.ContentRootPath, "wwwroot")))
+{
+    app.UseDefaultFiles();
+    app.UseStaticFiles();
+    app.MapFallbackToFile("index.html");
+    // Unknown API paths must return JSON, never the SPA document.
+    app.Map("/api/{**path}", () => Results.NotFound(new { message = "API route not found." }));
+}
 app.Run();

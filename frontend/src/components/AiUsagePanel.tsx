@@ -56,6 +56,10 @@ const operations: Record<string, string> = {
   lecture_slides: "Текст и иллюстрации слайдов",
   question: "Ответы на вопросы",
   transcription: "Распознавание голоса",
+  quality_review: "Проверка источников",
+  course_plan: "Программа курса",
+  remediation: "Работа над ошибками",
+  speech: "Облачная озвучка",
 };
 const statuses: Record<string, string> = {
   success: "Готово",

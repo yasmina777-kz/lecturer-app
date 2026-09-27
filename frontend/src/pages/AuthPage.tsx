@@ -13,6 +13,7 @@ import { login, register } from "../api/authApi";
 import { useAuth } from "../context/AuthContext";
 import { AvatarPlayer } from "../components/AvatarPlayer";
 import { Brand, ErrorMessage, messageOf } from "../components/UI";
+import { ThemeSwitcher } from "../components/ThemeSwitcher";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import { useLanguage } from "../i18n";
 export function AuthPage({ signup = false }: { signup?: boolean }) {
@@ -92,7 +93,7 @@ export function AuthPage({ signup = false }: { signup?: boolean }) {
           <ArrowLeft size={14} />
           {t("На главную")}
         </Link>
-        <LanguageSwitcher />
+        <div className="auth-preferences"><ThemeSwitcher /><LanguageSwitcher /></div>
         <div className="auth-mobile-brand">
           <Brand />
         </div>

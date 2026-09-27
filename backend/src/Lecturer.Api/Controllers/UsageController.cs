@@ -10,7 +10,7 @@ public class UsageController(AppDbContext db, AiService ai, IConfiguration confi
     [HttpGet]
     public async Task<IActionResult> Get([FromQuery] int days = 30, [FromQuery] string? operation = null, [FromQuery] int page = 1, CancellationToken ct = default)
     {
-        if (days is < 1 or > 365 || page < 1 || operation != null && !new[] { "lecture_plan", "lecture_slides", "question", "transcription" }.Contains(operation)) return BadRequest();
+        if (days is < 1 or > 365 || page < 1 || operation != null && !new[] { "lecture_plan", "lecture_slides", "question", "transcription", "course_plan", "remediation", "speech", "quality_review" }.Contains(operation)) return BadRequest();
         var since = DateTime.UtcNow.AddDays(-days);
         var query = db.AiUsage.AsNoTracking().Where(u => u.CreatedAt >= since);
         if (operation != null) query = query.Where(u => u.Operation == operation);

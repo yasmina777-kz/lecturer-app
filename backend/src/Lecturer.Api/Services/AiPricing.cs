@@ -21,10 +21,10 @@ public static class AiPricing
     public static object Estimate(int minutes, int materialCharacters, string language, string model, IConfiguration config)
     {
         var slides = SlideCount(minutes);
-        var calls = 1 + (int)Math.Ceiling(slides / 3d);
+        var calls = 1 + (int)Math.Ceiling(slides / 3d) + (materialCharacters > 0 ? 1 : 0);
         // Planning + repeated extracted source + outline for each batch; script at ~110 words/min.
         var materialTokens = materialCharacters / (language == "en" ? 4d : 2.5d);
-        var input = (long)Math.Ceiling(calls * (1400 + materialTokens + slides * 80));
+        var input = (long)Math.Ceiling(calls * (1400 + materialTokens + slides * 80) + (materialCharacters > 0 ? minutes * 110 * (language == "en" ? 1.5 : 2.5) : 0));
         var output = (long)Math.Ceiling(minutes * 110 * (language == "en" ? 1.5 : 2.5) + slides * 220 + 1500);
         return new { minutes, slides, calls, inputTokensLow = (long)(input * .7), inputTokensHigh = (long)(input * 1.5), outputTokensLow = (long)(output * .8), outputTokensHigh = (long)(output * 1.4), costLow = Cost(model, (long)(input * .7), 0, (long)(output * .8), config), costHigh = Cost(model, (long)(input * 1.5), 0, (long)(output * 1.4), config), model };
     }

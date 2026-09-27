@@ -11,7 +11,7 @@ public static class SqliteSchemaUpgrade
         await using var transaction = await connection.BeginTransactionAsync();
         var columns = new Dictionary<string, Dictionary<string, string>> {
             ["Users"] = new() { ["InterfaceLanguage"] = "ru", ["TeachingLanguage"] = "ru", ["AvatarId"] = "classic-male", ["VoiceGender"] = "male" },
-            ["Lectures"] = new() { ["Language"] = "ru", ["AvatarId"] = "classic-male", ["VoiceGender"] = "male", ["AvatarStyle"] = "sage" }
+            ["Lectures"] = new() { ["Language"] = "ru", ["AvatarId"] = "classic-male", ["VoiceGender"] = "male", ["AvatarStyle"] = "sage", ["SourceText"] = "" }
         };
         foreach (var (table, fields) in columns)
         {
@@ -45,6 +45,26 @@ public static class SqliteSchemaUpgrade
                 ""EstimatedUsd"" REAL NULL, ""AudioSeconds"" REAL NULL);
                 CREATE INDEX IF NOT EXISTS ""IX_AiUsage_CreatedAt"" ON ""AiUsage"" (""CreatedAt"");
                 CREATE INDEX IF NOT EXISTS ""IX_AiUsage_LectureId"" ON ""AiUsage"" (""LectureId"");";
+            await cmd.ExecuteNonQueryAsync();
+        }
+        await using (var cmd = connection.CreateCommand())
+        {
+            cmd.Transaction = transaction;
+            cmd.CommandText = @"
+                CREATE TABLE IF NOT EXISTS ""StudyGroups"" (""Id"" TEXT NOT NULL PRIMARY KEY, ""OwnerId"" TEXT NOT NULL REFERENCES ""Users""(""Id"") ON DELETE CASCADE, ""Name"" TEXT NOT NULL, ""JoinCode"" TEXT NOT NULL, ""CreatedAt"" TEXT NOT NULL);
+                CREATE UNIQUE INDEX IF NOT EXISTS ""IX_StudyGroups_JoinCode"" ON ""StudyGroups""(""JoinCode"");
+                CREATE INDEX IF NOT EXISTS ""IX_StudyGroups_OwnerId"" ON ""StudyGroups""(""OwnerId"");
+                CREATE TABLE IF NOT EXISTS ""GroupMembers"" (""GroupId"" TEXT NOT NULL REFERENCES ""StudyGroups""(""Id"") ON DELETE CASCADE, ""UserId"" TEXT NOT NULL REFERENCES ""Users""(""Id"") ON DELETE CASCADE, ""JoinedAt"" TEXT NOT NULL, PRIMARY KEY(""GroupId"", ""UserId""));
+                CREATE INDEX IF NOT EXISTS ""IX_GroupMembers_UserId"" ON ""GroupMembers""(""UserId"");
+                CREATE TABLE IF NOT EXISTS ""GroupAssignments"" (""GroupId"" TEXT NOT NULL REFERENCES ""StudyGroups""(""Id"") ON DELETE CASCADE, ""LectureId"" TEXT NOT NULL REFERENCES ""Lectures""(""Id"") ON DELETE CASCADE, ""AssignedAt"" TEXT NOT NULL, ""DueAt"" TEXT NULL, PRIMARY KEY(""GroupId"", ""LectureId""));
+                CREATE INDEX IF NOT EXISTS ""IX_GroupAssignments_LectureId"" ON ""GroupAssignments""(""LectureId"");
+                CREATE TABLE IF NOT EXISTS ""QuizAttempts"" (""Id"" TEXT NOT NULL PRIMARY KEY, ""UserId"" TEXT NOT NULL REFERENCES ""Users""(""Id"") ON DELETE CASCADE, ""LectureId"" TEXT NOT NULL REFERENCES ""Lectures""(""Id"") ON DELETE CASCADE, ""Score"" INTEGER NOT NULL, ""CreatedAt"" TEXT NOT NULL);
+                CREATE INDEX IF NOT EXISTS ""IX_QuizAttempts_UserId_CreatedAt"" ON ""QuizAttempts""(""UserId"", ""CreatedAt"");
+                CREATE INDEX IF NOT EXISTS ""IX_QuizAttempts_LectureId"" ON ""QuizAttempts""(""LectureId"");";
+            await cmd.ExecuteNonQueryAsync();
+        }
+        await using (var cmd = connection.CreateCommand()) {
+            cmd.Transaction = transaction; cmd.CommandText = AutomationSqlite.Sql;
             await cmd.ExecuteNonQueryAsync();
         }
         await transaction.CommitAsync(); await connection.CloseAsync();

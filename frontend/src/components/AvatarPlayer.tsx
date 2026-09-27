@@ -51,6 +51,14 @@ export function AvatarPlayer({
           fill="#21262b"
           opacity=".14"
         />
+        {female && (
+          <path
+            className="avatar-head"
+            data-hair="female-back"
+            d="M92 113Q79 34 156 32Q236 25 232 116L243 222Q214 241 196 218L115 223Q80 237 82 208Z"
+            fill="#493228"
+          />
+        )}
         <path
           d="M48 340Q42 250 110 229L209 229Q278 250 273 340Z"
           fill={`url(#${uid}coat)`}
@@ -64,12 +72,6 @@ export function AvatarPlayer({
         />
         <path d="M137 183V226Q160 248 184 226V183" fill="#c48d71" />
         <g className="avatar-head">
-          {female && (
-            <path
-              d="M92 113Q79 34 156 32Q236 25 232 116L243 222Q214 241 196 218L115 223Q80 237 82 208Z"
-              fill="#493228"
-            />
-          )}
           {!female && (
             <path
               data-hair="male-back"

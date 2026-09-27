@@ -1,3 +1,4 @@
+import { at } from "../i18n/automation";
 import { t } from "../i18n";
 import { SlideVisual, type TeachingVisual } from "./SlideVisual";
 import type { Slide } from "../types/lecture";
@@ -8,6 +9,7 @@ export function slideContent(slide: Slide) {
       heading?: string;
       bullets?: string[];
       visual?: TeachingVisual;
+      evidence?: string;
     };
   } catch {
     return {};
@@ -47,6 +49,7 @@ export function SlideViewer({
           </ul>
           {content.visual && <SlideVisual visual={content.visual} />}
         </div>
+        {content.evidence && <details className="source-excerpt"><summary>{at("Опорный фрагмент материала", "Supporting source excerpt", "Материалдың тірек үзіндісі")}</summary><blockquote>{content.evidence}</blockquote></details>}
       </div>
       <div className="slide-footer">
         <span>{t("Одна идея — на шаг ближе к пониманию")}</span>

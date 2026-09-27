@@ -57,3 +57,8 @@ venv/
 ._*
 Thumbs.db
 Desktop.ini
+
+# Vercel local project link and downloaded cloud configuration
+.vercel/
+.vercel
+.env*

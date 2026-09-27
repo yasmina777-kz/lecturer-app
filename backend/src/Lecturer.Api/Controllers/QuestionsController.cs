@@ -14,7 +14,7 @@ public class QuestionsController(AppDbContext db, AiService ai) : ControllerBase
     public async Task<IActionResult> Ask([FromForm] AskQuestionRequest dto, CancellationToken ct)
     {
         var uid = SessionService.UserId(User);
-        var lecture = await db.Lectures.Include(l => l.Slides).FirstOrDefaultAsync(l => l.Id == dto.LectureId && (l.IsPublished || l.OwnerId == uid || User.IsInRole("Admin")), ct);
+        var lecture = await LectureAccess.Readable(db, uid, User.IsInRole("Admin")).Include(l => l.Slides).FirstOrDefaultAsync(l => l.Id == dto.LectureId, ct);
         var slide = lecture?.Slides.FirstOrDefault(s => s.Id == dto.SlideId);
         if (lecture == null || slide == null) return NotFound(new { message = "Слайд недоступен." });
         var question = dto.Text?.Trim();

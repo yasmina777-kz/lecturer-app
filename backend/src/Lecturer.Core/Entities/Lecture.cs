@@ -16,6 +16,7 @@ public class Lecture
     public string Introduction { get; set; } = "";
     public string Summary { get; set; } = "";
     public string ExercisesJson { get; set; } = "[]";
+    public string SourceText { get; set; } = "";
     public string SourceName { get; set; } = "Тема";
     public bool IsPublished { get; set; }
     public bool IsDemo { get; set; }

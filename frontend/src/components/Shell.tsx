@@ -1,3 +1,4 @@
+import { at } from "../i18n/automation";
 import { t } from "../i18n";
 import { useState } from "react";
 import {
@@ -9,6 +10,10 @@ import {
 } from "react-router-dom";
 import {
   BookOpen,
+  Network,
+  Layers,
+  BarChart3,
+  Users,
   CircleHelp,
   GraduationCap,
   LayoutDashboard,
@@ -22,6 +27,7 @@ import {
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { Brand, ErrorMessage, messageOf } from "./UI";
+import { ThemeSwitcher } from "./ThemeSwitcher";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 export function Shell() {
   const { user, logout } = useAuth();
@@ -31,8 +37,11 @@ export function Shell() {
   const navigate = useNavigate();
   const nav = [
     ["/dashboard", t("Обзор"), LayoutDashboard],
+    ["/courses", at("Курсы", "Courses", "Курстар"), Layers],
     ["/library", t("Мои лекции"), BookOpen],
     ["/practice", t("Моя практика"), GraduationCap],
+    ["/knowledge", t("Карта знаний"), Network],
+    ["/groups", user?.role === "Student" ? t("Мои группы") : t("Группы"), Users],
     ["/settings", t("Настройки"), Settings2],
   ] as const;
   return (
@@ -62,6 +71,7 @@ export function Shell() {
               {label}
             </NavLink>
           ))}
+          {user?.role !== "Student" && <NavLink to="/reports" onClick={()=>setMenu(false)}><BarChart3 size={19}/>{at("Недельный отчёт","Weekly report","Апталық есеп")}</NavLink>}
           {user?.role === "Admin" && (
             <NavLink to="/admin" onClick={() => setMenu(false)}>
               <ShieldCheck size={19} />
@@ -121,6 +131,7 @@ export function Shell() {
             </button>
           </div>
           <div className="topbar-right">
+            <ThemeSwitcher />
             <LanguageSwitcher />
             <Link to="/create" className="button primary small">
               <Plus size={16} />

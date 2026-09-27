@@ -130,7 +130,7 @@ export function LecturePlayerPage() {
       start();
       return;
     }
-    if (narrator.speaking) saved.current = narrator.pause();
+    if (narrator.active) saved.current = narrator.pause();
     else if (saved.current)
       narrator.resume(saved.current, () =>
         phase === "intro" ? playSlide(index) : finishSlide(index),
@@ -143,7 +143,7 @@ export function LecturePlayerPage() {
       );
   }
   function openQuestion() {
-    autoResume.current = narrator.speaking;
+    autoResume.current = narrator.active;
     saved.current = narrator.pause();
     setPhase("question");
     setAnswer("");
@@ -373,11 +373,11 @@ export function LecturePlayerPage() {
               </button>
               <button
                 className="play-button"
-                aria-label={narrator.speaking ? t("Пауза") : t("Продолжить")}
+                aria-label={narrator.active ? t("Пауза") : t("Продолжить")}
                 disabled={asking}
                 onClick={togglePlay}
               >
-                {narrator.speaking ? (
+                {narrator.active ? (
                   <Pause size={18} fill="currentColor" />
                 ) : (
                   <Play size={18} fill="currentColor" />
@@ -603,7 +603,7 @@ export function LecturePlayerPage() {
             {t("Практика")}
           </button>
         </div>
-        <StudyPanel lecture={lecture} slideIndex={index} tab={tab} />
+        <StudyPanel lecture={lecture} slideIndex={index} tab={tab} onSlide={(i) => { narrator.cancel(); saved.current = undefined; setIndex(i); setPhase("slide"); setTab("outline"); window.scrollTo({top:0,behavior:"smooth"}); }} />
       </div>
     </>
   );

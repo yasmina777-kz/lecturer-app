@@ -1,3 +1,4 @@
+import { MistakeReview } from "../components/MistakeReview";
 import { t } from "../i18n";
 import { useState } from "react";
 import { Check, Download, Save } from "lucide-react";
@@ -8,12 +9,15 @@ export function StudyPanel({
   lecture,
   slideIndex,
   tab,
+  onSlide,
 }: {
   lecture: Lecture;
   slideIndex: number;
   tab: string;
+  onSlide: (index: number) => void;
 }) {
   const [notes, setNotes] = useState(lecture.progress?.notes ?? "");
+  const [reviewRun, setReviewRun] = useState(0);
   const [saved, setSaved] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -96,6 +100,7 @@ export function StudyPanel({
         { answers },
       );
       setResult(r);
+      setReviewRun(n => n + 1);
     } catch (e) {
       setError(messageOf(e));
     } finally {
@@ -185,6 +190,7 @@ export function StudyPanel({
                 {busy ? t("Проверяем…") : t("Проверить ответы")}
               </button>
             )}
+            <MistakeReview lectureId={lecture.id} wrong={result ? result.results.flatMap((r,i) => r.correct ? [] : [i]) : exercises.quiz.flatMap((q,i) => answers[i] != null && answers[i] !== q.correctIndex && lecture.progress?.quizScore != null ? [i] : [])} run={reviewRun} onSlide={onSlide}/>
           </div>
           <div className="panel practical-tasks">
             <span className="eyebrow">{t("ПРИМЕНИТЕ НА ПРАКТИКЕ")}</span>

@@ -13,7 +13,7 @@ namespace Lecturer.Api.Controllers;
 public class LecturesController(AppDbContext db, AiService ai) : ControllerBase
 {
     private Guid Uid => SessionService.UserId(User);
-    private IQueryable<Lecture> Accessible => db.Lectures.Where(l => l.IsPublished || l.OwnerId == Uid || User.IsInRole("Admin"));
+    private IQueryable<Lecture> Accessible => LectureAccess.Readable(db, Uid, User.IsInRole("Admin"));
     [HttpGet]
     public async Task<IActionResult> List(CancellationToken ct)
     {
@@ -49,6 +49,12 @@ public class LecturesController(AppDbContext db, AiService ai) : ControllerBase
             progress = await db.Progress.FindAsync(new object[] { Uid, id }, ct),
             questions = await db.Questions.Where(q => q.LectureId == id && q.UserId == Uid).OrderBy(q => q.CreatedAt).Select(q => new { q.Id, q.QuestionText, q.AnswerText, q.CreatedAt }).ToListAsync(ct)
         });
+    }
+    [HttpGet("{id:guid}/quality")]
+    public async Task<IActionResult> Quality(Guid id, CancellationToken ct)
+    {
+        var l = await db.Lectures.Include(l => l.Slides).FirstOrDefaultAsync(l => l.Id == id && (l.OwnerId == Uid || User.IsInRole("Admin")), ct);
+        return l == null ? NotFound() : Ok(LectureQuality.Check(l));
     }
     [HttpPost, RequestSizeLimit(11_000_000), EnableRateLimiting("ai")]
     public async Task<IActionResult> Create([FromForm] CreateLectureRequest dto, CancellationToken ct)
@@ -91,6 +97,7 @@ public class LecturesController(AppDbContext db, AiService ai) : ControllerBase
         var score = (int)Math.Round(100d * results.Count(r => r.correct) / results.Length);
         var progress = await db.Progress.FindAsync(new object[] { Uid, id }, ct);
         if (progress == null) { progress = new LearningProgress { UserId = Uid, LectureId = id }; db.Progress.Add(progress); }
+        db.QuizAttempts.Add(new QuizAttempt { Id = Guid.NewGuid(), UserId = Uid, LectureId = id, Score = score });
         progress.QuizScore = score; progress.AnswersJson = JsonSerializer.Serialize(dto.Answers); progress.UpdatedAt = DateTime.UtcNow;
         await db.SaveChangesAsync(ct); return Ok(new { score, results });
     }
@@ -120,10 +127,11 @@ public class LecturesController(AppDbContext db, AiService ai) : ControllerBase
     [HttpPatch("{id:guid}")]
     public async Task<IActionResult> Edit(Guid id, EditLectureRequest dto, CancellationToken ct)
     {
-        var lecture = await db.Lectures.FirstOrDefaultAsync(l => l.Id == id && (l.OwnerId == Uid || User.IsInRole("Admin")), ct);
+        var lecture = await db.Lectures.Include(l => l.Slides).FirstOrDefaultAsync(l => l.Id == id && (l.OwnerId == Uid || User.IsInRole("Admin")), ct);
         if (lecture == null) return NotFound();
         if (dto.IsPublished != lecture.IsPublished && !User.IsInRole("Admin") && !User.IsInRole("Lecturer")) return Forbid();
         if (dto.Title.Trim().Length < 3) return BadRequest();
+        if (dto.IsPublished && !lecture.IsPublished) LectureQuality.RequirePublishable(lecture, dto.Reviewed);
         lecture.Title = dto.Title.Trim(); lecture.IsPublished = dto.IsPublished; await db.SaveChangesAsync(ct); return NoContent();
     }
 }
@@ -137,6 +145,6 @@ public class CreateLectureRequest
 }
 public record ProgressRequest(int SlideIndex, bool Completed, [MaxLength(20000)] string? Notes);
 public record QuizRequest(int[] Answers);
-public record EditLectureRequest([Required, StringLength(200, MinimumLength = 3)] string Title, bool IsPublished);
+public record EditLectureRequest([Required, StringLength(200, MinimumLength = 3)] string Title, bool IsPublished, bool Reviewed = false);
 
 public record TaskAnswersRequest(Dictionary<int, string> Answers);

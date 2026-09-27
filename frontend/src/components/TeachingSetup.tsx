@@ -64,7 +64,7 @@ export function TeachingSetup({
               })
             }
           >
-            <AvatarPlayer avatarId={a.id as AvatarId} compact />
+            <AvatarPlayer avatarId={a.id as AvatarId} state={value.avatarId === a.id && speech.speaking ? "speaking" : "idle"} compact />
             <span>
               <strong>{a.name}</strong>
               <small>{a.detail}</small>
@@ -106,7 +106,7 @@ export function TeachingSetup({
         type="button"
         className="button secondary small"
         onClick={() =>
-          speech.speaking
+          speech.active
             ? speech.cancel()
             : speech.say(
                 value.teachingLanguage === "kk"
@@ -119,7 +119,7 @@ export function TeachingSetup({
         }
       >
         <Volume2 size={15} />
-        {speech.speaking ? t("Остановить пример") : t("Послушать голос")}
+        {speech.active ? t("Остановить пример") : t("Послушать голос")}
       </button>
       {speech.speechError && (
         <p role="status" className="form-hint">

@@ -1,4 +1,7 @@
 export const updatesEn: Record<string, string> = {
+  "Включить светлую тему": "Switch to light theme",
+  "Включить тёмную тему": "Switch to dark theme",
+  "Роль назначает только администратор через админ-панель.": "Only an administrator can assign roles through the admin panel.",
   "Около {0} мин. при обычном темпе": "About {0} min. at normal pace",
   "Все новые аккаунты — студенты. Роль преподавателя назначает администратор.":
     "All new accounts are students. An administrator assigns the teacher role.",
@@ -58,6 +61,9 @@ export const updatesEn: Record<string, string> = {
     "AI returned an incomplete lecture. Generation stopped; usage was saved in the admin panel. Try again.",
 };
 export const updatesKk: Record<string, string> = {
+  "Включить светлую тему": "Ашық тақырыпты қосу",
+  "Включить тёмную тему": "Қараңғы тақырыпты қосу",
+  "Роль назначает только администратор через админ-панель.": "Рөлді тек әкімші әкімші панелі арқылы тағайындайды.",
   "Около {0} мин. при обычном темпе": "Қалыпты қарқында шамамен {0} мин.",
   "Все новые аккаунты — студенты. Роль преподавателя назначает администратор.":
     "Барлық жаңа аккаунттар — студенттер. Оқытушы рөлін әкімші тағайындайды.",

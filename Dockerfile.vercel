@@ -1,0 +1,19 @@
+FROM node:22-bookworm-slim AS frontend
+WORKDIR /src/frontend
+COPY frontend/package*.json ./
+RUN npm ci
+COPY frontend/ ./
+RUN npm run build
+
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS backend
+WORKDIR /src
+COPY backend/src/ ./
+RUN dotnet publish Lecturer.Api/Lecturer.Api.csproj -c Release -o /app/publish /p:UseAppHost=false
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
+WORKDIR /app
+COPY --from=backend /app/publish ./
+COPY --from=frontend /src/frontend/dist ./wwwroot
+ENV ASPNETCORE_ENVIRONMENT=Production PORT=80 Hosting__Vercel=true Database__Provider=Postgres DataDirectory=/tmp/ai-mentor DOTNET_EnableDiagnostics=0
+EXPOSE 80
+ENTRYPOINT ["dotnet", "Lecturer.Api.dll"]
