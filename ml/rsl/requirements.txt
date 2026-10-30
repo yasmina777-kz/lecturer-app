@@ -1,0 +1,7 @@
+numpy
+scikit-learn
+mediapipe
+opencv-python-headless
+remotezip
+pypdf
+requests

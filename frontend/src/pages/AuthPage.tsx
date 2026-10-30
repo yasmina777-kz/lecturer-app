@@ -1,3 +1,4 @@
+import { at } from "../i18n/automation";
 import { t } from "../i18n";
 import { useState, type FormEvent } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
@@ -38,6 +39,7 @@ export function AuthPage({ signup = false }: { signup?: boolean }) {
             password,
             fullName: name,
             accountType: "Student",
+            avatarId: "classic-female",
             interfaceLanguage: language,
             teachingLanguage: language,
           })
@@ -58,20 +60,20 @@ export function AuthPage({ signup = false }: { signup?: boolean }) {
         </Link>
         <div className="auth-story-text">
           <span className="eyebrow">
-            <Sparkles size={14} /> {t("ВАШ ПЕРСОНАЛЬНЫЙ AI-ЛЕКТОР")}
+            <Sparkles size={14} /> {at("ИЗУЧАЕМ ЯЗЫК ЖЕСТОВ", "EXPLORE SIGN LANGUAGE", "ЫМ ТІЛІН ҮЙРЕНЕМІЗ")}
           </span>
           <h1>
-            {t("Сложные темы.")}
+            {at("Смотрите жесты.", "Watch signs.", "Ымдарды қараңыз.")}
             <br />
-            <em>{t("Простые объяснения.")}</em>
+            <em>{at("Учитесь понимать.", "Learn to understand.", "Түсінуді үйреніңіз.")}</em>
           </h1>
           <p>
-            {t("Лекции, в которых можно спросить «почему?»")}
+            {at("Карточки, примеры и повторение.", "Cards, examples and practice.", "Карточкалар, мысалдар және қайталау.")}
             <br />
-            {t("И разобраться по-настоящему.")}
+            {at("Постепенно, в вашем темпе.", "Step by step, at your pace.", "Біртіндеп, өз қарқыныңызбен.")}
           </p>
         </div>
-        <AvatarPlayer avatarId="classic-male" />
+        <AvatarPlayer avatarId="classic-female" />
         <div className="auth-benefits">
           <span>
             <Check size={16} />
@@ -79,7 +81,7 @@ export function AuthPage({ signup = false }: { signup?: boolean }) {
           </span>
           <span>
             <Check size={16} />
-            {t("Живые вопросы")}
+            {at("Разбор движений", "Movement breakdown", "Қимылды талдау")}
           </span>
           <span>
             <Check size={16} />
@@ -105,7 +107,7 @@ export function AuthPage({ signup = false }: { signup?: boolean }) {
           <p>
             {signup
               ? t("Создайте аккаунт — и найдите свой способ учиться.")
-              : t("Ваши лекции и новые открытия уже ждут.")}
+              : at("Продолжайте знакомство с языком жестов.", "Continue exploring sign language.", "Ым тілімен танысуды жалғастырыңыз.")}
           </p>
           <form onSubmit={submit}>
             <ErrorMessage message={error} />

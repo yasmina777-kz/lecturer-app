@@ -1,0 +1,406 @@
+.sign-exercise-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+.sign-exercise-card {
+  padding: 12px !important;
+  overflow: hidden;
+}
+.sign-exercise-card > div:last-child {
+  padding: 14px 8px;
+}
+.sign-exercise-card h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.sign-exercise-card p {
+  font-size: 14px;
+}
+.sign-exercise-thumb {
+  height: 180px;
+  background: var(--sw-soft);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  overflow: hidden;
+}
+.sign-exercise-thumb b {
+  font-size: 86px;
+  color: var(--accent);
+}
+.sign-exercise-thumb img {
+  height: 100%;
+  width: 75%;
+  object-fit: cover;
+  object-position: center 22%;
+}
+.sign-alphabet-plan {
+  margin: 32px 0;
+}
+.sign-alphabet-plan p {
+  font-size: 14px;
+  margin: 10px 0;
+}
+.sign-alphabet-plan > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.sign-alphabet-plan span {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px dashed var(--sw-border);
+  border-radius: 8px;
+  color: var(--sw-muted);
+}
+.sign-training-levels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.sign-training-levels button,
+.sign-exercise-picker button,
+.sign-view-buttons button {
+  border: 1px solid var(--sw-border);
+  background: var(--sw-soft);
+  color: var(--sw-ink);
+  border-radius: 10px;
+  padding: 12px 16px;
+  min-height: 44px;
+}
+.sign-training-levels button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+.sign-training-levels button span {
+  font-size: 11px;
+  opacity: 0.7;
+}
+.sign-workspace button[aria-pressed="true"] {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+.sign-exercise-picker {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.sign-exercise-picker button {
+  font-size: 20px;
+  min-width: 60px;
+  font-weight: 700;
+}
+.sign-trainer-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(240px, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+.sign-avatar-player.gesture-page {
+  padding: 0;
+  min-height: 0;
+  background: var(--sw-soft);
+  border: 1px solid var(--sw-border);
+  border-radius: 20px;
+  overflow: hidden;
+}
+.sign-avatar-stage {
+  height: 460px;
+  position: relative;
+  background: radial-gradient(ellipse at 50% 30%, #3b5267, #142231 80%);
+}
+.sign-avatar-stage .gesture-3d {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.sign-avatar-label {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  color: #edf3fa;
+  background: #102134c9;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  pointer-events: none;
+}
+.sign-zoom {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  background: #102134e6;
+  color: #edf3fa;
+  border: 1px solid #748ba0;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 12px;
+}
+.sign-player-controls {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.sign-player-controls .button {
+  font-size: 12px;
+  padding: 10px 12px;
+}
+.sign-player-controls label {
+  margin: 0 0 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+.sign-player-controls select {
+  width: 80px;
+  padding: 10px;
+}
+.sign-player-controls input[type="range"] {
+  flex-basis: 100%;
+  height: 24px;
+  margin: 4px 0;
+}
+.sign-view-buttons {
+  display: flex;
+  gap: 8px;
+}
+.sign-view-buttons button {
+  font-size: 12px;
+  padding: 8px 14px;
+}
+.sign-exercise-instructions {
+  padding: 24px !important;
+}
+.sign-exercise-instructions h2 {
+  margin: 14px 0 20px;
+}
+.sign-exercise-instructions ol {
+  padding-left: 20px;
+}
+.sign-exercise-instructions li {
+  padding-left: 5px;
+  margin-bottom: 20px;
+}
+.sign-exercise-instructions li p {
+  font-size: 14px;
+  margin-top: 6px;
+}
+.sign-exercise-instructions > a {
+  font-size: 12px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: var(--accent);
+}
+.sign-camera {
+  margin-top: 24px !important;
+  padding: 24px !important;
+}
+.sign-camera > p {
+  font-size: 14px;
+  margin: 10px 0 18px;
+  max-width: 80ch;
+}
+.sign-camera-media {
+  max-width: 560px;
+  margin: 16px 0;
+}
+.sign-camera-media video,
+.sign-camera-media img {
+  width: 100%;
+  max-height: 340px;
+  object-fit: contain;
+  background: #080c12;
+  border-radius: 12px;
+}
+.sign-camera-media video {
+  transform: scaleX(-1);
+}
+.sign-camera-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.sign-camera-actions label {
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  flex-direction: row;
+  cursor: pointer;
+}
+.sign-camera-actions input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.sign-camera-actions label:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.sign-camera-result {
+  margin: 16px 0;
+  font-size: 15px;
+}
+.sign-camera small {
+  display: block;
+  font-size: 12px;
+  color: var(--sw-muted);
+  max-width: 90ch;
+  line-height: 1.7;
+}
+.sign-camera details,
+.sign-history {
+  margin-top: 24px;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.sign-camera details p {
+  margin: 12px 0;
+}
+.sign-camera details a {
+  text-decoration: underline;
+}
+.sign-history summary,
+.sign-camera summary {
+  cursor: pointer;
+  min-height: 44px;
+  padding: 10px 0;
+  font-weight: 650;
+}
+:root[data-theme="light"] .sign-avatar-stage {
+  background: radial-gradient(ellipse at 50% 30%, #fffaf0, #d9cbb9);
+}
+@media (max-width: 1100px) {
+  .sign-trainer-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .sign-exercise-instructions ol {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+  }
+  .sign-exercise-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  .sign-avatar-stage {
+    height: 390px;
+  }
+  .sign-exercise-instructions ol {
+    display: block;
+  }
+  .sign-exercise-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .sign-training-levels {
+    gap: 8px;
+  }
+  .sign-training-levels button {
+    padding: 10px;
+    font-size: 12px;
+  }
+  .sign-player-controls label {
+    margin-left: 0;
+  }
+  .sign-player-controls {
+    padding: 12px;
+  }
+  .sign-camera {
+    padding: 18px !important;
+  }
+}
+.sign-reference-video {
+  margin-top: 24px !important;
+  padding: 20px !important;
+  font-size: 13px;
+}
+.sign-reference-video summary {
+  cursor: pointer;
+  min-height: 44px;
+  padding: 10px 0;
+  font-weight: 650;
+}
+.sign-reference-video video {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  max-height: 430px;
+  background: #080c12;
+  border-radius: 12px;
+  margin: 16px 0;
+}
+.sign-reference-video a {
+  text-decoration: underline;
+}
+
+/* Alphabet grows without pushing controls beyond the screen. */
+.sign-exercise-picker {
+  flex-wrap: wrap;
+}
+.sign-motion-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  padding: 14px 16px 0;
+}
+.sign-motion-steps button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 52px;
+  padding: 8px 12px;
+  color: var(--muted);
+  background: var(--sw-soft);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font: inherit;
+  cursor: pointer;
+}
+.sign-motion-steps button span {
+  font-size: 12px;
+  opacity: 0.65;
+}
+.sign-motion-steps button[aria-pressed="true"] {
+  color: var(--dark);
+  border-color: var(--accent);
+  background: var(--sw-soft);
+}
+.sign-player-controls .sign-repeat-control {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+}
+.sign-player-controls .sign-repeat-control input {
+  width: 17px;
+  height: 17px;
+}
+@media (max-width: 600px) {
+  .sign-motion-steps {
+    gap: 5px;
+    padding: 10px 10px 0;
+  }
+  .sign-motion-steps button {
+    font-size: 12px;
+    padding: 8px;
+    flex-direction: column;
+    gap: 3px;
+  }
+}

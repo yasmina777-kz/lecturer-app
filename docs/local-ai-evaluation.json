@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Почему знаменатели не складывают?",
+    "expected": "addition",
+    "result": "addition",
+    "score": 0.8613186625208786
+  },
+  {
+    "question": "Как сократить дробь?",
+    "expected": "reduce",
+    "result": "reduce",
+    "score": 0.9053399673038541
+  },
+  {
+    "question": "Что больше: треть или пятая часть?",
+    "expected": null,
+    "result": null,
+    "score": 0.8302892816154377
+  },
+  {
+    "question": "Как сравнить дроби с разными знаменателями?",
+    "expected": "compare",
+    "result": "compare",
+    "score": 0.9270998807796955
+  },
+  {
+    "question": "Как разделить на дробь?",
+    "expected": "divide",
+    "result": "divide",
+    "score": 0.8996153464891526
+  },
+  {
+    "question": "Сколько сегодня стоит билет в Париж?",
+    "expected": null,
+    "result": null,
+    "score": 0.7144831468812481
+  },
+  {
+    "question": "Кто победил в футбольном матче вчера?",
+    "expected": null,
+    "result": null,
+    "score": 0.7347922784908152
+  },
+  {
+    "question": "Что показывает число под чертой?",
+    "expected": "meaning",
+    "result": "meaning",
+    "score": 0.8575581405576758
+  },
+  {
+    "question": "Объясни правило умножения двух дробей",
+    "expected": "multiply",
+    "result": "multiply",
+    "score": 0.8937678446700257
+  },
+  {
+    "question": "How do I add fractions with different denominators?",
+    "expected": null,
+    "result": null,
+    "score": 0.8068930519432914
+  }
+]

@@ -16,7 +16,6 @@ import {
   Play,
   Plus,
   Sparkles,
-  Volume2,
 } from "lucide-react";
 import { AvatarPlayer } from "../components/AvatarPlayer";
 import { Brand } from "../components/UI";
@@ -24,6 +23,10 @@ import { ThemeSwitcher } from "../components/ThemeSwitcher";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import { useAuth } from "../context/AuthContext";
 import { t } from "../i18n";
+import { at } from "../i18n/automation";
+import { ParticleField } from "../components/ParticleField";
+import { ProjectStory } from "../components/ProjectStory";
+import { LearningGallery } from "../components/LearningGallery";
 export default function LandingPage() {
   const { user } = useAuth();
   const [step, setStep] = useState(0);
@@ -49,10 +52,10 @@ export default function LandingPage() {
   }, []);
   const destination = user ? "/dashboard" : "/register";
   const steps = [
-    t("Загрузите материал"),
-    t("Послушайте лекцию"),
-    t("Задайте вопрос"),
-    t("Закрепите знания"),
+    at("Выберите фразу", "Choose a phrase", "Сөйлем таңдаңыз"),
+    at("Посмотрите жест", "Watch the sign", "Ымды қараңыз"),
+    at("Разберите движение", "Explore the movement", "Қимылды талдаңыз"),
+    at("Повторите сами", "Practise yourself", "Өзіңіз қайталаңыз"),
   ];
   return (
     <div className={`mentor-site${motionPaused ? " motion-paused" : ""}`} ref={root}>
@@ -62,6 +65,7 @@ export default function LandingPage() {
           <Brand />
         </Link>
         <nav aria-label={t("Навигация по сайту")}>
+          <a href="#about-project">{at("О проекте", "About", "Жоба туралы")}</a>
           <a href="#possibilities">{t("Возможности")}</a>
           <a href="#experience">{t("Как это работает")}</a>
           <a href="#for-you">{t("Для кого")}</a>
@@ -77,23 +81,21 @@ export default function LandingPage() {
       </header>
       <main>
         <section className="mentor-hero">
-          <div className="hero-grid-lines" aria-hidden="true" />
+          <div className="nova-hero-coordinate" aria-hidden="true">LEARNING, REIMAGINED / 001</div>
           <div className="mentor-ambient" aria-hidden="true"><i /><i /><i /></div>
           <div className="mentor-hero-copy">
             <span className="mentor-kicker">
-              <span /> {t("Ваш AI-преподаватель")}
+              <span /> {at("Ваш наставник по языку жестов", "Your sign language mentor", "Ым тілі бойынша тәлімгеріңіз")}
             </span>
-            <h1>
-              {t("Знания.")}
-              <br />
-              <span>{t("В диалоге.")}</span>
+            <h1 className="mentor-warm-title">
+              {at("Понимать друг друга,", "Understand each other,", "Бір-бірімізді түсіну,")}{" "}
+              <span className="headline-living">{at("даже без слов.", "even without words.", "сөзсіз де мүмкін.")}<svg className="headline-stroke" viewBox="0 0 440 20" preserveAspectRatio="none" aria-hidden="true"><path d="M4 12Q180 -1 435 9"/></svg></span>
             </h1>
             <p>
-              {t(
-                "Превратите учебный материал в занятие, где можно слушать, спрашивать и понимать. AI Mentor объясняет тему в вашем темпе — от первого слайда до самостоятельной практики.",
-              )}
+              {at("AI Mentor — проект для изучения русского жестового языка с аватаром. Смотрите движения, разбирайте положение рук и повторяйте фразы в своём темпе. Начните с пробной 3D-демонстрации.", "AI Mentor is a project for learning Russian Sign Language with an avatar. Explore movements and hand positions, then practise phrases at your own pace. Start with the 3D prototype.", "AI Mentor — аватармен орыс ым тілін үйренуге арналған жоба. Қимылдар мен қол қалпын қарап, сөйлемдерді өз қарқыныңызбен қайталаңыз. Сынақ 3D көрсетілімінен бастаңыз.")}
             </p>
             <div className="mentor-hero-actions">
+              <Link to="/gesture-preview" className="button secondary">{at("Посмотреть жесты аватара", "Explore the signing avatar", "Аватардың ымдарын көру")}</Link>
               <Link to={destination} className="mentor-cta">
                 {user ? t("Продолжить обучение") : t("Начать обучение")}
                 <ArrowUpRight size={20} />
@@ -106,23 +108,17 @@ export default function LandingPage() {
             <div className="mentor-hero-note">
               <span>RU / EN / KZ</span>
               <i />
-              {t("Один вопрос — больше понимания")}
+              {at("Смотрите. Повторяйте. Общайтесь.", "Watch. Practise. Connect.", "Қараңыз. Қайталаңыз. Тілдесіңіз.")}
             </div>
           </div>
           <div
+            id="mentor-avatar"
             className="mentor-hero-art"
-            aria-label={t("Векторный AI-преподаватель")}
+            aria-label={at("Виртуальная наставница Мира", "Mira, your virtual mentor", "Мира виртуалды тәлімгеріңіз")}
           >
-            <div className="mentor-knowledge-orbit" aria-hidden="true">
-              <span><BookOpen size={22} /></span>
-              <span><Sparkles size={20} /></span>
-              <span><GraduationCap size={23} /></span>
-            </div>
-            <div className="mentor-orbit orbit-a" />
-            <div className="mentor-orbit orbit-b" />
-            <div className="mentor-art-type" aria-hidden="true">
-              AI
-            </div>
+            <ParticleField paused={motionPaused} />
+            <div className="nova-nameplate"><span>MIRA</span><small>{at("ВАШ ПРОВОДНИК В МИР ЖЕСТОВ", "YOUR GUIDE TO SIGN LANGUAGE", "ЫМ ТІЛІ ӘЛЕМІНДЕГІ СЕРІГІҢІЗ")}</small></div>
+            <div className="mentor-depth-panels" aria-hidden="true"><i/><i/><i/></div>
             <div className="mentor-portrait">
               <AvatarPlayer
                 avatarId="classic-female"
@@ -132,7 +128,7 @@ export default function LandingPage() {
             </div>
             <div className="mentor-float question-float">
               <Mic size={18} />
-              <span>{t("А можно на примере?")}</span>
+              <span>{at("Можно показать медленнее?", "Can you show it more slowly?", "Баяуырақ көрсете аласыз ба?")}</span>
             </div>
             <div className="mentor-float voice-float">
               <div className="mentor-wave" aria-hidden="true">
@@ -140,10 +136,10 @@ export default function LandingPage() {
                   <i key={i} style={{ animationDelay: `${i * 0.08}s` }} />
                 ))}
               </div>
-              <span>{t("Конечно. Давайте разберёмся.")}</span>
+              <span>{at("Рассмотрим движение по шагам.", "Explore the movement step by step.", "Қимылды қадам бойынша қарайық.")}</span>
             </div>
             <div className="mentor-art-index" aria-hidden="true">
-              01 — AI MENTOR
+              MIRA / AI MENTOR
             </div>
           </div>
           <a className="mentor-scroll" href="#possibilities">
@@ -158,152 +154,72 @@ export default function LandingPage() {
           </button>
         </section>
         <div className="mentor-format-strip">
-          <span>{t("Ваш материал. Новый способ учиться.")}</span>
+          <span>{at("Новый способ изучать язык жестов.", "A new way to explore sign language.", "Ым тілін үйренудің жаңа тәсілі.")}</span>
           <div>
             <FileText size={15} />
-            PDF
+            РЖЯ
             <i />
-            DOCX
+            3D
             <i />
-            PPTX
+            0.25×
             <i />
-            TXT
+            360°
             <i />
-            {t("Или просто тема")}
+            {at("В своём темпе", "At your own pace", "Өз қарқыныңызбен")}
           </div>
         </div>
         <section id="possibilities" className="mentor-section" data-reveal>
           <div className="mentor-section-heading">
             <span className="mentor-kicker">01 / {t("Возможности")}</span>
             <h2>
-              {t("От сложного текста")}
+              {at("От первого жеста", "From your first sign", "Алғашқы ымнан")}
               <br />
-              <span>{t("к понятной картине.")}</span>
+              <span>{at("к общению без слов.", "to communication without speech.", "сөзсіз қарым-қатынасқа.")}</span>
             </h2>
             <p>
-              {t(
-                "Презентация, голос преподавателя и практика связаны в одно занятие. Всё, что нужно для работы с темой, остаётся рядом.",
-              )}
+              {at("Новая идея платформы — обучение через наблюдение и повторение. Аватар помогает рассмотреть движение, а видеообразец человека — свериться с оригиналом.", "The new idea is learning through observation and practice. The avatar helps you inspect a movement, while a human reference video lets you compare it with the original.", "Платформаның жаңа идеясы — бақылау және қайталау арқылы үйрену. Аватар қимылды қарауға, ал адамның бейнеүлгісі түпнұсқамен салыстыруға көмектеседі.")}
             </p>
           </div>
-          <div className="mentor-features">
-            <article className="mentor-feature feature-large" data-reveal>
-              <div className="mini-slide">
-                <div className="mini-slide-top">
-                  <span>AI MENTOR</span>
-                  <Layers size={17} />
+          <div className="feature-stories">
+            {[
+              {
+                image: "learning-universe-v2", step: 1, icon: Layers,
+                title: at("Увидеть жест со всех сторон", "See a sign from every angle", "Ымды жан-жақтан көру"),
+                text: at("В пробной демонстрации можно повернуть 3D-аватара, приблизить кисти и рассмотреть положение пальцев.", "Rotate the 3D avatar in the prototype, zoom in on the hands and inspect finger positions.", "Сынақ көрсетілімінде 3D аватарды бұрып, қолдарды үлкейтіп, саусақ қалпын қарауға болады."),
+                action: at("Посмотреть занятие", "Explore a lesson", "Сабақты көру"),
+                alt: at("Открытая книга с объёмными учебными иллюстрациями", "An open book with three-dimensional learning illustrations", "Көлемді оқу иллюстрациялары бар ашық кітап"),
+              },
+              {
+                image: "mentor-dialogue-v2", step: 2, icon: AudioLines,
+                title: at("Разобрать движение по шагам", "Explore movement step by step", "Қимылды қадам бойынша талдау"),
+                text: at("Остановите анимацию на нужном кадре или замедлите её. Рассмотрите направление движения и переход между частями фразы.", "Pause on a frame or slow the animation down. Inspect the direction and transition between parts of the phrase.", "Анимацияны қажетті кадрда тоқтатыңыз немесе баяулатыңыз. Қимыл бағыты мен сөйлем бөліктерінің ауысуын қараңыз."),
+                action: at("Как устроен разбор", "Explore the breakdown", "Талдауды көру"),
+                alt: at("Преподаватель объясняет студенту тему", "A teacher explaining a topic to a student", "Оқытушы студентке тақырыпты түсіндіріп жатыр"),
+              },
+              {
+                image: "learning-path-v1", step: 3, icon: GraduationCap,
+                title: at("Попробовать самостоятельно", "Try it yourself", "Өзіңіз қайталап көріңіз"),
+                text: at("Повторите фразу перед зеркалом и сравните с видеообразцом. Для букв А, В, Л уже можно попробовать пилотное распознавание.", "Practise in front of a mirror and compare with the reference video. Pilot recognition is available for the letters А, В, Л.", "Айна алдында қайталап, бейнеүлгімен салыстырыңыз. А, В, Л әріптері үшін сынақ тануды қолданып көріңіз."),
+                action: at("Посмотреть практику", "Explore practice", "Жаттығуды көру"),
+                alt: at("Ступени с книгами ведут вверх вокруг стеклянной сферы", "Steps with books rise around a glass sphere", "Кітаптары бар баспалдақтар шыны шарды айнала жоғары көтеріледі"),
+              },
+            ].map(({image,step:stage,icon:Icon,title,text,action,alt},i) => (
+              <article className="feature-story" key={image}>
+                <div className="feature-story-image">
+                  <img src={`/images/${image}.png`} width="1536" height="1024" loading="lazy" decoding="async" alt={alt}/>
+                  <span className="feature-story-number">0{i+1}</span>
                 </div>
-                <span className="mini-slide-count">01 / 05</span>
-                <h3>{t("Как работает память")}</h3>
-                <div className="memory-diagram">
-                  <span>{t("Изучить")}</span>
-                  <ArrowRight />
-                  <span>{t("Вспомнить")}</span>
-                  <ArrowRight />
-                  <span>{t("Проверить")}</span>
+                <div className="feature-story-copy">
+                  <Icon size={22} aria-hidden="true"/>
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                  <a href="#experience" onClick={() => setStep(stage)}>{action}<ArrowUpRight size={17}/></a>
                 </div>
-                <div className="mini-slide-bottom">
-                  <Volume2 size={17} />
-                  <div className="mini-track">
-                    <i />
-                  </div>
-                  <Pause size={15} />
-                </div>
-              </div>
-              <div className="feature-copy">
-                <Layers size={22} />
-                <h3>{t("Материал становится лекцией")}</h3>
-                <p>
-                  {t(
-                    "Загрузите документ или опишите тему. AI подготовит структуру, слайды и связное объяснение с примерами. Выберите язык, уровень сложности и объём занятия.",
-                  )}
-                </p>
-              </div>
-            </article>
-            <article className="mentor-feature feature-dialogue" data-reveal>
-              <div className="mini-conversation">
-                <div>
-                  <Mic size={15} />
-                  {t("Почему это работает?")}
-                </div>
-                <p>
-                  <Sparkles size={17} />
-                  {t("Давайте свяжем эту идею с тем, что вы уже знаете.")}
-                </p>
-              </div>
-              <div className="feature-copy">
-                <AudioLines size={22} />
-                <h3>{t("Вопрос не прерывает обучение")}</h3>
-                <p>
-                  {t(
-                    "Спросите голосом или напишите. Презентация остановится, аватар объяснит непонятный момент, а затем лекция продолжится с того же места.",
-                  )}
-                </p>
-              </div>
-            </article>
-            <article className="mentor-feature feature-practice" data-reveal>
-              <div className="mini-checklist">
-                <span>
-                  <CheckCheck size={19} />
-                  {t("Главное — своими словами")}
-                </span>
-                <span>
-                  <Check size={17} />
-                  {t("Конспект готов")}
-                </span>
-                <span>
-                  <Check size={17} />
-                  {t("Есть вопросы для самопроверки")}
-                </span>
-                <span>
-                  <Plus size={17} />
-                  {t("Осталось применить на практике")}
-                </span>
-              </div>
-              <div className="feature-copy">
-                <GraduationCap size={22} />
-                <h3>{t("Понимание остаётся с вами")}</h3>
-                <p>
-                  {t(
-                    "Сохраните заметки, скачайте конспект, пройдите тест и выполните короткие задания. Результаты сохраняются, чтобы вы могли вернуться к теме.",
-                  )}
-                </p>
-              </div>
-            </article>
+              </article>
+            ))}
           </div>
         </section>
-        <section className="mentor-visual-story mentor-section" aria-labelledby="visual-story-title">
-          <div className="mentor-section-heading" data-reveal>
-            <span className="mentor-kicker">AI MENTOR / {t("Искусство учиться")}</span>
-            <h2 id="visual-story-title">{t("Смотрите шире.")}<br /><span>{t("Понимайте глубже.")}</span></h2>
-          </div>
-          <div className="mentor-artworks">
-            <article className="mentor-artwork" data-reveal>
-              <div className="mentor-artwork-image">
-                <img src="/images/knowledge-book.png" width="1536" height="1024" loading="lazy" decoding="async"
-                  alt={t("Открытая книга с парящими страницами и стеклянными схемами")} />
-                <span className="mentor-artwork-number" aria-hidden="true">01 / EXPLORE</span>
-              </div>
-              <div className="mentor-artwork-caption">
-                <BookOpen size={23} aria-hidden="true" />
-                <div><h3>{t("У знаний нет границ.")}</h3><p>{t("От одной страницы — к целой картине. Исследуйте тему через объяснения, примеры и вопросы.")}</p></div>
-                <a href="#possibilities" aria-label={t("Возможности")}><ArrowUpRight size={22} /></a>
-              </div>
-            </article>
-            <article className="mentor-artwork" data-reveal>
-              <div className="mentor-artwork-image">
-                <img src="/images/dialogue-sculpture.png" width="1536" height="1024" loading="lazy" decoding="async"
-                  alt={t("Стальные петли вокруг светящейся сферы и ступени к ней")} />
-                <span className="mentor-artwork-number" aria-hidden="true">02 / CONNECT</span>
-              </div>
-              <div className="mentor-artwork-caption">
-                <AudioLines size={23} aria-hidden="true" />
-                <div><h3>{t("Понимание рождается в диалоге.")}</h3><p>{t("Связывайте новые идеи с тем, что уже знаете. Один хороший вопрос помогает сделать следующий шаг.")}</p></div>
-                <a href="#experience" aria-label={t("Как это работает")}><ArrowUpRight size={22} /></a>
-              </div>
-            </article>
-          </div>
-        </section>
+        <ProjectStory paused={motionPaused} destination={destination} />
         <section
           id="experience"
           className="mentor-section experience-section"
@@ -314,12 +230,10 @@ export default function LandingPage() {
             <h2>
               {t("Одно занятие.")}
               <br />
-              <span>{t("Живой диалог.")}</span>
+              <span>{at("Понятное движение.", "A clear movement.", "Түсінікті қимыл.")}</span>
             </h2>
             <p>
-              {t(
-                "Попробуйте переключить этапы. Так выглядит путь от вашего материала до закреплённых знаний.",
-              )}
+              {at("Переключите этапы, чтобы познакомиться с новым сценарием обучения: увидеть жест, разобраться в деталях и попробовать повторить.", "Switch steps to explore the new learning flow: watch a sign, inspect the details and try it yourself.", "Жаңа оқу жолын көру үшін кезеңдерді ауыстырыңыз: ымды көру, бөлшектерін түсіну және қайталау.")}
             </p>
           </div>
           <div className="experience-layout">
@@ -370,16 +284,10 @@ export default function LandingPage() {
                     <p>
                       {
                         [
-                          t(
-                            "Документ или тема — вы выбираете отправную точку.",
-                          ),
-                          t(
-                            "Аватар знакомит с темой. Затем остаются слайды и голос.",
-                          ),
-                          t(
-                            "Остановитесь на сложном месте и получите объяснение.",
-                          ),
-                          t("Проверьте себя и сохраните то, что важно."),
+                          at("Начните со знакомства: «Как тебя зовут?»", "Start with an introduction: “What is your name?”", "«Сенің атың кім?» сөйлемінен бастаңыз."),
+                          at("В отдельной 3D-демонстрации аватар показывает фразу.", "The avatar demonstrates a phrase in the separate 3D preview.", "Аватар бөлек 3D көрсетілімінде сөйлемді көрсетеді."),
+                          at("Пауза, замедление и разные ракурсы помогают увидеть детали.", "Pause, slow motion and different views help reveal details.", "Кідіріс, баяулату және түрлі ракурстар бөлшектерді көруге көмектеседі."),
+                          at("Повторите движение, сверяясь с видеообразцом человека.", "Practise the movement using the human reference video.", "Адамның бейнеүлгісімен салыстырып, қимылды қайталаңыз."),
                         ][i]
                       }
                     </p>
@@ -407,32 +315,28 @@ export default function LandingPage() {
                   <>
                     <div className="upload-illustration">
                       <FileText size={54} />
-                      <span>lecture.pdf</span>
+                      <span>РЖЯ / 01</span>
                       <Check size={18} />
                     </div>
                     <h3>{t("С чего начнём?")}</h3>
                     <p>
-                      {t(
-                        "Выберите материал или расскажите, что хотите изучить. Остальное подготовит AI Mentor.",
-                      )}
+                      {at("В первой пробе доступна фраза «Как тебя зовут?». Другие темы будем добавлять после проверки анимаций специалистом.", "The first prototype offers “What is your name?”. More topics will follow after specialist review of the animations.", "Алғашқы нұсқада «Сенің атың кім?» сөйлемі бар. Басқа тақырыптар анимацияларды маман тексергеннен кейін қосылады.")}
                     </p>
                     <div className="preview-tags">
-                      <span>PDF</span>
-                      <span>DOCX</span>
-                      <span>PPTX</span>
-                      <span>TXT</span>
+                      <span>РЖЯ</span>
+                      <span>3D</span>
+                      <span>0.25×</span>
+                      <span>360°</span>
                     </div>
                   </>
                 ) : step === 1 ? (
                   <>
                     <div className="preview-avatar">
-                      <AvatarPlayer compact style="violet" state="speaking" />
+                      <AvatarPlayer avatarId="classic-female" compact style="violet" state="speaking" />
                     </div>
-                    <h3>{t("Здравствуйте! Начнём с главного.")}</h3>
+                    <h3>{at("Сначала посмотрите движение целиком.", "Watch the whole movement first.", "Алдымен қимылды толық қараңыз.")}</h3>
                     <p>
-                      {t(
-                        "Понятные слайды. Связный рассказ. Скорость, которую выбираете вы.",
-                      )}
+                      {at("Откройте 3D-пример: можно смотреть спереди, сбоку и под углом. Темп анимации выбираете вы.", "Open the 3D preview for front, side and angled views. Choose the animation speed yourself.", "3D үлгісін ашып, алдынан, жанынан және бұрыштан қараңыз. Анимация қарқынын өзіңіз таңдаңыз.")}
                     </p>
                     <div className="preview-progress">
                       <span />
@@ -450,12 +354,10 @@ export default function LandingPage() {
                     </div>
                     <div className="preview-question">
                       <Mic size={16} />
-                      {t("Объясни это проще")}
+                      {at("Покажи по шагам", "Show it step by step", "Қадам бойынша көрсет")}
                     </div>
                     <p>
-                      {t(
-                        "AI отвечает с учётом текущей лекции и слайда. После объяснения можно продолжить.",
-                      )}
+                      {at("Рассмотрите кисти крупным планом. Важно заметить, какие пальцы участвуют и куда направлена ладонь.", "Inspect the hands close up. Notice which fingers are involved and the direction the palm faces.", "Қолдарды жақыннан қараңыз. Қай саусақтар қатысатынын және алақан бағытын байқаңыз.")}
                     </p>
                   </>
                 ) : (
@@ -467,13 +369,11 @@ export default function LandingPage() {
                     </div>
                     <h3>{t("Теперь попробуйте сами")}</h3>
                     <p>
-                      {t(
-                        "Краткий конспект, тест и практические задания уже рядом. Ваши ответы и заметки сохраняются в аккаунте.",
-                      )}
+                      {at("Попробуйте повторить фразу без подсказки, затем снова посмотрите оригинальное видео. Пока платформа не оценивает правильность ваших движений.", "Try the phrase without a hint, then watch the original video again. The platform does not yet assess the accuracy of your movements.", "Сөйлемді көмексіз қайталап, түпнұсқа бейнені қайта қараңыз. Платформа қимылдарыңыздың дұрыстығын әзірге бағаламайды.")}
                     </p>
                     <div className="preview-tags">
-                      <span>{t("Конспект")}</span>
-                      <span>{t("Тест")}</span>
+                      <span>{at("Наблюдение", "Observation", "Бақылау")}</span>
+                      <span>{at("Повторение", "Repetition", "Қайталау")}</span>
                       <span>{t("Практика")}</span>
                     </div>
                   </>
@@ -517,29 +417,25 @@ export default function LandingPage() {
             <div className="audience-copy">
               <h3>
                 {audience === "student"
-                  ? t("Учитесь без страха переспросить.")
-                  : t("Ваши знания. Ваш AI-преподаватель.")}
+                  ? at("Учитесь общаться по-новому.", "Discover a new way to communicate.", "Қарым-қатынастың жаңа жолын үйреніңіз.")
+                  : at("Ваш опыт делает обучение точнее.", "Your expertise makes learning more accurate.", "Сіздің тәжірибеңіз оқуды нақтылайды.")}
               </h3>
               <p>
                 {audience === "student"
-                  ? t(
-                      "Разбирайте новый материал в удобном темпе. Возвращайтесь к сложным фрагментам, задавайте вопросы и проверяйте, что действительно запомнилось.",
-                    )
-                  : t(
-                      "После назначения роли администратором выберите в настройках персонажа, голос и язык. Создавайте подробные лекции с иллюстрациями и публикуйте их для студентов.",
-                    )}
+                  ? at("Для тех, кто хочет начать знакомство с РЖЯ: смотреть жесты, замечать детали и возвращаться к сложным движениям столько раз, сколько нужно.", "For anyone starting to explore RSL: watch signs, notice details and revisit difficult movements as often as needed.", "Орыс ым тілімен танысуды бастағысы келетіндерге: ымдарды қарау, бөлшектерін байқау және күрделі қимылдарды қайталау.")
+                  : at("В развитии проекта особенно важны преподаватели и носители РЖЯ. Вместе с ними нужно проверить форму кистей, направление движений и мимику, прежде чем превращать прототипы в учебные уроки.", "RSL teachers and signers are essential to this project. Hand shapes, movement direction and facial expression need their review before prototypes become teaching materials.", "Жобаға орыс ым тілі оқытушылары мен қолданушылары қажет. Прототиптерді оқу материалына айналдырмас бұрын қол пішіні, қимыл бағыты және мимика тексерілуі тиіс.")}
               </p>
               <ul>
                 {(audience === "student"
                   ? [
-                      t("Голосовые и текстовые вопросы по ходу лекции"),
-                      t("Конспект и личные заметки в одном месте"),
-                      t("Тесты, задания и сохранённый прогресс"),
+                      at("Просмотр жестов с разных ракурсов", "Signs viewed from multiple angles", "Ымдарды түрлі ракурстан көру"),
+                      at("Замедление и разбор по шагам", "Slow motion and step-by-step viewing", "Баяулату және қадам бойынша талдау"),
+                      at("Самостоятельное повторение по видеообразцу", "Independent practice with a reference video", "Бейнеүлгімен өз бетімен қайталау"),
                     ]
                   : [
-                      t("Мужской и женский векторные аватары"),
-                      t("Свой язык и голос для новых лекций"),
-                      t("Публикация собственных учебных материалов"),
+                      at("Экспертная проверка учебных жестов", "Expert review of learning signs", "Оқу ымдарын сарапшылық тексеру"),
+                      at("Подбор фраз для начинающих", "Selecting phrases for beginners", "Жаңадан үйренушілерге сөйлем таңдау"),
+                      at("Совместная разработка будущих уроков", "Developing future lessons together", "Болашақ сабақтарды бірге әзірлеу"),
                     ]
                 ).map((item) => (
                   <li key={item}>
@@ -562,9 +458,7 @@ export default function LandingPage() {
               <div className="audience-art-ring" />
               <AvatarPlayer
                 compact
-                avatarId={
-                  audience === "teacher" ? "classic-female" : "classic-male"
-                }
+                avatarId="classic-female"
                 style="violet"
               />
               <span>
@@ -575,14 +469,13 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
+        <LearningGallery />
         <section className="mentor-language-section" data-reveal>
           <div>
             <span className="mentor-kicker">RU / EN / KZ</span>
             <h2>{t("Ближе на вашем языке.")}</h2>
             <p>
-              {t(
-                "Интерфейс и занятия доступны на русском, английском и казахском. Язык меню и язык лекции выбираются отдельно — учитесь так, как вам удобно.",
-              )}
+              {at("Интерфейс можно переключить на русский, английский или казахский. Демонстрируемый жестовый язык остаётся русским жестовым языком: перевод меню не меняет сами жесты.", "Choose Russian, English or Kazakh for the interface. The demonstration remains in Russian Sign Language: translating the menus does not change the signs.", "Интерфейсті орыс, ағылшын немесе қазақ тіліне ауыстыруға болады. Көрсетілім орыс ым тілінде қалады: мәзір аудармасы ымдарды өзгертпейді.")}
             </p>
           </div>
           <div className="language-art" aria-hidden="true">
@@ -603,42 +496,12 @@ export default function LandingPage() {
           </div>
           <div>
             {[
-              [
-                t("Как начать пользоваться AI Mentor?"),
-                t(
-                  "Создайте аккаунт студента. После входа можно открыть готовую лекцию или создать новую. Роль преподавателя для публикации занятий назначает администратор.",
-                ),
-              ],
-              [
-                t("Какие материалы можно загрузить?"),
-                t(
-                  "PDF с текстовым слоем, DOCX, PPTX, TXT и MD размером до 10 МБ. Из документов извлекается текст. Для сканированных страниц сначала понадобится распознавание текста.",
-                ),
-              ],
-              [
-                t("Можно ли задавать вопросы во время лекции?"),
-                t(
-                  "Да. На слайде нажмите «Задать вопрос» и напишите его или включите микрофон. Лекция остановится на время ответа. Затем можно вернуться к текущему предложению.",
-                ),
-              ],
-              [
-                t("Откуда берётся голос преподавателя?"),
-                t(
-                  "Озвучка использует доступные голоса устройства или подключённый облачный сервис. Доступность выбранного языка и тембра зависит от настройки озвучки. Текст объяснения всегда можно прочитать.",
-                ),
-              ],
-              [
-                t("Что доступно без подключения AI?"),
-                t(
-                  "Регистрация, выбор аватара, демонстрационные лекции на трёх языках, конспекты, заметки и практика. Создание новых лекций и ответы AI требуют подключения провайдера владельцем платформы.",
-                ),
-              ],
-              [
-                t("Кто видит мои лекции и заметки?"),
-                t(
-                  "Личные лекции доступны автору и администратору. Преподаватель может опубликовать свои лекции для зарегистрированных пользователей. Заметки и результаты относятся к вашему аккаунту. При генерации текст материала отправляется AI-провайдеру.",
-                ),
-              ],
+              [at("Как начать?", "How do I start?", "Қалай бастауға болады?"), at("Откройте «Посмотреть жесты аватара». Сейчас доступна пробная 3D-анимация фразы «Как тебя зовут?».", "Open Explore the signing avatar. A trial 3D animation of “What is your name?” is currently available.", "«Аватардың ымдарын көру» сілтемесін ашыңыз. Қазір «Сенің атың кім?» сынақ 3D анимациясы бар.")],
+              [at("Какой жестовый язык используется?", "Which sign language is used?", "Қай ым тілі қолданылады?"), at("Русский жестовый язык — РЖЯ. Переключение языка интерфейса не меняет язык демонстрации.", "Russian Sign Language (RSL). Switching the interface language does not change the language demonstrated.", "Орыс ым тілі қолданылады. Интерфейс тілін ауыстыру көрсетілім тілін өзгертпейді.")],
+              [at("Можно замедлить аватара?", "Can I slow the avatar down?", "Аватарды баяулатуға бола ма?"), at("Да. В 3D-примере доступны пауза, скорость 0.25× и 0.5×, просмотр по шагам и приближение кистей.", "Yes. The 3D prototype supports pause, 0.25× and 0.5× speed, step-by-step viewing and hand close-ups.", "Иә. 3D үлгісінде кідіріс, 0.25× және 0.5× қарқын, қадаммен көру және қолдарды үлкейту бар.")],
+              [at("Это уже полноценный курс?", "Is this a complete course?", "Бұл толық курс па?"), at("Пока нет. Анимация — прототип, её форму кистей, направление движения и мимику ещё должен проверить носитель РЖЯ. Для обучения сверяйтесь с видеообразцом человека.", "Not yet. The animation is a prototype: an RSL signer still needs to review hand shapes, movement and facial expression. Use the human reference video when learning.", "Әзірге жоқ. Анимация — прототип: қол пішіні, қимыл және мимиканы маман тексеруі керек. Үйрену үшін адамның бейнеүлгісіне сүйеніңіз.")],
+              [at("Где здесь AI-компонент?", "Where is the AI component?", "AI компоненті қайда?"), at("В тренажёре работает пилотный классификатор букв А, В, Л, обученный на Bukva. Он обрабатывает фото или камеру на вашем устройстве без API-ключей. Распознавание слов и фраз ещё не обучено.", "The practice room includes a pilot classifier trained on Bukva for А, В, Л. It processes photos or camera frames on your device without API keys. Word and phrase recognition is not trained yet.", "Жаттығуда Bukva деректерінде оқытылған А, В, Л классификаторы бар. Фото мен камера кадрларын құрылғыда API кілтінсіз өңдейді. Сөздер мен сөйлемдерді тану әлі оқытылмаған.")],
+              [at("Нужны ли API-ключи для просмотра жестов?", "Do I need API keys to view signs?", "Ымдарды көруге API кілті керек пе?"), at("Нет. Подготовленная 3D-анимация проигрывается в браузере. Камера для её просмотра тоже не нужна.", "No. The prepared 3D animation plays in the browser. You do not need a camera to watch it.", "Жоқ. Дайын 3D анимация браузерде ойнатылады. Көру үшін камера да қажет емес.")]
             ].map(([question, answer]) => (
               <details key={question}>
                 <summary>
@@ -658,7 +521,7 @@ export default function LandingPage() {
             <br />
             <span>{t("момент понимания.")}</span>
           </h2>
-          <p>{t("Начните с темы, которая вам интересна.")}</p>
+          <p>{at("Начните со знакомства — посмотрите первую фразу на РЖЯ.", "Start with an introduction: explore your first RSL phrase.", "Танысудан бастаңыз — орыс ым тіліндегі алғашқы сөйлемді қараңыз.")}</p>
           <Link to={destination} className="mentor-cta">
             {user ? t("В кабинет") : t("Создать аккаунт")}
             <ArrowUpRight size={20} />
@@ -670,7 +533,7 @@ export default function LandingPage() {
           <Link to="/">
             <Brand />
           </Link>
-          <p>{t("Обучение, в котором есть место вашему вопросу.")}</p>
+          <p>{at("Язык жестов. Больше способов понимать друг друга.", "Sign language. More ways to understand each other.", "Ым тілі. Бір-бірімізді түсінудің жаңа жолдары.")}</p>
         </div>
         <div className="mentor-footer-links">
           <a href="#possibilities">{t("Возможности")}</a>
@@ -683,7 +546,7 @@ export default function LandingPage() {
         <LanguageSwitcher />
         <div className="mentor-footer-bottom">
           <span>© AI Mentor</span>
-          <span>{t("Учитесь. Спрашивайте. Понимайте.")}</span>
+          <span>{at("Смотрите. Повторяйте. Понимайте.", "Watch. Practise. Understand.", "Қараңыз. Қайталаңыз. Түсініңіз.")}</span>
         </div>
       </footer>
     </div>

@@ -67,6 +67,33 @@ public static class SqliteSchemaUpgrade
             cmd.Transaction = transaction; cmd.CommandText = AutomationSqlite.Sql;
             await cmd.ExecuteNonQueryAsync();
         }
+        await using (var cmd = connection.CreateCommand()) {
+            cmd.Transaction = transaction;
+            cmd.CommandText = @"
+                CREATE TABLE IF NOT EXISTS ""KnowledgeObservations"" (
+                    ""Id"" TEXT NOT NULL PRIMARY KEY, ""UserId"" TEXT NOT NULL REFERENCES ""Users""(""Id"") ON DELETE CASCADE,
+                    ""LectureId"" TEXT NOT NULL REFERENCES ""Lectures""(""Id"") ON DELETE CASCADE,
+                    ""AttemptId"" TEXT NOT NULL, ""ItemKey"" TEXT NOT NULL, ""SkillKey"" TEXT NOT NULL,
+                    ""SkillName"" TEXT NOT NULL, ""Subject"" TEXT NOT NULL, ""Position"" INTEGER NOT NULL,
+                    ""Correct"" INTEGER NOT NULL, ""CreatedAt"" TEXT NOT NULL);
+                CREATE INDEX IF NOT EXISTS ""IX_KnowledgeObservations_UserId_ItemKey"" ON ""KnowledgeObservations""(""UserId"", ""ItemKey"");
+                CREATE INDEX IF NOT EXISTS ""IX_KnowledgeObservations_LectureId"" ON ""KnowledgeObservations""(""LectureId"");
+                CREATE TABLE IF NOT EXISTS ""KnowledgeModels"" (""Id"" INTEGER NOT NULL PRIMARY KEY, ""ArtifactJson"" TEXT NOT NULL, ""ActivatedAt"" TEXT NOT NULL);";
+            await cmd.ExecuteNonQueryAsync();
+        }
+        await using (var cmd = connection.CreateCommand()) {
+            cmd.Transaction = transaction;
+            cmd.CommandText = @"
+                CREATE TABLE IF NOT EXISTS ""LessonFeedback"" (
+                    ""UserId"" TEXT NOT NULL REFERENCES ""Users""(""Id"") ON DELETE CASCADE,
+                    ""SlideId"" TEXT NOT NULL REFERENCES ""Slides""(""Id"") ON DELETE CASCADE,
+                    ""LectureId"" TEXT NOT NULL REFERENCES ""Lectures""(""Id"") ON DELETE CASCADE,
+                    ""Status"" TEXT NOT NULL, ""Question"" TEXT NOT NULL, ""UpdatedAt"" TEXT NOT NULL,
+                    PRIMARY KEY(""UserId"", ""SlideId""));
+                CREATE INDEX IF NOT EXISTS ""IX_LessonFeedback_LectureId"" ON ""LessonFeedback""(""LectureId"");
+                CREATE INDEX IF NOT EXISTS ""IX_LessonFeedback_SlideId"" ON ""LessonFeedback""(""SlideId"");";
+            await cmd.ExecuteNonQueryAsync();
+        }
         await transaction.CommitAsync(); await connection.CloseAsync();
     }
 }

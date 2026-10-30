@@ -1,0 +1,9 @@
+Bukva: Russian Sign Language Alphabet Dataset (2024)
+Creators: Karina Kvanchiani, Petr Surovtsev, Alexander Nagaev, Elizaveta Petrova, Alexander Kapitanov.
+Source: https://github.com/ai-forever/bukva
+Paper: https://arxiv.org/abs/2410.08675
+License: Public license with attribution and conditions reserved, a modified BY-SA license, NOT the standard Creative Commons license. Full terms in bukva-license.pdf.
+Selected reference videos are unmodified clips from the trimmed dataset. IDs in sources.json.
+The classifier is newly fitted on a three-class subset; hand-distance features are extracted with pretrained MediaPipe. Model artifacts and derived sample annotations are distributed under the same Bukva license terms. No endorsement by the original authors. Materials are provided without warranties.
+The avatar animations are independently authored motion studies using existing MakeHuman assets, visually informed by Bukva references; they have not been certified by RSL experts.
+MediaPipe Tasks and Hand Landmarker: Google, Apache 2.0. https://github.com/google-ai-edge/mediapipe

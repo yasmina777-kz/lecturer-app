@@ -1,0 +1,776 @@
+.sign-workspace {
+  --sw-ink: #233644;
+  --sw-muted: #526674;
+  --sw-soft: #edf3f7;
+  --sw-border: #cfdae1;
+  min-width: 0;
+  color: var(--sw-ink);
+}
+:root[data-theme="light"] .sign-workspace {
+  --sw-ink: #43382a;
+  --sw-muted: #75634c;
+  --sw-soft: #f3eadc;
+  --sw-border: #ddcfb9;
+}
+.sign-workspace .panel {
+  margin: 0;
+}
+.sign-workspace h2 {
+  font-size: 24px;
+  letter-spacing: -0.035em;
+  line-height: 1.3;
+}
+.sign-workspace h3 {
+  font-size: 19px;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+}
+.sign-workspace p {
+  line-height: 1.7;
+  color: var(--sw-muted);
+}
+.sign-welcome {
+  display: grid;
+  grid-template-columns: 1.45fr 0.8fr;
+  align-items: center;
+  gap: 28px;
+  padding: 32px !important;
+  overflow: hidden;
+  background: linear-gradient(125deg, #f4f8fa, #dfe9ee) !important;
+}
+.sign-welcome h2 {
+  font-size: 32px;
+  max-width: 20ch;
+  margin: 12px 0;
+}
+.sign-welcome p {
+  max-width: 54ch;
+}
+.sign-welcome-avatar {
+  height: 230px;
+  overflow: hidden;
+  border-radius: 20px;
+}
+.sign-welcome-avatar .avatar-scene {
+  height: 100% !important;
+  margin-top: 0;
+}
+.sign-save-note {
+  display: block;
+  font-size: 12px !important;
+  line-height: 1.65;
+  color: var(--sw-muted);
+  margin-top: 16px;
+}
+:root[data-theme="light"] .sign-welcome {
+  background: linear-gradient(125deg, #fffcf5, #f0e1cb) !important;
+}
+.sign-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  margin: 32px 0 20px;
+}
+.sign-section-heading h2 {
+  margin: 8px 0;
+}
+.sign-section-heading p {
+  font-size: 14px;
+  max-width: 68ch;
+  margin: 8px 0;
+}
+.sign-stage-list {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+.sign-stage-list > button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 16px;
+  padding: 18px 14px;
+  border: 1px solid var(--sw-border);
+  border-radius: 16px;
+  min-height: 150px;
+  background: white;
+  color: var(--sw-ink);
+  font-size: 14px;
+  font-weight: 650;
+}
+.sign-stage-list > button > b {
+  font-size: 19px;
+  font-weight: 500;
+  color: var(--sw-muted);
+}
+.sign-stage-list small {
+  display: block;
+  font-size: 11px;
+  font-weight: 450;
+  color: var(--sw-muted);
+  line-height: 1.4;
+  margin-top: 8px;
+}
+.sign-stage-list > button.selected {
+  background: var(--sw-soft);
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+.sign-filter {
+  font-size: 12px;
+  display: grid;
+  gap: 6px;
+  min-width: 160px;
+  flex-shrink: 0;
+  color: var(--sw-muted);
+}
+.sign-filter select {
+  width: 100%;
+  min-height: 44px;
+}
+.sign-lesson-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.sign-lesson-card {
+  padding: 0 !important;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition:
+    transform 0.2s,
+    border-color 0.2s;
+}
+.sign-lesson-card:is(a):hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+}
+.sign-card-art {
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 32px;
+  background: radial-gradient(ellipse at top right, #d1dfe8, var(--sw-soft));
+  color: #496679;
+}
+.sign-card-art > span {
+  font-size: 58px;
+  font-weight: 450;
+  letter-spacing: -0.06em;
+}
+.sign-card-body {
+  padding: 24px;
+  flex: 1;
+}
+.sign-card-body h3 {
+  margin: 14px 0 10px;
+}
+.sign-card-body p {
+  font-size: 14px;
+  margin: 0 0 16px;
+}
+.sign-status-label {
+  font-size: 11px;
+  font-weight: 650;
+  color: var(--sw-muted);
+  line-height: 1.5;
+  display: inline-block;
+  padding: 5px 9px;
+  background: var(--sw-soft);
+  border-radius: 7px;
+}
+.sign-card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--sw-border);
+}
+.sign-card-bottom > span:last-child {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 650;
+}
+.sign-planned .sign-card-art {
+  background: var(--sw-soft);
+  color: var(--sw-muted);
+  justify-content: center;
+}
+.sign-info-note {
+  font-size: 13px;
+  padding: 16px 20px;
+  border-left: 3px solid var(--sw-border);
+  background: var(--sw-soft);
+  border-radius: 0 12px 12px 0;
+  margin: 24px 0;
+}
+.sign-shortcuts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 40px;
+}
+.sign-shortcuts > a {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 22px;
+}
+.sign-shortcuts svg {
+  flex-shrink: 0;
+}
+.sign-shortcuts h3 {
+  margin: 0 0 8px;
+}
+.sign-shortcuts p {
+  margin: 0;
+  font-size: 13px;
+}
+.sign-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0 24px;
+  font-size: 14px;
+  color: var(--sw-muted);
+  min-height: 32px;
+}
+.sign-reading-layout {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.sign-reading {
+  padding: 32px !important;
+}
+.sign-reading section + section {
+  border-top: 1px solid var(--sw-border);
+  padding-top: 24px;
+  margin-top: 24px;
+}
+.sign-reading h2 {
+  margin: 12px 0;
+}
+.sign-reading p {
+  font-size: 16px;
+}
+.sign-reading > a {
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  display: inline-block;
+  margin-top: 20px;
+}
+.sign-lesson-guide {
+  padding: 28px !important;
+}
+.sign-lesson-guide > svg {
+  color: var(--accent);
+}
+.sign-lesson-guide h2 {
+  font-size: 21px;
+  margin: 16px 0;
+}
+.sign-lesson-guide p,
+.sign-lesson-guide li {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--sw-muted);
+}
+.sign-lesson-guide ol {
+  padding-left: 18px;
+}
+.sign-lesson-guide li {
+  margin-bottom: 14px;
+}
+.sign-check {
+  padding: 28px !important;
+  margin: 28px 0 !important;
+}
+.sign-check h2 {
+  font-size: 24px;
+  margin: 14px 0 20px;
+}
+.sign-answers {
+  border: 0;
+  padding: 0;
+  margin: 0 0 20px;
+}
+.sign-answers label {
+  padding: 16px;
+  border: 1px solid var(--sw-border);
+  border-radius: 12px;
+  margin: 12px 0;
+  background: transparent;
+}
+.sign-answers label.selected {
+  background: var(--sw-soft);
+  border-color: var(--accent);
+}
+.sign-answers label,
+.sign-check-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 15px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+.sign-answers input,
+.sign-check-row input {
+  width: 19px !important;
+  height: 19px;
+  flex-shrink: 0;
+  margin: 3px 0 0 !important;
+  accent-color: var(--accent);
+}
+.sign-check-row {
+  margin: 20px 0;
+}
+.sign-done {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent) !important;
+  font-size: 13px;
+  margin: 16px 0 0;
+  flex-wrap: wrap;
+}
+.sign-done a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.sign-text-layout {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.sign-text-form {
+  padding: 28px !important;
+}
+.sign-text-form > label {
+  display: block;
+  margin: 24px 0 10px;
+  font-size: 15px;
+  font-weight: 600;
+}
+.sign-text-form textarea {
+  resize: vertical;
+  width: 100%;
+  min-height: 150px;
+  font-size: 17px;
+  line-height: 1.6;
+}
+.sign-text-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 11px;
+  color: var(--sw-muted);
+  margin: 8px 0 22px;
+}
+.sign-text-meta > span:last-child {
+  white-space: nowrap;
+}
+.sign-examples {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--sw-border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  font-size: 13px;
+  color: var(--sw-muted);
+}
+.sign-examples button {
+  padding: 10px 12px;
+  background: var(--sw-soft);
+  border: 1px solid var(--sw-border);
+  border-radius: 9px;
+  color: var(--sw-ink);
+  min-height: 44px;
+}
+.sign-text-result {
+  margin-top: 28px !important;
+}
+.sign-text-empty {
+  padding: 50px 24px;
+  text-align: center;
+  color: var(--sw-muted);
+}
+.sign-text-empty > svg {
+  opacity: 0.7;
+}
+.sign-text-empty h2 {
+  font-size: 22px;
+}
+.sign-practice-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.sign-practice-stats > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px;
+}
+.sign-practice-stats strong {
+  font-size: 36px;
+  letter-spacing: -0.04em;
+}
+.sign-practice-stats span {
+  font-size: 14px;
+  color: var(--sw-muted);
+}
+.sign-practice-list {
+  display: grid;
+  gap: 16px;
+}
+.sign-practice-list article {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 24px;
+}
+.sign-practice-list h2 {
+  font-size: 21px;
+  margin: 10px 0;
+}
+.sign-practice-list p {
+  font-size: 14px;
+  margin: 0;
+}
+.sign-practice-list article > div:last-child {
+  flex-shrink: 0;
+  display: grid;
+  gap: 8px;
+}
+.sign-link-button {
+  border: 0;
+  background: transparent;
+  font-size: 12px;
+  min-height: 36px;
+  color: var(--sw-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.sign-help-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-bottom: 24px;
+}
+.sign-help-grid > a {
+  padding: 24px;
+}
+.sign-help-grid h2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 22px;
+}
+.sign-help-grid p {
+  font-size: 14px;
+}
+.sign-workspace .gesture-embedded {
+  border-radius: 22px;
+  overflow: hidden;
+  min-height: 0;
+}
+.gesture-embedded .gesture-layout {
+  padding: 24px;
+  gap: 28px;
+  grid-template-columns: 1fr 1fr;
+}
+.gesture-embedded .gesture-stage {
+  top: 20px;
+}
+.gesture-embedded .gesture-3d {
+  height: 500px;
+}
+.gesture-embedded .gesture-details #gesture-title {
+  font-size: 32px;
+}
+.sign-workspace :is(input, select, textarea):focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+.sign-workspace .page-heading p {
+  max-width: 75ch;
+}
+.sign-workspace .empty {
+  grid-column: 1/-1;
+}
+:root[data-theme="light"] .sign-stage-list > button {
+  background: #fffcf5;
+}
+:root[data-theme="light"] .sign-stage-list > button.selected {
+  background: var(--sw-soft);
+}
+:root[data-theme="light"] .sign-card-art {
+  background: radial-gradient(ellipse at top right, #e9d4b5, var(--sw-soft));
+  color: #84633b;
+}
+@media (max-width: 1100px) {
+  .sign-stage-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .sign-help-grid {
+    grid-template-columns: 1fr;
+  }
+  .sign-welcome h2 {
+    font-size: 27px;
+  }
+  .sign-reading-layout,
+  .sign-text-layout {
+    grid-template-columns: 1fr;
+  }
+  .sign-lesson-guide ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 32px;
+  }
+  .gesture-embedded .gesture-layout {
+    grid-template-columns: 1fr;
+  }
+  .gesture-embedded .gesture-stage {
+    position: relative;
+    top: auto;
+  }
+  .gesture-embedded .gesture-3d {
+    height: 460px;
+  }
+  .gesture-embedded .gesture-details > p {
+    max-width: none;
+  }
+}
+@media (max-width: 650px) {
+  .sign-welcome {
+    grid-template-columns: 1fr;
+    padding: 24px !important;
+    gap: 12px;
+  }
+  .sign-welcome-avatar {
+    height: 220px;
+    max-width: 280px;
+    width: 100%;
+    margin: auto;
+  }
+  .sign-welcome-avatar .avatar-scene {
+    height: 100% !important;
+  }
+  .sign-stage-list {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .sign-stage-list > button {
+    min-height: 130px;
+    padding: 14px;
+    font-size: 13px;
+    gap: 12px;
+  }
+  .sign-lesson-grid,
+  .sign-shortcuts,
+  .sign-practice-stats {
+    grid-template-columns: 1fr;
+  }
+  .sign-section-heading {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .sign-filter {
+    width: 100%;
+  }
+  .sign-card-art {
+    height: 110px;
+  }
+  .sign-reading,
+  .sign-text-form,
+  .sign-lesson-guide,
+  .sign-check {
+    padding: 22px !important;
+  }
+  .sign-reading p {
+    font-size: 15px;
+  }
+  .sign-practice-list article {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .sign-practice-list article > div:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .gesture-embedded .gesture-layout {
+    padding: 16px;
+    gap: 22px;
+  }
+  .gesture-embedded .gesture-3d {
+    height: 400px;
+  }
+  .gesture-embedded .gesture-details #gesture-title {
+    font-size: 30px;
+  }
+  .sign-workspace .button {
+    white-space: normal;
+  }
+  .sign-shortcuts > a {
+    padding: 20px;
+    gap: 12px;
+  }
+  .sign-shortcuts > a > svg:last-child {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sign-lesson-card {
+    transition: none;
+  }
+  .sign-lesson-card:is(a):hover {
+    transform: none;
+  }
+}
+.sign-welcome-avatar .avatar-scene.compact {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* The catalogue is the entry point; instructions live inside level one. */
+.sign-level-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+.sign-level-card {
+  display: flex;
+  flex-direction: column;
+  padding: 9px !important;
+  border-radius: 22px;
+  min-width: 0;
+  overflow: hidden;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.sign-level-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--sw-muted) !important;
+  box-shadow: 0 16px 32px #00000016;
+}
+.sign-level-cover {
+  position: relative;
+  aspect-ratio: 1.65;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--sw-soft);
+}
+.sign-level-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.sign-level-card:hover img {
+  transform: scale(1.035);
+}
+.sign-level-cover > span {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 6px 10px;
+  border: 1px solid #ffffff40;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  color: #fff;
+  background: #101a2cce;
+  backdrop-filter: blur(8px);
+}
+.sign-level-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 17px 12px 8px;
+}
+.sign-level-body h2 {
+  font-size: 19px;
+  margin: 0 0 7px;
+  line-height: 1.4;
+}
+.sign-level-body p {
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 0 0 14px;
+}
+.sign-level-body small {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  font-size: 11px;
+  color: var(--sw-muted);
+  margin-top: auto;
+}
+.sign-level-complete {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.sign-level-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  border-top: 1px solid var(--sw-border);
+  margin-top: 17px;
+  padding: 16px 0 4px;
+}
+.sign-catalog-note {
+  font-size: 12px;
+  margin-top: 20px;
+}
+@media (max-width: 1150px) {
+  .sign-level-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 580px) {
+  .sign-level-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+  .sign-level-cover {
+    aspect-ratio: 1.9;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sign-level-card,
+  .sign-level-cover img {
+    transition: none;
+  }
+  .sign-level-card:hover,
+  .sign-level-card:hover img {
+    transform: none;
+  }
+}

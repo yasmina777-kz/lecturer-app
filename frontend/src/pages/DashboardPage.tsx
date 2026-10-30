@@ -1,3 +1,4 @@
+import { at } from "../i18n/automation";
 import { t } from "../i18n";
 import { Link } from "react-router-dom";
 import {
@@ -58,6 +59,7 @@ export function DashboardPage() {
             {t("Ваш AI-лектор объяснит, ответит и поможет запомнить.")}
           </p>
           <div className="hero-actions">
+            <Link to="/local-mentor" className="button primary"><Sparkles size={18}/>{at("Наставник без API-ключей", "Mentor without API keys", "API кілтінсіз тәлімгер")}</Link>
             <Link to="/create" className="button primary">
               <Plus size={18} />
               {t("Создать лекцию")}

@@ -1,0 +1,51 @@
+[
+  {
+    "letter": "А",
+    "attachment_id": "fbe2c596-75a9-43d4-b9a9-4ac608270200",
+    "file": "a-reference.mp4",
+    "source": "https://github.com/ai-forever/bukva",
+    "changes": "Unmodified trimmed video from Bukva; subset selected for educational reference."
+  },
+  {
+    "letter": "В",
+    "attachment_id": "637c386b-e34b-4eed-86b9-ae6290a2df44",
+    "file": "v-reference.mp4",
+    "source": "https://github.com/ai-forever/bukva",
+    "changes": "Unmodified trimmed video from Bukva; subset selected for educational reference."
+  },
+  {
+    "letter": "Л",
+    "attachment_id": "32e6675d-cfe6-4de5-b32b-38105dd77ae5",
+    "file": "l-reference.mp4",
+    "source": "https://github.com/ai-forever/bukva",
+    "changes": "Unmodified trimmed video from Bukva; subset selected for educational reference."
+  },
+  {
+    "letter": "Г",
+    "attachment_id": "4918f7b2-a129-4afc-a6f1-245f2e4a0173",
+    "file": "g-reference.mp4",
+    "source": "https://github.com/ai-forever/bukva",
+    "changes": "Unmodified trimmed video from Bukva; educational reference."
+  },
+  {
+    "letter": "У",
+    "attachment_id": "c22b3b3d-9607-4e96-ae35-c5abad9bfccf",
+    "file": "u-reference.mp4",
+    "source": "https://github.com/ai-forever/bukva",
+    "changes": "Unmodified trimmed video from Bukva; educational reference."
+  },
+  {
+    "letter": "Ы",
+    "attachment_id": "0f310d94-3b92-4ec1-9ed6-877b7f9ec04a",
+    "file": "y-reference.mp4",
+    "source": "https://github.com/ai-forever/bukva",
+    "changes": "Unmodified trimmed video from Bukva; educational reference."
+  },
+  {
+    "letter": "Ш",
+    "attachment_id": "d26a8290-d2cd-44a0-b8ac-531d7e5aef8c",
+    "file": "sh-reference.mp4",
+    "source": "https://github.com/ai-forever/bukva",
+    "changes": "Unmodified trimmed video from Bukva; educational reference."
+  }
+]

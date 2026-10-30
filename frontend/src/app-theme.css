@@ -1,0 +1,108 @@
+/* Workspace and landing share the data-theme set by useTheme. */
+:root[data-theme="dark"] .app-shell {
+  color-scheme: dark;
+  --dark: #edf3fa;
+  --muted: #a4b3c4;
+  --line: #2c3b4b;
+  --accent: #b7dfff;
+  --cream: #192533;
+  color: var(--dark);
+  background: #080c12;
+}
+:root[data-theme="dark"] .app-shell .app-main {
+  background: #080c12;
+  color: var(--dark);
+  min-height: 100vh;
+}
+:root[data-theme="dark"] .app-shell .topbar {
+  background: #0d1520f5;
+  border-color: var(--line);
+  color: var(--dark);
+}
+:root[data-theme="dark"]
+  .app-shell
+  :is(.panel, .stat-card, .lecture-card, .modal, .empty-state) {
+  background: #111a25;
+  border-color: var(--line);
+  color: var(--dark);
+  box-shadow: 0 8px 28px #00000012;
+}
+:root[data-theme="dark"] .app-shell :is(input, textarea, select) {
+  background: #0d1520;
+  border-color: #3a4c60;
+  color: #edf3fa;
+}
+:root[data-theme="dark"] .app-shell :is(input, textarea)::placeholder {
+  color: #91a3b7;
+}
+:root[data-theme="dark"] .app-shell :is(input, textarea, select):focus {
+  border-color: #b7dfff;
+  box-shadow: 0 0 0 3px #b7dfff22;
+}
+:root[data-theme="dark"] .app-shell input:disabled {
+  color: #a4b3c4;
+  background: #192533;
+}
+:root[data-theme="dark"] .app-shell .primary {
+  background: #edc481;
+  border-color: #edc481;
+  color: #17212e;
+}
+:root[data-theme="dark"] .app-shell .primary:hover {
+  background: #f5d59e;
+  border-color: #f5d59e;
+}
+:root[data-theme="dark"]
+  .app-shell
+  :is(.secondary, .tabs button, .icon-button, .language-segments) {
+  background: #162231;
+  border-color: var(--line);
+  color: #bfcede;
+}
+:root[data-theme="dark"]
+  .app-shell
+  :is(.tabs button.active, .language-segments button[aria-pressed="true"]) {
+  background: #2b4055;
+  color: #edf3fa;
+  border-color: #7296b4;
+}
+:root[data-theme="dark"]
+  .app-shell
+  :is(
+    .page-heading p,
+    .muted,
+    .form-hint,
+    .empty-inline,
+    .empty-state p,
+    .admin-stats .panel p,
+    .service-row p,
+    .activity-row small
+  ) {
+  color: #a4b3c4;
+}
+:root[data-theme="dark"] .app-shell :is(th, .tag, .count, .notice) {
+  background: #192533;
+  color: #b9c9da;
+  border-color: var(--line);
+}
+:root[data-theme="dark"] .app-shell :is(td, th, .service-row, .activity-row) {
+  border-color: var(--line);
+}
+:root[data-theme="dark"] .app-shell .sign-workspace {
+  --sw-ink: #edf3fa;
+  --sw-muted: #a4b3c4;
+  --sw-soft: #1b2939;
+  --sw-border: #2c3b4b;
+}
+:root[data-theme="dark"] .app-shell .sign-card-art {
+  background: radial-gradient(ellipse at top right, #2b4055, #182433);
+  color: #b7dfff;
+}
+:root[data-theme="light"] .app-shell .app-main {
+  background: #f8f3e9;
+  color: #43382a;
+}
+:root[data-theme="light"] .app-shell .topbar {
+  background: #fbf7efee;
+  border-color: #e4d8c5;
+}

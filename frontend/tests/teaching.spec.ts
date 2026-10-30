@@ -91,7 +91,7 @@ test("teacher registration, validation, lesson settings snapshot and multilingua
     expect(
       (
         await request.patch(`/api/lectures/${id}`, {
-          data: { title: lesson.title, isPublished: true },
+          data: { title: lesson.title, isPublished: true, reviewed: true },
         })
       ).status(),
     ).toBe(204);

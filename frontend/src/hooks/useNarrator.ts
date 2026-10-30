@@ -1,3 +1,4 @@
+import { at } from "../i18n/automation";
 import { t } from "../i18n";
 import { useEffect, useRef, useState } from "react";
 import type { Language, VoiceGender } from "../types/auth";
@@ -156,13 +157,11 @@ export function useNarrator(
           voices = window.speechSynthesis.getVoices();
         }
         const matching = voices.filter((v) =>
-          v.lang.toLowerCase().startsWith(language),
+          v.lang.toLowerCase().startsWith(language) && (provider !== "device" || v.localService),
         );
         if (!matching.length)
           throw new Error(
-            t(
-              "На устройстве нет голоса для этого языка. Подключите Azure Speech или установите соответствующий голос в системе. Текст лекции доступен ниже.",
-            ),
+            at("На устройстве нет локального голоса для этого языка. Установите голос в настройках системы. Объяснение можно прочитать на экране.", "No local voice for this language is installed. Add a voice in system settings, or read the explanation on screen.", "Құрылғыда осы тілдің жергілікті дауысы жоқ. Жүйе баптауларында дауыс орнатыңыз немесе мәтінді оқыңыз."),
           );
         const preferred = matching.find(
           (v) =>
@@ -175,7 +174,7 @@ export function useNarrator(
           language === "kk" ? "kk-KZ" : language === "en" ? "en-US" : "ru-RU";
         u.rate = rate;
         u.voice = preferred ?? matching[0];
-        if (!preferred)
+        if (!preferred && provider !== "device")
           setSpeechError(
             t(
               "Пол голоса устройства не подтверждён. Для точного выбора мужского или женского голоса подключите Azure Speech.",

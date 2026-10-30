@@ -254,6 +254,75 @@ namespace Lecturer.Infrastructure.Migrations
                     b.ToTable("GroupMembers");
                 });
 
+            modelBuilder.Entity("Lecturer.Core.Entities.KnowledgeModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("ActivatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("ArtifactJson")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("KnowledgeModels");
+                });
+
+            modelBuilder.Entity("Lecturer.Core.Entities.KnowledgeObservation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("AttemptId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("Correct")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("ItemKey")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("LectureId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Position")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("SkillKey")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SkillName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LectureId");
+
+                    b.HasIndex("UserId", "ItemKey");
+
+                    b.ToTable("KnowledgeObservations");
+                });
+
             modelBuilder.Entity("Lecturer.Core.Entities.LearningProgress", b =>
                 {
                     b.Property<Guid>("UserId")
@@ -372,6 +441,39 @@ namespace Lecturer.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Lectures");
+                });
+
+            modelBuilder.Entity("Lecturer.Core.Entities.LessonFeedback", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("SlideId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("LectureId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Question")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("UserId", "SlideId");
+
+                    b.HasIndex("LectureId");
+
+                    b.HasIndex("SlideId");
+
+                    b.ToTable("LessonFeedback");
                 });
 
             modelBuilder.Entity("Lecturer.Core.Entities.Question", b =>
@@ -675,11 +777,47 @@ namespace Lecturer.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Lecturer.Core.Entities.KnowledgeObservation", b =>
+                {
+                    b.HasOne("Lecturer.Core.Entities.Lecture", null)
+                        .WithMany()
+                        .HasForeignKey("LectureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Lecturer.Core.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Lecturer.Core.Entities.LearningProgress", b =>
                 {
                     b.HasOne("Lecturer.Core.Entities.Lecture", null)
                         .WithMany()
                         .HasForeignKey("LectureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Lecturer.Core.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Lecturer.Core.Entities.LessonFeedback", b =>
+                {
+                    b.HasOne("Lecturer.Core.Entities.Lecture", null)
+                        .WithMany()
+                        .HasForeignKey("LectureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Lecturer.Core.Entities.Slide", null)
+                        .WithMany()
+                        .HasForeignKey("SlideId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

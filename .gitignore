@@ -62,3 +62,28 @@ Desktop.ini
 .vercel/
 .vercel
 .env*
+!.env.example
+
+# Local research exports and fitted artifacts
+training-data/
+
+# Local talking-avatar source package and render intermediates
+art/lecture-portraits-v1/lecture_*/
+
+# Local avatar recording and render intermediates
+art/lecture-portraits-v2/render/
+
+# Downloaded local neural model (restored by prepare:local-ai)
+frontend/public/models/mentor-e5/
+art/local-ai-cache/
+
+# Reproducible local sign-training inputs and Python environment
+ml/rsl/data/
+ml/rsl/.venv/
+
+# Keep Blender scripts and the reusable base; omit duplicate renders and research scratch files.
+art/**/*
+!art/**/
+!art/**/*.py
+!art/**/README.*
+!art/mira-blender-v2/Mira-base.blend

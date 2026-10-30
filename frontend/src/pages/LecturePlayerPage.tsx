@@ -16,21 +16,21 @@ import {
   Pause,
   Play,
   Send,
-  Square,
   Volume2,
   X,
 } from "lucide-react";
 import { apiGet, request } from "../api/httpClient";
-import { askQuestion } from "../api/questionsApi";
+import { at } from "../i18n/automation";
+import { useLocalMentor, localError } from "../local-ai/useLocalMentor";
+import { lectureSources, type LocalAnswer } from "../local-ai/retrieval";
 import { useAuth } from "../context/AuthContext";
 import { useNarrator, type SpeechPosition } from "../hooks/useNarrator";
-import { useAudioRecorder } from "../hooks/useAudioRecorder";
 import { AvatarPlayer } from "../components/AvatarPlayer";
 import { SlideViewer, slideContent } from "../components/SlideViewer";
 import { ErrorMessage, Loading, messageOf } from "../components/UI";
 import { LectureManagement } from "../components/LectureManagement";
 import { StudyPanel } from "./StudyPanel";
-import type { Capabilities, Lecture } from "../types/lecture";
+import type { Lecture } from "../types/lecture";
 type Phase = "welcome" | "intro" | "slide" | "question" | "answer" | "complete";
 export function LecturePlayerPage() {
   const { id = "" } = useParams();
@@ -43,18 +43,16 @@ export function LecturePlayerPage() {
   const [tab, setTab] = useState("outline");
   const [text, setText] = useState("");
   const [answer, setAnswer] = useState("");
+  const localMentor = useLocalMentor();
+  const [localResult, setLocalResult] = useState<LocalAnswer>();
   const [busy, setBusy] = useState(false);
-  const [caps, setCaps] = useState<Capabilities | null>(null);
   const [rate, setRate] = useState(user?.speechRate || 1);
-  const [recordPending, setRecordPending] = useState(false);
-  const [elapsed, setElapsed] = useState(0);
   const narrator = useNarrator(
     rate,
     lecture?.language || "ru",
     lecture?.voiceGender || "male",
-    caps?.speech || "browser",
+    "device",
   );
-  const recorder = useAudioRecorder();
   const saved = useRef<SpeechPosition>();
   const autoResume = useRef(false);
   const requestVersion = useRef(0);
@@ -73,13 +71,6 @@ export function LecturePlayerPage() {
       })
       .catch((e) => {
         if (alive.current) setLoadError(messageOf(e));
-      });
-    apiGet<Capabilities>("/capabilities")
-      .then((c) => {
-        if (alive.current) setCaps(c);
-      })
-      .catch((e) => {
-        if (alive.current) setError(messageOf(e));
       });
     return () => {
       alive.current = false;
@@ -143,6 +134,7 @@ export function LecturePlayerPage() {
       );
   }
   function openQuestion() {
+    setLocalResult(undefined);
     autoResume.current = narrator.active;
     saved.current = narrator.pause();
     setPhase("question");
@@ -150,6 +142,8 @@ export function LecturePlayerPage() {
     setError("");
   }
   function returnToLecture() {
+    localMentor.cancel();
+    setLocalResult(undefined);
     requestVersion.current++;
     narrator.cancel();
     setBusy(false);
@@ -158,15 +152,26 @@ export function LecturePlayerPage() {
     if (autoResume.current && saved.current?.chunks.length)
       narrator.resume(saved.current, () => finishSlide(index));
   }
-  async function submitQuestion(question: string | Blob) {
+  async function submitQuestion(question: string) {
     if (!lecture || busy) return;
     const version = ++requestVersion.current;
     narrator.cancel();
     setBusy(true);
     setError("");
     try {
-      const result = await askQuestion(id, lecture.slides[index].id, question);
+      const match = await localMentor.ask(question, lectureSources(lecture));
+      const result = {
+        questionText: question,
+        answerText:
+          match.source?.text ||
+          at(
+            "В материалах лекции не нашлось достаточно близкого объяснения. Уточните вопрос или обратитесь к преподавателю.",
+            "No sufficiently relevant explanation was found in this lecture. Rephrase your question or ask your teacher.",
+            "Дәріс материалынан тиісті түсіндірме табылмады. Сұрақты нақтылаңыз немесе оқытушыдан сұраңыз.",
+          ),
+      };
       if (!alive.current || version !== requestVersion.current) return;
+      setLocalResult(match);
       setAnswer(result.answerText);
       setText("");
       setPhase("answer");
@@ -181,45 +186,17 @@ export function LecturePlayerPage() {
             }
           : l,
       );
-      narrator.say(result.answerText, () => {
-        if (alive.current && version === requestVersion.current)
-          returnToLecture();
-      });
+      // Keep the source visible; speaking starts from an explicit user click.
+      // Local answers are session-only and are never posted to an AI endpoint.
     } catch (e) {
       if (alive.current && version === requestVersion.current) {
-        setError(messageOf(e));
+        setError(localError(e));
         setPhase("question");
       }
     } finally {
       if (alive.current && version === requestVersion.current) setBusy(false);
     }
   }
-  async function record() {
-    if (recordPending) return;
-    setRecordPending(true);
-    setError("");
-    try {
-      if (recorder.isRecording) {
-        const blob = await recorder.stop();
-        if (blob.size && alive.current) await submitQuestion(blob);
-      } else {
-        setElapsed(0);
-        await recorder.start();
-      }
-    } catch (e) {
-      setError(messageOf(e));
-    } finally {
-      if (alive.current) setRecordPending(false);
-    }
-  }
-  useEffect(() => {
-    if (!recorder.isRecording) return;
-    const timer = window.setInterval(() => setElapsed((e) => e + 1), 1000);
-    return () => clearInterval(timer);
-  }, [recorder.isRecording]);
-  useEffect(() => {
-    if (elapsed >= 60 && recorder.isRecording && !recordPending) void record();
-  }, [elapsed]);
   if (loadError)
     return (
       <>
@@ -294,7 +271,7 @@ export function LecturePlayerPage() {
                   <h2>
                     {asking
                       ? busy
-                        ? t("Обдумываю ваш вопрос…")
+                        ? localMentor.status
                         : phase === "answer"
                           ? t("Вот как это работает")
                           : t("Что осталось непонятным?")
@@ -438,20 +415,63 @@ export function LecturePlayerPage() {
                 <button
                   className="icon-button"
                   aria-label={t("Вернуться к лекции")}
-                  disabled={recorder.isRecording || recordPending}
                   onClick={returnToLecture}
                 >
                   <X size={18} />
                 </button>
               </div>
               {answer && <p className="answer-text">{answer}</p>}
-              {!caps?.aiConfigured && (
+              {localResult?.source && (
                 <div className="notice">
-                  {t(
-                    "Ответы AI и распознавание голоса появятся после подключения ключа на сервере. Лекцию можно продолжить ниже.",
-                  )}
+                  <FileText size={16} />
+                  <span>
+                    {at("Источник:", "Source:", "Дереккөз:")}{" "}
+                    {localResult.source.title}
+                  </span>
+                  <button
+                    className="text-link"
+                    onClick={() => {
+                      const i = localResult.source!.slideIndex ?? index;
+                      returnToLecture();
+                      playSlide(i, false);
+                    }}
+                  >
+                    {at("Открыть слайд", "Open slide", "Слайдты ашу")}
+                  </button>
                 </div>
               )}
+              {answer && localResult?.found && (
+                <button
+                  className="button secondary small"
+                  onClick={() =>
+                    narrator.active
+                      ? narrator.cancel()
+                      : narrator.say(answer, () => {})
+                  }
+                >
+                  {narrator.active ? (
+                    <Pause size={16} />
+                  ) : (
+                    <Volume2 size={16} />
+                  )}{" "}
+                  {narrator.active
+                    ? at("Остановить", "Stop", "Тоқтату")
+                    : at(
+                        "Озвучить ответ",
+                        "Read answer aloud",
+                        "Жауапты дауыстап оқу",
+                      )}
+                </button>
+              )}
+              <div className="notice">
+                {busy
+                  ? localMentor.status
+                  : at(
+                      "Локальная E5 ищет объяснение в слайдах этой лекции. Ответы сохраняются только до закрытия страницы. Для первой загрузки модели нужен интернет (около 170 МБ).",
+                      "Local E5 searches this lecture’s slides. Answers last only until the page closes. The initial model download needs internet (about 170 MB).",
+                      "Жергілікті E5 дәріс слайдтарынан түсіндірме іздейді. Жауаптар бет жабылғанша сақталады. Алғашқы жүктеуге интернет қажет (шамамен 170 МБ).",
+                    )}
+              </div>
               {phase === "question" && (
                 <form
                   onSubmit={(e) => {
@@ -462,42 +482,18 @@ export function LecturePlayerPage() {
                   <textarea
                     aria-label={t("Вопрос лектору")}
                     placeholder={t(
-                      "Например: объясни этот момент на другом примере…",
+                      "Спросите о понятии или правиле из этой лекции…",
                     )}
                     value={text}
                     onChange={(e) => setText(e.target.value)}
                     maxLength={2000}
                     rows={3}
-                    disabled={busy || recorder.isRecording}
+                    disabled={busy}
                   />
                   <div className="question-actions">
                     <button
-                      className={`button ${recorder.isRecording ? "danger" : "secondary"}`}
-                      type="button"
-                      disabled={busy || recordPending || !caps?.aiConfigured}
-                      onClick={record}
-                    >
-                      {recorder.isRecording ? (
-                        <>
-                          <Square size={15} />
-                          {t("Отправить запись ·")}
-                          {elapsed} {t("с")}
-                        </>
-                      ) : (
-                        <>
-                          <Mic size={17} />
-                          {t("Спросить голосом")}
-                        </>
-                      )}
-                    </button>
-                    <button
                       className="button primary"
-                      disabled={
-                        busy ||
-                        recorder.isRecording ||
-                        !text.trim() ||
-                        !caps?.aiConfigured
-                      }
+                      disabled={busy || !text.trim()}
                     >
                       {busy ? (
                         <LoaderCircle size={17} className="spin" />
@@ -509,11 +505,7 @@ export function LecturePlayerPage() {
                   </div>
                 </form>
               )}
-              <button
-                className="text-link"
-                disabled={recorder.isRecording || recordPending}
-                onClick={returnToLecture}
-              >
+              <button className="text-link" onClick={returnToLecture}>
                 {t("Продолжить лекцию")}
                 <ArrowRight size={16} />
               </button>
@@ -529,11 +521,7 @@ export function LecturePlayerPage() {
                   ? lecture.introduction
                   : slide.narrationText}
               </p>
-              <small>
-                {caps?.speech === "azure"
-                  ? t("Озвучка Azure Speech")
-                  : t("Озвучка голосом вашего устройства")}
-              </small>
+              <small>{t("Озвучка голосом вашего устройства")}</small>
             </div>
           )}
         </section>
@@ -603,7 +591,19 @@ export function LecturePlayerPage() {
             {t("Практика")}
           </button>
         </div>
-        <StudyPanel lecture={lecture} slideIndex={index} tab={tab} onSlide={(i) => { narrator.cancel(); saved.current = undefined; setIndex(i); setPhase("slide"); setTab("outline"); window.scrollTo({top:0,behavior:"smooth"}); }} />
+        <StudyPanel
+          lecture={lecture}
+          slideIndex={index}
+          tab={tab}
+          onSlide={(i) => {
+            narrator.cancel();
+            saved.current = undefined;
+            setIndex(i);
+            setPhase("slide");
+            setTab("outline");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+        />
       </div>
     </>
   );

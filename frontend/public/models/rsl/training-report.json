@@ -1,0 +1,431 @@
+{
+  "dataset": "Bukva subset",
+  "labels": [
+    "А",
+    "В",
+    "Л"
+  ],
+  "trainVideos": 135,
+  "testVideos": 54,
+  "trainFrames": 657,
+  "trainSigners": 91,
+  "testSigners": 20,
+  "signerOverlap": 0,
+  "missingHandVideos": 0,
+  "videoAccuracyIncludingMissingHands": 0.8703703703703703,
+  "acceptedAccuracy": 0.9361702127659575,
+  "acceptedCoverage": 0.8703703703703703,
+  "confusionMatrix": [
+    [
+      17,
+      0,
+      1,
+      0
+    ],
+    [
+      1,
+      16,
+      1,
+      0
+    ],
+    [
+      4,
+      0,
+      14,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "testResults": [
+    {
+      "id": "3a6e0307-e80c-4101-b3ed-1075070ba27a",
+      "expected": "А",
+      "prediction": "А",
+      "confidence": 0.9991337943555578,
+      "accepted": true
+    },
+    {
+      "id": "6dd5fe9b-ae33-4212-8d6c-7cf42f76dd81",
+      "expected": "А",
+      "prediction": "А",
+      "confidence": 0.9843119157739146,
+      "accepted": true
+    },
+    {
+      "id": "c8e2914e-03ca-41c0-8fb7-60c5019b07a5",
+      "expected": "А",
+      "prediction": "А",
+      "confidence": 0.9483686108581999,
+      "accepted": true
+    },
+    {
+      "id": "c727cc70-3f30-4426-8956-55514f0af3e4",
+      "expected": "А",
+      "prediction": "А",
+      "confidence": 0.9795888924482357,
+      "accepted": true
+    },
+    {
+      "id": "24936cc5-e5bb-43a3-96b8-2a9b4a6d157f",
+      "expected": "А",
+      "prediction": "А",
+      "confidence": 0.9192970054495312,
+      "accepted": true
+    },
+    {
+      "id": "e2a7025c02d81460bf9ae9c3b28336a6",
+      "expected": "А",
+      "prediction": "А",
+      "confidence": 0.8747093558837594,
+      "accepted": true
+    },
+    {
+      "id": "613ed2b8-c894-427f-b0ef-3e8872609c76",
+      "expected": "А",
+      "prediction": "А",
+      "confidence": 0.9516147148824625,
+      "accepted": true
+    },
+    {
+      "id": "df5b08f0-41d1-4572-889c-8b893e71069b",
+      "expected": "А",
+      "prediction": "А",
+      "confidence": 0.9893961404877987,
+      "accepted": true
+    },
+    {
+      "id": "bfb2d7ae-0f6c-4e20-b087-0965641d34ff",
+      "expected": "А",
+      "prediction": "А",
+      "confidence": 0.9894195107279188,
+      "accepted": true
+    },
+    {
+      "id": "b20b8829-b443-45e8-8ae0-5a9652ccfdf7",
+      "expected": "А",
+      "prediction": "А",
+      "confidence": 0.6366418452874985,
+      "accepted": false
+    },
+    {
+      "id": "83acfcc4-8122-4548-be09-ca9212fc528d",
+      "expected": "А",
+      "prediction": "А",
+      "confidence": 0.9982970942866178,
+      "accepted": true
+    },
+    {
+      "id": "cd31a981-0638-4ac3-bcdd-3cacf724c827",
+      "expected": "А",
+      "prediction": "А",
+      "confidence": 0.8888601141565461,
+      "accepted": true
+    },
+    {
+      "id": "dd938a9c-1dd4-4453-9633-e9e33423917f",
+      "expected": "А",
+      "prediction": "А",
+      "confidence": 0.9996189984604551,
+      "accepted": true
+    },
+    {
+      "id": "46b8313e-8281-41ad-8d01-29c8a49bfbf5",
+      "expected": "А",
+      "prediction": "А",
+      "confidence": 0.9054757589472251,
+      "accepted": true
+    },
+    {
+      "id": "52a31867-5661-4a33-aeea-416fedc8b029",
+      "expected": "А",
+      "prediction": "Л",
+      "confidence": 0.5332619086712855,
+      "accepted": false
+    },
+    {
+      "id": "f4b20d79509473b1c185f20626154d92",
+      "expected": "А",
+      "prediction": "А",
+      "confidence": 0.8778170463128425,
+      "accepted": true
+    },
+    {
+      "id": "521811f2-a8e4-4ebb-981f-bd3328088f62",
+      "expected": "А",
+      "prediction": "А",
+      "confidence": 0.9978972597918594,
+      "accepted": true
+    },
+    {
+      "id": "4d8c5d92-17c9-4cb3-8df8-b943df02b388",
+      "expected": "А",
+      "prediction": "А",
+      "confidence": 0.9753273346591762,
+      "accepted": true
+    },
+    {
+      "id": "d0f09a78-47a3-4673-a6c3-afa2ffc39101",
+      "expected": "В",
+      "prediction": "В",
+      "confidence": 0.9887535473696124,
+      "accepted": true
+    },
+    {
+      "id": "acd68cb4-a383-4725-b0f1-e1078eb867d2",
+      "expected": "В",
+      "prediction": "В",
+      "confidence": 0.912163859302515,
+      "accepted": true
+    },
+    {
+      "id": "673ea0cd-3484-443b-b8da-e5518f7e0d7b",
+      "expected": "В",
+      "prediction": "В",
+      "confidence": 0.9742718968887241,
+      "accepted": true
+    },
+    {
+      "id": "7b488158-23d7-47da-8a35-486d053161e9",
+      "expected": "В",
+      "prediction": "В",
+      "confidence": 0.9933441306662102,
+      "accepted": true
+    },
+    {
+      "id": "79655865b0e4e821791b9ff6e3c1810e",
+      "expected": "В",
+      "prediction": "А",
+      "confidence": 0.7930519346377702,
+      "accepted": false
+    },
+    {
+      "id": "636be944-2fb7-4843-8bf9-5bf504ce4159",
+      "expected": "В",
+      "prediction": "В",
+      "confidence": 0.995476465848548,
+      "accepted": true
+    },
+    {
+      "id": "f3bf9497-a565-4c91-baef-45649e5b06b8",
+      "expected": "В",
+      "prediction": "Л",
+      "confidence": 0.9307005077813459,
+      "accepted": true
+    },
+    {
+      "id": "47f4805e-047f-4306-b01e-c2564e78d002",
+      "expected": "В",
+      "prediction": "В",
+      "confidence": 0.9957893929092719,
+      "accepted": true
+    },
+    {
+      "id": "4bbaee59-7610-4bcb-ba8c-ebcba3870e74",
+      "expected": "В",
+      "prediction": "В",
+      "confidence": 0.998965169775674,
+      "accepted": true
+    },
+    {
+      "id": "69f0acac-e5b0-4efc-846e-011eade40911",
+      "expected": "В",
+      "prediction": "В",
+      "confidence": 0.9988670048349079,
+      "accepted": true
+    },
+    {
+      "id": "2821d9bf-2f5a-4ad1-bafb-6388c8554d6d",
+      "expected": "В",
+      "prediction": "В",
+      "confidence": 0.9919903737367515,
+      "accepted": true
+    },
+    {
+      "id": "38fa29d6-0fb1-4ac8-ad0d-1fa490163ad6",
+      "expected": "В",
+      "prediction": "В",
+      "confidence": 0.9979980329045111,
+      "accepted": true
+    },
+    {
+      "id": "3e04520e-0084-4e6e-a06e-622c257ec1de",
+      "expected": "В",
+      "prediction": "В",
+      "confidence": 0.9644834265102782,
+      "accepted": true
+    },
+    {
+      "id": "62186d7a-4389-4524-b0da-719c3a60b2dc",
+      "expected": "В",
+      "prediction": "В",
+      "confidence": 0.9901777836062303,
+      "accepted": true
+    },
+    {
+      "id": "0a1b79d6-3b30-4fc8-8755-365c17884892",
+      "expected": "В",
+      "prediction": "В",
+      "confidence": 0.9086876127545136,
+      "accepted": true
+    },
+    {
+      "id": "d10f6e2e-9cc8-4f0c-845a-da412d280595",
+      "expected": "В",
+      "prediction": "В",
+      "confidence": 0.9993774645552559,
+      "accepted": true
+    },
+    {
+      "id": "0bbf8345-9ae7-460d-a593-7fec049f2aa6",
+      "expected": "В",
+      "prediction": "В",
+      "confidence": 0.9322695535228407,
+      "accepted": true
+    },
+    {
+      "id": "f702ea0d-12bc-4cfa-ac2a-9bac39f945ab",
+      "expected": "В",
+      "prediction": "В",
+      "confidence": 0.9955438247240543,
+      "accepted": true
+    },
+    {
+      "id": "a4f7606c-7202-4e5f-b4fb-73ae07b801f0",
+      "expected": "Л",
+      "prediction": "Л",
+      "confidence": 0.978944161848686,
+      "accepted": true
+    },
+    {
+      "id": "0d4c267e-1b34-49c1-9543-7fd9f21ce206",
+      "expected": "Л",
+      "prediction": "А",
+      "confidence": 0.7127919220409711,
+      "accepted": false
+    },
+    {
+      "id": "5fcdce2b-0f66-48e2-8539-4ac84daf0a93",
+      "expected": "Л",
+      "prediction": "Л",
+      "confidence": 0.9997472925817215,
+      "accepted": true
+    },
+    {
+      "id": "3eb355a5-e6cc-433f-899f-6f3b196523cb",
+      "expected": "Л",
+      "prediction": "Л",
+      "confidence": 0.9054291631494765,
+      "accepted": true
+    },
+    {
+      "id": "3745a66a-2c78-4fce-80cd-0ac3521e41d1",
+      "expected": "Л",
+      "prediction": "Л",
+      "confidence": 0.9999696025916058,
+      "accepted": true
+    },
+    {
+      "id": "7c4c1af7-e078-48d7-ad3c-b75e9f69802a",
+      "expected": "Л",
+      "prediction": "Л",
+      "confidence": 0.7995938687832993,
+      "accepted": false
+    },
+    {
+      "id": "bbb5ba86-66f0-412d-91c0-858a991949c3",
+      "expected": "Л",
+      "prediction": "Л",
+      "confidence": 0.8336424487086287,
+      "accepted": true
+    },
+    {
+      "id": "06f6a297976d9cadff25964684a43328",
+      "expected": "Л",
+      "prediction": "А",
+      "confidence": 0.9165977604110275,
+      "accepted": true
+    },
+    {
+      "id": "9c05f71d-19d6-4067-b75c-4322b4e14df6",
+      "expected": "Л",
+      "prediction": "А",
+      "confidence": 0.8316719387930537,
+      "accepted": true
+    },
+    {
+      "id": "3a7ff9f3-5f1f-49f9-bd38-1930b7ce0e8b",
+      "expected": "Л",
+      "prediction": "Л",
+      "confidence": 0.8255559065695041,
+      "accepted": true
+    },
+    {
+      "id": "eced728b-ec24-4f91-a967-7377542a23e6",
+      "expected": "Л",
+      "prediction": "Л",
+      "confidence": 0.9999713041171757,
+      "accepted": true
+    },
+    {
+      "id": "9e233fc8-9288-4048-a723-b10fa23d89c8",
+      "expected": "Л",
+      "prediction": "Л",
+      "confidence": 0.9990816069966517,
+      "accepted": true
+    },
+    {
+      "id": "3d120451-d3f6-4dd4-abb1-6ee8c9feb5ba",
+      "expected": "Л",
+      "prediction": "Л",
+      "confidence": 0.8514949096204605,
+      "accepted": true
+    },
+    {
+      "id": "cd1594df-b120-46ad-a515-bef6ea8eb7c5",
+      "expected": "Л",
+      "prediction": "Л",
+      "confidence": 0.9999787651362861,
+      "accepted": true
+    },
+    {
+      "id": "33791516-7f9a-4269-9ef1-2d8237f21846",
+      "expected": "Л",
+      "prediction": "Л",
+      "confidence": 0.9038807697121719,
+      "accepted": true
+    },
+    {
+      "id": "1db5eb3b-2818-4603-bc65-d6949a0a48d2",
+      "expected": "Л",
+      "prediction": "Л",
+      "confidence": 0.9980058696202508,
+      "accepted": true
+    },
+    {
+      "id": "9b37cc05a313ba835fbf434043900cc2",
+      "expected": "Л",
+      "prediction": "А",
+      "confidence": 0.5410231739418687,
+      "accepted": false
+    },
+    {
+      "id": "308e5a8a-76e5-4351-9f93-dccc66576807",
+      "expected": "Л",
+      "prediction": "Л",
+      "confidence": 0.7406518634592881,
+      "accepted": false
+    }
+  ],
+  "limitations": [
+    "Three isolated hand shapes only, not words or phrases.",
+    "MediaPipe hand landmarks are pretrained; the logistic classifier is trained here.",
+    "Numbers are for this dataset subset, not live-user or pedagogical accuracy.",
+    "Unknown signs may still be classified as a supported letter. No correctness certification."
+  ],
+  "source": "https://github.com/ai-forever/bukva"
+}

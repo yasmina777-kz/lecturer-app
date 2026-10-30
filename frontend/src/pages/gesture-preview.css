@@ -1,0 +1,89 @@
+.gesture-page { --g-bg:#0e1721; --g-panel:#172635; --g-text:#edf2f5; --g-muted:#aabac6; --g-line:#3b4b59; --g-accent:#e2c08a; background:var(--g-bg); color:var(--g-text); min-height:100dvh; }
+:root[data-theme=light] .gesture-page { --g-bg:#faf6ee; --g-panel:#f0e8da; --g-text:#39382f; --g-muted:#6c665c; --g-line:#d6cbb9; --g-accent:#846442; }
+.gesture-header { display:flex; justify-content:space-between; align-items:center; gap:20px; padding:24px clamp(20px,5vw,80px); border-bottom:1px solid var(--g-line); }
+.gesture-header>a { display:flex; align-items:center; gap:12px; font-size:18px; font-weight:750; }
+.gesture-header>div { display:flex; gap:12px; align-items:center; }
+.gesture-layout { max-width:1280px; margin:auto; padding:48px clamp(20px,5vw,64px); display:grid; grid-template-columns:1.12fr 1fr; gap:clamp(32px,5vw,80px); align-items:center; }
+.gesture-stage { position:relative; isolation:isolate; background:var(--g-panel); border:1px solid var(--g-line); border-radius:28px; overflow:hidden; min-width:0; }
+.gesture-stage-caption,.gesture-stage-footer { position:absolute; display:flex; justify-content:space-between; gap:16px; left:25px; right:25px; z-index:2; font-size:10px; letter-spacing:.12em; color:var(--g-muted); }
+.gesture-stage-caption { top:25px; }.gesture-stage-footer { bottom:22px; letter-spacing:.04em; }
+.gesture-stage-footer>span:last-child { color:var(--g-accent); font-size:12px; }
+.gesture-backdrop { position:absolute; inset:19% 11% 14%; border:1px solid var(--g-line); border-radius:50% 50% 43% 43%; background:radial-gradient(ellipse at 50% 70%,#a2b7c719,transparent 70%); z-index:-1; }
+.wave-mentor { display:block; width:100%; height:auto; margin:24px 0 30px; overflow:visible; }
+.gesture-greeting { position:absolute; top:18%; left:7%; max-width:42%; padding:12px 16px; border-radius:15px 15px 4px 15px; background:var(--g-bg); color:var(--g-text); border:1px solid var(--g-line); z-index:3; font-size:14px; transition:opacity .35s,transform .35s; }
+.gesture-eyebrow { font-size:10px; letter-spacing:.14em; color:var(--g-accent); font-weight:750; }
+.gesture-details #gesture-title { font-size:clamp(32px,3.7vw,49px); line-height:1.12; letter-spacing:-.045em; margin:20px 0 24px; }
+.gesture-details #gesture-title>span { display:block; color:var(--g-accent); }
+.gesture-details>p { font-size:16px; line-height:1.7; color:var(--g-muted); max-width:43ch; }
+.gesture-steps { display:flex; gap:12px; margin:28px 0 32px; padding:0; list-style:none; }
+.gesture-steps li { flex:1; color:var(--g-muted); font-size:12px; line-height:1.5; border-top:2px solid var(--g-line); padding-top:12px; transition:color .2s,border-color .2s; }.gesture-steps b { display:block; font-size:10px; margin-bottom:6px; }.gesture-steps li.is-current { border-color:var(--g-accent); color:var(--g-accent); }
+.gesture-controls { border-top:1px solid var(--g-line); padding-top:25px; }.gesture-buttons { display:flex; gap:10px; }
+.gesture-buttons button { min-height:48px; display:flex; align-items:center; justify-content:center; gap:8px; padding:12px 20px; border-radius:12px; font-size:14px; font-weight:650; }
+.gesture-play { background:var(--g-accent); color:var(--g-bg); border:1px solid var(--g-accent); flex:1; }.gesture-replay { background:transparent; color:var(--g-text); border:1px solid var(--g-line); }
+.gesture-timeline { display:block; margin:25px 0 12px; }.gesture-timeline>span { display:flex; justify-content:space-between; gap:10px; font-size:12px; color:var(--g-muted); }.gesture-timeline output { font-variant-numeric:tabular-nums; white-space:nowrap; }
+.gesture-timeline input { width:100%; height:32px; padding:0; margin:8px 0 0; accent-color:var(--g-accent); cursor:pointer; box-shadow:none; }
+.gesture-options { display:flex; align-items:center; justify-content:space-between; gap:16px; }.gesture-options label { display:flex; align-items:center; gap:10px; color:var(--g-muted); font-size:13px; min-height:44px; margin:0; }.gesture-options input { width:17px; height:17px; accent-color:var(--g-accent); }.gesture-options select { background:var(--g-panel); color:var(--g-text); border:1px solid var(--g-line); padding:9px; border-radius:9px; min-height:44px; }
+.gesture-details .gesture-note { font-size:12px; margin-top:24px; }
+.gesture-page :is(a,button,input,select):focus-visible { outline:3px solid var(--g-accent); outline-offset:4px; }
+@media(max-width:800px) { .gesture-layout { grid-template-columns:1fr; max-width:600px; padding-top:24px; gap:32px; }.gesture-stage { width:100%; }.wave-mentor { max-height:490px; }.gesture-details #gesture-title { font-size:36px; }.gesture-header { padding:18px 20px; }.gesture-header>div { gap:6px; }.gesture-header>a { font-size:16px; gap:6px; }.gesture-details>p { max-width:none; } }
+@media(max-width:380px) { .gesture-header { flex-wrap:wrap; }.gesture-stage-caption,.gesture-stage-footer { left:16px; right:16px; }.gesture-stage-footer { font-size:9px; }.gesture-greeting { padding:8px 10px; font-size:12px; }.gesture-buttons button { padding:12px; } }
+@media(prefers-reduced-motion:reduce) { .gesture-page * { transition:none!important; } }
+.gesture-options label { flex-direction:row; }
+.gesture-options select { width:auto; }
+.gesture-greeting { top:12%; max-width:70%; }
+
+.gesture-steps li { padding-top:0; }
+.gesture-steps button { color:inherit; background:none; border:0; padding:12px 0; text-align:left; width:100%; min-height:60px; cursor:pointer; font:inherit; }
+.gesture-reference { display:grid; gap:7px; margin-top:22px; padding:16px 18px; background:var(--g-panel); border:1px solid var(--g-line); border-radius:14px; }
+.gesture-reference>span { color:var(--g-muted); font-size:9px; letter-spacing:.12em; }
+.gesture-reference>a { color:var(--g-accent); font-size:14px; text-decoration:underline; text-underline-offset:4px; }
+.gesture-reference>small { color:var(--g-muted); font-size:11px; line-height:1.6; }
+.gesture-details .gesture-note { margin-top:14px; }
+
+.gesture-layout { align-items:start; }
+@media(min-width:801px) { .gesture-stage { position:sticky; top:24px; } }
+
+.gesture-closeup { position:absolute; bottom:57px; right:18px; z-index:4; display:flex; align-items:center; gap:7px; min-height:42px; padding:10px 12px; border-radius:12px; border:1px solid var(--g-line); color:var(--g-text); background:var(--g-bg); font-size:11px; cursor:pointer; }
+.gesture-stage .wave-mentor { aspect-ratio:440/615; }
+.gesture-stage.is-closeup .wave-mentor { height:auto; }
+.gesture-stage .gesture-greeting { top:55px; left:18px; font-size:12px; padding:10px 12px; }
+@media(max-width:800px) { .gesture-stage .wave-mentor { height:470px; max-height:60vh; } }
+
+.gesture-stage.is-closeup .wave-mentor { overflow:hidden; }
+
+.gesture-stage.is-closeup :is(.gesture-stage-caption,.gesture-stage-footer) { background:var(--g-bg); padding:8px 10px; border:1px solid var(--g-line); border-radius:10px; left:16px; right:16px; }
+.gesture-stage.is-closeup .gesture-stage-caption { top:14px; }
+.gesture-stage.is-closeup .gesture-stage-footer { bottom:14px; }
+
+.gesture-modes { display:flex; gap:6px; border:1px solid var(--g-line); border-radius:14px; padding:5px; margin-top:20px; }
+.gesture-modes button { flex:1; min-height:44px; border:0; border-radius:10px; background:transparent; color:var(--g-muted); font-size:13px; cursor:pointer; }
+.gesture-modes button[aria-pressed=true] { background:var(--g-accent); color:var(--g-bg); font-weight:700; }
+.gesture-instruction { background:var(--g-panel); border:1px solid var(--g-line); border-radius:16px; padding:20px; margin:-8px 0 24px; }
+.gesture-instruction h2 { font-size:17px; letter-spacing:-.02em; margin:0 0 18px; }
+.gesture-instruction p { display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.5; color:var(--g-text); margin:12px 0; }
+.finger-key { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; width:25px; height:25px; border-radius:50%; color:white; font-size:13px; }
+.finger-key-blue { background:#287da2; }.finger-key-gold { background:#9c6420; }
+.gesture-instruction strong { display:block; font-weight:500; font-size:14px; line-height:1.6; margin-top:16px; }
+.gesture-instruction small { display:block; font-size:11px; line-height:1.6; color:var(--g-muted); margin-top:12px; }
+.gesture-stage.is-closeup .gesture-closeup { bottom:65px; }
+
+.gesture-finger-legend { position:absolute; bottom:64px; left:18px; right:18px; z-index:4; display:grid; gap:9px; padding:12px 14px; background:var(--g-bg); border:1px solid var(--g-line); border-radius:12px; font-size:12px; line-height:1.4; }
+.gesture-finger-legend>span { display:flex; align-items:center; gap:10px; }
+.gesture-finger-legend .finger-key { width:22px; height:22px; font-size:12px; }
+
+.gesture-3d { width:100%; height:620px; position:relative; touch-action:none; cursor:grab; }
+.gesture-3d:active { cursor:grabbing; }
+.gesture-3d canvas { display:block; width:100%; height:100%; }
+.gesture-stage-3d { background:radial-gradient(ellipse at 50% 38%,#364858 0%,#162531 70%); }
+:root[data-theme=light] .gesture-stage-3d { background:radial-gradient(ellipse at 50% 38%,#fffaf0 0%,#e4dbcc 78%); }
+.gesture-stage-3d :is(.gesture-stage-caption,.gesture-stage-footer,.gesture-greeting) { pointer-events:none; }
+.gesture-stage-3d .gesture-backdrop { display:none; }
+.gesture-camera { display:flex; gap:8px; margin:22px 0 8px; }
+.gesture-camera button { flex:1; min-height:44px; border:1px solid var(--g-line); border-radius:10px; background:var(--g-panel); color:var(--g-text); cursor:pointer; font-size:13px; }
+.gesture-camera button[aria-pressed=true] { border-color:var(--g-accent); box-shadow:inset 0 0 0 1px var(--g-accent); color:var(--g-accent); }
+.gesture-details>.gesture-camera-hint { font-size:12px; margin:8px 0 20px; }
+.gesture-3d-error { position:absolute; inset:25%; display:grid; place-items:center; color:var(--g-text); font-size:14px; line-height:1.6; }
+@media(max-width:800px) { .gesture-3d { height:520px; } }
+
+.gesture-stage-3d :is(.gesture-stage-caption,.gesture-stage-footer) { background:var(--g-bg); border:1px solid var(--g-line); padding:8px 10px; border-radius:10px; left:16px; right:16px; }
+.gesture-stage-3d .gesture-stage-caption { top:14px; }.gesture-stage-3d .gesture-stage-footer { bottom:14px; }

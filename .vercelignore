@@ -25,3 +25,17 @@
 backups
 .idea
 .vscode
+
+# Local talking-avatar source package and render intermediates
+art/lecture-portraits-v1
+
+# Local avatar recording and render intermediates
+art/lecture-portraits-v2
+
+# Reproducibly downloaded during the frontend prebuild step
+frontend/public/models/mentor-e5
+art/local-ai-cache
+
+# Local RSL training data and environment
+ml/rsl/data/
+ml/rsl/.venv/

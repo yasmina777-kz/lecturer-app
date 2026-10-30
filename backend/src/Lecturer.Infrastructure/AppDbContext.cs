@@ -5,6 +5,9 @@ namespace Lecturer.Infrastructure;
 
 public class AppDbContext : DbContext
 {
+    public DbSet<LessonFeedback> LessonFeedback => Set<LessonFeedback>();
+    public DbSet<KnowledgeObservation> KnowledgeObservations => Set<KnowledgeObservation>();
+    public DbSet<KnowledgeModel> KnowledgeModels => Set<KnowledgeModel>();
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
     public DbSet<Course> Courses => Set<Course>();
@@ -27,6 +30,17 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<LessonFeedback>().HasKey(x => new { x.UserId, x.SlideId });
+        modelBuilder.Entity<LessonFeedback>().Property(x => x.Status).HasMaxLength(20);
+        modelBuilder.Entity<LessonFeedback>().Property(x => x.Question).HasMaxLength(2000);
+        modelBuilder.Entity<LessonFeedback>().HasOne<User>().WithMany().HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<LessonFeedback>().HasOne<Slide>().WithMany().HasForeignKey(x => x.SlideId).OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<LessonFeedback>().HasOne<Lecture>().WithMany().HasForeignKey(x => x.LectureId).OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<LessonFeedback>().HasIndex(x => x.LectureId);
+        modelBuilder.Entity<KnowledgeObservation>().HasOne<User>().WithMany().HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<KnowledgeObservation>().HasOne<Lecture>().WithMany().HasForeignKey(x => x.LectureId).OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<KnowledgeObservation>().HasIndex(x => new { x.UserId, x.ItemKey });
+        modelBuilder.Entity<KnowledgeObservation>().HasIndex(x => x.LectureId);
         modelBuilder.Entity<Course>().HasOne<User>().WithMany().HasForeignKey(c => c.OwnerId).OnDelete(DeleteBehavior.Cascade);
         modelBuilder.Entity<Course>().HasMany(c => c.Modules).WithOne().HasForeignKey(m => m.CourseId).OnDelete(DeleteBehavior.Cascade);
         modelBuilder.Entity<CourseModule>().HasOne<Lecture>().WithMany().HasForeignKey(m => m.LectureId).OnDelete(DeleteBehavior.SetNull);

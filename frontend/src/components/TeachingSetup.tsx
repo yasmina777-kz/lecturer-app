@@ -1,4 +1,5 @@
 import { t } from "../i18n";
+import { at } from "../i18n/automation";
 import { Check, Volume2 } from "lucide-react";
 import type { AvatarId, Language, VoiceGender } from "../types/auth";
 import { AvatarPlayer } from "./AvatarPlayer";
@@ -25,55 +26,21 @@ export function TeachingSetup({
   );
   const change = (next: Partial<TeachingChoice>) => {
     speech.cancel();
-    onChange({ ...value, ...next });
+    onChange({ ...value, ...next, avatarId: "classic-female" });
   };
   return (
     <div className="teaching-setup">
       <h3>{t("Ваш преподаватель")}</h3>
       <p className="muted">
-        {t(
-          "Выберите персонажа из нашего каталога. Он будет вести ваши лекции.",
-        )}
+        {at("Мира — ваша наставница на главной странице и во всех занятиях.", "Mira is your mentor on the home page and throughout your lessons.", "Мира — басты бетте де, барлық сабақтарда да сіздің тәлімгеріңіз.")}
       </p>
-      <div className="avatar-catalog">
-        {[
-          {
-            id: "classic-male",
-            name: t("Классический лектор"),
-            detail: t("Мужской персонаж · 2D"),
-          },
-          {
-            id: "classic-female",
-            name: t("Классическая преподавательница"),
-            detail: t("Женский персонаж · 2D"),
-          },
-        ].map((a) => (
-          <button
-            type="button"
-            key={a.id}
-            className={value.avatarId === a.id ? "selected" : ""}
-            aria-pressed={value.avatarId === a.id}
-            onClick={() =>
-              change({
-                avatarId: a.id as AvatarId,
-                ...(a.id === "classic-male"
-                  ? { voiceGender: "male" }
-                  : a.id === "classic-female"
-                    ? { voiceGender: "female" }
-                    : {}),
-              })
-            }
-          >
-            <AvatarPlayer avatarId={a.id as AvatarId} state={value.avatarId === a.id && speech.speaking ? "speaking" : "idle"} compact />
-            <span>
-              <strong>{a.name}</strong>
-              <small>{a.detail}</small>
-            </span>
-            {value.avatarId === a.id && (
-              <Check className="selected-mark" size={17} />
-            )}
-          </button>
-        ))}
+      <div className="current-mentor-card">
+        <AvatarPlayer state={speech.speaking ? "speaking" : "idle"} compact />
+        <div>
+          <strong>{at("Мира", "Mira", "Мира")}</strong>
+          <p>{at("Виртуальная наставница", "Virtual mentor", "Виртуалды тәлімгер")}</p>
+          <span><Check size={14} />{at("Ваш преподаватель", "Your teacher", "Сіздің оқытушыңыз")}</span>
+        </div>
       </div>
       <div className="form-grid">
         <label>

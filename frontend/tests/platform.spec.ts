@@ -330,7 +330,9 @@ test("UI: registration, dashboard, player, pause/question/resume, notes, quiz, s
     path: "test-results/dashboard-desktop.png",
     fullPage: true,
   });
-  await page.getByRole("link", { name: /Как учиться и запоминать/ }).click();
+  // The dashboard shows only the newest lessons, including other test fixtures.
+  await page.getByRole("link", { name: "Мои лекции", exact: true }).click();
+  await page.locator(`a[href="/lectures/${demo}"]`).click();
   await page.getByRole("button", { name: "Начать лекцию" }).click();
   await expect(
     page.getByRole("button", { name: "Перейти к слайдам" }),

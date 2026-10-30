@@ -1,0 +1,75 @@
+.avatar-preview-controls {
+  max-width: 430px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid color-mix(in srgb, var(--site-text) 16%, transparent);
+  scroll-margin-top: 100px;
+}
+.avatar-preview-label {
+  display: block;
+  margin-bottom: 11px;
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--site-muted);
+}
+.avatar-preview-options { display: flex; gap: 6px; flex-wrap: wrap; }
+.avatar-preview-options button {
+  min-height: 42px;
+  padding: 9px 15px;
+  border: 1px solid color-mix(in srgb, var(--site-text) 22%, transparent);
+  border-radius: 24px;
+  background: transparent;
+  color: var(--site-text);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.avatar-preview-options button:hover { background: color-mix(in srgb, var(--site-text) 10%, transparent); }
+.avatar-preview-options button[aria-pressed="true"] { background: var(--site-text); color: var(--site-bg); border-color: var(--site-text); }
+.avatar-preview-controls p { color: var(--site-muted); font-size: 11px; line-height: 1.6; margin: 12px 0 0; min-height: 36px; }
+.generated-mentor-portrait { animation: none; }
+.generated-mentor-portrait::before { display: none; }
+.generated-mentor-image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  mask-image: linear-gradient(#000 90%, transparent 100%);
+  animation: mentor-preview-in .35s ease-out both;
+}
+@keyframes mentor-preview-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.motion-paused .generated-mentor-image { animation: none; }
+@media (max-width: 600px) {
+  .avatar-preview-options button { padding: 9px 12px; font-size: 11px; }
+  .avatar-preview-controls { margin-top: 20px; }
+}
+@media (prefers-reduced-motion: reduce) { .generated-mentor-image { animation: none; } }
+
+.lecture-avatar-demo { scroll-margin-top: 100px; }
+.lecture-avatar-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; max-width: 900px; margin: 32px auto 0; }
+.lecture-avatar-card { min-width: 0; overflow: hidden; border-radius: 24px; border: 1px solid color-mix(in srgb, var(--site-text) 20%, transparent); background: color-mix(in srgb, var(--site-text) 4%, var(--site-bg)); }
+.lecture-avatar-card video { display: block; width: 100%; height: 400px; object-fit: contain; background: #d8dce0; }
+.lecture-avatar-details { padding: 22px; }
+.lecture-avatar-details h3 { margin: 0 0 8px; font-size: 22px; }
+.lecture-avatar-details p, .lecture-avatar-caption { color: var(--site-muted); font-size: 14px; line-height: 1.6; }
+.lecture-avatar-details .mentor-cta { margin-top: 16px; cursor: pointer; font: inherit; }
+.lecture-avatar-details a { color: var(--site-text); text-decoration: underline; }
+.lecture-avatar-caption { max-width: 900px; margin: 20px auto 0; }
+@media(max-width: 600px) { .lecture-avatar-grid { grid-template-columns: 1fr; gap: 18px; } .lecture-avatar-card video { height: 360px; } }
+
+.live-mentor-stage { height: 400px; position: relative; overflow: hidden; background: #cbd4da; touch-action: pan-y; }
+.live-mentor-stage canvas { display: block; width: 100%; height: 100%; cursor: grab; }
+.live-mentor-stage canvas:active { cursor: grabbing; }
+.live-mentor-badge { position: absolute; top: 14px; left: 14px; padding: 7px 12px; border-radius: 20px; background: #21262be6; color: white; font-size: 11px; pointer-events: none; }
+.live-mentor-loading { position: absolute; inset: 0; display: grid; place-items: center; color: #21262b; }
+.live-mentor-placeholder { min-height: 560px; display: grid; place-items: center; }
+.live-mentor-toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0; }
+.live-mentor-toolbar button { border: 1px solid color-mix(in srgb, var(--site-text) 25%, transparent); color: var(--site-text); background: transparent; border-radius: 18px; padding: 8px 12px; cursor: pointer; font: inherit; font-size: 12px; }
+.live-mentor-card audio { width: 100%; display: block; margin-top: 16px; }
+.live-mentor-card button:disabled { opacity: .5; cursor: wait; }
+.live-mentor-note { font-size: 12px !important; margin-top: 16px; }
+@media (max-width: 600px) { .live-mentor-stage { height: 360px; } }
+.live-mentor-upload { display: block; margin-top: 20px; color: var(--site-muted); font-size: 12px; line-height: 1.5; }
+.live-mentor-upload input { display: block; max-width: 100%; margin-top: 8px; font: inherit; }

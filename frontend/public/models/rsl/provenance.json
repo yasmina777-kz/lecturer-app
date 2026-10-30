@@ -1,0 +1,9 @@
+{
+  "classifier_sha256": "5061fba50cb2d66952c57a837b95e0eb4489d8eca2b0d0b3bbfdc7ae34e32537",
+  "hand_landmarker_sha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1",
+  "dataset_manifest_sha256": "23f5fe5d432550e576c62fa7d423ebb0b12f6a534250c2d8025b5969a2090be6",
+  "data_source": "https://github.com/ai-forever/bukva",
+  "landmarker_source": "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task",
+  "license": "/research/rsl/bukva-license.pdf",
+  "credits": "/research/rsl/ATTRIBUTION.txt"
+}

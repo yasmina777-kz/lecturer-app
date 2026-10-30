@@ -1,0 +1,639 @@
+/* Human guides: independent eye, head, breathing and speech layers. */
+.avatar-scene.human-avatar {
+  align-items: center;
+  justify-content: center;
+}
+.human-figure {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 16px 20px #0003);
+}
+.human-breathe {
+  transform-origin: 180px 420px;
+  animation: human-breathe 5s ease-in-out infinite;
+}
+.human-head {
+  transform-origin: 180px 238px;
+  animation: human-attention 8s ease-in-out infinite;
+}
+.human-eyes {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: human-blink 6.4s infinite;
+}
+.human-mouth-talk {
+  display: none;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.human-hand {
+  transform-origin: 292px 408px;
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+.human-avatar.speaking .human-mouth-rest {
+  display: none;
+}
+.human-avatar.speaking .human-mouth-talk {
+  display: block;
+  animation: human-speech 0.46s ease-in-out infinite alternate;
+}
+.human-avatar.speaking .human-hand {
+  opacity: 1;
+  animation: human-gesture 4.8s ease-in-out infinite;
+}
+.human-avatar.thinking .human-head {
+  animation: human-think 5s ease-in-out infinite;
+}
+.human-avatar.thinking .human-brows {
+  transform: translateY(-2px);
+}
+.human-avatar .avatar-caption {
+  color: #315b79;
+  background: #edf5fbe6;
+  border: 1px solid #b9ccdb;
+  bottom: -7px;
+  white-space: nowrap;
+  font-size: 10px;
+}
+.human-avatar.compact {
+  width: 100px;
+  height: 125px;
+}
+.hero-portrait .human-avatar {
+  height: 310px;
+  width: 270px;
+}
+.mentor-portrait .human-avatar {
+  width: 360px;
+  height: 450px;
+}
+.mentor-hero .mentor-portrait {
+  inset: 50px 45px 30px;
+}
+.question-float {
+  left: -10px;
+  top: 115px;
+}
+.voice-float {
+  right: -5px;
+  bottom: 35px;
+}
+.nova-nameplate {
+  top: 3%;
+}
+.mentor-art-index {
+  bottom: 0;
+}
+.mentor-depth-panels {
+  position: absolute;
+  inset: 18% 0 15%;
+  perspective: 900px;
+  pointer-events: none;
+}
+.mentor-depth-panels i {
+  position: absolute;
+  display: block;
+  width: 110px;
+  height: 145px;
+  border: 1px solid #9fd4ff4d;
+  border-radius: 14px;
+  background: linear-gradient(130deg, #99cfff15, #8ab9ff02);
+  box-shadow:
+    inset 0 1px 0 #bfe6ff44,
+    10px 25px 40px #0002;
+  animation: lesson-panel-drift 9s ease-in-out infinite;
+}
+.mentor-depth-panels i::before {
+  content: "";
+  position: absolute;
+  inset: 28px 18px;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0 16px,
+    #a9d7f733 16px 18px
+  );
+}
+.mentor-depth-panels i:nth-child(1) {
+  top: 45px;
+  left: 0;
+  transform: rotateY(28deg) rotateZ(-15deg);
+}
+.mentor-depth-panels i:nth-child(2) {
+  top: 0;
+  right: 4%;
+  transform: rotateY(-32deg) rotateZ(12deg);
+  animation-delay: -3s;
+}
+.mentor-depth-panels i:nth-child(3) {
+  bottom: -20px;
+  right: 0;
+  width: 85px;
+  height: 110px;
+  transform: rotateY(-22deg) rotateZ(18deg);
+  animation-delay: -5s;
+  border-color: #edc48155;
+}
+:root .mentor-artwork-image {
+  max-height: none;
+  aspect-ratio: 3/2;
+  border-radius: 18px;
+  perspective: 1000px;
+  box-shadow: 0 20px 60px #0002;
+}
+.mentor-artwork-image img {
+  filter: none;
+  animation: editorial-camera 18s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+.mentor-artwork:nth-child(2) .mentor-artwork-image img {
+  animation-delay: -8s;
+}
+.mentor-artwork {
+  perspective: 1100px;
+}
+.mentor-artwork-image {
+  transition:
+    transform 0.7s ease,
+    box-shadow 0.7s ease;
+}
+.mentor-artwork:hover .mentor-artwork-image {
+  transform: rotateX(2deg) rotateY(-3deg) translateY(-5px);
+  box-shadow: 12px 30px 70px #0004;
+}
+.project-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 65px;
+  border-top: 1px solid var(--nova-border);
+}
+.project-intro .mentor-section-heading {
+  margin: 0;
+}
+.project-intro h2 {
+  font-size: clamp(32px, 3.4vw, 49px);
+  line-height: 1.18;
+}
+.project-intro-copy p {
+  font-size: 14px;
+  line-height: 1.95;
+  color: var(--site-text);
+}
+.project-intro-copy p + p {
+  margin-top: 20px;
+  color: var(--site-muted);
+  font-size: 13px;
+}
+.project-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 25px;
+}
+.project-pill-row span {
+  font-size: 9px;
+  padding: 9px 12px;
+  border: 1px solid var(--nova-border);
+  border-radius: 30px;
+  color: var(--site-highlight);
+}
+.learning-universe {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  align-items: center;
+  gap: 24px;
+  padding-top: 25px;
+  padding-bottom: 40px;
+}
+.universe-copy h2 {
+  font-size: clamp(35px, 4vw, 58px);
+  letter-spacing: -0.05em;
+  line-height: 1.12;
+  margin: 26px 0;
+}
+.universe-copy h2 span {
+  color: var(--site-highlight);
+}
+.universe-copy p {
+  max-width: 390px;
+  font-size: 13px;
+  line-height: 1.95;
+  color: var(--site-muted);
+}
+.universe-link {
+  display: inline-flex;
+  gap: 25px;
+  align-items: center;
+  margin-top: 28px;
+  color: var(--nova-gold);
+  font-size: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--nova-border);
+}
+.universe-stage {
+  height: 450px;
+  position: relative;
+  min-width: 0;
+  background: radial-gradient(ellipse, #6599d018, transparent 65%);
+}
+.knowledge-webgl {
+  position: absolute;
+  inset: 0;
+  touch-action: pan-y;
+}
+.knowledge-webgl canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.knowledge-orb-fallback {
+  position: absolute;
+  left: 30%;
+  top: 28%;
+  width: 40%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 25%,
+    #e1f4ff,
+    #72b8e7 30%,
+    #223c66 65%,
+    #0a1423
+  );
+  box-shadow: 0 0 70px #8dc8ff25;
+}
+.knowledge-orb-fallback i {
+  position: absolute;
+  inset: -20%;
+  border: 1px solid #9cd6ff77;
+  border-radius: 50%;
+  transform: rotateX(60deg) rotateZ(-25deg);
+}
+.knowledge-orb-fallback i:nth-child(2) {
+  transform: rotateY(60deg) rotateZ(30deg);
+  border-color: #edc481;
+}
+.knowledge-orb-fallback i:nth-child(3) {
+  transform: rotateX(60deg) rotateZ(70deg);
+}
+.knowledge-webgl[data-ready="true"] .knowledge-orb-fallback {
+  display: none;
+}
+.universe-label {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  color: var(--site-highlight);
+  background: color-mix(in srgb, var(--site-bg) 80%, transparent);
+  padding: 12px 14px;
+  border: 1px solid var(--nova-border);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  pointer-events: none;
+}
+.label-material {
+  top: 12%;
+  left: 10%;
+}
+.label-dialogue {
+  top: 33%;
+  right: 0;
+  color: var(--nova-gold);
+}
+.label-practice {
+  bottom: 17%;
+  left: 9%;
+}
+.universe-motion {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 9px;
+  padding: 8px 12px;
+  background: transparent;
+  border: 1px solid var(--nova-border);
+  border-radius: 30px;
+  color: var(--site-muted);
+}
+.project-details {
+  padding-top: 65px;
+}
+.project-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  perspective: 1200px;
+}
+.project-detail-card {
+  padding: 26px 22px;
+  border: 1px solid var(--nova-border);
+  background: linear-gradient(
+    150deg,
+    color-mix(in srgb, var(--site-highlight) 6%, var(--nova-panel)),
+    var(--nova-panel)
+  );
+  border-radius: 15px;
+  transition:
+    transform 0.35s,
+    border-color 0.35s;
+}
+.project-detail-card:hover {
+  transform: translateY(-8px) rotateX(3deg);
+  border-color: var(--site-highlight);
+}
+.project-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  color: var(--site-highlight);
+}
+.project-card-top span {
+  font: 10px monospace;
+  color: var(--nova-gold);
+}
+.project-detail-card h3 {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+.project-detail-card p {
+  font-size: 12px;
+  line-height: 1.85;
+  color: var(--site-muted);
+}
+.project-service-note {
+  font-size: 11px;
+  line-height: 1.85;
+  color: var(--site-muted);
+  border-left: 2px solid var(--nova-gold);
+  padding-left: 15px;
+  margin-top: 26px;
+  max-width: 700px;
+}
+@keyframes human-breathe {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.009);
+  }
+}
+@keyframes human-attention {
+  0%,
+  100% {
+    transform: rotate(-1deg);
+  }
+  45% {
+    transform: rotate(1.2deg);
+  }
+  65% {
+    transform: rotate(0.4deg) translateY(1px);
+  }
+}
+@keyframes human-blink {
+  0%,
+  45%,
+  49%,
+  100% {
+    transform: scaleY(1);
+  }
+  47% {
+    transform: scaleY(0.07);
+  }
+}
+@keyframes human-speech {
+  0% {
+    transform: scale(0.9, 0.35);
+  }
+  40% {
+    transform: scale(1, 0.8);
+  }
+  75% {
+    transform: scale(0.85, 1);
+  }
+  100% {
+    transform: scale(0.9, 0.4);
+  }
+}
+@keyframes human-gesture {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  40% {
+    transform: rotate(-6deg) translateY(-3px);
+  }
+  70% {
+    transform: rotate(2deg);
+  }
+}
+@keyframes human-think {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(-5deg) translateY(-2px);
+  }
+}
+@keyframes lesson-panel-drift {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -18px;
+  }
+}
+@keyframes editorial-camera {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.055) translateY(-4px);
+  }
+}
+.motion-paused *,
+.motion-paused *::before,
+.motion-paused *::after {
+  animation-play-state: paused !important;
+}
+:root[data-theme="light"] .mentor-depth-panels i {
+  background: linear-gradient(130deg, #98bdd13d, #b9d9f511);
+  border-color: #4a7da777;
+}
+:root[data-theme="light"] .mentor-depth-panels i::before {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0 16px,
+    #477b9b44 16px 18px
+  );
+}
+@media (max-width: 1100px) {
+  .project-detail-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .project-intro {
+    gap: 30px;
+  }
+  .universe-stage {
+    height: 380px;
+  }
+  .mentor-portrait .human-avatar {
+    height: 390px;
+  }
+}
+@media (max-width: 800px) {
+  .project-intro,
+  .learning-universe {
+    grid-template-columns: 1fr;
+  }
+  .project-intro-copy {
+    max-width: 600px;
+  }
+  .learning-universe {
+    gap: 10px;
+  }
+  .universe-stage {
+    height: 380px;
+    max-width: 600px;
+    width: 100%;
+    margin: auto;
+  }
+  .universe-copy p {
+    max-width: 550px;
+  }
+  .mentor-portrait .human-avatar {
+    height: 370px;
+  }
+  .mentor-hero .mentor-portrait {
+    inset: 55px 40px 25px;
+  }
+  .question-float {
+    top: 110px;
+    left: 0;
+  }
+  .voice-float {
+    bottom: 20px;
+  }
+  .mentor-art-index {
+    bottom: 0;
+  }
+}
+@media (max-width: 480px) {
+  .project-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .project-detail-card {
+    padding: 24px;
+  }
+  .project-card-top {
+    margin-bottom: 18px;
+  }
+  .project-intro {
+    gap: 24px;
+  }
+  .project-intro-copy p {
+    font-size: 13px;
+  }
+  .universe-stage {
+    height: 330px;
+  }
+  .universe-copy h2 {
+    font-size: 38px;
+  }
+  .universe-label {
+    font-size: 9px;
+    padding: 8px 10px;
+  }
+  .mentor-portrait .human-avatar {
+    height: 310px;
+    width: 260px;
+  }
+  .mentor-hero .mentor-portrait {
+    inset: 40px 25px 25px;
+  }
+  .mentor-depth-panels i {
+    width: 80px;
+    height: 110px;
+  }
+  .question-float {
+    top: 100px;
+    left: -4px;
+  }
+  .voice-float {
+    bottom: 12px;
+    right: -4px;
+  }
+  .nova-nameplate {
+    top: 1%;
+  }
+  .mentor-art-index {
+    bottom: -15px;
+  }
+  .mentor-hero-art {
+    margin-top: 28px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .human-avatar *,
+  .mentor-artwork-image img,
+  .mentor-depth-panels i {
+    animation: none !important;
+  }
+  .mentor-artwork:hover .mentor-artwork-image,
+  .project-detail-card:hover {
+    transform: none;
+  }
+  .human-hand {
+    transition: none;
+  }
+}
+
+/* MIRA v3: a generated portrait with a separate speech indicator. */
+.avatar-scene.portrait-mentor { position:relative; overflow:visible; }
+.portrait-mentor-image { position:relative; z-index:1; width:100%; height:100%; object-fit:contain; object-position:center bottom; filter:drop-shadow(0 18px 24px #0003); mask-image:linear-gradient(#000 0 93%,transparent 100%); }
+.portrait-mentor-aura { position:absolute; inset:9% -8% 2%; border-radius:50%; background:radial-gradient(ellipse,#9bd4ff25,transparent 68%); }
+.portrait-mentor.speaking .portrait-mentor-aura { animation:portrait-aura 2.3s ease-in-out infinite alternate; }
+.portrait-mentor.thinking .portrait-mentor-aura { animation:portrait-aura 4s ease-in-out infinite alternate; }
+.portrait-speech-meter { position:absolute; z-index:2; bottom:10px; left:50%; transform:translateX(-50%); height:25px; padding:5px 10px; display:flex; align-items:center; gap:3px; border:1px solid #acd4ef55; border-radius:20px; background:#0c1a2cdd; }
+.portrait-speech-meter i { display:block; height:12px; width:2px; border-radius:3px; background:#f2ce8b; animation:portrait-signal .55s ease-in-out infinite alternate; transform-origin:center; }
+.mentor-hero .portrait-speech-meter { display:none; }
+.portrait-mentor.compact .portrait-speech-meter { bottom:2px; height:17px; padding:3px 6px; gap:2px; }
+.portrait-mentor.compact .portrait-speech-meter i { height:8px; }
+@keyframes portrait-aura { from { opacity:.55; } to { opacity:1; } }
+@keyframes portrait-signal { from { transform:scaleY(.3); } to { transform:scaleY(1); } }
+@media(prefers-reduced-motion:reduce) { .portrait-mentor * { animation:none !important; } }
+
+.learning-gallery { padding-top:45px; }
+.learning-gallery-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+.learning-gallery-card { min-width:0; }
+.learning-gallery-image { position:relative; overflow:hidden; aspect-ratio:3/2; border:1px solid var(--nova-border); border-radius:16px; background:#080c12; }
+.learning-gallery-image img { display:block; width:100%; height:100%; object-fit:cover; transition:transform .7s ease; }
+.learning-gallery-image>span { position:absolute; top:14px; left:14px; border:1px solid #ffffff38; border-radius:24px; padding:6px 10px; background:#081320b0; color:#edf3fa; font:10px monospace; }
+.learning-gallery-card h3 { margin:20px 0 10px; font-size:18px; color:var(--site-text); }
+.learning-gallery-card p { font-size:12px; line-height:1.85; color:var(--site-muted); }
+@media(hover:hover) { .learning-gallery-card:hover img { transform:scale(1.04); } }
+@media(max-width:850px) { .learning-gallery-grid { grid-template-columns:1fr; gap:32px; }.learning-gallery-card { display:grid; grid-template-columns:1.1fr 1fr; column-gap:22px; align-items:start; }.learning-gallery-image { grid-row:span 2; }.learning-gallery-card h3 { margin-top:0; }.learning-gallery-card p { grid-column:2; } }
+@media(max-width:550px) { .learning-gallery-card { display:block; }.learning-gallery-card h3 { margin-top:18px; }.learning-gallery-grid { gap:36px; } }
+@media(prefers-reduced-motion:reduce) { .learning-gallery-image img { transition:none; }.learning-gallery-card:hover img { transform:none; } }
+
+/* The same mentor in the catalogue, saved lessons, and the public landing page. */
+.current-mentor-card { display:flex; align-items:center; gap:24px; margin:20px 0; padding:18px 24px 0; border:1px solid #b5d9f62b; border-radius:18px; background:radial-gradient(ellipse at 18% 65%,#8cc6f024,transparent 65%),#111d2b; color:#e8f2fc; overflow:hidden; }
+.current-mentor-card .avatar-scene.compact { width:138px; height:168px; margin:0; flex-shrink:0; }
+.current-mentor-card strong { display:block; font-size:22px; margin-bottom:5px; }
+.current-mentor-card p { font-size:13px; line-height:1.5; color:#a8bacb; }
+.current-mentor-card span { display:flex; align-items:center; gap:6px; margin:14px 0 18px; font-size:11px; color:#b6dcfa; }
+:root[data-theme="light"] .current-mentor-card { background:radial-gradient(ellipse at 18% 65%,#dfc69e65,transparent 65%),#f7efdf; border-color:#dfd1b9; color:#41382d; }
+:root[data-theme="light"] .current-mentor-card p { color:#7b6c57; }
+:root[data-theme="light"] .current-mentor-card span { color:#846442; }
+@media(max-width:480px) { .current-mentor-card { gap:15px; padding:14px 12px 0; }.current-mentor-card .avatar-scene.compact { width:105px; height:142px; }.current-mentor-card strong { font-size:19px; } }

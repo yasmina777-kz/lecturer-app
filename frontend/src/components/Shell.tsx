@@ -10,16 +10,11 @@ import {
 } from "react-router-dom";
 import {
   BookOpen,
-  Network,
-  Layers,
-  BarChart3,
-  Users,
+  Type,
   CircleHelp,
   GraduationCap,
-  LayoutDashboard,
   LogOut,
   Menu,
-  Plus,
   Settings2,
   ShieldCheck,
   X,
@@ -35,26 +30,40 @@ export function Shell() {
   const [error, setError] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
+  const path = location.pathname;
   const nav = [
-    ["/dashboard", t("Обзор"), LayoutDashboard],
-    ["/courses", at("Курсы", "Courses", "Курстар"), Layers],
-    ["/library", t("Мои лекции"), BookOpen],
-    ["/practice", t("Моя практика"), GraduationCap],
-    ["/knowledge", t("Карта знаний"), Network],
-    ["/groups", user?.role === "Student" ? t("Мои группы") : t("Группы"), Users],
-    ["/settings", t("Настройки"), Settings2],
-  ] as const;
+    {
+      to: "/learn",
+      label: at("Обучение", "Learning", "Оқу"),
+      icon: BookOpen,
+      active: path.startsWith("/learn"),
+    },
+    {
+      to: "/text-to-sign",
+      label: at("Текст → жесты", "Text → signs", "Мәтін → ымдар"),
+      icon: Type,
+      active: path === "/text-to-sign",
+    },
+    {
+      to: "/practice",
+      label: at("Практика с аватаром", "Avatar practice", "Аватармен жаттығу"),
+      icon: GraduationCap,
+      active: path === "/practice",
+    },
+    {
+      to: "/settings",
+      label: t("Настройки"),
+      icon: Settings2,
+      active: path === "/settings",
+    },
+  ];
   return (
     <div
       className={`app-shell ${/^\/lectures\/[^/]+$/.test(location.pathname) ? "player-shell" : ""}`}
     >
       {menu && <div className="mobile-scrim" onClick={() => setMenu(false)} />}
       <aside className={`sidebar ${menu ? "open" : ""}`}>
-        <Link
-          to="/dashboard"
-          className="brand-link"
-          onClick={() => setMenu(false)}
-        >
+        <Link to="/learn" className="brand-link" onClick={() => setMenu(false)}>
           <Brand />
         </Link>
         <button
@@ -64,14 +73,25 @@ export function Shell() {
         >
           <X />
         </button>
-        <nav>
-          {nav.map(([to, label, Icon]) => (
-            <NavLink key={to} to={to} onClick={() => setMenu(false)}>
+        <nav
+          aria-label={at(
+            "Основные разделы",
+            "Main sections",
+            "Негізгі бөлімдер",
+          )}
+        >
+          {nav.map(({ to, label, icon: Icon, active }) => (
+            <Link
+              key={to}
+              to={to}
+              className={active ? "active" : undefined}
+              aria-current={active ? "page" : undefined}
+              onClick={() => setMenu(false)}
+            >
               <Icon size={19} />
               {label}
-            </NavLink>
+            </Link>
           ))}
-          {user?.role !== "Student" && <NavLink to="/reports" onClick={()=>setMenu(false)}><BarChart3 size={19}/>{at("Недельный отчёт","Weekly report","Апталық есеп")}</NavLink>}
           {user?.role === "Admin" && (
             <NavLink to="/admin" onClick={() => setMenu(false)}>
               <ShieldCheck size={19} />
@@ -82,7 +102,11 @@ export function Shell() {
         <div className="sidebar-bottom">
           <NavLink to="/help" onClick={() => setMenu(false)}>
             <CircleHelp size={18} />
-            {t("Как это работает")}
+            {at(
+              "Что где находится",
+              "Where to find everything",
+              "Қай бөлімде не бар",
+            )}
           </NavLink>
           <Link to="/" onClick={() => setMenu(false)}>
             <ArrowUpRight size={18} />
@@ -133,9 +157,9 @@ export function Shell() {
           <div className="topbar-right">
             <ThemeSwitcher />
             <LanguageSwitcher />
-            <Link to="/create" className="button primary small">
-              <Plus size={16} />
-              {t("Создать лекцию")}
+            <Link to="/learn" className="button primary small">
+              <BookOpen size={16} />
+              {at("Все уровни", "All levels", "Барлық деңгейлер")}
             </Link>
           </div>
         </header>
