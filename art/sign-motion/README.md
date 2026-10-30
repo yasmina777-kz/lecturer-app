@@ -38,3 +38,13 @@ Data adaptations follow the source Bukva/Slovo attribution/share-alike public li
 Mechanical checks cover all 203 clips: no off-axis PIP/DIP twist, finite transforms, compatible skeletons and continuous trimmed playback timestamps. The angular-rate cleanup can alter timing around tracking errors; it cannot infer correct contact, facial grammar or occluded fingers. Human review is still required.
 
 Seven saved pre-change clips (А, И, я, читать, хотеть, мать, книга; Git `ff00e9f`) were compared at 30 Hz within their captured intervals. Finger angular-acceleration p95 decreased by 32–54% on those samples. This is a mechanical smoothness measure, not recognition/sign accuracy. Reproduce with `node frontend/scripts/compare-sign-curves.mjs`; all-library checks additionally require no joint step above 8.1° at 30 fps and no translating finger joints.
+
+## Motion v3 — Mixamo calibration and joint volume
+
+`calibrate_mixamo.py` reads the locally downloaded, retargeted Mixamo Talking and Standing Idle projects. It derives 30 rig-specific flexion axes, removes longitudinal roll from the hinge reference, and records 20 rest-joint curvature offsets. These are calibration measurements, not RSL animations or a newly trained model. Reproduce the Mixamo imports first using `art/mixamo-trial/import_motion.py`; source FBX files remain local.
+
+`kinematics.py` subtracts those rest bends so a source straight finger does not receive an extra bend from the mesh. Non-thumb distal measurements are projected onto the flexion plane to avoid turning lateral tracking noise into extra curl. Joint limits and the existing symmetric time filter remain active. A 65% body-only Standing Idle delta drives hips/spine; tracked shoulder reach and wrist IK are solved afterwards, keeping sign hand targets independent of the body layer. Generic Talking gestures never replace signs.
+
+The web renderer uses `volumeSkinning.ts` dual-quaternion deformation for the rigid Mira skeleton, including matching normals and shadow geometry. This avoids the volume collapse caused by averaging bone matrices at a rotated wrist. This implementation requires unit-scale deformation bones; the full-library check enforces that assumption. It does not repair wrong source landmarks or guarantee collision-free thumb/finger contacts.
+
+Checks: `Blender -b --python art/sign-motion/check_calibration.py` tests 60 actual joint poses (straight, 20°, 60° across 20 hinges); `node frontend/scripts/check-volume-skinning.mjs` checks surface/shadow integration. Rebuilt all 203 clips with motionVersion 3. Browser review covers the open-hand book gesture, the closed-hand letter А and a multiword sequence; complete linguistic and contact validation remains outstanding.

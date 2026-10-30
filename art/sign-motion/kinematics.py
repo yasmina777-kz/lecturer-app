@@ -17,8 +17,12 @@ def signed_angle(a,b,axis):
  a=a.normalized();b=b.normalized();axis=axis.normalized()
  return math.atan2(axis.dot(a.cross(b)),clamp(a.dot(b),-1,1))
 
+hand_calibration=json.loads((ROOT/"art/sign-motion/mixamo-hand-calibration.json").read_text())
+
 def hinge_axis(side,name,j):
  bone=B(side+'Hand'+name+str(j))
+ calibrated=hand_calibration['axes'].get(bone.name)
+ if calibrated:return V(calibrated)
  direction=(bone.bone.tail_local-bone.bone.head_local).normalized()
  axis=direction.cross(rest[side]['basis'].col[2]).normalized()
  return bone.bone.matrix_local.to_quaternion().inverted()@axis
@@ -51,9 +55,17 @@ def anatomical_fingers(side,pts,fade):
   else:
    bend=math.atan2(segments[0].dot(normal),segments[0].dot(flat))
    if bend < -math.pi/2:bend=math.pi
-   bend=clamp(bend,math.radians(-12),math.radians(100))
+   bend=clamp(bend,math.radians(-12),math.radians(95))
+   model=B(side+'Hand'+name+'1').bone
+   model_direction=(model.tail_local-model.head_local).normalized()
+   model_base=(model.head_local-rest[side]['wrist']).normalized()
+   model_normal=rest[side]['basis'].col[2]
+   model_flat=(model_base-model_normal*model_base.dot(model_normal)).normalized()
+   rest_bend=math.atan2(model_direction.dot(model_normal),model_direction.dot(model_flat))
+   bend-=rest_bend
    flat_segment=segments[0]-normal*segments[0].dot(normal)
-   spread=clamp(signed_angle(flat,flat_segment,normal),math.radians(-25),math.radians(25))
+   rest_spread=signed_angle(model_flat,model_direction-model_normal*model_direction.dot(model_normal),model_normal)
+   spread=clamp(signed_angle(flat,flat_segment,normal)-rest_spread,math.radians(-18),math.radians(18))
    spread*=clamp(segments[0].dot(flat)/.35,0,1)
    bone=B(side+'Hand'+name+'1')
    local_normal=bone.bone.matrix_local.to_quaternion().inverted()@rest[side]['basis'].col[2]
@@ -61,12 +73,16 @@ def anatomical_fingers(side,pts,fade):
    bone.rotation_quaternion=Quaternion(hinge_axis(side,name,1),relaxed[name][0]).slerp(target,fade)
   for j in (2,3):
    # Interphalangeal joints bend in one plane; tracking cannot twist them.
-   axis=segments[j-2].cross(normal)
-   # A noisy palm normal must not flip a bent finger into hyperextension.
-   angle=segments[j-2].angle(segments[j-1])
-   limit=math.radians((80 if j==2 else 85) if name=='Thumb' else (115 if j==2 else 85))
-   angle=clamp(angle,math.radians(-5),limit)
+   axis=segments[0].cross(normal).normalized()
+   # Lateral tracking noise is not finger flexion. Project onto the flexion
+   # plane before measuring; subtract the mesh's already-curved rest joints.
+   before=segments[j-2]-axis*segments[j-2].dot(axis)
+   after=segments[j-1]-axis*segments[j-1].dot(axis)
+   angle=segments[j-2].angle(segments[j-1]) if name=='Thumb' else signed_angle(before,after,axis)
+   limit=math.radians((70 if j==2 else 80) if name=='Thumb' else (105 if j==2 else 75))
    bone=B(side+'Hand'+name+str(j))
+   rest_bend=hand_calibration['restBends'].get(bone.name,0)
+   angle=clamp(angle,math.radians(-5),limit)-rest_bend
    bone.rotation_quaternion=Quaternion(hinge_axis(side,name,j),relaxed[name][j-1]*(1-fade)+angle*fade)
  bpy.context.view_layer.update()
 
@@ -152,3 +168,17 @@ def smooth_rotations(samples):
    final[i]=filtered[i-1].slerp(filtered[i+1],.5).slerp(filtered[i],.5)
   for i,q in enumerate(final):out[i][name]=q.normalized()
  return out
+
+
+body_calibration=json.loads((ROOT/'art/sign-motion/mixamo-body-calibration.json').read_text())
+def natural_body(t):
+ """Mixamo body micro-motion; hand targets are solved afterwards in rig space."""
+ frames=body_calibration['frames'];position=(t*body_calibration['fps'])%(len(frames)-1)
+ a=int(position);u=position-a
+ for name in frames[a]:
+  first=frames[a][name];second=frames[a+1][name];bone=B(name)
+  q=Quaternion(first['rotation']).slerp(Quaternion(second['rotation']),u)
+  seam=1-smooth(len(frames)-13,len(frames)-1,position)
+  bone.rotation_quaternion=Quaternion().slerp(q,.65*seam)
+  bone.location=V(first['location']).lerp(V(second['location']),u)*.65*seam
+ bpy.context.view_layer.update()

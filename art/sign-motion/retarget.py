@@ -9,7 +9,7 @@ source=ROOT/'art/mira-blender-v3/animate.py';scope={'__file__':str(source)}
 exec(compile(source.read_text().split('\nface=bpy.data.objects')[0].replace('limit=math.radians(52)','limit=math.radians(100)'),str(source),'exec'),scope)
 globals().update({k:v for k,v in scope.items() if not k.startswith('__')})
 OUT=ROOT/'frontend/public/avatars/sign-motion';OUT.mkdir(exist_ok=True)
-DATA=ROOT/'ml/rsl/data/motion';selected=sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else []
+DATA=ROOT/'ml/rsl/data/motion';selected=sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [];render_stills='render' in selected;selected=[x for x in selected if x!='render']
 paths=sorted(DATA.glob('word-*.json'))+sorted(DATA.glob('letter-*.json'))
 batch=next((x for x in selected if x.startswith('batch=')),None)
 if selected==['missing']:
@@ -70,15 +70,16 @@ for path in paths:
   src=max(0,min(frames[-1]['t'],t-lead));a=max((i for i,f in enumerate(frames) if f['t']<=src),default=0);b=min(a+1,N-1);u=(src-frames[a]['t'])/max(.0001,frames[b]['t']-frames[a]['t']) if b!=a else 0
   fade=clamp(smooth(0,lead,t)*(1-smooth(duration-tail,duration,t)),0,1)
   for bone in bones:bone.matrix_basis=Matrix.Identity(4)
+  natural_body(t)
   # Subtle torso tilt follows the reference shoulder line, not an idle loop.
   pa=frames[a]['pose'];pb=frames[b]['pose'];p=[V(x).lerp(V(y),u) for x,y in zip(pa,pb)]
   tilt=clamp(math.atan2(p[11].y-p[12].y,(p[11].x-p[12].x)*d['aspect']),-.14,.14)
-  B('Spine2').rotation_quaternion=Quaternion((0,1,0),-.4*tilt*fade)
+  B('Spine2').rotation_quaternion=Quaternion((0,1,0),-.4*tilt*fade)@B('Spine2').rotation_quaternion
   bpy.context.view_layer.update()
   for side,wi in [('Left',15),('Right',16)]:
    for name in finger_indices:
     for j in range(1,4):
-     bone=B(side+'Hand'+name+str(j));direction=(bone.bone.tail_local-bone.bone.head_local).normalized();axis=bone.bone.matrix_local.to_quaternion().inverted()@direction.cross(rest[side]['basis'].col[2]).normalized();bone.rotation_quaternion=Quaternion(axis,relaxed[name][j-1])
+     bone=B(side+'Hand'+name+str(j));direction=(bone.bone.tail_local-bone.bone.head_local).normalized();axis=hinge_axis(side,name,j);bone.rotation_quaternion=Quaternion(axis,relaxed[name][j-1])
    sign=1 if side=='Left' else -1;start=V((sign*.205,-.105,.94));qrest=qrestL if side=='Left' else qrestR
    if not tracks[side][a] or coverage[side]<.12:
     tracked_arm(side,start,qrest);continue
@@ -97,6 +98,13 @@ for path in paths:
    ei=13 if side=='Left' else 14;ep=p[ei]
    edepth=clamp(world[ei][2]-(world[11][2]+world[12][2])/2,-.35,.2) if world else -.05
    elbow_hint=V(((ep.x-mid.x)*d['aspect']*scale,edepth,shoulder_mid.z-(ep.y-mid.y)*scale))
+   # Scapula follows the reach before solving elbow/wrist. The IK preserves
+   # captured hand positions instead of adding an unrelated arm animation.
+   shoulder=B(side+'Shoulder');local=shoulder.bone.matrix_local.to_quaternion().inverted()
+   lift=clamp((elbow_hint.z-(shoulder_mid.z-.25))*.25,0,.09)*fade
+   reach=clamp(-edepth*.18,0,.055)*fade
+   shoulder.rotation_quaternion=Quaternion(local@V((0,1,0)),-sign*lift)@Quaternion(local@V((0,0,1)),-sign*reach)
+   bpy.context.view_layer.update()
    tracked_arm(side,start.lerp(target,fade),qrest.slerp(q,fade),elbow_hint,fade)
    anatomical_fingers(side,pts,fade)
   rotation_samples.append({bone.name:bone.rotation_quaternion.copy() for bone in bones})
@@ -125,7 +133,7 @@ for path in paths:
   for key in fc.keyframe_points:key.interpolation='LINEAR'
  bpy.ops.object.select_all(action='DESELECT');rig.select_set(True)
  bpy.ops.export_scene.gltf(filepath=str(OUT/(entry['id']+'.glb')),export_format='GLB',use_selection=True,export_animations=True,export_animation_mode='ACTIVE_ACTIONS',export_frame_range=True,export_force_sampling=True,export_anim_slide_to_zero=True,export_yup=True)
- info={'id':entry['id'],'label':entry['label'],'url':'/avatars/sign-motion/'+entry['id']+'.glb','duration':round((count-1)/30,3),'source':entry['source'],'reference':entry['video'],'handCoverage':coverage,'maxGapFrames':longest,'poseCoverage':d['poseCoverage'],'maxJointStepDegrees':round(math.degrees(maxstep),3),'review':'experimental-unreviewed','method':'Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training','motionVersion':2,'peakStep':peak,'leadIn':lead,'leadOut':tail,'maxHingeOffAxis':hinge_error}
+ info={'id':entry['id'],'label':entry['label'],'url':'/avatars/sign-motion/'+entry['id']+'.glb','duration':round((count-1)/30,3),'source':entry['source'],'reference':entry['video'],'handCoverage':coverage,'maxGapFrames':longest,'poseCoverage':d['poseCoverage'],'maxJointStepDegrees':round(math.degrees(maxstep),3),'review':'experimental-unreviewed','method':'Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training','motionVersion':3,'peakStep':peak,'leadIn':lead,'leadOut':tail,'maxHingeOffAxis':hinge_error}
  (OUT/(entry['id']+'.json')).write_text(json.dumps(info,ensure_ascii=False,indent=2));manifest.append(info)
  print('RETARGETED',entry['label'],info['duration'],coverage,flush=True)
  # Keep a concrete Blender workshop for manual finger/curve review.
@@ -133,6 +141,6 @@ for path in paths:
   sc.frame_set(round((lead+frames[-1]['t']/2)*30)+1)
   bpy.ops.wm.save_as_mainfile(filepath=str(ROOT/'art/sign-motion/Avatar-motion-workshop.blend'),compress=True)
  # Optional stills for comparison, only the initial test set.
- if selected:
+ if render_stills:
   sc.frame_set(round((lead+frames[-1]['t']/2)*30)+1);sc.camera.location=(0,-2.25,1.4);sc.camera.rotation_euler=(V((0,-.1,1.3))-sc.camera.location).to_track_quat('-Z','Y').to_euler();sc.camera.data.lens=55;sc.render.resolution_percentage=35;sc.render.filepath=str(ROOT/'art/sign-motion'/(entry['id']+'.png'));bpy.ops.render.render(write_still=True)
 print('RETARGET_COMPLETE',len(manifest),flush=True)

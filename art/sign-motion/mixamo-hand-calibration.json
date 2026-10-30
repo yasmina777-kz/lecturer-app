@@ -1,0 +1,180 @@
+{
+  "source": "Mixamo Talking / Asking A Question With Two Hands",
+  "sourceUrl": "https://www.mixamo.com/",
+  "rig": "Mira 64 deform bones + 6 forearm helpers",
+  "method": "PIP quaternion projection onto its local XZ plane; axis transported into each rest joint frame. Rest curvature subtracted separately. Not sign language motion.",
+  "axes": {
+    "mixamorig:LeftHandThumb1": [
+      0.4961690902709961,
+      0.0,
+      0.8682259917259216
+    ],
+    "mixamorig:LeftHandThumb2": [
+      0.5413705110549927,
+      0.0,
+      0.8407841324806213
+    ],
+    "mixamorig:LeftHandThumb3": [
+      0.6432768702507019,
+      0.0,
+      0.7656336426734924
+    ],
+    "mixamorig:LeftHandIndex1": [
+      0.981570303440094,
+      0.0,
+      0.1911013424396515
+    ],
+    "mixamorig:LeftHandIndex2": [
+      0.9773391485214233,
+      0.0,
+      0.2116798609495163
+    ],
+    "mixamorig:LeftHandIndex3": [
+      0.9740769267082214,
+      0.0,
+      0.2262171059846878
+    ],
+    "mixamorig:LeftHandMiddle1": [
+      0.9948129057884216,
+      0.0,
+      -0.1017213836312294
+    ],
+    "mixamorig:LeftHandMiddle2": [
+      0.9929690361022949,
+      0.0,
+      -0.11837431788444519
+    ],
+    "mixamorig:LeftHandMiddle3": [
+      0.9958943724632263,
+      0.0,
+      -0.0905226469039917
+    ],
+    "mixamorig:LeftHandRing1": [
+      0.9921852946281433,
+      0.0,
+      -0.12477333098649979
+    ],
+    "mixamorig:LeftHandRing2": [
+      0.9889537692070007,
+      0.0,
+      -0.14822432398796082
+    ],
+    "mixamorig:LeftHandRing3": [
+      0.9932469725608826,
+      0.0,
+      -0.11601870507001877
+    ],
+    "mixamorig:LeftHandPinky1": [
+      0.9713634252548218,
+      0.0,
+      -0.23759859800338745
+    ],
+    "mixamorig:LeftHandPinky2": [
+      0.9718537926673889,
+      0.0,
+      -0.2355845719575882
+    ],
+    "mixamorig:LeftHandPinky3": [
+      0.9715165495872498,
+      0.0,
+      -0.2369716614484787
+    ],
+    "mixamorig:RightHandThumb1": [
+      0.2852461338043213,
+      0.0,
+      -0.9584543108940125
+    ],
+    "mixamorig:RightHandThumb2": [
+      0.33908015489578247,
+      0.0,
+      -0.9407575726509094
+    ],
+    "mixamorig:RightHandThumb3": [
+      0.4494783282279968,
+      0.0,
+      -0.8932912349700928
+    ],
+    "mixamorig:RightHandIndex1": [
+      0.9716443419456482,
+      0.0,
+      -0.23644715547561646
+    ],
+    "mixamorig:RightHandIndex2": [
+      0.9661813378334045,
+      0.0,
+      -0.257863849401474
+    ],
+    "mixamorig:RightHandIndex3": [
+      0.962334394454956,
+      0.0,
+      -0.2718689441680908
+    ],
+    "mixamorig:RightHandMiddle1": [
+      0.9910804629325867,
+      0.0,
+      0.13326452672481537
+    ],
+    "mixamorig:RightHandMiddle2": [
+      0.9887051582336426,
+      0.0,
+      0.14987395703792572
+    ],
+    "mixamorig:RightHandMiddle3": [
+      0.9925439357757568,
+      0.0,
+      0.12188702076673508
+    ],
+    "mixamorig:RightHandRing1": [
+      0.987712562084198,
+      0.0,
+      0.15628103911876678
+    ],
+    "mixamorig:RightHandRing2": [
+      0.9837231636047363,
+      0.0,
+      0.17969052493572235
+    ],
+    "mixamorig:RightHandRing3": [
+      0.9890644550323486,
+      0.0,
+      0.14748400449752808
+    ],
+    "mixamorig:RightHandPinky1": [
+      0.9307921528816223,
+      0.0,
+      0.3655487298965454
+    ],
+    "mixamorig:RightHandPinky2": [
+      0.9312782287597656,
+      0.0,
+      0.36430877447128296
+    ],
+    "mixamorig:RightHandPinky3": [
+      0.9307348728179932,
+      0.0,
+      0.365694522857666
+    ]
+  },
+  "restBends": {
+    "mixamorig:LeftHandThumb2": -0.2077039193578618,
+    "mixamorig:LeftHandThumb3": 0.11825037184930332,
+    "mixamorig:LeftHandIndex2": 0.21921267160452582,
+    "mixamorig:LeftHandIndex3": 0.12580972557161862,
+    "mixamorig:LeftHandMiddle2": 0.09622638408455189,
+    "mixamorig:LeftHandMiddle3": 0.12408055532477733,
+    "mixamorig:LeftHandRing2": 0.12435888671660633,
+    "mixamorig:LeftHandRing3": 0.10278464220316291,
+    "mixamorig:LeftHandPinky2": 0.14665674842506513,
+    "mixamorig:LeftHandPinky3": -0.009217234516402547,
+    "mixamorig:RightHandThumb2": -0.27625139977417595,
+    "mixamorig:RightHandThumb3": 0.05891059202615623,
+    "mixamorig:RightHandIndex2": 0.2174220548989758,
+    "mixamorig:RightHandIndex3": 0.12622668734947193,
+    "mixamorig:RightHandMiddle2": 0.0934772016215461,
+    "mixamorig:RightHandMiddle3": 0.12398937268127679,
+    "mixamorig:RightHandRing2": 0.1211163076607321,
+    "mixamorig:RightHandRing3": 0.10371240373449826,
+    "mixamorig:RightHandPinky2": 0.13407718839307345,
+    "mixamorig:RightHandPinky3": -0.005040184439146346
+  }
+}

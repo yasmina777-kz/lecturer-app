@@ -14,16 +14,16 @@
     "Right": 0
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 7.999,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-  "motionVersion": 2,
+  "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+  "motionVersion": 3,
   "peakStep": {
-    "bone": "mixamorig:RightHandPinky1",
-    "frame": 53,
-    "angle": 7.998584381323581
+    "bone": "mixamorig:RightHandPinky2",
+    "frame": 52,
+    "angle": 7.999857357830142
   },
   "leadIn": 0.7,
   "leadOut": 0.7,
-  "maxHingeOffAxis": 4.470348358154353e-08
+  "maxHingeOffAxis": 4.470348358154297e-08
 }

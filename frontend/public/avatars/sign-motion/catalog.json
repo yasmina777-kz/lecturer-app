@@ -17,8 +17,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandThumb1",
       "frame": 14,
@@ -26,7 +26,7 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790771484e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-44bc9933",
@@ -46,16 +46,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex3",
-      "frame": 15,
-      "angle": 7.999955541799461
+      "bone": "mixamorig:RightHandIndex2",
+      "frame": 28,
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769621e-08
+    "maxHingeOffAxis": 3.725290298461914e-08
   },
   {
     "id": "word-0f02bf01",
@@ -75,16 +75,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky3",
+      "bone": "mixamorig:RightHandIndex2",
       "frame": 24,
-      "angle": 7.999955541799461
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769538e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-c1596705",
@@ -104,16 +104,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandThumb2",
-      "frame": 33,
-      "angle": 8.00005372576878
+      "bone": "mixamorig:RightHand",
+      "frame": 86,
+      "angle": 8.000151055964453
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154368e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-069645d8",
@@ -131,18 +131,18 @@
       "Right": 22
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.913,
+    "maxJointStepDegrees": 7.915,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHand",
       "frame": 24,
-      "angle": 7.912728049682874
+      "angle": 7.91460805925192
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 1.4901161193847762e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08
   },
   {
     "id": "word-aeed25a5",
@@ -162,16 +162,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 7.998,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHand",
       "frame": 18,
-      "angle": 7.99799698505496
+      "angle": 7.997800617116322
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539105e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-e29e36fe",
@@ -189,18 +189,18 @@
       "Right": 18
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.092,
+    "maxJointStepDegrees": 6.996,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHand",
-      "frame": 55,
-      "angle": 7.091603988324411
+      "bone": "mixamorig:LeftForearmRoll0",
+      "frame": 19,
+      "angle": 6.996319434308148
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790771766e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-8c1a7f26",
@@ -220,16 +220,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandRing2",
-      "frame": 44,
-      "angle": 7.999955541799461
+      "frame": 45,
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769727e-08
+    "maxHingeOffAxis": 5.960464477539063e-08
   },
   {
     "id": "word-b7dfae4f",
@@ -249,16 +249,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky3",
-      "frame": 15,
+      "bone": "mixamorig:RightHandIndex3",
+      "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154385e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-38153f62",
@@ -278,16 +278,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing1",
-      "frame": 14,
+      "bone": "mixamorig:RightHandMiddle3",
+      "frame": 42,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387698754e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-4699249c",
@@ -305,18 +305,18 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.999,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky1",
-      "frame": 53,
-      "angle": 7.998584381323581
+      "bone": "mixamorig:RightHandPinky2",
+      "frame": 52,
+      "angle": 7.999857357830142
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154353e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-1ff178a6",
@@ -336,16 +336,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandThumb1",
-      "frame": 16,
+      "bone": "mixamorig:LeftHandMiddle2",
+      "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769542e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-fc2a83a7",
@@ -365,16 +365,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHandIndex2",
-      "frame": 23,
+      "frame": 29,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154332e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-7143af36",
@@ -394,16 +394,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandThumb2",
-      "frame": 24,
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154368e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-3df3b9dc",
@@ -423,16 +423,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky2",
-      "frame": 23,
+      "bone": "mixamorig:RightHandThumb1",
+      "frame": 13,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539076e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-26e2d0ce",
@@ -452,16 +452,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandPinky2",
+      "bone": "mixamorig:RightHandPinky2",
       "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154325e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-8f8056fe",
@@ -481,16 +481,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky2",
-      "frame": 13,
+      "bone": "mixamorig:RightHandIndex2",
+      "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539107e-08
+    "maxHingeOffAxis": 5.960464477539063e-08
   },
   {
     "id": "word-d5e5068b",
@@ -510,16 +510,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandMiddle3",
+      "bone": "mixamorig:LeftHandPinky3",
       "frame": 39,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769616e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-d116eb89",
@@ -539,16 +539,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex2",
-      "frame": 24,
+      "bone": "mixamorig:RightHandPinky2",
+      "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154304e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-83b8a1b6",
@@ -568,16 +568,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing3",
-      "frame": 27,
+      "bone": "mixamorig:LeftHandPinky3",
+      "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539158e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-728c296d",
@@ -597,16 +597,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandIndex1",
-      "frame": 14,
+      "frame": 16,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 7.450580596923905e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-38c6f832",
@@ -626,16 +626,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing1",
-      "frame": 14,
+      "bone": "mixamorig:LeftHandPinky2",
+      "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539158e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-f1a5226d",
@@ -655,16 +655,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandThumb1",
-      "frame": 15,
+      "frame": 14,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539084e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-03ac3272",
@@ -684,16 +684,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHandMiddle2",
-      "frame": 75,
+      "frame": 76,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769727e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08
   },
   {
     "id": "word-92e94ab2",
@@ -713,16 +713,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle1",
-      "frame": 69,
-      "angle": 8.00005372576878
+      "bone": "mixamorig:RightHandPinky1",
+      "frame": 70,
+      "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154353e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-ed66b0ff",
@@ -742,16 +742,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHandPinky3",
-      "frame": 24,
+      "frame": 28,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 3.7252902984619405e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-41df6170",
@@ -771,16 +771,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing1",
-      "frame": 14,
+      "bone": "mixamorig:LeftHandThumb1",
+      "frame": 16,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769621e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-c58e68e8",
@@ -798,18 +798,18 @@
       "Right": 30
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.907,
+    "maxJointStepDegrees": 7.99,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandIndex1",
       "frame": 65,
-      "angle": 7.907380011562754
+      "angle": 7.990255819404396
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 7.450580596923863e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-9e551d12",
@@ -829,16 +829,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky1",
-      "frame": 61,
-      "angle": 7.999955541799461
+      "bone": "mixamorig:RightHandPinky3",
+      "frame": 26,
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769538e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-b19972c4",
@@ -858,16 +858,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle2",
-      "frame": 30,
+      "bone": "mixamorig:RightHandPinky3",
+      "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769538e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-c3c582bb",
@@ -887,16 +887,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex3",
-      "frame": 28,
+      "bone": "mixamorig:LeftHandIndex2",
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154315e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-a1a428c3",
@@ -916,8 +916,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHandRing2",
       "frame": 27,
@@ -925,7 +925,7 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769554e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-78a4ca40",
@@ -945,16 +945,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky2",
-      "frame": 38,
-      "angle": 8.00005372576878
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 40,
+      "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790774025e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08
   },
   {
     "id": "word-5d7cb3db",
@@ -974,16 +974,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing1",
-      "frame": 15,
+      "bone": "mixamorig:LeftHandPinky2",
+      "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 8.940696716308608e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-22f60354",
@@ -1003,16 +1003,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandThumb1",
-      "frame": 13,
+      "frame": 16,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-be28b6af",
@@ -1032,16 +1032,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex2",
-      "frame": 62,
+      "bone": "mixamorig:LeftHandIndex3",
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154353e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-6c7d80f0",
@@ -1061,16 +1061,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing2",
-      "frame": 71,
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.4703483581543544e-08
+    "maxHingeOffAxis": 5.960464477539063e-08
   },
   {
     "id": "word-b4f237bd",
@@ -1088,18 +1088,18 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.999,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex1",
-      "frame": 40,
-      "angle": 7.999171777592202
+      "bone": "mixamorig:LeftHandIndex3",
+      "frame": 32,
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769621e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-cd6a9d0b",
@@ -1119,16 +1119,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex2",
-      "frame": 24,
-      "angle": 8.00005372576878
+      "bone": "mixamorig:LeftHand",
+      "frame": 85,
+      "angle": 8.000151055964453
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154353e-08
+    "maxHingeOffAxis": 8.940696716308594e-08
   },
   {
     "id": "word-40af2c54",
@@ -1148,16 +1148,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing3",
-      "frame": 47,
+      "bone": "mixamorig:RightHandIndex3",
+      "frame": 30,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695643e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-0b485a5f",
@@ -1177,16 +1177,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex2",
-      "frame": 39,
+      "bone": "mixamorig:LeftHandPinky2",
+      "frame": 36,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.4703483581543544e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-69586c66",
@@ -1206,16 +1206,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky3",
-      "frame": 68,
+      "bone": "mixamorig:RightHandMiddle3",
+      "frame": 60,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.4703483581543e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-580edc90",
@@ -1235,16 +1235,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle3",
+      "bone": "mixamorig:RightHandIndex3",
       "frame": 27,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769621e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-e526814e",
@@ -1264,11 +1264,11 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandMiddle2",
-      "frame": 14,
+      "bone": "mixamorig:LeftHandRing3",
+      "frame": 25,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
@@ -1291,18 +1291,18 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.999,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHand",
-      "frame": 68,
-      "angle": 7.999465475726512
+      "bone": "mixamorig:LeftHandMiddle3",
+      "frame": 67,
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790772685e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-912db910",
@@ -1320,18 +1320,18 @@
       "Right": 4
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 8.0,
+    "maxJointStepDegrees": 7.966,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandMiddle2",
+      "bone": "mixamorig:LeftHandRing1",
       "frame": 26,
-      "angle": 8.00005372576878
+      "angle": 7.966201600694904
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790772685e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-6106a42d",
@@ -1351,16 +1351,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky2",
-      "frame": 15,
+      "bone": "mixamorig:RightHandMiddle3",
+      "frame": 25,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539076e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-e10fbdcb",
@@ -1380,16 +1380,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandRing2",
-      "frame": 75,
+      "frame": 25,
       "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695736e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-6a2d01fd",
@@ -1409,16 +1409,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex2",
+      "bone": "mixamorig:LeftHandRing2",
       "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.4703483581543544e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-a8989f04",
@@ -1438,16 +1438,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandThumb1",
-      "frame": 14,
+      "bone": "mixamorig:LeftHandIndex2",
+      "frame": 73,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769554e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-2c1fd7ff",
@@ -1467,16 +1467,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandPinky1",
-      "frame": 71,
+      "bone": "mixamorig:LeftHandPinky3",
+      "frame": 61,
       "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769722e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-30f82679",
@@ -1496,16 +1496,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing2",
+      "bone": "mixamorig:LeftHandPinky3",
       "frame": 29,
-      "angle": 7.999955541799461
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769554e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-54dee110",
@@ -1525,16 +1525,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing2",
+      "bone": "mixamorig:RightHandMiddle2",
       "frame": 14,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539076e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-542b93a5",
@@ -1554,8 +1554,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 7.729,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandThumb1",
       "frame": 34,
@@ -1563,7 +1563,7 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790771766e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-3d7e498c",
@@ -1583,16 +1583,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex2",
-      "frame": 34,
+      "bone": "mixamorig:RightHandIndex3",
+      "frame": 27,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-0a42bb8f",
@@ -1612,16 +1612,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandThumb1",
-      "frame": 15,
+      "bone": "mixamorig:RightHandMiddle3",
+      "frame": 32,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539105e-08
+    "maxHingeOffAxis": 5.960464477539063e-08
   },
   {
     "id": "word-620a9fc5",
@@ -1641,16 +1641,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandPinky3",
-      "frame": 24,
+      "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769542e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-1d06b313",
@@ -1670,16 +1670,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing2",
-      "frame": 15,
+      "bone": "mixamorig:LeftHandRing3",
+      "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769621e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-6911f183",
@@ -1697,18 +1697,18 @@
       "Right": 15
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.994,
+    "maxJointStepDegrees": 7.995,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHand",
       "frame": 52,
-      "angle": 7.994470046122294
+      "angle": 7.994568230091613
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790771574e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08
   },
   {
     "id": "word-b58b7f9b",
@@ -1728,16 +1728,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandPinky3",
-      "frame": 33,
-      "angle": 8.00005372576878
+      "frame": 36,
+      "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769579e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-e35ba719",
@@ -1757,16 +1757,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHandRing2",
-      "frame": 14,
+      "frame": 15,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154315e-08
+    "maxHingeOffAxis": 7.450580596923828e-08
   },
   {
     "id": "word-5ac08628",
@@ -1786,8 +1786,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHandThumb1",
       "frame": 14,
@@ -1795,7 +1795,7 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 1.8626451492309957e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-c2304594",
@@ -1815,16 +1815,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex1",
-      "frame": 64,
-      "angle": 8.000151055964453
+      "bone": "mixamorig:LeftHandMiddle3",
+      "frame": 24,
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769637e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-d8326c48",
@@ -1844,16 +1844,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky3",
+      "bone": "mixamorig:LeftHandPinky3",
       "frame": 24,
-      "angle": 7.999955541799461
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154329e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-8c3b0308",
@@ -1871,18 +1871,18 @@
       "Right": 27
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.995,
+    "maxJointStepDegrees": 7.996,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandIndex1",
       "frame": 62,
-      "angle": 7.994764598030251
+      "angle": 7.996233942475451
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695736e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-a5983e98",
@@ -1902,16 +1902,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing2",
-      "frame": 24,
+      "bone": "mixamorig:RightHandPinky3",
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769554e-08
+    "maxHingeOffAxis": 3.725290298461914e-08
   },
   {
     "id": "word-b047f8c8",
@@ -1929,18 +1929,18 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.792,
+    "maxJointStepDegrees": 7.794,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHand",
       "frame": 28,
-      "angle": 7.792328890088474
+      "angle": 7.794439418542009
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 1.4901161193848106e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-23b3909e",
@@ -1960,16 +1960,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle2",
-      "frame": 39,
-      "angle": 8.00005372576878
+      "bone": "mixamorig:LeftHandIndex2",
+      "frame": 73,
+      "angle": 8.000151055964453
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154315e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-24491c1c",
@@ -1989,16 +1989,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandRing2",
-      "frame": 27,
+      "frame": 28,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154353e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-f8ff6bc7",
@@ -2018,16 +2018,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandPinky2",
-      "frame": 26,
+      "bone": "mixamorig:LeftHandIndex3",
+      "frame": 27,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769538e-08
+    "maxHingeOffAxis": 5.960464477539063e-08
   },
   {
     "id": "word-cf4157f8",
@@ -2047,16 +2047,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandIndex2",
-      "frame": 29,
+      "frame": 31,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.4703483581545265e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-5da64d7c",
@@ -2076,16 +2076,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky3",
+      "bone": "mixamorig:RightHandMiddle2",
       "frame": 56,
-      "angle": 8.00005372576878
+      "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695524e-08
+    "maxHingeOffAxis": 1.4901161193847656e-08
   },
   {
     "id": "word-3eccaa2d",
@@ -2105,16 +2105,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing2",
-      "frame": 38,
+      "bone": "mixamorig:LeftHandMiddle3",
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695524e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08
   },
   {
     "id": "word-55d32981",
@@ -2132,18 +2132,18 @@
       "Right": 4
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 8.0,
+    "maxJointStepDegrees": 7.844,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHandIndex1",
-      "frame": 94,
-      "angle": 7.999955541799461
+      "frame": 93,
+      "angle": 7.844225521175877
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790772633e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-9aa82def",
@@ -2163,8 +2163,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHandRing2",
       "frame": 33,
@@ -2172,7 +2172,7 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154312e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-b45703d1",
@@ -2190,18 +2190,18 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.2,
+    "maxJointStepDegrees": 7.15,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHand",
       "frame": 31,
-      "angle": 7.200108800366056
+      "angle": 7.150225367536515
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 1.490116119384779e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08
   },
   {
     "id": "word-ffce2323",
@@ -2221,16 +2221,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle2",
-      "frame": 24,
+      "bone": "mixamorig:RightHandPinky2",
+      "frame": 25,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790772633e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-ceedcb88",
@@ -2250,16 +2250,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandMiddle3",
-      "frame": 26,
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 34,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.98023223876987e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-9d32e897",
@@ -2279,16 +2279,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex2",
-      "frame": 44,
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 33,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769637e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-65c00b09",
@@ -2308,16 +2308,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing2",
-      "frame": 14,
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769579e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-57c6880e",
@@ -2337,16 +2337,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing1",
-      "frame": 17,
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154315e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-2ad51148",
@@ -2364,18 +2364,18 @@
       "Right": 24
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.993,
+    "maxJointStepDegrees": 7.992,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHand",
       "frame": 24,
-      "angle": 7.992510635604147
+      "angle": 7.992412451634828
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 1.490116119384777e-08
+    "maxHingeOffAxis": 1.4901161193847656e-08
   },
   {
     "id": "word-9fcf26f7",
@@ -2395,16 +2395,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle3",
-      "frame": 34,
+      "bone": "mixamorig:RightHandRing3",
+      "frame": 69,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387698754e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-5fd8cf91",
@@ -2424,16 +2424,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandPinky2",
-      "frame": 24,
+      "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769554e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-71c24ba0",
@@ -2453,16 +2453,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle3",
-      "frame": 46,
+      "bone": "mixamorig:RightHandIndex2",
+      "frame": 49,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.98023223876987e-08
+    "maxHingeOffAxis": 5.960464477539063e-08
   },
   {
     "id": "word-360ff815",
@@ -2482,16 +2482,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex2",
-      "frame": 40,
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 27,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539092e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-2c57ef13",
@@ -2511,16 +2511,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing2",
-      "frame": 16,
+      "bone": "mixamorig:RightHandIndex3",
+      "frame": 27,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.98023223876987e-08
+    "maxHingeOffAxis": 3.725290298461914e-08
   },
   {
     "id": "word-00af7ae9",
@@ -2540,16 +2540,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex1",
-      "frame": 15,
-      "angle": 8.000151055964453
+      "bone": "mixamorig:RightHandPinky3",
+      "frame": 23,
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387698714e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-317890bf",
@@ -2569,16 +2569,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandMiddle3",
+      "bone": "mixamorig:LeftHandRing2",
       "frame": 53,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769617e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-b66bf5be",
@@ -2598,16 +2598,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 7.96,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHand",
       "frame": 39,
-      "angle": 7.959512284176523
+      "angle": 7.959610468145842
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790771772e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-5f337e79",
@@ -2627,16 +2627,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky2",
-      "frame": 25,
+      "bone": "mixamorig:LeftHandThumb1",
+      "frame": 14,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539078e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-25fed1ff",
@@ -2656,16 +2656,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle2",
+      "bone": "mixamorig:LeftHandIndex3",
       "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 3.7252902984619227e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-9357b146",
@@ -2685,16 +2685,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing1",
-      "frame": 14,
+      "bone": "mixamorig:RightHandPinky2",
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.4703483581543544e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-58862482",
@@ -2714,16 +2714,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex3",
-      "frame": 25,
+      "bone": "mixamorig:RightHandPinky3",
+      "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154311e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-5bd9ab86",
@@ -2741,18 +2741,18 @@
       "Right": 27
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 6.907,
+    "maxJointStepDegrees": 6.877,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftForeArm",
       "frame": 51,
-      "angle": 6.906754309948124
+      "angle": 6.877437430483138
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790771766e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-9ee25d0d",
@@ -2772,8 +2772,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHandPinky3",
       "frame": 26,
@@ -2781,7 +2781,7 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154438e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-16bf2a06",
@@ -2801,16 +2801,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandPinky2",
-      "frame": 27,
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769554e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-e3b0e3b1",
@@ -2830,16 +2830,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky1",
-      "frame": 16,
+      "bone": "mixamorig:LeftHandIndex2",
+      "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154424e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-4fb38350",
@@ -2859,16 +2859,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle2",
-      "frame": 16,
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 25,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154353e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-4fa6cc2a",
@@ -2888,16 +2888,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing2",
-      "frame": 15,
+      "bone": "mixamorig:RightHandMiddle3",
+      "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387697007e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-aba2f273",
@@ -2917,16 +2917,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandThumb1",
-      "frame": 16,
+      "bone": "mixamorig:LeftHandIndex2",
+      "frame": 25,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154353e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-1e422a1f",
@@ -2946,16 +2946,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandThumb1",
-      "frame": 14,
+      "frame": 16,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539105e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-c6b5c933",
@@ -2975,16 +2975,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex2",
-      "frame": 14,
+      "bone": "mixamorig:LeftHandPinky3",
+      "frame": 30,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539076e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-628722ef",
@@ -3004,16 +3004,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing2",
-      "frame": 16,
+      "bone": "mixamorig:LeftHandPinky3",
+      "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 1.4901161193849357e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-2a7729d7",
@@ -3033,8 +3033,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHand",
       "frame": 108,
@@ -3042,7 +3042,7 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-594f0e3d",
@@ -3062,16 +3062,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex2",
-      "frame": 25,
+      "bone": "mixamorig:RightHandMiddle1",
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539076e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-c0f1e55b",
@@ -3091,16 +3091,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex1",
-      "frame": 14,
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154805e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-50b48f58",
@@ -3120,16 +3120,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing2",
-      "frame": 61,
+      "bone": "mixamorig:LeftHandIndex3",
+      "frame": 32,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.4703483581543544e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-5ed48b44",
@@ -3149,16 +3149,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex2",
-      "frame": 32,
+      "bone": "mixamorig:RightHandPinky2",
+      "frame": 25,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154427e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-44de272e",
@@ -3178,16 +3178,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex2",
-      "frame": 61,
-      "angle": 7.999955541799461
+      "bone": "mixamorig:RightHandRing3",
+      "frame": 38,
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154805e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-c446b714",
@@ -3207,16 +3207,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 7.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightForeArm",
-      "frame": 20,
-      "angle": 6.999788743519692
+      "frame": 60,
+      "angle": 6.999900587867351
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790771785e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08
   },
   {
     "id": "word-b0df4010",
@@ -3234,18 +3234,18 @@
       "Right": 29
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.996,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing1",
-      "frame": 74,
-      "angle": 7.995842060371821
+      "bone": "mixamorig:LeftHandRing3",
+      "frame": 41,
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790781665e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-8e883b97",
@@ -3265,16 +3265,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing2",
+      "bone": "mixamorig:LeftHandIndex1",
       "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.4703483581543544e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-bb899ccb",
@@ -3294,16 +3294,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing2",
-      "frame": 34,
+      "bone": "mixamorig:LeftHandPinky3",
+      "frame": 29,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769554e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-924b6df6",
@@ -3323,8 +3323,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHandThumb1",
       "frame": 16,
@@ -3332,7 +3332,7 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539073e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-ae2dce80",
@@ -3350,18 +3350,18 @@
       "Right": 6
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.383,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing1",
-      "frame": 78,
-      "angle": 7.382608893667858
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 55,
+      "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695524e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-175ce38d",
@@ -3379,18 +3379,18 @@
       "Right": 28
     },
     "poseCoverage": 0.9642857142857143,
-    "maxJointStepDegrees": 7.999,
+    "maxJointStepDegrees": 7.998,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHand",
-      "frame": 46,
-      "angle": 7.999269961561521
+      "frame": 64,
+      "angle": 7.9977032869206495
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790774025e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-9613dff0",
@@ -3410,16 +3410,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle2",
-      "frame": 16,
+      "bone": "mixamorig:RightHandIndex2",
+      "frame": 41,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 3.7252902984620835e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-c9b82a16",
@@ -3439,16 +3439,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandMiddle3",
-      "frame": 24,
-      "angle": 8.00005372576878
+      "bone": "mixamorig:LeftHandIndex3",
+      "frame": 23,
+      "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387698754e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-b854c147",
@@ -3468,16 +3468,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandPinky2",
+      "bone": "mixamorig:LeftHandIndex2",
       "frame": 51,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154315e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-803b0a5e",
@@ -3497,16 +3497,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandThumb1",
-      "frame": 78,
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769616e-08
+    "maxHingeOffAxis": 1.4901161193847656e-08
   },
   {
     "id": "word-8d20b0ee",
@@ -3526,16 +3526,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandThumb2",
-      "frame": 23,
+      "bone": "mixamorig:LeftHandIndex1",
+      "frame": 16,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.4703483581543544e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-f00a8a7f",
@@ -3555,16 +3555,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing1",
-      "frame": 14,
+      "bone": "mixamorig:LeftHandMiddle3",
+      "frame": 29,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.98023223876987e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-72476e8f",
@@ -3584,16 +3584,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex1",
-      "frame": 72,
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154353e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-91d7d717",
@@ -3613,16 +3613,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHandIndex3",
       "frame": 26,
-      "angle": 8.00005372576878
+      "angle": 7.999857357830142
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769637e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08
   },
   {
     "id": "word-98521248",
@@ -3642,16 +3642,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandIndex3",
-      "frame": 44,
+      "frame": 43,
       "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769554e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-3637b257",
@@ -3671,16 +3671,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 7.999,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHand",
       "frame": 57,
-      "angle": 7.998976263427211
+      "angle": 7.998878079457891
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790771766e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-5782a432",
@@ -3700,16 +3700,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandRing2",
-      "frame": 52,
-      "angle": 8.00005372576878
+      "frame": 50,
+      "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-f8ffac36",
@@ -3727,18 +3727,18 @@
       "Right": 24
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.527,
+    "maxJointStepDegrees": 7.507,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHand",
       "frame": 15,
-      "angle": 7.527279984251545
+      "angle": 7.507274360172578
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 3.725290298461914e-08
   },
   {
     "id": "word-f872e2cb",
@@ -3758,16 +3758,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHandPinky3",
-      "frame": 47,
+      "frame": 48,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 1.490116119384808e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-2b21215c",
@@ -3787,16 +3787,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle2",
-      "frame": 31,
+      "bone": "mixamorig:RightHandIndex3",
+      "frame": 32,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154353e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-0c849b23",
@@ -3816,16 +3816,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandThumb1",
-      "frame": 15,
+      "bone": "mixamorig:RightHandMiddle3",
+      "frame": 29,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769542e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-d7560665",
@@ -3845,16 +3845,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle2",
-      "frame": 68,
+      "bone": "mixamorig:RightHandPinky3",
+      "frame": 27,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769637e-08
+    "maxHingeOffAxis": 3.725290298461914e-08
   },
   {
     "id": "word-338e93e8",
@@ -3872,18 +3872,18 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 8.0,
+    "maxJointStepDegrees": 7.897,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle3",
-      "frame": 28,
-      "angle": 8.00005372576878
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 24,
+      "angle": 7.897269624043843
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790774095e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08
   },
   {
     "id": "word-640f2b1f",
@@ -3903,16 +3903,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle2",
-      "frame": 24,
-      "angle": 7.999955541799461
+      "bone": "mixamorig:RightHandPinky3",
+      "frame": 23,
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769637e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-a98a74bc",
@@ -3932,16 +3932,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandIndex3",
       "frame": 43,
-      "angle": 8.00005372576878
+      "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769558e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-aab0e5db",
@@ -3961,16 +3961,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandMiddle2",
-      "frame": 55,
+      "frame": 58,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.4703483581544246e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-cd151b2a",
@@ -3990,16 +3990,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky2",
-      "frame": 13,
+      "bone": "mixamorig:RightHandIndex2",
+      "frame": 15,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154368e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-7ee747b0",
@@ -4019,16 +4019,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHandMiddle2",
-      "frame": 15,
+      "frame": 14,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.4703483581545265e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-35e11a03",
@@ -4048,16 +4048,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex3",
-      "frame": 63,
+      "bone": "mixamorig:RightHandIndex2",
+      "frame": 65,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154427e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-858669cd",
@@ -4077,16 +4077,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHandIndex2",
-      "frame": 46,
+      "frame": 49,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.4703483581543544e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-6e24fd10",
@@ -4106,16 +4106,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandThumb1",
-      "frame": 15,
+      "bone": "mixamorig:LeftHandIndex3",
+      "frame": 25,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695524e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-62813877",
@@ -4135,16 +4135,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing1",
-      "frame": 57,
-      "angle": 7.999955541799461
+      "bone": "mixamorig:RightHandRing3",
+      "frame": 29,
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 5.960464477539063e-08
   },
   {
     "id": "word-84ff2040",
@@ -4164,16 +4164,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky3",
-      "frame": 46,
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 29,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 1.4901161193849377e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-defd5c39",
@@ -4193,16 +4193,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing2",
-      "frame": 14,
+      "bone": "mixamorig:LeftHandPinky3",
+      "frame": 27,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.4703483581545265e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-151a37ef",
@@ -4222,8 +4222,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandPinky2",
       "frame": 28,
@@ -4231,7 +4231,7 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154312e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-ea7aa6fc",
@@ -4251,16 +4251,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing2",
-      "frame": 27,
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 34,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769727e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-fd1c4073",
@@ -4280,16 +4280,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandPinky3",
-      "frame": 33,
+      "frame": 34,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 3.7252902984619227e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-b08629fc",
@@ -4309,16 +4309,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandMiddle3",
+      "bone": "mixamorig:LeftHandThumb3",
       "frame": 60,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769722e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-32e530d7",
@@ -4338,16 +4338,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandPinky2",
-      "frame": 13,
+      "bone": "mixamorig:LeftHandThumb1",
+      "frame": 15,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.215406417846816e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-4893125c",
@@ -4367,16 +4367,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandMiddle3",
-      "frame": 62,
+      "bone": "mixamorig:LeftHandIndex2",
+      "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154353e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-b6fe83ed",
@@ -4396,16 +4396,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandPinky1",
-      "frame": 16,
+      "bone": "mixamorig:LeftHandPinky2",
+      "frame": 29,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790772633e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-36b20a69",
@@ -4425,16 +4425,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHand",
-      "frame": 70,
-      "angle": 7.999857357830142
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 67,
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695736e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08
   },
   {
     "id": "word-1ba0d285",
@@ -4454,16 +4454,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandThumb1",
-      "frame": 13,
+      "frame": 17,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154312e-08
+    "maxHingeOffAxis": 5.960464477539063e-08
   },
   {
     "id": "word-9543d766",
@@ -4483,16 +4483,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky1",
-      "frame": 28,
-      "angle": 7.999955541799461
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 35,
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695524e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08
   },
   {
     "id": "word-8cf533fa",
@@ -4512,16 +4512,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing2",
+      "bone": "mixamorig:RightHandMiddle2",
       "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154312e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-71b45022",
@@ -4541,16 +4541,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandPinky2",
-      "frame": 27,
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 30,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769538e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-ddc2e7ed",
@@ -4570,16 +4570,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHandMiddle2",
-      "frame": 52,
+      "frame": 51,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769727e-08
+    "maxHingeOffAxis": 1.4901161193847656e-08
   },
   {
     "id": "word-e70fcfd6",
@@ -4599,16 +4599,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandMiddle2",
-      "frame": 33,
+      "bone": "mixamorig:LeftHandIndex3",
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154368e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-250f896a",
@@ -4628,16 +4628,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky2",
-      "frame": 23,
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790774025e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-f3848317",
@@ -4657,16 +4657,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky2",
+      "bone": "mixamorig:RightHandMiddle2",
       "frame": 14,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695524e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-6d759966",
@@ -4686,16 +4686,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandRing2",
-      "frame": 14,
+      "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539158e-08
+    "maxHingeOffAxis": 5.21540641784668e-08
   },
   {
     "id": "word-9c7faf34",
@@ -4715,16 +4715,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandPinky3",
-      "frame": 23,
+      "frame": 25,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-5c794c1c",
@@ -4744,16 +4744,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 7.776,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHand",
       "frame": 16,
-      "angle": 7.775926190796689
+      "angle": 7.77572555398982
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.235174179077277e-08
+    "maxHingeOffAxis": 1.1175870895385742e-08
   },
   {
     "id": "word-896d253f",
@@ -4773,16 +4773,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex2",
+      "bone": "mixamorig:RightHandMiddle3",
       "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154304e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-99afdafa",
@@ -4800,18 +4800,18 @@
       "Right": 3
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.998,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex1",
-      "frame": 36,
-      "angle": 7.997898801085641
+      "bone": "mixamorig:RightHandPinky3",
+      "frame": 65,
+      "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769579e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08
   },
   {
     "id": "word-506f5596",
@@ -4831,16 +4831,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandMiddle3",
-      "frame": 63,
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 27,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154325e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-76fc58e0",
@@ -4860,16 +4860,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHand",
-      "frame": 73,
-      "angle": 7.999955541799461
+      "frame": 74,
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 1.4901161193847762e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-d388f4c7",
@@ -4889,16 +4889,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex2",
-      "frame": 28,
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154325e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-0bf7a453",
@@ -4918,16 +4918,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHandRing2",
-      "frame": 13,
+      "frame": 15,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.4703483581543544e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "letter-410",
@@ -4947,16 +4947,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing1",
-      "frame": 14,
+      "bone": "mixamorig:LeftHandPinky3",
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154353e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "letter-411",
@@ -4976,16 +4976,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky2",
-      "frame": 13,
+      "bone": "mixamorig:RightHandIndex2",
+      "frame": 15,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539105e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "letter-412",
@@ -5003,18 +5003,18 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.98,
+    "maxJointStepDegrees": 7.981,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHand",
       "frame": 78,
-      "angle": 7.980152262074656
+      "angle": 7.980839549859888
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387698754e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08
   },
   {
     "id": "letter-413",
@@ -5034,16 +5034,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing1",
-      "frame": 14,
+      "bone": "mixamorig:RightHandIndex2",
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.4703483581543e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "letter-414",
@@ -5063,16 +5063,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandMiddle3",
-      "frame": 60,
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 1.8626451492309703e-08
+    "maxHingeOffAxis": 3.725290298461914e-08
   },
   {
     "id": "letter-415",
@@ -5092,16 +5092,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHandRing2",
-      "frame": 26,
-      "angle": 8.00005372576878
+      "frame": 24,
+      "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790771772e-08
+    "maxHingeOffAxis": 1.4901161193847656e-08
   },
   {
     "id": "letter-401",
@@ -5121,8 +5121,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHandThumb3",
       "frame": 23,
@@ -5130,7 +5130,7 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154368e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "letter-416",
@@ -5150,16 +5150,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHandThumb1",
-      "frame": 14,
+      "frame": 15,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539147e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "letter-417",
@@ -5179,16 +5179,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandPinky3",
-      "frame": 15,
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 59,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769637e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "letter-418",
@@ -5208,16 +5208,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 7.997,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHand",
       "frame": 93,
-      "angle": 7.996821338744072
+      "angle": 7.997017706682709
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769579e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "letter-419",
@@ -5237,16 +5237,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHandMiddle2",
-      "frame": 46,
+      "frame": 28,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154308e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "letter-41a",
@@ -5266,16 +5266,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHandMiddle2",
-      "frame": 27,
+      "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387698754e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "letter-41b",
@@ -5295,16 +5295,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing2",
-      "frame": 65,
+      "bone": "mixamorig:LeftHandPinky3",
+      "frame": 30,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154353e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "letter-41c",
@@ -5322,18 +5322,18 @@
       "Right": 22
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.99,
+    "maxJointStepDegrees": 7.991,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHand",
       "frame": 14,
-      "angle": 7.9903540033737155
+      "angle": 7.990844069446664
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790771766e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "letter-41d",
@@ -5351,18 +5351,18 @@
       "Right": 22
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.097,
+    "maxJointStepDegrees": 7.089,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandThumb3",
       "frame": 23,
-      "angle": 7.097233771747794
+      "angle": 7.089173721640356
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769727e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "letter-41e",
@@ -5380,18 +5380,18 @@
       "Right": 60
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.731,
+    "maxJointStepDegrees": 7.029,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandRing1",
       "frame": 29,
-      "angle": 7.731072338517215
+      "angle": 7.029375415456894
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769554e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "letter-41f",
@@ -5411,16 +5411,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandIndex2",
-      "frame": 23,
+      "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.235174179077184e-08
+    "maxHingeOffAxis": 5.960464477539063e-08
   },
   {
     "id": "letter-420",
@@ -5440,16 +5440,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing1",
-      "frame": 14,
+      "bone": "mixamorig:LeftHandIndex2",
+      "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539068e-08
+    "maxHingeOffAxis": 5.960464477539063e-08
   },
   {
     "id": "letter-421",
@@ -5469,16 +5469,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHand",
-      "frame": 91,
-      "angle": 7.999857357830142
+      "bone": "mixamorig:RightHandIndex2",
+      "frame": 24,
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154385e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08
   },
   {
     "id": "letter-422",
@@ -5498,16 +5498,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex1",
-      "frame": 39,
+      "bone": "mixamorig:LeftHandIndex2",
+      "frame": 72,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769722e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "letter-423",
@@ -5527,8 +5527,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHandPinky3",
       "frame": 24,
@@ -5536,7 +5536,7 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154315e-08
+    "maxHingeOffAxis": 3.725290298461914e-08
   },
   {
     "id": "letter-424",
@@ -5556,16 +5556,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle3",
-      "frame": 25,
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387698754e-08
+    "maxHingeOffAxis": 5.960464477539063e-08
   },
   {
     "id": "letter-425",
@@ -5585,16 +5585,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandPinky1",
-      "frame": 64,
+      "bone": "mixamorig:LeftHandPinky3",
+      "frame": 23,
       "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790774042e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "letter-426",
@@ -5614,16 +5614,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 6.997,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftForearmRoll0",
       "frame": 18,
-      "angle": 6.996990927280925
+      "angle": 6.997102771628584
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790771766e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "letter-427",
@@ -5643,16 +5643,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing1",
-      "frame": 29,
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 14,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387698754e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "letter-428",
@@ -5672,16 +5672,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandMiddle3",
-      "frame": 15,
-      "angle": 7.999955541799461
+      "frame": 23,
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769542e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "letter-429",
@@ -5701,16 +5701,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHand",
-      "frame": 79,
-      "angle": 8.000151055964453
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 33,
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769538e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "letter-42a",
@@ -5730,16 +5730,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle2",
-      "frame": 60,
+      "bone": "mixamorig:RightHandMiddle3",
+      "frame": 27,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387698754e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "letter-42b",
@@ -5759,16 +5759,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandMiddle3",
-      "frame": 28,
+      "frame": 29,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.980232238769621e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "letter-42c",
@@ -5788,8 +5788,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:LeftHandRing2",
       "frame": 24,
@@ -5797,7 +5797,7 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539105e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "letter-42d",
@@ -5817,16 +5817,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
       "bone": "mixamorig:RightHandMiddle2",
-      "frame": 26,
-      "angle": 7.999955541799461
+      "frame": 24,
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790774042e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "letter-42e",
@@ -5846,16 +5846,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandPinky3",
-      "frame": 25,
+      "bone": "mixamorig:LeftHandPinky1",
+      "frame": 36,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790772685e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08
   },
   {
     "id": "letter-42f",
@@ -5875,15 +5875,15 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
-    "motionVersion": 2,
+    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 3,
     "peakStep": {
-      "bone": "mixamorig:LeftHandMiddle2",
-      "frame": 24,
-      "angle": 8.00005372576878
+      "bone": "mixamorig:RightHandPinky3",
+      "frame": 23,
+      "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 3.725290298461986e-08
+    "maxHingeOffAxis": 4.470348358154297e-08
   }
 ]

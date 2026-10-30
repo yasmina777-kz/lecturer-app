@@ -6,6 +6,7 @@ import {
   AvatarPlayback,
   type AvatarPlaybackState,
 } from "../sign/avatarPlayback";
+import { preserveJointVolume } from "../sign/volumeSkinning";
 import { composeMotion } from "../sign/composeMotion";
 import { at } from "../i18n/automation";
 
@@ -109,6 +110,7 @@ export function GestureMentor3D({
       root.traverse((o) => {
         if (o instanceof THREE.Mesh) {
           geometries.add(o.geometry);
+          if (o.customDepthMaterial) materials.add(o.customDepthMaterial);
           if (o instanceof THREE.SkinnedMesh) o.skeleton.dispose();
           (Array.isArray(o.material) ? o.material : [o.material]).forEach(
             (m) => {
@@ -249,6 +251,7 @@ export function GestureMentor3D({
         model = gltf.scene;
         model.traverse((o) => {
           if (o instanceof THREE.Mesh) {
+            if (o instanceof THREE.SkinnedMesh) preserveJointVolume(o);
             o.castShadow = true;
             o.receiveShadow = true;
             o.frustumCulled = false;
@@ -313,7 +316,7 @@ export function GestureMentor3D({
               );
               mount.dataset.playbackState =
                 current.current.playbackState ?? "paused";
-              render();
+              if (current.current.playbackState !== "paused") render();
             }
             if (alive) idleFrame = requestAnimationFrame(tickIdle);
           };
