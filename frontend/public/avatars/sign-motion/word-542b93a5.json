@@ -2,7 +2,7 @@
   "id": "word-542b93a5",
   "label": "читать",
   "url": "/avatars/sign-motion/word-542b93a5.glb",
-  "duration": 2.033333333333333,
+  "duration": 2.7333333333333334,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/542b93a5-b251-4899-92ba-e836da1e6ec4.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 27
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 7.729,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftHandThumb1",
+    "frame": 34,
+    "angle": 7.729248678008822
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 2.2351741790771766e-08
 }

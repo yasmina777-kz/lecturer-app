@@ -2,7 +2,7 @@
   "id": "word-5bd9ab86",
   "label": "вчера",
   "url": "/avatars/sign-motion/word-5bd9ab86.glb",
-  "duration": 2.033333333333333,
+  "duration": 2.7333333333333334,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/5bd9ab86-fe3b-4cf8-8b7b-5098424ff789.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 27
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 6.907,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftForeArm",
+    "frame": 51,
+    "angle": 6.906754309948124
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 2.2351741790771766e-08
 }

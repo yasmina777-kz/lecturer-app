@@ -2,7 +2,7 @@
   "id": "word-5c794c1c",
   "label": "черный",
   "url": "/avatars/sign-motion/word-5c794c1c.glb",
-  "duration": 1.9333333333333333,
+  "duration": 2.6333333333333333,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/5c794c1c-fd02-43d7-9938-4804fe6b8877.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 25
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 7.776,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftHand",
+    "frame": 16,
+    "angle": 7.775926190796689
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 2.235174179077277e-08
 }

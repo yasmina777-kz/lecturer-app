@@ -2,7 +2,7 @@
   "id": "word-c58e68e8",
   "label": "сказать",
   "url": "/avatars/sign-motion/word-c58e68e8.glb",
-  "duration": 2.1666666666666665,
+  "duration": 2.8666666666666667,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/c58e68e8-cac4-4676-9699-ff06de3061bd.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 30
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 7.907,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftHandIndex1",
+    "frame": 65,
+    "angle": 7.907380011562754
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 7.450580596923863e-08
 }

@@ -2,7 +2,7 @@
   "id": "word-e3b0e3b1",
   "label": "вечер",
   "url": "/avatars/sign-motion/word-e3b0e3b1.glb",
-  "duration": 2.1666666666666665,
+  "duration": 2.8666666666666667,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/e3b0e3b1-ee70-4eb3-8559-2c0f84cc066f.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 5
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:RightHandPinky1",
+    "frame": 16,
+    "angle": 8.00005372576878
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 4.470348358154424e-08
 }

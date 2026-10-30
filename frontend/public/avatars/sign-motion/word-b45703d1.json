@@ -2,7 +2,7 @@
   "id": "word-b45703d1",
   "label": "спать",
   "url": "/avatars/sign-motion/word-b45703d1.glb",
-  "duration": 1.8666666666666667,
+  "duration": 2.566666666666667,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/b45703d1-bc4e-4ec7-87cb-ecf59c7d49b5.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 2
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 7.2,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:RightHand",
+    "frame": 31,
+    "angle": 7.200108800366056
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 1.490116119384779e-08
 }

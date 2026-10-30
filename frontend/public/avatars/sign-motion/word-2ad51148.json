@@ -2,7 +2,7 @@
   "id": "word-2ad51148",
   "label": "любить",
   "url": "/avatars/sign-motion/word-2ad51148.glb",
-  "duration": 1.9,
+  "duration": 2.6,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/2ad51148-b6c8-4298-9d04-cffa81e2fc01.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 24
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 7.993,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftHand",
+    "frame": 24,
+    "angle": 7.992510635604147
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 1.490116119384777e-08
 }

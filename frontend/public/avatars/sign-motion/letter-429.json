@@ -2,7 +2,7 @@
   "id": "letter-429",
   "label": "Щ",
   "url": "/avatars/sign-motion/letter-429.glb",
-  "duration": 2.1666666666666665,
+  "duration": 2.8666666666666667,
   "source": "https://github.com/ai-forever/bukva",
   "reference": "/research/rsl/alphabet/0429.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 28
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftHand",
+    "frame": 79,
+    "angle": 8.000151055964453
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 2.980232238769538e-08
 }

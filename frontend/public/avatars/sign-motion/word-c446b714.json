@@ -2,7 +2,7 @@
   "id": "word-c446b714",
   "label": "вторник",
   "url": "/avatars/sign-motion/word-c446b714.glb",
-  "duration": 2.4,
+  "duration": 3.1,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/c446b714-580d-403c-a2ce-b91566a91432.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 3
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 7.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:RightForeArm",
+    "frame": 20,
+    "angle": 6.999788743519692
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 2.2351741790771785e-08
 }

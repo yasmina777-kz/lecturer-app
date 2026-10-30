@@ -2,7 +2,7 @@
   "id": "word-32e530d7",
   "label": "легкий",
   "url": "/avatars/sign-motion/word-32e530d7.glb",
-  "duration": 2.9,
+  "duration": 3.6,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/32e530d7-3598-47d3-b344-ceb36bb6fe58.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 4
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftHandPinky2",
+    "frame": 13,
+    "angle": 8.00005372576878
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 5.215406417846816e-08
 }

@@ -2,7 +2,7 @@
   "id": "word-b4f237bd",
   "label": "муж",
   "url": "/avatars/sign-motion/word-b4f237bd.glb",
-  "duration": 2.7,
+  "duration": 3.4,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/b4f237bd-f7cd-4d03-9a0e-0d07ef3b7aa0.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 0
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 7.999,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftHandIndex1",
+    "frame": 40,
+    "angle": 7.999171777592202
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 2.980232238769621e-08
 }

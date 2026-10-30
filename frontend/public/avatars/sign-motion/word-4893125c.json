@@ -2,7 +2,7 @@
   "id": "word-4893125c",
   "label": "интересный",
   "url": "/avatars/sign-motion/word-4893125c.glb",
-  "duration": 2.033333333333333,
+  "duration": 2.7333333333333334,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/4893125c-dccf-4a97-8b67-861fd3ada825.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 27
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftHandMiddle3",
+    "frame": 62,
+    "angle": 8.00005372576878
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 4.470348358154353e-08
 }

@@ -2,7 +2,7 @@
   "id": "word-26e2d0ce",
   "label": "сколько",
   "url": "/avatars/sign-motion/word-26e2d0ce.glb",
-  "duration": 1.6666666666666667,
+  "duration": 2.3666666666666667,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/26e2d0ce-9425-4a44-88b3-5373a109e49f.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 1
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftHandPinky2",
+    "frame": 24,
+    "angle": 8.00005372576878
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 4.470348358154325e-08
 }

@@ -2,7 +2,7 @@
   "id": "word-44de272e",
   "label": "понедельник",
   "url": "/avatars/sign-motion/word-44de272e.glb",
-  "duration": 2.066666666666667,
+  "duration": 2.7666666666666666,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/44de272e-c50b-4663-b113-eb50505d58db.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 2
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:RightHandIndex2",
+    "frame": 61,
+    "angle": 7.999955541799461
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 4.470348358154805e-08
 }

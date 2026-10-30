@@ -2,7 +2,7 @@
   "id": "word-9543d766",
   "label": "радость",
   "url": "/avatars/sign-motion/word-9543d766.glb",
-  "duration": 2.8666666666666667,
+  "duration": 3.566666666666667,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/9543d766-c852-4d5b-8638-3987a05d901f.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 3
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:RightHandPinky1",
+    "frame": 28,
+    "angle": 7.999955541799461
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 2.9802322387695524e-08
 }

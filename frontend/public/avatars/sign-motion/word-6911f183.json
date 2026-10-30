@@ -2,7 +2,7 @@
   "id": "word-6911f183",
   "label": "слушать",
   "url": "/avatars/sign-motion/word-6911f183.glb",
-  "duration": 1.5,
+  "duration": 2.2,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/6911f183-7abe-4505-a770-b48a1db994b5.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 15
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 7.994,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftHand",
+    "frame": 52,
+    "angle": 7.994470046122294
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 2.2351741790771574e-08
 }

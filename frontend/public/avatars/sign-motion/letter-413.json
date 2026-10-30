@@ -2,7 +2,7 @@
   "id": "letter-413",
   "label": "Г",
   "url": "/avatars/sign-motion/letter-413.glb",
-  "duration": 1.9666666666666666,
+  "duration": 2.6666666666666665,
   "source": "https://github.com/ai-forever/bukva",
   "reference": "/research/rsl/alphabet/0413.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 1
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:RightHandRing1",
+    "frame": 14,
+    "angle": 8.00005372576878
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 4.4703483581543e-08
 }

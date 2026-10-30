@@ -2,7 +2,7 @@
   "id": "word-a98a74bc",
   "label": "одиннадцать",
   "url": "/avatars/sign-motion/word-a98a74bc.glb",
-  "duration": 1.9,
+  "duration": 2.6,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/a98a74bc-f4f8-4792-a631-57300dbb18ad.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 24
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftHandIndex3",
+    "frame": 43,
+    "angle": 8.00005372576878
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 2.980232238769558e-08
 }

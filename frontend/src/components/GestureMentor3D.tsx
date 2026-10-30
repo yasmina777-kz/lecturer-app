@@ -9,6 +9,7 @@ export type GestureAngle = "front" | "three-quarter" | "side";
 export function GestureMentor3D({
   time,
   motionUrls,
+  motionTrims,
   onReadyChange,
   closeup,
   angle,
@@ -18,6 +19,7 @@ export function GestureMentor3D({
 }: {
   time: number;
   motionUrls?: string[];
+  motionTrims?: { start: number; end: number }[];
   onReadyChange?: (ready: boolean) => void;
   closeup: boolean;
   angle: GestureAngle;
@@ -28,6 +30,7 @@ export function GestureMentor3D({
   const readyCallback = useRef(onReadyChange);
   readyCallback.current = onReadyChange;
   const motionKey = JSON.stringify(motionUrls ?? []);
+  const trimKey = JSON.stringify(motionTrims ?? []);
   const host = useRef<HTMLDivElement>(null);
   const current = useRef({ time, closeup, angle });
   current.current = { time, closeup, angle };
@@ -252,7 +255,13 @@ export function GestureMentor3D({
               }),
             );
             if (!alive) return;
-            clips = [composeMotion(urls.map((url) => sources.get(url)!))];
+            clips = [
+              composeMotion(
+                urls.map((url) => sources.get(url)!),
+                undefined,
+                JSON.parse(trimKey),
+              ),
+            ];
           }
         } catch {
           if (alive) {
@@ -298,7 +307,7 @@ export function GestureMentor3D({
       renderer.dispose();
       renderer.domElement.remove();
     };
-  }, [modelUrl, framing, motionKey]);
+  }, [modelUrl, framing, motionKey, trimKey]);
   useEffect(() => api.current?.pose(time), [time]);
   useEffect(
     () => api.current?.view(closeup, angle),

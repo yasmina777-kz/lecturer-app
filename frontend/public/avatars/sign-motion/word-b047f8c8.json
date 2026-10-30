@@ -2,7 +2,7 @@
   "id": "word-b047f8c8",
   "label": "дом",
   "url": "/avatars/sign-motion/word-b047f8c8.glb",
-  "duration": 1.6,
+  "duration": 2.3,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/b047f8c8-9b3e-4873-851e-2738517ef94e.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 2
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 7.792,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:RightHand",
+    "frame": 28,
+    "angle": 7.792328890088474
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 1.4901161193848106e-08
 }

@@ -2,7 +2,7 @@
   "id": "word-6c7d80f0",
   "label": "дочь",
   "url": "/avatars/sign-motion/word-6c7d80f0.glb",
-  "duration": 2.466666666666667,
+  "duration": 3.1666666666666665,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/6c7d80f0-e435-487e-a2bc-31bdaaa4d788.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 0
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftHandRing2",
+    "frame": 71,
+    "angle": 8.00005372576878
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 4.4703483581543544e-08
 }

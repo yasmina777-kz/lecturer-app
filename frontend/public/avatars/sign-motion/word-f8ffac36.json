@@ -2,7 +2,7 @@
   "id": "word-f8ffac36",
   "label": "четыре",
   "url": "/avatars/sign-motion/word-f8ffac36.glb",
-  "duration": 1.9,
+  "duration": 2.6,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/f8ffac36-0b54-4b30-897c-ce34d8ef62bf.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 24
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 7.527,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftHand",
+    "frame": 15,
+    "angle": 7.527279984251545
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 2.9802322387695312e-08
 }

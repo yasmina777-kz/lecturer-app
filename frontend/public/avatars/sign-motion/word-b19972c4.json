@@ -2,7 +2,7 @@
   "id": "word-b19972c4",
   "label": "слышать",
   "url": "/avatars/sign-motion/word-b19972c4.glb",
-  "duration": 1.9666666666666666,
+  "duration": 2.6666666666666665,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/b19972c4-75f9-492c-a6c1-0dbbdd154f92.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 2
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:RightHandMiddle2",
+    "frame": 30,
+    "angle": 8.00005372576878
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 2.980232238769538e-08
 }

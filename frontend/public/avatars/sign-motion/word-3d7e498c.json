@@ -2,7 +2,7 @@
   "id": "word-3d7e498c",
   "label": "писать",
   "url": "/avatars/sign-motion/word-3d7e498c.glb",
-  "duration": 1.6333333333333333,
+  "duration": 2.3333333333333335,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/3d7e498c-feed-4cfb-bcb9-624ef427fda8.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 1
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:RightHandIndex2",
+    "frame": 34,
+    "angle": 8.00005372576878
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 4.470348358154312e-08
 }

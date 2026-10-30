@@ -3,7 +3,7 @@
     "id": "word-0cca1e04",
     "label": "я",
     "url": "/avatars/sign-motion/word-0cca1e04.glb",
-    "duration": 1.8333333333333333,
+    "duration": 2.533333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/0cca1e04-3f13-45e2-918c-190de5231e2a.mp4",
     "handCoverage": {
@@ -15,15 +15,24 @@
       "Right": 23
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandThumb1",
+      "frame": 14,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.2351741790771484e-08
   },
   {
     "id": "word-44bc9933",
     "label": "ты",
     "url": "/avatars/sign-motion/word-44bc9933.glb",
-    "duration": 2.033333333333333,
+    "duration": 2.7333333333333334,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/44bc9933-192e-478f-9ac3-d398cb022076.mp4",
     "handCoverage": {
@@ -35,15 +44,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandIndex3",
+      "frame": 15,
+      "angle": 7.999955541799461
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769621e-08
   },
   {
     "id": "word-0f02bf01",
     "label": "вы",
     "url": "/avatars/sign-motion/word-0f02bf01.glb",
-    "duration": 2,
+    "duration": 2.7,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/0f02bf01-0f76-448a-a0e4-b43096c92990.mp4",
     "handCoverage": {
@@ -55,15 +73,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandPinky3",
+      "frame": 24,
+      "angle": 7.999955541799461
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769538e-08
   },
   {
     "id": "word-c1596705",
     "label": "мы",
     "url": "/avatars/sign-motion/word-c1596705.glb",
-    "duration": 2.1666666666666665,
+    "duration": 2.8666666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/c1596705-39b0-4295-8942-d3cb5cf62444.mp4",
     "handCoverage": {
@@ -75,15 +102,24 @@
       "Right": 4
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandThumb2",
+      "frame": 33,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154368e-08
   },
   {
     "id": "word-069645d8",
     "label": "мой",
     "url": "/avatars/sign-motion/word-069645d8.glb",
-    "duration": 1.8,
+    "duration": 2.5,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/069645d8-301f-45e9-85f8-da55a30cc020.mp4",
     "handCoverage": {
@@ -95,15 +131,24 @@
       "Right": 22
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 7.913,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHand",
+      "frame": 24,
+      "angle": 7.912728049682874
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 1.4901161193847762e-08
   },
   {
     "id": "word-aeed25a5",
     "label": "твой",
     "url": "/avatars/sign-motion/word-aeed25a5.glb",
-    "duration": 2.033333333333333,
+    "duration": 2.7333333333333334,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/aeed25a5-ba8d-42f1-88f3-9c0770a8b281.mp4",
     "handCoverage": {
@@ -115,15 +160,24 @@
       "Right": 3
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 7.998,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHand",
+      "frame": 18,
+      "angle": 7.99799698505496
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 5.960464477539105e-08
   },
   {
     "id": "word-e29e36fe",
     "label": "наш",
     "url": "/avatars/sign-motion/word-e29e36fe.glb",
-    "duration": 1.5666666666666667,
+    "duration": 2.2666666666666666,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/e29e36fe-ddad-4ac8-9fe1-a3d8af3fb983.mp4",
     "handCoverage": {
@@ -135,15 +189,24 @@
       "Right": 18
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 7.092,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHand",
+      "frame": 55,
+      "angle": 7.091603988324411
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.2351741790771766e-08
   },
   {
     "id": "word-8c1a7f26",
     "label": "меня",
     "url": "/avatars/sign-motion/word-8c1a7f26.glb",
-    "duration": 1.5333333333333334,
+    "duration": 2.2333333333333334,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/8c1a7f26-480c-4108-90ed-221586015d7b.mp4",
     "handCoverage": {
@@ -155,15 +218,24 @@
       "Right": 17
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 44,
+      "angle": 7.999955541799461
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769727e-08
   },
   {
     "id": "word-b7dfae4f",
     "label": "тебя",
     "url": "/avatars/sign-motion/word-b7dfae4f.glb",
-    "duration": 1.8333333333333333,
+    "duration": 2.533333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/b7dfae4f-14a6-4c35-81fe-9586217836dd.mp4",
     "handCoverage": {
@@ -175,15 +247,24 @@
       "Right": 3
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandPinky3",
+      "frame": 15,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154385e-08
   },
   {
     "id": "word-38153f62",
     "label": "вам",
     "url": "/avatars/sign-motion/word-38153f62.glb",
-    "duration": 2.1,
+    "duration": 2.8,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/38153f62-4706-40c8-a74c-4c0a615cb67a.mp4",
     "handCoverage": {
@@ -195,15 +276,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandRing1",
+      "frame": 14,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.9802322387698754e-08
   },
   {
     "id": "word-4699249c",
     "label": "нам",
     "url": "/avatars/sign-motion/word-4699249c.glb",
-    "duration": 2.033333333333333,
+    "duration": 2.7333333333333334,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/4699249c-3f2b-48fa-bd7b-4359dbe491f4.mp4",
     "handCoverage": {
@@ -215,15 +305,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 7.999,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandPinky1",
+      "frame": 53,
+      "angle": 7.998584381323581
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154353e-08
   },
   {
     "id": "word-1ff178a6",
     "label": "кто?",
     "url": "/avatars/sign-motion/word-1ff178a6.glb",
-    "duration": 2.066666666666667,
+    "duration": 2.7666666666666666,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/1ff178a6-9a24-4f31-a658-c7c25140b6cb.mp4",
     "handCoverage": {
@@ -235,15 +334,24 @@
       "Right": 28
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandThumb1",
+      "frame": 16,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769542e-08
   },
   {
     "id": "word-fc2a83a7",
     "label": "что",
     "url": "/avatars/sign-motion/word-fc2a83a7.glb",
-    "duration": 2.6333333333333333,
+    "duration": 3.3333333333333335,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/fc2a83a7-c69c-4d53-83dd-c2357d50cf1f.mp4",
     "handCoverage": {
@@ -255,15 +363,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandIndex2",
+      "frame": 23,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154332e-08
   },
   {
     "id": "word-7143af36",
     "label": "когда",
     "url": "/avatars/sign-motion/word-7143af36.glb",
-    "duration": 1.9333333333333333,
+    "duration": 2.6333333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/7143af36-d46e-40b5-a875-d96c8e4f0a85.mp4",
     "handCoverage": {
@@ -275,15 +392,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandThumb2",
+      "frame": 24,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154368e-08
   },
   {
     "id": "word-3df3b9dc",
     "label": "почему",
     "url": "/avatars/sign-motion/word-3df3b9dc.glb",
-    "duration": 2.6,
+    "duration": 3.3,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/3df3b9dc-c35e-493b-b942-82d06357d686.mp4",
     "handCoverage": {
@@ -295,15 +421,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandPinky2",
+      "frame": 23,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 5.960464477539076e-08
   },
   {
     "id": "word-26e2d0ce",
     "label": "сколько",
     "url": "/avatars/sign-motion/word-26e2d0ce.glb",
-    "duration": 1.6666666666666667,
+    "duration": 2.3666666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/26e2d0ce-9425-4a44-88b3-5373a109e49f.mp4",
     "handCoverage": {
@@ -315,15 +450,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandPinky2",
+      "frame": 24,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154325e-08
   },
   {
     "id": "word-8f8056fe",
     "label": "да",
     "url": "/avatars/sign-motion/word-8f8056fe.glb",
-    "duration": 1.9666666666666666,
+    "duration": 2.6666666666666665,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/34d54421-d709-4b48-b6c7-58e0e3e0710c.mp4",
     "handCoverage": {
@@ -335,15 +479,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandPinky2",
+      "frame": 13,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 5.960464477539107e-08
   },
   {
     "id": "word-d5e5068b",
     "label": "не",
     "url": "/avatars/sign-motion/word-d5e5068b.glb",
-    "duration": 2.1666666666666665,
+    "duration": 2.8666666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/d5e5068b-369d-408e-a560-89254b90328c.mp4",
     "handCoverage": {
@@ -355,15 +508,24 @@
       "Right": 20
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandMiddle3",
+      "frame": 39,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769616e-08
   },
   {
     "id": "word-d116eb89",
     "label": "это",
     "url": "/avatars/sign-motion/word-d116eb89.glb",
-    "duration": 2.2,
+    "duration": 2.9,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/d116eb89-9f5b-4e4c-906f-51820266e3fe.mp4",
     "handCoverage": {
@@ -375,15 +537,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandIndex2",
+      "frame": 24,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154304e-08
   },
   {
     "id": "word-83b8a1b6",
     "label": "вопрос",
     "url": "/avatars/sign-motion/word-83b8a1b6.glb",
-    "duration": 2.1666666666666665,
+    "duration": 2.8666666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/83b8a1b6-5f62-4003-93aa-cf121cd0f8e1.mp4",
     "handCoverage": {
@@ -395,15 +566,24 @@
       "Right": 30
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandRing3",
+      "frame": 27,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 5.960464477539158e-08
   },
   {
     "id": "word-728c296d",
     "label": "имя",
     "url": "/avatars/sign-motion/word-728c296d.glb",
-    "duration": 1.9333333333333333,
+    "duration": 2.6333333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/728c296d-1cc6-4475-865b-8a3396221970.mp4",
     "handCoverage": {
@@ -415,15 +595,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandIndex1",
+      "frame": 14,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 7.450580596923905e-08
   },
   {
     "id": "word-38c6f832",
     "label": "язык",
     "url": "/avatars/sign-motion/word-38c6f832.glb",
-    "duration": 1.9,
+    "duration": 2.6,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/38c6f832-9af4-4db8-a211-16313de1ef9c.mp4",
     "handCoverage": {
@@ -435,15 +624,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandRing1",
+      "frame": 14,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 5.960464477539158e-08
   },
   {
     "id": "word-f1a5226d",
     "label": "помочь",
     "url": "/avatars/sign-motion/word-f1a5226d.glb",
-    "duration": 2.8333333333333335,
+    "duration": 3.533333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/f1a5226d-37c2-46bb-bff6-7db98c61ced0.mp4",
     "handCoverage": {
@@ -455,15 +653,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandThumb1",
+      "frame": 15,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 5.960464477539084e-08
   },
   {
     "id": "word-03ac3272",
     "label": "спросить",
     "url": "/avatars/sign-motion/word-03ac3272.glb",
-    "duration": 2.7,
+    "duration": 3.4,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/03ac3272-aac5-4d46-81ec-4b4fc902b94b.mp4",
     "handCoverage": {
@@ -475,15 +682,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 75,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769727e-08
   },
   {
     "id": "word-92e94ab2",
     "label": "ответить",
     "url": "/avatars/sign-motion/word-92e94ab2.glb",
-    "duration": 2.5,
+    "duration": 3.2,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/92e94ab2-b1ae-453a-8288-2bdfc052a71e.mp4",
     "handCoverage": {
@@ -495,15 +711,24 @@
       "Right": 3
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandMiddle1",
+      "frame": 69,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154353e-08
   },
   {
     "id": "word-ed66b0ff",
     "label": "показать",
     "url": "/avatars/sign-motion/word-ed66b0ff.glb",
-    "duration": 2.2,
+    "duration": 2.9,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/ed66b0ff-fd37-4050-ab98-6114d72d9826.mp4",
     "handCoverage": {
@@ -515,15 +740,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandPinky3",
+      "frame": 24,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 3.7252902984619405e-08
   },
   {
     "id": "word-41df6170",
     "label": "понять",
     "url": "/avatars/sign-motion/word-41df6170.glb",
-    "duration": 2.3666666666666667,
+    "duration": 3.066666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/41df6170-e50c-427f-a442-ff71b99d6087.mp4",
     "handCoverage": {
@@ -535,15 +769,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandRing1",
+      "frame": 14,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769621e-08
   },
   {
     "id": "word-c58e68e8",
     "label": "сказать",
     "url": "/avatars/sign-motion/word-c58e68e8.glb",
-    "duration": 2.1666666666666665,
+    "duration": 2.8666666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/c58e68e8-cac4-4676-9699-ff06de3061bd.mp4",
     "handCoverage": {
@@ -555,15 +798,24 @@
       "Right": 30
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 7.907,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandIndex1",
+      "frame": 65,
+      "angle": 7.907380011562754
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 7.450580596923863e-08
   },
   {
     "id": "word-9e551d12",
     "label": "говорить",
     "url": "/avatars/sign-motion/word-9e551d12.glb",
-    "duration": 1.7333333333333334,
+    "duration": 2.433333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/9e551d12-7bb8-40f1-b910-0d7b464b6a60.mp4",
     "handCoverage": {
@@ -575,15 +827,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandPinky1",
+      "frame": 61,
+      "angle": 7.999955541799461
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769538e-08
   },
   {
     "id": "word-b19972c4",
     "label": "слышать",
     "url": "/avatars/sign-motion/word-b19972c4.glb",
-    "duration": 1.9666666666666666,
+    "duration": 2.6666666666666665,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/b19972c4-75f9-492c-a6c1-0dbbdd154f92.mp4",
     "handCoverage": {
@@ -595,15 +856,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 30,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769538e-08
   },
   {
     "id": "word-c3c582bb",
     "label": "семья",
     "url": "/avatars/sign-motion/word-c3c582bb.glb",
-    "duration": 2.3666666666666667,
+    "duration": 3.066666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/c3c582bb-00ef-48cd-b8f5-cbf21473ca56.mp4",
     "handCoverage": {
@@ -615,15 +885,24 @@
       "Right": 4
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandIndex3",
+      "frame": 28,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154315e-08
   },
   {
     "id": "word-a1a428c3",
     "label": "мать",
     "url": "/avatars/sign-motion/word-a1a428c3.glb",
-    "duration": 2.2333333333333334,
+    "duration": 2.933333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/a1a428c3-5ddd-4baa-9de5-723eb9fe3f00.mp4",
     "handCoverage": {
@@ -635,15 +914,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 27,
+      "angle": 7.999955541799461
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769554e-08
   },
   {
     "id": "word-78a4ca40",
     "label": "отец",
     "url": "/avatars/sign-motion/word-78a4ca40.glb",
-    "duration": 2.4,
+    "duration": 3.1,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/78a4ca40-8a78-437e-8024-13935bd3abdb.mp4",
     "handCoverage": {
@@ -655,15 +943,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandPinky2",
+      "frame": 38,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.2351741790774025e-08
   },
   {
     "id": "word-5d7cb3db",
     "label": "брат",
     "url": "/avatars/sign-motion/word-5d7cb3db.glb",
-    "duration": 1.7333333333333334,
+    "duration": 2.433333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/5d7cb3db-0b02-4edd-8238-be0706020cba.mp4",
     "handCoverage": {
@@ -675,15 +972,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandRing1",
+      "frame": 15,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 8.940696716308608e-08
   },
   {
     "id": "word-22f60354",
     "label": "сестра",
     "url": "/avatars/sign-motion/word-22f60354.glb",
-    "duration": 2.3,
+    "duration": 3,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/22f60354-befe-442f-9017-c6f28d160825.mp4",
     "handCoverage": {
@@ -695,15 +1001,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandThumb1",
+      "frame": 13,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154312e-08
   },
   {
     "id": "word-be28b6af",
     "label": "сын",
     "url": "/avatars/sign-motion/word-be28b6af.glb",
-    "duration": 1.9666666666666666,
+    "duration": 2.6666666666666665,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/be28b6af-defd-46e4-a21e-b0a0334fea59.mp4",
     "handCoverage": {
@@ -715,15 +1030,24 @@
       "Right": 26
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandIndex2",
+      "frame": 62,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154353e-08
   },
   {
     "id": "word-6c7d80f0",
     "label": "дочь",
     "url": "/avatars/sign-motion/word-6c7d80f0.glb",
-    "duration": 2.466666666666667,
+    "duration": 3.1666666666666665,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/6c7d80f0-e435-487e-a2bc-31bdaaa4d788.mp4",
     "handCoverage": {
@@ -735,15 +1059,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 71,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.4703483581543544e-08
   },
   {
     "id": "word-b4f237bd",
     "label": "муж",
     "url": "/avatars/sign-motion/word-b4f237bd.glb",
-    "duration": 2.7,
+    "duration": 3.4,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/b4f237bd-f7cd-4d03-9a0e-0d07ef3b7aa0.mp4",
     "handCoverage": {
@@ -755,15 +1088,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 7.999,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandIndex1",
+      "frame": 40,
+      "angle": 7.999171777592202
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769621e-08
   },
   {
     "id": "word-cd6a9d0b",
     "label": "жена",
     "url": "/avatars/sign-motion/word-cd6a9d0b.glb",
-    "duration": 2.1333333333333333,
+    "duration": 2.8333333333333335,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/cd6a9d0b-4948-4e49-ac61-437223ed759a.mp4",
     "handCoverage": {
@@ -775,15 +1117,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandIndex2",
+      "frame": 24,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154353e-08
   },
   {
     "id": "word-40af2c54",
     "label": "друг",
     "url": "/avatars/sign-motion/word-40af2c54.glb",
-    "duration": 2.4,
+    "duration": 3.1,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/40af2c54-a282-47de-b505-b93c647f13d2.mp4",
     "handCoverage": {
@@ -795,15 +1146,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandRing3",
+      "frame": 47,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.9802322387695643e-08
   },
   {
     "id": "word-0b485a5f",
     "label": "подруга",
     "url": "/avatars/sign-motion/word-0b485a5f.glb",
-    "duration": 2.966666666666667,
+    "duration": 3.6666666666666665,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/0b485a5f-a4eb-49db-9088-2d318869e25d.mp4",
     "handCoverage": {
@@ -815,15 +1175,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandIndex2",
+      "frame": 39,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.4703483581543544e-08
   },
   {
     "id": "word-69586c66",
     "label": "ребёнок",
     "url": "/avatars/sign-motion/word-69586c66.glb",
-    "duration": 2.2,
+    "duration": 2.9,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/69586c66-7348-4881-8390-b56dbca08817.mp4",
     "handCoverage": {
@@ -835,15 +1204,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandPinky3",
+      "frame": 68,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.4703483581543e-08
   },
   {
     "id": "word-580edc90",
     "label": "человек",
     "url": "/avatars/sign-motion/word-580edc90.glb",
-    "duration": 2.1333333333333333,
+    "duration": 2.8333333333333335,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/580edc90-daea-483e-a310-ab68cb8dcd4d.mp4",
     "handCoverage": {
@@ -855,15 +1233,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandMiddle3",
+      "frame": 27,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769621e-08
   },
   {
     "id": "word-e526814e",
     "label": "люди",
     "url": "/avatars/sign-motion/word-e526814e.glb",
-    "duration": 2.3,
+    "duration": 3,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/5ea53ce1-5cdf-461c-a814-b8f678f7a7b8.mp4",
     "handCoverage": {
@@ -875,15 +1262,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandMiddle2",
+      "frame": 14,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154297e-08
   },
   {
     "id": "word-743cb1da",
     "label": "мальчик",
     "url": "/avatars/sign-motion/word-743cb1da.glb",
-    "duration": 2.433333333333333,
+    "duration": 3.1333333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/743cb1da-6fdb-40a1-92e5-0c85c480876d.mp4",
     "handCoverage": {
@@ -895,15 +1291,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 7.999,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHand",
+      "frame": 68,
+      "angle": 7.999465475726512
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.2351741790772685e-08
   },
   {
     "id": "word-912db910",
     "label": "девочка",
     "url": "/avatars/sign-motion/word-912db910.glb",
-    "duration": 2.2333333333333334,
+    "duration": 2.933333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/912db910-dc13-472c-8a22-51c2765945cf.mp4",
     "handCoverage": {
@@ -915,15 +1320,24 @@
       "Right": 4
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandMiddle2",
+      "frame": 26,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.2351741790772685e-08
   },
   {
     "id": "word-6106a42d",
     "label": "мужчина",
     "url": "/avatars/sign-motion/word-6106a42d.glb",
-    "duration": 2.3,
+    "duration": 3,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/6106a42d-83ff-45d2-98fe-a6e5101396a2.mp4",
     "handCoverage": {
@@ -935,15 +1349,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandPinky2",
+      "frame": 15,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 5.960464477539076e-08
   },
   {
     "id": "word-e10fbdcb",
     "label": "женщина",
     "url": "/avatars/sign-motion/word-e10fbdcb.glb",
-    "duration": 2.466666666666667,
+    "duration": 3.1666666666666665,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/e10fbdcb-14a6-4a4b-8073-f646db0d4f28.mp4",
     "handCoverage": {
@@ -955,15 +1378,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 75,
+      "angle": 7.999955541799461
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.9802322387695736e-08
   },
   {
     "id": "word-6a2d01fd",
     "label": "школа",
     "url": "/avatars/sign-motion/word-6a2d01fd.glb",
-    "duration": 2.1333333333333333,
+    "duration": 2.8333333333333335,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/6a2d01fd-1428-48a3-a218-252b79b21426.mp4",
     "handCoverage": {
@@ -975,15 +1407,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandIndex2",
+      "frame": 24,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.4703483581543544e-08
   },
   {
     "id": "word-a8989f04",
     "label": "книга",
     "url": "/avatars/sign-motion/word-a8989f04.glb",
-    "duration": 2.4,
+    "duration": 3.1,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/a8989f04-a615-4a0d-bb49-583d3c0e94ab.mp4",
     "handCoverage": {
@@ -995,15 +1436,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandThumb1",
+      "frame": 14,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769554e-08
   },
   {
     "id": "word-2c1fd7ff",
     "label": "карандаш",
     "url": "/avatars/sign-motion/word-2c1fd7ff.glb",
-    "duration": 2.2666666666666666,
+    "duration": 2.966666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/2c1fd7ff-e6c7-442d-bb43-d86eb04fb5c8.mp4",
     "handCoverage": {
@@ -1015,15 +1465,24 @@
       "Right": 5
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandPinky1",
+      "frame": 71,
+      "angle": 7.999955541799461
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769722e-08
   },
   {
     "id": "word-30f82679",
     "label": "ручка",
     "url": "/avatars/sign-motion/word-30f82679.glb",
-    "duration": 2.1666666666666665,
+    "duration": 2.8666666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/30f82679-8520-47b4-8ba8-3accdf750ff4.mp4",
     "handCoverage": {
@@ -1035,15 +1494,24 @@
       "Right": 10
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 29,
+      "angle": 7.999955541799461
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769554e-08
   },
   {
     "id": "word-54dee110",
     "label": "бумага",
     "url": "/avatars/sign-motion/word-54dee110.glb",
-    "duration": 2.3666666666666667,
+    "duration": 3.066666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/54dee110-03b2-4417-9edc-c98843a4a125.mp4",
     "handCoverage": {
@@ -1055,15 +1523,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 14,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 5.960464477539076e-08
   },
   {
     "id": "word-542b93a5",
     "label": "читать",
     "url": "/avatars/sign-motion/word-542b93a5.glb",
-    "duration": 2.033333333333333,
+    "duration": 2.7333333333333334,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/542b93a5-b251-4899-92ba-e836da1e6ec4.mp4",
     "handCoverage": {
@@ -1075,15 +1552,24 @@
       "Right": 27
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 7.729,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandThumb1",
+      "frame": 34,
+      "angle": 7.729248678008822
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.2351741790771766e-08
   },
   {
     "id": "word-3d7e498c",
     "label": "писать",
     "url": "/avatars/sign-motion/word-3d7e498c.glb",
-    "duration": 1.6333333333333333,
+    "duration": 2.3333333333333335,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/3d7e498c-feed-4cfb-bcb9-624ef427fda8.mp4",
     "handCoverage": {
@@ -1095,15 +1581,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandIndex2",
+      "frame": 34,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154312e-08
   },
   {
     "id": "word-0a42bb8f",
     "label": "изучить",
     "url": "/avatars/sign-motion/word-0a42bb8f.glb",
-    "duration": 2.3666666666666667,
+    "duration": 3.066666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/0a42bb8f-9a48-425d-a900-e4396cf41414.mp4",
     "handCoverage": {
@@ -1115,15 +1610,24 @@
       "Right": 5
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandThumb1",
+      "frame": 15,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 5.960464477539105e-08
   },
   {
     "id": "word-620a9fc5",
     "label": "знать",
     "url": "/avatars/sign-motion/word-620a9fc5.glb",
-    "duration": 1.7333333333333334,
+    "duration": 2.433333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/620a9fc5-4b35-4cfc-864a-8385dd8b74c3.mp4",
     "handCoverage": {
@@ -1135,15 +1639,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandPinky3",
+      "frame": 24,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769542e-08
   },
   {
     "id": "word-1d06b313",
     "label": "обучать",
     "url": "/avatars/sign-motion/word-1d06b313.glb",
-    "duration": 3.2,
+    "duration": 3.9,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/1d06b313-c771-44a4-9a7a-bd7b956eedb2.mp4",
     "handCoverage": {
@@ -1155,15 +1668,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 15,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769621e-08
   },
   {
     "id": "word-6911f183",
     "label": "слушать",
     "url": "/avatars/sign-motion/word-6911f183.glb",
-    "duration": 1.5,
+    "duration": 2.2,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/6911f183-7abe-4505-a770-b48a1db994b5.mp4",
     "handCoverage": {
@@ -1175,15 +1697,24 @@
       "Right": 15
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 7.994,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHand",
+      "frame": 52,
+      "angle": 7.994470046122294
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.2351741790771574e-08
   },
   {
     "id": "word-b58b7f9b",
     "label": "смотреть",
     "url": "/avatars/sign-motion/word-b58b7f9b.glb",
-    "duration": 2.033333333333333,
+    "duration": 2.7333333333333334,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/b58b7f9b-fde5-45d5-b41b-b3ebeef68a41.mp4",
     "handCoverage": {
@@ -1195,15 +1726,24 @@
       "Right": 27
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandPinky3",
+      "frame": 33,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769579e-08
   },
   {
     "id": "word-e35ba719",
     "label": "проверить",
     "url": "/avatars/sign-motion/word-e35ba719.glb",
-    "duration": 2.2333333333333334,
+    "duration": 2.933333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/e35ba719-4086-41ce-bd78-9312d355b31c.mp4",
     "handCoverage": {
@@ -1215,15 +1755,24 @@
       "Right": 4
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 14,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154315e-08
   },
   {
     "id": "word-5ac08628",
     "label": "ошибка",
     "url": "/avatars/sign-motion/word-5ac08628.glb",
-    "duration": 2.3333333333333335,
+    "duration": 3.033333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/5ac08628-5d6a-43a7-a99d-625d26e43977.mp4",
     "handCoverage": {
@@ -1235,15 +1784,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandThumb1",
+      "frame": 14,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 1.8626451492309957e-08
   },
   {
     "id": "word-c2304594",
     "label": "Память",
     "url": "/avatars/sign-motion/word-c2304594.glb",
-    "duration": 1.8,
+    "duration": 2.5,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/8b39dda1-b863-438a-b85c-659b9345d1d6.mp4",
     "handCoverage": {
@@ -1255,15 +1813,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandIndex1",
+      "frame": 64,
+      "angle": 8.000151055964453
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769637e-08
   },
   {
     "id": "word-d8326c48",
     "label": "думать",
     "url": "/avatars/sign-motion/word-d8326c48.glb",
-    "duration": 2.1333333333333333,
+    "duration": 2.8333333333333335,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/d8326c48-f788-4e5c-bff2-838e61630061.mp4",
     "handCoverage": {
@@ -1275,15 +1842,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandPinky3",
+      "frame": 24,
+      "angle": 7.999955541799461
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154329e-08
   },
   {
     "id": "word-8c3b0308",
     "label": "вспомнить",
     "url": "/avatars/sign-motion/word-8c3b0308.glb",
-    "duration": 2.033333333333333,
+    "duration": 2.7333333333333334,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/8c3b0308-8f51-4847-bc97-8dccdc15e900.mp4",
     "handCoverage": {
@@ -1295,15 +1871,24 @@
       "Right": 27
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 7.995,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandIndex1",
+      "frame": 62,
+      "angle": 7.994764598030251
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.9802322387695736e-08
   },
   {
     "id": "word-a5983e98",
     "label": "забыть",
     "url": "/avatars/sign-motion/word-a5983e98.glb",
-    "duration": 1.9,
+    "duration": 2.6,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/a5983e98-c147-407f-bd44-753b2dfa5b60.mp4",
     "handCoverage": {
@@ -1315,15 +1900,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 24,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769554e-08
   },
   {
     "id": "word-b047f8c8",
     "label": "дом",
     "url": "/avatars/sign-motion/word-b047f8c8.glb",
-    "duration": 1.6,
+    "duration": 2.3,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/b047f8c8-9b3e-4873-851e-2738517ef94e.mp4",
     "handCoverage": {
@@ -1335,15 +1929,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 7.792,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHand",
+      "frame": 28,
+      "angle": 7.792328890088474
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 1.4901161193848106e-08
   },
   {
     "id": "word-23b3909e",
     "label": "комната",
     "url": "/avatars/sign-motion/word-23b3909e.glb",
-    "duration": 2.3666666666666667,
+    "duration": 3.066666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/23b3909e-a63a-44dd-b5be-56182b039e3b.mp4",
     "handCoverage": {
@@ -1355,15 +1958,24 @@
       "Right": 6
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 39,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154315e-08
   },
   {
     "id": "word-24491c1c",
     "label": "город",
     "url": "/avatars/sign-motion/word-24491c1c.glb",
-    "duration": 2.3,
+    "duration": 3,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/24491c1c-fc65-4fa9-9f20-047fcd4f44e0.mp4",
     "handCoverage": {
@@ -1375,15 +1987,24 @@
       "Right": 5
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 27,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154353e-08
   },
   {
     "id": "word-f8ff6bc7",
     "label": "улица",
     "url": "/avatars/sign-motion/word-f8ff6bc7.glb",
-    "duration": 2.1666666666666665,
+    "duration": 2.8666666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/f8ff6bc7-5750-4565-b058-d16050b0d00e.mp4",
     "handCoverage": {
@@ -1395,15 +2016,24 @@
       "Right": 5
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandPinky2",
+      "frame": 26,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769538e-08
   },
   {
     "id": "word-cf4157f8",
     "label": "магазин",
     "url": "/avatars/sign-motion/word-cf4157f8.glb",
-    "duration": 2.1333333333333333,
+    "duration": 2.8333333333333335,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/cf4157f8-d295-4493-abac-036e1929c18c.mp4",
     "handCoverage": {
@@ -1415,15 +2045,24 @@
       "Right": 7
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandIndex2",
+      "frame": 29,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.4703483581545265e-08
   },
   {
     "id": "word-5da64d7c",
     "label": "вода",
     "url": "/avatars/sign-motion/word-5da64d7c.glb",
-    "duration": 2.1,
+    "duration": 2.8,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/5da64d7c-2131-4b7a-ae00-728d8b8dda5d.mp4",
     "handCoverage": {
@@ -1435,15 +2074,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandPinky3",
+      "frame": 56,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.9802322387695524e-08
   },
   {
     "id": "word-3eccaa2d",
     "label": "хлеб",
     "url": "/avatars/sign-motion/word-3eccaa2d.glb",
-    "duration": 1.9,
+    "duration": 2.6,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/3eccaa2d-ba0b-49bb-b39e-3db358ddd6e4.mp4",
     "handCoverage": {
@@ -1455,15 +2103,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 38,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.9802322387695524e-08
   },
   {
     "id": "word-55d32981",
     "label": "еда",
     "url": "/avatars/sign-motion/word-55d32981.glb",
-    "duration": 2.8,
+    "duration": 3.5,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/55d32981-a821-421e-b641-decd4465163d.mp4",
     "handCoverage": {
@@ -1475,15 +2132,24 @@
       "Right": 4
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandIndex1",
+      "frame": 94,
+      "angle": 7.999955541799461
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.2351741790772633e-08
   },
   {
     "id": "word-9aa82def",
     "label": "есть",
     "url": "/avatars/sign-motion/word-9aa82def.glb",
-    "duration": 2.033333333333333,
+    "duration": 2.7333333333333334,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/9aa82def-81ea-49c7-af40-2db2ad366921.mp4",
     "handCoverage": {
@@ -1495,15 +2161,24 @@
       "Right": 7
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 33,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154312e-08
   },
   {
     "id": "word-b45703d1",
     "label": "спать",
     "url": "/avatars/sign-motion/word-b45703d1.glb",
-    "duration": 1.8666666666666667,
+    "duration": 2.566666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/b45703d1-bc4e-4ec7-87cb-ecf59c7d49b5.mp4",
     "handCoverage": {
@@ -1515,15 +2190,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 7.2,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHand",
+      "frame": 31,
+      "angle": 7.200108800366056
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 1.490116119384779e-08
   },
   {
     "id": "word-ffce2323",
     "label": "работать",
     "url": "/avatars/sign-motion/word-ffce2323.glb",
-    "duration": 1.9333333333333333,
+    "duration": 2.6333333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/5fd28b57-9261-44fc-9648-e519d00eca14.mp4",
     "handCoverage": {
@@ -1535,15 +2219,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 24,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.2351741790772633e-08
   },
   {
     "id": "word-ceedcb88",
     "label": "идти",
     "url": "/avatars/sign-motion/word-ceedcb88.glb",
-    "duration": 2.1666666666666665,
+    "duration": 2.8666666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/ceedcb88-163e-49e4-b11d-172c52a97b2b.mp4",
     "handCoverage": {
@@ -1555,15 +2248,24 @@
       "Right": 8
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandMiddle3",
+      "frame": 26,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.98023223876987e-08
   },
   {
     "id": "word-9d32e897",
     "label": "ехать",
     "url": "/avatars/sign-motion/word-9d32e897.glb",
-    "duration": 1.9666666666666666,
+    "duration": 2.6666666666666665,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/9d32e897-7fae-48fc-8936-8abd9a81eb7c.mp4",
     "handCoverage": {
@@ -1575,15 +2277,24 @@
       "Right": 5
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandIndex2",
+      "frame": 44,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769637e-08
   },
   {
     "id": "word-65c00b09",
     "label": "жить",
     "url": "/avatars/sign-motion/word-65c00b09.glb",
-    "duration": 1.9666666666666666,
+    "duration": 2.6666666666666665,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/65c00b09-513d-4026-aafb-4e045a4e7d40.mp4",
     "handCoverage": {
@@ -1595,15 +2306,24 @@
       "Right": 3
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 14,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769579e-08
   },
   {
     "id": "word-57c6880e",
     "label": "играть",
     "url": "/avatars/sign-motion/word-57c6880e.glb",
-    "duration": 2,
+    "duration": 2.7,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/57c6880e-9d4f-4e03-a1d9-4169d18f4f43.mp4",
     "handCoverage": {
@@ -1615,15 +2335,24 @@
       "Right": 5
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandRing1",
+      "frame": 17,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154315e-08
   },
   {
     "id": "word-2ad51148",
     "label": "любить",
     "url": "/avatars/sign-motion/word-2ad51148.glb",
-    "duration": 1.9,
+    "duration": 2.6,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/2ad51148-b6c8-4298-9d04-cffa81e2fc01.mp4",
     "handCoverage": {
@@ -1635,15 +2364,24 @@
       "Right": 24
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 7.993,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHand",
+      "frame": 24,
+      "angle": 7.992510635604147
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 1.490116119384777e-08
   },
   {
     "id": "word-9fcf26f7",
     "label": "хотеть",
     "url": "/avatars/sign-motion/word-9fcf26f7.glb",
-    "duration": 2.3,
+    "duration": 3,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/9fcf26f7-f7db-45b2-8334-083a30751af0.mp4",
     "handCoverage": {
@@ -1655,15 +2393,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandMiddle3",
+      "frame": 34,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.9802322387698754e-08
   },
   {
     "id": "word-5fd8cf91",
     "label": "дать",
     "url": "/avatars/sign-motion/word-5fd8cf91.glb",
-    "duration": 1.8666666666666667,
+    "duration": 2.566666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/5fd8cf91-10c1-4f76-a070-24956a9a4557.mp4",
     "handCoverage": {
@@ -1675,15 +2422,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandPinky2",
+      "frame": 24,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769554e-08
   },
   {
     "id": "word-71c24ba0",
     "label": "взять",
     "url": "/avatars/sign-motion/word-71c24ba0.glb",
-    "duration": 2.466666666666667,
+    "duration": 3.1666666666666665,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/71c24ba0-d579-4c71-8e67-2134d7dc10d0.mp4",
     "handCoverage": {
@@ -1695,15 +2451,24 @@
       "Right": 3
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandMiddle3",
+      "frame": 46,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.98023223876987e-08
   },
   {
     "id": "word-360ff815",
     "label": "открыть",
     "url": "/avatars/sign-motion/word-360ff815.glb",
-    "duration": 2.1333333333333333,
+    "duration": 2.8333333333333335,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/360ff815-e7c0-4a06-b387-9dae69ad1c1f.mp4",
     "handCoverage": {
@@ -1715,15 +2480,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandIndex2",
+      "frame": 40,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 5.960464477539092e-08
   },
   {
     "id": "word-2c57ef13",
     "label": "закрыть",
     "url": "/avatars/sign-motion/word-2c57ef13.glb",
-    "duration": 2.8,
+    "duration": 3.5,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/2c57ef13-e81c-4ea8-bf6e-c0cb597adfca.mp4",
     "handCoverage": {
@@ -1735,15 +2509,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 16,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.98023223876987e-08
   },
   {
     "id": "word-00af7ae9",
     "label": "начать",
     "url": "/avatars/sign-motion/word-00af7ae9.glb",
-    "duration": 2.933333333333333,
+    "duration": 3.6333333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/00af7ae9-fdb5-4416-8ba1-980b5880528c.mp4",
     "handCoverage": {
@@ -1755,15 +2538,24 @@
       "Right": 6
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandIndex1",
+      "frame": 15,
+      "angle": 8.000151055964453
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.9802322387698714e-08
   },
   {
     "id": "word-317890bf",
     "label": "закончить",
     "url": "/avatars/sign-motion/word-317890bf.glb",
-    "duration": 2.2666666666666666,
+    "duration": 2.966666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/317890bf-b47f-437e-bcc7-c06f31ceeebf.mp4",
     "handCoverage": {
@@ -1775,15 +2567,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandMiddle3",
+      "frame": 53,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769617e-08
   },
   {
     "id": "word-b66bf5be",
     "label": "ждать",
     "url": "/avatars/sign-motion/word-b66bf5be.glb",
-    "duration": 2.066666666666667,
+    "duration": 2.7666666666666666,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/b66bf5be-fb7f-4963-9146-061c2cc0936b.mp4",
     "handCoverage": {
@@ -1795,15 +2596,24 @@
       "Right": 4
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 7.96,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHand",
+      "frame": 39,
+      "angle": 7.959512284176523
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.2351741790771772e-08
   },
   {
     "id": "word-5f337e79",
     "label": "найти",
     "url": "/avatars/sign-motion/word-5f337e79.glb",
-    "duration": 1.9,
+    "duration": 2.6,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/5f337e79-b6d4-45c8-84b2-7003d344627c.mp4",
     "handCoverage": {
@@ -1815,15 +2625,24 @@
       "Right": 4
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandPinky2",
+      "frame": 25,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 5.960464477539078e-08
   },
   {
     "id": "word-25fed1ff",
     "label": "купить",
     "url": "/avatars/sign-motion/word-25fed1ff.glb",
-    "duration": 2.1666666666666665,
+    "duration": 2.8666666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/25fed1ff-0407-4848-aa57-25bf1159ff08.mp4",
     "handCoverage": {
@@ -1835,15 +2654,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 23,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 3.7252902984619227e-08
   },
   {
     "id": "word-9357b146",
     "label": "сегодня",
     "url": "/avatars/sign-motion/word-9357b146.glb",
-    "duration": 2,
+    "duration": 2.7,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/9357b146-2273-48a9-8f27-65e8bd13de76.mp4",
     "handCoverage": {
@@ -1855,15 +2683,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandRing1",
+      "frame": 14,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.4703483581543544e-08
   },
   {
     "id": "word-58862482",
     "label": "завтра",
     "url": "/avatars/sign-motion/word-58862482.glb",
-    "duration": 1.9333333333333333,
+    "duration": 2.6333333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/58862482-a788-4e35-9c74-b65fda962a6f.mp4",
     "handCoverage": {
@@ -1875,15 +2712,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandIndex3",
+      "frame": 25,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154311e-08
   },
   {
     "id": "word-5bd9ab86",
     "label": "вчера",
     "url": "/avatars/sign-motion/word-5bd9ab86.glb",
-    "duration": 2.033333333333333,
+    "duration": 2.7333333333333334,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/5bd9ab86-fe3b-4cf8-8b7b-5098424ff789.mp4",
     "handCoverage": {
@@ -1895,15 +2741,24 @@
       "Right": 27
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 6.907,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftForeArm",
+      "frame": 51,
+      "angle": 6.906754309948124
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.2351741790771766e-08
   },
   {
     "id": "word-9ee25d0d",
     "label": "утро",
     "url": "/avatars/sign-motion/word-9ee25d0d.glb",
-    "duration": 2.4,
+    "duration": 3.1,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/9ee25d0d-a522-4099-bc42-b1eaeef688d7.mp4",
     "handCoverage": {
@@ -1915,15 +2770,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandPinky3",
+      "frame": 26,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154438e-08
   },
   {
     "id": "word-16bf2a06",
     "label": "день",
     "url": "/avatars/sign-motion/word-16bf2a06.glb",
-    "duration": 2.3333333333333335,
+    "duration": 3.033333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/875d68f6-5916-49f6-ba93-359b4d37dde3.mp4",
     "handCoverage": {
@@ -1935,15 +2799,24 @@
       "Right": 4
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandPinky2",
+      "frame": 27,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769554e-08
   },
   {
     "id": "word-e3b0e3b1",
     "label": "вечер",
     "url": "/avatars/sign-motion/word-e3b0e3b1.glb",
-    "duration": 2.1666666666666665,
+    "duration": 2.8666666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/e3b0e3b1-ee70-4eb3-8559-2c0f84cc066f.mp4",
     "handCoverage": {
@@ -1955,15 +2828,24 @@
       "Right": 5
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandPinky1",
+      "frame": 16,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154424e-08
   },
   {
     "id": "word-4fb38350",
     "label": "ночь",
     "url": "/avatars/sign-motion/word-4fb38350.glb",
-    "duration": 2.3,
+    "duration": 3,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/43720683-c4e2-4f43-83f7-0aefffa411b6.mp4",
     "handCoverage": {
@@ -1975,15 +2857,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 16,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154353e-08
   },
   {
     "id": "word-4fa6cc2a",
     "label": "час",
     "url": "/avatars/sign-motion/word-4fa6cc2a.glb",
-    "duration": 1.9666666666666666,
+    "duration": 2.6666666666666665,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/ec185ca1-6a96-4094-938e-6a6ce6d8363a.mp4",
     "handCoverage": {
@@ -1995,15 +2886,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 15,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.9802322387697007e-08
   },
   {
     "id": "word-aba2f273",
     "label": "минута",
     "url": "/avatars/sign-motion/word-aba2f273.glb",
-    "duration": 2.1333333333333333,
+    "duration": 2.8333333333333335,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/aba2f273-425d-4fd1-892b-1dd9d21e615c.mp4",
     "handCoverage": {
@@ -2015,15 +2915,24 @@
       "Right": 29
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandThumb1",
+      "frame": 16,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154353e-08
   },
   {
     "id": "word-1e422a1f",
     "label": "неделя",
     "url": "/avatars/sign-motion/word-1e422a1f.glb",
-    "duration": 2.3333333333333335,
+    "duration": 3.033333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/1e422a1f-65e7-4125-865d-d15f244d6b2b.mp4",
     "handCoverage": {
@@ -2035,15 +2944,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandThumb1",
+      "frame": 14,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 5.960464477539105e-08
   },
   {
     "id": "word-c6b5c933",
     "label": "месяц",
     "url": "/avatars/sign-motion/word-c6b5c933.glb",
-    "duration": 2.6333333333333333,
+    "duration": 3.3333333333333335,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/c6b5c933-f993-45fb-9875-59f87fc4aeda.mp4",
     "handCoverage": {
@@ -2055,15 +2973,24 @@
       "Right": 39
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandIndex2",
+      "frame": 14,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 5.960464477539076e-08
   },
   {
     "id": "word-628722ef",
     "label": "год",
     "url": "/avatars/sign-motion/word-628722ef.glb",
-    "duration": 1.9,
+    "duration": 2.6,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/628722ef-4a4c-4715-8728-4d3675c326fe.mp4",
     "handCoverage": {
@@ -2075,15 +3002,24 @@
       "Right": 24
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 16,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 1.4901161193849357e-08
   },
   {
     "id": "word-2a7729d7",
     "label": "потом",
     "url": "/avatars/sign-motion/word-2a7729d7.glb",
-    "duration": 2.933333333333333,
+    "duration": 3.6333333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/2a7729d7-507e-4748-8588-6954d0d52c18.mp4",
     "handCoverage": {
@@ -2095,15 +3031,24 @@
       "Right": 4
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHand",
+      "frame": 108,
+      "angle": 8.000151055964453
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-594f0e3d",
     "label": "скоро",
     "url": "/avatars/sign-motion/word-594f0e3d.glb",
-    "duration": 2.6333333333333333,
+    "duration": 3.3333333333333335,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/594f0e3d-531f-44a9-bded-fb18c9cd8a24.mp4",
     "handCoverage": {
@@ -2115,15 +3060,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandIndex2",
+      "frame": 25,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 5.960464477539076e-08
   },
   {
     "id": "word-c0f1e55b",
     "label": "всегда",
     "url": "/avatars/sign-motion/word-c0f1e55b.glb",
-    "duration": 1.9,
+    "duration": 2.6,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/c0f1e55b-ad7b-43df-8735-e740078a5225.mp4",
     "handCoverage": {
@@ -2135,15 +3089,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandIndex1",
+      "frame": 14,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154805e-08
   },
   {
     "id": "word-50b48f58",
     "label": "никогда",
     "url": "/avatars/sign-motion/word-50b48f58.glb",
-    "duration": 1.7333333333333334,
+    "duration": 2.433333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/50b48f58-5b8c-41f2-8438-d7d07c4e86bc.mp4",
     "handCoverage": {
@@ -2155,15 +3118,24 @@
       "Right": 21
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 61,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.4703483581543544e-08
   },
   {
     "id": "word-5ed48b44",
     "label": "иногда",
     "url": "/avatars/sign-motion/word-5ed48b44.glb",
-    "duration": 1.9,
+    "duration": 2.6,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/5ed48b44-4292-4771-a499-40b126901b50.mp4",
     "handCoverage": {
@@ -2175,15 +3147,24 @@
       "Right": 5
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandIndex2",
+      "frame": 32,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154427e-08
   },
   {
     "id": "word-44de272e",
     "label": "понедельник",
     "url": "/avatars/sign-motion/word-44de272e.glb",
-    "duration": 2.066666666666667,
+    "duration": 2.7666666666666666,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/44de272e-c50b-4663-b113-eb50505d58db.mp4",
     "handCoverage": {
@@ -2195,15 +3176,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandIndex2",
+      "frame": 61,
+      "angle": 7.999955541799461
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154805e-08
   },
   {
     "id": "word-c446b714",
     "label": "вторник",
     "url": "/avatars/sign-motion/word-c446b714.glb",
-    "duration": 2.4,
+    "duration": 3.1,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/c446b714-580d-403c-a2ce-b91566a91432.mp4",
     "handCoverage": {
@@ -2215,15 +3205,24 @@
       "Right": 3
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 7.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightForeArm",
+      "frame": 20,
+      "angle": 6.999788743519692
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.2351741790771785e-08
   },
   {
     "id": "word-b0df4010",
     "label": "среда",
     "url": "/avatars/sign-motion/word-b0df4010.glb",
-    "duration": 2.1333333333333333,
+    "duration": 2.8333333333333335,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/b0df4010-985a-4522-98c0-4ad5218f8007.mp4",
     "handCoverage": {
@@ -2235,15 +3234,24 @@
       "Right": 29
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 7.996,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandRing1",
+      "frame": 74,
+      "angle": 7.995842060371821
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.2351741790781665e-08
   },
   {
     "id": "word-8e883b97",
     "label": "четверг",
     "url": "/avatars/sign-motion/word-8e883b97.glb",
-    "duration": 1.7666666666666666,
+    "duration": 2.466666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/8e883b97-6b67-4404-8d9a-c17117421c18.mp4",
     "handCoverage": {
@@ -2255,15 +3263,24 @@
       "Right": 3
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 26,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.4703483581543544e-08
   },
   {
     "id": "word-bb899ccb",
     "label": "пятница",
     "url": "/avatars/sign-motion/word-bb899ccb.glb",
-    "duration": 2.1666666666666665,
+    "duration": 2.8666666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/bb899ccb-e512-4521-bbf3-7718a3923e72.mp4",
     "handCoverage": {
@@ -2275,15 +3292,24 @@
       "Right": 30
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 34,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769554e-08
   },
   {
     "id": "word-924b6df6",
     "label": "суббота",
     "url": "/avatars/sign-motion/word-924b6df6.glb",
-    "duration": 2.5,
+    "duration": 3.2,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/924b6df6-312e-4448-bd48-d37ab27c9db1.mp4",
     "handCoverage": {
@@ -2295,15 +3321,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandThumb1",
+      "frame": 16,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 5.960464477539073e-08
   },
   {
     "id": "word-ae2dce80",
     "label": "воскресенье",
     "url": "/avatars/sign-motion/word-ae2dce80.glb",
-    "duration": 2.3,
+    "duration": 3,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/ae2dce80-8cd7-41f6-9094-181684a2ded8.mp4",
     "handCoverage": {
@@ -2315,15 +3350,24 @@
       "Right": 6
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 7.383,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandRing1",
+      "frame": 78,
+      "angle": 7.382608893667858
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.9802322387695524e-08
   },
   {
     "id": "word-175ce38d",
     "label": "лето",
     "url": "/avatars/sign-motion/word-175ce38d.glb",
-    "duration": 2.1,
+    "duration": 2.8,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/175ce38d-d704-4f30-a522-35d5d1c8cfd2.mp4",
     "handCoverage": {
@@ -2335,15 +3379,24 @@
       "Right": 28
     },
     "poseCoverage": 0.9642857142857143,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 7.999,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHand",
+      "frame": 46,
+      "angle": 7.999269961561521
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.2351741790774025e-08
   },
   {
     "id": "word-9613dff0",
     "label": "зима",
     "url": "/avatars/sign-motion/word-9613dff0.glb",
-    "duration": 2.1333333333333333,
+    "duration": 2.8333333333333335,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/9613dff0-6050-4f02-86d4-04a49ab40a60.mp4",
     "handCoverage": {
@@ -2355,15 +3408,24 @@
       "Right": 12
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 16,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 3.7252902984620835e-08
   },
   {
     "id": "word-c9b82a16",
     "label": "осень",
     "url": "/avatars/sign-motion/word-c9b82a16.glb",
-    "duration": 2.3,
+    "duration": 3,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/c9b82a16-dba8-4012-98b3-29be7978a8ca.mp4",
     "handCoverage": {
@@ -2375,15 +3437,24 @@
       "Right": 32
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandMiddle3",
+      "frame": 24,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.9802322387698754e-08
   },
   {
     "id": "word-b854c147",
     "label": "весна",
     "url": "/avatars/sign-motion/word-b854c147.glb",
-    "duration": 2.2333333333333334,
+    "duration": 2.933333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/b854c147-373f-4b87-bcf6-fd1ed63987ca.mp4",
     "handCoverage": {
@@ -2395,15 +3466,24 @@
       "Right": 19
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandPinky2",
+      "frame": 51,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154315e-08
   },
   {
     "id": "word-803b0a5e",
     "label": "еще нет",
     "url": "/avatars/sign-motion/word-803b0a5e.glb",
-    "duration": 2.2333333333333334,
+    "duration": 2.933333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/803b0a5e-7415-4723-af3d-ecccddd1faf5.mp4",
     "handCoverage": {
@@ -2415,15 +3495,24 @@
       "Right": 3
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandThumb1",
+      "frame": 78,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769616e-08
   },
   {
     "id": "word-8d20b0ee",
     "label": "день и ночь",
     "url": "/avatars/sign-motion/word-8d20b0ee.glb",
-    "duration": 2.5,
+    "duration": 3.2,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/191d0ce8-7e6a-4ca0-893c-4eeb9af27e2b.mp4",
     "handCoverage": {
@@ -2435,15 +3524,24 @@
       "Right": 4
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandThumb2",
+      "frame": 23,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.4703483581543544e-08
   },
   {
     "id": "word-f00a8a7f",
     "label": "в этом году",
     "url": "/avatars/sign-motion/word-f00a8a7f.glb",
-    "duration": 2.5,
+    "duration": 3.2,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/506d755c-400e-479a-ac78-e402cd8287be.mp4",
     "handCoverage": {
@@ -2455,15 +3553,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandRing1",
+      "frame": 14,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.98023223876987e-08
   },
   {
     "id": "word-72476e8f",
     "label": "в прошлом году",
     "url": "/avatars/sign-motion/word-72476e8f.glb",
-    "duration": 2.1,
+    "duration": 2.8,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/72476e8f-288e-4b8a-b7a3-c0ba2e694d44.mp4",
     "handCoverage": {
@@ -2475,15 +3582,24 @@
       "Right": 28
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandIndex1",
+      "frame": 72,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154353e-08
   },
   {
     "id": "word-91d7d717",
     "label": "ноль",
     "url": "/avatars/sign-motion/word-91d7d717.glb",
-    "duration": 2.1,
+    "duration": 2.8,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/91d7d717-b06e-4eb7-85dd-2981b9dd7cfc.mp4",
     "handCoverage": {
@@ -2495,15 +3611,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandIndex3",
+      "frame": 26,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769637e-08
   },
   {
     "id": "word-98521248",
     "label": "один",
     "url": "/avatars/sign-motion/word-98521248.glb",
-    "duration": 1.4333333333333333,
+    "duration": 2.1333333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/98521248-2877-43fb-8a38-695b1ccd0a3d.mp4",
     "handCoverage": {
@@ -2515,15 +3640,24 @@
       "Right": 16
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandIndex3",
+      "frame": 44,
+      "angle": 7.999955541799461
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769554e-08
   },
   {
     "id": "word-3637b257",
     "label": "два",
     "url": "/avatars/sign-motion/word-3637b257.glb",
-    "duration": 1.6333333333333333,
+    "duration": 2.3333333333333335,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/3637b257-3d29-409a-bd6a-36908d24f8cb.mp4",
     "handCoverage": {
@@ -2535,15 +3669,24 @@
       "Right": 19
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 7.999,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHand",
+      "frame": 57,
+      "angle": 7.998976263427211
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.2351741790771766e-08
   },
   {
     "id": "word-5782a432",
     "label": "три",
     "url": "/avatars/sign-motion/word-5782a432.glb",
-    "duration": 1.3666666666666667,
+    "duration": 2.066666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/5782a432-ef90-4cbc-b315-9995ad70acea.mp4",
     "handCoverage": {
@@ -2555,15 +3698,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 52,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154312e-08
   },
   {
     "id": "word-f8ffac36",
     "label": "четыре",
     "url": "/avatars/sign-motion/word-f8ffac36.glb",
-    "duration": 1.9,
+    "duration": 2.6,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/f8ffac36-0b54-4b30-897c-ce34d8ef62bf.mp4",
     "handCoverage": {
@@ -2575,15 +3727,24 @@
       "Right": 24
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 7.527,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHand",
+      "frame": 15,
+      "angle": 7.527279984251545
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-f872e2cb",
     "label": "пять",
     "url": "/avatars/sign-motion/word-f872e2cb.glb",
-    "duration": 1.8333333333333333,
+    "duration": 2.533333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/f872e2cb-9fd7-4d62-914c-d469883e2215.mp4",
     "handCoverage": {
@@ -2595,15 +3756,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandPinky3",
+      "frame": 47,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 1.490116119384808e-08
   },
   {
     "id": "word-2b21215c",
     "label": "шесть",
     "url": "/avatars/sign-motion/word-2b21215c.glb",
-    "duration": 1.9666666666666666,
+    "duration": 2.6666666666666665,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/2b21215c-6693-4faa-998a-8cccaa00707f.mp4",
     "handCoverage": {
@@ -2615,15 +3785,24 @@
       "Right": 3
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 31,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154353e-08
   },
   {
     "id": "word-0c849b23",
     "label": "семь",
     "url": "/avatars/sign-motion/word-0c849b23.glb",
-    "duration": 2.7,
+    "duration": 3.4,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/0c849b23-1f52-42e4-bf2b-c7fea97e147a.mp4",
     "handCoverage": {
@@ -2635,15 +3814,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandThumb1",
+      "frame": 15,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769542e-08
   },
   {
     "id": "word-d7560665",
     "label": "восемь",
     "url": "/avatars/sign-motion/word-d7560665.glb",
-    "duration": 2.533333333333333,
+    "duration": 3.2333333333333334,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/d7560665-dcdc-4ee5-8687-a314e9f631d3.mp4",
     "handCoverage": {
@@ -2655,15 +3843,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 68,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769637e-08
   },
   {
     "id": "word-338e93e8",
     "label": "девять",
     "url": "/avatars/sign-motion/word-338e93e8.glb",
-    "duration": 2.066666666666667,
+    "duration": 2.7666666666666666,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/338e93e8-4033-4af6-8a62-12573c53bfcc.mp4",
     "handCoverage": {
@@ -2675,15 +3872,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandMiddle3",
+      "frame": 28,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.2351741790774095e-08
   },
   {
     "id": "word-640f2b1f",
     "label": "десять",
     "url": "/avatars/sign-motion/word-640f2b1f.glb",
-    "duration": 2.066666666666667,
+    "duration": 2.7666666666666666,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/640f2b1f-88b8-4616-af20-12f020350797.mp4",
     "handCoverage": {
@@ -2695,15 +3901,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 24,
+      "angle": 7.999955541799461
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769637e-08
   },
   {
     "id": "word-a98a74bc",
     "label": "одиннадцать",
     "url": "/avatars/sign-motion/word-a98a74bc.glb",
-    "duration": 1.9,
+    "duration": 2.6,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/a98a74bc-f4f8-4792-a631-57300dbb18ad.mp4",
     "handCoverage": {
@@ -2715,15 +3930,24 @@
       "Right": 24
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandIndex3",
+      "frame": 43,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769558e-08
   },
   {
     "id": "word-aab0e5db",
     "label": "двенадцать",
     "url": "/avatars/sign-motion/word-aab0e5db.glb",
-    "duration": 2.5,
+    "duration": 3.2,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/aab0e5db-ed15-47de-b79b-6fd97beadb66.mp4",
     "handCoverage": {
@@ -2735,15 +3959,24 @@
       "Right": 36
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandMiddle2",
+      "frame": 55,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.4703483581544246e-08
   },
   {
     "id": "word-cd151b2a",
     "label": "двадцать",
     "url": "/avatars/sign-motion/word-cd151b2a.glb",
-    "duration": 2,
+    "duration": 2.7,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/cd151b2a-4bdb-4446-b8fb-fe2a11841690.mp4",
     "handCoverage": {
@@ -2755,15 +3988,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandPinky2",
+      "frame": 13,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154368e-08
   },
   {
     "id": "word-7ee747b0",
     "label": "сто",
     "url": "/avatars/sign-motion/word-7ee747b0.glb",
-    "duration": 2.4,
+    "duration": 3.1,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/7ee747b0-05fa-4481-955d-429b641b719f.mp4",
     "handCoverage": {
@@ -2775,15 +4017,24 @@
       "Right": 15
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 15,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.4703483581545265e-08
   },
   {
     "id": "word-35e11a03",
     "label": "хороший",
     "url": "/avatars/sign-motion/word-35e11a03.glb",
-    "duration": 3.1333333333333333,
+    "duration": 3.8333333333333335,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/35e11a03-37fa-4be9-83e9-ee1afd137710.mp4",
     "handCoverage": {
@@ -2795,15 +4046,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandIndex3",
+      "frame": 63,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154427e-08
   },
   {
     "id": "word-858669cd",
     "label": "плохой",
     "url": "/avatars/sign-motion/word-858669cd.glb",
-    "duration": 1.8666666666666667,
+    "duration": 2.566666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/858669cd-c8a4-4ed8-b29a-9a091adcdde0.mp4",
     "handCoverage": {
@@ -2815,15 +4075,24 @@
       "Right": 4
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandIndex2",
+      "frame": 46,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.4703483581543544e-08
   },
   {
     "id": "word-6e24fd10",
     "label": "большой",
     "url": "/avatars/sign-motion/word-6e24fd10.glb",
-    "duration": 2.7,
+    "duration": 3.4,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/6e24fd10-7198-4f7c-8af5-3d6f2c116cd6.mp4",
     "handCoverage": {
@@ -2835,15 +4104,24 @@
       "Right": 3
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandThumb1",
+      "frame": 15,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.9802322387695524e-08
   },
   {
     "id": "word-62813877",
     "label": "маленький",
     "url": "/avatars/sign-motion/word-62813877.glb",
-    "duration": 1.5333333333333334,
+    "duration": 2.2333333333333334,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/62813877-fba9-4ca9-85e0-6c832874b249.mp4",
     "handCoverage": {
@@ -2855,15 +4133,24 @@
       "Right": 4
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandRing1",
+      "frame": 57,
+      "angle": 7.999955541799461
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.9802322387695312e-08
   },
   {
     "id": "word-84ff2040",
     "label": "новый",
     "url": "/avatars/sign-motion/word-84ff2040.glb",
-    "duration": 1.9333333333333333,
+    "duration": 2.6333333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/84ff2040-2ace-4600-bdf2-d613883c459a.mp4",
     "handCoverage": {
@@ -2875,15 +4162,24 @@
       "Right": 6
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandPinky3",
+      "frame": 46,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 1.4901161193849377e-08
   },
   {
     "id": "word-defd5c39",
     "label": "старый",
     "url": "/avatars/sign-motion/word-defd5c39.glb",
-    "duration": 2.1333333333333333,
+    "duration": 2.8333333333333335,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/defd5c39-68d2-46dd-9482-afd9f8c9aafb.mp4",
     "handCoverage": {
@@ -2895,15 +4191,24 @@
       "Right": 14
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 14,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.4703483581545265e-08
   },
   {
     "id": "word-151a37ef",
     "label": "быстрый",
     "url": "/avatars/sign-motion/word-151a37ef.glb",
-    "duration": 2.1666666666666665,
+    "duration": 2.8666666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/151a37ef-302b-4fb8-91b4-505c935e207c.mp4",
     "handCoverage": {
@@ -2915,15 +4220,24 @@
       "Right": 4
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandPinky2",
+      "frame": 28,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154312e-08
   },
   {
     "id": "word-ea7aa6fc",
     "label": "медленный",
     "url": "/avatars/sign-motion/word-ea7aa6fc.glb",
-    "duration": 2.7,
+    "duration": 3.4,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/ea7aa6fc-bd78-477e-9fe4-d97f5402570a.mp4",
     "handCoverage": {
@@ -2935,15 +4249,24 @@
       "Right": 6
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 27,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769727e-08
   },
   {
     "id": "word-fd1c4073",
     "label": "красивый",
     "url": "/avatars/sign-motion/word-fd1c4073.glb",
-    "duration": 2.1333333333333333,
+    "duration": 2.8333333333333335,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/fd1c4073-e36e-4f12-be21-4d47b1efabc0.mp4",
     "handCoverage": {
@@ -2955,15 +4278,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandPinky3",
+      "frame": 33,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 3.7252902984619227e-08
   },
   {
     "id": "word-b08629fc",
     "label": "трудный",
     "url": "/avatars/sign-motion/word-b08629fc.glb",
-    "duration": 2.033333333333333,
+    "duration": 2.7333333333333334,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/b08629fc-4f47-4fb6-a288-028b56256f4b.mp4",
     "handCoverage": {
@@ -2975,15 +4307,24 @@
       "Right": 3
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandMiddle3",
+      "frame": 60,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769722e-08
   },
   {
     "id": "word-32e530d7",
     "label": "легкий",
     "url": "/avatars/sign-motion/word-32e530d7.glb",
-    "duration": 2.9,
+    "duration": 3.6,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/32e530d7-3598-47d3-b344-ceb36bb6fe58.mp4",
     "handCoverage": {
@@ -2995,15 +4336,24 @@
       "Right": 4
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandPinky2",
+      "frame": 13,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 5.215406417846816e-08
   },
   {
     "id": "word-4893125c",
     "label": "интересный",
     "url": "/avatars/sign-motion/word-4893125c.glb",
-    "duration": 2.033333333333333,
+    "duration": 2.7333333333333334,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/4893125c-dccf-4a97-8b67-861fd3ada825.mp4",
     "handCoverage": {
@@ -3015,15 +4365,24 @@
       "Right": 27
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandMiddle3",
+      "frame": 62,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154353e-08
   },
   {
     "id": "word-b6fe83ed",
     "label": "счастливый",
     "url": "/avatars/sign-motion/word-b6fe83ed.glb",
-    "duration": 2.1666666666666665,
+    "duration": 2.8666666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/b6fe83ed-47c6-442f-8e6f-77fa4d6473df.mp4",
     "handCoverage": {
@@ -3035,15 +4394,24 @@
       "Right": 3
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandPinky1",
+      "frame": 16,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.2351741790772633e-08
   },
   {
     "id": "word-36b20a69",
     "label": "грустный",
     "url": "/avatars/sign-motion/word-36b20a69.glb",
-    "duration": 2.4,
+    "duration": 3.1,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/36b20a69-877f-4358-8074-94f3c386b357.mp4",
     "handCoverage": {
@@ -3055,15 +4423,24 @@
       "Right": 4
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHand",
+      "frame": 70,
+      "angle": 7.999857357830142
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.9802322387695736e-08
   },
   {
     "id": "word-1ba0d285",
     "label": "спокойный",
     "url": "/avatars/sign-motion/word-1ba0d285.glb",
-    "duration": 2.3,
+    "duration": 3,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/1ba0d285-5260-40a6-b13e-1b68b4c5dcee.mp4",
     "handCoverage": {
@@ -3075,15 +4452,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandThumb1",
+      "frame": 13,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154312e-08
   },
   {
     "id": "word-9543d766",
     "label": "радость",
     "url": "/avatars/sign-motion/word-9543d766.glb",
-    "duration": 2.8666666666666667,
+    "duration": 3.566666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/9543d766-c852-4d5b-8638-3987a05d901f.mp4",
     "handCoverage": {
@@ -3095,15 +4481,24 @@
       "Right": 3
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandPinky1",
+      "frame": 28,
+      "angle": 7.999955541799461
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.9802322387695524e-08
   },
   {
     "id": "word-8cf533fa",
     "label": "страх",
     "url": "/avatars/sign-motion/word-8cf533fa.glb",
-    "duration": 1.9333333333333333,
+    "duration": 2.6333333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/8cf533fa-b177-4ceb-80ff-18d130192300.mp4",
     "handCoverage": {
@@ -3115,15 +4510,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 24,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154312e-08
   },
   {
     "id": "word-71b45022",
     "label": "любовь",
     "url": "/avatars/sign-motion/word-71b45022.glb",
-    "duration": 2.2666666666666666,
+    "duration": 2.966666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/71b45022-d29a-45c3-837d-5496333083af.mp4",
     "handCoverage": {
@@ -3135,15 +4539,24 @@
       "Right": 32
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandPinky2",
+      "frame": 27,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769538e-08
   },
   {
     "id": "word-ddc2e7ed",
     "label": "цвет",
     "url": "/avatars/sign-motion/word-ddc2e7ed.glb",
-    "duration": 2.066666666666667,
+    "duration": 2.7666666666666666,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/ddc2e7ed-5d21-48f0-bfb7-dd668c754fcc.mp4",
     "handCoverage": {
@@ -3155,15 +4568,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 52,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769727e-08
   },
   {
     "id": "word-e70fcfd6",
     "label": "красный",
     "url": "/avatars/sign-motion/word-e70fcfd6.glb",
-    "duration": 1.9333333333333333,
+    "duration": 2.6333333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/e70fcfd6-52db-4656-ac39-c4dfbf73939e.mp4",
     "handCoverage": {
@@ -3175,15 +4597,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandMiddle2",
+      "frame": 33,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154368e-08
   },
   {
     "id": "word-250f896a",
     "label": "синий",
     "url": "/avatars/sign-motion/word-250f896a.glb",
-    "duration": 2.2666666666666666,
+    "duration": 2.966666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/250f896a-b06b-4096-bc8f-d5d628f0cda3.mp4",
     "handCoverage": {
@@ -3195,15 +4626,24 @@
       "Right": 3
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandPinky2",
+      "frame": 23,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.2351741790774025e-08
   },
   {
     "id": "word-f3848317",
     "label": "зелёный",
     "url": "/avatars/sign-motion/word-f3848317.glb",
-    "duration": 2.7333333333333334,
+    "duration": 3.433333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/f3848317-a25f-48cb-bc3f-66efe08de15a.mp4",
     "handCoverage": {
@@ -3215,15 +4655,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandPinky2",
+      "frame": 14,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.9802322387695524e-08
   },
   {
     "id": "word-6d759966",
     "label": "желтый",
     "url": "/avatars/sign-motion/word-6d759966.glb",
-    "duration": 2.2,
+    "duration": 2.9,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/6d759966-0116-477e-b4da-5f61fddd5f0c.mp4",
     "handCoverage": {
@@ -3235,15 +4684,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 14,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 5.960464477539158e-08
   },
   {
     "id": "word-9c7faf34",
     "label": "белый",
     "url": "/avatars/sign-motion/word-9c7faf34.glb",
-    "duration": 2.1666666666666665,
+    "duration": 2.8666666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/69376af6-13c9-42ca-9ff3-0880d106a0c3.mp4",
     "handCoverage": {
@@ -3255,15 +4713,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandPinky3",
+      "frame": 23,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154312e-08
   },
   {
     "id": "word-5c794c1c",
     "label": "черный",
     "url": "/avatars/sign-motion/word-5c794c1c.glb",
-    "duration": 1.9333333333333333,
+    "duration": 2.6333333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/5c794c1c-fd02-43d7-9938-4804fe6b8877.mp4",
     "handCoverage": {
@@ -3275,15 +4742,24 @@
       "Right": 25
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 7.776,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHand",
+      "frame": 16,
+      "angle": 7.775926190796689
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.235174179077277e-08
   },
   {
     "id": "word-896d253f",
     "label": "кошка",
     "url": "/avatars/sign-motion/word-896d253f.glb",
-    "duration": 2.3,
+    "duration": 3,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/896d253f-9191-43f3-9b63-58ee8658cc3f.mp4",
     "handCoverage": {
@@ -3295,15 +4771,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandIndex2",
+      "frame": 23,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154304e-08
   },
   {
     "id": "word-99afdafa",
     "label": "собака",
     "url": "/avatars/sign-motion/word-99afdafa.glb",
-    "duration": 2.2333333333333334,
+    "duration": 2.933333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/99afdafa-c186-48e2-b2cc-f33d2e5cd8da.mp4",
     "handCoverage": {
@@ -3315,15 +4800,24 @@
       "Right": 3
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 7.998,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandIndex1",
+      "frame": 36,
+      "angle": 7.997898801085641
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769579e-08
   },
   {
     "id": "word-506f5596",
     "label": "птица",
     "url": "/avatars/sign-motion/word-506f5596.glb",
-    "duration": 3.3,
+    "duration": 4,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/506f5596-ace8-426e-b97c-f5d5953abd65.mp4",
     "handCoverage": {
@@ -3335,15 +4829,24 @@
       "Right": 30
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandMiddle3",
+      "frame": 63,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154325e-08
   },
   {
     "id": "word-76fc58e0",
     "label": "рыба",
     "url": "/avatars/sign-motion/word-76fc58e0.glb",
-    "duration": 1.7666666666666666,
+    "duration": 2.466666666666667,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/76fc58e0-5691-455b-9eef-547200f9295b.mp4",
     "handCoverage": {
@@ -3355,15 +4858,24 @@
       "Right": 4
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHand",
+      "frame": 73,
+      "angle": 7.999955541799461
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 1.4901161193847762e-08
   },
   {
     "id": "word-d388f4c7",
     "label": "лошадь",
     "url": "/avatars/sign-motion/word-d388f4c7.glb",
-    "duration": 1.9,
+    "duration": 2.6,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/d388f4c7-842f-406e-9c34-862b9c7cad2f.mp4",
     "handCoverage": {
@@ -3375,15 +4887,24 @@
       "Right": 24
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandIndex2",
+      "frame": 28,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154325e-08
   },
   {
     "id": "word-0bf7a453",
     "label": "животное",
     "url": "/avatars/sign-motion/word-0bf7a453.glb",
-    "duration": 2.7333333333333334,
+    "duration": 3.433333333333333,
     "source": "https://github.com/ai-forever/slovo",
     "reference": "/research/rsl/words/0bf7a453-36e6-45f4-91ab-6468427ca16e.mp4",
     "handCoverage": {
@@ -3395,15 +4916,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 13,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.4703483581543544e-08
   },
   {
     "id": "letter-410",
     "label": "А",
     "url": "/avatars/sign-motion/letter-410.glb",
-    "duration": 2.2666666666666666,
+    "duration": 2.966666666666667,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/0410.mp4",
     "handCoverage": {
@@ -3415,15 +4945,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandRing1",
+      "frame": 14,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154353e-08
   },
   {
     "id": "letter-411",
     "label": "Б",
     "url": "/avatars/sign-motion/letter-411.glb",
-    "duration": 2.1666666666666665,
+    "duration": 2.8666666666666667,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/0411.mp4",
     "handCoverage": {
@@ -3435,15 +4974,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandPinky2",
+      "frame": 13,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 5.960464477539105e-08
   },
   {
     "id": "letter-412",
     "label": "В",
     "url": "/avatars/sign-motion/letter-412.glb",
-    "duration": 2.1333333333333333,
+    "duration": 2.8333333333333335,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/0412.mp4",
     "handCoverage": {
@@ -3455,15 +5003,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 7.98,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHand",
+      "frame": 78,
+      "angle": 7.980152262074656
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.9802322387698754e-08
   },
   {
     "id": "letter-413",
     "label": "Г",
     "url": "/avatars/sign-motion/letter-413.glb",
-    "duration": 1.9666666666666666,
+    "duration": 2.6666666666666665,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/0413.mp4",
     "handCoverage": {
@@ -3475,15 +5032,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandRing1",
+      "frame": 14,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.4703483581543e-08
   },
   {
     "id": "letter-414",
     "label": "Д",
     "url": "/avatars/sign-motion/letter-414.glb",
-    "duration": 2.2,
+    "duration": 2.9,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/0414.mp4",
     "handCoverage": {
@@ -3495,15 +5061,24 @@
       "Right": 30
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandMiddle3",
+      "frame": 60,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 1.8626451492309703e-08
   },
   {
     "id": "letter-415",
     "label": "Е",
     "url": "/avatars/sign-motion/letter-415.glb",
-    "duration": 1.7666666666666666,
+    "duration": 2.466666666666667,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/0415.mp4",
     "handCoverage": {
@@ -3515,15 +5090,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 26,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.2351741790771772e-08
   },
   {
     "id": "letter-401",
     "label": "Ё",
     "url": "/avatars/sign-motion/letter-401.glb",
-    "duration": 2.966666666666667,
+    "duration": 3.6666666666666665,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/0401.mp4",
     "handCoverage": {
@@ -3535,15 +5119,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandThumb3",
+      "frame": 23,
+      "angle": 7.999955541799461
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154368e-08
   },
   {
     "id": "letter-416",
     "label": "Ж",
     "url": "/avatars/sign-motion/letter-416.glb",
-    "duration": 2.6,
+    "duration": 3.3,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/0416.mp4",
     "handCoverage": {
@@ -3555,15 +5148,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandThumb1",
+      "frame": 14,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 5.960464477539147e-08
   },
   {
     "id": "letter-417",
     "label": "З",
     "url": "/avatars/sign-motion/letter-417.glb",
-    "duration": 2.433333333333333,
+    "duration": 3.1333333333333333,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/0417.mp4",
     "handCoverage": {
@@ -3575,15 +5177,24 @@
       "Right": 35
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandPinky3",
+      "frame": 15,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769637e-08
   },
   {
     "id": "letter-418",
     "label": "И",
     "url": "/avatars/sign-motion/letter-418.glb",
-    "duration": 2.5,
+    "duration": 3.2,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/0418.mp4",
     "handCoverage": {
@@ -3595,15 +5206,24 @@
       "Right": 3
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 7.997,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHand",
+      "frame": 93,
+      "angle": 7.996821338744072
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769579e-08
   },
   {
     "id": "letter-419",
     "label": "Й",
     "url": "/avatars/sign-motion/letter-419.glb",
-    "duration": 2.933333333333333,
+    "duration": 3.6333333333333333,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/0419.mp4",
     "handCoverage": {
@@ -3615,15 +5235,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 46,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154308e-08
   },
   {
     "id": "letter-41a",
     "label": "К",
     "url": "/avatars/sign-motion/letter-41a.glb",
-    "duration": 2.6,
+    "duration": 3.3,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/041a.mp4",
     "handCoverage": {
@@ -3635,15 +5264,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 27,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.9802322387698754e-08
   },
   {
     "id": "letter-41b",
     "label": "Л",
     "url": "/avatars/sign-motion/letter-41b.glb",
-    "duration": 2.2333333333333334,
+    "duration": 2.933333333333333,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/041b.mp4",
     "handCoverage": {
@@ -3655,15 +5293,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 65,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154353e-08
   },
   {
     "id": "letter-41c",
     "label": "М",
     "url": "/avatars/sign-motion/letter-41c.glb",
-    "duration": 1.8,
+    "duration": 2.5,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/041c.mp4",
     "handCoverage": {
@@ -3675,15 +5322,24 @@
       "Right": 22
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 7.99,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHand",
+      "frame": 14,
+      "angle": 7.9903540033737155
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.2351741790771766e-08
   },
   {
     "id": "letter-41d",
     "label": "Н",
     "url": "/avatars/sign-motion/letter-41d.glb",
-    "duration": 1.7666666666666666,
+    "duration": 2.466666666666667,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/041d.mp4",
     "handCoverage": {
@@ -3695,15 +5351,24 @@
       "Right": 22
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 7.097,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandThumb3",
+      "frame": 23,
+      "angle": 7.097233771747794
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769727e-08
   },
   {
     "id": "letter-41e",
     "label": "О",
     "url": "/avatars/sign-motion/letter-41e.glb",
-    "duration": 3.6666666666666665,
+    "duration": 4.366666666666666,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/041e.mp4",
     "handCoverage": {
@@ -3715,15 +5380,24 @@
       "Right": 60
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 7.731,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandRing1",
+      "frame": 29,
+      "angle": 7.731072338517215
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769554e-08
   },
   {
     "id": "letter-41f",
     "label": "П",
     "url": "/avatars/sign-motion/letter-41f.glb",
-    "duration": 2.2333333333333334,
+    "duration": 2.933333333333333,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/041f.mp4",
     "handCoverage": {
@@ -3735,15 +5409,24 @@
       "Right": 31
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandIndex2",
+      "frame": 23,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.235174179077184e-08
   },
   {
     "id": "letter-420",
     "label": "Р",
     "url": "/avatars/sign-motion/letter-420.glb",
-    "duration": 1.8,
+    "duration": 2.5,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/0420.mp4",
     "handCoverage": {
@@ -3755,15 +5438,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandRing1",
+      "frame": 14,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 5.960464477539068e-08
   },
   {
     "id": "letter-421",
     "label": "С",
     "url": "/avatars/sign-motion/letter-421.glb",
-    "duration": 2.4,
+    "duration": 3.1,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/0421.mp4",
     "handCoverage": {
@@ -3775,15 +5467,24 @@
       "Right": 5
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHand",
+      "frame": 91,
+      "angle": 7.999857357830142
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154385e-08
   },
   {
     "id": "letter-422",
     "label": "Т",
     "url": "/avatars/sign-motion/letter-422.glb",
-    "duration": 2.433333333333333,
+    "duration": 3.1333333333333333,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/0422.mp4",
     "handCoverage": {
@@ -3795,15 +5496,24 @@
       "Right": 35
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandIndex1",
+      "frame": 39,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769722e-08
   },
   {
     "id": "letter-423",
     "label": "У",
     "url": "/avatars/sign-motion/letter-423.glb",
-    "duration": 2.033333333333333,
+    "duration": 2.7333333333333334,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/0423.mp4",
     "handCoverage": {
@@ -3815,15 +5525,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandPinky3",
+      "frame": 24,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 4.470348358154315e-08
   },
   {
     "id": "letter-424",
     "label": "Ф",
     "url": "/avatars/sign-motion/letter-424.glb",
-    "duration": 1.9,
+    "duration": 2.6,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/0424.mp4",
     "handCoverage": {
@@ -3835,15 +5554,24 @@
       "Right": 1
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandMiddle3",
+      "frame": 25,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.9802322387698754e-08
   },
   {
     "id": "letter-425",
     "label": "Х",
     "url": "/avatars/sign-motion/letter-425.glb",
-    "duration": 1.8333333333333333,
+    "duration": 2.533333333333333,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/0425.mp4",
     "handCoverage": {
@@ -3855,15 +5583,24 @@
       "Right": 23
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandPinky1",
+      "frame": 64,
+      "angle": 7.999955541799461
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.2351741790774042e-08
   },
   {
     "id": "letter-426",
     "label": "Ц",
     "url": "/avatars/sign-motion/letter-426.glb",
-    "duration": 1.7333333333333334,
+    "duration": 2.433333333333333,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/0426.mp4",
     "handCoverage": {
@@ -3875,15 +5612,24 @@
       "Right": 21
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 6.997,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftForearmRoll0",
+      "frame": 18,
+      "angle": 6.996990927280925
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.2351741790771766e-08
   },
   {
     "id": "letter-427",
     "label": "Ч",
     "url": "/avatars/sign-motion/letter-427.glb",
-    "duration": 3.3,
+    "duration": 4,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/0427.mp4",
     "handCoverage": {
@@ -3895,15 +5641,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandRing1",
+      "frame": 29,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.9802322387698754e-08
   },
   {
     "id": "letter-428",
     "label": "Ш",
     "url": "/avatars/sign-motion/letter-428.glb",
-    "duration": 2.2333333333333334,
+    "duration": 2.933333333333333,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/0428.mp4",
     "handCoverage": {
@@ -3915,15 +5670,24 @@
       "Right": 31
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandMiddle3",
+      "frame": 15,
+      "angle": 7.999955541799461
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769542e-08
   },
   {
     "id": "letter-429",
     "label": "Щ",
     "url": "/avatars/sign-motion/letter-429.glb",
-    "duration": 2.1666666666666665,
+    "duration": 2.8666666666666667,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/0429.mp4",
     "handCoverage": {
@@ -3935,15 +5699,24 @@
       "Right": 28
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHand",
+      "frame": 79,
+      "angle": 8.000151055964453
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769538e-08
   },
   {
     "id": "letter-42a",
     "label": "Ъ",
     "url": "/avatars/sign-motion/letter-42a.glb",
-    "duration": 2,
+    "duration": 2.7,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/042a.mp4",
     "handCoverage": {
@@ -3955,15 +5728,24 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 60,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.9802322387698754e-08
   },
   {
     "id": "letter-42b",
     "label": "Ы",
     "url": "/avatars/sign-motion/letter-42b.glb",
-    "duration": 1.7333333333333334,
+    "duration": 2.433333333333333,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/042b.mp4",
     "handCoverage": {
@@ -3975,15 +5757,24 @@
       "Right": 21
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandMiddle3",
+      "frame": 28,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.980232238769621e-08
   },
   {
     "id": "letter-42c",
     "label": "Ь",
     "url": "/avatars/sign-motion/letter-42c.glb",
-    "duration": 2.3,
+    "duration": 3,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/042c.mp4",
     "handCoverage": {
@@ -3995,15 +5786,24 @@
       "Right": 4
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 24,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 5.960464477539105e-08
   },
   {
     "id": "letter-42d",
     "label": "Э",
     "url": "/avatars/sign-motion/letter-42d.glb",
-    "duration": 1.7333333333333334,
+    "duration": 2.433333333333333,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/042d.mp4",
     "handCoverage": {
@@ -4015,15 +5815,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 26,
+      "angle": 7.999955541799461
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.2351741790774042e-08
   },
   {
     "id": "letter-42e",
     "label": "Ю",
     "url": "/avatars/sign-motion/letter-42e.glb",
-    "duration": 1.6333333333333333,
+    "duration": 2.3333333333333335,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/042e.mp4",
     "handCoverage": {
@@ -4035,15 +5844,24 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandPinky3",
+      "frame": 25,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 2.2351741790772685e-08
   },
   {
     "id": "letter-42f",
     "label": "Я",
     "url": "/avatars/sign-motion/letter-42f.glb",
-    "duration": 2,
+    "duration": 2.7,
     "source": "https://github.com/ai-forever/bukva",
     "reference": "/research/rsl/alphabet/042f.mp4",
     "handCoverage": {
@@ -4055,8 +5873,17 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 12.0,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "MediaPipe capture retargeted in Blender; no translation training"
+    "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+    "motionVersion": 2,
+    "peakStep": {
+      "bone": "mixamorig:LeftHandMiddle2",
+      "frame": 24,
+      "angle": 8.00005372576878
+    },
+    "leadIn": 0.7,
+    "leadOut": 0.7,
+    "maxHingeOffAxis": 3.725290298461986e-08
   }
 ]

@@ -2,7 +2,7 @@
   "id": "word-3637b257",
   "label": "два",
   "url": "/avatars/sign-motion/word-3637b257.glb",
-  "duration": 1.6333333333333333,
+  "duration": 2.3333333333333335,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/3637b257-3d29-409a-bd6a-36908d24f8cb.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 19
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 7.999,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftHand",
+    "frame": 57,
+    "angle": 7.998976263427211
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 2.2351741790771766e-08
 }

@@ -244,3 +244,7 @@ docker-compose.yml  Локальный PostgreSQL + backend + frontend
 Для всех 33 букв и 170 слов словаря подготовлены **203 экспериментальных движения**, перенесённых с видео Bukva/Slovo с помощью готовых MediaPipe Hand/Pose Landmarker и собственного Blender-скрипта. Это перенос движений, **не обучение нового генератора жестов или грамматики**. Исходные видео доступны для сравнения. Учитываются кисти и положение рук; мимика/рот не перенесены, пересечения и скрытые пальцы могут быть ошибочными. Движения ещё не проверены преподавателем РЖЯ.
 
 Один 3D-персонаж использует небольшие файлы анимаций без повторного скачивания его геометрии. Единый таймер управляет паузой, скоростью, перемоткой и повтором всей последовательности. Словарь и тренажёр букв используют тот же проигрыватель. Структура процесса и воспроизведение: [art/sign-motion/README.md](art/sign-motion/README.md). Проверка: `npm run test:sign-motion --prefix frontend`.
+
+### Avatar motion mechanics (v2)
+
+The sign library uses palm-relative finger joints, constrained interphalangeal hinges, captured elbow guidance and cleaned rotation curves. Phrase playback trims only synthetic rest intervals and blends adjacent signs. All 203 motions remain experimental and unreviewed for RSL correctness; this is animation processing, not new language-model training. See `art/sign-motion/README.md` for reproducible Blender sources and limitations.

@@ -2,7 +2,7 @@
   "id": "word-4699249c",
   "label": "нам",
   "url": "/avatars/sign-motion/word-4699249c.glb",
-  "duration": 2.033333333333333,
+  "duration": 2.7333333333333334,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/4699249c-3f2b-48fa-bd7b-4359dbe491f4.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 0
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 7.999,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:RightHandPinky1",
+    "frame": 53,
+    "angle": 7.998584381323581
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 4.470348358154353e-08
 }

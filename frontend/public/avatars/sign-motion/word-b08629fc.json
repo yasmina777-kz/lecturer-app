@@ -2,7 +2,7 @@
   "id": "word-b08629fc",
   "label": "трудный",
   "url": "/avatars/sign-motion/word-b08629fc.glb",
-  "duration": 2.033333333333333,
+  "duration": 2.7333333333333334,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/b08629fc-4f47-4fb6-a288-028b56256f4b.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 3
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftHandMiddle3",
+    "frame": 60,
+    "angle": 8.00005372576878
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 2.980232238769722e-08
 }

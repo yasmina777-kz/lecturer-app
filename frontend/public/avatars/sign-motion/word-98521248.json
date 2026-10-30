@@ -2,7 +2,7 @@
   "id": "word-98521248",
   "label": "один",
   "url": "/avatars/sign-motion/word-98521248.glb",
-  "duration": 1.4333333333333333,
+  "duration": 2.1333333333333333,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/98521248-2877-43fb-8a38-695b1ccd0a3d.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 16
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftHandIndex3",
+    "frame": 44,
+    "angle": 7.999955541799461
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 2.980232238769554e-08
 }

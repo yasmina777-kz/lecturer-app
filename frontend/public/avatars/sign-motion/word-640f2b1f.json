@@ -2,7 +2,7 @@
   "id": "word-640f2b1f",
   "label": "десять",
   "url": "/avatars/sign-motion/word-640f2b1f.glb",
-  "duration": 2.066666666666667,
+  "duration": 2.7666666666666666,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/640f2b1f-88b8-4616-af20-12f020350797.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 0
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:RightHandMiddle2",
+    "frame": 24,
+    "angle": 7.999955541799461
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 2.980232238769637e-08
 }

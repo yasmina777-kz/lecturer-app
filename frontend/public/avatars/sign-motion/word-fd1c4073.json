@@ -2,7 +2,7 @@
   "id": "word-fd1c4073",
   "label": "красивый",
   "url": "/avatars/sign-motion/word-fd1c4073.glb",
-  "duration": 2.1333333333333333,
+  "duration": 2.8333333333333335,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/fd1c4073-e36e-4f12-be21-4d47b1efabc0.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 0
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftHandPinky3",
+    "frame": 33,
+    "angle": 8.00005372576878
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 3.7252902984619227e-08
 }

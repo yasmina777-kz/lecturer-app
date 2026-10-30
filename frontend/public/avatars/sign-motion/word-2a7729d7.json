@@ -2,7 +2,7 @@
   "id": "word-2a7729d7",
   "label": "потом",
   "url": "/avatars/sign-motion/word-2a7729d7.glb",
-  "duration": 2.933333333333333,
+  "duration": 3.6333333333333333,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/2a7729d7-507e-4748-8588-6954d0d52c18.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 4
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:RightHand",
+    "frame": 108,
+    "angle": 8.000151055964453
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 2.9802322387695312e-08
 }

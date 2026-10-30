@@ -2,7 +2,7 @@
   "id": "word-ed66b0ff",
   "label": "показать",
   "url": "/avatars/sign-motion/word-ed66b0ff.glb",
-  "duration": 2.2,
+  "duration": 2.9,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/ed66b0ff-fd37-4050-ab98-6114d72d9826.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 0
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:RightHandPinky3",
+    "frame": 24,
+    "angle": 8.00005372576878
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 3.7252902984619405e-08
 }

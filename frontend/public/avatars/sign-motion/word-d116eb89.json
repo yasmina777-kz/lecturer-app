@@ -2,7 +2,7 @@
   "id": "word-d116eb89",
   "label": "это",
   "url": "/avatars/sign-motion/word-d116eb89.glb",
-  "duration": 2.2,
+  "duration": 2.9,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/d116eb89-9f5b-4e4c-906f-51820266e3fe.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 1
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftHandIndex2",
+    "frame": 24,
+    "angle": 8.00005372576878
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 4.470348358154304e-08
 }

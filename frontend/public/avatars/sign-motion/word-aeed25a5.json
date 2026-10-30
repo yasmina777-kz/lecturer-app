@@ -2,7 +2,7 @@
   "id": "word-aeed25a5",
   "label": "твой",
   "url": "/avatars/sign-motion/word-aeed25a5.glb",
-  "duration": 2.033333333333333,
+  "duration": 2.7333333333333334,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/aeed25a5-ba8d-42f1-88f3-9c0770a8b281.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 3
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 7.998,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:RightHand",
+    "frame": 18,
+    "angle": 7.99799698505496
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 5.960464477539105e-08
 }

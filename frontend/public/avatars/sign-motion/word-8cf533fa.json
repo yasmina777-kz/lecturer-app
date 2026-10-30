@@ -2,7 +2,7 @@
   "id": "word-8cf533fa",
   "label": "страх",
   "url": "/avatars/sign-motion/word-8cf533fa.glb",
-  "duration": 1.9333333333333333,
+  "duration": 2.6333333333333333,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/8cf533fa-b177-4ceb-80ff-18d130192300.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 0
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:RightHandRing2",
+    "frame": 24,
+    "angle": 8.00005372576878
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 4.470348358154312e-08
 }

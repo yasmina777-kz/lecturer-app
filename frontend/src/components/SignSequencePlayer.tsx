@@ -17,6 +17,10 @@ export function SignSequencePlayer({
 }) {
   const timeline = useMemo(() => motionTimeline(plan.steps), [plan.steps]);
   const urls = useMemo(() => plan.steps.map((s) => s.url), [plan.steps]);
+  const trims = useMemo(
+    () => timeline.map((s) => ({ start: s.trimStart, end: s.trimEnd })),
+    [timeline],
+  );
   const duration = timeline[timeline.length - 1]?.end ?? 0;
   const [time, setTime] = useState(0),
     [playing, setPlaying] = useState(autoPlay),
@@ -120,6 +124,7 @@ export function SignSequencePlayer({
                 <Mentor
                   modelUrl="/avatars/mira-blender/letter-a.glb"
                   motionUrls={urls}
+                  motionTrims={trims}
                   onReadyChange={setReady}
                   time={time}
                   closeup={close}

@@ -2,7 +2,7 @@
   "id": "letter-414",
   "label": "Д",
   "url": "/avatars/sign-motion/letter-414.glb",
-  "duration": 2.2,
+  "duration": 2.9,
   "source": "https://github.com/ai-forever/bukva",
   "reference": "/research/rsl/alphabet/0414.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 30
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftHandMiddle3",
+    "frame": 60,
+    "angle": 8.00005372576878
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 1.8626451492309703e-08
 }

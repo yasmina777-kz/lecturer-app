@@ -2,7 +2,7 @@
   "id": "letter-42c",
   "label": "Ь",
   "url": "/avatars/sign-motion/letter-42c.glb",
-  "duration": 2.3,
+  "duration": 3,
   "source": "https://github.com/ai-forever/bukva",
   "reference": "/research/rsl/alphabet/042c.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 4
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftHandRing2",
+    "frame": 24,
+    "angle": 8.00005372576878
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 5.960464477539105e-08
 }

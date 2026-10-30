@@ -2,7 +2,7 @@
   "id": "word-84ff2040",
   "label": "новый",
   "url": "/avatars/sign-motion/word-84ff2040.glb",
-  "duration": 1.9333333333333333,
+  "duration": 2.6333333333333333,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/84ff2040-2ace-4600-bdf2-d613883c459a.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 6
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:RightHandPinky3",
+    "frame": 46,
+    "angle": 8.00005372576878
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 1.4901161193849377e-08
 }

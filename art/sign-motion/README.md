@@ -5,8 +5,8 @@
 ## Pipeline
 
 1. `ml/rsl/capture_motion.py` applies **pretrained** MediaPipe Hand Landmarker and Pose Landmarker to reference videos. No new motion/grammar model is trained. Samples are taken at up to 20 fps, capped at 180 frames per source. Original reference IDs remain attached.
-2. `retarget.py` maps tracked wrists relative to shoulder width, estimates depth from pose landmarks, and rotates individual finger segments onto the existing Blender rig. Bone lengths are preserved. A symmetric filter smooths tracking noise, short gaps are interpolated, and per-frame local angular changes are capped. Entry/exit movement is added for playback transitions.
-3. Animation-only GLBs share the existing avatar mesh. `publish_motion_catalog.py` publishes metadata, sources and the limitations report. In the browser, tracks are joined into one animation with a 0.25-second transition interval. Playback does not remount the avatar between words.
+2. `retarget.py` and `kinematics.py` map wrists and elbow poles relative to tracked shoulders. Finger poses are measured in the palm frame: MCP joints have flexion/spread, PIP/DIP joints have a single hinge axis, and the thumb has a separate saddle-joint swing. Finger translations remain zero. Forearm roll is unwrapped before distribution across skin bones. Symmetric observation filtering, isolated-flip rejection and alternating angular-rate projection clean the curves. Added neutral lead/tail lasts 0.7 s each. This changes motion mechanics; it does not validate the sign's meaning.
+3. Animation-only GLBs share the existing avatar mesh. `publish_motion_catalog.py` publishes metadata, sources and the limitations report. In the browser, tracks are joined into one animation. Synthetic lead/tail poses between words are trimmed, preserving the captured source interval. A 0.25-second quintic eased transition connects adjacent poses; the UI uses the same trimmed timing. Playback does not remount the avatar between words.
 
 ## Reproduce
 
@@ -30,3 +30,11 @@ The technical gate requires pose detection in at least 85% of frames and one han
 Tests check every GLB for compatible skeleton nodes, finite transforms, ordered timestamps and duration; they test combined timelines, phrase matching, morphology, unknown tokens and alphabet/word disambiguation. Initial visual comparison covered Я, хотеть, читать, книга, with browser checks for phrase playback and dictionary entries. This is not a linguistic evaluation of all 203 clips. RSL teacher review is still required before calling them correct teaching demonstrations.
 
 Data adaptations follow the source Bukva/Slovo attribution/share-alike public license. See `frontend/public/avatars/sign-motion/ATTRIBUTION.txt` and each catalog entry's source/reference path. No author endorsement is implied.
+
+## Motion v2 review
+
+`Avatar-motion-workshop.blend` is an ignored local Blender project with the shared mesh/rig and the “книга” animation, ready for manual hand and curve review. Rebuilding the library also refreshes this file. Raw capture, comparison images and Blender binaries stay outside Git; scripts and GLB assets are versioned.
+
+Mechanical checks cover all 203 clips: no off-axis PIP/DIP twist, finite transforms, compatible skeletons and continuous trimmed playback timestamps. The angular-rate cleanup can alter timing around tracking errors; it cannot infer correct contact, facial grammar or occluded fingers. Human review is still required.
+
+Seven saved pre-change clips (А, И, я, читать, хотеть, мать, книга; Git `ff00e9f`) were compared at 30 Hz within their captured intervals. Finger angular-acceleration p95 decreased by 32–54% on those samples. This is a mechanical smoothness measure, not recognition/sign accuracy. Reproduce with `node frontend/scripts/compare-sign-curves.mjs`; all-library checks additionally require no joint step above 8.1° at 30 fps and no translating finger joints.

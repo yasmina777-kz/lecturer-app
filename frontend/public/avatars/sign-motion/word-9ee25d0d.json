@@ -2,7 +2,7 @@
   "id": "word-9ee25d0d",
   "label": "утро",
   "url": "/avatars/sign-motion/word-9ee25d0d.glb",
-  "duration": 2.4,
+  "duration": 3.1,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/9ee25d0d-a522-4099-bc42-b1eaeef688d7.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 1
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:RightHandPinky3",
+    "frame": 26,
+    "angle": 8.00005372576878
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 4.470348358154438e-08
 }

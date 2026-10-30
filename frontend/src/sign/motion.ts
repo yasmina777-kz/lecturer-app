@@ -12,6 +12,8 @@ export type MotionAsset = {
   reference?: string;
   review: string;
   handCoverage?: Record<string, number>;
+  leadIn?: number;
+  leadOut?: number;
 };
 export type MotionStep = MotionAsset & { text: string };
 export type MotionPlan = {
@@ -89,7 +91,11 @@ export function motionTimeline(steps: MotionStep[]) {
   let cursor = 0;
   return steps.map((step, index) => {
     const start = cursor;
-    cursor += step.duration + (index < steps.length - 1 ? MOTION_GAP : 0);
-    return { ...step, start, end: start + step.duration };
+    // Trim only synthetic rest poses, never the captured sign itself.
+    const trimStart = index > 0 ? (step.leadIn ?? 0) : 0;
+    const trimEnd = index < steps.length - 1 ? (step.leadOut ?? 0) : 0;
+    const duration = step.duration - trimStart - trimEnd;
+    cursor += duration + (index < steps.length - 1 ? MOTION_GAP : 0);
+    return { ...step, trimStart, trimEnd, start, end: start + duration };
   });
 }

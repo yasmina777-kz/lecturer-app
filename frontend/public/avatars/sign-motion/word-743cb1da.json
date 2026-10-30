@@ -2,7 +2,7 @@
   "id": "word-743cb1da",
   "label": "мальчик",
   "url": "/avatars/sign-motion/word-743cb1da.glb",
-  "duration": 2.433333333333333,
+  "duration": 3.1333333333333333,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/743cb1da-6fdb-40a1-92e5-0c85c480876d.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 2
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 7.999,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftHand",
+    "frame": 68,
+    "angle": 7.999465475726512
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 2.2351741790772685e-08
 }

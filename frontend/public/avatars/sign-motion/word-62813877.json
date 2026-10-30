@@ -2,7 +2,7 @@
   "id": "word-62813877",
   "label": "маленький",
   "url": "/avatars/sign-motion/word-62813877.glb",
-  "duration": 1.5333333333333334,
+  "duration": 2.2333333333333334,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/62813877-fba9-4ca9-85e0-6c832874b249.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 4
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:RightHandRing1",
+    "frame": 57,
+    "angle": 7.999955541799461
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 2.9802322387695312e-08
 }

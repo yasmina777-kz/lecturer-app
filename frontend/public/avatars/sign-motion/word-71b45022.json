@@ -2,7 +2,7 @@
   "id": "word-71b45022",
   "label": "любовь",
   "url": "/avatars/sign-motion/word-71b45022.glb",
-  "duration": 2.2666666666666666,
+  "duration": 2.966666666666667,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/71b45022-d29a-45c3-837d-5496333083af.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 32
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftHandPinky2",
+    "frame": 27,
+    "angle": 8.00005372576878
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 2.980232238769538e-08
 }

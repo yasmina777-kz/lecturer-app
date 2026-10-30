@@ -2,7 +2,7 @@
   "id": "word-5d7cb3db",
   "label": "брат",
   "url": "/avatars/sign-motion/word-5d7cb3db.glb",
-  "duration": 1.7333333333333334,
+  "duration": 2.433333333333333,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/5d7cb3db-0b02-4edd-8238-be0706020cba.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 0
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftHandRing1",
+    "frame": 15,
+    "angle": 8.00005372576878
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 8.940696716308608e-08
 }

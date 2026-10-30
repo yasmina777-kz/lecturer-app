@@ -2,7 +2,7 @@
   "id": "letter-41e",
   "label": "О",
   "url": "/avatars/sign-motion/letter-41e.glb",
-  "duration": 3.6666666666666665,
+  "duration": 4.366666666666666,
   "source": "https://github.com/ai-forever/bukva",
   "reference": "/research/rsl/alphabet/041e.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 60
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 7.731,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftHandRing1",
+    "frame": 29,
+    "angle": 7.731072338517215
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 2.980232238769554e-08
 }

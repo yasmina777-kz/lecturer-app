@@ -2,7 +2,7 @@
   "id": "word-175ce38d",
   "label": "лето",
   "url": "/avatars/sign-motion/word-175ce38d.glb",
-  "duration": 2.1,
+  "duration": 2.8,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/175ce38d-d704-4f30-a522-35d5d1c8cfd2.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 28
   },
   "poseCoverage": 0.9642857142857143,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 7.999,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftHand",
+    "frame": 46,
+    "angle": 7.999269961561521
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 2.2351741790774025e-08
 }

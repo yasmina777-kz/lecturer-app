@@ -2,7 +2,7 @@
   "id": "word-9357b146",
   "label": "сегодня",
   "url": "/avatars/sign-motion/word-9357b146.glb",
-  "duration": 2,
+  "duration": 2.7,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/9357b146-2273-48a9-8f27-65e8bd13de76.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 1
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:RightHandRing1",
+    "frame": 14,
+    "angle": 8.00005372576878
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 4.4703483581543544e-08
 }

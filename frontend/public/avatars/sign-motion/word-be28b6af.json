@@ -2,7 +2,7 @@
   "id": "word-be28b6af",
   "label": "сын",
   "url": "/avatars/sign-motion/word-be28b6af.glb",
-  "duration": 1.9666666666666666,
+  "duration": 2.6666666666666665,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/be28b6af-defd-46e4-a21e-b0a0334fea59.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 26
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftHandIndex2",
+    "frame": 62,
+    "angle": 8.00005372576878
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 4.470348358154353e-08
 }

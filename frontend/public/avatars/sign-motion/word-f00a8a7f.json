@@ -2,7 +2,7 @@
   "id": "word-f00a8a7f",
   "label": "в этом году",
   "url": "/avatars/sign-motion/word-f00a8a7f.glb",
-  "duration": 2.5,
+  "duration": 3.2,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/506d755c-400e-479a-ac78-e402cd8287be.mp4",
   "handCoverage": {
@@ -14,7 +14,16 @@
     "Right": 0
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 12.0,
+  "maxJointStepDegrees": 8.0,
   "review": "experimental-unreviewed",
-  "method": "MediaPipe capture retargeted in Blender; no translation training"
+  "method": "Anatomical palm-relative fingers, captured elbow IK, symmetric smoothing in Blender; no translation training",
+  "motionVersion": 2,
+  "peakStep": {
+    "bone": "mixamorig:LeftHandRing1",
+    "frame": 14,
+    "angle": 8.00005372576878
+  },
+  "leadIn": 0.7,
+  "leadOut": 0.7,
+  "maxHingeOffAxis": 2.98023223876987e-08
 }
