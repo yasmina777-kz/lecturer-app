@@ -1,0 +1,12 @@
+{
+  "label": "Standing Idle",
+  "source": "Adobe Mixamo",
+  "sourceUrl": "https://www.mixamo.com/",
+  "duration": 6.0,
+  "frames": 181,
+  "fps": 30,
+  "matchedBones": 64,
+  "peakRotationStepDegrees": 1.1460154561650484,
+  "scope": "Body movement trial, not a sign or RSL translation",
+  "url": "/avatars/mixamo-trial/standing-idle.glb"
+}

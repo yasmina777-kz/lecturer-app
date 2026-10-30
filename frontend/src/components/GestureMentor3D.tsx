@@ -25,7 +25,7 @@ export function GestureMentor3D({
   angle: GestureAngle;
   resetToken: number;
   modelUrl?: string;
-  framing?: "full" | "sign" | "letter";
+  framing?: "full" | "sign" | "letter" | "body";
 }) {
   const readyCallback = useRef(onReadyChange);
   readyCallback.current = onReadyChange;
@@ -162,9 +162,11 @@ export function GestureMentor3D({
         ? framing === "letter"
           ? 0.76
           : 1.08
-        : framing === "full"
-          ? 1.95
-          : 1.62;
+        : framing === "body"
+          ? 3.6
+          : framing === "full"
+            ? 1.95
+            : 1.62;
       const radius =
         !close && motionKey !== "[]"
           ? Math.max(
@@ -183,9 +185,11 @@ export function GestureMentor3D({
           ? framing === "letter"
             ? handHeight
             : 1.3
-          : framing === "full"
-            ? 1.3
-            : 1.38,
+          : framing === "body"
+            ? 0.9
+            : framing === "full"
+              ? 1.3
+              : 1.38,
         close ? 0.25 : 0.05,
       );
       camera.position.set(

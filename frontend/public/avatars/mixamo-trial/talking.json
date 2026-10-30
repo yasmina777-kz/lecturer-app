@@ -1,0 +1,12 @@
+{
+  "label": "Talking",
+  "source": "Adobe Mixamo",
+  "sourceUrl": "https://www.mixamo.com/",
+  "duration": 3.933333333333333,
+  "frames": 119,
+  "fps": 30,
+  "matchedBones": 64,
+  "peakRotationStepDegrees": 18.701857079627803,
+  "scope": "Body movement trial, not a sign or RSL translation",
+  "url": "/avatars/mixamo-trial/talking.glb"
+}

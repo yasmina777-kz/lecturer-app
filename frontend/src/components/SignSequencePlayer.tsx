@@ -5,15 +5,20 @@ import { motionTimeline, type MotionPlan } from "../sign/motion";
 import type { GestureAngle } from "./GestureMentor3D";
 import "../pages/gesture-preview.css";
 import "../pages/sign-trainer.css";
+import "../pages/sign-dictionary.css";
 const Mentor = lazy(() =>
   import("./GestureMentor3D").then((m) => ({ default: m.GestureMentor3D })),
 );
 export function SignSequencePlayer({
   plan,
   autoPlay = false,
+  framing = "sign",
+  note,
 }: {
   plan: MotionPlan;
   autoPlay?: boolean;
+  framing?: "sign" | "body";
+  note?: string;
 }) {
   const timeline = useMemo(() => motionTimeline(plan.steps), [plan.steps]);
   const urls = useMemo(() => plan.steps.map((s) => s.url), [plan.steps]);
@@ -130,7 +135,7 @@ export function SignSequencePlayer({
                   closeup={close}
                   angle={angle}
                   resetToken={0}
-                  framing="sign"
+                  framing={framing}
                 />
               </Suspense>
               <span className="sign-avatar-label" aria-live="off">
@@ -266,11 +271,12 @@ export function SignSequencePlayer({
               "Ымдар мәтін ретімен көрсетіледі. Ым тілі грамматикасы автоматты аударылмайды. ",
             )
           : ""}
-        {at(
-          "Движения перенесены с видео или подготовлены вручную. Пальцы при перекрытии рук могут отображаться неточно; сверяйте с видеообразцом.",
-          "Motion is captured from video or authored manually. Occluded fingers may be inaccurate; compare the reference.",
-          "Қимылдар бейнеден көшірілген не қолмен жасалған. Қолдар жабылғанда саусақтар дәл болмауы мүмкін; үлгімен салыстырыңыз.",
-        )}
+        {note ??
+          at(
+            "Движения перенесены с видео или подготовлены вручную. Пальцы при перекрытии рук могут отображаться неточно; сверяйте с видеообразцом.",
+            "Motion is captured from video or authored manually. Occluded fingers may be inaccurate; compare the reference.",
+            "Қимылдар бейнеден көшірілген не қолмен жасалған. Қолдар жабылғанда саусақтар дәл болмауы мүмкін; үлгімен салыстырыңыз.",
+          )}
       </p>
     </section>
   );

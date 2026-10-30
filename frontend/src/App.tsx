@@ -13,6 +13,7 @@ import { Shell } from "./components/Shell";
 import { ErrorMessage, Loading } from "./components/UI";
 import { AuthPage } from "./pages/AuthPage";
 const GesturePreviewPage = lazy(() => import("./pages/GesturePreviewPage").then(m => ({default:m.GesturePreviewPage})));
+const MixamoPreviewPage = lazy(() => import("./pages/MixamoPreviewPage").then(m => ({default:m.MixamoPreviewPage})));
 import LandingPage from "./pages/LandingPage";
 const SignLearningPage = lazy(() => import("./pages/SignWorkspace").then(m => ({default:m.SignLearningPage})));
 const SignLessonPage = lazy(() => import("./pages/SignWorkspace").then(m => ({default:m.SignLessonPage})));
@@ -88,6 +89,7 @@ export function App() {
             <Route path="learn" element={<SignLearningPage />} />
             <Route path="learn/:id" element={<SignLessonPage />} />
             <Route path="text-to-sign" element={<SignTextPage />} />
+            <Route path="avatar-motion" element={<MixamoPreviewPage />} />
 
             <Route path="library" element={<LibraryPage />} />
             <Route path="create" element={<CreatePage />} />

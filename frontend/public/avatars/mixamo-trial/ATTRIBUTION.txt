@@ -1,0 +1,7 @@
+AI Mentor motion trials, 2026-10-30.
+Animation source: Adobe Mixamo (https://www.mixamo.com/).
+Selected clips: Standing Idle; Talking (Asking A Question With Two Hands).
+Downloaded through the user's Adobe account as FBX Binary, Without Skin, 30 fps, no keyframe reduction. Adapted in Blender to AI Mentor's existing MakeHuman-based Mira rig. No Mixamo stock character is included.
+Usage information: https://helpx.adobe.com/creative-cloud/faq/mixamo-faq.html
+Character source: existing CC0 MakeHuman/MPFB base; see art/mira-blender-v2/README.txt.
+These are generic body-motion demonstrations, not RSL signs or a sign-language translation model. They are used only on the motion trial page, not substituted for the educational sign library.
