@@ -395,3 +395,29 @@
   border-color: var(--accent);
   box-shadow: inset 0 0 0 1px var(--accent);
 }
+
+.sign-letter-picker {
+  margin-top: 1rem;
+}
+.sign-letter-picker summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.sign-letter-picker .sign-examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.sign-letter-picker button {
+  min-width: 44px;
+  min-height: 44px;
+}
+.sign-input-hint {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+.sign-avatar-player > .sign-sequence-note {
+  padding: 1rem 1.25rem;
+  margin: 0;
+}

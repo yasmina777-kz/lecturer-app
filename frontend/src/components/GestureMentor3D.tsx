@@ -2,6 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import {
+  AvatarPlayback,
+  type AvatarPlaybackState,
+} from "../sign/avatarPlayback";
 import { composeMotion } from "../sign/composeMotion";
 import { at } from "../i18n/automation";
 
@@ -10,6 +14,7 @@ export function GestureMentor3D({
   time,
   motionUrls,
   motionTrims,
+  playbackState,
   onReadyChange,
   closeup,
   angle,
@@ -18,6 +23,7 @@ export function GestureMentor3D({
   modelUrl = "/avatars/mira-blender/mira-signing-soft.glb",
 }: {
   time: number;
+  playbackState?: AvatarPlaybackState;
   motionUrls?: string[];
   motionTrims?: { start: number; end: number }[];
   onReadyChange?: (ready: boolean) => void;
@@ -32,8 +38,9 @@ export function GestureMentor3D({
   const motionKey = JSON.stringify(motionUrls ?? []);
   const trimKey = JSON.stringify(motionTrims ?? []);
   const host = useRef<HTMLDivElement>(null);
-  const current = useRef({ time, closeup, angle });
-  current.current = { time, closeup, angle };
+  const current = useRef({ time, closeup, angle, playbackState });
+  current.current = { time, closeup, angle, playbackState };
+  const naturalIdle = playbackState !== undefined;
   const api = useRef<{
     pose: (t: number) => void;
     view: (close: boolean, angle: GestureAngle) => void;
@@ -91,6 +98,9 @@ export function GestureMentor3D({
     let clipDuration = 8;
     let mixer: THREE.AnimationMixer | undefined;
     const actions: THREE.AnimationAction[] = [];
+    let playback: AvatarPlayback | undefined;
+    let idleFrame = 0,
+      lastIdleFrame = 0;
     let model: THREE.Group | undefined;
     const disposeModel = (root: THREE.Object3D) => {
       const geometries = new Set<THREE.BufferGeometry>(),
@@ -139,7 +149,9 @@ export function GestureMentor3D({
         action.paused = false;
         action.enabled = true;
       });
-      mixer?.setTime(Math.min(clipDuration, Math.max(0, t)));
+      if (playback)
+        playback.update(t, current.current.playbackState ?? "paused", 0);
+      else mixer?.setTime(Math.min(clipDuration, Math.max(0, t)));
       mount.dataset.poseTime = t.toFixed(2);
       render();
     };
@@ -244,8 +256,17 @@ export function GestureMentor3D({
         });
         scene.add(model);
         mixer = new THREE.AnimationMixer(model);
-        let clips = gltf.animations;
+        let clips = naturalIdle ? [] : gltf.animations;
+        let idleClip: THREE.AnimationClip | undefined;
         try {
+          if (naturalIdle) {
+            const idle = await new GLTFLoader().loadAsync(
+              "/avatars/mixamo-trial/standing-idle.glb",
+            );
+            idleClip = idle.animations[0];
+            disposeModel(idle.scene);
+            if (!idleClip) throw new Error("Missing idle animation");
+          }
           const urls: string[] = JSON.parse(motionKey);
           if (urls.length) {
             const sources = new Map<string, THREE.AnimationClip>();
@@ -276,8 +297,29 @@ export function GestureMentor3D({
           return;
         }
         if (!alive) return;
-        clipDuration = Math.max(...clips.map((clip) => clip.duration));
-        for (const clip of clips) {
+        clipDuration = Math.max(0, ...clips.map((clip) => clip.duration));
+        if (idleClip) {
+          playback = new AvatarPlayback(mixer, clips, idleClip);
+          const tickIdle = (now: number) => {
+            const dt = lastIdleFrame
+              ? Math.min(0.05, (now - lastIdleFrame) / 1000)
+              : 0;
+            lastIdleFrame = visible && !document.hidden ? now : 0;
+            if (visible && !document.hidden) {
+              playback!.update(
+                current.current.time,
+                current.current.playbackState ?? "paused",
+                dt,
+              );
+              mount.dataset.playbackState =
+                current.current.playbackState ?? "paused";
+              render();
+            }
+            if (alive) idleFrame = requestAnimationFrame(tickIdle);
+          };
+          idleFrame = requestAnimationFrame(tickIdle);
+        }
+        for (const clip of idleClip ? [] : clips) {
           const action = mixer.clipAction(clip);
           action.setLoop(THREE.LoopOnce, 1);
           action.clampWhenFinished = true;
@@ -299,6 +341,7 @@ export function GestureMentor3D({
     );
     return () => {
       alive = false;
+      cancelAnimationFrame(idleFrame);
       api.current = undefined;
       observer.disconnect();
       visibility.disconnect();
@@ -311,8 +354,8 @@ export function GestureMentor3D({
       renderer.dispose();
       renderer.domElement.remove();
     };
-  }, [modelUrl, framing, motionKey, trimKey]);
-  useEffect(() => api.current?.pose(time), [time]);
+  }, [modelUrl, framing, motionKey, trimKey, naturalIdle]);
+  useEffect(() => api.current?.pose(time), [time, playbackState]);
   useEffect(
     () => api.current?.view(closeup, angle),
     [closeup, angle, resetToken],

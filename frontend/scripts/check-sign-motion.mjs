@@ -14,6 +14,14 @@ const timeline=motionTimeline(plan.steps);assert.equal(timeline.length,4);assert
 plan=planMotion('Здравствуйте! Как тебя зовут? Спасибо.',entries,forms,assets);assert.equal(plan.steps.length,3);assert.deepEqual(plan.missing,[]);
 plan=planMotion('Я не абракадабра',entries,forms,assets);assert.deepEqual(plan.missing,['абракадабра']);assert.ok(plan.steps.some(s=>s.label==='не'));
 plan=planMotion('Юлия',entries,forms,assets,true);assert.equal(plan.steps.length,4);assert.ok(plan.steps.every(s=>s.id.startsWith('letter-')));
+for (const entry of alphabetEntries()) {
+ const letter = planMotion(entry.label.toLowerCase(), entries, forms, assets);
+ assert.equal(letter.spelling, true);
+ assert.deepEqual(letter.missing, []);
+ assert.equal(letter.steps.length, 1);
+ assert.equal(letter.steps[0].id, entry.id);
+}
+assert.equal(planMotion('я хочу', entries, forms, assets).spelling, false);
 const base=await readFile(new URL('../public/avatars/mira-blender/letter-a.glb',import.meta.url));const j=JSON.parse(base.subarray(20,20+base.readUInt32LE(12)).toString());const boneNames=new Set(j.nodes.map(n=>n.name));
 const clips=[];
 for(const asset of assets){

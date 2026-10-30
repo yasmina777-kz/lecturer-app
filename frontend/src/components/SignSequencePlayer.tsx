@@ -14,11 +14,13 @@ export function SignSequencePlayer({
   autoPlay = false,
   framing = "sign",
   note,
+  naturalIdle = framing === "sign",
 }: {
   plan: MotionPlan;
   autoPlay?: boolean;
   framing?: "sign" | "body";
   note?: string;
+  naturalIdle?: boolean;
 }) {
   const timeline = useMemo(() => motionTimeline(plan.steps), [plan.steps]);
   const urls = useMemo(() => plan.steps.map((s) => s.url), [plan.steps]);
@@ -27,6 +29,7 @@ export function SignSequencePlayer({
     [timeline],
   );
   const duration = timeline[timeline.length - 1]?.end ?? 0;
+  const [started, setStarted] = useState(autoPlay);
   const [time, setTime] = useState(0),
     [playing, setPlaying] = useState(autoPlay),
     [ready, setReady] = useState(false),
@@ -78,6 +81,7 @@ export function SignSequencePlayer({
   const current =
     timeline.find((s) => time < s.end) ?? timeline[timeline.length - 1];
   function seek(t: number) {
+    setStarted(true);
     clock.current = t;
     setTime(t);
     setPlaying(false);
@@ -92,7 +96,7 @@ export function SignSequencePlayer({
           {at("Пробная анимация", "Experimental motion", "Сынақ анимациясы")}
         </span>
       </div>
-      {blocked && (
+      {blocked && plan.missing.length > 0 && (
         <p className="sign-sequence-missing" role="status">
           {at(
             "Не хватает движений для:",
@@ -111,7 +115,7 @@ export function SignSequencePlayer({
           )}
         </p>
       )}
-      {!blocked && (
+      {(!blocked || naturalIdle) && (
         <>
           <div className="sign-avatar-player gesture-page">
             <div ref={stage} className="sign-avatar-stage sign-sequence-stage">
@@ -128,7 +132,16 @@ export function SignSequencePlayer({
               >
                 <Mentor
                   modelUrl="/avatars/mira-blender/letter-a.glb"
-                  motionUrls={urls}
+                  motionUrls={blocked ? [] : urls}
+                  playbackState={
+                    naturalIdle
+                      ? blocked || !started || time >= duration
+                        ? "idle"
+                        : playing
+                          ? "playing"
+                          : "paused"
+                      : undefined
+                  }
                   motionTrims={trims}
                   onReadyChange={setReady}
                   time={time}
@@ -139,7 +152,13 @@ export function SignSequencePlayer({
                 />
               </Suspense>
               <span className="sign-avatar-label" aria-live="off">
-                {current?.text}
+                {blocked || !started || time >= duration
+                  ? at(
+                      "Готова показать",
+                      "Ready to demonstrate",
+                      "Көрсетуге дайын",
+                    )
+                  : current?.text}
               </span>
               <button
                 className="sign-zoom"
@@ -152,115 +171,141 @@ export function SignSequencePlayer({
                   : at("Приблизить руки", "Zoom hands", "Қолды үлкейту")}
               </button>
             </div>
-            <div className="sign-sequence-controls">
-              <div className="sign-sequence-buttons">
-                <button
-                  className="button primary"
-                  disabled={!ready}
-                  onClick={() => {
-                    if (clock.current >= duration) {
+            {blocked && (
+              <p className="sign-sequence-note" role="status">
+                {at(
+                  "Введите букву или фразу либо выберите слово в словаре. Аватар покажет доступные движения здесь.",
+                  "Enter a letter or phrase, or select a dictionary word. Your avatar will demonstrate here.",
+                  "Әріп не сөйлем енгізіңіз немесе сөздіктен таңдаңыз. Аватар осы жерде көрсетеді.",
+                )}
+              </p>
+            )}
+            {!blocked && (
+              <div className="sign-sequence-controls">
+                <div className="sign-sequence-buttons">
+                  <button
+                    className="button primary"
+                    disabled={!ready}
+                    onClick={() => {
+                      if (clock.current >= duration) {
+                        clock.current = 0;
+                        setTime(0);
+                      }
+                      setStarted(true);
+                      setPlaying((v) => !v);
+                    }}
+                  >
+                    {playing && ready ? (
+                      <Pause size={18} />
+                    ) : (
+                      <Play size={18} />
+                    )}{" "}
+                    {!ready
+                      ? at("Загрузка…", "Loading…", "Жүктелуде…")
+                      : playing
+                        ? at("Пауза", "Pause", "Кідірту")
+                        : at("Показать всё", "Play all", "Толық көрсету")}
+                  </button>
+                  <button
+                    className="button secondary"
+                    disabled={!ready}
+                    onClick={() => {
                       clock.current = 0;
                       setTime(0);
-                    }
-                    setPlaying((v) => !v);
-                  }}
-                >
-                  {playing && ready ? <Pause size={18} /> : <Play size={18} />}{" "}
-                  {!ready
-                    ? at("Загрузка…", "Loading…", "Жүктелуде…")
-                    : playing
-                      ? at("Пауза", "Pause", "Кідірту")
-                      : at("Показать всё", "Play all", "Толық көрсету")}
-                </button>
+                      setStarted(true);
+                      setPlaying(true);
+                    }}
+                  >
+                    <RotateCcw size={17} />
+                    {at("Сначала", "Restart", "Басынан")}
+                  </button>
+                  <label>
+                    {at("Скорость", "Speed", "Жылдамдық")}
+                    <select
+                      value={speed}
+                      onChange={(e) => setSpeed(Number(e.target.value))}
+                    >
+                      <option value=".5">0.5×</option>
+                      <option value=".75">0.75×</option>
+                      <option value="1">1×</option>
+                      <option value="1.25">1.25×</option>
+                    </select>
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={loop}
+                      onChange={(e) => setLoop(e.target.checked)}
+                    />
+                    {at("Повторять", "Loop", "Қайталау")}
+                  </label>
+                </div>
+                <input
+                  className="sign-sequence-range"
+                  aria-label={at(
+                    "Позиция показа",
+                    "Playback position",
+                    "Көрсетілім орны",
+                  )}
+                  type="range"
+                  min="0"
+                  max={duration}
+                  step=".01"
+                  value={time}
+                  onChange={(e) => seek(Number(e.target.value))}
+                />
+                <div className="sign-sequence-bottom">
+                  <span>
+                    {time.toFixed(1)} / {duration.toFixed(1)}{" "}
+                    {at("с", "s", "с")}
+                  </span>
+                  <div role="group" aria-label={at("Ракурс", "View", "Ракурс")}>
+                    {(["front", "three-quarter", "side"] as const).map(
+                      (v, i) => (
+                        <button
+                          key={v}
+                          aria-pressed={angle === v}
+                          onClick={() => setAngle(v)}
+                        >
+                          {
+                            [
+                              at("Спереди", "Front", "Алдынан"),
+                              "¾",
+                              at("Сбоку", "Side", "Бүйірден"),
+                            ][i]
+                          }
+                        </button>
+                      ),
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+          {!blocked && (
+            <div
+              className="sign-sequence-words"
+              aria-label={at(
+                "Порядок показа",
+                "Playback order",
+                "Көрсету реті",
+              )}
+            >
+              {timeline.map((s, i) => (
                 <button
-                  className="button secondary"
-                  disabled={!ready}
+                  key={i}
+                  aria-current={s === current ? "step" : undefined}
                   onClick={() => {
-                    clock.current = 0;
-                    setTime(0);
+                    seek(s.start);
                     setPlaying(true);
                   }}
                 >
-                  <RotateCcw size={17} />
-                  {at("Сначала", "Restart", "Басынан")}
+                  <span>{i + 1}</span>
+                  {s.text}
                 </button>
-                <label>
-                  {at("Скорость", "Speed", "Жылдамдық")}
-                  <select
-                    value={speed}
-                    onChange={(e) => setSpeed(Number(e.target.value))}
-                  >
-                    <option value=".5">0.5×</option>
-                    <option value=".75">0.75×</option>
-                    <option value="1">1×</option>
-                    <option value="1.25">1.25×</option>
-                  </select>
-                </label>
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={loop}
-                    onChange={(e) => setLoop(e.target.checked)}
-                  />
-                  {at("Повторять", "Loop", "Қайталау")}
-                </label>
-              </div>
-              <input
-                className="sign-sequence-range"
-                aria-label={at(
-                  "Позиция показа",
-                  "Playback position",
-                  "Көрсетілім орны",
-                )}
-                type="range"
-                min="0"
-                max={duration}
-                step=".01"
-                value={time}
-                onChange={(e) => seek(Number(e.target.value))}
-              />
-              <div className="sign-sequence-bottom">
-                <span>
-                  {time.toFixed(1)} / {duration.toFixed(1)} {at("с", "s", "с")}
-                </span>
-                <div role="group" aria-label={at("Ракурс", "View", "Ракурс")}>
-                  {(["front", "three-quarter", "side"] as const).map((v, i) => (
-                    <button
-                      key={v}
-                      aria-pressed={angle === v}
-                      onClick={() => setAngle(v)}
-                    >
-                      {
-                        [
-                          at("Спереди", "Front", "Алдынан"),
-                          "¾",
-                          at("Сбоку", "Side", "Бүйірден"),
-                        ][i]
-                      }
-                    </button>
-                  ))}
-                </div>
-              </div>
+              ))}
             </div>
-          </div>
-          <div
-            className="sign-sequence-words"
-            aria-label={at("Порядок показа", "Playback order", "Көрсету реті")}
-          >
-            {timeline.map((s, i) => (
-              <button
-                key={i}
-                aria-current={s === current ? "step" : undefined}
-                onClick={() => {
-                  seek(s.start);
-                  setPlaying(true);
-                }}
-              >
-                <span>{i + 1}</span>
-                {s.text}
-              </button>
-            ))}
-          </div>
+          )}
         </>
       )}
       <p className="sign-sequence-note">

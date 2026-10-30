@@ -12,6 +12,7 @@ import { SignSequencePlayer } from "../components/SignSequencePlayer";
 import { exercises } from "../sign/exercises";
 import "./sign-dictionary.css";
 import { ReferenceVideo } from "../components/SignReferenceVideo";
+const emptyMotionPlan = { steps: [], missing: [], spelling: false };
 const categoryTranslations: Record<string, [string, string]> = {
   Алфавит: ["Alphabet", "Әліпби"],
   Общение: ["Communication", "Қарым-қатынас"],
@@ -50,7 +51,7 @@ export function SignDictionaryPage() {
     [selected, setSelected] = useState<DictionaryEntry | null>(null),
     [page, setPage] = useState(1),
     [message, setMessage] = useState("");
-  const resultRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const abort = new AbortController();
     Promise.all([
@@ -119,8 +120,12 @@ export function SignDictionaryPage() {
   const categories = ["Все", ...new Set(entries.map((e) => e.category))];
   function choose(entry: DictionaryEntry) {
     setSelected(entry);
+    setRun((v) => v + 1);
     requestAnimationFrame(() =>
-      resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }),
+      sequenceRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      }),
     );
   }
   function analyse() {
@@ -309,35 +314,108 @@ export function SignDictionaryPage() {
                 </button>
               ))}
             </div>
+            <details className="sign-letter-picker">
+              <summary>
+                {at(
+                  "Выбрать букву · А–Я",
+                  "Choose a letter · А–Я",
+                  "Әріпті таңдау · А–Я",
+                )}
+              </summary>
+              <div
+                className="sign-examples"
+                aria-label={at("Алфавит", "Alphabet", "Әліпби")}
+              >
+                {alphabetEntries().map((entry) => (
+                  <button
+                    key={entry.id}
+                    onClick={() => choose(entry)}
+                    aria-pressed={selected?.id === entry.id}
+                  >
+                    {entry.label}
+                  </button>
+                ))}
+              </div>
+            </details>
+            <p className="sign-input-hint">
+              {at(
+                "Одна буква распознаётся автоматически. Для целого имени включите показ по буквам.",
+                "A single letter is selected automatically. For a whole name, enable spelling.",
+                "Бір әріп автоматты таңдалады. Толық есім үшін әріптеуді қосыңыз.",
+              )}
+            </p>
             {message && <p role="status">{message}</p>}
           </section>
-          {submitted && (
-            <div ref={sequenceRef} className="sign-dictionary-result">
-              <SignSequencePlayer
-                key={`${run}-${spelling}`}
-                plan={motionPlan}
-                autoPlay
-              />
-              <details className="sign-dictionary-reference">
-                <summary>
-                  {at(
-                    "Что входит в показ",
-                    "What is included",
-                    "Көрсетілім құрамы",
-                  )}
-                </summary>
-                <p>
-                  {at(
-                    "Слова, для которых есть движения, показываются последовательно. Неизвестные слова не пропускаются. Это пробный показ слов, а не проверенный перевод предложения на РЖЯ.",
-                    "Available signs play in sequence. Unknown words are never silently skipped. This is an experimental sign sequence, not a verified sentence translation into RSL.",
-                    "Қолжетімді ымдар ретімен көрсетіледі. Белгісіз сөздер түсіп қалмайды. Бұл — сынақ көрсетілімі, сөйлемнің тексерілген аудармасы емес.",
-                  )}
-                </p>
-              </details>
-            </div>
-          )}
         </>
       )}
+      {tab !== "grammar" && (
+        <div ref={sequenceRef} className="sign-dictionary-result">
+          <SignSequencePlayer
+            key={`${tab}-${run}-${spelling}-${selected?.id ?? submitted}`}
+            plan={
+              selectedPlan ?? (tab === "text" ? motionPlan : emptyMotionPlan)
+            }
+            autoPlay={!!(selected || (tab === "text" && submitted))}
+          />
+          {((tab === "text" && submitted) || selected) && (
+            <details className="sign-dictionary-reference">
+              <summary>
+                {at(
+                  "Что входит в показ",
+                  "What is included",
+                  "Көрсетілім құрамы",
+                )}
+              </summary>
+              <p>
+                {at(
+                  "Слова, для которых есть движения, показываются последовательно. Неизвестные слова не пропускаются. Это пробный показ слов, а не проверенный перевод предложения на РЖЯ.",
+                  "Available signs play in sequence. Unknown words are never silently skipped. This is an experimental sign sequence, not a verified sentence translation into RSL.",
+                  "Қолжетімді ымдар ретімен көрсетіледі. Белгісіз сөздер түсіп қалмайды. Бұл — сынақ көрсетілімі, сөйлемнің тексерілген аудармасы емес.",
+                )}
+              </p>
+            </details>
+          )}
+        </div>
+      )}
+      <div className="sign-dictionary-result">
+        {selected && (
+          <>
+            <details
+              className="sign-dictionary-reference"
+              open={!selectedPlan?.steps.length}
+            >
+              <summary>
+                {at(
+                  "Сравнить с видео человека",
+                  "Compare with the human reference",
+                  "Адамның бейнесімен салыстыру",
+                )}
+              </summary>
+              <ReferenceVideo key={selected.id} entry={selected} />
+            </details>
+            {selected.category === "Алфавит" && (
+              <Link
+                className="button secondary"
+                to={`/practice?exercise=${exercises().find((e) => e.letter === selected.label)?.id}`}
+              >
+                <ArrowRight size={17} />
+                {at(
+                  "Повторить и проверить ИИ",
+                  "Practise with AI",
+                  "ЖИ арқылы жаттығу",
+                )}
+              </Link>
+            )}
+            <p>
+              {at(
+                "Образец из исследовательского набора; для учебной программы нужна проверка преподавателя РЖЯ.",
+                "Research dataset reference; a teaching curriculum needs review by an RSL educator.",
+                "Зерттеу деректеріндегі үлгі; оқу бағдарламасын ым тілі мұғалімі тексеруі қажет.",
+              )}
+            </p>
+          </>
+        )}
+      </div>
       {tab === "dictionary" && (
         <>
           <div className="sign-dictionary-filter">
@@ -437,52 +515,6 @@ export function SignDictionaryPage() {
         </>
       )}
       {tab === "grammar" && <GrammarGuide />}
-      <div ref={resultRef} className="sign-dictionary-result">
-        {selected && (
-          <>
-            {selectedPlan && (
-              <SignSequencePlayer
-                key={selected.id}
-                plan={selectedPlan}
-                autoPlay
-              />
-            )}
-            <details
-              className="sign-dictionary-reference"
-              open={!selectedPlan?.steps.length}
-            >
-              <summary>
-                {at(
-                  "Сравнить с видео человека",
-                  "Compare with the human reference",
-                  "Адамның бейнесімен салыстыру",
-                )}
-              </summary>
-              <ReferenceVideo key={selected.id} entry={selected} />
-            </details>
-            {selected.category === "Алфавит" && (
-              <Link
-                className="button secondary"
-                to={`/practice?exercise=${exercises().find((e) => e.letter === selected.label)?.id}`}
-              >
-                <ArrowRight size={17} />
-                {at(
-                  "Повторить и проверить ИИ",
-                  "Practise with AI",
-                  "ЖИ арқылы жаттығу",
-                )}
-              </Link>
-            )}
-            <p>
-              {at(
-                "Образец из исследовательского набора; для учебной программы нужна проверка преподавателя РЖЯ.",
-                "Research dataset reference; a teaching curriculum needs review by an RSL educator.",
-                "Зерттеу деректеріндегі үлгі; оқу бағдарламасын ым тілі мұғалімі тексеруі қажет.",
-              )}
-            </p>
-          </>
-        )}
-      </div>
       <p className="sign-catalog-note">
         <a
           href="/research/rsl/words/ATTRIBUTION.txt"

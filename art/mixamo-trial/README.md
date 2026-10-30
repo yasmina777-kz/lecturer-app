@@ -9,7 +9,7 @@
 Local outputs (ignored in Git):
 - `AI-Mentor-Mira-Mixamo.fbx`: existing 64-bone skeleton, 30 finger joints, 6 meshes, textures embedded, no animation. FBX round-trip validation passed.
 - `AI-Mentor-Mira-AutoRig.fbx`: neutral mesh-only fallback for Mixamo auto-rigging.
-- `validation.json`: local export checks. Mixamo acceptance is not yet tested.
+- `validation.json`: local export checks. Mixamo acceptance was subsequently confirmed (see below).
 
 The rigged export was accepted by Mixamo on 2026-10-30 using the user's Adobe account. Two animations were downloaded: Standing Idle and Talking (Asking A Question With Two Hands), FBX Binary, 30 fps, Without Skin, no keyframe reduction. Original FBX files remain local/ignored.
 
@@ -25,3 +25,12 @@ Adobe references:
 - https://helpx.adobe.com/creative-cloud/help/mixamo-rigging-animation.html
 
 Source character: the existing MakeHuman CC0 Mira base; see `art/mira-blender-v2/README.txt`. The generated application clips are attributed in `frontend/public/avatars/mixamo-trial/ATTRIBUTION.txt`.
+
+Integrated playback (`/text-to-sign`, dictionary and captured-letter exercises):
+- `SignSequencePlayer` uses the same Mira skeleton for both sources. `AvatarPlayback` plays Standing Idle before/after a request and blends through the neutral lead-in in 350 ms.
+- Meaningful sign poses receive zero idle contribution; pause/scrub uses exact source transforms. Seeking to a word beyond the lead-in selects its exact pose immediately. Talking remains in the separate body-motion trial only.
+- Single Cyrillic characters automatically select the alphabet. A sentence beginning with «Я» still uses word signs. All 33 letters are checked against catalog IDs.
+- Unsupported tokens block the full phrase; they are never silently skipped or replaced by arbitrary body gestures.
+- This integration does not train a text-to-RSL model. Selection uses the local dictionary and word forms; the existing camera classifier is a separate AI component. No inference API key is required. Gesture and grammar correctness still needs RSL signer validation.
+
+Additional regression check: `node frontend/scripts/check-avatar-playback.mjs` (exclusive motion weights, exact pause/seek/resume poses, empty state and word jumps).

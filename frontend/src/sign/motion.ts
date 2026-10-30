@@ -40,6 +40,7 @@ export function planMotion(
   assets: MotionAsset[],
   spelling = false,
 ): MotionPlan {
+  spelling = spelling || /^[а-яё]$/iu.test(text.trim());
   const legacy = preparedSigns
     .filter((p) => p.phrase.length > 1)
     .map((p) => ({
