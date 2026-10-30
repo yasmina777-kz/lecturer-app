@@ -17,16 +17,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandThumb1",
-      "frame": 14,
+      "bone": "mixamorig:LeftHandRing3",
+      "frame": 25,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 24.76936324093687
   },
   {
     "id": "word-44bc9933",
@@ -44,18 +45,19 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 8.0,
+    "maxJointStepDegrees": 7.631,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex2",
-      "frame": 28,
-      "angle": 8.00005372576878
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 70,
+      "angle": 7.630728321873265
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 3.725290298461914e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 12.954443888205715
   },
   {
     "id": "word-0f02bf01",
@@ -75,16 +77,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHandIndex2",
-      "frame": 24,
+      "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 21.25261131213004
   },
   {
     "id": "word-c1596705",
@@ -104,8 +107,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHand",
       "frame": 86,
@@ -113,7 +116,8 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 24.50261238178066
   },
   {
     "id": "word-069645d8",
@@ -133,8 +137,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 7.915,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHand",
       "frame": 24,
@@ -142,7 +146,8 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790771484e-08
+    "maxHingeOffAxis": 7.450580596923828e-09,
+    "meanFingerDirectionErrorDegrees": 7.183978907428311
   },
   {
     "id": "word-aeed25a5",
@@ -160,18 +165,19 @@
       "Right": 3
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.998,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHand",
-      "frame": 18,
-      "angle": 7.997800617116322
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 28,
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 11.298159351707621
   },
   {
     "id": "word-e29e36fe",
@@ -191,8 +197,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 6.996,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftForearmRoll0",
       "frame": 19,
@@ -200,7 +206,8 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 1.1175870895385742e-08,
+    "meanFingerDirectionErrorDegrees": 5.918342254856412
   },
   {
     "id": "word-8c1a7f26",
@@ -220,16 +227,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing2",
-      "frame": 45,
+      "bone": "mixamorig:LeftHandPinky2",
+      "frame": 44,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539063e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 12.280595993848511
   },
   {
     "id": "word-b7dfae4f",
@@ -249,16 +257,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex3",
-      "frame": 24,
+      "bone": "mixamorig:RightHandMiddle3",
+      "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 11.02116062038643
   },
   {
     "id": "word-38153f62",
@@ -278,16 +287,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle3",
-      "frame": 42,
+      "bone": "mixamorig:LeftHandRing1",
+      "frame": 15,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 15.300127415213783
   },
   {
     "id": "word-4699249c",
@@ -307,16 +317,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky2",
-      "frame": 52,
-      "angle": 7.999857357830142
+      "bone": "mixamorig:RightHandPinky1",
+      "frame": 51,
+      "angle": 7.999661843665151
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 3.725290298461914e-08,
+    "meanFingerDirectionErrorDegrees": 11.617826529909307
   },
   {
     "id": "word-1ff178a6",
@@ -336,16 +347,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandMiddle2",
+      "bone": "mixamorig:LeftHandPinky2",
       "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 16.450280853036666
   },
   {
     "id": "word-fc2a83a7",
@@ -365,16 +377,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex2",
+      "bone": "mixamorig:RightHandPinky2",
       "frame": 29,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 12.5932847641182
   },
   {
     "id": "word-7143af36",
@@ -394,16 +407,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing2",
+      "bone": "mixamorig:RightHandRing3",
       "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 14.629924862100752
   },
   {
     "id": "word-3df3b9dc",
@@ -423,16 +437,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandThumb1",
-      "frame": 13,
+      "bone": "mixamorig:RightHandIndex2",
+      "frame": 34,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 25.794800062319084
   },
   {
     "id": "word-26e2d0ce",
@@ -452,16 +467,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky2",
-      "frame": 24,
+      "bone": "mixamorig:RightHandRing3",
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 15.35100229802829
   },
   {
     "id": "word-8f8056fe",
@@ -481,16 +497,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex2",
-      "frame": 24,
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539063e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 13.829295334694335
   },
   {
     "id": "word-d5e5068b",
@@ -510,16 +527,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandPinky3",
+      "bone": "mixamorig:LeftHandMiddle2",
       "frame": 39,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 11.607031773057344
   },
   {
     "id": "word-d116eb89",
@@ -539,16 +557,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky2",
-      "frame": 23,
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 5.960464477539063e-08,
+    "meanFingerDirectionErrorDegrees": 14.014583472929505
   },
   {
     "id": "word-83b8a1b6",
@@ -568,16 +587,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandPinky3",
-      "frame": 23,
+      "bone": "mixamorig:LeftHandMiddle2",
+      "frame": 17,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 20.127549393276038
   },
   {
     "id": "word-728c296d",
@@ -597,16 +617,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex1",
-      "frame": 16,
+      "bone": "mixamorig:LeftHandRing1",
+      "frame": 15,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 3.725290298461914e-08,
+    "meanFingerDirectionErrorDegrees": 20.290280113452262
   },
   {
     "id": "word-38c6f832",
@@ -626,16 +647,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandPinky2",
-      "frame": 23,
+      "bone": "mixamorig:LeftHandMiddle2",
+      "frame": 17,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 19.039191752693732
   },
   {
     "id": "word-f1a5226d",
@@ -655,8 +677,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHandThumb1",
       "frame": 14,
@@ -664,7 +686,8 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 5.960464477539063e-08,
+    "meanFingerDirectionErrorDegrees": 27.930935260585553
   },
   {
     "id": "word-03ac3272",
@@ -684,16 +707,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHandMiddle2",
-      "frame": 76,
+      "frame": 78,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790771484e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 14.357368544249864
   },
   {
     "id": "word-92e94ab2",
@@ -713,16 +737,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky1",
-      "frame": 70,
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 72,
       "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 9.344076828176497
   },
   {
     "id": "word-ed66b0ff",
@@ -742,16 +767,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHandPinky3",
-      "frame": 28,
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 15.931799935133599
   },
   {
     "id": "word-41df6170",
@@ -771,16 +797,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandThumb1",
-      "frame": 16,
+      "bone": "mixamorig:LeftHandMiddle2",
+      "frame": 17,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 20.69841991439792
   },
   {
     "id": "word-c58e68e8",
@@ -798,18 +825,19 @@
       "Right": 30
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.99,
+    "maxJointStepDegrees": 7.973,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex1",
-      "frame": 65,
-      "angle": 7.990255819404396
+      "bone": "mixamorig:LeftHandIndex2",
+      "frame": 45,
+      "angle": 7.972590388889805
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 8.573756015160361
   },
   {
     "id": "word-9e551d12",
@@ -829,16 +857,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky3",
-      "frame": 26,
-      "angle": 8.00005372576878
+      "bone": "mixamorig:RightHandRing1",
+      "frame": 62,
+      "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 13.516126715092303
   },
   {
     "id": "word-b19972c4",
@@ -858,16 +887,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky3",
-      "frame": 24,
+      "bone": "mixamorig:RightHandMiddle3",
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 15.759613121326678
   },
   {
     "id": "word-c3c582bb",
@@ -887,16 +917,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex2",
-      "frame": 26,
+      "bone": "mixamorig:RightHandIndex3",
+      "frame": 29,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 23.456465392719053
   },
   {
     "id": "word-a1a428c3",
@@ -916,16 +947,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHandRing2",
-      "frame": 27,
-      "angle": 7.999955541799461
+      "frame": 28,
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 1.4901161193847656e-08,
+    "meanFingerDirectionErrorDegrees": 8.94679547724989
   },
   {
     "id": "word-78a4ca40",
@@ -945,16 +977,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing2",
-      "frame": 40,
-      "angle": 7.999955541799461
+      "bone": "mixamorig:RightHandRing1",
+      "frame": 41,
+      "angle": 7.999857357830142
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790771484e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 10.87788408838194
   },
   {
     "id": "word-5d7cb3db",
@@ -974,16 +1007,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandPinky2",
+      "bone": "mixamorig:RightHandPinky3",
       "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 22.98447752773792
   },
   {
     "id": "word-22f60354",
@@ -1003,16 +1037,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandThumb1",
-      "frame": 16,
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 14,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 18.718109879101974
   },
   {
     "id": "word-be28b6af",
@@ -1032,16 +1067,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex3",
-      "frame": 26,
+      "bone": "mixamorig:LeftHandIndex2",
+      "frame": 29,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 1.4901161193847656e-08,
+    "meanFingerDirectionErrorDegrees": 22.67649432864709
   },
   {
     "id": "word-6c7d80f0",
@@ -1061,16 +1097,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing2",
-      "frame": 26,
+      "bone": "mixamorig:RightHandPinky2",
+      "frame": 25,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539063e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 14.37387050661374
   },
   {
     "id": "word-b4f237bd",
@@ -1090,16 +1127,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHandIndex3",
-      "frame": 32,
+      "frame": 37,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 11.158626475349823
   },
   {
     "id": "word-cd6a9d0b",
@@ -1119,8 +1157,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHand",
       "frame": 85,
@@ -1128,7 +1166,8 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 8.940696716308594e-08
+    "maxHingeOffAxis": 5.960464477539063e-08,
+    "meanFingerDirectionErrorDegrees": 24.729374204681374
   },
   {
     "id": "word-40af2c54",
@@ -1148,16 +1187,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHandIndex3",
-      "frame": 30,
+      "frame": 28,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 5.960464477539063e-08,
+    "meanFingerDirectionErrorDegrees": 12.945646658821946
   },
   {
     "id": "word-0b485a5f",
@@ -1177,16 +1217,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHandPinky2",
-      "frame": 36,
+      "frame": 35,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 14.447574424367984
   },
   {
     "id": "word-69586c66",
@@ -1206,16 +1247,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle3",
-      "frame": 60,
+      "bone": "mixamorig:RightHandIndex2",
+      "frame": 30,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 5.960464477539063e-08,
+    "meanFingerDirectionErrorDegrees": 11.749409396058788
   },
   {
     "id": "word-580edc90",
@@ -1235,16 +1277,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex3",
+      "bone": "mixamorig:RightHandPinky3",
       "frame": 27,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 26.786046361449834
   },
   {
     "id": "word-e526814e",
@@ -1264,16 +1307,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing3",
-      "frame": 25,
+      "bone": "mixamorig:LeftHandMiddle2",
+      "frame": 17,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 17.555374271497225
   },
   {
     "id": "word-743cb1da",
@@ -1293,16 +1337,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandMiddle3",
-      "frame": 67,
+      "bone": "mixamorig:LeftHandIndex3",
+      "frame": 75,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 11.930418532627664
   },
   {
     "id": "word-912db910",
@@ -1320,18 +1365,19 @@
       "Right": 4
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.966,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing1",
+      "bone": "mixamorig:LeftHandMiddle2",
       "frame": 26,
-      "angle": 7.966201600694904
+      "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 8.98729060848679
   },
   {
     "id": "word-6106a42d",
@@ -1351,16 +1397,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHandMiddle3",
-      "frame": 25,
+      "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 26.47221190012992
   },
   {
     "id": "word-e10fbdcb",
@@ -1380,16 +1427,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHandRing2",
       "frame": 25,
-      "angle": 7.999955541799461
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 1.4901161193847656e-08,
+    "meanFingerDirectionErrorDegrees": 13.271458774334159
   },
   {
     "id": "word-6a2d01fd",
@@ -1409,16 +1457,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing2",
+      "bone": "mixamorig:LeftHandMiddle2",
       "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 5.960464477539063e-08,
+    "meanFingerDirectionErrorDegrees": 11.738548121227574
   },
   {
     "id": "word-a8989f04",
@@ -1438,16 +1487,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex2",
+      "bone": "mixamorig:LeftHandRing2",
       "frame": 73,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 1.4901161193847656e-08,
+    "meanFingerDirectionErrorDegrees": 14.776279170399585
   },
   {
     "id": "word-2c1fd7ff",
@@ -1465,18 +1515,19 @@
       "Right": 5
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 8.0,
+    "maxJointStepDegrees": 7.999,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandPinky3",
-      "frame": 61,
-      "angle": 7.999955541799461
+      "bone": "mixamorig:LeftHandPinky1",
+      "frame": 71,
+      "angle": 7.99936814553084
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 11.81383717083304
   },
   {
     "id": "word-30f82679",
@@ -1496,16 +1547,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandPinky3",
-      "frame": 29,
+      "bone": "mixamorig:LeftHandMiddle2",
+      "frame": 28,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 11.663612881091558
   },
   {
     "id": "word-54dee110",
@@ -1525,16 +1577,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle2",
-      "frame": 14,
+      "bone": "mixamorig:LeftHandMiddle2",
+      "frame": 17,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 5.960464477539063e-08,
+    "meanFingerDirectionErrorDegrees": 16.191885774242017
   },
   {
     "id": "word-542b93a5",
@@ -1552,18 +1605,19 @@
       "Right": 27
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.729,
+    "maxJointStepDegrees": 7.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandThumb1",
-      "frame": 34,
-      "angle": 7.729248678008822
+      "bone": "mixamorig:LeftForeArm",
+      "frame": 18,
+      "angle": 6.999676472285209
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 1.1175870895385742e-08,
+    "meanFingerDirectionErrorDegrees": 8.662174862379766
   },
   {
     "id": "word-3d7e498c",
@@ -1583,8 +1637,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHandIndex3",
       "frame": 27,
@@ -1592,7 +1646,8 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 19.360310105016406
   },
   {
     "id": "word-0a42bb8f",
@@ -1612,16 +1667,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle3",
-      "frame": 32,
+      "bone": "mixamorig:RightHandThumb1",
+      "frame": 15,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539063e-08
+    "maxHingeOffAxis": 5.21540641784668e-08,
+    "meanFingerDirectionErrorDegrees": 27.37203689667377
   },
   {
     "id": "word-620a9fc5",
@@ -1641,8 +1697,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHandPinky3",
       "frame": 23,
@@ -1650,7 +1706,8 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 12.378664508327148
   },
   {
     "id": "word-1d06b313",
@@ -1670,16 +1727,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing3",
-      "frame": 24,
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 11.802424612619488
   },
   {
     "id": "word-6911f183",
@@ -1699,8 +1757,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 7.995,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHand",
       "frame": 52,
@@ -1708,7 +1766,8 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790771484e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 10.574753747636572
   },
   {
     "id": "word-b58b7f9b",
@@ -1728,16 +1787,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHandPinky3",
-      "frame": 36,
+      "frame": 27,
       "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 10.7588470200092
   },
   {
     "id": "word-e35ba719",
@@ -1757,16 +1817,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing2",
-      "frame": 15,
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 30,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 7.450580596923828e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 18.534384586421453
   },
   {
     "id": "word-5ac08628",
@@ -1786,16 +1847,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandThumb1",
-      "frame": 14,
+      "bone": "mixamorig:RightHandRing3",
+      "frame": 31,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 13.280157146931284
   },
   {
     "id": "word-c2304594",
@@ -1815,16 +1877,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandMiddle3",
-      "frame": 24,
+      "bone": "mixamorig:LeftHandRing1",
+      "frame": 64,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 12.302903263681909
   },
   {
     "id": "word-d8326c48",
@@ -1844,16 +1907,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandPinky3",
-      "frame": 24,
-      "angle": 8.00005372576878
+      "bone": "mixamorig:RightHandPinky1",
+      "frame": 28,
+      "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 17.471557636653383
   },
   {
     "id": "word-8c3b0308",
@@ -1871,18 +1935,19 @@
       "Right": 27
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.996,
+    "maxJointStepDegrees": 7.798,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHandIndex1",
-      "frame": 62,
-      "angle": 7.996233942475451
+      "frame": 61,
+      "angle": 7.798357385804657
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 6.558795532372612
   },
   {
     "id": "word-a5983e98",
@@ -1902,16 +1967,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky3",
-      "frame": 26,
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 28,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 3.725290298461914e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 12.899536138546594
   },
   {
     "id": "word-b047f8c8",
@@ -1929,18 +1995,19 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.794,
+    "maxJointStepDegrees": 7.998,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHand",
-      "frame": 28,
-      "angle": 7.794439418542009
+      "bone": "mixamorig:RightHandThumb1",
+      "frame": 49,
+      "angle": 7.99838886715859
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 1.4901161193847656e-08,
+    "meanFingerDirectionErrorDegrees": 7.822495064572487
   },
   {
     "id": "word-23b3909e",
@@ -1960,16 +2027,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex2",
-      "frame": 73,
+      "bone": "mixamorig:RightHand",
+      "frame": 89,
       "angle": 8.000151055964453
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 20.783448678172608
   },
   {
     "id": "word-24491c1c",
@@ -1989,16 +2057,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing2",
-      "frame": 28,
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 30,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 23.375076397728805
   },
   {
     "id": "word-f8ff6bc7",
@@ -2018,16 +2087,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHandIndex3",
-      "frame": 27,
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539063e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 12.083201927011366
   },
   {
     "id": "word-cf4157f8",
@@ -2047,16 +2117,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHandIndex2",
-      "frame": 31,
+      "frame": 30,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 9.83349898243829
   },
   {
     "id": "word-5da64d7c",
@@ -2076,16 +2147,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHandMiddle2",
-      "frame": 56,
-      "angle": 7.999955541799461
+      "frame": 57,
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 1.4901161193847656e-08
+    "maxHingeOffAxis": 1.4901161193847656e-08,
+    "meanFingerDirectionErrorDegrees": 9.299425925018367
   },
   {
     "id": "word-3eccaa2d",
@@ -2105,16 +2177,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandMiddle3",
-      "frame": 26,
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 32,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790771484e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 29.446127624445545
   },
   {
     "id": "word-55d32981",
@@ -2132,18 +2205,19 @@
       "Right": 4
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.844,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex1",
-      "frame": 93,
-      "angle": 7.844225521175877
+      "bone": "mixamorig:RightHandPinky3",
+      "frame": 30,
+      "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 3.725290298461914e-08,
+    "meanFingerDirectionErrorDegrees": 10.19084354682316
   },
   {
     "id": "word-9aa82def",
@@ -2163,16 +2237,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing2",
-      "frame": 33,
+      "bone": "mixamorig:RightHandIndex2",
+      "frame": 34,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 13.121279894012263
   },
   {
     "id": "word-b45703d1",
@@ -2192,8 +2267,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 7.15,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHand",
       "frame": 31,
@@ -2201,7 +2276,8 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790771484e-08
+    "maxHingeOffAxis": 1.4901161193847656e-08,
+    "meanFingerDirectionErrorDegrees": 6.180808750601656
   },
   {
     "id": "word-ffce2323",
@@ -2221,16 +2297,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky2",
-      "frame": 25,
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 15.017976371517014
   },
   {
     "id": "word-ceedcb88",
@@ -2250,16 +2327,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHandRing2",
-      "frame": 34,
+      "frame": 31,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 21.49646077220224
   },
   {
     "id": "word-9d32e897",
@@ -2279,16 +2357,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing2",
-      "frame": 33,
+      "bone": "mixamorig:LeftHandIndex2",
+      "frame": 46,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 5.960464477539063e-08,
+    "meanFingerDirectionErrorDegrees": 16.21414548781234
   },
   {
     "id": "word-65c00b09",
@@ -2308,16 +2387,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle2",
-      "frame": 23,
+      "bone": "mixamorig:RightHandPinky3",
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 3.725290298461914e-08,
+    "meanFingerDirectionErrorDegrees": 29.512851163454872
   },
   {
     "id": "word-57c6880e",
@@ -2337,16 +2417,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing2",
-      "frame": 26,
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 15,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 5.960464477539063e-08,
+    "meanFingerDirectionErrorDegrees": 15.292863360777423
   },
   {
     "id": "word-2ad51148",
@@ -2366,8 +2447,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 7.992,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHand",
       "frame": 24,
@@ -2375,7 +2456,8 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 1.4901161193847656e-08
+    "maxHingeOffAxis": 7.450580596923828e-09,
+    "meanFingerDirectionErrorDegrees": 6.268244364656544
   },
   {
     "id": "word-9fcf26f7",
@@ -2395,16 +2477,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing3",
-      "frame": 69,
+      "bone": "mixamorig:RightHandMiddle3",
+      "frame": 35,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 12.357086114872457
   },
   {
     "id": "word-5fd8cf91",
@@ -2424,16 +2507,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHandPinky2",
-      "frame": 23,
+      "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 25.24657966445083
   },
   {
     "id": "word-71c24ba0",
@@ -2453,16 +2537,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex2",
-      "frame": 49,
+      "bone": "mixamorig:RightHandIndex1",
+      "frame": 28,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539063e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 27.91002712133274
   },
   {
     "id": "word-360ff815",
@@ -2482,16 +2567,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing2",
-      "frame": 27,
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 38,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 11.1788358499265
   },
   {
     "id": "word-2c57ef13",
@@ -2511,16 +2597,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex3",
-      "frame": 27,
+      "bone": "mixamorig:LeftHandMiddle2",
+      "frame": 33,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 3.725290298461914e-08
+    "maxHingeOffAxis": 3.725290298461914e-08,
+    "meanFingerDirectionErrorDegrees": 16.95882664602192
   },
   {
     "id": "word-00af7ae9",
@@ -2540,16 +2627,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky3",
-      "frame": 23,
+      "bone": "mixamorig:RightHandMiddle3",
+      "frame": 27,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 5.960464477539063e-08,
+    "meanFingerDirectionErrorDegrees": 15.648626851751052
   },
   {
     "id": "word-317890bf",
@@ -2569,16 +2657,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing2",
+      "bone": "mixamorig:LeftHandIndex3",
       "frame": 53,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 14.901537040581662
   },
   {
     "id": "word-b66bf5be",
@@ -2596,18 +2685,19 @@
       "Right": 4
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.96,
+    "maxJointStepDegrees": 7.995,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHand",
-      "frame": 39,
-      "angle": 7.959610468145842
+      "bone": "mixamorig:RightHandThumb1",
+      "frame": 38,
+      "angle": 7.994764598030251
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 1.4901161193847656e-08,
+    "meanFingerDirectionErrorDegrees": 12.062581153211719
   },
   {
     "id": "word-5f337e79",
@@ -2627,16 +2717,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandThumb1",
-      "frame": 14,
+      "bone": "mixamorig:RightHandMiddle3",
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 13.516416486144442
   },
   {
     "id": "word-25fed1ff",
@@ -2656,16 +2747,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex3",
+      "bone": "mixamorig:RightHandMiddle3",
       "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 5.960464477539063e-08,
+    "meanFingerDirectionErrorDegrees": 23.39057156708251
   },
   {
     "id": "word-9357b146",
@@ -2685,16 +2777,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky2",
-      "frame": 26,
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 69,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 14.972126920348114
   },
   {
     "id": "word-58862482",
@@ -2714,16 +2807,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky3",
-      "frame": 24,
+      "bone": "mixamorig:RightHandIndex3",
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 5.960464477539063e-08,
+    "meanFingerDirectionErrorDegrees": 15.239150025524912
   },
   {
     "id": "word-5bd9ab86",
@@ -2743,8 +2837,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 6.877,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftForeArm",
       "frame": 51,
@@ -2752,7 +2846,8 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 1.1175870895385742e-08,
+    "meanFingerDirectionErrorDegrees": 9.411903571440421
   },
   {
     "id": "word-9ee25d0d",
@@ -2772,16 +2867,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky3",
-      "frame": 26,
+      "bone": "mixamorig:RightHandMiddle2",
+      "frame": 25,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 8.920276709048233
   },
   {
     "id": "word-16bf2a06",
@@ -2801,16 +2897,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandPinky2",
-      "frame": 26,
+      "bone": "mixamorig:LeftHandPinky3",
+      "frame": 56,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 21.24437241448061
   },
   {
     "id": "word-e3b0e3b1",
@@ -2830,16 +2927,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHandIndex2",
-      "frame": 24,
+      "frame": 28,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 5.960464477539063e-08,
+    "meanFingerDirectionErrorDegrees": 22.116825411338333
   },
   {
     "id": "word-4fb38350",
@@ -2859,16 +2957,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing2",
-      "frame": 25,
+      "bone": "mixamorig:RightHandIndex2",
+      "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 12.059833314181752
   },
   {
     "id": "word-4fa6cc2a",
@@ -2888,16 +2987,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle3",
-      "frame": 23,
+      "bone": "mixamorig:RightHandRing1",
+      "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 18.613936082198443
   },
   {
     "id": "word-aba2f273",
@@ -2917,16 +3017,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex2",
-      "frame": 25,
+      "bone": "mixamorig:LeftHandPinky1",
+      "frame": 15,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 5.960464477539063e-08,
+    "meanFingerDirectionErrorDegrees": 22.79415517270255
   },
   {
     "id": "word-1e422a1f",
@@ -2946,16 +3047,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandThumb1",
-      "frame": 16,
+      "bone": "mixamorig:RightHandMiddle3",
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 3.725290298461914e-08,
+    "meanFingerDirectionErrorDegrees": 15.045906427631332
   },
   {
     "id": "word-c6b5c933",
@@ -2975,16 +3077,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandPinky3",
-      "frame": 30,
+      "bone": "mixamorig:LeftHandRing1",
+      "frame": 14,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 12.907244387570588
   },
   {
     "id": "word-628722ef",
@@ -3004,16 +3107,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandPinky3",
-      "frame": 24,
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 10.727854068665533
   },
   {
     "id": "word-2a7729d7",
@@ -3033,8 +3137,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHand",
       "frame": 108,
@@ -3042,7 +3146,8 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 42.77450320444825
   },
   {
     "id": "word-594f0e3d",
@@ -3062,16 +3167,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle1",
-      "frame": 26,
+      "bone": "mixamorig:LeftHandIndex3",
+      "frame": 25,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 28.436253258222518
   },
   {
     "id": "word-c0f1e55b",
@@ -3091,16 +3197,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing2",
-      "frame": 26,
+      "bone": "mixamorig:RightHandMiddle1",
+      "frame": 15,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 18.211474632017616
   },
   {
     "id": "word-50b48f58",
@@ -3120,16 +3227,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex3",
-      "frame": 32,
-      "angle": 8.00005372576878
+      "bone": "mixamorig:LeftHandMiddle3",
+      "frame": 39,
+      "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 13.217058385997658
   },
   {
     "id": "word-5ed48b44",
@@ -3149,16 +3257,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky2",
-      "frame": 25,
+      "bone": "mixamorig:RightHandIndex2",
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 23.46981752676552
   },
   {
     "id": "word-44de272e",
@@ -3178,16 +3287,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing3",
-      "frame": 38,
-      "angle": 8.00005372576878
+      "bone": "mixamorig:RightHandIndex2",
+      "frame": 60,
+      "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 12.036384699188826
   },
   {
     "id": "word-c446b714",
@@ -3207,8 +3317,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 7.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightForeArm",
       "frame": 60,
@@ -3216,7 +3326,8 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790771484e-08
+    "maxHingeOffAxis": 1.1175870895385742e-08,
+    "meanFingerDirectionErrorDegrees": 7.943505716690088
   },
   {
     "id": "word-b0df4010",
@@ -3234,18 +3345,19 @@
       "Right": 29
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 8.0,
+    "maxJointStepDegrees": 7.908,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing3",
-      "frame": 41,
-      "angle": 8.00005372576878
+      "bone": "mixamorig:LeftHandRing1",
+      "frame": 73,
+      "angle": 7.908172313506476
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 11.490316268587216
   },
   {
     "id": "word-8e883b97",
@@ -3265,16 +3377,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex1",
-      "frame": 26,
+      "bone": "mixamorig:LeftHandMiddle2",
+      "frame": 17,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 3.725290298461914e-08,
+    "meanFingerDirectionErrorDegrees": 20.052443080514163
   },
   {
     "id": "word-bb899ccb",
@@ -3294,16 +3407,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandPinky3",
-      "frame": 29,
-      "angle": 8.00005372576878
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 34,
+      "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 23.892178879683886
   },
   {
     "id": "word-924b6df6",
@@ -3323,16 +3437,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandThumb1",
-      "frame": 16,
+      "bone": "mixamorig:RightHandPinky3",
+      "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 22.447988766286148
   },
   {
     "id": "word-ae2dce80",
@@ -3350,18 +3465,19 @@
       "Right": 6
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 8.0,
+    "maxJointStepDegrees": 7.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing2",
-      "frame": 55,
-      "angle": 7.999955541799461
+      "bone": "mixamorig:RightForeArm",
+      "frame": 20,
+      "angle": 6.999676472285209
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 10.663632600952637
   },
   {
     "id": "word-175ce38d",
@@ -3381,8 +3497,8 @@
     "poseCoverage": 0.9642857142857143,
     "maxJointStepDegrees": 7.998,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHand",
       "frame": 64,
@@ -3390,7 +3506,8 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 10.436662909221067
   },
   {
     "id": "word-9613dff0",
@@ -3410,16 +3527,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex2",
-      "frame": 41,
+      "bone": "mixamorig:LeftHandPinky3",
+      "frame": 64,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 10.22039508734925
   },
   {
     "id": "word-c9b82a16",
@@ -3439,16 +3557,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex3",
-      "frame": 23,
-      "angle": 7.999955541799461
+      "bone": "mixamorig:LeftHandMiddle2",
+      "frame": 24,
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 10.213097105716203
   },
   {
     "id": "word-b854c147",
@@ -3468,16 +3587,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex2",
+      "bone": "mixamorig:LeftHandMiddle3",
       "frame": 51,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 14.247814367103627
   },
   {
     "id": "word-803b0a5e",
@@ -3497,16 +3617,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing2",
-      "frame": 26,
+      "bone": "mixamorig:LeftHandPinky3",
+      "frame": 27,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 1.4901161193847656e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 21.460377911658213
   },
   {
     "id": "word-8d20b0ee",
@@ -3526,16 +3647,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex1",
-      "frame": 16,
+      "bone": "mixamorig:RightHandIndex3",
+      "frame": 29,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 22.60016454370994
   },
   {
     "id": "word-f00a8a7f",
@@ -3555,16 +3677,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandMiddle3",
-      "frame": 29,
+      "bone": "mixamorig:LeftHandMiddle2",
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 17.884673399111843
   },
   {
     "id": "word-72476e8f",
@@ -3582,18 +3705,19 @@
       "Right": 28
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 8.0,
+    "maxJointStepDegrees": 7.944,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing2",
-      "frame": 26,
-      "angle": 8.00005372576878
+      "bone": "mixamorig:LeftHandRing1",
+      "frame": 72,
+      "angle": 7.944046174574676
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 14.529950168240417
   },
   {
     "id": "word-91d7d717",
@@ -3613,16 +3737,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHandIndex3",
-      "frame": 26,
-      "angle": 7.999857357830142
+      "frame": 28,
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790771484e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 8.686013483306061
   },
   {
     "id": "word-98521248",
@@ -3642,16 +3767,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHandIndex3",
-      "frame": 43,
-      "angle": 7.999955541799461
+      "frame": 44,
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 10.688186833016065
   },
   {
     "id": "word-3637b257",
@@ -3671,8 +3797,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 7.999,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHand",
       "frame": 57,
@@ -3680,7 +3806,8 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 10.228633772892099
   },
   {
     "id": "word-5782a432",
@@ -3700,16 +3827,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing2",
-      "frame": 50,
-      "angle": 7.999955541799461
+      "bone": "mixamorig:LeftHandIndex3",
+      "frame": 24,
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 11.891841642317884
   },
   {
     "id": "word-f8ffac36",
@@ -3729,8 +3857,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 7.507,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHand",
       "frame": 15,
@@ -3738,7 +3866,8 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 3.725290298461914e-08
+    "maxHingeOffAxis": 1.4901161193847656e-08,
+    "meanFingerDirectionErrorDegrees": 7.427758646973003
   },
   {
     "id": "word-f872e2cb",
@@ -3758,16 +3887,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky3",
+      "bone": "mixamorig:RightHandPinky2",
       "frame": 48,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 5.960464477539063e-08,
+    "meanFingerDirectionErrorDegrees": 21.297751462740617
   },
   {
     "id": "word-2b21215c",
@@ -3787,16 +3917,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex3",
+      "bone": "mixamorig:RightHandMiddle2",
       "frame": 32,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 14.38232671982904
   },
   {
     "id": "word-0c849b23",
@@ -3816,16 +3947,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle3",
+      "bone": "mixamorig:RightHandRing2",
       "frame": 29,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 5.21540641784668e-08,
+    "meanFingerDirectionErrorDegrees": 14.9995301605314
   },
   {
     "id": "word-d7560665",
@@ -3845,16 +3977,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky3",
-      "frame": 27,
+      "bone": "mixamorig:RightHandRing1",
+      "frame": 28,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 3.725290298461914e-08
+    "maxHingeOffAxis": 3.725290298461914e-08,
+    "meanFingerDirectionErrorDegrees": 17.543937652983498
   },
   {
     "id": "word-338e93e8",
@@ -3872,18 +4005,19 @@
       "Right": 2
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.897,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle2",
+      "bone": "mixamorig:RightHandIndex3",
       "frame": 24,
-      "angle": 7.897269624043843
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790771484e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 6.179309816975601
   },
   {
     "id": "word-640f2b1f",
@@ -3903,16 +4037,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky3",
+      "bone": "mixamorig:RightHandMiddle2",
       "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 18.433513372519347
   },
   {
     "id": "word-a98a74bc",
@@ -3932,16 +4067,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHandIndex3",
       "frame": 43,
-      "angle": 7.999955541799461
+      "angle": 7.999857357830142
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 9.985340725040325
   },
   {
     "id": "word-aab0e5db",
@@ -3961,16 +4097,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHandMiddle2",
-      "frame": 58,
+      "frame": 56,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 18.35020381730474
   },
   {
     "id": "word-cd151b2a",
@@ -3990,16 +4127,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex2",
-      "frame": 15,
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 5.960464477539063e-08,
+    "meanFingerDirectionErrorDegrees": 13.751116536135656
   },
   {
     "id": "word-7ee747b0",
@@ -4019,16 +4157,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHandMiddle2",
-      "frame": 14,
-      "angle": 8.00005372576878
+      "frame": 15,
+      "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 12.968747408661411
   },
   {
     "id": "word-35e11a03",
@@ -4048,16 +4187,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHandIndex2",
-      "frame": 65,
+      "frame": 64,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 10.487438378226935
   },
   {
     "id": "word-858669cd",
@@ -4077,16 +4217,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHandIndex2",
-      "frame": 49,
+      "frame": 45,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 10.363467033433734
   },
   {
     "id": "word-6e24fd10",
@@ -4106,16 +4247,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex3",
-      "frame": 25,
+      "bone": "mixamorig:LeftHandRing3",
+      "frame": 29,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 1.4901161193847656e-08,
+    "meanFingerDirectionErrorDegrees": 16.32778044559797
   },
   {
     "id": "word-62813877",
@@ -4133,18 +4275,19 @@
       "Right": 4
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 8.0,
+    "maxJointStepDegrees": 7.959,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing3",
-      "frame": 29,
-      "angle": 8.00005372576878
+      "bone": "mixamorig:RightHandRing1",
+      "frame": 56,
+      "angle": 7.959414100207204
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539063e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 11.529280820890206
   },
   {
     "id": "word-84ff2040",
@@ -4164,16 +4307,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle2",
+      "bone": "mixamorig:RightHandIndex2",
       "frame": 29,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 1.4901161193847656e-08,
+    "meanFingerDirectionErrorDegrees": 13.238005554148693
   },
   {
     "id": "word-defd5c39",
@@ -4193,16 +4337,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHandPinky3",
-      "frame": 27,
+      "frame": 28,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 17.377292466105995
   },
   {
     "id": "word-151a37ef",
@@ -4222,16 +4367,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHandPinky2",
-      "frame": 28,
+      "frame": 27,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 11.247126429342014
   },
   {
     "id": "word-ea7aa6fc",
@@ -4251,16 +4397,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHandMiddle2",
-      "frame": 34,
+      "frame": 33,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 3.725290298461914e-08,
+    "meanFingerDirectionErrorDegrees": 13.76491217370044
   },
   {
     "id": "word-fd1c4073",
@@ -4280,16 +4427,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHandPinky3",
-      "frame": 34,
-      "angle": 8.00005372576878
+      "frame": 32,
+      "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 12.798699596180235
   },
   {
     "id": "word-b08629fc",
@@ -4309,16 +4457,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandThumb3",
+      "bone": "mixamorig:LeftHandMiddle3",
       "frame": 60,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 10.902021977419045
   },
   {
     "id": "word-32e530d7",
@@ -4338,16 +4487,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandThumb1",
-      "frame": 15,
+      "bone": "mixamorig:LeftHandMiddle2",
+      "frame": 17,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 22.311253014168344
   },
   {
     "id": "word-4893125c",
@@ -4367,16 +4517,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex2",
+      "bone": "mixamorig:LeftHandIndex3",
       "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 18.653363568435694
   },
   {
     "id": "word-b6fe83ed",
@@ -4396,16 +4547,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandPinky2",
-      "frame": 29,
+      "bone": "mixamorig:LeftHandPinky1",
+      "frame": 15,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 11.800648633836447
   },
   {
     "id": "word-36b20a69",
@@ -4425,16 +4577,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle2",
-      "frame": 67,
-      "angle": 8.00005372576878
+      "bone": "mixamorig:RightHandThumb1",
+      "frame": 44,
+      "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790771484e-08
+    "maxHingeOffAxis": 1.4901161193847656e-08,
+    "meanFingerDirectionErrorDegrees": 11.071051823619003
   },
   {
     "id": "word-1ba0d285",
@@ -4454,16 +4607,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandThumb1",
-      "frame": 17,
+      "bone": "mixamorig:RightHandMiddle1",
+      "frame": 15,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539063e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 27.74467443212171
   },
   {
     "id": "word-9543d766",
@@ -4483,16 +4637,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandRing2",
-      "frame": 35,
+      "bone": "mixamorig:RightHandPinky3",
+      "frame": 29,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790771484e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 14.143725359860351
   },
   {
     "id": "word-8cf533fa",
@@ -4512,16 +4667,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHandMiddle2",
       "frame": 24,
-      "angle": 8.00005372576878
+      "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 14.004565566130507
   },
   {
     "id": "word-71b45022",
@@ -4541,16 +4697,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing2",
-      "frame": 30,
+      "bone": "mixamorig:LeftHandPinky3",
+      "frame": 25,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 13.956577445592913
   },
   {
     "id": "word-ddc2e7ed",
@@ -4570,8 +4727,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHandMiddle2",
       "frame": 51,
@@ -4579,7 +4736,8 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 1.4901161193847656e-08
+    "maxHingeOffAxis": 1.4901161193847656e-08,
+    "meanFingerDirectionErrorDegrees": 11.759557561714777
   },
   {
     "id": "word-e70fcfd6",
@@ -4599,8 +4757,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHandIndex3",
       "frame": 26,
@@ -4608,7 +4766,8 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 10.011558197476166
   },
   {
     "id": "word-250f896a",
@@ -4628,8 +4787,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHandRing2",
       "frame": 24,
@@ -4637,7 +4796,8 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 14.39753451331877
   },
   {
     "id": "word-f3848317",
@@ -4657,16 +4817,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle2",
-      "frame": 14,
+      "bone": "mixamorig:RightHandPinky1",
+      "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 12.45529363397767
   },
   {
     "id": "word-6d759966",
@@ -4686,16 +4847,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing2",
-      "frame": 24,
+      "bone": "mixamorig:LeftHandMiddle2",
+      "frame": 17,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.21540641784668e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 20.046681213515637
   },
   {
     "id": "word-9c7faf34",
@@ -4715,16 +4877,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandPinky3",
-      "frame": 25,
+      "bone": "mixamorig:LeftHandIndex3",
+      "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 8.569403184064067
   },
   {
     "id": "word-5c794c1c",
@@ -4742,18 +4905,19 @@
       "Right": 25
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.776,
+    "maxJointStepDegrees": 7.928,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHand",
-      "frame": 16,
-      "angle": 7.77572555398982
+      "bone": "mixamorig:LeftHandThumb1",
+      "frame": 58,
+      "angle": 7.928155739470641
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 1.1175870895385742e-08
+    "maxHingeOffAxis": 1.4901161193847656e-08,
+    "meanFingerDirectionErrorDegrees": 10.264691904064923
   },
   {
     "id": "word-896d253f",
@@ -4773,16 +4937,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle3",
+      "bone": "mixamorig:RightHandIndex2",
       "frame": 23,
-      "angle": 8.00005372576878
+      "angle": 7.999857357830142
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 7.9670183920351985
   },
   {
     "id": "word-99afdafa",
@@ -4802,16 +4967,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHandPinky3",
       "frame": 65,
-      "angle": 7.999955541799461
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790771484e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 13.127252801189217
   },
   {
     "id": "word-506f5596",
@@ -4831,16 +4997,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing2",
-      "frame": 27,
+      "bone": "mixamorig:LeftHandMiddle3",
+      "frame": 63,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 12.382061179244154
   },
   {
     "id": "word-76fc58e0",
@@ -4860,8 +5027,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHand",
       "frame": 74,
@@ -4869,7 +5036,8 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 1.4901161193847656e-08,
+    "meanFingerDirectionErrorDegrees": 11.594910018882384
   },
   {
     "id": "word-d388f4c7",
@@ -4889,16 +5057,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing2",
-      "frame": 23,
+      "bone": "mixamorig:LeftHandRing3",
+      "frame": 25,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 1.4901161193847656e-08,
+    "meanFingerDirectionErrorDegrees": 27.73654753998461
   },
   {
     "id": "word-0bf7a453",
@@ -4918,16 +5087,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHandRing2",
-      "frame": 15,
+      "frame": 25,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 3.725290298461914e-08,
+    "meanFingerDirectionErrorDegrees": 18.13426342387464
   },
   {
     "id": "letter-410",
@@ -4947,16 +5117,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandPinky3",
-      "frame": 26,
+      "bone": "mixamorig:LeftHandRing1",
+      "frame": 15,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 15.683323749591771
   },
   {
     "id": "letter-411",
@@ -4976,16 +5147,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex2",
-      "frame": 15,
+      "bone": "mixamorig:LeftHandPinky3",
+      "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 12.803925686941039
   },
   {
     "id": "letter-412",
@@ -5005,8 +5177,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 7.981,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHand",
       "frame": 78,
@@ -5014,7 +5186,8 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790771484e-08
+    "maxHingeOffAxis": 1.4901161193847656e-08,
+    "meanFingerDirectionErrorDegrees": 5.2057233931893565
   },
   {
     "id": "letter-413",
@@ -5034,16 +5207,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex2",
-      "frame": 26,
+      "bone": "mixamorig:RightHandMiddle1",
+      "frame": 15,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 34.80525851850165
   },
   {
     "id": "letter-414",
@@ -5063,16 +5237,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHandRing2",
-      "frame": 24,
+      "frame": 23,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 3.725290298461914e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 12.15445026738032
   },
   {
     "id": "letter-415",
@@ -5092,8 +5267,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHandRing2",
       "frame": 24,
@@ -5101,7 +5276,8 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 1.4901161193847656e-08
+    "maxHingeOffAxis": 1.4901161193847656e-08,
+    "meanFingerDirectionErrorDegrees": 17.347523855043697
   },
   {
     "id": "letter-401",
@@ -5119,18 +5295,19 @@
       "Right": 0
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 8.0,
+    "maxJointStepDegrees": 7.664,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandThumb3",
+      "bone": "mixamorig:LeftHandRing1",
       "frame": 23,
-      "angle": 7.999955541799461
+      "angle": 7.663606291216768
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 14.131837093423782
   },
   {
     "id": "letter-416",
@@ -5150,8 +5327,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHandThumb1",
       "frame": 15,
@@ -5159,7 +5336,8 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 1.4901161193847656e-08,
+    "meanFingerDirectionErrorDegrees": 19.537972454247935
   },
   {
     "id": "letter-417",
@@ -5179,16 +5357,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing2",
-      "frame": 59,
-      "angle": 8.00005372576878
+      "bone": "mixamorig:LeftHandIndex2",
+      "frame": 27,
+      "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 10.318421622566312
   },
   {
     "id": "letter-418",
@@ -5208,8 +5387,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 7.997,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHand",
       "frame": 93,
@@ -5217,7 +5396,8 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 10.575692831788887
   },
   {
     "id": "letter-419",
@@ -5237,16 +5417,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHandMiddle2",
-      "frame": 28,
+      "frame": 30,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 11.099200054515391
   },
   {
     "id": "letter-41a",
@@ -5266,16 +5447,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle2",
-      "frame": 24,
+      "bone": "mixamorig:RightHandPinky3",
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 11.84534672783582
   },
   {
     "id": "letter-41b",
@@ -5295,16 +5477,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandPinky3",
-      "frame": 30,
+      "bone": "mixamorig:LeftHandMiddle3",
+      "frame": 27,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 12.785752570288942
   },
   {
     "id": "letter-41c",
@@ -5324,8 +5507,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 7.991,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHand",
       "frame": 14,
@@ -5333,7 +5516,8 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 10.851809227726974
   },
   {
     "id": "letter-41d",
@@ -5351,18 +5535,19 @@
       "Right": 22
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.089,
+    "maxJointStepDegrees": 7.531,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandThumb3",
-      "frame": 23,
-      "angle": 7.089173721640356
+      "bone": "mixamorig:LeftHandRing1",
+      "frame": 51,
+      "angle": 7.531128795848847
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 9.516595796874267
   },
   {
     "id": "letter-41e",
@@ -5380,18 +5565,19 @@
       "Right": 60
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 7.029,
+    "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing1",
-      "frame": 29,
-      "angle": 7.029375415456894
+      "bone": "mixamorig:LeftHandMiddle3",
+      "frame": 27,
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 1.4901161193847656e-08,
+    "meanFingerDirectionErrorDegrees": 7.958683495742369
   },
   {
     "id": "letter-41f",
@@ -5411,16 +5597,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex2",
+      "bone": "mixamorig:LeftHandMiddle3",
       "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539063e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 15.811997923304075
   },
   {
     "id": "letter-420",
@@ -5440,16 +5627,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex2",
-      "frame": 23,
+      "bone": "mixamorig:LeftHandRing1",
+      "frame": 15,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539063e-08
+    "maxHingeOffAxis": 5.21540641784668e-08,
+    "meanFingerDirectionErrorDegrees": 14.56386000248776
   },
   {
     "id": "letter-421",
@@ -5469,16 +5657,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandIndex2",
-      "frame": 24,
+      "bone": "mixamorig:RightHandRing2",
+      "frame": 25,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790771484e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 10.458994426337913
   },
   {
     "id": "letter-422",
@@ -5498,16 +5687,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandIndex2",
-      "frame": 72,
+      "bone": "mixamorig:LeftHandIndex3",
+      "frame": 47,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 30.92046695274232
   },
   {
     "id": "letter-423",
@@ -5527,16 +5717,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHandPinky3",
-      "frame": 24,
+      "frame": 26,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 3.725290298461914e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 9.509603835525088
   },
   {
     "id": "letter-424",
@@ -5556,16 +5747,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing2",
-      "frame": 23,
+      "bone": "mixamorig:RightHandPinky2",
+      "frame": 25,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 5.960464477539063e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 17.05063935756247
   },
   {
     "id": "letter-425",
@@ -5583,18 +5775,19 @@
       "Right": 23
     },
     "poseCoverage": 1.0,
-    "maxJointStepDegrees": 8.0,
+    "maxJointStepDegrees": 7.64,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandPinky3",
-      "frame": 23,
-      "angle": 7.999955541799461
+      "bone": "mixamorig:LeftHandMiddle2",
+      "frame": 15,
+      "angle": 7.640473294271581
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 3.725290298461914e-08,
+    "meanFingerDirectionErrorDegrees": 11.154221276897971
   },
   {
     "id": "letter-426",
@@ -5614,8 +5807,8 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 6.997,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftForearmRoll0",
       "frame": 18,
@@ -5623,7 +5816,8 @@
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 8.83912662787584
   },
   {
     "id": "letter-427",
@@ -5643,16 +5837,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle2",
-      "frame": 14,
+      "bone": "mixamorig:RightHandPinky3",
+      "frame": 25,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 26.38401752774956
   },
   {
     "id": "letter-428",
@@ -5672,16 +5867,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandMiddle3",
-      "frame": 23,
+      "bone": "mixamorig:LeftHandIndex2",
+      "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 13.40464685673014
   },
   {
     "id": "letter-429",
@@ -5701,16 +5897,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandRing2",
-      "frame": 33,
+      "bone": "mixamorig:LeftHandPinky2",
+      "frame": 47,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 33.809270243705356
   },
   {
     "id": "letter-42a",
@@ -5730,16 +5927,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandMiddle3",
-      "frame": 27,
+      "bone": "mixamorig:RightHandPinky3",
+      "frame": 25,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 16.354210045022313
   },
   {
     "id": "letter-42b",
@@ -5759,16 +5957,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandMiddle3",
-      "frame": 29,
+      "bone": "mixamorig:LeftHandRing2",
+      "frame": 24,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.9802322387695312e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 9.271796661755586
   },
   {
     "id": "letter-42c",
@@ -5788,16 +5987,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:LeftHandRing2",
-      "frame": 24,
+      "frame": 25,
       "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 12.854383780859852
   },
   {
     "id": "letter-42d",
@@ -5817,16 +6017,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
       "bone": "mixamorig:RightHandMiddle2",
-      "frame": 24,
-      "angle": 8.00005372576878
+      "frame": 23,
+      "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 2.9802322387695312e-08,
+    "meanFingerDirectionErrorDegrees": 15.293024169789415
   },
   {
     "id": "letter-42e",
@@ -5846,16 +6047,17 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:LeftHandPinky1",
-      "frame": 36,
-      "angle": 8.00005372576878
+      "bone": "mixamorig:RightHand",
+      "frame": 69,
+      "angle": 7.999955541799461
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 2.2351741790771484e-08
+    "maxHingeOffAxis": 2.2351741790771484e-08,
+    "meanFingerDirectionErrorDegrees": 15.421286015317854
   },
   {
     "id": "letter-42f",
@@ -5875,15 +6077,16 @@
     "poseCoverage": 1.0,
     "maxJointStepDegrees": 8.0,
     "review": "experimental-unreviewed",
-    "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-    "motionVersion": 3,
+    "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+    "motionVersion": 4,
     "peakStep": {
-      "bone": "mixamorig:RightHandPinky3",
-      "frame": 23,
-      "angle": 7.999955541799461
+      "bone": "mixamorig:LeftHandMiddle2",
+      "frame": 25,
+      "angle": 8.00005372576878
     },
     "leadIn": 0.7,
     "leadOut": 0.7,
-    "maxHingeOffAxis": 4.470348358154297e-08
+    "maxHingeOffAxis": 4.470348358154297e-08,
+    "meanFingerDirectionErrorDegrees": 15.119180671175073
   }
 ]

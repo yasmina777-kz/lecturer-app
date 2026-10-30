@@ -48,7 +48,7 @@ for(const track of flowing.tracks){
 }
 assert.throws(()=>composeMotion([ordered[0]],undefined,[{start:ordered[0].duration,end:0}]),/Invalid motion window/);
 for(const asset of assets){
- assert.equal(asset.motionVersion,3,asset.label);
+ assert.equal(asset.motionVersion,4,asset.label);
  assert.ok(asset.maxJointStepDegrees<=8.1,`${asset.label}: rotation spike`);
  assert.ok(asset.maxHingeOffAxis<.0001,`${asset.label}: finger hinge twist`);
  assert.ok(asset.leadIn>0 && asset.leadOut>0);

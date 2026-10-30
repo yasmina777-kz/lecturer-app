@@ -27,63 +27,88 @@ def hinge_axis(side,name,j):
  axis=direction.cross(rest[side]['basis'].col[2]).normalized()
  return bone.bone.matrix_local.to_quaternion().inverted()@axis
 
-def anatomical_fingers(side,pts,fade):
- """MCP flexion/spread, PIP/DIP hinges; no per-phalanx twist or translation.
+# Fit a complete articulated chain instead of measuring each joint in unrelated planes.
+finger_fit_previous={}
+finger_fit_rigs={}
+finger_fit_errors=[]
+def finger_chain(side,name,values):
+ riginfo=finger_fit_rigs[(side,name)];parent=riginfo['parent'];directions=[];rotations=[]
+ for j in range(3):
+  q=Quaternion(riginfo['axes'][j],values[(0,2,3)[j]])
+  if j==0:q=Quaternion(riginfo['spread'],values[1])@q
+  parent=parent@riginfo['local'][j]@q
+  directions.append(parent@V((0,1,0)));rotations.append(q)
+ return directions,rotations
 
- Measurements are in the source palm frame, so wrist IK correction cannot
- counter-rotate the fingers into an unrelated world-space direction.
- """
- forward=(pts[9]-pts[0]).normalized()
- across=(pts[5]-pts[17]).normalized()*(-1 if side=='Left' else 1)
- normal=across.cross(forward).normalized()
+def init_finger_rigs():
+ for side in ['Left','Right']:
+  for name in finger_indices:
+   parent=B(side+'Hand').bone.matrix_local.to_quaternion();local=[];axes=[]
+   for j in range(1,4):
+    q=B(side+'Hand'+name+str(j)).bone.matrix_local.to_quaternion()
+    local.append(parent.inverted()@q);parent=q;axes.append(hinge_axis(side,name,j))
+   root=B(side+'Hand'+name+'1').bone
+   spread=root.matrix_local.to_quaternion().inverted()@rest[side]['basis'].col[2]
+   offsets=[hand_calibration['restBends'].get(B(side+'Hand'+name+str(j)).name,0) for j in (2,3)]
+   if name=='Thumb':bounds=[(-40,70),(-65,65),(-5-math.degrees(offsets[0]),70-math.degrees(offsets[0])),(-5-math.degrees(offsets[1]),80-math.degrees(offsets[1]))]
+   else:bounds=[(-15,95),(-18,18),(-5-math.degrees(offsets[0]),105-math.degrees(offsets[0])),(-5-math.degrees(offsets[1]),75-math.degrees(offsets[1]))]
+   finger_fit_rigs[(side,name)]={'parent':B(side+'Hand').bone.matrix_local.to_quaternion(),'local':local,'axes':axes,'spread':spread,'bounds':[(math.radians(a),math.radians(b)) for a,b in bounds],'offsets':offsets}
+
+def project_finger_values(side,name,values):
+ info=finger_fit_rigs[(side,name)]
+ values=[clamp(v,*info['bounds'][j]) for j,v in enumerate(values)]
+ if name!='Thumb':
+  # MCP abduction closes with flexion; a curled finger cannot fan sideways
+  # through its neighbour as freely as an extended finger.
+  spread=math.radians(18)*(1-.75*clamp(values[0]/math.radians(90),0,1))
+  values[1]=clamp(values[1],-spread,spread)
+ total=values[0]+values[2]+values[3]+sum(info['offsets'])
+ excess=max(0,total-math.radians(240 if name!='Thumb' else 190))
+ for j in [3,2,0]:
+  reduction=min(excess,max(0,values[j]-info['bounds'][j][0]))
+  values[j]-=reduction;excess-=reduction
+ return values
+
+def fit_finger_directions(side,name,target,previous=None):
+ info=finger_fit_rigs[(side,name)]
+ def cost(values):
+  predicted,_=finger_chain(side,name,values)
+  error=sum((a-b).length_squared*w for a,b,w in zip(predicted,target,[1.0,1.0,.8]))
+  # Weak temporal preference selects the nearby solution in ambiguous frames;
+  # it never substitutes an idle pose for the observed sign.
+  if previous is not None:error+=.012*sum((a-b)**2 for a,b in zip(values,previous))
+  return error
+ candidates=[previous or [.2,0,.2,.1],[0,0,0,0],[1.2,0,1.3,.7]]
+ values=min((project_finger_values(side,name,c) for c in candidates),key=cost)
+ best=cost(values)
+ for degrees in [16,8,4,2,.75]:
+  step=math.radians(degrees)
+  for sweep in range(3):
+   improved=False
+   for j in range(4):
+    for sign in [-1,1]:
+     candidate=values.copy();candidate[j]+=sign*step
+     candidate=project_finger_values(side,name,candidate);score=cost(candidate)
+     if score<best-1e-9:values=candidate;best=score;improved=True
+   if not improved:break
+ return values
+
+def anatomical_fingers(side,pts,fade):
+ if not finger_fit_rigs:init_finger_rigs()
+ forward=(pts[9]-pts[0]).normalized();across=(pts[5]-pts[17]).normalized()*(-1 if side=='Left' else 1)
+ normal=across.cross(forward).normalized();source=basis(forward,normal)
+ transfer=rest[side]['basis']@source.transposed()
  for name,ids in finger_indices.items():
-  segments=[(pts[ids[k+1]]-pts[ids[k]]).normalized() for k in range(3)]
-  base=(pts[ids[0]]-pts[0]).normalized()
-  flat=(base-normal*base.dot(normal)).normalized()
-  if name=='Thumb':
-   # Thumb CMC is a saddle joint. Transfer its two-axis direction without roll.
-   bone=B(side+'HandThumb1')
-   source_basis=basis(forward,normal)
-   desired=rest[side]['basis']@(source_basis.transposed()@segments[0])
-   initial=(bone.bone.tail_local-bone.bone.head_local).normalized()
-   swing=initial.rotation_difference(desired)
-   angle=swing.angle
-   if angle>math.radians(85):swing=Quaternion().slerp(swing,math.radians(85)/angle)
-   local=bone.bone.matrix_local.to_quaternion()
-   thumbq=local.inverted()@swing@local
-   bone.rotation_quaternion=Quaternion(hinge_axis(side,name,1),relaxed[name][0]).slerp(thumbq,fade)
-  else:
-   bend=math.atan2(segments[0].dot(normal),segments[0].dot(flat))
-   if bend < -math.pi/2:bend=math.pi
-   bend=clamp(bend,math.radians(-12),math.radians(95))
-   model=B(side+'Hand'+name+'1').bone
-   model_direction=(model.tail_local-model.head_local).normalized()
-   model_base=(model.head_local-rest[side]['wrist']).normalized()
-   model_normal=rest[side]['basis'].col[2]
-   model_flat=(model_base-model_normal*model_base.dot(model_normal)).normalized()
-   rest_bend=math.atan2(model_direction.dot(model_normal),model_direction.dot(model_flat))
-   bend-=rest_bend
-   flat_segment=segments[0]-normal*segments[0].dot(normal)
-   rest_spread=signed_angle(model_flat,model_direction-model_normal*model_direction.dot(model_normal),model_normal)
-   spread=clamp(signed_angle(flat,flat_segment,normal)-rest_spread,math.radians(-18),math.radians(18))
-   spread*=clamp(segments[0].dot(flat)/.35,0,1)
-   bone=B(side+'Hand'+name+'1')
-   local_normal=bone.bone.matrix_local.to_quaternion().inverted()@rest[side]['basis'].col[2]
-   target=Quaternion(local_normal,spread)@Quaternion(hinge_axis(side,name,1),bend)
-   bone.rotation_quaternion=Quaternion(hinge_axis(side,name,1),relaxed[name][0]).slerp(target,fade)
-  for j in (2,3):
-   # Interphalangeal joints bend in one plane; tracking cannot twist them.
-   axis=segments[0].cross(normal).normalized()
-   # Lateral tracking noise is not finger flexion. Project onto the flexion
-   # plane before measuring; subtract the mesh's already-curved rest joints.
-   before=segments[j-2]-axis*segments[j-2].dot(axis)
-   after=segments[j-1]-axis*segments[j-1].dot(axis)
-   angle=segments[j-2].angle(segments[j-1]) if name=='Thumb' else signed_angle(before,after,axis)
-   limit=math.radians((70 if j==2 else 80) if name=='Thumb' else (105 if j==2 else 75))
+  target=[transfer@(pts[ids[k+1]]-pts[ids[k]]).normalized() for k in range(3)]
+  info=finger_fit_rigs[(side,name)];key=(side,name)
+  values=fit_finger_directions(side,name,target,finger_fit_previous.get(key))
+  finger_fit_previous[key]=values.copy()
+  predicted,rotations=finger_chain(side,name,values)
+  finger_fit_errors.append(sum(a.angle(b) for a,b in zip(predicted,target))/3)
+  for j,q in enumerate(rotations,1):
    bone=B(side+'Hand'+name+str(j))
-   rest_bend=hand_calibration['restBends'].get(bone.name,0)
-   angle=clamp(angle,math.radians(-5),limit)-rest_bend
-   bone.rotation_quaternion=Quaternion(hinge_axis(side,name,j),relaxed[name][j-1]*(1-fade)+angle*fade)
+   neutral=Quaternion(info['axes'][j-1],relaxed[name][j-1])
+   bone.rotation_quaternion=neutral.slerp(q,fade)
  bpy.context.view_layer.update()
 
 forearm_twist={}

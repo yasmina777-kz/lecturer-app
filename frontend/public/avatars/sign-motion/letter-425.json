@@ -14,16 +14,17 @@
     "Right": 23
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 8.0,
+  "maxJointStepDegrees": 7.64,
   "review": "experimental-unreviewed",
-  "method": "Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training",
-  "motionVersion": 3,
+  "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
+  "motionVersion": 4,
   "peakStep": {
-    "bone": "mixamorig:LeftHandPinky3",
-    "frame": 23,
-    "angle": 7.999955541799461
+    "bone": "mixamorig:LeftHandMiddle2",
+    "frame": 15,
+    "angle": 7.640473294271581
   },
   "leadIn": 0.7,
   "leadOut": 0.7,
-  "maxHingeOffAxis": 2.9802322387695312e-08
+  "maxHingeOffAxis": 3.725290298461914e-08,
+  "meanFingerDirectionErrorDegrees": 11.154221276897971
 }

@@ -62,7 +62,7 @@ for path in paths:
   for f,value in zip(frames,filtered_samples(filled)):f[key]=value
  for ob in [rig,*rig.children_recursive]:ob.animation_data_clear()
  face=bpy.data.objects['Mira • continuous human mesh'].data.shape_keys;face.animation_data_clear()
- forearm_twist.clear()
+ forearm_twist.clear();finger_fit_previous.clear();finger_fit_errors.clear()
  lead=.7;tail=.7;duration=frames[-1]['t']+lead+tail;count=round(duration*30)+1
  sc.frame_start=1;sc.frame_end=count;previous={};maxstep=0;peak={};hinge_error=0;rotation_samples=[];location_samples=[]
  for frame in range(1,count+1):
@@ -133,7 +133,7 @@ for path in paths:
   for key in fc.keyframe_points:key.interpolation='LINEAR'
  bpy.ops.object.select_all(action='DESELECT');rig.select_set(True)
  bpy.ops.export_scene.gltf(filepath=str(OUT/(entry['id']+'.glb')),export_format='GLB',use_selection=True,export_animations=True,export_animation_mode='ACTIVE_ACTIONS',export_frame_range=True,export_force_sampling=True,export_anim_slide_to_zero=True,export_yup=True)
- info={'id':entry['id'],'label':entry['label'],'url':'/avatars/sign-motion/'+entry['id']+'.glb','duration':round((count-1)/30,3),'source':entry['source'],'reference':entry['video'],'handCoverage':coverage,'maxGapFrames':longest,'poseCoverage':d['poseCoverage'],'maxJointStepDegrees':round(math.degrees(maxstep),3),'review':'experimental-unreviewed','method':'Mixamo-calibrated finger flexion axes, rest-curvature correction, palm-relative capture, elbow IK and symmetric smoothing; no translation training','motionVersion':3,'peakStep':peak,'leadIn':lead,'leadOut':tail,'maxHingeOffAxis':hinge_error}
+ info={'id':entry['id'],'label':entry['label'],'url':'/avatars/sign-motion/'+entry['id']+'.glb','duration':round((count-1)/30,3),'source':entry['source'],'reference':entry['video'],'handCoverage':coverage,'maxGapFrames':longest,'poseCoverage':d['poseCoverage'],'maxJointStepDegrees':round(math.degrees(maxstep),3),'review':'experimental-unreviewed','method':'Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training','motionVersion':4,'peakStep':peak,'leadIn':lead,'leadOut':tail,'maxHingeOffAxis':hinge_error,'meanFingerDirectionErrorDegrees':math.degrees(sum(finger_fit_errors)/max(1,len(finger_fit_errors)))}
  (OUT/(entry['id']+'.json')).write_text(json.dumps(info,ensure_ascii=False,indent=2));manifest.append(info)
  print('RETARGETED',entry['label'],info['duration'],coverage,flush=True)
  # Keep a concrete Blender workshop for manual finger/curve review.
