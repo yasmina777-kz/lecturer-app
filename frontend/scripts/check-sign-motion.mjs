@@ -8,6 +8,13 @@ const dictionary=await source('../src/sign/dictionary.ts'),text=await source('..
 const motion=await source('../src/sign/motion.ts',{'"./dictionary"':dictionary,'"./textPlan"':text});const {planMotion,motionTimeline}=await import(motion);const {alphabetEntries}=await import(dictionary);
 const {composeMotion}=await import(await source('../src/sign/composeMotion.ts',{'"three"':new URL('../node_modules/three/build/three.module.js',import.meta.url).href,'"./motion"':motion}));
 const assets=await read('../public/avatars/sign-motion/catalog.json'),words=await read('../public/research/rsl/words/catalog.json'),forms=await read('../public/research/rsl/words/forms.json'),entries=[...alphabetEntries(),...words];
+const {phraseGroups}=await import(await source('../src/sign/phraseExamples.ts'));
+for(const group of phraseGroups)for(const phrase of group.phrases){
+ const example=planMotion(phrase,entries,forms,assets);
+ assert.deepEqual(example.missing,[],phrase+' has unavailable signs');
+ assert.ok(example.steps.length>0,phrase);
+ assert.equal(example.spelling,false,phrase);
+}
 assert.equal(assets.length,203);assert.equal(new Set(assets.map(a=>a.id)).size,203);
 let plan=planMotion('Я хочу читать книгу',entries,forms,assets);assert.deepEqual(plan.steps.map(s=>s.label),['я','хотеть','читать','книга']);assert.deepEqual(plan.missing,[]);
 const timeline=motionTimeline(plan.steps);assert.equal(timeline.length,4);assert.ok(timeline.every((s,i)=>i===0||s.start>timeline[i-1].end));

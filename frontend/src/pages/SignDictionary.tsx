@@ -12,6 +12,7 @@ import { SignSequencePlayer } from "../components/SignSequencePlayer";
 import { exercises } from "../sign/exercises";
 import "./sign-dictionary.css";
 import { ReferenceVideo } from "../components/SignReferenceVideo";
+import { phraseGroups } from "../sign/phraseExamples";
 const emptyMotionPlan = { steps: [], missing: [], spelling: false };
 const categoryTranslations: Record<string, [string, string]> = {
   Алфавит: ["Alphabet", "Әліпби"],
@@ -37,6 +38,7 @@ export function SignDictionaryPage() {
   const setTab = (next: "text" | "dictionary" | "grammar") =>
     setParams(next === "text" ? {} : { tab: next });
   const [motions, setMotions] = useState<MotionAsset[]>([]);
+  const [phraseGroup, setPhraseGroup] = useState(0);
   const [run, setRun] = useState(0);
   const sequenceRef = useRef<HTMLDivElement>(null);
   const [words, setWords] = useState<DictionaryEntry[]>([]),
@@ -287,13 +289,35 @@ export function SignDictionaryPage() {
                 )}
               </button>
             </div>
+            <div className="sign-phrase-library">
+              <label htmlFor="phrase-topic">
+                {at(
+                  "Готовые фразы · 32 примера",
+                  "Ready phrases · 32 examples",
+                  "Дайын сөйлемдер · 32 мысал",
+                )}
+              </label>
+              <select
+                id="phrase-topic"
+                value={phraseGroup}
+                onChange={(e) => setPhraseGroup(Number(e.target.value))}
+              >
+                {phraseGroups.map((group, i) => (
+                  <option key={group.title[0]} value={i}>
+                    {at(group.title[0], group.title[1], group.title[2])}
+                  </option>
+                ))}
+              </select>
+              <p>
+                {at(
+                  "Выберите фразу — доступные жесты будут показаны подряд. Это учебная последовательность, а не проверенный перевод с грамматикой РЖЯ.",
+                  "Choose a phrase to play its available signs in order. These are practice sequences, not verified grammatical RSL translations.",
+                  "Сөйлемді таңдаңыз — қолжетімді ишаралар ретімен көрсетіледі. Бұл оқу тізбегі, РЖЯ грамматикасымен тексерілген аударма емес.",
+                )}
+              </p>
+            </div>
             <div className="sign-examples">
-              {[
-                "Как тебя зовут?",
-                "Спасибо",
-                "Я хочу читать книгу",
-                "Здравствуйте! Как тебя зовут? Спасибо.",
-              ].map((v) => (
+              {phraseGroups[phraseGroup].phrases.map((v) => (
                 <button
                   key={v}
                   onClick={() => {

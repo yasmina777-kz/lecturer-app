@@ -74,6 +74,21 @@ export function decomposeText(
       i += size - 1;
       continue;
     }
+    // Resolve only explicit pronoun variants; other ambiguous words still require a choice.
+    const pronounAlias: Record<string, string> = {
+      мне: "меня",
+      мной: "меня",
+      мною: "меня",
+      тебе: "тебя",
+      тобой: "тебя",
+      тобою: "тебя",
+    };
+    const alias = pronounAlias[token.toLocaleLowerCase("ru")];
+    const aliasEntry = alias ? byLabel.get(alias) : undefined;
+    if (aliasEntry) {
+      result.push({ text: token, entry: aliasEntry, inflected: true });
+      continue;
+    }
     const candidates = (forms[token.toLocaleLowerCase("ru")] ?? [])
       .map((id) => byId.get(id))
       .filter((e): e is DictionaryEntry => !!e);
