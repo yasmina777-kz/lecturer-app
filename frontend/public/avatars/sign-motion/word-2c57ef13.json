@@ -1,0 +1,20 @@
+{
+  "id": "word-2c57ef13",
+  "label": "закрыть",
+  "url": "/avatars/sign-motion/word-2c57ef13.glb",
+  "duration": 2.8,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/2c57ef13-e81c-4ea8-bf6e-c0cb597adfca.mp4",
+  "handCoverage": {
+    "Left": 0.5952380952380952,
+    "Right": 0.9761904761904762
+  },
+  "maxGapFrames": {
+    "Left": 15,
+    "Right": 1
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

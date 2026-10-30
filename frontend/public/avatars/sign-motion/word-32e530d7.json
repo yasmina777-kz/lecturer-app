@@ -1,0 +1,20 @@
+{
+  "id": "word-32e530d7",
+  "label": "легкий",
+  "url": "/avatars/sign-motion/word-32e530d7.glb",
+  "duration": 2.9,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/32e530d7-3598-47d3-b344-ceb36bb6fe58.mp4",
+  "handCoverage": {
+    "Left": 0.8863636363636364,
+    "Right": 0.8636363636363636
+  },
+  "maxGapFrames": {
+    "Left": 5,
+    "Right": 4
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

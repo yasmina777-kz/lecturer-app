@@ -1,0 +1,20 @@
+{
+  "id": "word-83b8a1b6",
+  "label": "вопрос",
+  "url": "/avatars/sign-motion/word-83b8a1b6.glb",
+  "duration": 2.1666666666666665,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/83b8a1b6-5f62-4003-93aa-cf121cd0f8e1.mp4",
+  "handCoverage": {
+    "Left": 1.0,
+    "Right": 0.0
+  },
+  "maxGapFrames": {
+    "Left": 0,
+    "Right": 30
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

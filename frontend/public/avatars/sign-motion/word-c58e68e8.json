@@ -1,0 +1,20 @@
+{
+  "id": "word-c58e68e8",
+  "label": "сказать",
+  "url": "/avatars/sign-motion/word-c58e68e8.glb",
+  "duration": 2.1666666666666665,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/c58e68e8-cac4-4676-9699-ff06de3061bd.mp4",
+  "handCoverage": {
+    "Left": 1.0,
+    "Right": 0.0
+  },
+  "maxGapFrames": {
+    "Left": 0,
+    "Right": 30
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

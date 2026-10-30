@@ -1,0 +1,20 @@
+{
+  "id": "word-151a37ef",
+  "label": "быстрый",
+  "url": "/avatars/sign-motion/word-151a37ef.glb",
+  "duration": 2.1666666666666665,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/151a37ef-302b-4fb8-91b4-505c935e207c.mp4",
+  "handCoverage": {
+    "Left": 0.8666666666666667,
+    "Right": 0.7333333333333333
+  },
+  "maxGapFrames": {
+    "Left": 3,
+    "Right": 4
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "word-e10fbdcb",
+  "label": "женщина",
+  "url": "/avatars/sign-motion/word-e10fbdcb.glb",
+  "duration": 2.466666666666667,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/e10fbdcb-14a6-4a4b-8073-f646db0d4f28.mp4",
+  "handCoverage": {
+    "Left": 1.0,
+    "Right": 0.9166666666666666
+  },
+  "maxGapFrames": {
+    "Left": 0,
+    "Right": 2
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

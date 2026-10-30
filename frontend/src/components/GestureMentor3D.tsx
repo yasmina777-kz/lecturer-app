@@ -2,11 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { composeMotion } from "../sign/composeMotion";
 import { at } from "../i18n/automation";
 
 export type GestureAngle = "front" | "three-quarter" | "side";
 export function GestureMentor3D({
   time,
+  motionUrls,
+  onReadyChange,
   closeup,
   angle,
   resetToken,
@@ -14,12 +17,17 @@ export function GestureMentor3D({
   modelUrl = "/avatars/mira-blender/mira-signing-soft.glb",
 }: {
   time: number;
+  motionUrls?: string[];
+  onReadyChange?: (ready: boolean) => void;
   closeup: boolean;
   angle: GestureAngle;
   resetToken: number;
   modelUrl?: string;
   framing?: "full" | "sign" | "letter";
 }) {
+  const readyCallback = useRef(onReadyChange);
+  readyCallback.current = onReadyChange;
+  const motionKey = JSON.stringify(motionUrls ?? []);
   const host = useRef<HTMLDivElement>(null);
   const current = useRef({ time, closeup, angle });
   current.current = { time, closeup, angle };
@@ -44,7 +52,7 @@ export function GestureMentor3D({
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.08;
     renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.shadowMap.type = THREE.PCFShadowMap;
     renderer.domElement.setAttribute("role", "img");
     renderer.domElement.setAttribute(
       "aria-label",
@@ -77,6 +85,7 @@ export function GestureMentor3D({
     const rim = new THREE.DirectionalLight(0xffe1af, 2);
     rim.position.set(0, 3, -3);
     scene.add(rim);
+    let clipDuration = 8;
     let mixer: THREE.AnimationMixer | undefined;
     const actions: THREE.AnimationAction[] = [];
     let model: THREE.Group | undefined;
@@ -127,7 +136,7 @@ export function GestureMentor3D({
         action.paused = false;
         action.enabled = true;
       });
-      mixer?.setTime(Math.min(8, Math.max(0, t)));
+      mixer?.setTime(Math.min(clipDuration, Math.max(0, t)));
       mount.dataset.poseTime = t.toFixed(2);
       render();
     };
@@ -153,7 +162,18 @@ export function GestureMentor3D({
         : framing === "full"
           ? 1.95
           : 1.62;
-      const radius = baseRadius * (!close && narrow ? 1.13 : 1);
+      const radius =
+        !close && motionKey !== "[]"
+          ? Math.max(
+              baseRadius,
+              Math.min(
+                2.8,
+                0.58 /
+                  (Math.tan((16 * Math.PI) / 180) *
+                    (mount.clientWidth / Math.max(1, mount.clientHeight))),
+              ),
+            )
+          : baseRadius * (!close && narrow ? 1.13 : 1);
       orbit.target.set(
         close ? (framing === "letter" ? -0.23 : 0) : 0,
         close
@@ -199,9 +219,10 @@ export function GestureMentor3D({
     pose(current.current.time);
     setError(false);
     setLoading(true);
+    readyCallback.current?.(false);
     new GLTFLoader().load(
       modelUrl,
-      (gltf) => {
+      async (gltf) => {
         if (!alive) {
           disposeModel(gltf.scene);
           return;
@@ -216,7 +237,34 @@ export function GestureMentor3D({
         });
         scene.add(model);
         mixer = new THREE.AnimationMixer(model);
-        for (const clip of gltf.animations) {
+        let clips = gltf.animations;
+        try {
+          const urls: string[] = JSON.parse(motionKey);
+          if (urls.length) {
+            const sources = new Map<string, THREE.AnimationClip>();
+            await Promise.all(
+              [...new Set(urls)].map(async (url) => {
+                const asset = await new GLTFLoader().loadAsync(url);
+                const clip = asset.animations[0];
+                if (clip) sources.set(url, clip);
+                disposeModel(asset.scene);
+                if (!clip) throw new Error("Empty animation");
+              }),
+            );
+            if (!alive) return;
+            clips = [composeMotion(urls.map((url) => sources.get(url)!))];
+          }
+        } catch {
+          if (alive) {
+            setLoading(false);
+            setError(true);
+            readyCallback.current?.(false);
+          }
+          return;
+        }
+        if (!alive) return;
+        clipDuration = Math.max(...clips.map((clip) => clip.duration));
+        for (const clip of clips) {
           const action = mixer.clipAction(clip);
           action.setLoop(THREE.LoopOnce, 1);
           action.clampWhenFinished = true;
@@ -224,6 +272,7 @@ export function GestureMentor3D({
           actions.push(action);
         }
         setLoading(false);
+        readyCallback.current?.(true);
         mount.dataset.model = "blender-mira-v3-soft";
         pose(current.current.time);
       },
@@ -249,7 +298,7 @@ export function GestureMentor3D({
       renderer.dispose();
       renderer.domElement.remove();
     };
-  }, [modelUrl, framing]);
+  }, [modelUrl, framing, motionKey]);
   useEffect(() => api.current?.pose(time), [time]);
   useEffect(
     () => api.current?.view(closeup, angle),

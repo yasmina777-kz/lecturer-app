@@ -1,0 +1,20 @@
+{
+  "id": "letter-425",
+  "label": "Х",
+  "url": "/avatars/sign-motion/letter-425.glb",
+  "duration": 1.8333333333333333,
+  "source": "https://github.com/ai-forever/bukva",
+  "reference": "/research/rsl/alphabet/0425.mp4",
+  "handCoverage": {
+    "Left": 1.0,
+    "Right": 0.0
+  },
+  "maxGapFrames": {
+    "Left": 0,
+    "Right": 23
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

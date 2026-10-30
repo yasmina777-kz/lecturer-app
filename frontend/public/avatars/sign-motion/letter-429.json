@@ -1,0 +1,20 @@
+{
+  "id": "letter-429",
+  "label": "Щ",
+  "url": "/avatars/sign-motion/letter-429.glb",
+  "duration": 2.1666666666666665,
+  "source": "https://github.com/ai-forever/bukva",
+  "reference": "/research/rsl/alphabet/0429.mp4",
+  "handCoverage": {
+    "Left": 1.0,
+    "Right": 0.03333333333333333
+  },
+  "maxGapFrames": {
+    "Left": 0,
+    "Right": 28
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

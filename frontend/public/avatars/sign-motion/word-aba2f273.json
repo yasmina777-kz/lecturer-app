@@ -1,0 +1,20 @@
+{
+  "id": "word-aba2f273",
+  "label": "минута",
+  "url": "/avatars/sign-motion/word-aba2f273.glb",
+  "duration": 2.1333333333333333,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/aba2f273-425d-4fd1-892b-1dd9d21e615c.mp4",
+  "handCoverage": {
+    "Left": 0.896551724137931,
+    "Right": 0.0
+  },
+  "maxGapFrames": {
+    "Left": 3,
+    "Right": 29
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "word-b854c147",
+  "label": "весна",
+  "url": "/avatars/sign-motion/word-b854c147.glb",
+  "duration": 2.2333333333333334,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/b854c147-373f-4b87-bcf6-fd1ed63987ca.mp4",
+  "handCoverage": {
+    "Left": 0.8709677419354839,
+    "Right": 0.06451612903225806
+  },
+  "maxGapFrames": {
+    "Left": 4,
+    "Right": 19
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

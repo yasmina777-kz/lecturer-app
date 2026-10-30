@@ -1,0 +1,20 @@
+{
+  "id": "word-3eccaa2d",
+  "label": "хлеб",
+  "url": "/avatars/sign-motion/word-3eccaa2d.glb",
+  "duration": 1.9,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/3eccaa2d-ba0b-49bb-b39e-3db358ddd6e4.mp4",
+  "handCoverage": {
+    "Left": 1.0,
+    "Right": 0.9583333333333334
+  },
+  "maxGapFrames": {
+    "Left": 0,
+    "Right": 1
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

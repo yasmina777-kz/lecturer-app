@@ -1,0 +1,20 @@
+{
+  "id": "word-d7560665",
+  "label": "восемь",
+  "url": "/avatars/sign-motion/word-d7560665.glb",
+  "duration": 2.533333333333333,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/d7560665-dcdc-4ee5-8687-a314e9f631d3.mp4",
+  "handCoverage": {
+    "Left": 0.972972972972973,
+    "Right": 0.8378378378378378
+  },
+  "maxGapFrames": {
+    "Left": 1,
+    "Right": 2
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "word-57c6880e",
+  "label": "играть",
+  "url": "/avatars/sign-motion/word-57c6880e.glb",
+  "duration": 2,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/57c6880e-9d4f-4e03-a1d9-4169d18f4f43.mp4",
+  "handCoverage": {
+    "Left": 0.7307692307692307,
+    "Right": 0.4230769230769231
+  },
+  "maxGapFrames": {
+    "Left": 4,
+    "Right": 5
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

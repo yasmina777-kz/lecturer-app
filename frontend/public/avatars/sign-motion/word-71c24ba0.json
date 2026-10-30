@@ -1,0 +1,20 @@
+{
+  "id": "word-71c24ba0",
+  "label": "взять",
+  "url": "/avatars/sign-motion/word-71c24ba0.glb",
+  "duration": 2.466666666666667,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/71c24ba0-d579-4c71-8e67-2134d7dc10d0.mp4",
+  "handCoverage": {
+    "Left": 0.0,
+    "Right": 0.8888888888888888
+  },
+  "maxGapFrames": {
+    "Left": 36,
+    "Right": 3
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "word-b58b7f9b",
+  "label": "смотреть",
+  "url": "/avatars/sign-motion/word-b58b7f9b.glb",
+  "duration": 2.033333333333333,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/b58b7f9b-fde5-45d5-b41b-b3ebeef68a41.mp4",
+  "handCoverage": {
+    "Left": 0.8888888888888888,
+    "Right": 0.0
+  },
+  "maxGapFrames": {
+    "Left": 3,
+    "Right": 27
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

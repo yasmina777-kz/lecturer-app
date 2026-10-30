@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft,
@@ -16,6 +16,8 @@ import type { GestureAngle } from "../components/GestureMentor3D";
 import "./gesture-preview.css";
 import "./sign-trainer.css";
 import "./sign-dictionary.css";
+import { SignSequencePlayer } from "../components/SignSequencePlayer";
+import { planMotion, type MotionAsset } from "../sign/motion";
 import { ReferenceVideo } from "../components/SignReferenceVideo";
 import { alphabetEntries } from "../sign/dictionary";
 const Mentor = lazy(() =>
@@ -109,11 +111,7 @@ export function SignCourseCatalog() {
                   <h2>{e.title}</h2>
                   <p>{e.hint}</p>
                   <span className="sign-level-link">
-                    {at(
-                      e.model ? "Смотреть аватара" : "Видео и ИИ-проверка",
-                      e.model ? "Watch avatar" : "Video and AI check",
-                      e.model ? "Аватарды көру" : "Бейне және ЖИ тексеруі",
-                    )}
+                    {at("Смотреть аватара", "Watch avatar", "Аватарды көру")}
                     <ArrowRight size={17} />
                   </span>
                 </div>
@@ -130,9 +128,9 @@ export function SignCourseCatalog() {
       </Link>
       <p className="sign-catalog-note">
         {at(
-          "Все буквы доступны по видео. Ещё 170 слов и выражений — в разделе «Текст → жесты». 3D-показы пока пробные.",
-          "All letters have video references. Another 170 words and expressions are in Text → signs. 3D demonstrations are still prototypes.",
-          "Барлық әріптің бейнеүлгісі бар. «Мәтін → ымдар» бөлімінде тағы 170 сөз бен тіркес. 3D көрсетілімдер әзірге сынақ.",
+          "Все 33 буквы и 170 слов имеют пробные движения аватара и видео для сравнения. Откройте словарь, чтобы посмотреть слова и собрать последовательность.",
+          "All 33 letters and 170 words have experimental avatar motion and reference videos. Open the dictionary to view words and build sequences.",
+          "33 әріп пен 170 сөздің сынақ аватар қимылдары және бейнеүлгілері бар. Сөздер мен тізбектерді сөздіктен көріңіз.",
         )}
       </p>
       <div className="sign-shortcuts">
@@ -247,32 +245,53 @@ export function ExercisePlayer({
 }: {
   exercise: ReturnType<typeof exercises>[number];
 }) {
-  const reference = alphabetEntries().find((e) => e.label === exercise.letter);
-  if (!exercise.model && reference)
-    return (
-      <>
-        <ReferenceVideo entry={reference} />
-        <Link className="button primary" to="/text-to-sign?tab=dictionary">
-          {at(
-            "Открыть словарь · 170 слов",
-            "Open dictionary · 170 words",
-            "Сөздікті ашу · 170 сөз",
-          )}
-        </Link>
-        <p className="sign-catalog-note">
-          {at(
-            "Для этой буквы показываем человека: проверенная 3D-анимация ещё не подготовлена.",
-            "This letter uses a human reference; a reviewed 3D animation is not available yet.",
-            "Бұл әріпті адам көрсетеді: тексерілген 3D анимация әлі дайын емес.",
-          )}
-        </p>
-        <Suspense fallback={<Loading />}>
-          <Camera key={exercise.id} expected={exercise.letter!} />
-        </Suspense>
-      </>
-    );
+  if (exercise.letter)
+    return <CapturedLetterPlayer key={exercise.id} letter={exercise.letter} />;
   return <AnimatedExercisePlayer key={exercise.id} exercise={exercise} />;
 }
+function CapturedLetterPlayer({ letter }: { letter: string }) {
+  const [motions, setMotions] = useState<MotionAsset[]>([]),
+    [loaded, setLoaded] = useState(false);
+  useEffect(() => {
+    const abort = new AbortController();
+    fetch("/avatars/sign-motion/catalog.json", { signal: abort.signal })
+      .then((r) => {
+        if (!r.ok) throw Error();
+        return r.json();
+      })
+      .then((m) => setMotions(m))
+      .catch(() => {})
+      .finally(() => {
+        if (!abort.signal.aborted) setLoaded(true);
+      });
+    return () => abort.abort();
+  }, []);
+  const references = useMemo(() => alphabetEntries(), []);
+  const reference = references.find((e) => e.label === letter)!;
+  const plan = useMemo(
+    () => planMotion(letter, references, {}, motions, true),
+    [letter, references, motions],
+  );
+  return (
+    <>
+      {!loaded ? <Loading /> : <SignSequencePlayer plan={plan} />}
+      <details className="sign-dictionary-reference">
+        <summary>
+          {at(
+            "Сравнить с видео человека",
+            "Compare with a human reference",
+            "Адам бейнесімен салыстыру",
+          )}
+        </summary>
+        <ReferenceVideo entry={reference} />
+      </details>
+      <Suspense fallback={<Loading />}>
+        <Camera expected={letter} />
+      </Suspense>
+    </>
+  );
+}
+
 function AnimatedExercisePlayer({
   exercise,
 }: {

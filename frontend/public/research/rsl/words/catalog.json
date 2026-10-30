@@ -179,12 +179,12 @@
     "id": "word-8f8056fe",
     "label": "да",
     "category": "Общение",
-    "video": "/research/rsl/words/8f8056fe-ceb5-4324-a5ca-6d8e95184692.mp4",
-    "poster": "/research/rsl/words/8f8056fe-ceb5-4324-a5ca-6d8e95184692.jpg",
+    "video": "/research/rsl/words/34d54421-d709-4b48-b6c7-58e0e3e0710c.mp4",
+    "poster": "/research/rsl/words/34d54421-d709-4b48-b6c7-58e0e3e0710c.jpg",
     "source": "https://github.com/ai-forever/slovo",
     "dataset": "Slovo",
-    "attachmentId": "8f8056fe-ceb5-4324-a5ca-6d8e95184692",
-    "signerId": "0211b488644476dd0fec656ccb9b74fc"
+    "attachmentId": "34d54421-d709-4b48-b6c7-58e0e3e0710c",
+    "signerId": "db573f94204e56e0cf3fc2ea000e5bdc"
   },
   {
     "id": "word-d5e5068b",
@@ -476,12 +476,12 @@
     "id": "word-e526814e",
     "label": "люди",
     "category": "Семья и люди",
-    "video": "/research/rsl/words/e526814e-0962-4c44-8a18-e4b8ef513a7e.mp4",
-    "poster": "/research/rsl/words/e526814e-0962-4c44-8a18-e4b8ef513a7e.jpg",
+    "video": "/research/rsl/words/5ea53ce1-5cdf-461c-a814-b8f678f7a7b8.mp4",
+    "poster": "/research/rsl/words/5ea53ce1-5cdf-461c-a814-b8f678f7a7b8.jpg",
     "source": "https://github.com/ai-forever/slovo",
     "dataset": "Slovo",
-    "attachmentId": "e526814e-0962-4c44-8a18-e4b8ef513a7e",
-    "signerId": "db573f94204e56e0cf3fc2ea000e5bdc"
+    "attachmentId": "5ea53ce1-5cdf-461c-a814-b8f678f7a7b8",
+    "signerId": "0211b488644476dd0fec656ccb9b74fc"
   },
   {
     "id": "word-743cb1da",
@@ -685,12 +685,12 @@
     "id": "word-c2304594",
     "label": "Память",
     "category": "Учёба",
-    "video": "/research/rsl/words/c2304594-a1fa-4e0b-a84d-4a2fe3f403c5.mp4",
-    "poster": "/research/rsl/words/c2304594-a1fa-4e0b-a84d-4a2fe3f403c5.jpg",
+    "video": "/research/rsl/words/8b39dda1-b863-438a-b85c-659b9345d1d6.mp4",
+    "poster": "/research/rsl/words/8b39dda1-b863-438a-b85c-659b9345d1d6.jpg",
     "source": "https://github.com/ai-forever/slovo",
     "dataset": "Slovo",
-    "attachmentId": "c2304594-a1fa-4e0b-a84d-4a2fe3f403c5",
-    "signerId": "ca6b767f0cccf093ba737ae2fc4fec3d"
+    "attachmentId": "8b39dda1-b863-438a-b85c-659b9345d1d6",
+    "signerId": "9a0784a99ea13a8b06cb103c2c8c7f0f"
   },
   {
     "id": "word-d8326c48",
@@ -839,12 +839,12 @@
     "id": "word-ffce2323",
     "label": "работать",
     "category": "Каждый день",
-    "video": "/research/rsl/words/ffce2323-7036-46ee-af8a-82f010ce9aff.mp4",
-    "poster": "/research/rsl/words/ffce2323-7036-46ee-af8a-82f010ce9aff.jpg",
+    "video": "/research/rsl/words/5fd28b57-9261-44fc-9648-e519d00eca14.mp4",
+    "poster": "/research/rsl/words/5fd28b57-9261-44fc-9648-e519d00eca14.jpg",
     "source": "https://github.com/ai-forever/slovo",
     "dataset": "Slovo",
-    "attachmentId": "ffce2323-7036-46ee-af8a-82f010ce9aff",
-    "signerId": "db573f94204e56e0cf3fc2ea000e5bdc"
+    "attachmentId": "5fd28b57-9261-44fc-9648-e519d00eca14",
+    "signerId": "46dd04a1caa75ed3082b573cb5a3ad26"
   },
   {
     "id": "word-ceedcb88",
@@ -1059,12 +1059,12 @@
     "id": "word-16bf2a06",
     "label": "день",
     "category": "Время",
-    "video": "/research/rsl/words/16bf2a06-f5a8-43a3-a362-ed4c09055d12.mp4",
-    "poster": "/research/rsl/words/16bf2a06-f5a8-43a3-a362-ed4c09055d12.jpg",
+    "video": "/research/rsl/words/875d68f6-5916-49f6-ba93-359b4d37dde3.mp4",
+    "poster": "/research/rsl/words/875d68f6-5916-49f6-ba93-359b4d37dde3.jpg",
     "source": "https://github.com/ai-forever/slovo",
     "dataset": "Slovo",
-    "attachmentId": "16bf2a06-f5a8-43a3-a362-ed4c09055d12",
-    "signerId": "95af8e702c909eee7145c6dc1a3d756b"
+    "attachmentId": "875d68f6-5916-49f6-ba93-359b4d37dde3",
+    "signerId": "b07a773bcb10b4f14f33d2b0e8ec58ba"
   },
   {
     "id": "word-e3b0e3b1",
@@ -1081,23 +1081,23 @@
     "id": "word-4fb38350",
     "label": "ночь",
     "category": "Время",
-    "video": "/research/rsl/words/4fb38350-eb94-4257-a094-013dcce6ac27.mp4",
-    "poster": "/research/rsl/words/4fb38350-eb94-4257-a094-013dcce6ac27.jpg",
+    "video": "/research/rsl/words/43720683-c4e2-4f43-83f7-0aefffa411b6.mp4",
+    "poster": "/research/rsl/words/43720683-c4e2-4f43-83f7-0aefffa411b6.jpg",
     "source": "https://github.com/ai-forever/slovo",
     "dataset": "Slovo",
-    "attachmentId": "4fb38350-eb94-4257-a094-013dcce6ac27",
-    "signerId": "db573f94204e56e0cf3fc2ea000e5bdc"
+    "attachmentId": "43720683-c4e2-4f43-83f7-0aefffa411b6",
+    "signerId": "0211b488644476dd0fec656ccb9b74fc"
   },
   {
     "id": "word-4fa6cc2a",
     "label": "час",
     "category": "Время",
-    "video": "/research/rsl/words/4fa6cc2a-f6d4-45ae-896c-36b618a373ce.mp4",
-    "poster": "/research/rsl/words/4fa6cc2a-f6d4-45ae-896c-36b618a373ce.jpg",
+    "video": "/research/rsl/words/ec185ca1-6a96-4094-938e-6a6ce6d8363a.mp4",
+    "poster": "/research/rsl/words/ec185ca1-6a96-4094-938e-6a6ce6d8363a.jpg",
     "source": "https://github.com/ai-forever/slovo",
     "dataset": "Slovo",
-    "attachmentId": "4fa6cc2a-f6d4-45ae-896c-36b618a373ce",
-    "signerId": "db573f94204e56e0cf3fc2ea000e5bdc"
+    "attachmentId": "ec185ca1-6a96-4094-938e-6a6ce6d8363a",
+    "signerId": "185bd3a81d9d618518d10abebf0d17a8"
   },
   {
     "id": "word-aba2f273",
@@ -1334,23 +1334,23 @@
     "id": "word-8d20b0ee",
     "label": "день и ночь",
     "category": "Время",
-    "video": "/research/rsl/words/8d20b0ee-e64c-4f5a-a1ee-81a5a9462686.mp4",
-    "poster": "/research/rsl/words/8d20b0ee-e64c-4f5a-a1ee-81a5a9462686.jpg",
+    "video": "/research/rsl/words/191d0ce8-7e6a-4ca0-893c-4eeb9af27e2b.mp4",
+    "poster": "/research/rsl/words/191d0ce8-7e6a-4ca0-893c-4eeb9af27e2b.jpg",
     "source": "https://github.com/ai-forever/slovo",
     "dataset": "Slovo",
-    "attachmentId": "8d20b0ee-e64c-4f5a-a1ee-81a5a9462686",
-    "signerId": "95af8e702c909eee7145c6dc1a3d756b"
+    "attachmentId": "191d0ce8-7e6a-4ca0-893c-4eeb9af27e2b",
+    "signerId": "db573f94204e56e0cf3fc2ea000e5bdc"
   },
   {
     "id": "word-f00a8a7f",
     "label": "в этом году",
     "category": "Время",
-    "video": "/research/rsl/words/f00a8a7f-91a8-491f-9813-7b9e29425cb2.mp4",
-    "poster": "/research/rsl/words/f00a8a7f-91a8-491f-9813-7b9e29425cb2.jpg",
+    "video": "/research/rsl/words/506d755c-400e-479a-ac78-e402cd8287be.mp4",
+    "poster": "/research/rsl/words/506d755c-400e-479a-ac78-e402cd8287be.jpg",
     "source": "https://github.com/ai-forever/slovo",
     "dataset": "Slovo",
-    "attachmentId": "f00a8a7f-91a8-491f-9813-7b9e29425cb2",
-    "signerId": "2d84da20c251acaeb3186642fcb04f2e"
+    "attachmentId": "506d755c-400e-479a-ac78-e402cd8287be",
+    "signerId": "46dd04a1caa75ed3082b573cb5a3ad26"
   },
   {
     "id": "word-72476e8f",
@@ -1785,11 +1785,11 @@
     "id": "word-9c7faf34",
     "label": "белый",
     "category": "Цвета и животные",
-    "video": "/research/rsl/words/9c7faf34-1c78-4852-a49f-d5823d8efd54.mp4",
-    "poster": "/research/rsl/words/9c7faf34-1c78-4852-a49f-d5823d8efd54.jpg",
+    "video": "/research/rsl/words/69376af6-13c9-42ca-9ff3-0880d106a0c3.mp4",
+    "poster": "/research/rsl/words/69376af6-13c9-42ca-9ff3-0880d106a0c3.jpg",
     "source": "https://github.com/ai-forever/slovo",
     "dataset": "Slovo",
-    "attachmentId": "9c7faf34-1c78-4852-a49f-d5823d8efd54",
+    "attachmentId": "69376af6-13c9-42ca-9ff3-0880d106a0c3",
     "signerId": "db573f94204e56e0cf3fc2ea000e5bdc"
   },
   {

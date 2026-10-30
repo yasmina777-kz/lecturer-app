@@ -1,0 +1,20 @@
+{
+  "id": "word-24491c1c",
+  "label": "город",
+  "url": "/avatars/sign-motion/word-24491c1c.glb",
+  "duration": 2.3,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/24491c1c-fc65-4fa9-9f20-047fcd4f44e0.mp4",
+  "handCoverage": {
+    "Left": 0.625,
+    "Right": 0.8125
+  },
+  "maxGapFrames": {
+    "Left": 6,
+    "Right": 5
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

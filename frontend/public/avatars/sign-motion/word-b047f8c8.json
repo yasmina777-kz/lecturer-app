@@ -1,0 +1,20 @@
+{
+  "id": "word-b047f8c8",
+  "label": "дом",
+  "url": "/avatars/sign-motion/word-b047f8c8.glb",
+  "duration": 1.6,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/b047f8c8-9b3e-4873-851e-2738517ef94e.mp4",
+  "handCoverage": {
+    "Left": 0.8888888888888888,
+    "Right": 0.8888888888888888
+  },
+  "maxGapFrames": {
+    "Left": 2,
+    "Right": 2
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

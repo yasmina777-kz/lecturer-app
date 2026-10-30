@@ -1,0 +1,20 @@
+{
+  "id": "word-c3c582bb",
+  "label": "семья",
+  "url": "/avatars/sign-motion/word-c3c582bb.glb",
+  "duration": 2.3666666666666667,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/c3c582bb-00ef-48cd-b8f5-cbf21473ca56.mp4",
+  "handCoverage": {
+    "Left": 0.17647058823529413,
+    "Right": 0.7058823529411765
+  },
+  "maxGapFrames": {
+    "Left": 24,
+    "Right": 4
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

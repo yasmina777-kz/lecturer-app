@@ -1,0 +1,20 @@
+{
+  "id": "word-69586c66",
+  "label": "ребёнок",
+  "url": "/avatars/sign-motion/word-69586c66.glb",
+  "duration": 2.2,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/69586c66-7348-4881-8390-b56dbca08817.mp4",
+  "handCoverage": {
+    "Left": 0.0,
+    "Right": 0.9333333333333333
+  },
+  "maxGapFrames": {
+    "Left": 30,
+    "Right": 1
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

@@ -1,0 +1,20 @@
+{
+  "total": 203,
+  "letters": 33,
+  "words": 170,
+  "missing": [],
+  "review": "experimental-unreviewed",
+  "limitations": [
+    "Tracking coverage is not gesture correctness.",
+    "Long occlusions are interpolated and can create wrong finger shapes.",
+    "No face/mouth grammar capture.",
+    "Hand/arm collisions have not been certified.",
+    "Text sequences retain Russian source order; no grammatical translation."
+  ],
+  "source": "MediaPipe tracking of Bukva/Slovo videos; Blender retargeting",
+  "qualityGate": {
+    "minPoseCoverage": 0.85,
+    "minDominantHandCoverage": 0.65,
+    "maxLocalJointStepDegrees": 12
+  }
+}

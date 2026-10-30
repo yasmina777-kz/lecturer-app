@@ -16,7 +16,7 @@ These are subset-video results, not live-camera or pedagogical accuracy. The bro
 
 `/text-to-sign` contains all 33 letter references and **170 words/expressions from Slovo**, with eight thematic word categories. Russian inflections are looked up using a precomputed pymorphy3/OpenCorpora table (3,430 forms). Ambiguities and unsupported words remain visible; negation is not removed. The longest available phrase is matched first.
 
-This is **dictionary lookup, not a trained Russian-to-RSL grammatical translator**. The existing 10 hand-authored 3D clips can be opened by supported exact text. Other entries show real human references. The 170 reference videos are not training samples for a word recognizer; word/phrase recognition has not been trained. Continuous translation requires licensed aligned sentence data, a separate model and evaluation by RSL signers.
+This is **dictionary lookup, not a trained Russian-to-RSL grammatical translator**. The existing 10 hand-authored 3D clips can be opened by supported exact text. All dictionary entries also have experimental avatar motion captured from the human references. The 170 reference videos are not training samples for a word recognizer; word/phrase recognition has not been trained. Continuous translation requires licensed aligned sentence data, a separate model and evaluation by RSL signers.
 
 ## Reproduce
 
@@ -40,7 +40,7 @@ Inference runs in the browser with locally served MediaPipe weights/WASM and cla
 
 ## Avatar
 
-Seven letter clips and three word/phrase clips are independently authored Blender motion studies, **not expert-verified RSL instruction**. All 33 letters have real human video references. Letters without a 3D clip show the reference rather than fabricated motion. Alphabet body animation includes connected shoulders/spine/neck, staggered finger transitions and a stable handshape viewing interval. Finite transforms, loop continuity and quaternion steps are checked during export. Gesture semantics still require an RSL specialist's review.
+The original seven letter clips and three word/phrase clips are independently authored Blender motion studies, **not expert-verified RSL instruction**. All 33 letters have real human video references. The dictionary and practice room now additionally use 203 experimental reference-captured motions, including all 33 letters; original videos remain available for comparison. These are not expert-verified. Alphabet body animation includes connected shoulders/spine/neck, staggered finger transitions and a stable handshape viewing interval. Finite transforms, loop continuity and quaternion steps are checked during export. Gesture semantics still require an RSL specialist's review.
 
 Scripts: `art/mira-alphabet/build.py`, `art/mira-blender-phrases/animate.py`, `art/mira-blender-v3/animate.py`. Recognition and playback are separate systems.
 

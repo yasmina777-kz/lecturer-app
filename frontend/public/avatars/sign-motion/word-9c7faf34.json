@@ -1,0 +1,20 @@
+{
+  "id": "word-9c7faf34",
+  "label": "белый",
+  "url": "/avatars/sign-motion/word-9c7faf34.glb",
+  "duration": 2.1666666666666665,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/69376af6-13c9-42ca-9ff3-0880d106a0c3.mp4",
+  "handCoverage": {
+    "Left": 1.0,
+    "Right": 1.0
+  },
+  "maxGapFrames": {
+    "Left": 0,
+    "Right": 0
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "letter-42c",
+  "label": "Ь",
+  "url": "/avatars/sign-motion/letter-42c.glb",
+  "duration": 2.3,
+  "source": "https://github.com/ai-forever/bukva",
+  "reference": "/research/rsl/alphabet/042c.mp4",
+  "handCoverage": {
+    "Left": 1.0,
+    "Right": 0.8125
+  },
+  "maxGapFrames": {
+    "Left": 0,
+    "Right": 4
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

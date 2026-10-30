@@ -1,0 +1,20 @@
+{
+  "id": "word-6c7d80f0",
+  "label": "дочь",
+  "url": "/avatars/sign-motion/word-6c7d80f0.glb",
+  "duration": 2.466666666666667,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/6c7d80f0-e435-487e-a2bc-31bdaaa4d788.mp4",
+  "handCoverage": {
+    "Left": 1.0,
+    "Right": 1.0
+  },
+  "maxGapFrames": {
+    "Left": 0,
+    "Right": 0
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

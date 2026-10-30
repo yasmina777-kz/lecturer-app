@@ -1,0 +1,20 @@
+{
+  "id": "word-5ed48b44",
+  "label": "иногда",
+  "url": "/avatars/sign-motion/word-5ed48b44.glb",
+  "duration": 1.9,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/5ed48b44-4292-4771-a499-40b126901b50.mp4",
+  "handCoverage": {
+    "Left": 0.6666666666666666,
+    "Right": 0.625
+  },
+  "maxGapFrames": {
+    "Left": 3,
+    "Right": 5
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

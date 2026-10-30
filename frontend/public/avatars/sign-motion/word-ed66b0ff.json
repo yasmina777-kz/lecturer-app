@@ -1,0 +1,20 @@
+{
+  "id": "word-ed66b0ff",
+  "label": "показать",
+  "url": "/avatars/sign-motion/word-ed66b0ff.glb",
+  "duration": 2.2,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/ed66b0ff-fd37-4050-ab98-6114d72d9826.mp4",
+  "handCoverage": {
+    "Left": 0.9,
+    "Right": 1.0
+  },
+  "maxGapFrames": {
+    "Left": 3,
+    "Right": 0
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

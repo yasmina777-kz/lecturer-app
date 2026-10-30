@@ -14,11 +14,13 @@ groups={
 'Описание':'хороший|плохой|большой|маленький|новый|старый|быстрый|медленный|красивый|трудный|легкий|интересный|счастливый|грустный|спокойный|радость|страх|любовь',
 'Цвета и животные':'цвет|красный|синий|зелёный|желтый|белый|черный|кошка|собака|птица|рыба|лошадь|животное'
 }
+overrides_path=ROOT/'ml/rsl/reference-overrides.json'
+overrides=json.loads(overrides_path.read_text()) if overrides_path.exists() else {}
 chosen=[]
 for category,terms in groups.items():
  for term in terms.split('|'):
   if term not in lookup:print('NOT_IN_DATASET',term,flush=True);continue
-  label=lookup[term];eligible=sorted([r for r in rows if r['text']==label and r['train']=='True'],key=lambda r:hashlib.sha256(r['attachment_id'].encode()).hexdigest());r=eligible[0];chosen.append(dict(r,category=category))
+  label=lookup[term];eligible=sorted([r for r in rows if r['text']==label and r['train']=='True'],key=lambda r:hashlib.sha256(r['attachment_id'].encode()).hexdigest());r=next((r for r in eligible if r['attachment_id']==overrides.get(label,{}).get('attachmentId')),eligible[0]);chosen.append(dict(r,category=category,stableId=overrides.get(label,{}).get('stableId')))
 local=threading.local();URL='https://rndml-team-cv.obs.ru-moscow-1.hc.sbercloud.ru/datasets/slovo/slovo.zip'
 def fetch(r):
  id=r['attachment_id'];dest=DEST/(id+'.mp4')
@@ -30,7 +32,7 @@ def fetch(r):
   cap=cv2.VideoCapture(str(dest));cap.set(cv2.CAP_PROP_POS_FRAMES,int(cap.get(cv2.CAP_PROP_FRAME_COUNT)*.5));ok,img=cap.read();cap.release()
   if ok:
    h,w=img.shape[:2];factor=min(1,480/max(w,h));cv2.imwrite(str(poster),cv2.resize(img,(int(w*factor),int(h*factor))),[cv2.IMWRITE_JPEG_QUALITY,80])
- return {'id':'word-'+id[:8],'label':r['text'],'category':r['category'],'video':'/research/rsl/words/'+dest.name,'poster':'/research/rsl/words/'+poster.name,'source':'https://github.com/ai-forever/slovo','dataset':'Slovo','attachmentId':id,'signerId':r['user_id']}
+ return {'id':r.get('stableId') or 'word-'+id[:8],'label':r['text'],'category':r['category'],'video':'/research/rsl/words/'+dest.name,'poster':'/research/rsl/words/'+poster.name,'source':'https://github.com/ai-forever/slovo','dataset':'Slovo','attachmentId':id,'signerId':r['user_id']}
 with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
  entries=[]
  for e in pool.map(fetch,chosen):

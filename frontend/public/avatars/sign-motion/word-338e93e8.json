@@ -1,0 +1,20 @@
+{
+  "id": "word-338e93e8",
+  "label": "девять",
+  "url": "/avatars/sign-motion/word-338e93e8.glb",
+  "duration": 2.066666666666667,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/338e93e8-4033-4af6-8a62-12573c53bfcc.mp4",
+  "handCoverage": {
+    "Left": 0.8928571428571429,
+    "Right": 0.8928571428571429
+  },
+  "maxGapFrames": {
+    "Left": 3,
+    "Right": 2
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

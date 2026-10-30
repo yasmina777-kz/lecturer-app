@@ -1,0 +1,20 @@
+{
+  "id": "word-506f5596",
+  "label": "птица",
+  "url": "/avatars/sign-motion/word-506f5596.glb",
+  "duration": 3.3,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/506f5596-ace8-426e-b97c-f5d5953abd65.mp4",
+  "handCoverage": {
+    "Left": 0.8269230769230769,
+    "Right": 0.19230769230769232
+  },
+  "maxGapFrames": {
+    "Left": 6,
+    "Right": 30
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

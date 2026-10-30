@@ -1,0 +1,20 @@
+{
+  "id": "word-b66bf5be",
+  "label": "ждать",
+  "url": "/avatars/sign-motion/word-b66bf5be.glb",
+  "duration": 2.066666666666667,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/b66bf5be-fb7f-4963-9146-061c2cc0936b.mp4",
+  "handCoverage": {
+    "Left": 1.0,
+    "Right": 0.42857142857142855
+  },
+  "maxGapFrames": {
+    "Left": 0,
+    "Right": 4
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

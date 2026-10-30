@@ -1,0 +1,20 @@
+{
+  "id": "word-c2304594",
+  "label": "Память",
+  "url": "/avatars/sign-motion/word-c2304594.glb",
+  "duration": 1.8,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/8b39dda1-b863-438a-b85c-659b9345d1d6.mp4",
+  "handCoverage": {
+    "Left": 1.0,
+    "Right": 0.8636363636363636
+  },
+  "maxGapFrames": {
+    "Left": 0,
+    "Right": 2
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

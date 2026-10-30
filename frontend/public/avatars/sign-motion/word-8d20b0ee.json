@@ -1,0 +1,20 @@
+{
+  "id": "word-8d20b0ee",
+  "label": "день и ночь",
+  "url": "/avatars/sign-motion/word-8d20b0ee.glb",
+  "duration": 2.5,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/191d0ce8-7e6a-4ca0-893c-4eeb9af27e2b.mp4",
+  "handCoverage": {
+    "Left": 1.0,
+    "Right": 0.5833333333333334
+  },
+  "maxGapFrames": {
+    "Left": 0,
+    "Right": 4
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "word-fd1c4073",
+  "label": "красивый",
+  "url": "/avatars/sign-motion/word-fd1c4073.glb",
+  "duration": 2.1333333333333333,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/fd1c4073-e36e-4f12-be21-4d47b1efabc0.mp4",
+  "handCoverage": {
+    "Left": 0.9655172413793104,
+    "Right": 1.0
+  },
+  "maxGapFrames": {
+    "Left": 1,
+    "Right": 0
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "word-8e883b97",
+  "label": "четверг",
+  "url": "/avatars/sign-motion/word-8e883b97.glb",
+  "duration": 1.7666666666666666,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/8e883b97-6b67-4404-8d9a-c17117421c18.mp4",
+  "handCoverage": {
+    "Left": 0.8181818181818182,
+    "Right": 0.8636363636363636
+  },
+  "maxGapFrames": {
+    "Left": 2,
+    "Right": 3
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

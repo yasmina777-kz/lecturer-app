@@ -1,0 +1,20 @@
+{
+  "id": "word-6e24fd10",
+  "label": "большой",
+  "url": "/avatars/sign-motion/word-6e24fd10.glb",
+  "duration": 2.7,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/6e24fd10-7198-4f7c-8af5-3d6f2c116cd6.mp4",
+  "handCoverage": {
+    "Left": 0.95,
+    "Right": 0.75
+  },
+  "maxGapFrames": {
+    "Left": 2,
+    "Right": 3
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

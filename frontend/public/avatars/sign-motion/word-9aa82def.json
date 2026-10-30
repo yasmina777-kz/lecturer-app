@@ -1,0 +1,20 @@
+{
+  "id": "word-9aa82def",
+  "label": "есть",
+  "url": "/avatars/sign-motion/word-9aa82def.glb",
+  "duration": 2.033333333333333,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/9aa82def-81ea-49c7-af40-2db2ad366921.mp4",
+  "handCoverage": {
+    "Left": 0.9629629629629629,
+    "Right": 0.5555555555555556
+  },
+  "maxGapFrames": {
+    "Left": 1,
+    "Right": 7
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

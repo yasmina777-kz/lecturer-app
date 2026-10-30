@@ -1,0 +1,20 @@
+{
+  "id": "word-0bf7a453",
+  "label": "животное",
+  "url": "/avatars/sign-motion/word-0bf7a453.glb",
+  "duration": 2.7333333333333334,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/0bf7a453-36e6-45f4-91ab-6468427ca16e.mp4",
+  "handCoverage": {
+    "Left": 0.975609756097561,
+    "Right": 1.0
+  },
+  "maxGapFrames": {
+    "Left": 1,
+    "Right": 0
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "word-aab0e5db",
+  "label": "двенадцать",
+  "url": "/avatars/sign-motion/word-aab0e5db.glb",
+  "duration": 2.5,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/aab0e5db-ed15-47de-b79b-6fd97beadb66.mp4",
+  "handCoverage": {
+    "Left": 0.8888888888888888,
+    "Right": 0.0
+  },
+  "maxGapFrames": {
+    "Left": 4,
+    "Right": 36
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

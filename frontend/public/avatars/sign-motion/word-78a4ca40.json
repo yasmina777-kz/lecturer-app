@@ -1,0 +1,20 @@
+{
+  "id": "word-78a4ca40",
+  "label": "отец",
+  "url": "/avatars/sign-motion/word-78a4ca40.glb",
+  "duration": 2.4,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/78a4ca40-8a78-437e-8024-13935bd3abdb.mp4",
+  "handCoverage": {
+    "Left": 1.0,
+    "Right": 0.9117647058823529
+  },
+  "maxGapFrames": {
+    "Left": 0,
+    "Right": 1
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

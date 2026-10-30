@@ -1,0 +1,20 @@
+{
+  "id": "word-25fed1ff",
+  "label": "купить",
+  "url": "/avatars/sign-motion/word-25fed1ff.glb",
+  "duration": 2.1666666666666665,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/25fed1ff-0407-4848-aa57-25bf1159ff08.mp4",
+  "handCoverage": {
+    "Left": 0.8666666666666667,
+    "Right": 0.9333333333333333
+  },
+  "maxGapFrames": {
+    "Left": 2,
+    "Right": 1
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

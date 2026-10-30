@@ -1,0 +1,20 @@
+{
+  "id": "word-cd151b2a",
+  "label": "двадцать",
+  "url": "/avatars/sign-motion/word-cd151b2a.glb",
+  "duration": 2,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/cd151b2a-4bdb-4446-b8fb-fe2a11841690.mp4",
+  "handCoverage": {
+    "Left": 1.0,
+    "Right": 0.8846153846153846
+  },
+  "maxGapFrames": {
+    "Left": 0,
+    "Right": 1
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

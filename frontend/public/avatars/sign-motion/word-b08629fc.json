@@ -1,0 +1,20 @@
+{
+  "id": "word-b08629fc",
+  "label": "трудный",
+  "url": "/avatars/sign-motion/word-b08629fc.glb",
+  "duration": 2.033333333333333,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/b08629fc-4f47-4fb6-a288-028b56256f4b.mp4",
+  "handCoverage": {
+    "Left": 1.0,
+    "Right": 0.8888888888888888
+  },
+  "maxGapFrames": {
+    "Left": 0,
+    "Right": 3
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "word-858669cd",
+  "label": "плохой",
+  "url": "/avatars/sign-motion/word-858669cd.glb",
+  "duration": 1.8666666666666667,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/858669cd-c8a4-4ed8-b29a-9a091adcdde0.mp4",
+  "handCoverage": {
+    "Left": 0.0,
+    "Right": 0.8333333333333334
+  },
+  "maxGapFrames": {
+    "Left": 24,
+    "Right": 4
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

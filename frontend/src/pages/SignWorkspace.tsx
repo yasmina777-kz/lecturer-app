@@ -389,9 +389,9 @@ export function SignHelpPage() {
             "/text-to-sign",
             at("Текст → жесты", "Text → signs", "Мәтін → ымдар"),
             at(
-              "33 буквы, 170 слов и выражений с видео. Введите текст: известные слова откроют показы, неизвестные будут отмечены. Это словарный разбор, а не грамматический перевод.",
-              "33 letters and 170 words and expressions with videos. Enter text to find known signs; unsupported words stay visible. This is dictionary lookup, not grammatical translation.",
-              "33 әріп, бейнеүлгісі бар 170 сөз бен тіркес. Мәтін енгізіңіз: таныс сөздерге үлгі көрсетіледі, белгісіздері белгіленеді. Бұл грамматикалық аударма емес.",
+              "33 буквы и 170 слов с пробными движениями аватара. Введите текст — известные жесты проиграются подряд. При неизвестном слове показ остановлен до уточнения; грамматика РЖЯ автоматически не переводится.",
+              "33 letters and 170 words with experimental avatar motion. Enter text to play known signs in sequence. Unknown words block the full sequence; RSL grammar is not translated automatically.",
+              "33 әріп және 170 сөздің сынақ аватар қимылдары. Мәтін енгізсеңіз, таныс ымдар ретімен көрсетіледі. Белгісіз сөз толық көрсетілімді тоқтатады; грамматика автоматты аударылмайды.",
             ),
           ],
           [

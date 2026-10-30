@@ -1,0 +1,20 @@
+{
+  "id": "word-38c6f832",
+  "label": "язык",
+  "url": "/avatars/sign-motion/word-38c6f832.glb",
+  "duration": 1.9,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/38c6f832-9af4-4db8-a211-16313de1ef9c.mp4",
+  "handCoverage": {
+    "Left": 0.9583333333333334,
+    "Right": 1.0
+  },
+  "maxGapFrames": {
+    "Left": 1,
+    "Right": 0
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

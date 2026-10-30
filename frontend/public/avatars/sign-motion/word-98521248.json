@@ -1,0 +1,20 @@
+{
+  "id": "word-98521248",
+  "label": "один",
+  "url": "/avatars/sign-motion/word-98521248.glb",
+  "duration": 1.4333333333333333,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/98521248-2877-43fb-8a38-695b1ccd0a3d.mp4",
+  "handCoverage": {
+    "Left": 0.8125,
+    "Right": 0.0
+  },
+  "maxGapFrames": {
+    "Left": 3,
+    "Right": 16
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "word-7ee747b0",
+  "label": "сто",
+  "url": "/avatars/sign-motion/word-7ee747b0.glb",
+  "duration": 2.4,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/7ee747b0-05fa-4481-955d-429b641b719f.mp4",
+  "handCoverage": {
+    "Left": 1.0,
+    "Right": 0.4411764705882353
+  },
+  "maxGapFrames": {
+    "Left": 0,
+    "Right": 15
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

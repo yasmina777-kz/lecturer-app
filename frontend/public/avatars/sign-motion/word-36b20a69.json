@@ -1,0 +1,20 @@
+{
+  "id": "word-36b20a69",
+  "label": "грустный",
+  "url": "/avatars/sign-motion/word-36b20a69.glb",
+  "duration": 2.4,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/36b20a69-877f-4358-8074-94f3c386b357.mp4",
+  "handCoverage": {
+    "Left": 0.08823529411764706,
+    "Right": 0.8235294117647058
+  },
+  "maxGapFrames": {
+    "Left": 21,
+    "Right": 4
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

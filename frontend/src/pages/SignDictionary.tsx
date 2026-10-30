@@ -4,13 +4,12 @@ import { Search, BookOpen, Play, ArrowRight } from "lucide-react";
 import { at } from "../i18n/automation";
 import {
   alphabetEntries,
-  decomposeText,
   type DictionaryEntry,
   type DictionaryForms,
 } from "../sign/dictionary";
-import { planText } from "../sign/textPlan";
+import { planMotion, type MotionAsset } from "../sign/motion";
+import { SignSequencePlayer } from "../components/SignSequencePlayer";
 import { exercises } from "../sign/exercises";
-import { ExercisePlayer } from "./SignTrainer";
 import "./sign-dictionary.css";
 import { ReferenceVideo } from "../components/SignReferenceVideo";
 const categoryTranslations: Record<string, [string, string]> = {
@@ -36,6 +35,9 @@ export function SignDictionaryPage() {
         : "text";
   const setTab = (next: "text" | "dictionary" | "grammar") =>
     setParams(next === "text" ? {} : { tab: next });
+  const [motions, setMotions] = useState<MotionAsset[]>([]);
+  const [run, setRun] = useState(0);
+  const sequenceRef = useRef<HTMLDivElement>(null);
   const [words, setWords] = useState<DictionaryEntry[]>([]),
     [forms, setForms] = useState<DictionaryForms>({}),
     [loading, setLoading] = useState(true),
@@ -64,8 +66,15 @@ export function SignDictionaryPage() {
           return r.json();
         },
       ),
+      fetch("/avatars/sign-motion/catalog.json", { signal: abort.signal }).then(
+        (r) => {
+          if (!r.ok) throw Error();
+          return r.json();
+        },
+      ),
     ])
-      .then(([w, f]) => {
+      .then(([w, f, m]) => {
+        setMotions(m);
         setWords(w);
         setForms(f);
       })
@@ -85,18 +94,23 @@ export function SignDictionaryPage() {
     return () => abort.abort();
   }, []);
   const entries = useMemo(() => [...alphabetEntries(), ...words], [words]);
-  const pieces = useMemo(
-    () => decomposeText(submitted, entries, forms, spelling),
-    [submitted, entries, forms, spelling],
+  const motionPlan = useMemo(
+    () => planMotion(submitted, entries, forms, motions, spelling),
+    [submitted, entries, forms, motions, spelling],
   );
-  const prepared = !spelling ? planText(submitted) : null;
-  const readyExercise = prepared?.ok
-    ? exercises().find(
-        (e) =>
-          e.id ===
-          (prepared.animation === "name-demo" ? "name" : prepared.animation),
-      )
-    : undefined;
+  const selectedPlan = useMemo(
+    () =>
+      selected
+        ? planMotion(
+            selected.label,
+            entries,
+            forms,
+            motions,
+            selected.category === "Алфавит",
+          )
+        : null,
+    [selected, entries, forms, motions],
+  );
   const visible = entries.filter(
     (e) =>
       (category === "Все" || e.category === category) &&
@@ -132,7 +146,14 @@ export function SignDictionaryPage() {
     }
     setMessage("");
     setSubmitted(text);
+    setRun((v) => v + 1);
     setSelected(null);
+    requestAnimationFrame(() =>
+      sequenceRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      }),
+    );
   }
   return (
     <div className="sign-workspace sign-dictionary">
@@ -147,9 +168,9 @@ export function SignDictionaryPage() {
           </h1>
           <p>
             {at(
-              "Найдите жест, разберите текст по словам или посмотрите имя по буквам.",
-              "Find a sign, break text into words or view a name letter by letter.",
-              "Ымды табыңыз, мәтінді сөздерге бөліңіз не есімді әріптеп қараңыз.",
+              "Введите фразу — аватар покажет доступные жесты подряд. Или выберите слово в словаре.",
+              "Enter a phrase to play available signs in sequence, or choose a dictionary entry.",
+              "Сөйлем енгізіңіз — аватар қолжетімді ымдарды ретімен көрсетеді. Немесе сөздіктен сөз таңдаңыз.",
             )}
           </p>
         </div>
@@ -194,9 +215,9 @@ export function SignDictionaryPage() {
         )}{" "}
         ·{" "}
         {at(
-          "10 пробных 3D-показов",
-          "10 trial 3D demonstrations",
-          "10 сынақ 3D көрсетілімі",
+          `${motions.length} пробных движений аватара`,
+          `${motions.length} experimental avatar motions`,
+          `${motions.length} сынақ аватар қимылы`,
         )}
       </p>
       {loading && (
@@ -242,9 +263,9 @@ export function SignDictionaryPage() {
                   }}
                 />
                 {at(
-                  "Показать по буквам",
-                  "Show letter by letter",
-                  "Әріптеп көрсету",
+                  "Имя по буквам (не перевод фразы)",
+                  "Spell a name (not phrase translation)",
+                  "Есімді әріптеу (сөйлем аудармасы емес)",
                 )}
               </label>
               <span>{text.length}/500</span>
@@ -254,7 +275,11 @@ export function SignDictionaryPage() {
                 onClick={analyse}
               >
                 <Search size={17} />
-                {at("Разобрать текст", "Analyse text", "Мәтінді талдау")}
+                {at(
+                  "Показать аватаром",
+                  "Show with avatar",
+                  "Аватармен көрсету",
+                )}
               </button>
             </div>
             <div className="sign-examples">
@@ -262,14 +287,22 @@ export function SignDictionaryPage() {
                 "Как тебя зовут?",
                 "Спасибо",
                 "Я хочу читать книгу",
-                "Сегодня мы идём в школу",
+                "Здравствуйте! Как тебя зовут? Спасибо.",
               ].map((v) => (
                 <button
                   key={v}
                   onClick={() => {
                     setText(v);
-                    setSubmitted("");
+                    setSubmitted(v);
+                    setSpelling(false);
+                    setRun((n) => n + 1);
                     setSelected(null);
+                    requestAnimationFrame(() =>
+                      sequenceRef.current?.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                      }),
+                    );
                   }}
                 >
                   {v}
@@ -279,87 +312,29 @@ export function SignDictionaryPage() {
             {message && <p role="status">{message}</p>}
           </section>
           {submitted && (
-            <section className="panel sign-text-analysis">
-              <h2>
-                {readyExercise
-                  ? at(
-                      "Подготовленный показ",
-                      "Prepared demonstration",
-                      "Дайын көрсетілім",
-                    )
-                  : spelling
-                    ? at(
-                        "Дактиль по буквам",
-                        "Fingerspelling",
-                        "Әріптеп көрсету",
-                      )
-                    : at(
-                        "Словарный разбор",
-                        "Dictionary breakdown",
-                        "Сөздік бойынша талдау",
-                      )}
-              </h2>
-              <p>
-                {spelling
-                  ? at(
-                      "Это буквенная запись. Она полезна для имён, но не заменяет перевод предложения на РЖЯ.",
-                      "This spells letters. Useful for names, but not a sentence translation into RSL.",
-                      "Бұл — әріптік жазба. Есімдерге пайдалы, бірақ сөйлемнің ым тіліне аудармасы емес.",
-                    )
-                  : readyExercise
-                    ? at(
-                        "Для этого текста уже есть отдельная пробная анимация.",
-                        "A trial animation exists for this exact text.",
-                        "Осы мәтінге жеке сынақ анимациясы бар.",
-                      )
-                    : at(
-                        "Слова идут в порядке русского текста. Это учебный разбор, а не готовый перевод с грамматикой РЖЯ. Нажмите на слово, чтобы увидеть образец.",
-                        "Words retain Russian text order. This is a learning breakdown, not a grammatical RSL translation. Select a word to view its reference.",
-                        "Сөздер орысша мәтін ретімен берілген. Бұл — оқу талдауы, ым тілі грамматикасымен дайын аударма емес. Үлгіні көру үшін сөзді таңдаңыз.",
-                      )}
-              </p>
-              {!readyExercise && (
-                <div className="sign-token-list">
-                  {pieces.map((p, i) =>
-                    p.punctuation ? (
-                      <span key={i}>{p.text}</span>
-                    ) : (
-                      <button
-                        key={i}
-                        disabled={!p.entry}
-                        className={p.entry ? "known" : "unknown"}
-                        onClick={() => p.entry && choose(p.entry)}
-                      >
-                        <b>{p.text}</b>
-                        <small>
-                          {p.inflected
-                            ? `→ ${p.entry!.label}`
-                            : p.entry
-                              ? at("Смотреть", "Watch", "Көру")
-                              : p.ambiguous
-                                ? at(
-                                    "Несколько значений",
-                                    "Ambiguous",
-                                    "Бірнеше мағына",
-                                  )
-                                : at(
-                                    "Пока нет в словаре",
-                                    "Not in dictionary yet",
-                                    "Сөздікте әзірге жоқ",
-                                  )}
-                        </small>
-                      </button>
-                    ),
+            <div ref={sequenceRef} className="sign-dictionary-result">
+              <SignSequencePlayer
+                key={`${run}-${spelling}`}
+                plan={motionPlan}
+                autoPlay
+              />
+              <details className="sign-dictionary-reference">
+                <summary>
+                  {at(
+                    "Что входит в показ",
+                    "What is included",
+                    "Көрсетілім құрамы",
                   )}
-                </div>
-              )}
-              {readyExercise && (
-                <ExercisePlayer
-                  key={readyExercise.id}
-                  exercise={readyExercise}
-                />
-              )}
-            </section>
+                </summary>
+                <p>
+                  {at(
+                    "Слова, для которых есть движения, показываются последовательно. Неизвестные слова не пропускаются. Это пробный показ слов, а не проверенный перевод предложения на РЖЯ.",
+                    "Available signs play in sequence. Unknown words are never silently skipped. This is an experimental sign sequence, not a verified sentence translation into RSL.",
+                    "Қолжетімді ымдар ретімен көрсетіледі. Белгісіз сөздер түсіп қалмайды. Бұл — сынақ көрсетілімі, сөйлемнің тексерілген аудармасы емес.",
+                  )}
+                </p>
+              </details>
+            </div>
           )}
         </>
       )}
@@ -415,7 +390,14 @@ export function SignDictionaryPage() {
                 key={e.id}
                 onClick={() => choose(e)}
               >
-                {e.poster ? (
+                {motions.some((m) => m.id === e.id) ? (
+                  <img
+                    className="sign-avatar-cover"
+                    src="/avatars/sign-motion/preview.png"
+                    alt=""
+                    loading="lazy"
+                  />
+                ) : e.poster ? (
                   <img src={e.poster} alt="" loading="lazy" />
                 ) : (
                   <span className="sign-letter-cover">{e.label}</span>
@@ -424,7 +406,13 @@ export function SignDictionaryPage() {
                 <small>{categoryName(e.category)}</small>
                 <span>
                   <Play size={14} />
-                  {at("Смотреть образец", "Watch reference", "Үлгіні көру")}
+                  {motions.some((m) => m.id === e.id)
+                    ? at(
+                        "Показать аватаром",
+                        "Show with avatar",
+                        "Аватармен көрсету",
+                      )
+                    : at("Видеообразец", "Video reference", "Бейнеүлгі")}
                 </span>
               </button>
             ))}
@@ -452,7 +440,26 @@ export function SignDictionaryPage() {
       <div ref={resultRef} className="sign-dictionary-result">
         {selected && (
           <>
-            <ReferenceVideo key={selected.id} entry={selected} />
+            {selectedPlan && (
+              <SignSequencePlayer
+                key={selected.id}
+                plan={selectedPlan}
+                autoPlay
+              />
+            )}
+            <details
+              className="sign-dictionary-reference"
+              open={!selectedPlan?.steps.length}
+            >
+              <summary>
+                {at(
+                  "Сравнить с видео человека",
+                  "Compare with the human reference",
+                  "Адамның бейнесімен салыстыру",
+                )}
+              </summary>
+              <ReferenceVideo key={selected.id} entry={selected} />
+            </details>
             {selected.category === "Алфавит" && (
               <Link
                 className="button secondary"

@@ -1,0 +1,20 @@
+{
+  "id": "word-803b0a5e",
+  "label": "еще нет",
+  "url": "/avatars/sign-motion/word-803b0a5e.glb",
+  "duration": 2.2333333333333334,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/803b0a5e-7415-4723-af3d-ecccddd1faf5.mp4",
+  "handCoverage": {
+    "Left": 1.0,
+    "Right": 0.9032258064516129
+  },
+  "maxGapFrames": {
+    "Left": 0,
+    "Right": 3
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

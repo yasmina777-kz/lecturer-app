@@ -1,0 +1,20 @@
+{
+  "id": "letter-413",
+  "label": "Г",
+  "url": "/avatars/sign-motion/letter-413.glb",
+  "duration": 1.9666666666666666,
+  "source": "https://github.com/ai-forever/bukva",
+  "reference": "/research/rsl/alphabet/0413.mp4",
+  "handCoverage": {
+    "Left": 0.0,
+    "Right": 0.9615384615384616
+  },
+  "maxGapFrames": {
+    "Left": 26,
+    "Right": 1
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

@@ -158,9 +158,9 @@ export function courseLevels() {
         "Әріптер мен дактиль",
       ),
       description: at(
-        "Все 33 буквы: видеообразцы и экспериментальная ИИ-проверка. Для 7 букв есть 3D-пробы.",
-        "All 33 letters: video references and experimental AI checks. Seven letters include 3D studies.",
-        "33 әріптің бейнеүлгілері мен тәжірибелік ЖИ тексеруі. 7 әріптің 3D сынағы бар.",
+        "Все 33 буквы: пробные движения аватара, видео для сравнения и экспериментальная ИИ-проверка.",
+        "All 33 letters: experimental avatar motion, reference videos and AI checks.",
+        "33 әріптің сынақ аватар қимылдары, бейнеүлгілері және тәжірибелік ЖИ тексеруі.",
       ),
       image: "knowledge-book.png",
       count: at(

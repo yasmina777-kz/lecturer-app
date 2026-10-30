@@ -1,0 +1,20 @@
+{
+  "id": "word-92e94ab2",
+  "label": "ответить",
+  "url": "/avatars/sign-motion/word-92e94ab2.glb",
+  "duration": 2.5,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/92e94ab2-b1ae-453a-8288-2bdfc052a71e.mp4",
+  "handCoverage": {
+    "Left": 0.0,
+    "Right": 0.8888888888888888
+  },
+  "maxGapFrames": {
+    "Left": 36,
+    "Right": 3
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

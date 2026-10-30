@@ -1,0 +1,20 @@
+{
+  "id": "word-65c00b09",
+  "label": "жить",
+  "url": "/avatars/sign-motion/word-65c00b09.glb",
+  "duration": 1.9666666666666666,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/65c00b09-513d-4026-aafb-4e045a4e7d40.mp4",
+  "handCoverage": {
+    "Left": 0.0,
+    "Right": 0.8461538461538461
+  },
+  "maxGapFrames": {
+    "Left": 26,
+    "Right": 3
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

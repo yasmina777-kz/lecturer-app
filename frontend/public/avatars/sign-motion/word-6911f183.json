@@ -1,0 +1,20 @@
+{
+  "id": "word-6911f183",
+  "label": "слушать",
+  "url": "/avatars/sign-motion/word-6911f183.glb",
+  "duration": 1.5,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/6911f183-7abe-4505-a770-b48a1db994b5.mp4",
+  "handCoverage": {
+    "Left": 0.875,
+    "Right": 0.0625
+  },
+  "maxGapFrames": {
+    "Left": 2,
+    "Right": 15
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

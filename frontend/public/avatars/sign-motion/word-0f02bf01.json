@@ -1,0 +1,20 @@
+{
+  "id": "word-0f02bf01",
+  "label": "вы",
+  "url": "/avatars/sign-motion/word-0f02bf01.glb",
+  "duration": 2,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/0f02bf01-0f76-448a-a0e4-b43096c92990.mp4",
+  "handCoverage": {
+    "Left": 1.0,
+    "Right": 0.9230769230769231
+  },
+  "maxGapFrames": {
+    "Left": 0,
+    "Right": 1
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

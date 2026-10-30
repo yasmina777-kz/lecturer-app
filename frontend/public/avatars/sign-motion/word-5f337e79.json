@@ -1,0 +1,20 @@
+{
+  "id": "word-5f337e79",
+  "label": "найти",
+  "url": "/avatars/sign-motion/word-5f337e79.glb",
+  "duration": 1.9,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/5f337e79-b6d4-45c8-84b2-7003d344627c.mp4",
+  "handCoverage": {
+    "Left": 0.5416666666666666,
+    "Right": 0.8333333333333334
+  },
+  "maxGapFrames": {
+    "Left": 5,
+    "Right": 4
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

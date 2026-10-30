@@ -1,0 +1,20 @@
+{
+  "id": "letter-412",
+  "label": "В",
+  "url": "/avatars/sign-motion/letter-412.glb",
+  "duration": 2.1333333333333333,
+  "source": "https://github.com/ai-forever/bukva",
+  "reference": "/research/rsl/alphabet/0412.mp4",
+  "handCoverage": {
+    "Left": 0.0,
+    "Right": 1.0
+  },
+  "maxGapFrames": {
+    "Left": 29,
+    "Right": 0
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

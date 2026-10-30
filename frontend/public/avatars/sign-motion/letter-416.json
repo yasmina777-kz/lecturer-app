@@ -1,0 +1,20 @@
+{
+  "id": "letter-416",
+  "label": "Ж",
+  "url": "/avatars/sign-motion/letter-416.glb",
+  "duration": 2.6,
+  "source": "https://github.com/ai-forever/bukva",
+  "reference": "/research/rsl/alphabet/0416.mp4",
+  "handCoverage": {
+    "Left": 0.9210526315789473,
+    "Right": 1.0
+  },
+  "maxGapFrames": {
+    "Left": 3,
+    "Right": 0
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

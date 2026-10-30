@@ -1,0 +1,20 @@
+{
+  "id": "word-26e2d0ce",
+  "label": "сколько",
+  "url": "/avatars/sign-motion/word-26e2d0ce.glb",
+  "duration": 1.6666666666666667,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/26e2d0ce-9425-4a44-88b3-5373a109e49f.mp4",
+  "handCoverage": {
+    "Left": 0.85,
+    "Right": 0.95
+  },
+  "maxGapFrames": {
+    "Left": 2,
+    "Right": 1
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

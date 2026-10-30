@@ -1,0 +1,20 @@
+{
+  "id": "word-bb899ccb",
+  "label": "пятница",
+  "url": "/avatars/sign-motion/word-bb899ccb.glb",
+  "duration": 2.1666666666666665,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/bb899ccb-e512-4521-bbf3-7718a3923e72.mp4",
+  "handCoverage": {
+    "Left": 1.0,
+    "Right": 0.0
+  },
+  "maxGapFrames": {
+    "Left": 0,
+    "Right": 30
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

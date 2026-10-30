@@ -1,0 +1,20 @@
+{
+  "id": "word-594f0e3d",
+  "label": "скоро",
+  "url": "/avatars/sign-motion/word-594f0e3d.glb",
+  "duration": 2.6333333333333333,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/594f0e3d-531f-44a9-bded-fb18c9cd8a24.mp4",
+  "handCoverage": {
+    "Left": 0.9487179487179487,
+    "Right": 0.8717948717948718
+  },
+  "maxGapFrames": {
+    "Left": 1,
+    "Right": 2
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

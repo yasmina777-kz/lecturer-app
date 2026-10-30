@@ -1,0 +1,20 @@
+{
+  "id": "word-f8ff6bc7",
+  "label": "улица",
+  "url": "/avatars/sign-motion/word-f8ff6bc7.glb",
+  "duration": 2.1666666666666665,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/f8ff6bc7-5750-4565-b058-d16050b0d00e.mp4",
+  "handCoverage": {
+    "Left": 0.8,
+    "Right": 0.8333333333333334
+  },
+  "maxGapFrames": {
+    "Left": 4,
+    "Right": 5
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

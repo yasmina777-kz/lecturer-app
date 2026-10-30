@@ -1,0 +1,20 @@
+{
+  "id": "word-d8326c48",
+  "label": "думать",
+  "url": "/avatars/sign-motion/word-d8326c48.glb",
+  "duration": 2.1333333333333333,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/d8326c48-f788-4e5c-bff2-838e61630061.mp4",
+  "handCoverage": {
+    "Left": 1.0,
+    "Right": 1.0
+  },
+  "maxGapFrames": {
+    "Left": 0,
+    "Right": 0
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

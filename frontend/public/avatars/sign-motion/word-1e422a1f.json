@@ -1,0 +1,20 @@
+{
+  "id": "word-1e422a1f",
+  "label": "неделя",
+  "url": "/avatars/sign-motion/word-1e422a1f.glb",
+  "duration": 2.3333333333333335,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/1e422a1f-65e7-4125-865d-d15f244d6b2b.mp4",
+  "handCoverage": {
+    "Left": 1.0,
+    "Right": 0.9393939393939394
+  },
+  "maxGapFrames": {
+    "Left": 0,
+    "Right": 1
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

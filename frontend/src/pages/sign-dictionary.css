@@ -261,3 +261,137 @@
     gap: 10px;
   }
 }
+.sign-sequence-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 24px 0 16px;
+}
+.sign-sequence-heading h2 {
+  margin: 0;
+}
+.sign-sequence-heading > span {
+  font-size: 12px;
+  color: var(--sw-muted);
+}
+.sign-sequence-stage {
+  height: 450px !important;
+  min-height: 0 !important;
+}
+.sign-sequence-controls {
+  padding: 16px;
+}
+.sign-sequence-buttons,
+.sign-sequence-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.sign-workspace .sign-sequence-buttons label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  margin: 0;
+}
+.sign-sequence-buttons select {
+  width: 84px;
+}
+.sign-sequence-buttons input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+}
+.sign-sequence-range {
+  width: 100%;
+  margin: 20px 0;
+}
+.sign-sequence-bottom {
+  justify-content: space-between;
+  font-size: 13px;
+}
+.sign-sequence-bottom button {
+  padding: 8px 12px;
+  margin-inline-start: 6px;
+}
+.sign-sequence-words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+.sign-sequence-words button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+}
+.sign-sequence-words span {
+  opacity: 0.6;
+  font-size: 12px;
+}
+.sign-sequence-words [aria-current="step"] {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+.sign-sequence-note {
+  font-size: 13px !important;
+  line-height: 1.6 !important;
+  color: var(--sw-muted);
+  margin-top: 14px;
+}
+.sign-sequence-missing {
+  border-inline-start: 3px solid var(--accent);
+  padding: 16px;
+  background: var(--sw-soft);
+}
+.sign-word-card img.sign-avatar-cover {
+  object-fit: cover;
+  object-position: 50% 24%;
+  background: radial-gradient(
+    ellipse at 50% 70%,
+    var(--sw-soft),
+    var(--sw-surface)
+  );
+  height: 160px;
+}
+.sign-dictionary-reference {
+  margin-top: 20px;
+}
+.sign-dictionary-reference summary {
+  cursor: pointer;
+  padding: 14px 0;
+  font-weight: 600;
+}
+@media (max-width: 600px) {
+  .sign-sequence-stage {
+    height: 390px !important;
+  }
+  .sign-sequence-buttons > .button {
+    flex: 1;
+  }
+  .sign-sequence-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .sign-word-card img.sign-avatar-cover {
+    height: 125px;
+  }
+}
+.sign-sequence-bottom button,
+.sign-sequence-words button {
+  font: inherit;
+  color: var(--sw-ink);
+  background: var(--sw-soft);
+  border: 1px solid var(--sw-border);
+  border-radius: 10px;
+  cursor: pointer;
+  min-height: 42px;
+}
+.sign-sequence-bottom button[aria-pressed="true"] {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}

@@ -1,0 +1,20 @@
+{
+  "id": "word-e29e36fe",
+  "label": "наш",
+  "url": "/avatars/sign-motion/word-e29e36fe.glb",
+  "duration": 1.5666666666666667,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/e29e36fe-ddad-4ac8-9fe1-a3d8af3fb983.mp4",
+  "handCoverage": {
+    "Left": 0.9444444444444444,
+    "Right": 0.0
+  },
+  "maxGapFrames": {
+    "Left": 1,
+    "Right": 18
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

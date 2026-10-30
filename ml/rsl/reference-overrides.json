@@ -1,0 +1,42 @@
+{
+  "да": {
+    "attachmentId": "34d54421-d709-4b48-b6c7-58e0e3e0710c",
+    "stableId": "word-8f8056fe"
+  },
+  "люди": {
+    "attachmentId": "5ea53ce1-5cdf-461c-a814-b8f678f7a7b8",
+    "stableId": "word-e526814e"
+  },
+  "Память": {
+    "attachmentId": "8b39dda1-b863-438a-b85c-659b9345d1d6",
+    "stableId": "word-c2304594"
+  },
+  "работать": {
+    "attachmentId": "5fd28b57-9261-44fc-9648-e519d00eca14",
+    "stableId": "word-ffce2323"
+  },
+  "день": {
+    "attachmentId": "875d68f6-5916-49f6-ba93-359b4d37dde3",
+    "stableId": "word-16bf2a06"
+  },
+  "ночь": {
+    "attachmentId": "43720683-c4e2-4f43-83f7-0aefffa411b6",
+    "stableId": "word-4fb38350"
+  },
+  "час": {
+    "attachmentId": "ec185ca1-6a96-4094-938e-6a6ce6d8363a",
+    "stableId": "word-4fa6cc2a"
+  },
+  "день и ночь": {
+    "attachmentId": "191d0ce8-7e6a-4ca0-893c-4eeb9af27e2b",
+    "stableId": "word-8d20b0ee"
+  },
+  "в этом году": {
+    "attachmentId": "506d755c-400e-479a-ac78-e402cd8287be",
+    "stableId": "word-f00a8a7f"
+  },
+  "белый": {
+    "attachmentId": "69376af6-13c9-42ca-9ff3-0880d106a0c3",
+    "stableId": "word-9c7faf34"
+  }
+}

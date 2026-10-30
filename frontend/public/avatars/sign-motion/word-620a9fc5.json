@@ -1,0 +1,20 @@
+{
+  "id": "word-620a9fc5",
+  "label": "знать",
+  "url": "/avatars/sign-motion/word-620a9fc5.glb",
+  "duration": 1.7333333333333334,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/620a9fc5-4b35-4cfc-864a-8385dd8b74c3.mp4",
+  "handCoverage": {
+    "Left": 1.0,
+    "Right": 0.9047619047619048
+  },
+  "maxGapFrames": {
+    "Left": 0,
+    "Right": 1
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

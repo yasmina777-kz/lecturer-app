@@ -1,0 +1,20 @@
+{
+  "id": "word-7143af36",
+  "label": "когда",
+  "url": "/avatars/sign-motion/word-7143af36.glb",
+  "duration": 1.9333333333333333,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/7143af36-d46e-40b5-a875-d96c8e4f0a85.mp4",
+  "handCoverage": {
+    "Left": 1.0,
+    "Right": 1.0
+  },
+  "maxGapFrames": {
+    "Left": 0,
+    "Right": 0
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

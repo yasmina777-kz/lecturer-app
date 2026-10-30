@@ -1,0 +1,20 @@
+{
+  "id": "word-4fb38350",
+  "label": "ночь",
+  "url": "/avatars/sign-motion/word-4fb38350.glb",
+  "duration": 2.3,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/43720683-c4e2-4f43-83f7-0aefffa411b6.mp4",
+  "handCoverage": {
+    "Left": 0.875,
+    "Right": 0.90625
+  },
+  "maxGapFrames": {
+    "Left": 2,
+    "Right": 2
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

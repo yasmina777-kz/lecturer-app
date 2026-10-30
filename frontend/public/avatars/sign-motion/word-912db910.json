@@ -1,0 +1,20 @@
+{
+  "id": "word-912db910",
+  "label": "девочка",
+  "url": "/avatars/sign-motion/word-912db910.glb",
+  "duration": 2.2333333333333334,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/912db910-dc13-472c-8a22-51c2765945cf.mp4",
+  "handCoverage": {
+    "Left": 1.0,
+    "Right": 0.8387096774193549
+  },
+  "maxGapFrames": {
+    "Left": 0,
+    "Right": 4
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}

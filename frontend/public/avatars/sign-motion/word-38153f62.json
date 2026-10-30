@@ -1,0 +1,20 @@
+{
+  "id": "word-38153f62",
+  "label": "вам",
+  "url": "/avatars/sign-motion/word-38153f62.glb",
+  "duration": 2.1,
+  "source": "https://github.com/ai-forever/slovo",
+  "reference": "/research/rsl/words/38153f62-4706-40c8-a74c-4c0a615cb67a.mp4",
+  "handCoverage": {
+    "Left": 1.0,
+    "Right": 1.0
+  },
+  "maxGapFrames": {
+    "Left": 0,
+    "Right": 0
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 12.0,
+  "review": "experimental-unreviewed",
+  "method": "MediaPipe capture retargeted in Blender; no translation training"
+}
