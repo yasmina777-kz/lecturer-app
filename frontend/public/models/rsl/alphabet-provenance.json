@@ -1,0 +1,14 @@
+{
+  "source": "https://github.com/ai-forever/bukva",
+  "selection": "45 train and 18 test per class, SHA-256 ID order, official subject split",
+  "manifestSha256": "85168708321d685ca3355823e22043055507cedb82fc60d3c13498cb0bcf41d8",
+  "features": "16 frames, 4 temporal bins of normalized dominant-hand coordinates, wrist movement, visibility, and 210 average pairwise distances",
+  "classifier": "multinomial logistic regression",
+  "validation": "signer-disjoint subset of train; C in [0.1,1,10]",
+  "pretrainedComponent": "MediaPipe Hand Landmarker (Google)",
+  "scripts": [
+    "ml/rsl/prepare_alphabet.py",
+    "ml/rsl/extract_alphabet.py",
+    "ml/rsl/train_alphabet.py"
+  ]
+}

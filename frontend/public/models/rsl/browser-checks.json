@@ -1,0 +1,11 @@
+{
+  "date": "2026-10-30",
+  "environment": "Local Vite build in ChatGPT in-app Chromium browser; native file input; local video inference",
+  "selection": "First test example of each selected class in deterministic manifest order, without pre-filtering for correct predictions",
+  "checks": [
+    {"attachmentId":"cafcbbc7-25fe-476a-a1e4-a70273987e1f", "expected":"Д", "predicted":"Я", "accepted":true, "outcome":"wrong accepted prediction"},
+    {"attachmentId":"410e2f5f-ac6a-46a5-a70d-ec846488a45d", "expected":"Я", "predicted":"Я", "accepted":true, "outcome":"correct"},
+    {"attachmentId":"no_f936868d-691a-4b0d-a90f-5a3ab801a255", "expected":"no_event", "accepted":false, "outcome":"no confident letter returned"}
+  ],
+  "limitations": ["Only three end-to-end smoke checks, not an accuracy estimate.","Live personal webcam was not tested.","Browser frame sampling and MediaPipe detections can differ from offline evaluation.","The wrong Д example is also classified as Я offline, but falls below the acceptance threshold offline."]
+}

@@ -5,3 +5,5 @@ opencv-python-headless
 remotezip
 pypdf
 requests
+
+pymorphy3==2.0.6

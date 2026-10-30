@@ -9,24 +9,24 @@ import {
   ScanSearch,
 } from "lucide-react";
 import { at } from "../i18n/automation";
-import {
-  exercises,
-  courseLevels,
-  alphabet,
-  recognitionLetters,
-} from "../sign/exercises";
+import { exercises, courseLevels, recognitionLetters } from "../sign/exercises";
 import { animationTime, playbackDuration } from "../sign/playback";
 import { Loading } from "../components/UI";
 import type { GestureAngle } from "../components/GestureMentor3D";
 import "./gesture-preview.css";
 import "./sign-trainer.css";
+import "./sign-dictionary.css";
+import { ReferenceVideo } from "../components/SignReferenceVideo";
+import { alphabetEntries } from "../sign/dictionary";
 const Mentor = lazy(() =>
   import("../components/GestureMentor3D").then((m) => ({
     default: m.GestureMentor3D,
   })),
 );
 const Camera = lazy(() =>
-  import("../components/SignCamera").then((m) => ({ default: m.SignCamera })),
+  import("../components/TemporalSignCamera").then((m) => ({
+    default: m.TemporalSignCamera,
+  })),
 );
 export function SignCourseCatalog() {
   const [params] = useSearchParams();
@@ -110,9 +110,9 @@ export function SignCourseCatalog() {
                   <p>{e.hint}</p>
                   <span className="sign-level-link">
                     {at(
-                      "Смотреть аватара",
-                      "Watch the avatar",
-                      "Аватарды көру",
+                      e.model ? "Смотреть аватара" : "Видео и ИИ-проверка",
+                      e.model ? "Watch avatar" : "Video and AI check",
+                      e.model ? "Аватарды көру" : "Бейне және ЖИ тексеруі",
                     )}
                     <ArrowRight size={17} />
                   </span>
@@ -121,36 +121,18 @@ export function SignCourseCatalog() {
             ))}
         </div>
       )}
-      {stage?.id === 1 && (
-        <section className="sign-alphabet-plan">
-          <h2>
-            {at(
-              "Остальная азбука",
-              "The rest of the alphabet",
-              "Әліпбидің қалған бөлігі",
-            )}
-          </h2>
-          <p>
-            {at(
-              "Доступны А, В, Г, Л, У, Ы, Ш. Остальные буквы ещё в подготовке.",
-              "А, В, Г, Л, У, Ы, Ш are available. Other letters are still in preparation.",
-              "А, В, Г, Л, У, Ы, Ш қолжетімді. Қалған әріптер дайындалуда.",
-            )}
-          </p>
-          <div>
-            {alphabet
-              .filter((l) => !exercises().some((e) => e.letter === l))
-              .map((l) => (
-                <span key={l}>{l}</span>
-              ))}
-          </div>
-        </section>
-      )}
+      <Link className="button primary" to="/text-to-sign?tab=dictionary">
+        {at(
+          "Открыть словарь · 170 слов",
+          "Open dictionary · 170 words",
+          "Сөздікті ашу · 170 сөз",
+        )}
+      </Link>
       <p className="sign-catalog-note">
         {at(
-          "Это первая версия курса: 7 букв, 2 слова и одна фраза. 3D-показы требуют проверки специалистом РЖЯ.",
-          "First course version: 7 letters, 2 words and one phrase. 3D demonstrations require review by an RSL specialist.",
-          "Курстың алғашқы нұсқасы: 7 әріп, 2 сөз және бір сөйлем. 3D көрсетілімдерін ым тілі маманы тексеруі қажет.",
+          "Все буквы доступны по видео. Ещё 170 слов и выражений — в разделе «Текст → жесты». 3D-показы пока пробные.",
+          "All letters have video references. Another 170 words and expressions are in Text → signs. 3D demonstrations are still prototypes.",
+          "Барлық әріптің бейнеүлгісі бар. «Мәтін → ымдар» бөлімінде тағы 170 сөз бен тіркес. 3D көрсетілімдер әзірге сынақ.",
         )}
       </p>
       <div className="sign-shortcuts">
@@ -261,6 +243,37 @@ export function SignTrainingRoom() {
   );
 }
 export function ExercisePlayer({
+  exercise,
+}: {
+  exercise: ReturnType<typeof exercises>[number];
+}) {
+  const reference = alphabetEntries().find((e) => e.label === exercise.letter);
+  if (!exercise.model && reference)
+    return (
+      <>
+        <ReferenceVideo entry={reference} />
+        <Link className="button primary" to="/text-to-sign?tab=dictionary">
+          {at(
+            "Открыть словарь · 170 слов",
+            "Open dictionary · 170 words",
+            "Сөздікті ашу · 170 сөз",
+          )}
+        </Link>
+        <p className="sign-catalog-note">
+          {at(
+            "Для этой буквы показываем человека: проверенная 3D-анимация ещё не подготовлена.",
+            "This letter uses a human reference; a reviewed 3D animation is not available yet.",
+            "Бұл әріпті адам көрсетеді: тексерілген 3D анимация әлі дайын емес.",
+          )}
+        </p>
+        <Suspense fallback={<Loading />}>
+          <Camera key={exercise.id} expected={exercise.letter!} />
+        </Suspense>
+      </>
+    );
+  return <AnimatedExercisePlayer key={exercise.id} exercise={exercise} />;
+}
+function AnimatedExercisePlayer({
   exercise,
 }: {
   exercise: ReturnType<typeof exercises>[number];
@@ -495,9 +508,9 @@ export function ExercisePlayer({
               <p>
                 {canRecognize
                   ? at(
-                      "Ниже включите камеру или выберите фото руки.",
-                      "Start the camera below or choose a hand photo.",
-                      "Төменде камераны қосыңыз немесе қол суретін таңдаңыз.",
+                      "Ниже запишите короткий жест или выберите видео.",
+                      "Record a short sign below or choose a video.",
+                      "Төменде қысқа қимылды жазыңыз немесе бейне таңдаңыз.",
                     )
                   : at(
                       "Для этого упражнения ИИ-проверки пока нет. Сравните форму и движение с видео человека.",
@@ -507,6 +520,13 @@ export function ExercisePlayer({
               </p>
             </li>
           </ol>
+          <Link className="button primary" to="/text-to-sign?tab=dictionary">
+            {at(
+              "Открыть словарь · 170 слов",
+              "Open dictionary · 170 words",
+              "Сөздікті ашу · 170 сөз",
+            )}
+          </Link>
           <p className="sign-catalog-note">
             {at(
               "Анимация — пробный образец, пока без проверки специалистом РЖЯ.",
@@ -561,7 +581,9 @@ export function ExercisePlayer({
             controls
             playsInline
             preload="none"
-            src={`/research/rsl/${exercise.id}-reference.mp4`}
+            src={
+              alphabetEntries().find((e) => e.label === exercise.letter)?.video
+            }
           />
           <p>
             Bukva · {exercise.letter}.{" "}

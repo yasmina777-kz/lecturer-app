@@ -1,18 +1,22 @@
-# AI Mentor: first local RSL classifier
+# Local RSL recognition and dictionary
 
-This is independent project code; no SignStart source or models were used.
+Independent project code; no SignStart code or models were used.
 
-## What is trained
+## Current model: 33 isolated letters
 
-A multinomial logistic classifier is fitted here to 210 normalized pairwise distances between 21 hand landmarks. The landmark detector is Google's pretrained MediaPipe Hand Landmarker; it was not trained by us. The classifier has exactly three labels: Russian А, В, Л. It does not understand sentences, body motion, mouth movements or sign-language grammar.
+`alphabet-classifier.json` is a multinomial logistic classifier trained locally on Bukva. Google's pretrained MediaPipe Hand Landmarker supplies hand landmarks; we did not train that detector. The classifier uses 16 frames: four temporal bins of normalized hand coordinates, wrist movement and visibility, plus 210 average pairwise hand distances (474 features). It has 33 Russian letter classes and `no_event`.
 
-Data: [Bukva](https://github.com/ai-forever/bukva), Kvanchiani, Surovtsev, Nagaev, Petrova and Kapitanov (2024). Selected 45 training and 18 test videos per letter by deterministic SHA-256 ordering of attachment IDs. The official split by signer is preserved: 91 training signers, 20 test signers, no overlap. Five middle frames per video are sampled; 657 training frames had detected hands. Frames from a video never cross splits.
+Data selection is deterministic: 45 training and 18 test videos per class, SHA-256 order of attachment IDs, preserving the official signer split. **1,530 training videos / 135 signers; 612 held-out test videos / 20 different signers.** Regularization was selected on a signer-disjoint subset of training data (315 videos), then the final model was fitted on all training data. Test videos were not used for model selection.
 
-## Observed evaluation
+Observed test accuracy: **76.47%** (all 612 videos). Fixed probability ≥ 0.70, margin ≥ 0.20, non-background prediction and hands in at least 8/16 frames yield **78.10% coverage**, with **87.45% accuracy among accepted predictions**. Refusals do not count as correct answers. Per-class scores and confusion matrix: `frontend/public/models/rsl/alphabet-report.json`; readable report: `/research/rsl/alphabet-report.html`.
 
-135 training videos, 54 held-out videos. Mean class probability over detected test frames gives 47/54 correct (87.04%). Fixed confidence ≥ 0.8 and margin ≥ 0.25 accepts 47/54 videos; 44/47 accepted predictions are correct. Thresholds were set before this evaluation. See `frontend/public/models/rsl/training-report.json` for confusion matrix and individual errors.
+These are subset-video results, not live-camera or pedagogical accuracy. The browser samples short camera recordings or local videos. It uses the same feature aggregation, but camera conditions, decoding and landmark detections can differ. Unknown gestures can still get confident wrong predictions. The model does not recognize words, continuous fingerspelling, phrases, face/body motion or grammar. The expected exercise letter is used only for comparing the result, never as model input.
 
-These are **subset video metrics**, not live-camera accuracy. Browser photo/live inference uses individual frames, not the five-frame video aggregate. This pilot is not an objective assessment of correct RSL. Unknown signs can receive confident wrong labels; there is no trained background/unknown class. Validation with new live users and negative examples is still needed. Face and body movement are not checked.
+## Dictionary and text
+
+`/text-to-sign` contains all 33 letter references and **170 words/expressions from Slovo**, with eight thematic word categories. Russian inflections are looked up using a precomputed pymorphy3/OpenCorpora table (3,430 forms). Ambiguities and unsupported words remain visible; negation is not removed. The longest available phrase is matched first.
+
+This is **dictionary lookup, not a trained Russian-to-RSL grammatical translator**. The existing 10 hand-authored 3D clips can be opened by supported exact text. Other entries show real human references. The 170 reference videos are not training samples for a word recognizer; word/phrase recognition has not been trained. Continuous translation requires licensed aligned sentence data, a separate model and evaluation by RSL signers.
 
 ## Reproduce
 
@@ -21,19 +25,28 @@ From repository root:
 ```sh
 python3 -m venv ml/rsl/.venv
 ml/rsl/.venv/bin/pip install -r ml/rsl/requirements-lock.txt
-ml/rsl/.venv/bin/python ml/rsl/prepare_data.py
-ml/rsl/.venv/bin/python ml/rsl/train.py
-npm run test:rsl --prefix frontend
+ml/rsl/.venv/bin/python ml/rsl/prepare_alphabet.py
+ml/rsl/.venv/bin/python ml/rsl/extract_alphabet.py
+ml/rsl/.venv/bin/python ml/rsl/train_alphabet.py
+ml/rsl/.venv/bin/python ml/rsl/render_alphabet_report.py
+ml/rsl/.venv/bin/python ml/rsl/prepare_dictionary.py
+ml/rsl/.venv/bin/python ml/rsl/prepare_word_forms.py
+npm run test:sign-expansion --prefix frontend
 ```
 
-Download uses byte ranges and selects about 153 MB instead of the full 27 GB archive. Inputs and the virtual environment remain ignored by Git. `features.json` is a local extraction cache; remove it when changing the selection or feature extraction.
+Training downloads, extraction caches and the virtual environment stay ignored by Git. Clear `data/alphabet/features-v1` when changing extraction. The generated model, reports and selected public reference media are versioned. The previous three-letter pilot remains for regression comparison in `classifier.json` and `training-report.json`; the active practice UI uses the alphabet model.
 
-The app serves the model, MediaPipe WASM and weights locally. Inference requires no API key and uploads no camera/photo data. Camera permission is requested only after the user clicks Start. Leaving the exercise closes the camera tracks. Photo upload is processed in memory.
+Inference runs in the browser with locally served MediaPipe weights/WASM and classifier, without an external AI API key. Camera permission is requested only after Start; leaving the exercise closes tracks. User recordings are processed in memory and are not uploaded.
 
-## Avatar and references
+## Avatar
 
-`art/mira-alphabet/build.py` produces three independently authored eight-second Blender motion studies. They need review by an RSL specialist. Each letter has an optional human video reference; it is not generated by the model. Recognition and playback are separate systems. Model predictions do not depend on the exercise the user selected.
+Seven letter clips and three word/phrase clips are independently authored Blender motion studies, **not expert-verified RSL instruction**. All 33 letters have real human video references. Letters without a 3D clip show the reference rather than fabricated motion. Alphabet body animation includes connected shoulders/spine/neck, staggered finger transitions and a stable handshape viewing interval. Finite transforms, loop continuity and quaternion steps are checked during export. Gesture semantics still require an RSL specialist's review.
 
-## Licenses
+Scripts: `art/mira-alphabet/build.py`, `art/mira-blender-phrases/animate.py`, `art/mira-blender-v3/animate.py`. Recognition and playback are separate systems.
 
-Bukva uses its own attribution/share-alike public license, not an unmodified Creative Commons license. Full text, credits and selected reference IDs: `frontend/public/research/rsl/`. Derived classifier artifacts are shared under those same terms. MediaPipe uses Apache 2.0. No author endorsement is implied.
+## Sources and licenses
+
+- [Bukva](https://github.com/ai-forever/bukva), Kvanchiani, Surovtsev, Nagaev, Petrova and Kapitanov (2024).
+- [Slovo](https://github.com/ai-forever/slovo), Kapitanov et al.
+- Both data sources use their attribution/share-alike public license, not an unmodified Creative Commons license. Full texts and reference IDs are in `frontend/public/research/rsl/` and `words/`. Derived classifier artifacts are distributed under the source terms. No author endorsement is implied.
+- MediaPipe: Apache 2.0. pymorphy3: MIT; OpenCorpora dictionaries: CC BY-SA 3.0. Generated inflection table follows the dictionary's attribution/share-alike terms.

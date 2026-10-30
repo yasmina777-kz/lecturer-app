@@ -1,7 +1,7 @@
 import { at } from "../i18n/automation";
 export const alphabet = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ".split("");
 export function exercises() {
-  return [
+  const available = [
     {
       id: "a",
       level: 1,
@@ -122,7 +122,23 @@ export function exercises() {
         "Алдымен сөйлемді толық қараңыз. Кідірісте саусақтардың жанасуы мен қимыл бағытын қараңыз.",
       ),
     },
-  ].sort(
+  ];
+  for (const letter of alphabet) {
+    if (!available.some((e) => e.letter === letter))
+      available.push({
+        id: "bukva-" + letter.codePointAt(0)!.toString(16),
+        level: 1,
+        letter,
+        title: at("Буква " + letter, "Letter " + letter, letter + " әрпі"),
+        model: "",
+        hint: at(
+          "Смотрите форму, направление и движение кисти целиком. Затем повторите перед камерой.",
+          "Watch the complete hand shape, orientation and motion. Then repeat for the camera.",
+          "Қол пішінін, бағыты мен қимылын толық қарап, камера алдында қайталаңыз.",
+        ),
+      });
+  }
+  return available.sort(
     (a, b) =>
       a.level - b.level ||
       (a.letter && b.letter
@@ -130,7 +146,8 @@ export function exercises() {
         : 0),
   );
 }
-export const recognitionLetters = ["А", "В", "Л"];
+
+export const recognitionLetters = alphabet;
 export function courseLevels() {
   return [
     {
@@ -141,15 +158,15 @@ export function courseLevels() {
         "Әріптер мен дактиль",
       ),
       description: at(
-        "Начните с формы кисти: А, В, Г, Л, У, Ы, Ш. Показ аватара, разбор и видеообразец.",
-        "Start with hand shapes: А, В, Г, Л, У, Ы, Ш. Avatar playback, breakdown and video references.",
-        "А, В, Г, Л, У, Ы, Ш қол пішіндерінен бастаңыз. Аватар мен бейнеүлгіні қараңыз.",
+        "Все 33 буквы: видеообразцы и экспериментальная ИИ-проверка. Для 7 букв есть 3D-пробы.",
+        "All 33 letters: video references and experimental AI checks. Seven letters include 3D studies.",
+        "33 әріптің бейнеүлгілері мен тәжірибелік ЖИ тексеруі. 7 әріптің 3D сынағы бар.",
       ),
       image: "knowledge-book.png",
       count: at(
-        "7 букв · ИИ-проверка А, В, Л",
-        "7 letters · AI check for А, В, Л",
-        "7 әріп · А, В, Л үшін ЖИ тексеруі",
+        "33 буквы · видео и ИИ",
+        "33 letters · video and AI",
+        "33 әріп · бейне және ЖИ",
       ),
     },
     {

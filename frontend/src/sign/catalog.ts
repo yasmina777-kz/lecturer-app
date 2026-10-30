@@ -88,9 +88,9 @@ export function reading(id: LessonId) {
             "Әріптерді қалай үйренеміз",
           ),
           at(
-            "План: небольшие группы букв → просмотр образцов → различение похожих форм → своё имя. В практике уже есть пробные показы А, В, Л и пилотное распознавание этих трёх букв.",
-            "Plan: small groups of letters → reference examples → distinguishing similar shapes → your name. Practice includes trial demonstrations of А, В, Л and pilot recognition for these three letters.",
-            "Жоспар: шағын әріп топтары → үлгілерді қарау → ұқсас пішіндерді ажырату → өз есіміңіз. Жаттығуда А, В, Л көрсетілімдері және осы үш әріпті сынақ тану бар.",
+            "План: небольшие группы букв → просмотр образцов → различение похожих форм → своё имя. В практике есть видео всех 33 букв, семь пробных 3D-показов и экспериментальная ИИ-проверка алфавита.",
+            "Plan: small groups of letters → reference examples → distinguishing similar shapes → your name. Practice includes videos of all 33 letters, seven trial 3D demonstrations and experimental alphabet recognition.",
+            "Жоспар: шағын әріп топтары → үлгілерді қарау → ұқсас пішіндерді ажырату → өз есіміңіз. Жаттығуда 33 әріптің бейнесі, жеті сынақ 3D көрсетілімі және әліпбиді тәжірибелік ЖИ тексеруі бар.",
           ),
         ],
       ],

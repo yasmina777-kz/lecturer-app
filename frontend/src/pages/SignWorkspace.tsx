@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState, type FormEvent } from "react";
+import { lazy, Suspense, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   ArrowLeft,
@@ -15,19 +15,10 @@ import { at } from "../i18n/automation";
 import { Empty, ErrorMessage, Loading } from "../components/UI";
 import { lessons, reading } from "../sign/catalog";
 import { useSignProgress } from "../sign/useProgress";
-import {
-  planText,
-  supportedPhrase,
-  preparedSigns,
-  type TextPlan,
-} from "../sign/textPlan";
+
 import "./sign-workspace.css";
-import { exercises } from "../sign/exercises";
-import {
-  SignCourseCatalog,
-  SignTrainingRoom,
-  ExercisePlayer,
-} from "./SignTrainer";
+import { SignDictionaryPage } from "./SignDictionary";
+import { SignCourseCatalog, SignTrainingRoom } from "./SignTrainer";
 const GesturePreview = lazy(() =>
   import("./GesturePreviewPage").then((m) => ({
     default: m.GesturePreviewPage,
@@ -191,9 +182,9 @@ function LessonContent({ id }: { id?: string }) {
           <>
             <p>
               {at(
-                "Откройте видеообразец, затем рассмотрите аватара по шагам и попробуйте повторить. Камера и автоматическая оценка пока не подключены.",
-                "Watch the reference video, inspect the avatar step by step and try it yourself. Camera input and automatic assessment are not connected yet.",
-                "Бейнеүлгіні көріп, аватарды қадам бойынша қарап, қайталаңыз. Камера және автоматты бағалау әлі қосылмаған.",
+                "Откройте видеообразец, затем рассмотрите аватара по шагам и попробуйте повторить. ИИ-проверка доступна для отдельных букв в тренажёре; фразы пока проверяются только сравнением с образцом.",
+                "Watch the reference, inspect the avatar step by step and practise. AI checking is available for isolated letters in practice; compare phrases with the reference.",
+                "Бейнеүлгіні көріп, аватарды қадам бойынша қарап, қайталаңыз. ЖИ жеке әріптерді тексереді; сөйлемдерді үлгімен салыстырыңыз.",
               )}
             </p>
             <label className="sign-check-row">
@@ -279,203 +270,7 @@ function LessonContent({ id }: { id?: string }) {
   );
 }
 export function SignTextPage() {
-  const [text, setText] = useState("");
-  const [result, setResult] = useState<TextPlan | null>(null);
-  const [version, setVersion] = useState(0);
-  const update = (v: string) => {
-    setText(v);
-    setResult(null);
-  };
-  const submit = (e: FormEvent) => {
-    e.preventDefault();
-    setResult(planText(text));
-    setVersion((v) => v + 1);
-  };
-  return (
-    <div className="sign-workspace">
-      <Heading
-        title={at("Текст → жесты", "Text → signs", "Мәтін → ымдар")}
-        description={at(
-          "Введите фразу и проверьте, есть ли для неё подготовленный показ аватара.",
-          "Enter a phrase to check whether a prepared avatar demonstration exists.",
-          "Сөйлемді енгізіп, аватардың дайын көрсетілімі бар-жоғын тексеріңіз.",
-        )}
-      />
-      <div className="sign-text-layout">
-        <form className="panel sign-text-form" onSubmit={submit}>
-          <span className="sign-status-label">
-            {at(
-              "7 букв · 2 слова · 1 фраза",
-              "7 letters · 2 words · 1 phrase",
-              "7 әріп · 2 сөз · 1 сөйлем",
-            )}
-          </span>
-          <label htmlFor="sign-text">
-            {at("Текст на русском", "Text in Russian", "Орыс тіліндегі мәтін")}
-          </label>
-          <textarea
-            id="sign-text"
-            maxLength={500}
-            rows={5}
-            value={text}
-            onChange={(e) => update(e.target.value)}
-            placeholder={supportedPhrase}
-            aria-describedby="sign-text-hint"
-          />
-          <div className="sign-text-meta">
-            <span id="sign-text-hint">
-              {at(
-                "Текст обрабатывается на устройстве.",
-                "Text is processed on your device.",
-                "Мәтін құрылғыңызда өңделеді.",
-              )}
-            </span>
-            <span>{text.length}/500</span>
-          </div>
-          <button className="button primary" type="submit">
-            <Play size={17} />
-            {at(
-              "Подготовить показ",
-              "Prepare demonstration",
-              "Көрсетілімді дайындау",
-            )}
-          </button>
-          <div className="sign-examples">
-            <span>
-              {at("Готовый словарь:", "Prepared vocabulary:", "Дайын сөздік:")}
-            </span>
-            {preparedSigns.map((sign) => (
-              <button
-                key={sign.animation}
-                type="button"
-                onClick={() => update(sign.phrase)}
-              >
-                {sign.phrase}
-              </button>
-            ))}
-          </div>
-        </form>
-        <aside className="panel sign-lesson-guide">
-          <Type size={28} />
-          <h2>
-            {at(
-              "Как это работает сейчас",
-              "How it works now",
-              "Қазір қалай жұмыс істейді",
-            )}
-          </h2>
-          <p>
-            {at(
-              "Система ищет точное совпадение с подготовленной фразой. Это пока не AI-переводчик произвольного текста.",
-              "The system looks for an exact match with a prepared phrase. This is not yet an AI translator for arbitrary text.",
-              "Жүйе дайын сөйлеммен дәл сәйкестікті іздейді. Бұл әзірге кез келген мәтінге арналған AI аудармашы емес.",
-            )}
-          </p>
-          <p>
-            {at(
-              "Неподдерживаемый текст не заменяется случайными жестами. Новые переводы и анимации нужно подготовить и проверить.",
-              "Unsupported text is not replaced with unrelated signs. New translations and animations need preparation and review.",
-              "Қолдауы жоқ мәтін кездейсоқ ымдармен алмастырылмайды. Жаңа аудармалар мен анимациялар әзірленіп, тексерілуі керек.",
-            )}
-          </p>
-        </aside>
-      </div>
-      {result && !result.ok && (
-        <section className="panel sign-text-result" role="status">
-          <h2>
-            {result.reason === "empty"
-              ? at(
-                  "Сначала введите фразу",
-                  "Enter a phrase first",
-                  "Алдымен сөйлем енгізіңіз",
-                )
-              : at(
-                  "Для этого текста пока нет показа",
-                  "No demonstration for this text yet",
-                  "Бұл мәтінге көрсетілім әлі жоқ",
-                )}
-          </h2>
-          <p>
-            {result.reason === "too-long"
-              ? at(
-                  "Можно ввести не больше 500 символов.",
-                  "Enter no more than 500 characters.",
-                  "500 таңбадан артық енгізбеңіз.",
-                )
-              : at(
-                  "Выберите одну букву, слово или фразу из готового словаря выше. Сочетания слов и произвольные предложения пока не переводятся.",
-                  "Choose one letter, word or phrase from the prepared vocabulary above. Word combinations and arbitrary sentences are not translated yet.",
-                  "Жоғарыдағы дайын сөздіктен бір әріп, сөз не сөйлемді таңдаңыз. Сөз тіркестері мен еркін сөйлемдер әзірге аударылмайды.",
-                )}
-          </p>
-          <button
-            className="button secondary"
-            onClick={() => update(supportedPhrase)}
-          >
-            {at(
-              "Вставить доступный пример",
-              "Insert available example",
-              "Қолжетімді мысалды қою",
-            )}
-          </button>
-        </section>
-      )}
-      {result?.ok && (
-        <section className="sign-text-result">
-          <div className="sign-section-heading">
-            <div>
-              <span className="eyebrow">
-                {at(
-                  "ПОДГОТОВЛЕННЫЙ ПОКАЗ",
-                  "PREPARED DEMONSTRATION",
-                  "ДАЙЫН КӨРСЕТІЛІМ",
-                )}
-              </span>
-              <h2>{result.phrase}</h2>
-              <p>
-                {at(
-                  "3D-проба, не проверенная носителем РЖЯ. Нажмите «Смотреть» в плеере.",
-                  "A 3D prototype, not reviewed by an RSL signer. Press Play in the viewer.",
-                  "Орыс ым тілі маманы тексермеген 3D сынағы. Ойнатқышта «Көру» түймесін басыңыз.",
-                )}
-              </p>
-            </div>
-          </div>
-          <Suspense fallback={<Loading />}>
-            <ExercisePlayer
-              key={version}
-              exercise={exercises().find(
-                (e) =>
-                  e.id ===
-                  (result.animation === "name-demo"
-                    ? "name"
-                    : result.animation),
-              )!}
-            />
-          </Suspense>
-        </section>
-      )}
-      {!result && (
-        <div className="sign-text-empty">
-          <Hand size={34} />
-          <h2>
-            {at(
-              "Здесь появится аватар",
-              "Your avatar will appear here",
-              "Аватар осы жерде пайда болады",
-            )}
-          </h2>
-          <p>
-            {at(
-              "Вставьте пример и нажмите «Подготовить показ».",
-              "Insert the example and select Prepare demonstration.",
-              "Мысалды қойып, «Көрсетілімді дайындау» түймесін басыңыз.",
-            )}
-          </p>
-        </div>
-      )}
-    </div>
-  );
+  return <SignDictionaryPage />;
 }
 export function SignPracticePage() {
   const { progress, error, save } = useSignProgress();
@@ -585,27 +380,27 @@ export function SignHelpPage() {
             "/learn",
             at("Обучение", "Learning", "Оқу"),
             at(
-              "Три уровня: буквы, первые слова и фразы. Откройте карточку — она ведёт прямо к аватару.",
-              "Three levels: letters, first words and phrases. Open a card to go directly to the avatar.",
-              "Үш деңгей: әріптер, алғашқы сөздер және сөйлемдер. Карточка арқылы аватарға өтіңіз.",
+              "Три уровня: буквы, первые слова и фразы. Карточка открывает аватара или видеообразец человека.",
+              "Three levels: letters, first words and phrases. A card opens an avatar or a human video reference.",
+              "Үш деңгей: әріптер, алғашқы сөздер және сөйлемдер. Карточка аватарды не адамның бейнеүлгісін ашады.",
             ),
           ],
           [
             "/text-to-sign",
             at("Текст → жесты", "Text → signs", "Мәтін → ымдар"),
             at(
-              "Отдельное поле ввода текста. Пока доступен показ одной подготовленной фразы, другие тексты получают понятный отказ.",
-              "A separate text input. One prepared phrase can be shown; other text receives an explicit unsupported response.",
-              "Мәтін енгізуге арналған бөлек өріс. Әзірге бір дайын сөйлем көрсетіледі; басқа мәтінге қолдау жоқ екені айтылады.",
+              "33 буквы, 170 слов и выражений с видео. Введите текст: известные слова откроют показы, неизвестные будут отмечены. Это словарный разбор, а не грамматический перевод.",
+              "33 letters and 170 words and expressions with videos. Enter text to find known signs; unsupported words stay visible. This is dictionary lookup, not grammatical translation.",
+              "33 әріп, бейнеүлгісі бар 170 сөз бен тіркес. Мәтін енгізіңіз: таныс сөздерге үлгі көрсетіледі, белгісіздері белгіленеді. Бұл грамматикалық аударма емес.",
             ),
           ],
           [
             "/practice",
             at("Моя практика", "My practice", "Менің жаттығуым"),
             at(
-              "Аватар показывает буквы и фразы. Для А, В, Л можно проверить фото или камеру. История вводных занятий находится внизу.",
-              "The avatar demonstrates letters and phrases. Check photos or camera input for А, В, Л. Introduction history is at the bottom.",
-              "Аватар әріптер мен сөйлемдерді көрсетеді. А, В, Л үшін фото не камераны тексеріңіз. Кіріспе тарихы төменде.",
+              "3D-показы и видео всех 33 букв. Запишите короткий жест камерой или выберите видео: экспериментальный ИИ предложит букву либо откажется от ответа.",
+              "3D demonstrations and videos of all 33 letters. Record a short sign or choose a video: the experimental AI suggests a letter or declines to answer.",
+              "3D көрсетілімдер және 33 әріптің бейнесі. Камерамен қысқа қимыл жазыңыз не бейне таңдаңыз: тәжірибелік ЖИ әріпті ұсынады немесе жауаптан бас тартады.",
             ),
           ],
         ].map(([url, title, text]) => (
@@ -628,9 +423,9 @@ export function SignHelpPage() {
         </h2>
         <p>
           {at(
-            "Остальные буквы, дополнительные слова и диалоги, распознавание фраз и перевод произвольного текста. Сейчас ИИ различает только три буквы: А, В, Л.",
-            "More letters, words and dialogues, phrase recognition and arbitrary-text translation are still in preparation. The AI currently distinguishes only А, В, Л.",
-            "Қалған әріптер, сөздер мен диалогтар, сөйлемдерді тану және еркін мәтін аудармасы әзірленуде. ЖИ әзірге тек А, В, Л әріптерін ажыратады.",
+            "Распознавание слов и фраз, непрерывная дактильная речь и перевод с грамматикой РЖЯ ещё не обучены. Сейчас модель обучена на 33 отдельных буквах и примерах «нет жеста». Лицо и корпус модель не оценивает.",
+            "Word and phrase recognition, continuous fingerspelling and grammatical RSL translation are not trained yet. The current model covers 33 isolated letters and no-sign examples. It does not assess the face or body.",
+            "Сөздер мен сөйлемдерді тану, үздіксіз дактиль және РЖЯ грамматикасымен аудару әлі үйретілмеген. Қазіргі модель 33 жеке әріпке және «ым жоқ» мысалдарына үйретілді. Бет пен денені бағаламайды.",
           )}
         </p>
         <p>

@@ -1,0 +1,4 @@
+Slovo: Russian Sign Language Dataset (2023). Authors: Alexander Kapitanov, Karina Kvanchiani, Alexander Nagaev, Elizaveta Petrova. Source: https://github.com/ai-forever/slovo . License: custom attribution/share-alike public license, full terms in license.pdf. Unmodified trimmed training videos; posters extracted and resized by AI Mentor. No endorsement. The same license applies to these adaptations. IDs and labels in catalog.json. Dataset samples are references, not certified teaching material.
+Russian word forms generated with pymorphy3 (MIT) and OpenCorpora dictionaries (CC BY-SA 3.0). Sources: https://github.com/no-plagiarism/pymorphy3 and https://opencorpora.org/ . forms.json retains the dictionary attribution/share-alike terms. These word forms are Russian morphology, not RSL grammar.
+
+Russian inflection lookup: pymorphy3 (MIT), OpenCorpora morphological dictionaries (CC BY-SA 3.0). https://github.com/no-plagiarism/pymorphy3 https://opencorpora.org/

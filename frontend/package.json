@@ -12,7 +12,8 @@
     "prebuild": "node scripts/prepare-local-ai.mjs",
     "test:local-ai": "node scripts/check-local-ai.mjs",
     "test:sign": "node scripts/check-sign-text.mjs",
-    "test:rsl": "node scripts/check-rsl-model.mjs"
+    "test:rsl": "node scripts/check-rsl-model.mjs",
+    "test:sign-expansion": "node scripts/check-sign-expansion.mjs"
   },
   "dependencies": {
     "@huggingface/transformers": "^4.3.2",
