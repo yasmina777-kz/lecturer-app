@@ -1,4 +1,4 @@
-/** Export captured boundary poses so UI and animation share a speed-bounded transition. */
+/** Export relaxed boundary poses so UI and animation share a speed-bounded transition. */
 import { readFile, writeFile } from "node:fs/promises";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { QuaternionLinearInterpolant } from "three";
@@ -24,12 +24,12 @@ for (const asset of catalog) {
       4,
     );
     const key=track.name.replace(/^mixamorig[:_]?/, "").replace(/\.quaternion$/, "");
-    start[key] = Array.from(sample.evaluate(asset.leadIn ?? 0),v=>Number(v.toFixed(5)));
+    start[key] = Array.from(sample.evaluate(0),v=>Number(v.toFixed(5)));
     end[key] = Array.from(
-      sample.evaluate(clip.duration - (asset.leadOut ?? 0)), v=>Number(v.toFixed(5)),
+      sample.evaluate(clip.duration), v=>Number(v.toFixed(5)),
     );
   }
-  asset.transitionPose = { start, end };
+  asset.transitionPose = { at: "rest", start, end };
 }
 await writeFile(
   new URL("catalog.json", root),

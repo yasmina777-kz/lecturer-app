@@ -16,6 +16,7 @@ export type MotionAsset = {
   leadIn?: number;
   leadOut?: number;
   transitionPose?: {
+    at?: "rest";
     start: Record<string, number[]>;
     end: Record<string, number[]>;
   };
@@ -99,7 +100,8 @@ export const TRANSITION_SPEED_DEGREES = 240;
 export function transitionDuration(a: MotionAsset, b: MotionAsset) {
   const from = a.transitionPose?.end,
     to = b.transitionPose?.start;
-  if (!from || !to) return 1.5; // Legacy authored clips: safe even for a 180° change.
+  if (!from || !to || a.transitionPose?.at !== "rest" || b.transitionPose?.at !== "rest")
+    return 1.5; // Old catalogs must not use captured handshapes as rest boundaries.
   let angle = 0;
   for (const [name, q] of Object.entries(from)) {
     const r = to[name];
@@ -118,9 +120,11 @@ export function motionTimeline(steps: MotionStep[]) {
   let cursor = 0;
   return steps.map((step, index) => {
     const start = cursor;
-    // Trim only synthetic rest poses, never the captured sign itself.
-    const trimStart = index > 0 ? (step.leadIn ?? 0) : 0;
-    const trimEnd = index < steps.length - 1 ? (step.leadOut ?? 0) : 0;
+    // Keep Blender's coordinated release and preparation. Slerping local joints
+    // directly between two sign handshapes breaks the arm chain and finger pose,
+    // even when angular speed is bounded. Only join relaxed endpoints.
+    const trimStart = 0;
+    const trimEnd = 0;
     const duration = step.duration - trimStart - trimEnd;
     const gapAfter =
       index < steps.length - 1 ? transitionDuration(step, steps[index + 1]) : 0;

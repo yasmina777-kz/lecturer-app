@@ -110,7 +110,7 @@ for path in paths:
     thumb_dirs,_=finger_chain(side,'Thumb',[math.radians(v) for v in [-30,30,0,0]])
     direction=(q@sum(thumb_dirs,V())).normalized()
     q=direction.rotation_difference(V((.12,0,1)).normalized())@q
-   if entry['id']=='word-0cca1e04' and side=='Left':
+   if entry['id'] in ['word-0cca1e04','word-8c1a7f26'] and side=='Left':
     # The index points INTO the upper chest, not diagonally up into space.
     target.y=-.28
     q=orient(side,(-1,0,.08),(0,1,0))

@@ -11,7 +11,7 @@ const motion=await source('../src/sign/motion.ts',{'"./dictionary"':dictionary,'
 const {composeMotion}=await import(await source('../src/sign/composeMotion.ts',{'"three"':new URL('../node_modules/three/build/three.module.js',import.meta.url).href,'"./motion"':motion}));
 const assets=await read('../public/avatars/sign-motion/catalog.json'),words=await read('../public/research/rsl/words/catalog.json'),forms=await read('../public/research/rsl/words/forms.json'),entries=[...alphabetEntries(),...words];
 const {phraseGroups}=await import(await source('../src/sign/phraseExamples.ts'));
-let worstOldTransition=0;
+let restTransitionAtFixedGap=0;
 for(const group of phraseGroups)for(const phrase of group.phrases){
  const example=planMotion(phrase,entries,forms,assets);
  assert.deepEqual(example.missing,[],phrase+' has unavailable signs');
@@ -23,16 +23,16 @@ for(const group of phraseGroups)for(const phrase of group.phrases){
   for(const name of Object.keys(a))if(b[name]){
    const dot=Math.abs(a[name].reduce((sum,v,j)=>sum+v*b[name][j],0));
    const angle=2*Math.acos(Math.min(1,dot))*180/Math.PI;
-   worstOldTransition=Math.max(worstOldTransition,angle*1.875/.25);
+   restTransitionAtFixedGap=Math.max(restTransitionAtFixedGap,angle*1.875/.25);
    assert.ok(angle*1.875/transitionDuration(example.steps[i-1],example.steps[i])<=TRANSITION_SPEED_DEGREES+.1,phrase+' transition too fast');
   }
  }
 
 }
-console.log('Previous fixed-gap transition peak:',worstOldTransition.toFixed(1),'degrees/s');
+console.log('Relaxed-boundary transition peak with 250 ms gap:',restTransitionAtFixedGap.toFixed(1),'degrees/s');
 assert.equal(assets.length,203);assert.equal(new Set(assets.map(a=>a.id)).size,203);
 let plan=planMotion('Я хочу читать книгу',entries,forms,assets);assert.deepEqual(plan.steps.map(s=>s.label),['я','хотеть','читать','книга']);assert.deepEqual(plan.missing,[]);
-const timeline=motionTimeline(plan.steps);assert.equal(timeline.length,4);assert.ok(timeline.every((s,i)=>i===0||s.start>timeline[i-1].end));
+const timeline=motionTimeline(plan.steps);assert.equal(timeline.length,4);assert.ok(timeline.every(s=>s.trimStart===0&&s.trimEnd===0),'phrase must preserve coordinated lead-in/out');assert.ok(timeline.every((s,i)=>i===0||s.start>timeline[i-1].end));
 plan=planMotion('Здравствуйте! Как тебя зовут? Спасибо.',entries,forms,assets);assert.equal(plan.steps.length,3);assert.deepEqual(plan.missing,[]);
 plan=planMotion('Я не абракадабра',entries,forms,assets);assert.deepEqual(plan.missing,['абракадабра']);assert.ok(plan.steps.some(s=>s.label==='не'));
 plan=planMotion('Юлия',entries,forms,assets,true);assert.equal(plan.steps.length,4);assert.ok(plan.steps.every(s=>s.id.startsWith('letter-')));
@@ -46,12 +46,13 @@ for (const entry of alphabetEntries()) {
 assert.equal(planMotion('я хочу', entries, forms, assets).spelling, false);
 const base=await readFile(new URL('../public/avatars/mira-blender/letter-a.glb',import.meta.url));const j=JSON.parse(base.subarray(20,20+base.readUInt32LE(12)).toString());const boneNames=new Set(j.nodes.map(n=>n.name));
 const clips=[];
+const loadedClips=new Map();
 for(const asset of assets){
  const bytes=await readFile(new URL('../public'+asset.url,import.meta.url));assert.equal(asset.revision,createHash('sha256').update(bytes).digest('hex').slice(0,12),'stale motion revision');const json=JSON.parse(bytes.subarray(20,20+bytes.readUInt32LE(12)).toString());assert.equal(json.meshes?.length??0,0);
  for(const channel of json.animations[0].channels)assert.ok(boneNames.has(json.nodes[channel.target.node].name),asset.label);
- const loaded=await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');const clip=loaded.animations[0];assert.ok(Math.abs(clip.duration-asset.duration)<.02,asset.label);
+ const loaded=await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');const clip=loaded.animations[0];loadedClips.set(asset.url,clip);assert.ok(Math.abs(clip.duration-asset.duration)<.02,asset.label);
  for(const track of clip.tracks){if(track.name.endsWith('.scale'))assert.ok(Array.from(track.values).every(v=>Math.abs(v-1)<.001),asset.label+' DQ requires rigid bone transforms');if(/Hand(?:Index|Middle|Ring|Pinky|Thumb)[123]\.position/.test(track.name))assert.ok(Array.from(track.values).every((v,i)=>Math.abs(v-track.values[i%3])<.00001),asset.label+' sliding finger joint');assert.ok(Array.from(track.values).every(Number.isFinite));assert.ok(Array.from(track.times).every((t,i)=>i===0||t>track.times[i-1]));}
- if(['я','читать','книга','помочь'].includes(asset.label)) {
+ if(['я','читать','книга','помочь','показать'].includes(asset.label)) {
   const mixer=new AnimationMixer(loaded.scene);mixer.clipAction(clip).play();
   const point=(suffix)=>{
    const bone=loaded.scene.getObjectByName('mixamorig'+suffix);
@@ -69,6 +70,14 @@ for(const asset of assets){
     assert.ok(b.clone().sub(a).angleTo(c.sub(b))<Math.PI/12,'reading hand must keep straight fingers');
    }
   }
+  if(asset.label==='показать') for(const t of [asset.leadIn+.3,asset.leadIn+.6]) {
+   sample(t);
+   for(const [side,fingers] of [['Left',['Index','Middle','Ring','Pinky']],['Right',['Index']]])
+    for(const finger of fingers) {
+     const a=point(side+'Hand'+finger+'1'),b=point(side+'Hand'+finger+'2'),c=point(side+'Hand'+finger+'3');
+     assert.ok(b.clone().sub(a).angleTo(c.sub(b))<Math.PI/12,'show: straight index and supporting palm must not curl');
+    }
+  }
   if(asset.label==='книга') {
    sample(1.7);const closed=point('LeftHand').distanceTo(point('RightHand'));
    sample(1.13);const open=point('LeftHand').distanceTo(point('RightHand'));
@@ -79,7 +88,7 @@ for(const asset of assets){
  if(['я','хотеть','читать','книга'].includes(asset.label))clips.push(clip);
 }
 const combined=composeMotion(clips);assert.equal(clips.length,4);assert.ok(combined.duration>clips.reduce((n,c)=>n+c.duration,0));for(const t of combined.tracks){assert.ok(Array.from(t.times).every((x,i)=>i===0||x>t.times[i-1]));assert.ok(Array.from(t.values).every(Number.isFinite));}
-// Only synthetic lead/tail can be removed; source frames and UI durations agree.
+// Release/preparation must survive phrase composition, including fingers and IK.
 const phrase=planMotion('Я хочу читать книгу',entries,forms,assets);
 const windows=motionTimeline(phrase.steps);
 const ordered=await Promise.all(phrase.steps.map(async step=>{
@@ -113,6 +122,55 @@ for(let i=0;i<windows.length-1;i++){
  }
 }
 console.log('Measured composed phrase transition peak:',measuredTransitionPeak.toFixed(1),'degrees/s');
+
+// Regression: every source pose in all offered phrases remains unchanged in the
+// composed clip. Previously the release and preparation were cut off and replaced
+// with unrelated joint-by-joint blends, despite passing the speed-only check.
+let verifiedPhraseFrames=0;
+for(const group of phraseGroups) for(const label of group.phrases) {
+ const p=planMotion(label,entries,forms,assets), w=motionTimeline(p.steps), sourceClips=[];
+ for(const step of p.steps) {
+  if(!loadedClips.has(step.url)) {
+   const b=await readFile(new URL('../public'+step.url,import.meta.url));
+   const loader=new GLTFLoader().register(()=>({name:'test-no-textures',loadTexture:()=>Promise.resolve(null)}));
+   const c=(await loader.parseAsync(b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength),'')).animations[0];
+   loadedClips.set(step.url,c);
+  }
+  const c=loadedClips.get(step.url);
+  assert.ok(Math.abs(c.duration-step.duration)<.002,label+' metadata duration mismatch');
+  sourceClips.push(c);
+ }
+ const result=composeMotion(sourceClips,undefined,w.map(s=>({start:s.trimStart,end:s.trimEnd,gapAfter:s.gapAfter})));
+ assert.ok(Math.abs(result.duration-w.at(-1).end)<.002,label+' composed timeline mismatch');
+ for(let i=0;i<w.length;i++) {
+  assert.equal(w[i].trimStart,0);assert.equal(w[i].trimEnd,0);
+  for(const t of sourceClips[i].tracks) {
+   const src=t.createInterpolant(), dst=result.tracks.find(r=>r.name===t.name).createInterpolant();
+   for(let k=0;k<=Math.ceil(sourceClips[i].duration*60);k++) {
+    const time=Math.min(k/60,sourceClips[i].duration);
+    const a=Array.from(src.evaluate(time)),b=Array.from(dst.evaluate(w[i].start+time));
+    if(t.name.endsWith('.quaternion')) {
+     const dot=Math.abs(a.reduce((s,v,j)=>s+v*b[j],0))/(Math.hypot(...a)*Math.hypot(...b));
+     assert.ok(1-dot<1e-7,label+' altered source joint '+t.name);
+    } else assert.ok(a.every((v,j)=>Math.abs(v-b[j])<.0001),label+' altered source position '+t.name);
+    verifiedPhraseFrames++;
+   }
+  }
+ }
+}
+// Across the catalog all finger endpoints share the same relaxed shape. New
+// transitions therefore cannot mix incompatible fist/open/pinch finger poses.
+const referenceRest=assets[0].transitionPose.start;
+for(const a of assets) {
+ assert.equal(a.transitionPose.at,'rest');
+ for(const pose of [a.transitionPose.start,a.transitionPose.end])
+  for(const [bone,q] of Object.entries(pose)) if(/Hand(?:Thumb|Index|Middle|Ring|Pinky)[123]$/.test(bone)) {
+   const r=referenceRest[bone];const dot=Math.abs(q.reduce((s,v,j)=>s+v*r[j],0))/(Math.hypot(...q)*Math.hypot(...r));
+   assert.ok(2*Math.acos(Math.min(1,dot))<.005,a.label+' non-neutral finger boundary '+bone);
+  }
+}
+console.log('32 phrases: source-pose samples preserved:',verifiedPhraseFrames,'; all 203 clips join relaxed fingers.');
+
 assert.throws(()=>composeMotion([ordered[0]],undefined,[{start:ordered[0].duration,end:0}]),/Invalid motion window/);
 for(const asset of assets){
  assert.equal(asset.motionVersion,5,asset.label);

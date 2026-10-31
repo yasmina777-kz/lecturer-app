@@ -42,7 +42,7 @@ Inference runs in the browser with locally served MediaPipe weights/WASM and cla
 
 The original seven letter clips and three word/phrase clips are independently authored Blender motion studies, **not expert-verified RSL instruction**. All 33 letters have real human video references. The dictionary and practice room now additionally use 203 experimental reference-captured motions, including all 33 letters; original videos remain available for comparison. These are not expert-verified. Alphabet body animation includes connected shoulders/spine/neck, staggered finger transitions and a stable handshape viewing interval. Finite transforms, loop continuity and quaternion steps are checked during export. Gesture semantics still require an RSL specialist's review.
 
-Scripts: `art/mira-alphabet/build.py`, `art/mira-blender-phrases/animate.py`, `art/mira-blender-v3/animate.py`. Recognition and playback are separate systems.
+Scripts: `art/mira-alphabet/build.py`, `art/mira-blender-phrases/animate.py`, `art/mira-blender-v3/animate.py`. Recognition and playback are separate systems. Phrase playback preserves each Blender clip’s coordinated preparation and release, joining only relaxed endpoints. It does not interpolate directly between the meaningful handshapes of different signs. This adds a brief return between words; it is not natural continuous RSL coarticulation. Legacy constant STEP channels are converted to linear output tracks during composition so later moving clips are not played as discontinuous steps.
 
 ## Sources and licenses
 

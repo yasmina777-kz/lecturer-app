@@ -32,6 +32,8 @@ def authored_finger_angles(entry_id,side,fade):
 # These shapes remain stable through the captured wrist motion.
 REFERENCE_HAND_SHAPES={
  'word-0cca1e04':{'Left':'point'},
+ 'word-8c1a7f26':{'Left':'point'},
+ 'word-ed66b0ff':{'Left':'flat','Right':'straight-point'},
  'word-9fcf26f7':{'Right':'thumb'},
  'word-542b93a5':{'Left':'flat-tucked'},
  'word-a8989f04':{'Left':'flat','Right':'flat'},
@@ -59,10 +61,10 @@ def corrected_hand_pose(entry_id,side,fade):
  for name in finger_indices:
   if shape=='relaxed':values=[18,0,22,8] if name!='Thumb' else [0,-10,10,5]
   elif name=='Thumb':
-   values={'point':[40,0,45,25],'thumb':[-30,30,0,0],'flat':[0,0,5,0],'flat-tucked':[20,35,25,15]}[shape]
-  elif shape=='point' and name=='Index':
+   values={'point':[40,0,45,25],'straight-point':[25,15,30,15],'thumb':[-30,30,0,0],'flat':[0,0,5,0],'flat-tucked':[20,35,25,15]}[shape]
+  elif shape in ['point','straight-point'] and name=='Index':
    angles[name]=flat_shape(side)[name].copy()
-   angles[name][0]+=math.radians(55)
+   if shape=='point':angles[name][0]+=math.radians(55)
    continue
   elif shape.startswith('flat'):
    angles[name]=flat_shape(side)[name];continue

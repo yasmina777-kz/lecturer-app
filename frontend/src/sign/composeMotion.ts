@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { MOTION_GAP } from "./motion";
-/** One clock, palm-to-palm transitions; keep all captured source frames. */
+/** One clock; join relaxed endpoints after Blender's coordinated release. */
 export function composeMotion(
   clips: THREE.AnimationClip[],
   gap = MOTION_GAP,
@@ -79,6 +79,10 @@ export function composeMotion(
         (index < clips.length - 1 ? (trims[index]?.gapAfter ?? gap) : 0);
     }
     const track = template.clone();
+    // glTF exports constant channels as STEP. The first word may keep this
+    // joint still while later words animate it; inheriting STEP makes those
+    // movements jump frame by frame (including the generated transitions).
+    track.setInterpolation(THREE.InterpolateLinear);
     track.times = new Float32Array(times);
     track.values = new Float32Array(values);
     tracks.push(track);
