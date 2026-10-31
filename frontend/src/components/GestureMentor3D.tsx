@@ -7,6 +7,7 @@ import {
   type AvatarPlaybackState,
 } from "../sign/avatarPlayback";
 import { preserveJointVolume } from "../sign/volumeSkinning";
+import { signingBounds, fitSigningFrame } from "../sign/motionFraming";
 import { composeMotion } from "../sign/composeMotion";
 import { at } from "../i18n/automation";
 
@@ -133,6 +134,7 @@ export function GestureMentor3D({
           t.image.close();
       });
     };
+    let motionBounds = new THREE.Box3();
     const camera = new THREE.PerspectiveCamera(32, 1, 0.02, 20);
     const orbit = new OrbitControls(camera, renderer.domElement);
     orbit.enablePan = false;
@@ -181,7 +183,7 @@ export function GestureMentor3D({
           : framing === "full"
             ? 1.95
             : 1.62;
-      const radius =
+      let radius =
         !close && motionKey !== "[]"
           ? Math.max(
               baseRadius,
@@ -206,9 +208,14 @@ export function GestureMentor3D({
               : 1.38,
         close ? 0.25 : 0.05,
       );
+      if (close && !motionBounds.isEmpty()) {
+        const fit = fitSigningFrame(motionBounds, camera.aspect, theta);
+        orbit.target.copy(fit.target);
+        radius = fit.radius;
+      }
       camera.position.set(
         orbit.target.x + Math.sin(theta) * radius,
-        orbit.target.y + 0.04,
+        orbit.target.y,
         orbit.target.z + Math.cos(theta) * radius,
       );
       orbit.update();
@@ -220,7 +227,7 @@ export function GestureMentor3D({
       renderer.setSize(box.width, box.height, false);
       camera.aspect = box.width / Math.max(1, box.height);
       camera.updateProjectionMatrix();
-      render();
+      view(current.current.closeup, current.current.angle);
     };
     const observer = new ResizeObserver(resize);
     observer.observe(mount);
@@ -301,6 +308,10 @@ export function GestureMentor3D({
         }
         if (!alive) return;
         clipDuration = Math.max(0, ...clips.map((clip) => clip.duration));
+        if (motionKey !== "[]" && clips[0]) {
+          motionBounds = signingBounds(model, clips[0]);
+          view(current.current.closeup, current.current.angle);
+        }
         if (idleClip) {
           playback = new AvatarPlayback(mixer, clips, idleClip);
           const tickIdle = (now: number) => {

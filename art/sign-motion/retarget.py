@@ -96,6 +96,25 @@ for path in paths:
    pts=[cv(x) for x in hand['world']];forward=(pts[9]-pts[0]).normalized();across=(pts[5]-pts[17]).normalized()
    if side=='Left':across=-across
    normal=across.cross(forward).normalized();q=orient(side,forward,normal)
+   if entry['id']=='word-9fcf26f7' and side=='Right':
+    if not finger_fit_rigs:init_finger_rigs()
+    thumb_dirs,_=finger_chain(side,'Thumb',[math.radians(v) for v in [-30,30,0,0]])
+    direction=(q@sum(thumb_dirs,V())).normalized()
+    q=direction.rotation_difference(V((.12,0,1)).normalized())@q
+   if entry['id']=='word-0cca1e04' and side=='Left':
+    # The index points INTO the upper chest, not diagonally up into space.
+    target.y=-.28
+    q=orient(side,(-1,0,.08),(0,1,0))
+   if entry['id']=='word-a8989f04':
+    # One shared book hinge: independent monocular depths cannot preserve contact.
+    pair={s:[V(x).lerp(V(y),u) for x,y in zip(tracks[s][a]['image'],tracks[s][b]['image'])] for s in ['Left','Right']}
+    center=(pair['Left'][0]+pair['Right'][0])/2
+    # The reference opens once (about 0.30–0.55 s), rotating the palms
+    # toward the viewer around their ulnar edges, not fanning fingertips sideways.
+    opening=math.radians(58)*smooth(.24,.42,src)*(1-smooth(.44,.62,src))
+    target=V(((center.x-mid.x)*d['aspect']*scale+sign*(.018+.035*math.sin(opening)),-.29,shoulder_mid.z-(center.y-mid.y)*scale))
+    rotation=Quaternion((0,0,1),sign*opening)@Quaternion((0,1,0),sign*opening*.25)
+    q=orient(side,rotation@V((0,0,1)),rotation@V((-sign,0,0)))
    ei=13 if side=='Left' else 14;ep=p[ei]
    edepth=clamp(world[ei][2]-(world[11][2]+world[12][2])/2,-.35,.2) if world else -.05
    elbow_hint=V(((ep.x-mid.x)*d['aspect']*scale,edepth,shoulder_mid.z-(ep.y-mid.y)*scale))
@@ -136,8 +155,8 @@ for path in paths:
  bpy.ops.object.select_all(action='DESELECT');rig.select_set(True)
  bpy.ops.export_scene.gltf(filepath=str(OUT/(entry['id']+'.glb')),export_format='GLB',use_selection=True,export_animations=True,export_animation_mode='ACTIVE_ACTIONS',export_frame_range=True,export_force_sampling=True,export_anim_slide_to_zero=True,export_yup=True)
  info={'id':entry['id'],'label':entry['label'],'url':'/avatars/sign-motion/'+entry['id']+'.glb','duration':round((count-1)/30,3),'source':entry['source'],'reference':entry['video'],'handCoverage':coverage,'maxGapFrames':longest,'poseCoverage':d['poseCoverage'],'maxJointStepDegrees':round(math.degrees(maxstep),3),'review':'experimental-unreviewed','method':'Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training','motionVersion':4,'peakStep':peak,'leadIn':lead,'leadOut':tail,'maxHingeOffAxis':hinge_error,'meanFingerDirectionErrorDegrees':math.degrees(sum(finger_fit_errors)/max(1,len(finger_fit_errors)))}
- if entry['id'] in HAND_POSE_CORRECTIONS:
-  info['trackedFitErrorBeforeCorrectionDegrees']=info.pop('meanFingerDirectionErrorDegrees');info['handPoseCorrection']='authored-fist-v1';info['method']+='; explicit authored А fist and thumb correction'
+ if entry['id'] in HAND_POSE_CORRECTIONS or entry['id'] in REFERENCE_HAND_SHAPES:
+  info['trackedFitErrorBeforeCorrectionDegrees']=info.pop('meanFingerDirectionErrorDegrees');info['handPoseCorrection']='authored-fist-v1' if entry['id'] in HAND_POSE_CORRECTIONS else 'reference-handshape-v1';info['method']+='; explicit handshape correction from the linked video reference'
  (OUT/(entry['id']+'.json')).write_text(json.dumps(info,ensure_ascii=False,indent=2));manifest.append(info)
  print('RETARGETED',entry['label'],info['duration'],coverage,flush=True)
  # Keep a concrete Blender workshop for manual finger/curve review.

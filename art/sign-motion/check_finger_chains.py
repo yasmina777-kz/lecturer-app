@@ -25,3 +25,9 @@ for side in ['Left','Right']:
   assert all(lo-1e-7<=v<=hi+1e-7 for v,(lo,hi) in zip(limited,info['bounds']))
   assert sum(limited[j] for j in [0,2,3])+sum(info['offsets'])<=math.radians(240 if name!='Thumb' else 190)+1e-7
 print('WHOLE_FINGER_CHAINS',count,'poses, FK and joint limits; max target error',maximum,'degrees',flush=True)
+# The authored open hand must be straight in the actual rig, on BOTH sides.
+for side in ['Left','Right']:
+ for name,values in flat_shape(side).items():
+  directions,_=finger_chain(side,name,values)
+  assert max(math.degrees(v.angle(rest[side]['basis'].col[1])) for v in directions)<12,(side,name,'open fingers do not align')
+print('REFERENCE_HAND_SHAPES: both open palms have aligned, extended phalanges',flush=True)

@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import ts from 'typescript';
+import { AnimationMixer, Vector3 } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 const read=async p=>JSON.parse(await readFile(new URL(p,import.meta.url),'utf8'));
 async function source(p,replacements={}){let code=ts.transpileModule(await readFile(new URL(p,import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2020}}).outputText;for(const [a,b]of Object.entries(replacements))code=code.replaceAll(a,JSON.stringify(b));return 'data:text/javascript;base64,'+Buffer.from(code).toString('base64');}
@@ -49,6 +50,31 @@ for(const asset of assets){
  for(const channel of json.animations[0].channels)assert.ok(boneNames.has(json.nodes[channel.target.node].name),asset.label);
  const loaded=await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');const clip=loaded.animations[0];assert.ok(Math.abs(clip.duration-asset.duration)<.02,asset.label);
  for(const track of clip.tracks){if(track.name.endsWith('.scale'))assert.ok(Array.from(track.values).every(v=>Math.abs(v-1)<.001),asset.label+' DQ requires rigid bone transforms');if(/Hand(?:Index|Middle|Ring|Pinky|Thumb)[123]\.position/.test(track.name))assert.ok(Array.from(track.values).every((v,i)=>Math.abs(v-track.values[i%3])<.00001),asset.label+' sliding finger joint');assert.ok(Array.from(track.values).every(Number.isFinite));assert.ok(Array.from(track.times).every((t,i)=>i===0||t>track.times[i-1]));}
+ if(['я','читать','книга'].includes(asset.label)) {
+  const mixer=new AnimationMixer(loaded.scene);mixer.clipAction(clip).play();
+  const point=(suffix)=>{
+   const bone=loaded.scene.getObjectByName('mixamorig'+suffix);
+   assert.ok(bone,suffix);return bone.getWorldPosition(new Vector3());
+  };
+  const sample=(t)=>{mixer.setTime(t);loaded.scene.updateMatrixWorld(true);};
+  if(asset.label==='я') {
+   sample(1.14);
+   assert.ok(point('LeftHandIndex3').z<point('LeftHandIndex1').z-.025,'self-point must face back toward the chest');
+  }
+  if(asset.label==='читать') for(const t of [1,1.4,1.7]) {
+   sample(t);
+   for(const finger of ['Index','Middle','Ring','Pinky']) {
+    const a=point('LeftHand'+finger+'1'),b=point('LeftHand'+finger+'2'),c=point('LeftHand'+finger+'3');
+    assert.ok(b.clone().sub(a).angleTo(c.sub(b))<Math.PI/12,'reading hand must keep straight fingers');
+   }
+  }
+  if(asset.label==='книга') {
+   sample(1.7);const closed=point('LeftHand').distanceTo(point('RightHand'));
+   sample(1.13);const open=point('LeftHand').distanceTo(point('RightHand'));
+   assert.ok(closed<.065 && open>closed+.025,'book hands must close together then open from a shared hinge');
+  }
+  mixer.stopAllAction();mixer.uncacheRoot(loaded.scene);
+ }
  if(['я','хотеть','читать','книга'].includes(asset.label))clips.push(clip);
 }
 const combined=composeMotion(clips);assert.equal(clips.length,4);assert.ok(combined.duration>clips.reduce((n,c)=>n+c.duration,0));for(const t of combined.tracks){assert.ok(Array.from(t.times).every((x,i)=>i===0||x>t.times[i-1]));assert.ok(Array.from(t.values).every(Number.isFinite));}

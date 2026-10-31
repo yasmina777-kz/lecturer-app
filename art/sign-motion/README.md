@@ -67,3 +67,21 @@ The previous 0.25 s gap applied to every pair of words regardless of the change 
 `transitionDuration` chooses the shared UI/animation gap from the largest joint change and the quintic easing peak derivative (1.875), capped at 240°/s at 1× speed. Legacy clips without endpoints use a conservative 1.5 s gap. Transitions are sampled at 60 Hz; captured signs keep their existing timing. The UI, word seeking and composed clip use the same `gapAfter`. Tests cover the boundary-speed formula for all practice phrases and sample the composed “Я хочу читать книгу” seams at 120 Hz (observed peak 239.5°/s).
 
 This fixes transition timing only. It does not fix captured hand shapes, avoid every mesh collision, model coarticulation, or translate Russian grammar into RSL. The 32 examples are sequences of available assets, not newly trained phrase animations. A production phrase needs a continuous signer reference, corrected hands/body/face, and linguistic review.
+
+### Four-sign reference correction (2026-10-31)
+
+`hand_pose_overrides.py` keeps stable, rig-calibrated hand shapes for **я,
+хотеть, читать, книга**, using each entry's linked reference. Straight phalanges
+are solved against the actual bone rest axes, rather than assumed zero Euler
+angles. `retarget.py` additionally corrects the self-pointing direction, thumb
+orientation, and the shared contact/opening of the book gesture (reference
+opening at approximately 0.30–0.55 s). These are explicit authored corrections,
+not newly trained recognition or translation models. The source recordings remain
+available and linguistic review is still required; other entries do not inherit
+these poses. The mesh/FK checks do not establish linguistic correctness.
+
+The player's close-up samples the motion before playback and uses a fixed frame
+for raised hands and head, with perspective/aspect compensation. Resting hands at
+the hip are excluded from the close-up; the full-avatar view remains available.
+`node frontend/scripts/check-motion-framing.mjs` checks all three viewing angles
+at desktop and phone proportions.
