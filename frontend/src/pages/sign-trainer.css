@@ -37,6 +37,29 @@
   object-fit: cover;
   object-position: center 22%;
 }
+.sign-exercise-thumb--illustrated {
+  position: relative;
+  height: 240px;
+  background: #faf8f2;
+}
+.sign-exercise-thumb img.sign-alphabet-illustration {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  object-fit: contain;
+  object-position: center;
+}
+.sign-exercise-thumb--illustrated > svg {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  padding: 8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #e7ddcc;
+  color: #493b2a;
+}
 .sign-alphabet-plan {
   margin: 32px 0;
 }

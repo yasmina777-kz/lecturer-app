@@ -20,6 +20,7 @@ import { SignSequencePlayer } from "../components/SignSequencePlayer";
 import { planMotion, type MotionAsset } from "../sign/motion";
 import { ReferenceVideo } from "../components/SignReferenceVideo";
 import { alphabetEntries } from "../sign/dictionary";
+import { alphabetIllustration } from "../sign/alphabetIllustrations";
 const Mentor = lazy(() =>
   import("../components/GestureMentor3D").then((m) => ({
     default: m.GestureMentor3D,
@@ -99,8 +100,15 @@ export function SignCourseCatalog() {
                 to={`/practice?exercise=${e.id}`}
                 key={e.id}
               >
-                <div className="sign-exercise-thumb">
-                  {e.letter ? (
+                <div className={`sign-exercise-thumb${e.letter && alphabetIllustration(e.letter) ? " sign-exercise-thumb--illustrated" : ""}`}>
+                  {e.letter && alphabetIllustration(e.letter) ? (
+                    <img
+                      className="sign-alphabet-illustration"
+                      src={alphabetIllustration(e.letter)}
+                      alt={at(`Дактильная буква ${e.letter}`, `Fingerspelling: ${e.letter}`, `Дактиль әрпі: ${e.letter}`)}
+                      loading="lazy"
+                    />
+                  ) : e.letter ? (
                     <b>{e.letter}</b>
                   ) : (
                     <img src="/images/avatars/mira-portrait-v3.png" alt="" />

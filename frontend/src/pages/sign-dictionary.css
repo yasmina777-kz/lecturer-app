@@ -106,6 +106,12 @@
   font-size: 68px;
   color: var(--accent);
 }
+.sign-word-card img.sign-alphabet-illustration {
+  height: 220px;
+  padding: 8px;
+  object-fit: contain;
+  background: #faf8f2;
+}
 .sign-word-card strong {
   padding: 0 6px;
   font-size: 17px;
