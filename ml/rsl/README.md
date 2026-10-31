@@ -50,3 +50,29 @@ Scripts: `art/mira-alphabet/build.py`, `art/mira-blender-phrases/animate.py`, `a
 - [Slovo](https://github.com/ai-forever/slovo), Kapitanov et al.
 - Both data sources use their attribution/share-alike public license, not an unmodified Creative Commons license. Full texts and reference IDs are in `frontend/public/research/rsl/` and `words/`. Derived classifier artifacts are distributed under the source terms. No author endorsement is implied.
 - MediaPipe: Apache 2.0. pymorphy3: MIT; OpenCorpora dictionaries: CC BY-SA 3.0. Generated inflection table follows the dictionary's attribution/share-alike terms.
+
+## Camera feedback and training bundle
+
+The practice camera now draws the detected hand landmarks continuously (about
+8 updates/second) before recording. These points show detection, not a letter
+prediction. Recording still collects 16 frames for the trained classifier.
+Uploaded videos show the sampled frame and its landmarks as well. Video and
+landmarks share one aspect ratio; only the live preview is mirrored. No image
+or recording is sent to a server.
+
+Stopping/leaving closes the camera tracks. Disposing the MediaPipe detector
+also clears its references, so development hot reload cannot reuse a closed
+WebGL context. Camera permission/device errors are separate from model errors.
+
+Create a shareable archive of the actual training code, 2,142 cached feature
+sequences, labels/splits, 33 required reference videos, detector weights, fitted
+classifier, reports and source licenses:
+
+```sh
+python3 ml/rsl/package_training.py /path/to/AI-Mentor-training.zip
+```
+
+The archive excludes the full 1.8 GB source-video subset, credentials, and the
+Python environment. It includes the source download script and checksums.
+The detector is pretrained Google MediaPipe; only the letter classifier was
+trained by this project. Packaging does not retrain or change the model.

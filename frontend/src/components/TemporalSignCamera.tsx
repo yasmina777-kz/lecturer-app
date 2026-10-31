@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import type { HandLandmarker } from "@mediapipe/tasks-vision";
+import type {
+  HandLandmarker,
+  HandLandmarkerResult,
+} from "@mediapipe/tasks-vision";
 import type { SignClassifier } from "../sign/recognition";
 import {
   temporalFrame,
@@ -7,14 +10,23 @@ import {
   type TemporalFrame,
 } from "../sign/temporal";
 import { at } from "../i18n/automation";
+import { drawHandOverlay } from "../sign/handOverlay";
 export function TemporalSignCamera({ expected }: { expected: string }) {
   const video = useRef<HTMLVideoElement>(null),
+    overlay = useRef<HTMLCanvasElement>(null),
+    loading = useRef<Promise<void>>(),
     detector = useRef<HandLandmarker>(),
     model = useRef<SignClassifier>(),
     stream = useRef<MediaStream>(),
     alive = useRef(true),
     generation = useRef(0),
     fileUrl = useRef("");
+  const [handCount, setHandCount] = useState<number | null>(null),
+    [filePreview, setFilePreview] = useState(false),
+    [aspect, setAspect] = useState(4 / 3);
+  const [operation, setOperation] = useState<"model" | "camera" | "video">(
+    "model",
+  );
   const [busy, setBusy] = useState(false),
     [active, setActive] = useState(false),
     [progress, setProgress] = useState(0),
@@ -40,11 +52,22 @@ export function TemporalSignCamera({ expected }: { expected: string }) {
       alive.current = false;
       generation.current++;
       stream.current?.getTracks().forEach((t) => t.stop());
-      detector.current?.close();
+      stream.current = undefined;
+      disposeDetector();
       if (fileUrl.current) URL.revokeObjectURL(fileUrl.current);
       abort.abort();
     };
   }, []);
+  function disposeDetector() {
+    const previous = detector.current;
+    detector.current = undefined;
+    model.current = undefined;
+    try {
+      previous?.close();
+    } catch {
+      /* A crashed WASM context may already be closed. */
+    }
+  }
   function stop() {
     generation.current++;
     stream.current?.getTracks().forEach((t) => t.stop());
@@ -54,44 +77,149 @@ export function TemporalSignCamera({ expected }: { expected: string }) {
       video.current.srcObject = null;
     }
     setActive(false);
+    setFilePreview(false);
+    setHandCount(null);
+    if (overlay.current)
+      overlay.current
+        .getContext("2d")
+        ?.clearRect(0, 0, overlay.current.width, overlay.current.height);
     setBusy(false);
     setProgress(0);
   }
   async function load() {
     if (detector.current && model.current) return;
-    const [{ FilesetResolver, HandLandmarker }, response] = await Promise.all([
-      import("@mediapipe/tasks-vision"),
-      fetch("/models/rsl/alphabet-classifier.json"),
-    ]);
-    if (!response.ok) throw Error("model");
-    const m = await response.json();
-    const d = await HandLandmarker.createFromOptions(
-      await FilesetResolver.forVisionTasks("/models/rsl/wasm"),
-      {
-        baseOptions: {
-          modelAssetPath: "/models/rsl/hand_landmarker.task",
-          delegate: "CPU",
+    if (loading.current) return loading.current;
+    loading.current = (async () => {
+      const [{ FilesetResolver, HandLandmarker }, response] = await Promise.all(
+        [
+          import("@mediapipe/tasks-vision"),
+          fetch("/models/rsl/alphabet-classifier.json"),
+        ],
+      );
+      if (!response.ok) throw Error("model");
+      const m = await response.json();
+      const d = await HandLandmarker.createFromOptions(
+        await FilesetResolver.forVisionTasks("/models/rsl/wasm"),
+        {
+          baseOptions: {
+            modelAssetPath: "/models/rsl/hand_landmarker.task",
+            delegate: "CPU",
+          },
+          runningMode: "IMAGE",
+          numHands: 2,
         },
-        runningMode: "IMAGE",
-        numHands: 2,
-      },
-    );
-    if (!alive.current) {
-      d.close();
+      );
+      if (!alive.current) {
+        d.close();
+        return;
+      }
+      detector.current = d;
+      model.current = m;
+    })();
+    try {
+      await loading.current;
+    } finally {
+      loading.current = undefined;
+    }
+  }
+  function paint(
+    source: HTMLVideoElement,
+    detected: HandLandmarkerResult,
+    fromFile = false,
+  ) {
+    if (overlay.current)
+      drawHandOverlay(overlay.current, source, detected, fromFile);
+    setHandCount(detected.landmarks.length);
+    if (source.videoWidth && source.videoHeight)
+      setAspect(source.videoWidth / source.videoHeight);
+  }
+  // Live feedback is separate from classification of a complete 16-frame sign.
+  // IMAGE mode matches offline extraction; throttle inference and skip duplicate frames.
+  useEffect(() => {
+    if (!active || busy) return;
+    if (!detector.current || !stream.current?.active) {
+      setActive(false);
+      setBusy(false);
       return;
     }
-    detector.current = d;
-    model.current = m;
-  }
-  function fail() {
-    if (alive.current)
-      setError(
-        at(
-          "Не удалось обработать видео. Проверьте разрешение камеры или выберите MP4/WebM до 30 МБ, длиной 0,5–15 секунд.",
-          "Could not process video. Check camera permission or choose a 0.5–15 second MP4/WebM under 30 MB.",
-          "Бейне өңделмеді. Камера рұқсатын тексеріңіз не 30 МБ-тан кіші, 0,5–15 секундтық MP4/WebM таңдаңыз.",
-        ),
-      );
+    const token = generation.current;
+    let frame = 0,
+      lastTime = -1,
+      lastRun = -Infinity;
+    const tick = (now: number) => {
+      if (!alive.current || token !== generation.current) return;
+      const source = video.current;
+      if (
+        source &&
+        source.readyState >= 2 &&
+        source.currentTime !== lastTime &&
+        now - lastRun >= 120
+      ) {
+        try {
+          lastTime = source.currentTime;
+          lastRun = now;
+          paint(source, detector.current!.detect(source));
+        } catch (e) {
+          stop();
+          disposeDetector();
+          fail(e, "tracking");
+          return;
+        }
+      }
+      frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [active, busy]);
+  function fail(
+    reason?: unknown,
+    stage: "model" | "camera" | "video" | "tracking" = "video",
+  ) {
+    if (!alive.current) return;
+    const name = reason instanceof Error ? reason.name : "";
+    setError(
+      stage === "model"
+        ? at(
+            "Не загрузилась модель распознавания. Обновите страницу и попробуйте ещё раз.",
+            "The recognition model could not load. Reload and try again.",
+            "Тану моделі жүктелмеді. Бетті жаңартып, қайта көріңіз.",
+          )
+        : name === "NotAllowedError" || name === "SecurityError"
+          ? at(
+              "Доступ к камере запрещён. Разрешите камеру в настройках этого сайта или проверьте видеофайл.",
+              "Camera access is blocked. Allow it in site settings or check a video file.",
+              "Камераға рұқсат жоқ. Сайт баптауларында рұқсат беріңіз немесе бейнефайлды тексеріңіз.",
+            )
+          : name === "NotFoundError"
+            ? at(
+                "Камера не найдена. Подключите её или выберите видеофайл.",
+                "No camera found. Connect one or choose a video file.",
+                "Камера табылмады. Оны қосыңыз немесе бейнефайлды таңдаңыз.",
+              )
+            : name === "NotReadableError"
+              ? at(
+                  "Камера занята другим приложением или недоступна. Закройте другие приложения с камерой.",
+                  "Camera is busy or unavailable. Close other camera apps.",
+                  "Камера бос емес не қолжетімсіз. Камера қолданатын басқа қолданбаларды жабыңыз.",
+                )
+              : stage === "camera"
+                ? at(
+                    "Камера не запустилась. Откройте сайт через HTTPS или localhost и проверьте разрешение камеры.",
+                    "Camera could not start. Use HTTPS or localhost and check permission.",
+                    "Камера қосылмады. HTTPS не localhost арқылы ашып, рұқсатты тексеріңіз.",
+                  )
+                : stage === "tracking"
+                  ? at(
+                      "Отслеживание рук прервалось. Включите камеру повторно.",
+                      "Hand tracking stopped. Start the camera again.",
+                      "Қолды бақылау үзілді. Камераны қайта қосыңыз.",
+                    )
+                  : at(
+                      "Не удалось прочитать видео. Выберите MP4/WebM до 30 МБ, длиной 0,5–15 секунд.",
+                      "Could not read video. Choose a 0.5–15 second MP4/WebM under 30 MB.",
+                      "Бейне оқылмады. 30 МБ-тан кіші, 0,5–15 секундтық MP4/WebM таңдаңыз.",
+                    ),
+    );
   }
   async function start() {
     stop();
@@ -99,9 +227,15 @@ export function TemporalSignCamera({ expected }: { expected: string }) {
     setError("");
     setResult(null);
     setBusy(true);
+    setOperation("model");
+    let stage: "model" | "camera" = "model";
     try {
       await load();
       if (!alive.current || token !== generation.current) return;
+      stage = "camera";
+      setOperation("camera");
+      if (!navigator.mediaDevices?.getUserMedia)
+        throw Error("camera unavailable");
       const media = await navigator.mediaDevices.getUserMedia({
         video: { facingMode: "user", width: 640, height: 480 },
         audio: false,
@@ -111,12 +245,23 @@ export function TemporalSignCamera({ expected }: { expected: string }) {
         return;
       }
       stream.current = media;
+      media.getVideoTracks().forEach((track) => {
+        track.onended = () => {
+          if (alive.current && token === generation.current) {
+            stop();
+            fail(new Error("camera ended"), "camera");
+          }
+        };
+      });
       video.current!.removeAttribute("src");
       video.current!.srcObject = media;
       await video.current!.play();
       if (alive.current && token === generation.current) setActive(true);
-    } catch {
-      fail();
+    } catch (e) {
+      if (alive.current && token === generation.current) {
+        stop();
+        fail(e, stage);
+      }
     } finally {
       if (alive.current && token === generation.current) setBusy(false);
     }
@@ -130,14 +275,20 @@ export function TemporalSignCamera({ expected }: { expected: string }) {
     try {
       for (let i = 0; i < 16; i++) {
         if (!alive.current || token !== generation.current) return;
-        frames.push(temporalFrame(detector.current!.detect(video.current!)));
+        const detected = detector.current!.detect(video.current!);
+        paint(video.current!, detected);
+        frames.push(temporalFrame(detected));
         setProgress(i + 1);
         if (i < 15) await new Promise((r) => setTimeout(r, 180));
       }
       if (alive.current && token === generation.current)
         setResult(recognizeSequence(frames, model.current!));
-    } catch {
-      fail();
+    } catch (e) {
+      if (alive.current && token === generation.current) {
+        stop();
+        disposeDetector();
+        fail(e, "tracking");
+      }
     } finally {
       if (alive.current && token === generation.current) setBusy(false);
     }
@@ -150,10 +301,15 @@ export function TemporalSignCamera({ expected }: { expected: string }) {
     setResult(null);
     setBusy(true);
     let clip: HTMLVideoElement | undefined;
+    let stage: "model" | "video" = "video";
     try {
       if (!file.type.startsWith("video/") || file.size > 30 * 1024 * 1024)
         throw Error("file");
+      stage = "model";
+      setOperation("model");
       await load();
+      stage = "video";
+      setOperation("video");
       if (!alive.current || token !== generation.current) return;
       if (fileUrl.current) URL.revokeObjectURL(fileUrl.current);
       fileUrl.current = URL.createObjectURL(file);
@@ -195,13 +351,16 @@ export function TemporalSignCamera({ expected }: { expected: string }) {
           clip!.currentTime = t;
         });
         if (!alive.current || token !== generation.current) return;
-        frames.push(temporalFrame(detector.current!.detect(clip)));
+        const detected = detector.current!.detect(clip);
+        setFilePreview(true);
+        paint(clip, detected, true);
+        frames.push(temporalFrame(detected));
         setProgress(i + 1);
       }
       if (alive.current && token === generation.current)
         setResult(recognizeSequence(frames, model.current!));
-    } catch {
-      fail();
+    } catch (e) {
+      if (alive.current && token === generation.current) fail(e, stage);
     } finally {
       clip?.removeAttribute("src");
       clip?.load();
@@ -209,7 +368,7 @@ export function TemporalSignCamera({ expected }: { expected: string }) {
     }
   }
   return (
-    <section className="sign-camera panel">
+    <section id="sign-camera-check" className="sign-camera panel">
       <span className="sign-status-label">
         {at(
           "ИИ · 33 буквы · эксперимент",
@@ -228,13 +387,47 @@ export function TemporalSignCamera({ expected }: { expected: string }) {
           "Камера қысқа қимылды толық тексереді. Камераны қосып, дайындалып, қимылды жазыңыз. Фото қозғалысты әріптерге жарамайды.",
         )}
       </p>
-      <video
-        ref={video}
-        playsInline
-        muted
-        hidden={!active}
-        className="sign-sequence-camera"
-      />
+      <div
+        className="sign-tracking-view"
+        hidden={!active && !filePreview}
+        style={{ aspectRatio: aspect, width: `min(100%, ${360 * aspect}px)` }}
+        data-mirrored={active}
+      >
+        <video ref={video} playsInline muted hidden={!active} />
+        <canvas
+          ref={overlay}
+          role="img"
+          aria-label={at(
+            "Точки кистей и соединения пальцев",
+            "Hand landmarks and finger connections",
+            "Қол нүктелері мен саусақ байланыстары",
+          )}
+        />
+      </div>
+      {(active || filePreview) && (
+        <p className="sign-tracking-status" role="status">
+          {handCount === null
+            ? at("Ищем руки…", "Looking for hands…", "Қол ізделуде…")
+            : handCount === 0
+              ? at(
+                  "Руки не видны. Покажите кисть целиком перед камерой.",
+                  "No hands visible. Show your whole hand.",
+                  "Қол көрінбейді. Қолыңызды толық көрсетіңіз.",
+                )
+              : `${at("Рук в кадре", "Hands in frame", "Кадрдағы қол саны")}: ${handCount} · ${at("Точек", "Landmarks", "Нүктелер")}: ${handCount * 21}`}
+          {filePreview &&
+            ` · ${at("Кадр из видео", "Video frame", "Бейнеден кадр")}`}
+        </p>
+      )}
+      {!active && !filePreview && (
+        <p className="sign-camera-hint">
+          {at(
+            "После включения камеры на руках появятся точки и линии. Для ответа ИИ нажмите «Записать жест» и покажите одну букву.",
+            "Start the camera to see hand landmarks. Press Record sign and show one letter for an AI result.",
+            "Камера қосылғанда қол нүктелері көрінеді. ЖИ жауабы үшін қимылды жазып, бір әріпті көрсетіңіз.",
+          )}
+        </p>
+      )}
       <div className="sign-camera-actions">
         <button
           className="button primary"
@@ -276,11 +469,19 @@ export function TemporalSignCamera({ expected }: { expected: string }) {
         <p role="status">
           {progress
             ? `${at("Обработка кадров", "Processing frames", "Кадрларды өңдеу")}: ${progress}/16`
-            : at(
-                "Подготовка модели…",
-                "Preparing model…",
-                "Модель дайындалуда…",
-              )}
+            : operation === "camera"
+              ? at(
+                  "Запускаем камеру… Если браузер запросит доступ, разрешите его.",
+                  "Starting camera… Allow access if your browser asks.",
+                  "Камера қосылуда… Браузер сұраса, рұқсат беріңіз.",
+                )
+              : operation === "video"
+                ? at("Читаем видео…", "Reading video…", "Бейне оқылуда…")
+                : at(
+                    "Подготовка модели…",
+                    "Preparing model…",
+                    "Модель дайындалуда…",
+                  )}
         </p>
       )}
       {error && <p role="alert">{error}</p>}

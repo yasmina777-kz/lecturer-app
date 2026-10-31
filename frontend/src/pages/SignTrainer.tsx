@@ -274,6 +274,17 @@ function CapturedLetterPlayer({ letter }: { letter: string }) {
   );
   return (
     <>
+      <a
+        className="button secondary sign-camera-jump"
+        href="#sign-camera-check"
+      >
+        <ScanSearch size={18} />
+        {at(
+          "Проверить букву через камеру",
+          "Check the letter with camera",
+          "Әріпті камерамен тексеру",
+        )}
+      </a>
       {!loaded ? <Loading /> : <SignSequencePlayer plan={plan} />}
       <details className="sign-dictionary-reference">
         <summary>
