@@ -30,10 +30,10 @@ for(const group of phraseGroups)for(const phrase of group.phrases){
 
 }
 console.log('Relaxed-boundary transition peak with 250 ms gap:',restTransitionAtFixedGap.toFixed(1),'degrees/s');
-assert.equal(assets.length,203);assert.equal(new Set(assets.map(a=>a.id)).size,203);
+assert.equal(assets.length,206);assert.equal(new Set(assets.map(a=>a.id)).size,206);
 let plan=planMotion('Я хочу читать книгу',entries,forms,assets);assert.deepEqual(plan.steps.map(s=>s.label),['я','хотеть','читать','книга']);assert.deepEqual(plan.missing,[]);
 const timeline=motionTimeline(plan.steps);assert.equal(timeline.length,4);assert.ok(timeline.every(s=>s.trimStart===0&&s.trimEnd===0),'phrase must preserve coordinated lead-in/out');assert.ok(timeline.every((s,i)=>i===0||s.start>timeline[i-1].end));
-plan=planMotion('Здравствуйте! Как тебя зовут? Спасибо.',entries,forms,assets);assert.equal(plan.steps.length,3);assert.deepEqual(plan.missing,[]);
+plan=planMotion('Здравствуйте! Как тебя зовут? Спасибо.',entries,forms,assets);assert.equal(plan.steps.length,3);assert.deepEqual(plan.missing,[]);assert.ok(plan.steps.every(s=>s.url.startsWith('/avatars/sign-motion/') && s.revision),'prepared phrases must use rebuilt versioned clips');
 plan=planMotion('Я не абракадабра',entries,forms,assets);assert.deepEqual(plan.missing,['абракадабра']);assert.ok(plan.steps.some(s=>s.label==='не'));
 plan=planMotion('Юлия',entries,forms,assets,true);assert.equal(plan.steps.length,4);assert.ok(plan.steps.every(s=>s.id.startsWith('letter-')));
 for (const entry of alphabetEntries()) {
@@ -44,6 +44,7 @@ for (const entry of alphabetEntries()) {
  assert.equal(letter.steps[0].id, entry.id);
 }
 assert.equal(planMotion('я хочу', entries, forms, assets).spelling, false);
+assert.deepEqual(planMotion('Спасибо', entries, forms, assets.filter(a=>a.id!=='prepared-thanks')).missing,['Спасибо'],'missing rebuilt motion must not fall back to old rig animation');
 const base=await readFile(new URL('../public/avatars/mira-blender/letter-a.glb',import.meta.url));const j=JSON.parse(base.subarray(20,20+base.readUInt32LE(12)).toString());const boneNames=new Set(j.nodes.map(n=>n.name));
 const clips=[];
 const loadedClips=new Map();
@@ -169,14 +170,15 @@ for(const a of assets) {
    assert.ok(2*Math.acos(Math.min(1,dot))<.005,a.label+' non-neutral finger boundary '+bone);
   }
 }
-console.log('32 phrases: source-pose samples preserved:',verifiedPhraseFrames,'; all 203 clips join relaxed fingers.');
+console.log('32 phrases: source-pose samples preserved:',verifiedPhraseFrames,'; all 206 clips join relaxed fingers.');
 
 assert.throws(()=>composeMotion([ordered[0]],undefined,[{start:ordered[0].duration,end:0}]),/Invalid motion window/);
 for(const asset of assets){
- assert.equal(asset.motionVersion,5,asset.label);
- assert.ok(asset.finalWristErrorMeters<.001,`${asset.label}: coordinated wrist target lost`);
+ assert.equal(asset.motionVersion,6,asset.label);
+ assert.equal(asset.handMechanics,'workshop-parameter-curves-v1',asset.label);
+ if (!asset.id.startsWith('prepared-')) assert.ok(asset.finalWristErrorMeters<.001,`${asset.label}: coordinated wrist target lost`);
  assert.ok(asset.maxJointStepDegrees<=8.1,`${asset.label}: rotation spike`);
  assert.ok(asset.maxHingeOffAxis<.0001,`${asset.label}: finger hinge twist`);
  assert.ok(asset.leadIn>0 && asset.leadOut>0);
 }
-console.log('203 animation assets: skeleton compatibility, finite transforms, timelines, full phrase matching, morphology, unknown/negation preservation and alphabet selection passed.');
+console.log('206 animation assets: skeleton compatibility, finite transforms, timelines, full phrase matching, morphology, unknown/negation preservation and alphabet selection passed.');

@@ -23,3 +23,13 @@ The Action Editor contains five `TEST • …` baked actions. They key the armat
 The local platform preview is `/avatar-motion`. Existing sign sequences use the repaired character's weights; this does not replace sign animations with generic Mixamo Talking gestures. Existing Mixamo Standing Idle/Talking are available alongside the five independent mechanical tests. Flexion planes were calibrated from those downloaded motions; no new Mixamo download, recognition training or RSL translation is claimed.
 
 Bone-tip contact fitting is followed by evaluated mesh contact checks in `validate.py`. The sphere remains stationary as a QA target. These are rig tests, not linguistically verified signs. Skin contact limits and control checks are in `validation.json`.
+
+## Text → signs integration
+
+`poses.py` is the shared source of open/closed/pinch mechanics for the workshop and the sign pipeline. Reviewed pointing handshapes use the workshop's folded fingers and solved thumb opposition. Captured signs retain their reference-specific shapes; a generic fist or Mixamo Talking clip is not substituted for them.
+
+`art/sign-motion/retarget.py` records independent MCP flexion/spread, PIP/DIP flexion and thumb opposition, removes isolated tracking impulses, filters those anatomical coordinates symmetrically, and reconstructs finger chains before the final arm IK solve. This replaces quaternion averaging of finger roots, which could introduce unintended axial rotation. Explicit neutral endpoints prevent residual curl when joining words. The exporter receives a final integer-frame key so it cannot truncate the relaxed pose at a fractional action boundary. Shared whole-body retiming still limits rotation speed.
+
+Rebuild all captured motions with `blender -b --python art/sign-motion/retarget.py`. Rebuild three older authored phrases with `blender -b --python art/sign-motion/repair_prepared.py`, then run `python3 ml/rsl/publish_motion_catalog.py`. The published catalog contains 33 letters, 170 words and three prepared phrases. Text/dictionary playback resolves all of them through that versioned catalog; old hardcoded animation fallbacks have been removed.
+
+Checks: `blender -b --python art/hand-rig/check_sign_curves.py`, `npm run test:sign-motion --prefix frontend`, `npm run test:hand-workshop --prefix frontend`. These validate mechanical constraints, pose continuity and playback, not correctness of RSL grammar or every sign. Occluded reference fingers, body/clothing contact and facial grammar still need manual review; this change does not train a new AI model.

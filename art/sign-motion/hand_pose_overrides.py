@@ -22,10 +22,7 @@ def authored_finger_angles(entry_id,side,fade):
  if not finger_fit_rigs:init_finger_rigs()
  for name,degrees in correction.items():
   values=project_finger_values(side,name,[math.radians(x) for x in degrees])
-  _,rotations=finger_chain(side,name,values)
-  for j,q in enumerate(rotations,1):
-   axis=finger_fit_rigs[(side,name)]['axes'][j-1]
-   B(side+'Hand'+name+str(j)).rotation_quaternion=Quaternion(axis,relaxed[name][j-1]).slerp(q,fade)
+  apply_finger_values(side,name,values,fade)
  bpy.context.view_layer.update()
 
 # Reviewed against the exact catalog reference frames, not inferred from text.
@@ -60,20 +57,20 @@ def corrected_hand_pose(entry_id,side,fade):
  angles={}
  for name in finger_indices:
   if shape=='relaxed':values=[18,0,22,8] if name!='Thumb' else [0,-10,10,5]
+  elif name=='Thumb' and shape in ['point','straight-point']:
+   angles[name]=closed_pose[side][name].copy();continue
   elif name=='Thumb':
-   values={'point':[40,0,45,25],'straight-point':[25,15,30,15],'thumb':[-30,30,0,0],'flat':[0,0,5,0],'flat-tucked':[20,35,25,15]}[shape]
+   values={'thumb':[-30,30,0,0],'flat':[0,0,5,0],'flat-tucked':[20,35,25,15]}[shape]
   elif shape in ['point','straight-point'] and name=='Index':
    angles[name]=flat_shape(side)[name].copy()
    if shape=='point':angles[name][0]+=math.radians(55)
    continue
   elif shape.startswith('flat'):
    angles[name]=flat_shape(side)[name];continue
-  else:values=[72,0,72,35]
+  else:
+   angles[name]=closed_pose[side][name].copy();continue
   angles[name]=[math.radians(v) for v in values]
  for name,values in angles.items():
   values=project_finger_values(side,name,values)
-  _,rotations=finger_chain(side,name,values)
-  for j,q in enumerate(rotations,1):
-   neutral=Quaternion(finger_fit_rigs[(side,name)]['axes'][j-1],relaxed[name][j-1])
-   B(side+'Hand'+name+str(j)).rotation_quaternion=neutral.slerp(q,fade)
+  apply_finger_values(side,name,values,fade)
  bpy.context.view_layer.update()

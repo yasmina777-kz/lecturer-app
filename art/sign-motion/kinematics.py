@@ -105,15 +105,12 @@ def anatomical_fingers(side,pts,fade):
  transfer=rest[side]['basis']@source.transposed()
  for name,ids in finger_indices.items():
   target=[transfer@(pts[ids[k+1]]-pts[ids[k]]).normalized() for k in range(3)]
-  info=finger_fit_rigs[(side,name)];key=(side,name)
+  key=(side,name)
   values=fit_finger_directions(side,name,target,finger_fit_previous.get(key))
   finger_fit_previous[key]=values.copy()
-  predicted,rotations=finger_chain(side,name,values)
+  predicted,_=finger_chain(side,name,values)
   finger_fit_errors.append(sum(a.angle(b) for a,b in zip(predicted,target))/3)
-  for j,q in enumerate(rotations,1):
-   bone=B(side+'Hand'+name+str(j))
-   neutral=Quaternion(info['axes'][j-1],relaxed[name][j-1])
-   bone.rotation_quaternion=neutral.slerp(q,fade)
+  apply_finger_values(side,name,values,fade)
  bpy.context.view_layer.update()
 
 forearm_twist={}
@@ -223,3 +220,36 @@ def natural_body(t):
   bone.rotation_quaternion=Quaternion().slerp(q,.65*seam)
   bone.location=V(first['location']).lerp(V(second['location']),u)*.65*seam
  bpy.context.view_layer.update()
+
+# All sign finger curves share the workshop's articulated coordinates. Blending
+# these coordinates keeps MCP flexion/spread and thumb opposition independent.
+current_hand_values={}
+def neutral_finger_values(name):
+ values=[relaxed[name][0],0,relaxed[name][1],relaxed[name][2]]
+ return values+[0] if name=='Thumb' else values
+
+def apply_finger_values(side,name,values,fade=1):
+ values=project_finger_values(side,name,values)
+ values=[a+(b-a)*fade for a,b in zip(neutral_finger_values(name),values)]
+ current_hand_values[(side,name)]=values
+ _,rotations=finger_chain(side,name,values)
+ for j,q in enumerate(rotations,1):B(side+'Hand'+name+str(j)).rotation_quaternion=q
+
+def filter_hand_values(samples):
+ result=[{} for _ in samples]
+ for side,name in samples[0]:
+  raw=[row[(side,name)] for row in samples]
+  # Remove isolated one-frame capture flips in joint coordinates, then use a
+  # symmetric kernel so fingertips do not lag behind the arm's trajectory.
+  clean=[v.copy() for v in raw]
+  for i in range(1,len(raw)-1):
+   for j,value in enumerate(raw[i]):
+    mid=(raw[i-1][j]+raw[i+1][j])*.5
+    if abs(value-mid)>math.radians(25) and abs(raw[i+1][j]-raw[i-1][j])<abs(value-mid)*.7:clean[i][j]=mid
+  for i in range(len(raw)):
+   if i in (0,len(raw)-1):values=raw[i].copy()
+   else:
+    window=[(k,[1,4,6,4,1][k-i+2]) for k in range(max(0,i-2),min(len(raw),i+3))]
+    values=[sum(clean[k][j]*w for k,w in window)/sum(w for _,w in window) for j in range(len(raw[i]))]
+   result[i][(side,name)]=project_finger_values(side,name,values)
+ return result

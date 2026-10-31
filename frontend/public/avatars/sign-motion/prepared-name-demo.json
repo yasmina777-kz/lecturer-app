@@ -1,0 +1,15 @@
+{
+  "id": "prepared-name-demo",
+  "label": "Как тебя зовут?",
+  "url": "/avatars/sign-motion/prepared-name-demo.glb",
+  "duration": 8,
+  "review": "experimental-unreviewed",
+  "source": "Existing project-authored phrase; anatomical hand rebake",
+  "motionVersion": 6,
+  "handMechanics": "workshop-parameter-curves-v1",
+  "maxJointStepDegrees": 7.462592116396,
+  "maxHingeOffAxis": 1.4901161193847656e-08,
+  "leadIn": 0.6,
+  "leadOut": 0.6000000000000165,
+  "revision": "0014a86c35f5"
+}

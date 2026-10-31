@@ -1,7 +1,8 @@
 {
-  "total": 203,
+  "total": 206,
   "letters": 33,
   "words": 170,
+  "preparedPhrases": 3,
   "missing": [],
   "review": "experimental-unreviewed",
   "limitations": [
@@ -11,17 +12,17 @@
     "Hand/arm collisions have not been certified.",
     "Text sequences retain Russian source order; no grammatical translation."
   ],
-  "source": "MediaPipe tracking of Bukva/Slovo videos; Blender retargeting",
+  "source": "203 Bukva/Slovo reference adaptations plus 3 project-authored phrases; Blender anatomical hand rebake",
   "qualityGate": {
     "minPoseCoverage": 0.85,
     "minDominantHandCoverage": 0.65,
     "maxHingeOffAxis": 0.0001,
-    "motionVersion": 5
+    "motionVersion": 6
   },
   "observed": {
-    "maxHingeOffAxis": 7.450580596923828e-08,
+    "maxHingeOffAxis": 2.9802322387695312e-08,
     "maxJointStepDegrees": 7.918,
-    "v5Clips": 203,
+    "v6Clips": 206,
     "maxFinalWristErrorMeters": 0.00023539843194510276,
     "maxLegacyWristDriftMeters": 0.29551429508994154
   }

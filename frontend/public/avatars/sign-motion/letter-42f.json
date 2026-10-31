@@ -2,7 +2,7 @@
   "id": "letter-42f",
   "label": "Я",
   "url": "/avatars/sign-motion/letter-42f.glb",
-  "duration": 2.8333333333333335,
+  "duration": 3.1333333333333333,
   "source": "https://github.com/ai-forever/bukva",
   "reference": "/research/rsl/alphabet/042f.mp4",
   "handCoverage": {
@@ -16,19 +16,20 @@
   "poseCoverage": 1.0,
   "maxJointStepDegrees": 7.917,
   "review": "experimental-unreviewed",
-  "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, monotone captured palm trajectories, final coordinated elbow IK and constrained finger chains; no translation training",
-  "motionVersion": 5,
+  "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, monotone captured palm trajectories, final coordinated elbow IK, workshop hand priors and anatomical-parameter finger curves; no translation training",
+  "motionVersion": 6,
+  "handMechanics": "workshop-parameter-curves-v1",
   "finalWristErrorMeters": 2.4620758953479386e-07,
   "legacyWristDriftMeters": 0.07676032806674506,
   "timing": "whole-pose retiming at 240 degrees/second; no independent joint slowdown",
   "peakStep": {
-    "bone": "mixamorig:RightHandRing2",
-    "frame": 15,
-    "angle": 7.917280370764688
+    "bone": "mixamorig:LeftHandIndex1",
+    "frame": 64,
+    "angle": 7.917477592476972
   },
-  "leadIn": 0.7018048757461918,
-  "leadOut": 0.8586194440595825,
-  "maxHingeOffAxis": 4.470348358154297e-08,
+  "leadIn": 0.7411412305096031,
+  "leadOut": 0.8599307198106176,
+  "maxHingeOffAxis": 1.4901161193847656e-08,
   "meanFingerDirectionErrorDegrees": 14.77413897394751,
-  "revision": "433677ea5d4d"
+  "revision": "ceeff12f6c75"
 }

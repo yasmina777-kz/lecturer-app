@@ -28,7 +28,10 @@ finger_indices={'Thumb':[1,2,3,4],'Index':[5,6,7,8],'Middle':[9,10,11,12],'Ring'
 exec(compile((ROOT/'art/sign-motion/kinematics.py').read_text(), 'kinematics.py', 'exec'), globals())
 exec(compile((ROOT/'art/sign-motion/hand_pose_overrides.py').read_text(), 'hand_pose_overrides.py', 'exec'), globals())
 exec(compile((ROOT/'art/sign-motion/trajectory.py').read_text(), 'trajectory.py', 'exec'), globals())
+exec(compile((ROOT/'art/hand-rig/poses.py').read_text(), 'hand-workshop-poses.py', 'exec'), globals())
+exec(compile((ROOT/'art/hand-rig/weights.py').read_text(), 'weights.py', 'exec'), globals())
 manifest=[]
+repair_hand_weights(rig)
 for path in paths:
  d=json.loads(path.read_text());entry=d['entry'];frames=d['frames'];N=len(frames)
  if d['poseCoverage']<.85:continue
@@ -70,12 +73,13 @@ for path in paths:
  face=bpy.data.objects['Mira • continuous human mesh'].data.shape_keys;face.animation_data_clear()
  forearm_twist.clear();finger_fit_previous.clear();finger_fit_errors.clear()
  lead=.7;tail=.7;duration=frames[-1]['t']+lead+tail;count=round(duration*30)+1
- sc.frame_start=1;sc.frame_end=count;previous={};maxstep=0;peak={};hinge_error=0;rotation_samples=[];location_samples=[];arm_samples=[]
+ sc.frame_start=1;sc.frame_end=count;previous={};maxstep=0;peak={};hinge_error=0;rotation_samples=[];location_samples=[];arm_samples=[];hand_samples=[]
  for frame in range(1,count+1):
   t=(frame-1)/30;sc.frame_set(frame)
   src=max(0,min(frames[-1]['t'],t-lead));a=max((i for i,f in enumerate(frames) if f['t']<=src),default=0);b=min(a+1,N-1);u=(src-frames[a]['t'])/max(.0001,frames[b]['t']-frames[a]['t']) if b!=a else 0
-  fade=clamp(smooth(0,lead,t)*(1-smooth(duration-tail,duration,t)),0,1)
+  fade=0 if frame in (1,count) else clamp(smooth(0,lead,t)*(1-smooth(duration-tail,duration,t)),0,1)
   for bone in bones:bone.matrix_basis=Matrix.Identity(4)
+  current_hand_values.clear()
   natural_body(t)
   # Subtle torso tilt follows the reference shoulder line, not an idle loop.
   pa=frames[a]['pose'];pb=frames[b]['pose'];p=[V(x).lerp(V(y),u) for x,y in zip(pa,pb)]
@@ -83,9 +87,7 @@ for path in paths:
   B('Spine2').rotation_quaternion=Quaternion((0,1,0),-.4*tilt*fade)@B('Spine2').rotation_quaternion
   bpy.context.view_layer.update()
   for side,wi in [('Left',15),('Right',16)]:
-   for name in finger_indices:
-    for j in range(1,4):
-     bone=B(side+'Hand'+name+str(j));direction=(bone.bone.tail_local-bone.bone.head_local).normalized();axis=hinge_axis(side,name,j);bone.rotation_quaternion=Quaternion(axis,relaxed[name][j-1])
+   for name in finger_indices:apply_finger_values(side,name,neutral_finger_values(name))
    sign=1 if side=='Left' else -1;start=V((sign*.205,-.105,.94));qrest=qrestL if side=='Left' else qrestR
    if not tracks[side][a] or coverage[side]<.12:
     tracked_arm(side,start,qrest);continue
@@ -137,11 +139,19 @@ for path in paths:
    tracked_arm(side,start.lerp(target,fade),qrest.slerp(q,fade),elbow_hint,fade)
    anatomical_fingers(side,pts,fade)
    corrected_hand_pose(entry['id'],side,fade)
+  hand_samples.append({key:values.copy() for key,values in current_hand_values.items()})
   arm_samples.append({side:{'wrist':B(side+'Hand').head.copy(),'elbow':B(side+'ForeArm').head.copy(),'rotation':B(side+'Hand').matrix.to_quaternion()@B(side+'Hand').bone.matrix_local.to_quaternion().inverted()} for side in ['Left','Right']})
   rotation_samples.append({bone.name:bone.rotation_quaternion.copy() for bone in bones})
   location_samples.append({bone.name:bone.location.copy() for bone in bones})
  # Bake symmetric smooth rotations after solving: no independent delayed joint chase.
  rotation_samples=smooth_rotations(rotation_samples)
+ # Interpolate anatomical DOFs, then rebuild the FK chains. Quaternion averaging
+ # at MCP used to add twist that neither capture nor the workshop controls requested.
+ smooth_hand_samples=filter_hand_values(hand_samples)
+ for row,hands in zip(rotation_samples,smooth_hand_samples):
+  for (side,name),values in hands.items():
+   _,qs=finger_chain(side,name,values)
+   for j,q in enumerate(qs,1):row[B(side+'Hand'+name+str(j)).name]=q
  arm_paths=coherent_arm_paths(arm_samples)
  forearm_twist.clear()
  final_wrist_error=0;legacy_wrist_drift=0;solved_rotations=[];solved_locations=[]
@@ -183,6 +193,12 @@ for path in paths:
   for bone in bones:
    bone.rotation_quaternion=row[bone.name];bone.location=locations[bone.name]
    for prop in ['location','rotation_quaternion','scale']:bone.keyframe_insert(prop,frame=1+times[i]*30,group=bone.name)
+ # Blender glTF samples through floor(action.frame_range.end), even with a
+ # ceil scene end. Without this integer key it drops the neutral final pose
+ # whenever whole-pose retiming ends on a fractional frame.
+ for bone in bones:
+  bone.rotation_quaternion=solved_rotations[-1][bone.name];bone.location=solved_locations[-1][bone.name]
+  for prop in ['location','rotation_quaternion','scale']:bone.keyframe_insert(prop,frame=sc.frame_end,group=bone.name)
  rig.animation_data.action.name=entry['id']
  for fc in rig.animation_data.action.fcurves:
   for key in fc.keyframe_points:key.interpolation='LINEAR'
@@ -198,9 +214,9 @@ for path in paths:
    previous[bone.name]=q.copy()
  bpy.ops.object.select_all(action='DESELECT');rig.select_set(True)
  bpy.ops.export_scene.gltf(filepath=str(OUT/(entry['id']+'.glb')),export_format='GLB',use_selection=True,export_animations=True,export_animation_mode='ACTIVE_ACTIONS',export_frame_range=True,export_force_sampling=True,export_anim_slide_to_zero=True,export_yup=True)
- info={'id':entry['id'],'label':entry['label'],'url':'/avatars/sign-motion/'+entry['id']+'.glb','duration':round((count-1)/30,3),'source':entry['source'],'reference':entry['video'],'handCoverage':coverage,'maxGapFrames':longest,'poseCoverage':d['poseCoverage'],'maxJointStepDegrees':round(math.degrees(maxstep),3),'review':'experimental-unreviewed','method':'Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, monotone captured palm trajectories, final coordinated elbow IK and constrained finger chains; no translation training','motionVersion':5,'finalWristErrorMeters':final_wrist_error,'legacyWristDriftMeters':legacy_wrist_drift,'timing':'whole-pose retiming at 240 degrees/second; no independent joint slowdown','peakStep':peak,'leadIn':lead,'leadOut':tail,'maxHingeOffAxis':hinge_error,'meanFingerDirectionErrorDegrees':math.degrees(sum(finger_fit_errors)/max(1,len(finger_fit_errors)))}
+ info={'id':entry['id'],'label':entry['label'],'url':'/avatars/sign-motion/'+entry['id']+'.glb','duration':round((count-1)/30,3),'source':entry['source'],'reference':entry['video'],'handCoverage':coverage,'maxGapFrames':longest,'poseCoverage':d['poseCoverage'],'maxJointStepDegrees':round(math.degrees(maxstep),3),'review':'experimental-unreviewed','method':'Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, monotone captured palm trajectories, final coordinated elbow IK, workshop hand priors and anatomical-parameter finger curves; no translation training','motionVersion':6,'handMechanics':'workshop-parameter-curves-v1','finalWristErrorMeters':final_wrist_error,'legacyWristDriftMeters':legacy_wrist_drift,'timing':'whole-pose retiming at 240 degrees/second; no independent joint slowdown','peakStep':peak,'leadIn':lead,'leadOut':tail,'maxHingeOffAxis':hinge_error,'meanFingerDirectionErrorDegrees':math.degrees(sum(finger_fit_errors)/max(1,len(finger_fit_errors)))}
  if entry['id'] in HAND_POSE_CORRECTIONS or entry['id'] in REFERENCE_HAND_SHAPES:
-  info['trackedFitErrorBeforeCorrectionDegrees']=info.pop('meanFingerDirectionErrorDegrees');info['handPoseCorrection']='authored-fist-v1' if entry['id'] in HAND_POSE_CORRECTIONS else 'reference-handshape-v1';info['method']+='; explicit handshape correction from the linked video reference'
+  info['trackedFitErrorBeforeCorrectionDegrees']=info.pop('meanFingerDirectionErrorDegrees');info['handPoseCorrection']='authored-fist-v1' if entry['id'] in HAND_POSE_CORRECTIONS else 'reference-workshop-handshape-v2';info['method']+='; explicit handshape correction from the linked video reference'
  (OUT/(entry['id']+'.json')).write_text(json.dumps(info,ensure_ascii=False,indent=2));manifest.append(info)
  print('RETARGETED',entry['label'],info['duration'],coverage,'wrist drift cm',round(legacy_wrist_drift*100,2),'->',round(final_wrist_error*100,3),flush=True)
  # Keep a concrete Blender workshop for manual finger/curve review.

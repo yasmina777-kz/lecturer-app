@@ -2,7 +2,7 @@
   "id": "letter-41c",
   "label": "М",
   "url": "/avatars/sign-motion/letter-41c.glb",
-  "duration": 3.566666666666667,
+  "duration": 3.6,
   "source": "https://github.com/ai-forever/bukva",
   "reference": "/research/rsl/alphabet/041c.mp4",
   "handCoverage": {
@@ -16,8 +16,9 @@
   "poseCoverage": 1.0,
   "maxJointStepDegrees": 7.918,
   "review": "experimental-unreviewed",
-  "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, monotone captured palm trajectories, final coordinated elbow IK and constrained finger chains; no translation training",
-  "motionVersion": 5,
+  "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, monotone captured palm trajectories, final coordinated elbow IK, workshop hand priors and anatomical-parameter finger curves; no translation training",
+  "motionVersion": 6,
+  "handMechanics": "workshop-parameter-curves-v1",
   "finalWristErrorMeters": 2.4027400458748785e-07,
   "legacyWristDriftMeters": 0.26763456595119506,
   "timing": "whole-pose retiming at 240 degrees/second; no independent joint slowdown",
@@ -28,7 +29,7 @@
   },
   "leadIn": 1.2150681743494915,
   "leadOut": 0.9689204680125227,
-  "maxHingeOffAxis": 2.2351741790771484e-08,
+  "maxHingeOffAxis": 7.450580596923828e-09,
   "meanFingerDirectionErrorDegrees": 10.164967952923352,
-  "revision": "8e3325009d40"
+  "revision": "974f5992b7b4"
 }

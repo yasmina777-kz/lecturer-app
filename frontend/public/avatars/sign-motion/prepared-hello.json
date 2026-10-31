@@ -1,0 +1,15 @@
+{
+  "id": "prepared-hello",
+  "label": "Здравствуйте",
+  "url": "/avatars/sign-motion/prepared-hello.glb",
+  "duration": 8,
+  "review": "experimental-unreviewed",
+  "source": "Existing project-authored phrase; anatomical hand rebake",
+  "motionVersion": 6,
+  "handMechanics": "workshop-parameter-curves-v1",
+  "maxJointStepDegrees": 7.236564935061,
+  "maxHingeOffAxis": 7.450580596923828e-09,
+  "leadIn": 0.6,
+  "leadOut": 0.6000000000000165,
+  "revision": "03e45471b42f"
+}

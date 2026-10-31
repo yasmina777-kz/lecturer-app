@@ -2,7 +2,7 @@
   "id": "word-f8ffac36",
   "label": "четыре",
   "url": "/avatars/sign-motion/word-f8ffac36.glb",
-  "duration": 2.6333333333333333,
+  "duration": 2.6666666666666665,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/f8ffac36-0b54-4b30-897c-ce34d8ef62bf.mp4",
   "handCoverage": {
@@ -16,8 +16,9 @@
   "poseCoverage": 1.0,
   "maxJointStepDegrees": 7.918,
   "review": "experimental-unreviewed",
-  "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, monotone captured palm trajectories, final coordinated elbow IK and constrained finger chains; no translation training",
-  "motionVersion": 5,
+  "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, monotone captured palm trajectories, final coordinated elbow IK, workshop hand priors and anatomical-parameter finger curves; no translation training",
+  "motionVersion": 6,
+  "handMechanics": "workshop-parameter-curves-v1",
   "finalWristErrorMeters": 1.8189185285171422e-07,
   "legacyWristDriftMeters": 0.10046790749817512,
   "timing": "whole-pose retiming at 240 degrees/second; no independent joint slowdown",
@@ -28,7 +29,7 @@
   },
   "leadIn": 0.7108597829660903,
   "leadOut": 0.7558068837005734,
-  "maxHingeOffAxis": 3.725290298461914e-08,
+  "maxHingeOffAxis": 1.4901161193847656e-08,
   "meanFingerDirectionErrorDegrees": 6.829543700615689,
-  "revision": "900f66b3ce72"
+  "revision": "8c3224030302"
 }

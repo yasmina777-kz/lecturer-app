@@ -2,7 +2,7 @@
   "id": "letter-412",
   "label": "В",
   "url": "/avatars/sign-motion/letter-412.glb",
-  "duration": 5.9,
+  "duration": 5.933333333333334,
   "source": "https://github.com/ai-forever/bukva",
   "reference": "/research/rsl/alphabet/0412.mp4",
   "handCoverage": {
@@ -16,8 +16,9 @@
   "poseCoverage": 1.0,
   "maxJointStepDegrees": 7.915,
   "review": "experimental-unreviewed",
-  "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, monotone captured palm trajectories, final coordinated elbow IK and constrained finger chains; no translation training",
-  "motionVersion": 5,
+  "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, monotone captured palm trajectories, final coordinated elbow IK, workshop hand priors and anatomical-parameter finger curves; no translation training",
+  "motionVersion": 6,
+  "handMechanics": "workshop-parameter-curves-v1",
   "finalWristErrorMeters": 2.653076323086747e-07,
   "legacyWristDriftMeters": 0.15001881063626196,
   "timing": "whole-pose retiming at 240 degrees/second; no independent joint slowdown",
@@ -28,7 +29,7 @@
   },
   "leadIn": 0.740616345125364,
   "leadOut": 3.7283580060796737,
-  "maxHingeOffAxis": 2.2351741790771484e-08,
+  "maxHingeOffAxis": 7.450580596923828e-09,
   "meanFingerDirectionErrorDegrees": 4.700806157956284,
-  "revision": "6122f7254090"
+  "revision": "db60b60cc8c1"
 }

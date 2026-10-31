@@ -27,18 +27,6 @@ export type MotionPlan = {
   missing: string[];
   spelling: boolean;
 };
-const legacyFiles: Record<string, string> = {
-  hello: "mira-hello.glb",
-  thanks: "mira-thanks.glb",
-  "name-demo": "mira-signing-soft.glb",
-  a: "letter-a.glb",
-  v: "letter-v.glb",
-  g: "letter-g.glb",
-  l: "letter-l.glb",
-  u: "letter-u.glb",
-  sh: "letter-sh.glb",
-  y: "letter-y.glb",
-};
 export function planMotion(
   text: string,
   entries: DictionaryEntry[],
@@ -64,30 +52,9 @@ export function planMotion(
     missing: string[] = [];
   for (const p of pieces) {
     if (p.punctuation) continue;
-    let asset = p.entry ? byId.get(p.entry.id) : undefined;
-    if (p.entry?.id.startsWith("prepared-")) {
-      const id = p.entry.id.slice(9);
-      asset = {
-        id: p.entry.id,
-        label: p.entry.label,
-        url: "/avatars/mira-blender/" + legacyFiles[id],
-        duration: 8,
-        review: "experimental-unreviewed",
-      };
-    }
-    // Existing authored letters remain available if motion capture failed.
-    if (!asset && p.entry?.category === "Алфавит") {
-      const sign = preparedSigns.find((s) => s.phrase === p.entry?.label);
-      if (sign)
-        asset = {
-          id: p.entry.id,
-          label: p.entry.label,
-          url: "/avatars/mira-blender/" + legacyFiles[sign.animation],
-          duration: 8,
-          review: "experimental-unreviewed",
-          reference: p.entry.video,
-        };
-    }
+    // Every entry, including the three authored phrases, must resolve to the
+    // rebuilt catalog. Never silently fall back to the old finger animations.
+    const asset = p.entry ? byId.get(p.entry.id) : undefined;
     if (asset) steps.push({ ...asset, text: p.text });
     else missing.push(p.text);
   }
