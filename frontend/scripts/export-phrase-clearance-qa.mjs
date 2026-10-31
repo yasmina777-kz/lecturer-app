@@ -30,7 +30,7 @@ function restoreSkin(exported,original){
 const output=process.argv[2]??'/tmp/sign-phrase-clearance-qa';await mkdir(output,{recursive:true});let i=0;const manifest=[];
 const idleQA=process.argv[3]==='--idle-transitions';
 if(idleQA){
- const {AvatarPlayback}=await import(await source('../src/sign/AvatarPlayback.ts',{'"three"':new URL('../node_modules/three/build/three.module.js',import.meta.url).href}));
+ const {AvatarPlayback}=await import(await source('../src/sign/avatarPlayback.ts',{'"three"':new URL('../node_modules/three/build/three.module.js',import.meta.url).href}));
  const idleBytes=await readFile(new URL('../public/avatars/sign-motion/ready-idle.glb',import.meta.url)),idle=(await new GLTFLoader().parseAsync(idleBytes.buffer.slice(idleBytes.byteOffset,idleBytes.byteOffset+idleBytes.byteLength),'')).animations[0];
  const selected=assets.filter(a=>['я','книга','показать','читать','помочь','красный','вода','люди','ехать','не'].includes(a.label)||a.id.startsWith('prepared-'));
  for(const asset of selected)for(const phase of [0,1.5,3])for(const end of [false,true]){

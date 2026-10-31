@@ -17,12 +17,16 @@
     "minPoseCoverage": 0.85,
     "minDominantHandCoverage": 0.65,
     "maxHingeOffAxis": 0.0001,
-    "motionVersion": 7
+    "motionVersion": 8,
+    "maxUpperPlaneErrorDegrees": 8,
+    "maxForearmRollDegrees": 86,
+    "maxWristSwingDegrees": 66,
+    "maxElbowPoleDeviationDegrees": 30
   },
   "observed": {
     "maxHingeOffAxis": 2.9802322387695312e-08,
     "maxJointStepDegrees": 7.917774705705868,
-    "v7Clips": 206,
+    "v8Clips": 206,
     "maxSourceWristFitErrorMeters": 0.00023539843194510276,
     "maxBodyOverlapAfterMeters": 0,
     "maxBodyOverlapBeforeMeters": 0.1918952502310276,

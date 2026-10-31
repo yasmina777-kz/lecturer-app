@@ -28,7 +28,12 @@ export class AvatarPlayback {
     const dt = Math.max(0, Math.min(0.05, delta));
     // 350 ms fits within the captured clips' 700 ms neutral lead-in.
     // Pausing/scrubbing always shows the exact source pose, never a mixed hand.
-    if (state === "paused" || (state === "playing" && time >= 0.45))
+    // A completed sign already contains its authored release into rest.
+    // Blending that pose into an unrelated idle can reverse the elbow's bend
+    // plane and sweep a hand through the hip. Hold the verified final pose.
+    const completed = state === "idle" && this.signs.length > 0 &&
+      this.signs.every(action => time >= action.getClip().duration);
+    if (completed || state === "paused" || (state === "playing" && time >= 0.45))
       this.blend = 1;
     else
       this.blend = THREE.MathUtils.clamp(

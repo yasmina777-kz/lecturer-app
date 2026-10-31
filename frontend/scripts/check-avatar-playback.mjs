@@ -22,7 +22,7 @@ assert.deepEqual(hand.position.toArray(), [1.5,3,4.5], 'scrubbing samples the ex
 playback.update(1, 'playing', .03);
 assert.deepEqual(hand.position.toArray(), [2,4,6], 'resume must preserve sign source, not restart');
 for(let i=0;i<10;i++) playback.update(2, 'idle', .05);
-assert.ok(hand.position.x >= 10 && hand.position.x <= 12);
+assert.deepEqual(hand.position.toArray(), [0,0,0], 'completion holds the verified release pose instead of an unsafe idle crossfade');
 playback.update(1, 'playing', 0);
 assert.deepEqual(hand.position.toArray(), [2,4,6], 'jumping to a word must not blend idle into its meaningful pose');
 const empty = new AvatarPlayback(new THREE.AnimationMixer(root), [], idle);

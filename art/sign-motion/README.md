@@ -6,7 +6,7 @@
 
 1. `ml/rsl/capture_motion.py` applies **pretrained** MediaPipe Hand Landmarker and Pose Landmarker to reference videos. No new motion/grammar model is trained. Samples are taken at up to 20 fps, capped at 180 frames per source. Original reference IDs remain attached.
 2. `retarget.py` and `kinematics.py` map wrists and elbow poles relative to tracked shoulders. Whole finger chains are fitted to captured segment directions in the palm frame, with MCP flexion/spread and single-axis distal hinges, including bounded thumb flexion/opposition. Finger translations remain zero. Forearm roll is unwrapped before distribution across skin bones. Symmetric observation filtering, isolated-flip rejection and alternating angular-rate projection clean the curves. Added neutral lead/tail lasts 0.7 s each. This changes motion mechanics; it does not validate the sign's meaning.
-3. Animation-only GLBs share the existing avatar mesh. `publish_motion_catalog.py` publishes metadata, sources and the limitations report. In the browser, tracks are joined into one animation. Synthetic lead/tail poses between words are trimmed, preserving the captured source interval. A 0.25-second quintic eased transition connects adjacent poses; the UI uses the same trimmed timing. Playback does not remount the avatar between words.
+3. Animation-only GLBs share the existing avatar mesh. `publish_motion_catalog.py` publishes metadata, sources and the limitations report. In the browser, tracks are joined into one animation. The current v8 path retains the coordinated preparation and release. Every clip uses the same relaxed boundary pose; a short quintic eased transition joins those identical endpoints. The UI uses the same complete timing. Playback does not remount the avatar between words.
 
 ## Reproduce
 
@@ -163,3 +163,50 @@ python3 ml/rsl/publish_clearance_validation.py --library /tmp/body-clearance.jso
 For batched verification, pass all library reports after `--library`.
 `test:sign-motion` rejects a missing/stale validation report using the hashes of
 all 207 GLBs, the model, and the runtime composition/playback sources.
+
+### Arm anatomy v8 (current)
+
+v7 prevented front-surface intersections but preserved the captured forearm
+orientation after changing the elbow, and aimed the upper arm independently.
+That could leave the skin's elbow hinge facing almost 180° away from the actual
+bend plane. Slow motion and collision-free vertices did not prevent this defect.
+
+`arm_anatomy.py` solves each elbow toward a down/outward pole, with only 20% of
+the captured pole. It aligns the upper-arm and proximal-forearm frames to the
+same bend plane. Pronation is measured relative to that plane, unwrapped over
+time, bounded to ±85°, and distributed through the three roll bones. Wrist
+swing is bounded to 65°; finger articulation is retained. These are rig comfort
+limits, not a clinical model or a guarantee of RSL accuracy. Changed palm
+orientation and sign location still need language review.
+
+`bake_arm_anatomy.py` applies this to all 206 motions and the idle, adds paired
+hand depth clearance where required, and retimes whole poses. Deform constraints
+are removed before clearing Blender driver data; otherwise disabled workshop
+controllers can silently reactivate and override the baked animation.
+
+After the v7 clearance stage, preserve its GLBs, per-clip JSON and catalog in an
+immutable input directory, then run. The complete v7 input is also preserved in
+Git commit `92dcd00` under `frontend/public/avatars/sign-motion` (extract it to a
+separate directory, not over the current v8 output):
+
+```sh
+/Applications/Blender.app/Contents/MacOS/Blender -b --python-exit-code 1 --python art/sign-motion/bake_arm_anatomy.py -- input=/path/to/v7-motion
+python3 ml/rsl/publish_motion_catalog.py
+/Applications/Blender.app/Contents/MacOS/Blender -b --python-exit-code 1 --python art/sign-motion/verify_body_clearance.py -- anatomy report=/tmp/body-clearance.json
+```
+
+`batch=0/3`, `1/3`, `2/3` partition the bake. Export the 32 composed phrases and
+78 idle transitions as above, and include `anatomy` in their verification calls.
+The independent exported-pose checks reject elbow pole deviations over 30°,
+hinge-plane errors over 8°, pronation over 86°, wrist swing over 66°, and body
+penetration over 2 mm. The small margin over bake limits allows GLB interpolation.
+The publisher and `test:sign-motion` require v8 assets and these measured checks;
+old clearance-only reports cannot pass the new gate.
+
+Every clip now uses a shared relaxed boundary pose (checked within 0.3° and
+0.1 mm after GLB export), blended only inside
+the preparation/release and then passed through the same anatomy and clearance
+solver. This prevents a new body collision between two individually safe but
+different rest poses. Playback holds the verified release pose on completion;
+it no longer crossfades the completed sign into an unrelated idle. The 78 runtime
+checks cover starts and completed-pose holds at three idle phases.

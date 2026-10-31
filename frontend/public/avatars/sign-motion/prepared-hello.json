@@ -5,13 +5,13 @@
   "duration": 8,
   "review": "experimental-unreviewed",
   "source": "Existing project-authored phrase; anatomical hand rebake",
-  "motionVersion": 7,
+  "motionVersion": 8,
   "handMechanics": "workshop-parameter-curves-v1",
   "maxJointStepDegrees": 7.236564935061,
   "maxHingeOffAxis": 7.450580596923828e-09,
   "leadIn": 0.6,
-  "leadOut": 0.6000000000000165,
-  "revision": "f7254a27752e",
+  "leadOut": 0.6000000000000325,
+  "revision": "ae520fa42f69",
   "bodyClearance": {
     "method": "evaluated torso/head/shirt front-surface clearance; paired-hand depth offset and elbow IK",
     "beforeMaxMeters": 0.02885475754737854,
@@ -261,5 +261,11 @@
       7.966667,
       8.0
     ]
+  },
+  "armAnatomy": {
+    "method": "hinge-aligned upper arm, forearm pronation +/-85 degrees, wrist swing <=65 degrees",
+    "beforeUpperPlaneErrorDegrees": 52.47215990234133,
+    "afterUpperPlaneErrorDegrees": 1.7302844014466245e-05,
+    "extraDepthMeters": 0.0
   }
 }

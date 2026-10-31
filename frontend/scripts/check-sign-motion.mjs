@@ -18,6 +18,7 @@ assert.equal(bodyReport.idleTransitions.clips.length,78);
 for(const group of [bodyReport.library,bodyReport.phrases,bodyReport.idleTransitions]){
  assert.equal(group.sampleRate,60);assert.deepEqual(group.failed,[]);
  assert.ok(group.clips.every(c=>c.samples>1&&c.maxOverlapMeters<=.002));
+ assert.ok(group.clips.every(c=>c.armAnatomy.upperPlaneErrorDegrees<=8&&c.armAnatomy.forearmRollDegrees<=86&&c.armAnatomy.wristSwingDegrees<=66&&c.armAnatomy.elbowPoleDeviationDegrees<=30),'invalid arm articulation');
 }
 for(const [path,hash]of Object.entries(bodyReport.sources)){
  assert.equal(createHash('sha256').update(await readFile(new URL('../../'+path,import.meta.url))).digest('hex'),hash,'stale clearance validation: '+path);
@@ -63,10 +64,24 @@ assert.deepEqual(planMotion('Спасибо', entries, forms, assets.filter(a=>a
 const base=await readFile(new URL('../public/avatars/mira-blender/letter-a.glb',import.meta.url));const j=JSON.parse(base.subarray(20,20+base.readUInt32LE(12)).toString());const boneNames=new Set(j.nodes.map(n=>n.name));
 const clips=[];
 const loadedClips=new Map();
+const sharedRest=new Map();
 for(const asset of assets){
  const bytes=await readFile(new URL('../public'+asset.url,import.meta.url));assert.equal(asset.revision,createHash('sha256').update(bytes).digest('hex').slice(0,12),'stale motion revision');const json=JSON.parse(bytes.subarray(20,20+bytes.readUInt32LE(12)).toString());assert.equal(json.meshes?.length??0,0);
  for(const channel of json.animations[0].channels)assert.ok(boneNames.has(json.nodes[channel.target.node].name),asset.label);
  const loaded=await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');const clip=loaded.animations[0];loadedClips.set(asset.url,clip);assert.ok(Math.abs(clip.duration-asset.duration)<.02,asset.label);
+ // Every possible adjacent word pair must join a shared rest pose (0.3° / 0.1 mm export tolerance).
+ // Individually collision-free endpoints are insufficient (mother -> work).
+ for(const track of clip.tracks){
+  const size=track.getValueSize(),start=Array.from(track.values.slice(0,size)),end=Array.from(track.values.slice(-size));
+  if(!sharedRest.has(track.name))sharedRest.set(track.name,start);
+  const rest=sharedRest.get(track.name);
+  for(const boundary of [start,end]){
+   if(track.name.endsWith('.quaternion')){
+    const dot=Math.abs(boundary.reduce((n,v,i)=>n+v*rest[i],0))/(Math.hypot(...boundary)*Math.hypot(...rest));
+    assert.ok(2*Math.acos(Math.min(1,dot))<.3*Math.PI/180,asset.label+' inconsistent rest rotation '+track.name);
+   }else assert.ok(boundary.every((v,i)=>Math.abs(v-rest[i])<.0001),asset.label+' inconsistent rest position '+track.name);
+  }
+ }
  for(const track of clip.tracks){if(track.name.endsWith('.scale'))assert.ok(Array.from(track.values).every(v=>Math.abs(v-1)<.001),asset.label+' DQ requires rigid bone transforms');if(/Hand(?:Index|Middle|Ring|Pinky|Thumb)[123]\.position/.test(track.name))assert.ok(Array.from(track.values).every((v,i)=>Math.abs(v-track.values[i%3])<.00001),asset.label+' sliding finger joint');assert.ok(Array.from(track.values).every(Number.isFinite));assert.ok(Array.from(track.times).every((t,i)=>i===0||t>track.times[i-1]));}
  if(['я','читать','книга','помочь','показать'].includes(asset.label)) {
   const mixer=new AnimationMixer(loaded.scene);mixer.clipAction(clip).play();
@@ -189,7 +204,7 @@ console.log('32 phrases: source-pose samples preserved:',verifiedPhraseFrames,';
 
 assert.throws(()=>composeMotion([ordered[0]],undefined,[{start:ordered[0].duration,end:0}]),/Invalid motion window/);
 for(const asset of assets){
- assert.equal(asset.motionVersion,7,asset.label);
+ assert.equal(asset.motionVersion,8,asset.label);
  assert.ok(asset.bodyClearance?.afterMaxMeters<=.002,`${asset.label}: body clearance failed`);
  assert.equal(asset.handMechanics,'workshop-parameter-curves-v1',asset.label);
  if (!asset.id.startsWith('prepared-')) assert.ok(asset.sourceWristFitErrorMeters<.001,`${asset.label}: coordinated wrist target lost`);

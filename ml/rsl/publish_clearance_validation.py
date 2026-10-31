@@ -16,8 +16,8 @@ def combine(paths):
         assert report['sampleRate'] == 60
         for row in report['clips']:
             rows[row['id']] = row
-    failed = [r['id'] for r in rows.values() if r['maxOverlapMeters'] > .002]
-    assert not failed, f'Unresolved exported intersections: {failed}'
+    failed = [r['id'] for r in rows.values() if r['maxOverlapMeters'] > .002 or r.get('armAnatomy',{}).get('upperPlaneErrorDegrees',999)>8 or r.get('armAnatomy',{}).get('forearmRollDegrees',999)>86 or r.get('armAnatomy',{}).get('wristSwingDegrees',999)>66 or r.get('armAnatomy',{}).get('elbowPoleDeviationDegrees',999)>30]
+    assert not failed, f'Unresolved exported motion violations: {failed}'
     return {'sampleRate': 60, 'toleranceMeters': .002,
             'clips': sorted(rows.values(), key=lambda r: r['id']), 'failed': failed}
 
@@ -31,10 +31,11 @@ phrases, idle = combine([args.phrases]), combine([args.idle])
 assert len(phrases['clips']) == 32 and len(idle['clips']) == 78
 sources = [
     'frontend/src/sign/composeMotion.ts', 'frontend/src/sign/motion.ts',
-    'frontend/src/sign/AvatarPlayback.ts', 'frontend/src/sign/phraseExamples.ts',
+    'frontend/src/sign/avatarPlayback.ts', 'frontend/src/sign/phraseExamples.ts',
     'frontend/src/components/volumeSkinning.ts',
     'frontend/public/avatars/hand-workshop/mira-rig.glb',
     'art/hand-rig/Mira-Hand-Workshop.blend',
+    'art/sign-motion/arm_anatomy.py', 'art/sign-motion/bake_arm_anatomy.py',
     'art/sign-motion/body_clearance.py', 'art/sign-motion/verify_body_clearance.py',
     'frontend/scripts/export-phrase-clearance-qa.mjs',
 ]
@@ -42,7 +43,7 @@ sources = [
 if not (ROOT/sources[4]).exists():
     sources[4] = str(next((ROOT/'frontend/src').rglob('volumeSkinning.ts')).relative_to(ROOT))
 result = {
-    'method': 'Evaluated hand/forearm skin against torso, head and clothing front surfaces',
+    'method': 'Evaluated arm articulation limits and hand/forearm skin against torso, head and clothing front surfaces',
     'limitations': ['Not an arm-arm collision certificate.',
                     'Not a review of RSL meaning, finger accuracy or facial grammar.',
                     'Runtime checks cover 13 selected motions at 3 idle phases, start and finish.'],
