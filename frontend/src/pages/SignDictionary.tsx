@@ -14,6 +14,7 @@ import "./sign-dictionary.css";
 import { ReferenceVideo } from "../components/SignReferenceVideo";
 import { phraseGroups } from "../sign/phraseExamples";
 import { alphabetIllustration } from "../sign/alphabetIllustrations";
+import { AlphabetCardArt } from "../components/AlphabetCardArt";
 const emptyMotionPlan = { steps: [], missing: [], spelling: false };
 const categoryTranslations: Record<string, [string, string]> = {
   Алфавит: ["Alphabet", "Әліпби"],
@@ -494,12 +495,7 @@ export function SignDictionaryPage() {
                 onClick={() => choose(e)}
               >
                 {e.category === "Алфавит" && alphabetIllustration(e.label) ? (
-                  <img
-                    className="sign-alphabet-illustration"
-                    src={alphabetIllustration(e.label)}
-                    alt={at(`Дактильная буква ${e.label}`, `Fingerspelling: ${e.label}`, `Дактиль әрпі: ${e.label}`)}
-                    loading="lazy"
-                  />
+                  <AlphabetCardArt letter={e.label} />
                 ) : motions.some((m) => m.id === e.id) ? (
                   <img
                     className="sign-avatar-cover"

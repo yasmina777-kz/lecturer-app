@@ -21,6 +21,7 @@ import { planMotion, type MotionAsset } from "../sign/motion";
 import { ReferenceVideo } from "../components/SignReferenceVideo";
 import { alphabetEntries } from "../sign/dictionary";
 import { alphabetIllustration } from "../sign/alphabetIllustrations";
+import { AlphabetCardArt } from "../components/AlphabetCardArt";
 const Mentor = lazy(() =>
   import("../components/GestureMentor3D").then((m) => ({
     default: m.GestureMentor3D,
@@ -102,12 +103,7 @@ export function SignCourseCatalog() {
               >
                 <div className={`sign-exercise-thumb${e.letter && alphabetIllustration(e.letter) ? " sign-exercise-thumb--illustrated" : ""}`}>
                   {e.letter && alphabetIllustration(e.letter) ? (
-                    <img
-                      className="sign-alphabet-illustration"
-                      src={alphabetIllustration(e.letter)}
-                      alt={at(`Дактильная буква ${e.letter}`, `Fingerspelling: ${e.letter}`, `Дактиль әрпі: ${e.letter}`)}
-                      loading="lazy"
-                    />
+                    <AlphabetCardArt letter={e.letter} />
                   ) : e.letter ? (
                     <b>{e.letter}</b>
                   ) : (

@@ -1,0 +1,69 @@
+.alphabet-card-art {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 240px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #f8efdf url('/images/rsl-alphabet/design-v2/pastel-background.png') center / cover;
+  box-shadow: inset 0 0 0 1px #fff9;
+}
+.alphabet-card-art::before {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  border: 1px solid #ffffffa6;
+  border-radius: 10px;
+  pointer-events: none;
+}
+.sign-exercise-thumb .alphabet-card-art > img,
+.sign-word-card .alphabet-card-art > img {
+  display: block;
+  width: auto;
+  max-width: 70%;
+  height: calc(100% - 30px);
+  padding: 0;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 0;
+  background: transparent;
+  /* White paper blends into the artwork; ink acquires a warm navy tone. */
+  filter: contrast(1.16) sepia(.7) saturate(1.6) hue-rotate(165deg);
+  mix-blend-mode: multiply;
+  opacity: .87;
+}
+.alphabet-card-art__tag {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  padding: 5px 8px !important;
+  border-radius: 7px;
+  color: #365771;
+  background: #ffffffb3;
+  border: 1px solid #ffffffbd;
+  font-size: 10px !important;
+  letter-spacing: .12em;
+  font-weight: 700;
+}
+.alphabet-card-art__dot {
+  position: absolute;
+  right: 22px;
+  top: 22px;
+  width: 7px;
+  height: 7px;
+  padding: 0 !important;
+  border-radius: 50%;
+  background: #c39956;
+  box-shadow: 0 0 0 5px #ffffff70;
+}
+.sign-word-card > .alphabet-card-art {
+  height: 220px;
+}
+@media (max-width: 600px) {
+  .sign-word-card > .alphabet-card-art { height: 190px; }
+  .sign-word-card .alphabet-card-art__tag { top: 12px; left: 12px; font-size: 8px !important; }
+}
