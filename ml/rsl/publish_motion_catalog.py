@@ -16,3 +16,7 @@ report={'total':len(entries),'letters':sum(e['id'].startswith('letter-') for e i
 report['observed']={'maxHingeOffAxis':max(e.get('maxHingeOffAxis',0) for e in entries),'maxJointStepDegrees':max(e['maxJointStepDegrees'] for e in entries),'v4Clips':sum(e.get('motionVersion')==4 for e in entries)}
 (OUT/'quality-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
 print(report['total'],'motions, missing',report['missing'])
+
+# Refresh endpoint orientations whenever an authored/captured clip is replaced.
+import subprocess
+subprocess.run(['node',str(ROOT/'frontend/scripts/prepare-sign-transitions.mjs')],check=True)

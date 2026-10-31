@@ -26,7 +26,7 @@ export function GestureMentor3D({
   time: number;
   playbackState?: AvatarPlaybackState;
   motionUrls?: string[];
-  motionTrims?: { start: number; end: number }[];
+  motionTrims?: { start: number; end: number; gapAfter?: number }[];
   onReadyChange?: (ready: boolean) => void;
   closeup: boolean;
   angle: GestureAngle;

@@ -5,16 +5,29 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 const read=async p=>JSON.parse(await readFile(new URL(p,import.meta.url),'utf8'));
 async function source(p,replacements={}){let code=ts.transpileModule(await readFile(new URL(p,import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2020}}).outputText;for(const [a,b]of Object.entries(replacements))code=code.replaceAll(a,JSON.stringify(b));return 'data:text/javascript;base64,'+Buffer.from(code).toString('base64');}
 const dictionary=await source('../src/sign/dictionary.ts'),text=await source('../src/sign/textPlan.ts');
-const motion=await source('../src/sign/motion.ts',{'"./dictionary"':dictionary,'"./textPlan"':text});const {planMotion,motionTimeline}=await import(motion);const {alphabetEntries}=await import(dictionary);
+const motion=await source('../src/sign/motion.ts',{'"./dictionary"':dictionary,'"./textPlan"':text});const {planMotion,motionTimeline,transitionDuration,TRANSITION_SPEED_DEGREES}=await import(motion);const {alphabetEntries}=await import(dictionary);
 const {composeMotion}=await import(await source('../src/sign/composeMotion.ts',{'"three"':new URL('../node_modules/three/build/three.module.js',import.meta.url).href,'"./motion"':motion}));
 const assets=await read('../public/avatars/sign-motion/catalog.json'),words=await read('../public/research/rsl/words/catalog.json'),forms=await read('../public/research/rsl/words/forms.json'),entries=[...alphabetEntries(),...words];
 const {phraseGroups}=await import(await source('../src/sign/phraseExamples.ts'));
+let worstOldTransition=0;
 for(const group of phraseGroups)for(const phrase of group.phrases){
  const example=planMotion(phrase,entries,forms,assets);
  assert.deepEqual(example.missing,[],phrase+' has unavailable signs');
  assert.ok(example.steps.length>0,phrase);
  assert.equal(example.spelling,false,phrase);
+ for(let i=1;i<example.steps.length;i++){
+  const a=example.steps[i-1].transitionPose?.end,b=example.steps[i].transitionPose?.start;
+  if(!a||!b)continue;
+  for(const name of Object.keys(a))if(b[name]){
+   const dot=Math.abs(a[name].reduce((sum,v,j)=>sum+v*b[name][j],0));
+   const angle=2*Math.acos(Math.min(1,dot))*180/Math.PI;
+   worstOldTransition=Math.max(worstOldTransition,angle*1.875/.25);
+   assert.ok(angle*1.875/transitionDuration(example.steps[i-1],example.steps[i])<=TRANSITION_SPEED_DEGREES+.1,phrase+' transition too fast');
+  }
+ }
+
 }
+console.log('Previous fixed-gap transition peak:',worstOldTransition.toFixed(1),'degrees/s');
 assert.equal(assets.length,203);assert.equal(new Set(assets.map(a=>a.id)).size,203);
 let plan=planMotion('Я хочу читать книгу',entries,forms,assets);assert.deepEqual(plan.steps.map(s=>s.label),['я','хотеть','читать','книга']);assert.deepEqual(plan.missing,[]);
 const timeline=motionTimeline(plan.steps);assert.equal(timeline.length,4);assert.ok(timeline.every((s,i)=>i===0||s.start>timeline[i-1].end));
@@ -46,13 +59,33 @@ const ordered=await Promise.all(phrase.steps.map(async step=>{
  const bytes=await readFile(new URL('../public'+step.url,import.meta.url));
  return (await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'')).animations[0];
 }));
-const flowing=composeMotion(ordered,undefined,windows.map(s=>({start:s.trimStart,end:s.trimEnd})));
+const flowing=composeMotion(ordered,undefined,windows.map(s=>({start:s.trimStart,end:s.trimEnd,gapAfter:s.gapAfter})));
 assert.ok(Math.abs(flowing.duration-windows.at(-1).end)<.001);
-assert.ok(flowing.duration<ordered.reduce((n,c)=>n+c.duration,0));
+assert.ok(windows.every((w,i)=>i===windows.length-1||Math.abs(windows[i+1].start-w.end-w.gapAfter)<1e-6));
 for(const track of flowing.tracks){
  assert.ok(Array.from(track.times).every((x,i)=>i===0||x>track.times[i-1]));
  assert.ok(Array.from(track.values).every(Number.isFinite));
 }
+// Inspect real composed rotation tracks at each seam, not just the duration formula.
+let measuredTransitionPeak=0;
+for(let i=0;i<windows.length-1;i++){
+ const begin=windows[i].end,end=windows[i+1].start;
+ for(const track of flowing.tracks){
+  if(!track.name.endsWith('.quaternion'))continue;
+  const {QuaternionLinearInterpolant}=await import('three');
+  const sample=new QuaternionLinearInterpolant(track.times,track.values,4);
+  let last=Array.from(sample.evaluate(begin)),time=begin;
+  for(let next=Math.min(end,time+1/120);time<end-1e-7;next=Math.min(end,time+1/120)){
+   const q=Array.from(sample.evaluate(next));
+   const dot=Math.abs(q.reduce((sum,v,j)=>sum+v*last[j],0))/(Math.hypot(...q)*Math.hypot(...last));
+   const speed=2*Math.acos(Math.min(1,dot))*180/Math.PI/(next-time);
+   measuredTransitionPeak=Math.max(measuredTransitionPeak,speed);
+   assert.ok(speed<=TRANSITION_SPEED_DEGREES+1,track.name+' composed seam exceeds speed bound');
+   last=q;time=next;
+  }
+ }
+}
+console.log('Measured composed phrase transition peak:',measuredTransitionPeak.toFixed(1),'degrees/s');
 assert.throws(()=>composeMotion([ordered[0]],undefined,[{start:ordered[0].duration,end:0}]),/Invalid motion window/);
 for(const asset of assets){
  assert.equal(asset.motionVersion,4,asset.label);

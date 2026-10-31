@@ -59,3 +59,11 @@ The previous independent joint measurements did not account for how all three ph
 ## Explicit capture corrections
 
 `hand_pose_overrides.py` contains a reviewed-on-mesh replacement for the failed captured fist in `letter-410` (А). Four fingers have a coordinated curl, the thumb remains alongside the index, and the inactive hand uses a relaxed pose. The correction blends with the existing lead/tail and keeps the captured arm path. Metadata records `handPoseCorrection: authored-fist-v1`. This is an authored correction to this clip, not a new universal solver or linguistic certification of the remaining library. Browser comparison uses 0.94 s, matching the user's reported bad frame.
+
+## Phrase transition timing
+
+The previous 0.25 s gap applied to every pair of words regardless of the change in joint angles. Across the 32 practice examples, captured boundaries implied a peak eased angular speed of about 1346°/s. `prepare-sign-transitions.mjs` now samples each GLB at its captured lead-in/lead-out boundaries and publishes compact quaternion endpoints with the catalog. `publish_motion_catalog.py` refreshes them after rebuilding/replacing assets.
+
+`transitionDuration` chooses the shared UI/animation gap from the largest joint change and the quintic easing peak derivative (1.875), capped at 240°/s at 1× speed. Legacy clips without endpoints use a conservative 1.5 s gap. Transitions are sampled at 60 Hz; captured signs keep their existing timing. The UI, word seeking and composed clip use the same `gapAfter`. Tests cover the boundary-speed formula for all practice phrases and sample the composed “Я хочу читать книгу” seams at 120 Hz (observed peak 239.5°/s).
+
+This fixes transition timing only. It does not fix captured hand shapes, avoid every mesh collision, model coarticulation, or translate Russian grammar into RSL. The 32 examples are sequences of available assets, not newly trained phrase animations. A production phrase needs a continuous signer reference, corrected hands/body/face, and linguistic review.

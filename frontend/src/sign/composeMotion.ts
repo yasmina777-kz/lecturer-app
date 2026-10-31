@@ -4,7 +4,7 @@ import { MOTION_GAP } from "./motion";
 export function composeMotion(
   clips: THREE.AnimationClip[],
   gap = MOTION_GAP,
-  trims: { start: number; end: number }[] = [],
+  trims: { start: number; end: number; gapAfter?: number }[] = [],
 ): THREE.AnimationClip {
   if (!clips.length) throw new Error("No motion clips");
   const templates = new Map<string, THREE.KeyframeTrack>();
@@ -36,12 +36,15 @@ export function composeMotion(
               )
             : new THREE.LinearInterpolant(track.times, track.values, size);
         const first = Array.from(interpolant.evaluate(from)) as number[];
-        if (index > 0 && gap > 0) {
+        const transitionGap =
+          index > 0 ? (trims[index - 1]?.gapAfter ?? gap) : 0;
+        if (index > 0 && transitionGap > 0) {
           // Zero velocity at each end avoids a linear snap between gestures.
-          for (let k = 1; k < 8; k++) {
-            const t = k / 8;
+          const samples = Math.max(8, Math.ceil(transitionGap * 60));
+          for (let k = 1; k < samples; k++) {
+            const t = k / samples;
             const ease = t * t * t * (t * (t * 6 - 15) + 10);
-            times.push(offset - gap + t * gap);
+            times.push(offset - transitionGap + t * transitionGap);
             if (track instanceof THREE.QuaternionKeyframeTrack) {
               const mixed = new THREE.Quaternion()
                 .fromArray(last)
@@ -70,7 +73,10 @@ export function composeMotion(
         times.push(offset, offset + to - from);
         values.push(...last, ...last);
       }
-      offset += to - from + gap;
+      offset +=
+        to -
+        from +
+        (index < clips.length - 1 ? (trims[index]?.gapAfter ?? gap) : 0);
     }
     const track = template.clone();
     track.times = new Float32Array(times);
@@ -84,7 +90,9 @@ export function composeMotion(
         sum + c.duration - (trims[i]?.start ?? 0) - (trims[i]?.end ?? 0),
       0,
     ) +
-      gap * (clips.length - 1),
+      clips
+        .slice(0, -1)
+        .reduce((sum, _, i) => sum + (trims[i]?.gapAfter ?? gap), 0),
     tracks,
   );
 }
