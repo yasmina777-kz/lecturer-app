@@ -2,7 +2,7 @@
   "id": "word-44de272e",
   "label": "понедельник",
   "url": "/avatars/sign-motion/word-44de272e.glb",
-  "duration": 2.7666666666666666,
+  "duration": 3.2,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/44de272e-c50b-4663-b113-eb50505d58db.mp4",
   "handCoverage": {
@@ -14,17 +14,21 @@
     "Right": 2
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 8.0,
+  "maxJointStepDegrees": 7.918,
   "review": "experimental-unreviewed",
-  "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
-  "motionVersion": 4,
+  "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, monotone captured palm trajectories, final coordinated elbow IK and constrained finger chains; no translation training",
+  "motionVersion": 5,
+  "finalWristErrorMeters": 2.8957369459930027e-06,
+  "legacyWristDriftMeters": 0.19524585127810024,
+  "timing": "whole-pose retiming at 240 degrees/second; no independent joint slowdown",
   "peakStep": {
     "bone": "mixamorig:RightHandIndex2",
-    "frame": 60,
-    "angle": 7.999955541799461
+    "frame": 71,
+    "angle": 7.917675667962903
   },
-  "leadIn": 0.7,
-  "leadOut": 0.7,
-  "maxHingeOffAxis": 4.470348358154297e-08,
-  "meanFingerDirectionErrorDegrees": 12.036384699188826
+  "leadIn": 0.9762278483435828,
+  "leadOut": 0.8845759167615439,
+  "maxHingeOffAxis": 2.9802322387695312e-08,
+  "meanFingerDirectionErrorDegrees": 11.784725755977574,
+  "revision": "4f8508ae233b"
 }

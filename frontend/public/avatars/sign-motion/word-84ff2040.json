@@ -2,7 +2,7 @@
   "id": "word-84ff2040",
   "label": "новый",
   "url": "/avatars/sign-motion/word-84ff2040.glb",
-  "duration": 2.6333333333333333,
+  "duration": 3.8,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/84ff2040-2ace-4600-bdf2-d613883c459a.mp4",
   "handCoverage": {
@@ -14,17 +14,21 @@
     "Right": 6
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 8.0,
+  "maxJointStepDegrees": 7.918,
   "review": "experimental-unreviewed",
-  "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
-  "motionVersion": 4,
+  "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, monotone captured palm trajectories, final coordinated elbow IK and constrained finger chains; no translation training",
+  "motionVersion": 5,
+  "finalWristErrorMeters": 2.4374332730405914e-07,
+  "legacyWristDriftMeters": 0.1733649034250387,
+  "timing": "whole-pose retiming at 240 degrees/second; no independent joint slowdown",
   "peakStep": {
-    "bone": "mixamorig:RightHandIndex2",
-    "frame": 29,
-    "angle": 8.00005372576878
+    "bone": "mixamorig:RightForeArm",
+    "frame": 63,
+    "angle": 7.917576630219937
   },
-  "leadIn": 0.7,
-  "leadOut": 0.7,
+  "leadIn": 0.7215947774965461,
+  "leadOut": 1.2081352806814363,
   "maxHingeOffAxis": 1.4901161193847656e-08,
-  "meanFingerDirectionErrorDegrees": 13.238005554148693
+  "meanFingerDirectionErrorDegrees": 12.60402991153023,
+  "revision": "7e9d65d6ef14"
 }

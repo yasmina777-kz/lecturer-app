@@ -14,17 +14,21 @@
     "Right": 1
   },
   "poseCoverage": 1.0,
-  "maxJointStepDegrees": 8.0,
+  "maxJointStepDegrees": 7.918,
   "review": "experimental-unreviewed",
-  "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, captured palm targets, elbow IK and symmetric smoothing; no translation training",
-  "motionVersion": 4,
+  "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, monotone captured palm trajectories, final coordinated elbow IK and constrained finger chains; no translation training",
+  "motionVersion": 5,
+  "finalWristErrorMeters": 2.682209014892578e-07,
+  "legacyWristDriftMeters": 0.07846266040391249,
+  "timing": "whole-pose retiming at 240 degrees/second; no independent joint slowdown",
   "peakStep": {
-    "bone": "mixamorig:RightHandMiddle2",
-    "frame": 78,
-    "angle": 8.00005372576878
+    "bone": "mixamorig:RightHandRing2",
+    "frame": 77,
+    "angle": 7.917675667962903
   },
   "leadIn": 0.7,
-  "leadOut": 0.7,
+  "leadOut": 0.7307243036036581,
   "maxHingeOffAxis": 2.9802322387695312e-08,
-  "meanFingerDirectionErrorDegrees": 14.357368544249864
+  "meanFingerDirectionErrorDegrees": 13.773107670332136,
+  "revision": "053c971f27d1"
 }

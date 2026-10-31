@@ -85,3 +85,27 @@ for raised hands and head, with perspective/aspect compensation. Resting hands a
 the hip are excluded from the close-up; the full-avatar view remains available.
 `node frontend/scripts/check-motion-framing.mjs` checks all three viewing angles
 at desktop and phone proportions.
+
+### Coordinated motion pipeline v5
+
+The final smoothing pass previously changed each arm bone independently. That
+moved the wrist away from its measured target (sometimes by centimetres), and
+could destroy contact even when the original IK solve was correct. v5 filters
+wrist/elbow trajectories, then solves the complete arm again. The elbow pole is
+confidence weighted and continuous near an extended arm. `finalWristErrorMeters`
+is the solver error BEFORE export, not a linguistic accuracy score.
+
+Landmarks use monotone Hermite interpolation. The thumb base has a bounded
+opposition axis in addition to flexion and abduction; PIP/DIP joints remain
+hinges. A shared time map limits speed for the entire pose instead of slowing
+individual bones independently. It accounts for Blender's quaternion nlerp
+midpoint speed and records the resulting lead-in/out times. DQ volume preservation
+is enabled in the Blender workshops to match the website's skinning.
+
+Run `check_trajectories.py` and `check_finger_chains.py` through Blender, then
+`publish_motion_catalog.py` and `npm run test:sign-motion --prefix frontend`.
+The publisher adds a content revision to each motion so the browser loads a new
+asset after a correction. `hand_motion_study.py` makes a six-second articulation
+study and an editable `.blend`; it is explicitly NOT a sign-language lesson.
+These rig and timing improvements do not repair every uncertain source landmark
+or establish correct RSL grammar. Expert reference review remains necessary.

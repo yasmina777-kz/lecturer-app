@@ -8,7 +8,9 @@ bpy.context.view_layer.update();init_finger_rigs()
 maximum=0;count=0
 for side in ['Left','Right']:
  for name in finger_indices:
-  for requested in [[0,0,0,0],[.35,.03,.5,.3],[1.1,0,1.3,.7]]:
+  requests=[[0,0,0,0],[.35,.03,.5,.3],[1.1,0,1.3,.7]]
+  if name=='Thumb':requests.extend([[-.2,.3,.5,.2,.4],[.3,-.2,.4,.2,-.4]])
+  for requested in requests:
    expected=project_finger_values(side,name,requested)
    targets,rotations=finger_chain(side,name,expected)
    for j,q in enumerate(rotations,1):B(side+'Hand'+name+str(j)).rotation_quaternion=q

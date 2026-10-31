@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import ts from 'typescript';
 import { AnimationMixer, Vector3 } from 'three';
@@ -46,11 +47,11 @@ assert.equal(planMotion('я хочу', entries, forms, assets).spelling, false);
 const base=await readFile(new URL('../public/avatars/mira-blender/letter-a.glb',import.meta.url));const j=JSON.parse(base.subarray(20,20+base.readUInt32LE(12)).toString());const boneNames=new Set(j.nodes.map(n=>n.name));
 const clips=[];
 for(const asset of assets){
- const bytes=await readFile(new URL('../public'+asset.url,import.meta.url));const json=JSON.parse(bytes.subarray(20,20+bytes.readUInt32LE(12)).toString());assert.equal(json.meshes?.length??0,0);
+ const bytes=await readFile(new URL('../public'+asset.url,import.meta.url));assert.equal(asset.revision,createHash('sha256').update(bytes).digest('hex').slice(0,12),'stale motion revision');const json=JSON.parse(bytes.subarray(20,20+bytes.readUInt32LE(12)).toString());assert.equal(json.meshes?.length??0,0);
  for(const channel of json.animations[0].channels)assert.ok(boneNames.has(json.nodes[channel.target.node].name),asset.label);
  const loaded=await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');const clip=loaded.animations[0];assert.ok(Math.abs(clip.duration-asset.duration)<.02,asset.label);
  for(const track of clip.tracks){if(track.name.endsWith('.scale'))assert.ok(Array.from(track.values).every(v=>Math.abs(v-1)<.001),asset.label+' DQ requires rigid bone transforms');if(/Hand(?:Index|Middle|Ring|Pinky|Thumb)[123]\.position/.test(track.name))assert.ok(Array.from(track.values).every((v,i)=>Math.abs(v-track.values[i%3])<.00001),asset.label+' sliding finger joint');assert.ok(Array.from(track.values).every(Number.isFinite));assert.ok(Array.from(track.times).every((t,i)=>i===0||t>track.times[i-1]));}
- if(['я','читать','книга'].includes(asset.label)) {
+ if(['я','читать','книга','помочь'].includes(asset.label)) {
   const mixer=new AnimationMixer(loaded.scene);mixer.clipAction(clip).play();
   const point=(suffix)=>{
    const bone=loaded.scene.getObjectByName('mixamorig'+suffix);
@@ -61,10 +62,10 @@ for(const asset of assets){
    sample(1.14);
    assert.ok(point('LeftHandIndex3').z<point('LeftHandIndex1').z-.025,'self-point must face back toward the chest');
   }
-  if(asset.label==='читать') for(const t of [1,1.4,1.7]) {
+  if(['читать','помочь'].includes(asset.label)) for(const t of [asset.leadIn+.3,asset.leadIn+.6]) {
    sample(t);
-   for(const finger of ['Index','Middle','Ring','Pinky']) {
-    const a=point('LeftHand'+finger+'1'),b=point('LeftHand'+finger+'2'),c=point('LeftHand'+finger+'3');
+   for(const side of (asset.label==='читать'?['Left']:['Left','Right'])) for(const finger of ['Index','Middle','Ring','Pinky']) {
+    const a=point(side+'Hand'+finger+'1'),b=point(side+'Hand'+finger+'2'),c=point(side+'Hand'+finger+'3');
     assert.ok(b.clone().sub(a).angleTo(c.sub(b))<Math.PI/12,'reading hand must keep straight fingers');
    }
   }
@@ -114,7 +115,8 @@ for(let i=0;i<windows.length-1;i++){
 console.log('Measured composed phrase transition peak:',measuredTransitionPeak.toFixed(1),'degrees/s');
 assert.throws(()=>composeMotion([ordered[0]],undefined,[{start:ordered[0].duration,end:0}]),/Invalid motion window/);
 for(const asset of assets){
- assert.equal(asset.motionVersion,4,asset.label);
+ assert.equal(asset.motionVersion,5,asset.label);
+ assert.ok(asset.finalWristErrorMeters<.001,`${asset.label}: coordinated wrist target lost`);
  assert.ok(asset.maxJointStepDegrees<=8.1,`${asset.label}: rotation spike`);
  assert.ok(asset.maxHingeOffAxis<.0001,`${asset.label}: finger hinge twist`);
  assert.ok(asset.leadIn>0 && asset.leadOut>0);

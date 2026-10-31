@@ -35,7 +35,11 @@ def finger_chain(side,name,values):
  riginfo=finger_fit_rigs[(side,name)];parent=riginfo['parent'];directions=[];rotations=[]
  for j in range(3):
   q=Quaternion(riginfo['axes'][j],values[(0,2,3)[j]])
-  if j==0:q=Quaternion(riginfo['spread'],values[1])@q
+  if j==0:
+   q=Quaternion(riginfo['spread'],values[1])@q
+   # The thumb CMC is a saddle joint: opposition needs axial rotation in
+   # addition to flexion/abduction. Other fingers remain hinge-only distally.
+   if name=='Thumb' and len(values)>4:q=q@Quaternion((0,1,0),values[4])
   parent=parent@riginfo['local'][j]@q
   directions.append(parent@V((0,1,0)));rotations.append(q)
  return directions,rotations
@@ -50,12 +54,13 @@ def init_finger_rigs():
    root=B(side+'Hand'+name+'1').bone
    spread=root.matrix_local.to_quaternion().inverted()@rest[side]['basis'].col[2]
    offsets=[hand_calibration['restBends'].get(B(side+'Hand'+name+str(j)).name,0) for j in (2,3)]
-   if name=='Thumb':bounds=[(-40,70),(-65,65),(-5-math.degrees(offsets[0]),70-math.degrees(offsets[0])),(-5-math.degrees(offsets[1]),80-math.degrees(offsets[1]))]
+   if name=='Thumb':bounds=[(-40,70),(-65,65),(-5-math.degrees(offsets[0]),70-math.degrees(offsets[0])),(-5-math.degrees(offsets[1]),80-math.degrees(offsets[1])),(-35,35)]
    else:bounds=[(-15,95),(-18,18),(-5-math.degrees(offsets[0]),105-math.degrees(offsets[0])),(-5-math.degrees(offsets[1]),75-math.degrees(offsets[1]))]
    finger_fit_rigs[(side,name)]={'parent':B(side+'Hand').bone.matrix_local.to_quaternion(),'local':local,'axes':axes,'spread':spread,'bounds':[(math.radians(a),math.radians(b)) for a,b in bounds],'offsets':offsets}
 
 def project_finger_values(side,name,values):
  info=finger_fit_rigs[(side,name)]
+ values=list(values)+[0]*max(0,len(info['bounds'])-len(values))
  values=[clamp(v,*info['bounds'][j]) for j,v in enumerate(values)]
  if name!='Thumb':
   # MCP abduction closes with flexion; a curled finger cannot fan sideways
@@ -85,7 +90,7 @@ def fit_finger_directions(side,name,target,previous=None):
   step=math.radians(degrees)
   for sweep in range(3):
    improved=False
-   for j in range(4):
+   for j in range(len(values)):
     for sign in [-1,1]:
      candidate=values.copy();candidate[j]+=sign*step
      candidate=project_finger_values(side,name,candidate);score=cost(candidate)
@@ -123,8 +128,19 @@ def tracked_arm(side,wrist,q,elbow_hint=None,influence=1):
  pole=default
  if elbow_hint is not None:
   hint=elbow_hint-shoulder;hint-=axis*hint.dot(axis)
-  if hint.length>.035:
-   pole=default.lerp(hint.normalized(),.85*influence).normalized()
+  if hint.length>.001:
+   confidence=smooth(.015,.08,hint.length)
+   pole=default.lerp(hint.normalized(),.85*influence*confidence).normalized()
+ # Near an extended arm, a tiny landmark error must not flip the elbow plane.
+ previous_pole=forearm_twist.get(side+'_pole')
+ if previous_pole is not None:
+  previous_pole=previous_pole-axis*previous_pole.dot(axis)
+  if previous_pole.length>.001:
+   previous_pole.normalize()
+   rotation=previous_pole.rotation_difference(pole)
+   amount=min(.35,math.radians(6)/max(.0001,rotation.angle))
+   pole=Quaternion().slerp(rotation,amount)@previous_pole
+ forearm_twist[side+'_pole']=pole.copy()
  along=(l1*l1-l2*l2+distance*distance)/(2*distance)
  elbow=shoulder+axis*along+pole*math.sqrt(max(0,l1*l1-along*along))
  upperq=(upper.bone.tail_local-upper.bone.head_local).rotation_difference(elbow-shoulder)@upper.bone.matrix_local.to_quaternion()

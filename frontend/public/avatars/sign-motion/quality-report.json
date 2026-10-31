@@ -16,11 +16,13 @@
     "minPoseCoverage": 0.85,
     "minDominantHandCoverage": 0.65,
     "maxHingeOffAxis": 0.0001,
-    "motionVersion": 4
+    "motionVersion": 5
   },
   "observed": {
-    "maxHingeOffAxis": 5.960464477539063e-08,
-    "maxJointStepDegrees": 8.0,
-    "v4Clips": 203
+    "maxHingeOffAxis": 7.450580596923828e-08,
+    "maxJointStepDegrees": 7.918,
+    "v5Clips": 203,
+    "maxFinalWristErrorMeters": 0.00023539843194510276,
+    "maxLegacyWristDriftMeters": 0.29551429508994154
   }
 }

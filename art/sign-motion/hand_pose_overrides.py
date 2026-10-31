@@ -35,6 +35,7 @@ REFERENCE_HAND_SHAPES={
  'word-9fcf26f7':{'Right':'thumb'},
  'word-542b93a5':{'Left':'flat-tucked'},
  'word-a8989f04':{'Left':'flat','Right':'flat'},
+ 'word-f1a5226d':{'Left':'flat','Right':'flat'},
 }
 flat_shape_cache={}
 

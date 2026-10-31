@@ -8,6 +8,7 @@ export type MotionAsset = {
   id: string;
   label: string;
   url: string;
+  revision?: string;
   duration: number;
   reference?: string;
   review: string;

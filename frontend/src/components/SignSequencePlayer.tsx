@@ -23,7 +23,7 @@ export function SignSequencePlayer({
   naturalIdle?: boolean;
 }) {
   const timeline = useMemo(() => motionTimeline(plan.steps), [plan.steps]);
-  const urls = useMemo(() => plan.steps.map((s) => s.url), [plan.steps]);
+  const urls = useMemo(() => plan.steps.map((s) => s.revision ? `${s.url}?v=${s.revision}` : s.url), [plan.steps]);
   const trims = useMemo(
     () =>
       timeline.map((s) => ({
