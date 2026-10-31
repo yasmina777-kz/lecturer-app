@@ -114,7 +114,7 @@ def anatomical_fingers(side,pts,fade):
  bpy.context.view_layer.update()
 
 forearm_twist={}
-def tracked_arm(side,wrist,q,elbow_hint=None,influence=1):
+def tracked_arm(side,wrist,q,elbow_hint=None,influence=1,pole_override=None):
  """Two-bone IK with a captured elbow pole, connected wrist and distributed roll."""
  upper=B(side+'Arm');fore=B(side+'ForeArm');hand=B(side+'Hand')
  shoulder=upper.head.copy();l1=upper.bone.length;l2=fore.bone.length
@@ -128,9 +128,11 @@ def tracked_arm(side,wrist,q,elbow_hint=None,influence=1):
   if hint.length>.001:
    confidence=smooth(.015,.08,hint.length)
    pole=default.lerp(hint.normalized(),.85*influence*confidence).normalized()
+ if pole_override is not None:
+  pole=V(pole_override);pole-=axis*pole.dot(axis);pole.normalize()
  # Near an extended arm, a tiny landmark error must not flip the elbow plane.
  previous_pole=forearm_twist.get(side+'_pole')
- if previous_pole is not None:
+ if previous_pole is not None and pole_override is None:
   previous_pole=previous_pole-axis*previous_pole.dot(axis)
   if previous_pole.length>.001:
    previous_pole.normalize()

@@ -245,6 +245,8 @@ docker-compose.yml  Локальный PostgreSQL + backend + frontend
 
 Один 3D-персонаж использует небольшие файлы анимаций без повторного скачивания его геометрии. Единый таймер управляет паузой, скоростью, перемоткой и повтором всей последовательности. Словарь и тренажёр букв используют тот же проигрыватель. Структура процесса и воспроизведение: [art/sign-motion/README.md](art/sign-motion/README.md). Проверка: `npm run test:sign-motion --prefix frontend`.
 
-### Avatar motion mechanics (v2)
+### Механика аватара: проверка пересечений
 
-The sign library uses palm-relative finger joints, constrained interphalangeal hinges, captured elbow guidance and cleaned rotation curves. Phrase playback trims only synthetic rest intervals and blends adjacent signs. All 203 motions remain experimental and unreviewed for RSL correctness; this is animation processing, not new language-model training. See `art/sign-motion/README.md` for reproducible Blender sources and limitations.
+Каталог содержит 206 экспериментальных анимаций: 33 буквы, 170 слов и три подготовленные фразы. В версии v7 траектории кистей и предплечий корректируются в Blender относительно поверхности корпуса, головы и одежды. Сохраняются отдельные сгибания пальцев, согласованное движение двух рук и ограничение скорости суставов. Обработана также поза ожидания. Переходы сохраняют начало и завершение каждого жеста.
+
+Независимая проверка загружает готовые GLB и проверяет кожу на 60 кадрах в секунду; отдельные проверки охватывают 32 собранные фразы и 78 переходов к позе ожидания. Отчёт с версиями файлов: `frontend/public/avatars/sign-motion/body-clearance-report.json`. Это проверка проходов рук внутрь передней поверхности модели, а не подтверждение правильности РЖЯ, контакта между руками или мимики. Перенос движений не является обучением нового генератора языка жестов. Воспроизведение процесса: [art/sign-motion/README.md](art/sign-motion/README.md).

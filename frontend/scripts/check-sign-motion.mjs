@@ -11,6 +11,21 @@ const motion=await source('../src/sign/motion.ts',{'"./dictionary"':dictionary,'
 const {composeMotion}=await import(await source('../src/sign/composeMotion.ts',{'"three"':new URL('../node_modules/three/build/three.module.js',import.meta.url).href,'"./motion"':motion}));
 const assets=await read('../public/avatars/sign-motion/catalog.json'),words=await read('../public/research/rsl/words/catalog.json'),forms=await read('../public/research/rsl/words/forms.json'),entries=[...alphabetEntries(),...words];
 const {phraseGroups}=await import(await source('../src/sign/phraseExamples.ts'));
+const bodyReport=await read('../public/avatars/sign-motion/body-clearance-report.json');
+assert.equal(bodyReport.library.clips.length,207);
+assert.equal(bodyReport.phrases.clips.length,32);
+assert.equal(bodyReport.idleTransitions.clips.length,78);
+for(const group of [bodyReport.library,bodyReport.phrases,bodyReport.idleTransitions]){
+ assert.equal(group.sampleRate,60);assert.deepEqual(group.failed,[]);
+ assert.ok(group.clips.every(c=>c.samples>1&&c.maxOverlapMeters<=.002));
+}
+for(const [path,hash]of Object.entries(bodyReport.sources)){
+ assert.equal(createHash('sha256').update(await readFile(new URL('../../'+path,import.meta.url))).digest('hex'),hash,'stale clearance validation: '+path);
+}
+for(const checked of bodyReport.library.clips){
+ const bytes=await readFile(new URL('../public/avatars/sign-motion/'+checked.id+'.glb',import.meta.url));
+ assert.equal(createHash('sha256').update(bytes).digest('hex'),checked.sha256,'unchecked changed animation: '+checked.id);
+}
 let restTransitionAtFixedGap=0;
 for(const group of phraseGroups)for(const phrase of group.phrases){
  const example=planMotion(phrase,entries,forms,assets);
@@ -59,9 +74,9 @@ for(const asset of assets){
    const bone=loaded.scene.getObjectByName('mixamorig'+suffix);
    assert.ok(bone,suffix);return bone.getWorldPosition(new Vector3());
   };
-  const sample=(t)=>{mixer.setTime(t);loaded.scene.updateMatrixWorld(true);};
+  const sample=(t,sourceTime=false)=>{if(sourceTime){const times=asset.bodyClearance.sourceFrameTimes;const f=Math.min(t*30,times.length-1),i=Math.floor(f);t=times[i]+((times[i+1]??times[i])-times[i])*(f-i);}mixer.setTime(t);loaded.scene.updateMatrixWorld(true);};
   if(asset.label==='я') {
-   sample(1.14);
+   sample(1.14,true);
    assert.ok(point('LeftHandIndex3').z<point('LeftHandIndex1').z-.025,'self-point must face back toward the chest');
   }
   if(['читать','помочь'].includes(asset.label)) for(const t of [asset.leadIn+.3,asset.leadIn+.6]) {
@@ -80,8 +95,8 @@ for(const asset of assets){
     }
   }
   if(asset.label==='книга') {
-   sample(1.7);const closed=point('LeftHand').distanceTo(point('RightHand'));
-   sample(1.13);const open=point('LeftHand').distanceTo(point('RightHand'));
+   sample(1.7,true);const closed=point('LeftHand').distanceTo(point('RightHand'));
+   sample(1.13,true);const open=point('LeftHand').distanceTo(point('RightHand'));
    assert.ok(closed<.065 && open>closed+.025,'book hands must close together then open from a shared hinge');
   }
   mixer.stopAllAction();mixer.uncacheRoot(loaded.scene);
@@ -174,9 +189,10 @@ console.log('32 phrases: source-pose samples preserved:',verifiedPhraseFrames,';
 
 assert.throws(()=>composeMotion([ordered[0]],undefined,[{start:ordered[0].duration,end:0}]),/Invalid motion window/);
 for(const asset of assets){
- assert.equal(asset.motionVersion,6,asset.label);
+ assert.equal(asset.motionVersion,7,asset.label);
+ assert.ok(asset.bodyClearance?.afterMaxMeters<=.002,`${asset.label}: body clearance failed`);
  assert.equal(asset.handMechanics,'workshop-parameter-curves-v1',asset.label);
- if (!asset.id.startsWith('prepared-')) assert.ok(asset.finalWristErrorMeters<.001,`${asset.label}: coordinated wrist target lost`);
+ if (!asset.id.startsWith('prepared-')) assert.ok(asset.sourceWristFitErrorMeters<.001,`${asset.label}: coordinated wrist target lost`);
  assert.ok(asset.maxJointStepDegrees<=8.1,`${asset.label}: rotation spike`);
  assert.ok(asset.maxHingeOffAxis<.0001,`${asset.label}: finger hinge twist`);
  assert.ok(asset.leadIn>0 && asset.leadOut>0);

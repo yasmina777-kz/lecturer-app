@@ -9,7 +9,7 @@
     "Tracking coverage is not gesture correctness.",
     "Long occlusions are interpolated and can create wrong finger shapes.",
     "No face/mouth grammar capture.",
-    "Hand/arm collisions have not been certified.",
+    "Front-surface clearance checks do not certify arm-arm contacts or linguistic correctness.",
     "Text sequences retain Russian source order; no grammatical translation."
   ],
   "source": "203 Bukva/Slovo reference adaptations plus 3 project-authored phrases; Blender anatomical hand rebake",
@@ -17,13 +17,15 @@
     "minPoseCoverage": 0.85,
     "minDominantHandCoverage": 0.65,
     "maxHingeOffAxis": 0.0001,
-    "motionVersion": 6
+    "motionVersion": 7
   },
   "observed": {
     "maxHingeOffAxis": 2.9802322387695312e-08,
-    "maxJointStepDegrees": 7.918,
-    "v6Clips": 206,
-    "maxFinalWristErrorMeters": 0.00023539843194510276,
+    "maxJointStepDegrees": 7.917774705705868,
+    "v7Clips": 206,
+    "maxSourceWristFitErrorMeters": 0.00023539843194510276,
+    "maxBodyOverlapAfterMeters": 0,
+    "maxBodyOverlapBeforeMeters": 0.1918952502310276,
     "maxLegacyWristDriftMeters": 0.29551429508994154
   }
 }

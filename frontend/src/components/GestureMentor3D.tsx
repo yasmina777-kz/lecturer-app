@@ -271,8 +271,12 @@ export function GestureMentor3D({
         let idleClip: THREE.AnimationClip | undefined;
         try {
           if (naturalIdle) {
+            const idleResponse = await fetch("/avatars/sign-motion/ready-idle.json", { cache: "no-cache" });
+            if (!idleResponse.ok) throw new Error("Missing idle motion metadata");
+            const idleMetadata = await idleResponse.json();
+            if (typeof idleMetadata.revision !== "string") throw new Error("Missing idle motion revision");
             const idle = await new GLTFLoader().loadAsync(
-              "/avatars/mixamo-trial/standing-idle.glb",
+              `/avatars/sign-motion/ready-idle.glb?v=${encodeURIComponent(idleMetadata.revision)}`,
             );
             idleClip = idle.animations[0];
             disposeModel(idle.scene);

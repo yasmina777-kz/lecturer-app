@@ -109,3 +109,57 @@ asset after a correction. `hand_motion_study.py` makes a six-second articulation
 study and an editable `.blend`; it is explicitly NOT a sign-language lesson.
 These rig and timing improvements do not repair every uncertain source landmark
 or establish correct RSL grammar. Expert reference review remains necessary.
+
+### Body clearance v7
+
+`clear_body.py` runs after the v6 finger/arm bake and before publishing. It uses
+vertices of the evaluated character and shirt, rather than a wrist-only sphere.
+For hands and forearms it measures clearance from the front surface of the
+head/torso/clothing. Both wrists receive a shared depth correction, with a smooth
+anticipatory envelope; elbow IK and source forearm twist are transported together.
+The elbow route is unwrapped over time to avoid a 180° branch flip. The entire
+pose is then retimed under the existing joint-speed limit. The standing idle is
+processed too (`ready-idle.glb`). Appearance and finger hinge curves are retained.
+
+```sh
+# Keep an immutable copy of the v6 input catalog and clips before this step.
+/Applications/Blender.app/Contents/MacOS/Blender -b --python art/sign-motion/clear_body.py -- input=/path/to/v6-motion
+python3 ml/rsl/publish_motion_catalog.py
+/Applications/Blender.app/Contents/MacOS/Blender -b --python art/sign-motion/verify_body_clearance.py -- report=/tmp/body-clearance.json
+node frontend/scripts/export-phrase-clearance-qa.mjs
+/Applications/Blender.app/Contents/MacOS/Blender -b --python art/sign-motion/verify_body_clearance.py -- directory=/tmp/sign-phrase-clearance-qa report=/tmp/phrase-clearance.json
+npm run test:sign-motion --prefix frontend
+```
+
+Both Blender scripts accept `batch=0/3` (and the other two indices) for disjoint
+batches. The independent verifier reloads exported GLBs, evaluates the skin at
+60 Hz including lead-in/out, and fails above 2 mm of front-surface overlap.
+`sourceFrameTimes` maps each original 30 Hz frame to corrected playback time;
+`sourceWristFitErrorMeters` describes the input fit, not the intentionally changed
+wrist trajectory. The public `body-clearance-report.json` records export checks.
+
+This is a conservative front-surface constraint, not a general triangle-mesh
+collision engine: it does not certify hand-to-hand contacts, every possible
+runtime crossfade, or linguistic correctness. Large depth corrections can change
+a sign's placement. Occluded fingers, mouth grammar and source-data mistakes
+still require human RSL review. Passing mechanical checks is not a claim that
+the avatar has learned all words or translates Russian grammar into RSL.
+
+If the independent export check fails after retiming, copy the current GLB/JSON
+and catalog to a new input directory and run `clear_body.py -- input=... refine
+<failed-id>`. This corrects the now-sampled intermediate poses and composes the
+original-time mapping, rather than discarding it. Reload and verify the result
+again. Never publish merely because the pre-export `afterMaxMeters` is zero.
+
+The idle/start/finish checks run the actual `AvatarPlayback` mixer at three idle
+phases for 13 selected movements (78 transitions):
+
+```sh
+node frontend/scripts/export-phrase-clearance-qa.mjs /tmp/sign-idle-clearance-qa --idle-transitions
+/Applications/Blender.app/Contents/MacOS/Blender -b --python-exit-code 1 --python art/sign-motion/verify_body_clearance.py -- directory=/tmp/sign-idle-clearance-qa report=/tmp/idle-clearance.json
+python3 ml/rsl/publish_clearance_validation.py --library /tmp/body-clearance.json --phrases /tmp/phrase-clearance.json --idle /tmp/idle-clearance.json
+```
+
+For batched verification, pass all library reports after `--library`.
+`test:sign-motion` rejects a missing/stale validation report using the hashes of
+all 207 GLBs, the model, and the runtime composition/playback sources.
