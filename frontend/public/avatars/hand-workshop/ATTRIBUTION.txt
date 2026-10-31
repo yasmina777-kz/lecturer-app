@@ -1,0 +1,4 @@
+Character: existing Mira, MakeHuman CC0 base. See art/mira-blender-v2/README.txt.
+Hand weight repair, controllers, test choreography and contact fitting: project-authored Blender scripts under art/hand-rig.
+Finger flexion axes use the existing calibration from the user's downloaded Adobe Mixamo Talking motion; body micro-motion uses existing Standing Idle calibration. These five mechanical tests are not Mixamo RSL animations or linguistically validated sign-language examples. Original Mixamo trials and attribution: /avatars/mixamo-trial/ATTRIBUTION.txt.
+Game exports contain the deform skeleton and baked animation; Blender controllers are in Mira-Hand-Workshop.blend only.

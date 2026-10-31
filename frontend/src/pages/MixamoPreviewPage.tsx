@@ -6,17 +6,21 @@ import { at } from "../i18n/automation";
 import "./sign-workspace.css";
 
 export function MixamoPreviewPage() {
-  const [motion, setMotion] = useState("talking");
+  const [motion, setMotion] = useState("fist");
   const [plan, setPlan] = useState<MotionPlan>();
   const [failed, setFailed] = useState(false);
   const [attempt, setAttempt] = useState(0);
+  const workshop = !["talking", "standing-idle"].includes(motion);
   useEffect(() => {
     const controller = new AbortController();
     setFailed(false);
     setPlan(undefined);
-    fetch(`/avatars/mixamo-trial/${motion}.json`, {
-      signal: controller.signal,
-    })
+    fetch(
+      `/avatars/${workshop ? "hand-workshop" : "mixamo-trial"}/${motion}.json`,
+      {
+        signal: controller.signal,
+      },
+    )
       .then((r) => {
         if (!r.ok) throw new Error("Missing motion");
         return r.json();
@@ -32,6 +36,7 @@ export function MixamoPreviewPage() {
               text: m.label,
               duration: m.duration,
               url: m.url,
+              revision: m.revision,
               review: "body-motion-trial",
             },
           ],
@@ -41,7 +46,7 @@ export function MixamoPreviewPage() {
         if (e.name !== "AbortError") setFailed(true);
       });
     return () => controller.abort();
-  }, [attempt, motion]);
+  }, [attempt, motion, workshop]);
   return (
     <main className="sign-workspace">
       <Link to="/text-to-sign">
@@ -49,16 +54,16 @@ export function MixamoPreviewPage() {
       </Link>
       <h1>
         {at(
-          "Пробуем движения Mixamo",
-          "Mixamo motion trial",
-          "Mixamo қимылдарын сынау",
+          "Проверка рук и движения Mixamo",
+          "Hand workshop and Mixamo motion",
+          "Қол қимылдары және Mixamo",
         )}
       </h1>
       <p>
         {at(
-          "Два примера из Mixamo на нашей наставнице: спокойная стойка и разговорные жесты. Нажмите «Показать всё», чтобы оценить стойку, перенос веса и движение рук.",
-          "Two Mixamo examples on our mentor: standing idle and conversational gestures. Press Play all to inspect the posture, weight shift and arms.",
-          "Тәлімгерімізде Mixamo-ның екі мысалы: тыныш тұру және әңгімелесу қимылдары. Дене қалпы мен қол қимылын бағалау үшін «Толық көрсету» түймесін басыңыз.",
+          "Пять тестов кистей с исправленными весами кожи и два исходных движения Mixamo. Выберите тест, приблизьте руки и посмотрите спереди, сбоку и в три четверти. Это проверка механики аватара, а не урок РЖЯ.",
+          "Five hand tests with repaired skin weights and two original Mixamo movements. Choose a test, zoom in and inspect the front, side and three-quarter views. These are mechanical tests, not RSL lessons.",
+          "Тері салмақтары түзетілген бес қол сынағы және Mixamo-ның екі қимылы. Сынақты таңдап, қолды жақындатып, алдынан, қырынан және үш ширек көріністе тексеріңіз. Бұл — аватар механикасының сынағы, ым тілі сабағы емес.",
         )}
       </p>
       <label
@@ -66,6 +71,23 @@ export function MixamoPreviewPage() {
       >
         {at("Выберите движение", "Choose motion", "Қимылды таңдаңыз")}
         <select value={motion} onChange={(e) => setMotion(e.target.value)}>
+          <option value="fist">
+            {at(
+              "Сжать и раскрыть кулак",
+              "Close and open fist",
+              "Жұдырықты жұму және ашу",
+            )}
+          </option>
+          <option value="point">
+            {at("Указательный жест", "Point", "Нұсқау")}
+          </option>
+          <option value="pinch">{at("Щипок", "Pinch", "Шымшу")}</option>
+          <option value="wave">
+            {at("Взмах рукой", "Wave", "Қол бұлғау")}
+          </option>
+          <option value="grasp">
+            {at("Захват шара", "Grasp a ball", "Шарды ұстау")}
+          </option>
           <option value="talking">
             {at(
               "Разговорные жесты",
@@ -96,6 +118,11 @@ export function MixamoPreviewPage() {
         <SignSequencePlayer
           key={motion}
           plan={plan}
+          modelUrl={
+            motion === "grasp"
+              ? "/avatars/hand-workshop/grasp-scene.glb"
+              : undefined
+          }
           framing="body"
           note={at(
             "Это проба естественных движений тела, а не жест РЖЯ. Во время обучения сохраняются отдельные движения букв и слов.",
@@ -112,7 +139,17 @@ export function MixamoPreviewPage() {
         <a href="https://www.mixamo.com/" target="_blank" rel="noreferrer">
           Adobe Mixamo
         </a>{" "}
-        · {motion === "talking" ? "Talking" : "Standing Idle"} · 30 fps
+        ·{" "}
+        {workshop
+          ? at(
+              "Тесты кистей подготовлены в Blender",
+              "Hand tests authored in Blender",
+              "Қол сынақтары Blender-де дайындалған",
+            )
+          : motion === "talking"
+            ? "Talking"
+            : "Standing Idle"}{" "}
+        · 30 fps
       </p>
     </main>
   );

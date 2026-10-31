@@ -1,0 +1,10 @@
+{
+  "label": "Взмах рукой",
+  "url": "/avatars/hand-workshop/wave.glb",
+  "duration": 6.633333333333334,
+  "holdTime": 3.3101667519118614,
+  "revision": "17a9f07da206",
+  "scope": "mechanical hand test, not RSL",
+  "sourcePeakJointStepDegrees": 19.198995813461767,
+  "speedLimitDegreesPerSecond": 240
+}

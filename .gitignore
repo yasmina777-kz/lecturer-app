@@ -87,3 +87,8 @@ art/**/*
 !art/**/*.py
 !art/**/README.*
 !art/mira-blender-v2/Mira-base.blend
+
+# Editable hand rig requested alongside game exports.
+!art/hand-rig/Mira-Hand-Workshop.blend
+!art/sign-motion/mixamo-hand-calibration.json
+!art/sign-motion/mixamo-body-calibration.json

@@ -1,0 +1,10 @@
+{
+  "label": "Захват шара",
+  "url": "/avatars/hand-workshop/grasp.glb",
+  "duration": 7.1,
+  "holdTime": 3.577990837284659,
+  "revision": "0b462713d647",
+  "scope": "mechanical hand test, not RSL",
+  "sourcePeakJointStepDegrees": 27.254283571501148,
+  "speedLimitDegreesPerSecond": 240
+}

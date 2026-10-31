@@ -1,0 +1,10 @@
+{
+  "label": "Указательный жест",
+  "url": "/avatars/hand-workshop/point.glb",
+  "duration": 6.633333333333334,
+  "holdTime": 3.3101667519118614,
+  "revision": "09976bc7aad8",
+  "scope": "mechanical hand test, not RSL",
+  "sourcePeakJointStepDegrees": 19.198995813461767,
+  "speedLimitDegreesPerSecond": 240
+}

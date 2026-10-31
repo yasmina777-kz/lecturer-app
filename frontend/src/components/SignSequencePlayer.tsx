@@ -11,19 +11,25 @@ const Mentor = lazy(() =>
 );
 export function SignSequencePlayer({
   plan,
+  modelUrl = "/avatars/hand-workshop/mira-rig.glb",
   autoPlay = false,
   framing = "sign",
   note,
   naturalIdle = framing === "sign",
 }: {
   plan: MotionPlan;
+  modelUrl?: string;
   autoPlay?: boolean;
   framing?: "sign" | "body";
   note?: string;
   naturalIdle?: boolean;
 }) {
   const timeline = useMemo(() => motionTimeline(plan.steps), [plan.steps]);
-  const urls = useMemo(() => plan.steps.map((s) => s.revision ? `${s.url}?v=${s.revision}` : s.url), [plan.steps]);
+  const urls = useMemo(
+    () =>
+      plan.steps.map((s) => (s.revision ? `${s.url}?v=${s.revision}` : s.url)),
+    [plan.steps],
+  );
   const trims = useMemo(
     () =>
       timeline.map((s) => ({
@@ -136,7 +142,7 @@ export function SignSequencePlayer({
                 }
               >
                 <Mentor
-                  modelUrl="/avatars/mira-blender/letter-a.glb"
+                  modelUrl={modelUrl}
                   motionUrls={blocked ? [] : urls}
                   playbackState={
                     naturalIdle

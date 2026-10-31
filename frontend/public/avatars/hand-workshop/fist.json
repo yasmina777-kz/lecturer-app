@@ -1,0 +1,10 @@
+{
+  "label": "Сжать и раскрыть кулак",
+  "url": "/avatars/hand-workshop/fist.glb",
+  "duration": 6.633333333333334,
+  "holdTime": 3.3101667519118614,
+  "revision": "bf3c87018eb4",
+  "scope": "mechanical hand test, not RSL",
+  "sourcePeakJointStepDegrees": 19.198995813461767,
+  "speedLimitDegreesPerSecond": 240
+}

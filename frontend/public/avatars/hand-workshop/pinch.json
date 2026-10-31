@@ -1,0 +1,10 @@
+{
+  "label": "Щипок",
+  "url": "/avatars/hand-workshop/pinch.glb",
+  "duration": 6.633333333333334,
+  "holdTime": 3.3101667519118614,
+  "revision": "be849ff27ce3",
+  "scope": "mechanical hand test, not RSL",
+  "sourcePeakJointStepDegrees": 19.198995813461767,
+  "speedLimitDegreesPerSecond": 240
+}

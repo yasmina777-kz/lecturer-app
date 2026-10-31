@@ -1,0 +1,95 @@
+{
+  "weights": {
+    "verticesChanged": 179,
+    "crossFingerDistalBefore": 179,
+    "crossFingerDistalAfter": 0,
+    "maxWeightSumError": 2.220446049250313e-16,
+    "handVertices": 3012
+  },
+  "source": "Existing Mira mesh; Mixamo-calibrated flexion planes; independent mechanical tests, not RSL signs",
+  "pinchBoneTipGapMeters": {
+    "Left": 0.012229900609592103,
+    "Right": 0.011976979622906022
+  },
+  "graspBoneTipSurfaceGapsMeters": {
+    "Thumb": 0.01033046114084693,
+    "Index": 0.0023456429308316915,
+    "Middle": 0.0013609480337168425,
+    "Ring": 0.004950806253071642,
+    "Pinky": 0.00548640072005397
+  },
+  "fist": {
+    "label": "Сжать и раскрыть кулак",
+    "url": "/avatars/hand-workshop/fist.glb",
+    "duration": 6.633333333333334,
+    "holdTime": 3.3101667519118614,
+    "revision": "bf3c87018eb4",
+    "scope": "mechanical hand test, not RSL",
+    "sourcePeakJointStepDegrees": 19.198995813461767,
+    "speedLimitDegreesPerSecond": 240
+  },
+  "point": {
+    "label": "Указательный жест",
+    "url": "/avatars/hand-workshop/point.glb",
+    "duration": 6.633333333333334,
+    "holdTime": 3.3101667519118614,
+    "revision": "09976bc7aad8",
+    "scope": "mechanical hand test, not RSL",
+    "sourcePeakJointStepDegrees": 19.198995813461767,
+    "speedLimitDegreesPerSecond": 240
+  },
+  "pinch": {
+    "label": "Щипок",
+    "url": "/avatars/hand-workshop/pinch.glb",
+    "duration": 6.633333333333334,
+    "holdTime": 3.3101667519118614,
+    "revision": "be849ff27ce3",
+    "scope": "mechanical hand test, not RSL",
+    "sourcePeakJointStepDegrees": 19.198995813461767,
+    "speedLimitDegreesPerSecond": 240
+  },
+  "wave": {
+    "label": "Взмах рукой",
+    "url": "/avatars/hand-workshop/wave.glb",
+    "duration": 6.633333333333334,
+    "holdTime": 3.3101667519118614,
+    "revision": "17a9f07da206",
+    "scope": "mechanical hand test, not RSL",
+    "sourcePeakJointStepDegrees": 19.198995813461767,
+    "speedLimitDegreesPerSecond": 240
+  },
+  "grasp": {
+    "label": "Захват шара",
+    "url": "/avatars/hand-workshop/grasp.glb",
+    "duration": 7.1,
+    "holdTime": 3.577990837284659,
+    "revision": "0b462713d647",
+    "scope": "mechanical hand test, not RSL",
+    "sourcePeakJointStepDegrees": 27.254283571501148,
+    "speedLimitDegreesPerSecond": 240
+  },
+  "controllerBones": 46,
+  "deformBones": 70,
+  "controls": {
+    "Left": {
+      "fingerControlRotationDegrees": 210.21322385910267,
+      "ikTargetErrorMeters": 3.129243850708008e-07,
+      "fkRotationErrorDegrees": 0.0
+    },
+    "Right": {
+      "fingerControlRotationDegrees": 209.7458340141987,
+      "ikTargetErrorMeters": 2.1126042125758269e-07,
+      "fkRotationErrorDegrees": 0.0
+    }
+  },
+  "graspSkinContact": {
+    "hold": {
+      "Index": 0.000586644023920467,
+      "Middle": 0.0005949706688189171,
+      "Ring": 0.0006192438458473837,
+      "Pinky": 0.0007612939602237578,
+      "Thumb": 0.0005521120620967171
+    }
+  },
+  "bakedMaxJointStepDegrees": 7.917675667962903
+}

@@ -352,7 +352,8 @@ function AnimatedExercisePlayer({
           <div className="sign-avatar-stage">
             <Suspense fallback={<Loading />}>
               <Mentor
-                modelUrl={`/avatars/mira-blender/${exercise.model}`}
+                modelUrl="/avatars/hand-workshop/mira-rig.glb"
+                motionUrls={[`/avatars/mira-blender/${exercise.model}`]}
                 time={animationTime(time, isLetter)}
                 framing={isLetter ? "letter" : "sign"}
                 closeup={closeup}
