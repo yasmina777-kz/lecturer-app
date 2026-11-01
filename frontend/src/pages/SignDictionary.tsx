@@ -1,12 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import {
-  Search,
-  BookOpen,
-  Play,
-  ArrowRight,
-  MessageCircle,
-} from "lucide-react";
+import { Search, BookOpen, Play, ArrowRight } from "lucide-react";
 import { at } from "../i18n/automation";
 import {
   alphabetEntries,
@@ -18,6 +12,7 @@ import { SignSequencePlayer } from "../components/SignSequencePlayer";
 import { exercises } from "../sign/exercises";
 import "./sign-dictionary.css";
 import { ReferenceVideo } from "../components/SignReferenceVideo";
+import { phraseArt } from "../sign/phraseArt";
 import { phraseGroups } from "../sign/phraseExamples";
 import { alphabetIllustration } from "../sign/alphabetIllustrations";
 import { AlphabetCardArt } from "../components/AlphabetCardArt";
@@ -415,9 +410,9 @@ export function SignDictionaryPage() {
             </select>
             <p>
               {at(
-                "Выберите фразу — доступные жесты будут показаны подряд. Это учебная последовательность, а не проверенный перевод с грамматикой РЖЯ.",
-                "Choose a phrase to play its available signs in order. These are practice sequences, not verified grammatical RSL translations.",
-                "Сөйлемді таңдаңыз — қолжетімді ишаралар ретімен көрсетіледі. Бұл оқу тізбегі, РЖЯ грамматикасымен тексерілген аударма емес.",
+                "Нажмите на карточку, чтобы открыть показ. Картинки — обложки по теме, а не точные образцы жестов. Показы составлены из доступных слов.",
+                "Select a card to open its demonstration. Pictures are thematic covers, not exact sign references. Demonstrations combine available word signs.",
+                "Көрсетілім үшін карточканы таңдаңыз. Суреттер — тақырыптық мұқабалар, нақты ым үлгілері емес. Көрсетілімдер қолжетімді сөздерден құралады.",
               )}
             </p>
           </div>
@@ -444,9 +439,25 @@ export function SignDictionaryPage() {
                   );
                 }}
               >
-                <MessageCircle size={21} aria-hidden="true" />
-                <strong>{v}</strong>
-                <Play size={18} aria-hidden="true" />
+                <span className="sign-phrase-cover">
+                  <img
+                    src={phraseArt(v)}
+                    alt=""
+                    loading="lazy"
+                    width="800"
+                    height="533"
+                  />
+                  <span className="sign-phrase-play">
+                    <Play size={18} aria-hidden="true" />
+                  </span>
+                </span>
+                <span className="sign-phrase-caption">
+                  <strong>{v}</strong>
+                  <span>
+                    {at("Смотреть показ", "Watch signs", "Көрсетілімді қарау")}
+                    <ArrowRight size={16} />
+                  </span>
+                </span>
               </button>
             ))}
           </div>

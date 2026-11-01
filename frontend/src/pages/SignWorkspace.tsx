@@ -395,6 +395,15 @@ export function SignHelpPage() {
             ),
           ],
           [
+            "/recognition",
+            at("Жесты → текст", "Signs → text", "Ымдар → мәтін"),
+            at(
+              "Показывайте отдельные буквы камере или загрузите короткое видео. Принятые ответы модели собираются в редактируемые субтитры. Свободные фразы и грамматика пока не распознаются.",
+              "Show isolated letters to the camera or upload a short video. Accepted predictions become editable captions. Continuous phrases and grammar are not yet recognized.",
+              "Камераға жеке әріптерді көрсетіңіз не қысқа бейне жүктеңіз. Қабылданған жауаптар түзетілетін субтитрге жиналады. Еркін сөйлемдер мен грамматика әзірге танылмайды.",
+            ),
+          ],
+          [
             "/practice",
             at("Моя практика", "My practice", "Менің жаттығуым"),
             at(

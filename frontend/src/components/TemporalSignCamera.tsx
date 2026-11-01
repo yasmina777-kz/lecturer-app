@@ -12,8 +12,14 @@ import {
   type TemporalFrame,
 } from "../sign/temporal";
 import { at } from "../i18n/automation";
+import { releaseGate } from "../sign/captions";
 import { drawHandOverlay } from "../sign/handOverlay";
-export function TemporalSignCamera({ expected }: { expected: string }) {
+export type SignPrediction = ReturnType<typeof recognizeSequence>;
+type CameraProps = {
+  expected?: string;
+  onPrediction?: (prediction: SignPrediction) => void;
+};
+export function TemporalSignCamera({ expected, onPrediction }: CameraProps) {
   const [cautious, setCautious] = useState(false);
   return (
     <div className="sign-camera-modes">
@@ -21,6 +27,7 @@ export function TemporalSignCamera({ expected }: { expected: string }) {
         key={`${expected}:${cautious}`}
         expected={expected}
         cautious={cautious}
+        onPrediction={onPrediction}
       />
       <details className="sign-camera-settings">
         <summary>
@@ -73,10 +80,16 @@ export function TemporalSignCamera({ expected }: { expected: string }) {
 function TemporalCameraSession({
   expected,
   cautious,
-}: {
-  expected: string;
-  cautious: boolean;
-}) {
+  onPrediction,
+}: CameraProps & { cautious: boolean }) {
+  const [automatic, setAutomatic] = useState(false);
+  const autoReady = useRef(true);
+  const emptyFrames = useRef(0);
+  const capturing = useRef(false);
+  function publish(prediction: SignPrediction) {
+    setResult(prediction);
+    onPrediction?.(prediction);
+  }
   const video = useRef<HTMLVideoElement>(null),
     overlay = useRef<HTMLCanvasElement>(null),
     loading = useRef<Promise<void>>(),
@@ -144,6 +157,10 @@ function TemporalCameraSession({
       video.current.srcObject = null;
     }
     setActive(false);
+    setAutomatic(false);
+    autoReady.current = true;
+    emptyFrames.current = 0;
+    capturing.current = false;
     setFilePreview(false);
     setHandCount(null);
     if (overlay.current)
@@ -227,7 +244,20 @@ function TemporalCameraSession({
         try {
           lastTime = source.currentTime;
           lastRun = now;
-          paint(source, detector.current!.detect(source));
+          const detected = detector.current!.detect(source);
+          paint(source, detected);
+          if (!detected.landmarks.length) {
+            const gate = releaseGate(emptyFrames.current, false);
+            emptyFrames.current = gate.emptyFrames;
+            if (gate.released) autoReady.current = true;
+          } else {
+            emptyFrames.current = 0;
+            if (automatic && autoReady.current && !capturing.current) {
+              autoReady.current = false;
+              void record();
+              return;
+            }
+          }
         } catch (e) {
           stop();
           disposeDetector();
@@ -239,7 +269,7 @@ function TemporalCameraSession({
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [active, busy]);
+  }, [active, busy, automatic]);
   function fail(
     reason?: unknown,
     stage: "model" | "camera" | "video" | "tracking" = "video",
@@ -336,6 +366,10 @@ function TemporalCameraSession({
     }
   }
   async function record() {
+    if (capturing.current) return;
+    capturing.current = true;
+    autoReady.current = false;
+    emptyFrames.current = 0;
     const token = generation.current;
     setBusy(true);
     setResult(null);
@@ -351,7 +385,7 @@ function TemporalCameraSession({
         if (i < 15) await new Promise((r) => setTimeout(r, 180));
       }
       if (alive.current && token === generation.current)
-        setResult(recognizeSequence(frames, model.current!));
+        publish(recognizeSequence(frames, model.current!));
     } catch (e) {
       if (alive.current && token === generation.current) {
         stop();
@@ -359,7 +393,10 @@ function TemporalCameraSession({
         fail(e, "tracking");
       }
     } finally {
-      if (alive.current && token === generation.current) setBusy(false);
+      if (alive.current && token === generation.current) {
+        capturing.current = false;
+        setBusy(false);
+      }
     }
   }
   async function inspect(file?: File) {
@@ -427,7 +464,7 @@ function TemporalCameraSession({
         setProgress(i + 1);
       }
       if (alive.current && token === generation.current)
-        setResult(recognizeSequence(frames, model.current!));
+        publish(recognizeSequence(frames, model.current!));
     } catch (e) {
       if (alive.current && token === generation.current) fail(e, stage);
     } finally {
@@ -446,14 +483,20 @@ function TemporalCameraSession({
         )}
       </span>
       <h2>
-        {at("Покажите букву", "Show the letter", "Әріпті көрсетіңіз")} «
-        {expected}»
+        {expected ? (
+          <>
+            {at("Покажите букву", "Show the letter", "Әріпті көрсетіңіз")} «
+            {expected}»
+          </>
+        ) : (
+          at("Камера → текст", "Camera → text", "Камера → мәтін")
+        )}
       </h2>
       <p className="sign-camera-intro">
         {at(
-          "Повторите букву перед камерой и получите ответ модели.",
-          "Repeat the letter on camera to get model feedback.",
-          "Камера алдында әріпті қайталап, модель жауабын алыңыз.",
+          "Покажите одну букву. Модель попробует определить её по движению руки.",
+          "Show one letter. The model will try to identify it from your hand movement.",
+          "Бір әріпті көрсетіңіз. Модель оны қол қимылынан анықтауға тырысады.",
         )}
       </p>
       {!active && !filePreview && (
@@ -462,7 +505,7 @@ function TemporalCameraSession({
             <span className="sign-camera-corner" />
             <Hand strokeWidth={1.25} />
             <span className="sign-camera-scan" />
-            <span className="sign-camera-letter">{expected}</span>
+            <span className="sign-camera-letter">{expected || "А–Я"}</span>
             <span className="sign-camera-off">
               <Camera size={14} />
               {at("Камера выключена", "Camera is off", "Камера өшірулі")}
@@ -493,15 +536,15 @@ function TemporalCameraSession({
               <div>
                 <strong>
                   {at(
-                    "Запишите жест · 3 секунды",
+                    "Запишите букву · 3 секунды",
                     "Record the sign · 3 seconds",
                     "Ымды жазыңыз · 3 секунд",
                   )}
                 </strong>
                 <p>
                   {at(
-                    "Нажмите «Записать жест» и покажите одну букву.",
-                    "Press Record sign and show one letter.",
+                    "Нажмите «Распознать букву» и покажите одну букву.",
+                    "Press Recognize letter and show one letter.",
                     "«Қимылды жазу» түймесін басып, бір әріпті көрсетіңіз.",
                   )}
                 </p>
@@ -512,9 +555,9 @@ function TemporalCameraSession({
               <div>
                 <strong>
                   {at(
-                    "Сравните с образцом",
-                    "Compare with the reference",
-                    "Үлгімен салыстырыңыз",
+                    "Проверьте результат",
+                    "Check the result",
+                    "Нәтижені тексеріңіз",
                   )}
                 </strong>
                 <p>
@@ -561,6 +604,34 @@ function TemporalCameraSession({
             ` · ${at("Кадр из видео", "Video frame", "Бейнеден кадр")}`}
         </p>
       )}
+      {!expected && active && (
+        <div className="caption-auto-control">
+          <label>
+            <input
+              type="checkbox"
+              checked={automatic}
+              disabled={busy}
+              onChange={(e) => {
+                setAutomatic(e.target.checked);
+                autoReady.current = true;
+                emptyFrames.current = 0;
+              }}
+            />
+            {at(
+              "Распознавать по очереди",
+              "Recognize in sequence",
+              "Кезекпен тану",
+            )}
+          </label>
+          <p>
+            {at(
+              "Одна буква → уберите руку из кадра на секунду → следующая буква. Слова жестами пока не поддерживаются.",
+              "One letter → remove your hand for a second → next letter. Word signs are not supported yet.",
+              "Бір әріп → қолды бір секундқа кадрдан алыңыз → келесі әріп. Сөз ымдары әзірге қолдау таппайды.",
+            )}
+          </p>
+        </div>
+      )}
       <div className="sign-camera-actions">
         {!active && (
           <button
@@ -575,9 +646,9 @@ function TemporalCameraSession({
         {active && (
           <button className="button primary" disabled={busy} onClick={record}>
             {at(
-              "Записать жест · 3 с",
-              "Record sign · 3 s",
-              "Қимылды жазу · 3 с",
+              "Распознать букву · 3 с",
+              "Recognize letter · 3 s",
+              "Әріпті тану · 3 с",
             )}
           </button>
         )}
@@ -633,17 +704,23 @@ function TemporalCameraSession({
                 {result.label}
               </h3>
               <p>
-                {result.label === expected
+                {!expected
                   ? at(
-                      "Совпало с выбранной буквой. Сверьте положение руки и движение с образцом.",
-                      "Matches the selected letter. Compare hand position and movement with the reference.",
-                      "Таңдалған әріппен сәйкес. Қол қалпы мен қимылды үлгімен салыстырыңыз.",
+                      "Проверьте букву в субтитрах. Исправьте её, если модель ошиблась.",
+                      "The letter was added to the captions. Correct it if needed.",
+                      "Әріп субтитрге қосылды. Қажет болса, түзетіңіз.",
                     )
-                  : at(
-                      "Результат отличается от выбранной буквы. Это может быть ошибка модели; сравните видео, а не только ответ ИИ.",
-                      "The result differs from the selected letter. The model may be wrong; compare the video too.",
-                      "Нәтиже таңдалған әріптен өзгеше. Модель қателесуі мүмкін; бейнемен де салыстырыңыз.",
-                    )}
+                  : result.label === expected
+                    ? at(
+                        "Совпало с выбранной буквой. Сверьте положение руки и движение с образцом.",
+                        "Matches the selected letter. Compare hand position and movement with the reference.",
+                        "Таңдалған әріппен сәйкес. Қол қалпы мен қимылды үлгімен салыстырыңыз.",
+                      )
+                    : at(
+                        "Результат отличается от выбранной буквы. Это может быть ошибка модели; сравните видео, а не только ответ ИИ.",
+                        "The result differs from the selected letter. The model may be wrong; compare the video too.",
+                        "Нәтиже таңдалған әріптен өзгеше. Модель қателесуі мүмкін; бейнемен де салыстырыңыз.",
+                      )}
               </p>
             </>
           ) : (

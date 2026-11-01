@@ -1,0 +1,184 @@
+.recognition-kicker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--sw-muted);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  margin-bottom: 12px;
+}
+.recognition-scope {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 20px;
+  border: 1px solid var(--sw-border);
+  border-radius: 18px;
+  background: var(--sw-soft);
+  margin: 0 0 24px;
+}
+.recognition-scope > span {
+  flex-shrink: 0;
+  color: var(--sw-ink);
+  font-size: 13px;
+  font-weight: 650;
+}
+.recognition-scope p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+}
+.recognition-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.9fr);
+  align-items: start;
+  gap: 24px;
+}
+.recognition-layout .sign-camera {
+  padding: 24px !important;
+  margin-top: 0;
+}
+.recognition-layout .sign-camera-onboarding {
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+.recognition-layout .sign-camera-illustration {
+  min-height: 210px;
+}
+.recognition-layout .sign-camera-steps {
+  gap: 16px;
+}
+.recognition-layout .sign-tracking-view {
+  margin: 20px auto 0;
+}
+.sign-workspace .recognition-captions {
+  padding: 24px;
+  position: sticky;
+  top: 96px;
+  min-width: 0;
+  border-top: 3px solid #9ed5bf;
+}
+.recognition-caption-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.recognition-caption-heading h2 {
+  margin: 0;
+}
+.recognition-caption-heading > span {
+  margin-left: auto;
+  color: var(--sw-muted);
+  font-size: 11px;
+  border: 1px solid var(--sw-border);
+  border-radius: 20px;
+  padding: 5px 8px;
+}
+.recognition-last {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 24px 0;
+  padding: 18px;
+  background: var(--sw-soft);
+  border-radius: 16px;
+  min-height: 86px;
+  color: var(--sw-muted);
+  font-size: 13px;
+}
+.recognition-last strong,
+.recognition-empty-glyph {
+  font-size: 40px;
+  line-height: 1;
+  color: var(--sw-ink);
+}
+.recognition-empty-glyph {
+  opacity: 0.45;
+}
+.recognition-captions label {
+  font-size: 13px;
+  color: var(--sw-muted);
+  margin-bottom: 10px;
+}
+.recognition-captions textarea {
+  display: block;
+  width: 100%;
+  min-height: 190px;
+  font: inherit;
+  font-size: 24px;
+  line-height: 1.5;
+  resize: vertical;
+  color: var(--sw-ink);
+  background: var(--sw-soft);
+  border: 1px solid var(--sw-border);
+  border-radius: 16px;
+  padding: 16px;
+}
+.recognition-captions textarea::placeholder {
+  font-size: 17px;
+}
+.recognition-edit-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0;
+}
+.recognition-edit-tools .button {
+  padding: 10px 13px;
+  font-size: 12px;
+  min-height: 44px;
+}
+.recognition-privacy {
+  font-size: 12px;
+}
+.recognition-reference {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--sw-ink);
+  font-size: 13px;
+  margin-top: 20px;
+}
+.sign-workspace .caption-auto-control label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+.caption-auto-control input {
+  width: 18px;
+  height: 18px;
+}
+.caption-auto-control p {
+  font-size: 12px;
+  margin: 8px 0;
+}
+.caption-auto-control {
+  background: var(--sw-soft);
+  border-radius: 14px;
+  padding: 16px;
+  margin-top: 16px;
+}
+@media (max-width: 850px) {
+  .recognition-layout {
+    grid-template-columns: 1fr;
+  }
+  .sign-workspace .recognition-captions {
+    position: static;
+  }
+  .recognition-scope {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+@media (max-width: 600px) {
+  .recognition-layout .sign-camera,
+  .sign-workspace .recognition-captions {
+    padding: 16px !important;
+  }
+  .recognition-captions textarea {
+    min-height: 145px;
+  }
+}

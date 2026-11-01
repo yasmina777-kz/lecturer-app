@@ -9,6 +9,7 @@ import {
   RotateCcw,
   Play,
 } from "lucide-react";
+import { phraseArt } from "../sign/phraseArt";
 import { at } from "../i18n/automation";
 import { Loading } from "../components/UI";
 import { ReferenceVideo } from "../components/SignReferenceVideo";
@@ -171,7 +172,13 @@ export function SignDialoguesPage() {
           </p>
           <div className="activity-scenarios">
             {scenarios.map((s, i) => {
-              const cover = data.entries.find((e) => e.label === s.image);
+              const cover = phraseArt(
+                [
+                  "Как тебя зовут?",
+                  "Я хочу читать книгу",
+                  "Я хочу купить хлеб",
+                ][i],
+              );
               return (
                 <button
                   className="panel activity-scenario"
@@ -179,7 +186,7 @@ export function SignDialoguesPage() {
                   onClick={() => setParams({ scenario: s.id })}
                 >
                   <div className="activity-scenario-cover">
-                    {cover?.poster && <img src={cover.poster} alt="" />}
+                    {cover && <img src={cover} alt="" loading="lazy" />}
                     <span>0{i + 1}</span>
                   </div>
                   <div>

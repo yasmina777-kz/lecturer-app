@@ -1,23 +1,14 @@
-import {
-  ArrowUpRight,
-  BookOpen,
-  Camera,
-  Hand,
-  MessageCircle,
-  Type,
-  Play,
-  Check,
-} from "lucide-react";
+import { ArrowUpRight, Check } from "lucide-react";
 import { at } from "../i18n/automation";
 import "./sign-action-cards.css";
 
 type Kind = "text" | "phrases" | "dictionary" | "watch" | "camera";
-const icons = {
-  text: Type,
-  phrases: MessageCircle,
-  dictionary: BookOpen,
-  watch: Play,
-  camera: Camera,
+const covers = {
+  text: "13",
+  phrases: "01",
+  dictionary: "09",
+  watch: "06",
+  camera: "03",
 };
 export function SignActionCards({
   items,
@@ -33,7 +24,6 @@ export function SignActionCards({
   return (
     <nav className="sign-action-cards" aria-label={label}>
       {items.map((item) => {
-        const Icon = icons[item.id];
         return (
           <button
             type="button"
@@ -44,24 +34,14 @@ export function SignActionCards({
             data-workspace-enter
           >
             <span className="sign-action-art" aria-hidden="true">
-              <span className="sign-art-orbit" />
-              <span className="sign-art-sheet sign-art-sheet--back">
-                <Hand strokeWidth={1.4} />
-              </span>
-              <span className="sign-art-sheet sign-art-sheet--front">
-                <Icon strokeWidth={1.5} />
-              </span>
-              <span className="sign-art-token">
-                {item.id === "dictionary"
-                  ? "А–Я"
-                  : item.id === "camera"
-                    ? "21"
-                    : item.id === "phrases"
-                      ? "…"
-                      : item.id === "watch"
-                        ? "▶"
-                        : "Аа"}
-              </span>
+              <img
+                className="sign-action-cover"
+                src={`/illustrations/sign-phrases/phrase-${covers[item.id]}.jpg`}
+                alt=""
+                width="800"
+                height="533"
+                loading="lazy"
+              />
               <span className="sign-action-tag">{item.tag}</span>
             </span>
             <span className="sign-action-copy">

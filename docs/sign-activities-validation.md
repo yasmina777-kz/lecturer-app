@@ -92,3 +92,34 @@ search and playback, switching between avatar/camera, model selection and direct
 320px text/player page had equal viewport and document widths (no horizontal
 overflow). No browser console errors observed. Theme and viewport restored.
 Live camera capture was not started for this interface-only verification.
+
+## Sign-language covers and letter captions (2026-11-01)
+
+Generated 32 distinct signed-communication cover illustrations with the built-in
+image generator, replacing ordinary activity scenes after the user's correction.
+All final covers live in frontend/public/illustrations/sign-phrases as optimized
+800px JPEGs (about 3.9 MiB together). Exact generation prompts are recorded in
+sign-phrase-image-prompts.json. These are decorative thematic covers, not verified
+RSL handshape references. Phrase cards, action cards and dialogue scenario covers
+use them; instructional video/motion assets remain unchanged. Hover zoom and the
+existing entrance animation honor reduced motion.
+
+Added /recognition and the Signs → text navigation item. It reuses the actual
+local 33-letter temporal classifier without an expected-letter input. Accepted
+single Cyrillic letters append to an editable caption panel; rejected/no-event
+results do not change it. Users can insert spaces, delete the last character,
+edit or copy the text. No text or video is uploaded/persisted by this feature.
+Optional automatic capture requires a visible-hand release between 3-second
+windows to prevent repeatedly appending one held sign. Stopping and unmounting
+retain stream cleanup and generation-token cancellation. It is NOT a trained
+word/phrase translator or a continuous RSL recognition model.
+
+Checks: production build, sign-expansion, sign-activities and new sign-captions
+checks passed. Caption checks cover rejected/no-event labels, valid Cyrillic
+letters including Ё, repeated letters, capacity and hand-release gating.
+Browser verification used bundled public research videos: a-reference.mp4 was
+rejected without changing captions; alphabet/0411.mp4 returned Б and appended it
+to the panel. Space/delete controls were checked. Live webcam/automatic capture
+was not exercised with a human signer, so no accuracy or live-stream reliability
+claim is made. All four sets of eight covers were visually inspected in-app;
+dark desktop and cream 390px mobile layouts checked without horizontal overflow.
