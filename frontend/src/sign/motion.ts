@@ -15,6 +15,14 @@ export type MotionAsset = {
   handCoverage?: Record<string, number>;
   leadIn?: number;
   leadOut?: number;
+  chartPose?: {
+    source: string;
+    method: string;
+    holdTime: number;
+    hand: "Right" | "Left";
+    movement: string;
+    review: string;
+  };
   transitionPose?: {
     at?: "rest";
     start: Record<string, number[]>;

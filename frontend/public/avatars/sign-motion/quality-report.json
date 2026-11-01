@@ -6,13 +6,14 @@
   "missing": [],
   "review": "experimental-unreviewed",
   "limitations": [
-    "Tracking coverage is not gesture correctness.",
+    "Tracking coverage is not gesture correctness. For chart-authored clips it describes only the retained source video.",
+    "Chart poses and movement arrows require RSL teacher review; a drawing does not specify a complete motion.",
     "Long occlusions are interpolated and can create wrong finger shapes.",
     "No face/mouth grammar capture.",
     "Front-surface clearance checks do not certify arm-arm contacts or linguistic correctness.",
     "Text sequences retain Russian source order; no grammatical translation."
   ],
-  "source": "203 Bukva/Slovo reference adaptations plus 3 project-authored phrases; Blender anatomical hand rebake",
+  "source": "32 chart-authored alphabet poses, 171 Bukva/Slovo reference adaptations and 3 project-authored phrases; Blender anatomical hand rebake",
   "qualityGate": {
     "minPoseCoverage": 0.85,
     "minDominantHandCoverage": 0.65,
@@ -23,9 +24,10 @@
     "maxWristSwingDegrees": 66,
     "maxElbowPoleDeviationDegrees": 30
   },
+  "chartAuthoredLetters": 32,
   "observed": {
     "maxHingeOffAxis": 2.9802322387695312e-08,
-    "maxJointStepDegrees": 7.917774705705868,
+    "maxJointStepDegrees": 7.917873743448832,
     "v8Clips": 206,
     "maxSourceWristFitErrorMeters": 0.00023539843194510276,
     "maxBodyOverlapAfterMeters": 0,

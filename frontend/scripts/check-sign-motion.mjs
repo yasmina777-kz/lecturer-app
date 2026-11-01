@@ -207,9 +207,15 @@ for(const asset of assets){
  assert.equal(asset.motionVersion,8,asset.label);
  assert.ok(asset.bodyClearance?.afterMaxMeters<=.002,`${asset.label}: body clearance failed`);
  assert.equal(asset.handMechanics,'workshop-parameter-curves-v1',asset.label);
- if (!asset.id.startsWith('prepared-')) assert.ok(asset.sourceWristFitErrorMeters<.001,`${asset.label}: coordinated wrist target lost`);
+ if (!asset.id.startsWith('prepared-') && !asset.chartPose) assert.ok(asset.sourceWristFitErrorMeters<.001,`${asset.label}: coordinated wrist target lost`);
  assert.ok(asset.maxJointStepDegrees<=8.1,`${asset.label}: rotation spike`);
  assert.ok(asset.maxHingeOffAxis<.0001,`${asset.label}: finger hinge twist`);
  assert.ok(asset.leadIn>0 && asset.leadOut>0);
+ if (asset.chartPose) {
+  assert.ok(asset.chartPose.holdTime>=asset.leadIn && asset.chartPose.holdTime<asset.duration-asset.leadOut,'inspect time must be inside the authored pose');
+  assert.ok(asset.maxPlaybackHingeOffAxis<=asset.restHingeOffAxis+.0001,'authored motion adds finger twist beyond shared idle');
+  assert.equal(asset.chartPose.review,'experimental-unreviewed');
+  assert.equal(asset.chartPose.source,'/images/rsl-alphabet/source-chart.jpg');
+ }
 }
 console.log('206 animation assets: skeleton compatibility, finite transforms, timelines, full phrase matching, morphology, unknown/negation preservation and alphabet selection passed.');

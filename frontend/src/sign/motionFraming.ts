@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 /** A fixed frame for the complete motion, so following a hand never moves the camera. */
-export function signingBounds(model: THREE.Object3D, clip: THREE.AnimationClip) {
+export function signingBounds(model: THREE.Object3D, clip: THREE.AnimationClip, handOnly = false) {
   const bounds = new THREE.Box3();
   const joints: THREE.Object3D[] = [];
   model.traverse((node) => {
@@ -12,7 +12,7 @@ export function signingBounds(model: THREE.Object3D, clip: THREE.AnimationClip) 
   const action = mixer.clipAction(clip).play();
   const point = new THREE.Vector3();
   // Captured assets contain a 0.7 s neutral lead-in/out. Frame the sign itself.
-  const lead = Math.min(0.7, clip.duration / 4);
+  const lead = handOnly ? clip.duration * .3 : Math.min(0.7, clip.duration / 4);
   const handBounds = { Left: new THREE.Box3(), Right: new THREE.Box3() };
   const wristHeights = { Left: 0, Right: 0 };
   const steps = Math.min(600, Math.max(1, Math.ceil(clip.duration * 15)));
@@ -26,7 +26,7 @@ export function signingBounds(model: THREE.Object3D, clip: THREE.AnimationClip) 
     }
     for (const joint of joints) {
       joint.getWorldPosition(point);
-      if (/Head/.test(joint.name)) bounds.expandByPoint(point);
+      if (/Head/.test(joint.name)) { if (!handOnly) bounds.expandByPoint(point); }
       else {
         const side = joint.name.includes('Left') ? 'Left' : 'Right';
         if (raised[side]) handBounds[side].expandByPoint(point);
@@ -41,7 +41,7 @@ export function signingBounds(model: THREE.Object3D, clip: THREE.AnimationClip) 
   action.stop();
   mixer.uncacheRoot(model);
   // Bone centres exclude skin thickness, fingertip ends and the crown of the head.
-  return bounds.expandByScalar(0.09);
+  return bounds.expandByScalar(handOnly ? 0.045 : 0.09);
 }
 
 export function fitSigningFrame(bounds: THREE.Box3, aspect: number, theta: number) {

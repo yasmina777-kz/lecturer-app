@@ -314,7 +314,7 @@ export function GestureMentor3D({
         if (!alive) return;
         clipDuration = Math.max(0, ...clips.map((clip) => clip.duration));
         if (motionKey !== "[]" && clips[0]) {
-          motionBounds = signingBounds(model, clips[0]);
+          motionBounds = signingBounds(model, clips[0], framing === "letter");
           view(current.current.closeup, current.current.angle);
         }
         if (idleClip) {

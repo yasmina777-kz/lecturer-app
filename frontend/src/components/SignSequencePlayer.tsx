@@ -3,6 +3,8 @@ import { Play, Pause, RotateCcw, ScanSearch } from "lucide-react";
 import { at } from "../i18n/automation";
 import { motionTimeline, type MotionPlan } from "../sign/motion";
 import type { GestureAngle } from "./GestureMentor3D";
+import { AlphabetCardArt } from "./AlphabetCardArt";
+import { alphabetIllustration } from "../sign/alphabetIllustrations";
 import "../pages/gesture-preview.css";
 import "../pages/sign-trainer.css";
 import "../pages/sign-dictionary.css";
@@ -40,15 +42,19 @@ export function SignSequencePlayer({
     [timeline],
   );
   const duration = timeline[timeline.length - 1]?.end ?? 0;
-  const [started, setStarted] = useState(autoPlay);
-  const [time, setTime] = useState(0),
+  const singleLetter = plan.spelling && plan.steps.length === 1;
+  const previewTime = !autoPlay && singleLetter
+    ? (plan.steps[0].chartPose?.holdTime ?? ((plan.steps[0].leadIn ?? 0) + plan.steps[0].duration - (plan.steps[0].leadOut ?? 0)) / 2)
+    : 0;
+  const [started, setStarted] = useState(autoPlay || singleLetter);
+  const [time, setTime] = useState(previewTime),
     [playing, setPlaying] = useState(autoPlay),
     [ready, setReady] = useState(false),
     [speed, setSpeed] = useState(1),
     [loop, setLoop] = useState(false),
-    [close, setClose] = useState(false),
+    [close, setClose] = useState(plan.steps.length === 1 && plan.spelling),
     [angle, setAngle] = useState<GestureAngle>("front");
-  const clock = useRef(0);
+  const clock = useRef(previewTime);
   const stage = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
@@ -91,6 +97,8 @@ export function SignSequencePlayer({
   }, [playing, ready, blocked, visible, speed, loop, duration]);
   const current =
     timeline.find((s) => time < s.end) ?? timeline[timeline.length - 1];
+  const chartLetter = current?.id.startsWith("letter-") && alphabetIllustration(current.label)
+    ? current.label : undefined;
   function seek(t: number) {
     setStarted(true);
     clock.current = t;
@@ -107,6 +115,22 @@ export function SignSequencePlayer({
           {at("Пробная анимация", "Experimental motion", "Сынақ анимациясы")}
         </span>
       </div>
+      {chartLetter && (
+        <div className="sign-letter-comparison">
+          <AlphabetCardArt letter={chartLetter} />
+          <div>
+            <strong>{at("Сравните с карточкой", "Compare with the card", "Карточкамен салыстырыңыз")}</strong>
+            <p>{at("Смотрите на согнутые пальцы, большой палец и поворот ладони. Стрелки на рисунке обозначают движение.", "Check bent fingers, thumb and palm direction. Arrows indicate movement.", "Бүгілген саусақтарды, бас бармақты және алақан бағытын қараңыз. Жебелер қозғалысты білдіреді.")}</p>
+            <button className="button secondary" disabled={!ready || blocked} onClick={() => {
+              seek(current.start + (current.chartPose?.holdTime ?? ((current.leadIn ?? 0) + current.duration - (current.leadOut ?? 0)) / 2));
+              setClose(true);
+              setAngle("front");
+            }}>
+              <ScanSearch size={17} />{at("Рассмотреть букву", "Inspect the letter", "Әріпті қарау")}
+            </button>
+          </div>
+        </div>
+      )}
       {blocked && plan.missing.length > 0 && (
         <p className="sign-sequence-missing" role="status">
           {at(
@@ -159,7 +183,7 @@ export function SignSequencePlayer({
                   closeup={close}
                   angle={angle}
                   resetToken={0}
-                  framing={framing}
+                  framing={plan.spelling && plan.steps.length === 1 ? "letter" : framing}
                 />
               </Suspense>
               <span className="sign-avatar-label" aria-live="off">
@@ -215,7 +239,9 @@ export function SignSequencePlayer({
                       ? at("Загрузка…", "Loading…", "Жүктелуде…")
                       : playing
                         ? at("Пауза", "Pause", "Кідірту")
-                        : at("Показать всё", "Play all", "Толық көрсету")}
+                        : time > 0 && time < duration
+                          ? at("Продолжить", "Continue", "Жалғастыру")
+                          : at("Показать всё", "Play all", "Толық көрсету")}
                   </button>
                   <button
                     className="button secondary"

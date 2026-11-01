@@ -289,7 +289,7 @@ function CapturedLetterPlayer({ letter }: { letter: string }) {
           "Әріпті камерамен тексеру",
         )}
       </a>
-      {!loaded ? <Loading /> : <SignSequencePlayer plan={plan} />}
+      {!loaded ? <Loading /> : <SignSequencePlayer key={letter} plan={plan} />}
       <details className="sign-dictionary-reference">
         <summary>
           {at(
