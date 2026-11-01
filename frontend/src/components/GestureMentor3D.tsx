@@ -136,6 +136,7 @@ export function GestureMentor3D({
       });
     };
     let motionBounds = new THREE.Box3();
+    let fullMotionBounds = new THREE.Box3();
     const camera = new THREE.PerspectiveCamera(32, 1, 0.02, 20);
     const orbit = new OrbitControls(camera, renderer.domElement);
     orbit.enablePan = false;
@@ -213,6 +214,11 @@ export function GestureMentor3D({
         const fit = fitSigningFrame(motionBounds, camera.aspect, theta);
         orbit.target.copy(fit.target);
         radius = fit.radius;
+      }
+      if (!close && (framing === "sign" || framing === "letter") && !fullMotionBounds.isEmpty()) {
+        const fit = fitSigningFrame(fullMotionBounds, camera.aspect, theta);
+        orbit.target.copy(fit.target);
+        radius = Math.max(radius, fit.radius);
       }
       camera.position.set(
         orbit.target.x + Math.sin(theta) * radius,
@@ -314,7 +320,8 @@ export function GestureMentor3D({
         if (!alive) return;
         clipDuration = Math.max(0, ...clips.map((clip) => clip.duration));
         if (motionKey !== "[]" && clips[0]) {
-          motionBounds = signingBounds(model, clips[0], framing === "letter");
+          fullMotionBounds = signingBounds(model, clips[0]);
+          motionBounds = framing === "letter" ? signingBounds(model, clips[0], true) : fullMotionBounds;
           view(current.current.closeup, current.current.angle);
         }
         if (idleClip) {

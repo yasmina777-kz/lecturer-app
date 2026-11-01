@@ -43,18 +43,16 @@ export function SignSequencePlayer({
   );
   const duration = timeline[timeline.length - 1]?.end ?? 0;
   const singleLetter = plan.spelling && plan.steps.length === 1;
-  const previewTime = !autoPlay && singleLetter
-    ? (plan.steps[0].chartPose?.holdTime ?? ((plan.steps[0].leadIn ?? 0) + plan.steps[0].duration - (plan.steps[0].leadOut ?? 0)) / 2)
-    : 0;
-  const [started, setStarted] = useState(autoPlay || singleLetter);
-  const [time, setTime] = useState(previewTime),
+  const [started, setStarted] = useState(autoPlay);
+  const [time, setTime] = useState(0),
     [playing, setPlaying] = useState(autoPlay),
     [ready, setReady] = useState(false),
     [speed, setSpeed] = useState(1),
     [loop, setLoop] = useState(false),
-    [close, setClose] = useState(plan.steps.length === 1 && plan.spelling),
+    [close, setClose] = useState(false),
+    [inspecting, setInspecting] = useState(false),
     [angle, setAngle] = useState<GestureAngle>("front");
-  const clock = useRef(previewTime);
+  const clock = useRef(0);
   const stage = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
@@ -100,6 +98,7 @@ export function SignSequencePlayer({
   const chartLetter = current?.id.startsWith("letter-") && alphabetIllustration(current.label)
     ? current.label : undefined;
   function seek(t: number) {
+    setInspecting(false);
     setStarted(true);
     clock.current = t;
     setTime(t);
@@ -123,6 +122,7 @@ export function SignSequencePlayer({
             <p>{at("Смотрите на согнутые пальцы, большой палец и поворот ладони. Стрелки на рисунке обозначают движение.", "Check bent fingers, thumb and palm direction. Arrows indicate movement.", "Бүгілген саусақтарды, бас бармақты және алақан бағытын қараңыз. Жебелер қозғалысты білдіреді.")}</p>
             <button className="button secondary" disabled={!ready || blocked} onClick={() => {
               seek(current.start + (current.chartPose?.holdTime ?? ((current.leadIn ?? 0) + current.duration - (current.leadOut ?? 0)) / 2));
+              setInspecting(true);
               setClose(true);
               setAngle("front");
             }}>
@@ -222,10 +222,12 @@ export function SignSequencePlayer({
                     className="button primary"
                     disabled={!ready}
                     onClick={() => {
-                      if (clock.current >= duration) {
+                      if (clock.current >= duration || inspecting) {
                         clock.current = 0;
                         setTime(0);
                       }
+                      if (inspecting) setClose(false);
+                      setInspecting(false);
                       setStarted(true);
                       setPlaying((v) => !v);
                     }}
@@ -239,9 +241,11 @@ export function SignSequencePlayer({
                       ? at("Загрузка…", "Loading…", "Жүктелуде…")
                       : playing
                         ? at("Пауза", "Pause", "Кідірту")
-                        : time > 0 && time < duration
+                        : !inspecting && time > 0 && time < duration
                           ? at("Продолжить", "Continue", "Жалғастыру")
-                          : at("Показать всё", "Play all", "Толық көрсету")}
+                          : singleLetter
+                            ? at("Показать букву целиком", "Play the whole letter", "Әріпті толық көрсету")
+                            : at("Показать всё", "Play all", "Толық көрсету")}
                   </button>
                   <button
                     className="button secondary"
@@ -249,6 +253,8 @@ export function SignSequencePlayer({
                     onClick={() => {
                       clock.current = 0;
                       setTime(0);
+                      setInspecting(false);
+                      if (singleLetter) setClose(false);
                       setStarted(true);
                       setPlaying(true);
                     }}

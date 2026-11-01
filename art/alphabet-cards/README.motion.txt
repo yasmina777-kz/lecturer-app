@@ -29,5 +29,6 @@ cover joint limits and torso/head/clothing penetration, not semantic correctness
 all finger-to-finger contacts or arm-arm collisions. Compare linked human videos;
 a qualified RSL reviewer is still needed before using these as authoritative lessons.
 
-The browser shows a source card alongside the player, a paused handshape on
-opening a practice letter, and an Inspect letter button with a fixed hand close-up.
+The browser shows a source card alongside the player. Letters open with the
+full avatar ready to play from the beginning. Inspect letter pauses at the authored
+pose and offers a hand close-up; Play the whole letter exits inspection and restarts.
