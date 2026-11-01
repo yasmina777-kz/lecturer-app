@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useLocation } from "react-router-dom";
 import {
   Hand,
   Eye,
@@ -35,6 +35,7 @@ const Camera = lazy(() =>
     default: m.TemporalSignCamera,
   })),
 );
+import { SignActionCards } from "../components/SignActionCards";
 import { ActivityLinks } from "./SignActivities";
 export function SignCourseCatalog() {
   const [params] = useSearchParams();
@@ -284,6 +285,11 @@ export function ExercisePlayer({
   return <AnimatedExercisePlayer key={exercise.id} exercise={exercise} />;
 }
 function CapturedLetterPlayer({ letter }: { letter: string }) {
+  const location = useLocation();
+  const [mode, setMode] = useState("watch");
+  useEffect(() => {
+    if (location.hash === "#sign-camera-check") setMode("camera");
+  }, [location.hash]);
   const [motions, setMotions] = useState<MotionAsset[]>([]),
     [loaded, setLoaded] = useState(false);
   useEffect(() => {
@@ -308,31 +314,74 @@ function CapturedLetterPlayer({ letter }: { letter: string }) {
   );
   return (
     <>
-      <a
-        className="button secondary sign-camera-jump"
-        href="#sign-camera-check"
-      >
-        <ScanSearch size={18} />
-        {at(
-          "Проверить букву через камеру",
-          "Check the letter with camera",
-          "Әріпті камерамен тексеру",
-        )}
-      </a>
-      {!loaded ? <Loading /> : <SignSequencePlayer key={letter} plan={plan} />}
-      <details className="sign-dictionary-reference">
-        <summary>
-          {at(
-            "Сравнить с видео человека",
-            "Compare with a human reference",
-            "Адам бейнесімен салыстыру",
+      <SignActionCards
+        label={at("Способ практики", "Practice mode", "Жаттығу тәсілі")}
+        value={mode}
+        onChange={setMode}
+        items={[
+          {
+            id: "watch",
+            title: at("Изучить жест", "Study the sign", "Ымды үйрену"),
+            description: at(
+              "Смотрите, замедляйте и повторяйте",
+              "Watch, slow down and repeat",
+              "Қараңыз, баяулатыңыз, қайталаңыз",
+            ),
+            tag: at(`Буква ${letter}`, `Letter ${letter}`, `${letter} әрпі`),
+          },
+          {
+            id: "camera",
+            title: at("Проверить себя", "Check yourself", "Өзіңізді тексеру"),
+            description: at(
+              "Покажите букву камере → ответ ИИ",
+              "Show a letter to the camera → AI feedback",
+              "Камераға әріпті көрсетіңіз → ЖИ жауабы",
+            ),
+            tag: at(
+              "Камера · 3 секунды",
+              "Camera · 3 seconds",
+              "Камера · 3 секунд",
+            ),
+          },
+        ]}
+      />
+      {mode === "watch" ? (
+        <div data-workspace-enter>
+          {!loaded ? (
+            <Loading />
+          ) : (
+            <SignSequencePlayer key={letter} plan={plan} />
           )}
-        </summary>
-        <ReferenceVideo entry={reference} />
-      </details>
-      <Suspense fallback={<Loading />}>
-        <Camera expected={letter} />
-      </Suspense>
+          <details className="sign-dictionary-reference">
+            <summary>
+              {at(
+                "Сравнить с видео человека",
+                "Compare with a human reference",
+                "Адам бейнесімен салыстыру",
+              )}
+            </summary>
+            <ReferenceVideo entry={reference} />
+          </details>
+          <button
+            className="button primary sign-next-practice"
+            onClick={() => setMode("camera")}
+          >
+            <ScanSearch size={18} />
+            {at(
+              "Теперь попробовать с камерой",
+              "Now try with the camera",
+              "Енді камерамен көріңіз",
+            )}
+            <ArrowRight size={18} />
+          </button>
+        </div>
+      ) : (
+        <div data-workspace-enter>
+          <Suspense fallback={<Loading />}>
+            <Camera expected={letter} />
+          </Suspense>
+        </div>
+      )}
     </>
   );
 }

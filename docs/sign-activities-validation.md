@@ -68,3 +68,27 @@ changed and disable decorative CSS motion. No gesture, score or model logic chan
 Production build, TypeScript and existing activity checks passed. Visually checked
 dark desktop and cream 390px mobile cards, completed reveal states and navigation
 from the dialogue watch step to the answer step. Original viewport/theme restored.
+
+## Task cards for text, phrases and camera practice (2026-11-01)
+
+Replaced the dictionary's flat tab/form stack with illustrated action cards for
+custom text, ready phrases and dictionary search. Ready phrases have their own
+URL (`?tab=phrases`) and selectable tiles; the avatar result appears after a
+selection. Existing dictionary/grammar URLs and text prefills remain supported.
+Letter practice separates the avatar and camera into two explicit choices. The
+camera starts only on user action, with three concise preparation steps; model
+settings remain available in a disclosure below the main action. Camera sessions
+unmount on return to the avatar, retaining their existing cleanup behavior.
+
+Card entrances use the existing workspace observer. Selection, hover and a finite
+camera illustration animation respect reduced-motion preferences. The illustration
+is labeled camera-off and does not pretend to be live tracking. No trained model,
+inference pipeline, motion asset or gesture semantics changed.
+
+Validation: production build, sign-expansion and sign-activities checks passed.
+Browser checks covered phrase playback, keyboard text submission, dictionary
+search and playback, switching between avatar/camera, model selection and direct
+`#sign-camera-check` navigation. Dark desktop and cream 390px cards were inspected;
+320px text/player page had equal viewport and document widths (no horizontal
+overflow). No browser console errors observed. Theme and viewport restored.
+Live camera capture was not started for this interface-only verification.

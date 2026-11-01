@@ -1,6 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { Search, BookOpen, Play, ArrowRight } from "lucide-react";
+import {
+  Search,
+  BookOpen,
+  Play,
+  ArrowRight,
+  MessageCircle,
+} from "lucide-react";
 import { at } from "../i18n/automation";
 import {
   alphabetEntries,
@@ -15,6 +21,7 @@ import { ReferenceVideo } from "../components/SignReferenceVideo";
 import { phraseGroups } from "../sign/phraseExamples";
 import { alphabetIllustration } from "../sign/alphabetIllustrations";
 import { AlphabetCardArt } from "../components/AlphabetCardArt";
+import { SignActionCards } from "../components/SignActionCards";
 const emptyMotionPlan = { steps: [], missing: [], spelling: false };
 const categoryTranslations: Record<string, [string, string]> = {
   Алфавит: ["Alphabet", "Әліпби"],
@@ -36,8 +43,10 @@ export function SignDictionaryPage() {
       ? "dictionary"
       : params.get("tab") === "grammar"
         ? "grammar"
-        : "text";
-  const setTab = (next: "text" | "dictionary" | "grammar") =>
+        : params.get("tab") === "phrases"
+          ? "phrases"
+          : "text";
+  const setTab = (next: "text" | "phrases" | "dictionary" | "grammar") =>
     setParams(next === "text" ? {} : { tab: next });
   const [motions, setMotions] = useState<MotionAsset[]>([]);
   const [phraseGroup, setPhraseGroup] = useState(0);
@@ -47,7 +56,9 @@ export function SignDictionaryPage() {
     [forms, setForms] = useState<DictionaryForms>({}),
     [loading, setLoading] = useState(true),
     [error, setError] = useState("");
-  const [text, setText] = useState(() => (params.get("text") || "").slice(0, 500)),
+  const [text, setText] = useState(() =>
+      (params.get("text") || "").slice(0, 500),
+    ),
     [submitted, setSubmitted] = useState(""),
     [spelling, setSpelling] = useState(false),
     [search, setSearch] = useState(""),
@@ -127,7 +138,9 @@ export function SignDictionaryPage() {
     setRun((v) => v + 1);
     requestAnimationFrame(() =>
       sequenceRef.current?.scrollIntoView({
-        behavior: "smooth",
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
         block: "start",
       }),
     );
@@ -159,7 +172,9 @@ export function SignDictionaryPage() {
     setSelected(null);
     requestAnimationFrame(() =>
       sequenceRef.current?.scrollIntoView({
-        behavior: "smooth",
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
         block: "start",
       }),
     );
@@ -184,51 +199,67 @@ export function SignDictionaryPage() {
           </p>
         </div>
       </div>
-      <nav
-        className="sign-training-levels"
-        aria-label={at(
-          "Разделы словаря",
-          "Dictionary sections",
-          "Сөздік бөлімдері",
+      <SignActionCards
+        label={at(
+          "Что хотите сделать?",
+          "What would you like to do?",
+          "Не істегіңіз келеді?",
         )}
-      >
-        {(["text", "dictionary", "grammar"] as const).map((v, i) => (
-          <button
-            key={v}
-            aria-pressed={tab === v}
-            onClick={() => {
-              setTab(v);
-              setSelected(null);
-            }}
-          >
-            {
-              [
-                at(
-                  "Текст → показы",
-                  "Text → demonstrations",
-                  "Мәтін → көрсетілімдер",
-                ),
-                at("Словарь", "Dictionary", "Сөздік"),
-                at("Как устроен РЖЯ", "How RSL works", "Ым тілінің құрылысы"),
-              ][i]
-            }
-          </button>
-        ))}
-      </nav>
-      <p className="sign-dictionary-count">
-        33 {at("буквы", "letters", "әріп")} · {words.length || "…"}{" "}
-        {at(
-          "слов и выражений с видео",
-          "words and expressions with videos",
-          "сөз бен тіркестің бейнесі",
-        )}{" "}
-        ·{" "}
-        {at(
-          `${motions.length} пробных движений аватара`,
-          `${motions.length} experimental avatar motions`,
-          `${motions.length} сынақ аватар қимылы`,
-        )}
-      </p>
+        value={tab}
+        onChange={(next) => {
+          if (next === "text" || next === "phrases" || next === "dictionary") {
+            setTab(next);
+            setSelected(null);
+            setSubmitted("");
+          }
+        }}
+        items={[
+          {
+            id: "text",
+            title: at("Написать текст", "Write text", "Мәтін жазу"),
+            description: at(
+              "Слово или имя → показ аватара",
+              "A word or name → avatar demonstration",
+              "Сөз не есім → аватар көрсетілімі",
+            ),
+            tag: at("Ваш вариант", "Your choice", "Өз нұсқаңыз"),
+          },
+          {
+            id: "phrases",
+            title: at("Выбрать фразу", "Choose a phrase", "Сөйлем таңдау"),
+            description: at(
+              "Готовые примеры для тренировки",
+              "Ready examples to practice",
+              "Жаттығуға дайын мысалдар",
+            ),
+            tag: at("32 примера", "32 examples", "32 мысал"),
+          },
+          {
+            id: "dictionary",
+            title: at("Найти жест", "Find a sign", "Ым табу"),
+            description: at(
+              "Буквы и слова по темам",
+              "Letters and words by topic",
+              "Тақырып бойынша әріптер мен сөздер",
+            ),
+            tag: at("А–Я · словарь", "А–Я · dictionary", "А–Я · сөздік"),
+          },
+        ]}
+      />
+      <div className="sign-workspace-meta">
+        <span>
+          33 {at("буквы", "letters", "әріп")} · {words.length || "…"}{" "}
+          {at("слов и выражений", "words and expressions", "сөз бен тіркес")}
+        </span>
+        <button
+          className="sign-help-link"
+          aria-pressed={tab === "grammar"}
+          onClick={() => setTab("grammar")}
+        >
+          <BookOpen size={16} />
+          {at("Как устроен РЖЯ", "How RSL works", "Ым тілінің құрылысы")}
+        </button>
+      </div>
       {loading && (
         <p role="status">
           {at("Загружаем словарь…", "Loading dictionary…", "Сөздік жүктелуде…")}
@@ -237,7 +268,26 @@ export function SignDictionaryPage() {
       {error && <p role="alert">{error}</p>}
       {tab === "text" && (
         <>
-          <section className="panel sign-text-editor">
+          <section className="panel sign-text-editor" data-workspace-enter>
+            <div className="sign-editor-title">
+              <span className="sign-step-number">01</span>
+              <div>
+                <h2>
+                  {at(
+                    "Что покажет аватар?",
+                    "What should the avatar show?",
+                    "Аватар нені көрсетеді?",
+                  )}
+                </h2>
+                <p>
+                  {at(
+                    "Введите текст, затем нажмите «Показать аватаром».",
+                    "Enter text, then select Show with avatar.",
+                    "Мәтінді енгізіп, «Аватармен көрсету» түймесін басыңыз.",
+                  )}
+                </p>
+              </div>
+            </div>
             <label htmlFor="dictionary-text">
               {at(
                 "Ваш текст на русском",
@@ -252,6 +302,7 @@ export function SignDictionaryPage() {
               rows={3}
               onChange={(e) => {
                 setText(e.target.value);
+                setMessage("");
                 setSubmitted("");
                 setSelected(null);
               }}
@@ -291,55 +342,6 @@ export function SignDictionaryPage() {
                 )}
               </button>
             </div>
-            <div className="sign-phrase-library">
-              <label htmlFor="phrase-topic">
-                {at(
-                  "Готовые фразы · 32 примера",
-                  "Ready phrases · 32 examples",
-                  "Дайын сөйлемдер · 32 мысал",
-                )}
-              </label>
-              <select
-                id="phrase-topic"
-                value={phraseGroup}
-                onChange={(e) => setPhraseGroup(Number(e.target.value))}
-              >
-                {phraseGroups.map((group, i) => (
-                  <option key={group.title[0]} value={i}>
-                    {at(group.title[0], group.title[1], group.title[2])}
-                  </option>
-                ))}
-              </select>
-              <p>
-                {at(
-                  "Выберите фразу — доступные жесты будут показаны подряд. Это учебная последовательность, а не проверенный перевод с грамматикой РЖЯ.",
-                  "Choose a phrase to play its available signs in order. These are practice sequences, not verified grammatical RSL translations.",
-                  "Сөйлемді таңдаңыз — қолжетімді ишаралар ретімен көрсетіледі. Бұл оқу тізбегі, РЖЯ грамматикасымен тексерілген аударма емес.",
-                )}
-              </p>
-            </div>
-            <div className="sign-examples">
-              {phraseGroups[phraseGroup].phrases.map((v) => (
-                <button
-                  key={v}
-                  onClick={() => {
-                    setText(v);
-                    setSubmitted(v);
-                    setSpelling(false);
-                    setRun((n) => n + 1);
-                    setSelected(null);
-                    requestAnimationFrame(() =>
-                      sequenceRef.current?.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start",
-                      }),
-                    );
-                  }}
-                >
-                  {v}
-                </button>
-              ))}
-            </div>
             <details className="sign-letter-picker">
               <summary>
                 {at(
@@ -371,19 +373,104 @@ export function SignDictionaryPage() {
               )}
             </p>
             {message && <p role="status">{message}</p>}
+            <div className="sign-workflow-hint">
+              <span>01 · {at("Ваш текст", "Your text", "Мәтініңіз")}</span>
+              <ArrowRight size={16} />
+              <span>
+                02 ·{" "}
+                {at(
+                  "Показ аватара",
+                  "Avatar demonstration",
+                  "Аватар көрсетілімі",
+                )}
+              </span>
+              <ArrowRight size={16} />
+              <span>
+                03 · {at("Повторите жест", "Repeat the sign", "Ымды қайталау")}
+              </span>
+            </div>
           </section>
         </>
       )}
-      {tab !== "grammar" && (
+      {tab === "phrases" && (
+        <section className="panel sign-phrase-workspace" data-workspace-enter>
+          <div className="sign-phrase-library">
+            <label htmlFor="phrase-topic">
+              {at(
+                "Готовые фразы · 32 примера",
+                "Ready phrases · 32 examples",
+                "Дайын сөйлемдер · 32 мысал",
+              )}
+            </label>
+            <select
+              id="phrase-topic"
+              value={phraseGroup}
+              onChange={(e) => setPhraseGroup(Number(e.target.value))}
+            >
+              {phraseGroups.map((group, i) => (
+                <option key={group.title[0]} value={i}>
+                  {at(group.title[0], group.title[1], group.title[2])}
+                </option>
+              ))}
+            </select>
+            <p>
+              {at(
+                "Выберите фразу — доступные жесты будут показаны подряд. Это учебная последовательность, а не проверенный перевод с грамматикой РЖЯ.",
+                "Choose a phrase to play its available signs in order. These are practice sequences, not verified grammatical RSL translations.",
+                "Сөйлемді таңдаңыз — қолжетімді ишаралар ретімен көрсетіледі. Бұл оқу тізбегі, РЖЯ грамматикасымен тексерілген аударма емес.",
+              )}
+            </p>
+          </div>
+          <div className="sign-phrase-tiles">
+            {phraseGroups[phraseGroup].phrases.map((v) => (
+              <button
+                key={v}
+                disabled={loading || !!error}
+                onClick={() => {
+                  setText(v);
+                  setSubmitted(v);
+                  setSpelling(false);
+                  setRun((n) => n + 1);
+                  setSelected(null);
+                  requestAnimationFrame(() =>
+                    sequenceRef.current?.scrollIntoView({
+                      behavior: window.matchMedia(
+                        "(prefers-reduced-motion: reduce)",
+                      ).matches
+                        ? "auto"
+                        : "smooth",
+                      block: "start",
+                    }),
+                  );
+                }}
+              >
+                <MessageCircle size={21} aria-hidden="true" />
+                <strong>{v}</strong>
+                <Play size={18} aria-hidden="true" />
+              </button>
+            ))}
+          </div>
+        </section>
+      )}
+      {tab !== "grammar" && !!(selected || submitted) && (
         <div ref={sequenceRef} className="sign-dictionary-result">
           <SignSequencePlayer
             key={`${tab}-${run}-${spelling}-${selected?.id ?? submitted}`}
             plan={
-              selectedPlan ?? (tab === "text" ? motionPlan : emptyMotionPlan)
+              selectedPlan ??
+              (tab === "text" || tab === "phrases"
+                ? motionPlan
+                : emptyMotionPlan)
             }
-            autoPlay={!!(selected || (tab === "text" && submitted))}
+            autoPlay={
+              !!(
+                selected ||
+                ((tab === "text" || tab === "phrases") && submitted)
+              )
+            }
           />
-          {((tab === "text" && submitted) || selected) && (
+          {(((tab === "text" || tab === "phrases") && submitted) ||
+            selected) && (
             <details className="sign-dictionary-reference">
               <summary>
                 {at(

@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { Hand, Camera, Upload } from "lucide-react";
+import "./sign-action-cards.css";
 import type {
   HandLandmarker,
   HandLandmarkerResult,
@@ -15,42 +17,56 @@ export function TemporalSignCamera({ expected }: { expected: string }) {
   const [cautious, setCautious] = useState(false);
   return (
     <div className="sign-camera-modes">
-      <label>
-        {at("Режим распознавания", "Recognition mode", "Тану режимі")}
-        <select
-          value={cautious ? "cautious" : "standard"}
-          onChange={(e) => setCautious(e.target.value === "cautious")}
-        >
-          <option value="standard">
-            {at("Обычный", "Standard", "Қалыпты")}
-          </option>
-          <option value="cautious">
-            {at(
-              "Осторожный · новая модель",
-              "Cautious · new model",
-              "Сақ · жаңа модель",
-            )}
-          </option>
-        </select>
-      </label>
-      <p>
-        {cautious
-          ? at(
-              "Новая модель обучена на 3 013 видео. Она чаще отказывается отвечать; отказ не означает, что вы ошиблись.",
-              "Trained on 3,013 videos. This model rejects more attempts; rejection does not mean your sign was wrong.",
-              "Жаңа модель 3 013 бейнемен оқытылды. Жауаптан жиі бас тартады; бұл сіз қателестіңіз деген сөз емес.",
-            )
-          : at(
-              "Обычный режим отвечает чаще. Можно сравнить его с новой осторожной моделью.",
-              "Standard mode answers more often. Compare it with the new cautious model.",
-              "Қалыпты режим жиірек жауап береді. Жаңа сақ модельмен салыстырыңыз.",
-            )}
-      </p>
       <TemporalCameraSession
         key={`${expected}:${cautious}`}
         expected={expected}
         cautious={cautious}
       />
+      <details className="sign-camera-settings">
+        <summary>
+          {at(
+            "Настройки распознавания",
+            "Recognition settings",
+            "Тану параметрлері",
+          )}
+        </summary>
+        <label>
+          {at("Режим распознавания", "Recognition mode", "Тану режимі")}
+          <select
+            aria-label={at(
+              "Режим распознавания",
+              "Recognition mode",
+              "Тану режимі",
+            )}
+            value={cautious ? "cautious" : "standard"}
+            onChange={(e) => setCautious(e.target.value === "cautious")}
+          >
+            <option value="standard">
+              {at("Обычный", "Standard", "Қалыпты")}
+            </option>
+            <option value="cautious">
+              {at(
+                "Осторожный · новая модель",
+                "Cautious · new model",
+                "Сақ · жаңа модель",
+              )}
+            </option>
+          </select>
+        </label>
+        <p>
+          {cautious
+            ? at(
+                "Новая модель обучена на 3 013 видео. Она чаще отказывается отвечать; отказ не означает, что вы ошиблись.",
+                "Trained on 3,013 videos. This model rejects more attempts; rejection does not mean your sign was wrong.",
+                "Жаңа модель 3 013 бейнемен оқытылды. Жауаптан жиі бас тартады; бұл сіз қателестіңіз деген сөз емес.",
+              )
+            : at(
+                "Обычный режим отвечает чаще. Можно сравнить его с новой осторожной моделью.",
+                "Standard mode answers more often. Compare it with the new cautious model.",
+                "Қалыпты режим жиірек жауап береді. Жаңа сақ модельмен салыстырыңыз.",
+              )}
+        </p>
+      </details>
     </div>
   );
 }
@@ -433,13 +449,86 @@ function TemporalCameraSession({
         {at("Покажите букву", "Show the letter", "Әріпті көрсетіңіз")} «
         {expected}»
       </h2>
-      <p>
+      <p className="sign-camera-intro">
         {at(
-          "Камера проверяет короткое движение целиком. Включите камеру, подготовьтесь и нажмите «Записать жест». Фото не подходит для букв с движением.",
-          "The camera checks a short complete movement. Start the camera, get ready, then record. A photo cannot show dynamic letters.",
-          "Камера қысқа қимылды толық тексереді. Камераны қосып, дайындалып, қимылды жазыңыз. Фото қозғалысты әріптерге жарамайды.",
+          "Повторите букву перед камерой и получите ответ модели.",
+          "Repeat the letter on camera to get model feedback.",
+          "Камера алдында әріпті қайталап, модель жауабын алыңыз.",
         )}
       </p>
+      {!active && !filePreview && (
+        <div className="sign-camera-onboarding">
+          <div className="sign-camera-illustration" aria-hidden="true">
+            <span className="sign-camera-corner" />
+            <Hand strokeWidth={1.25} />
+            <span className="sign-camera-scan" />
+            <span className="sign-camera-letter">{expected}</span>
+            <span className="sign-camera-off">
+              <Camera size={14} />
+              {at("Камера выключена", "Camera is off", "Камера өшірулі")}
+            </span>
+          </div>
+          <ol className="sign-camera-steps">
+            <li>
+              <span>1</span>
+              <div>
+                <strong>
+                  {at(
+                    "Включите камеру",
+                    "Start the camera",
+                    "Камераны қосыңыз",
+                  )}
+                </strong>
+                <p>
+                  {at(
+                    "Кисть целиком в кадре, лицо и руки хорошо освещены.",
+                    "Keep your whole hand in frame, with good lighting.",
+                    "Қол толық кадрда, жарық жеткілікті болсын.",
+                  )}
+                </p>
+              </div>
+            </li>
+            <li>
+              <span>2</span>
+              <div>
+                <strong>
+                  {at(
+                    "Запишите жест · 3 секунды",
+                    "Record the sign · 3 seconds",
+                    "Ымды жазыңыз · 3 секунд",
+                  )}
+                </strong>
+                <p>
+                  {at(
+                    "Нажмите «Записать жест» и покажите одну букву.",
+                    "Press Record sign and show one letter.",
+                    "«Қимылды жазу» түймесін басып, бір әріпті көрсетіңіз.",
+                  )}
+                </p>
+              </div>
+            </li>
+            <li>
+              <span>3</span>
+              <div>
+                <strong>
+                  {at(
+                    "Сравните с образцом",
+                    "Compare with the reference",
+                    "Үлгімен салыстырыңыз",
+                  )}
+                </strong>
+                <p>
+                  {at(
+                    "ИИ предложит букву или попросит повторить. Он может ошибаться.",
+                    "AI suggests a letter or asks you to retry. It can make mistakes.",
+                    "ЖИ әріпті ұсынады не қайталауды сұрайды. Ол қателесуі мүмкін.",
+                  )}
+                </p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      )}
       <div
         className="sign-tracking-view"
         hidden={!active && !filePreview}
@@ -472,23 +561,17 @@ function TemporalCameraSession({
             ` · ${at("Кадр из видео", "Video frame", "Бейнеден кадр")}`}
         </p>
       )}
-      {!active && !filePreview && (
-        <p className="sign-camera-hint">
-          {at(
-            "После включения камеры на руках появятся точки и линии. Для ответа ИИ нажмите «Записать жест» и покажите одну букву.",
-            "Start the camera to see hand landmarks. Press Record sign and show one letter for an AI result.",
-            "Камера қосылғанда қол нүктелері көрінеді. ЖИ жауабы үшін қимылды жазып, бір әріпті көрсетіңіз.",
-          )}
-        </p>
-      )}
       <div className="sign-camera-actions">
-        <button
-          className="button primary"
-          disabled={busy || active}
-          onClick={start}
-        >
-          {at("Включить камеру", "Start camera", "Камераны қосу")}
-        </button>
+        {!active && (
+          <button
+            className="button primary"
+            disabled={busy || active}
+            onClick={start}
+          >
+            <Camera size={18} />
+            {at("Включить камеру", "Start camera", "Камераны қосу")}
+          </button>
+        )}
         {active && (
           <button className="button primary" disabled={busy} onClick={record}>
             {at(
@@ -498,15 +581,18 @@ function TemporalCameraSession({
             )}
           </button>
         )}
-        <button
-          className="button secondary"
-          disabled={!active && !busy}
-          onClick={stop}
-        >
-          {at("Остановить", "Stop", "Тоқтату")}
-        </button>
+        {(active || busy) && (
+          <button
+            className="button secondary"
+            disabled={!active && !busy}
+            onClick={stop}
+          >
+            {at("Остановить", "Stop", "Тоқтату")}
+          </button>
+        )}
         <label className="button secondary">
-          {at("Проверить видео", "Check video", "Бейнені тексеру")}
+          <Upload size={17} />
+          {at("Загрузить видео", "Upload video", "Бейне жүктеу")}
           <input
             type="file"
             accept="video/mp4,video/webm,video/quicktime"
