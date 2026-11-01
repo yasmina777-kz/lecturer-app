@@ -3,6 +3,7 @@ export type SignClassifier = {
   labels: string[];
   mean: number[];
   std: number[];
+  layers?: { weights: number[][]; bias: number[]; activation: "relu" }[];
   weights: number[][];
   bias: number[];
   threshold: number;
@@ -33,9 +34,15 @@ export function classifyFeatures(features: number[], model: SignClassifier) {
     features.some((f) => !Number.isFinite(f))
   )
     return null;
-  const standardized = features.map(
-    (v, i) => (v - model.mean[i]) / model.std[i],
-  );
+  let standardized = features.map((v, i) => (v - model.mean[i]) / model.std[i]);
+  for (const layer of model.layers ?? []) {
+    standardized = layer.weights.map((row, k) =>
+      Math.max(
+        0,
+        row.reduce((sum, w, i) => sum + w * standardized[i], layer.bias[k]),
+      ),
+    );
+  }
   const logits = model.weights.map((row, k) =>
     row.reduce((sum, w, i) => sum + w * standardized[i], model.bias[k]),
   );

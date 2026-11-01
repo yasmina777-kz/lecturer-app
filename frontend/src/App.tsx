@@ -19,6 +19,8 @@ const SignLearningPage = lazy(() => import("./pages/SignWorkspace").then(m => ({
 const SignLessonPage = lazy(() => import("./pages/SignWorkspace").then(m => ({default:m.SignLessonPage})));
 const SignTextPage = lazy(() => import("./pages/SignWorkspace").then(m => ({default:m.SignTextPage})));
 const SignPracticePage = lazy(() => import("./pages/SignWorkspace").then(m => ({default:m.SignPracticePage})));
+const SignDialoguesPage = lazy(() => import("./pages/SignActivities").then(m => ({default:m.SignDialoguesPage})));
+const SignUnderstandingPage = lazy(() => import("./pages/SignActivities").then(m => ({default:m.SignUnderstandingPage})));
 const SignHelpPage = lazy(() => import("./pages/SignWorkspace").then(m => ({default:m.SignHelpPage})));
 import { LibraryPage } from "./pages/LibraryPage";
 import { CreatePage } from "./pages/CreatePage";
@@ -95,6 +97,8 @@ export function App() {
             <Route path="create" element={<CreatePage />} />
             <Route path="lectures/:id" element={<PlayerRoute />} />
             <Route path="practice" element={<SignPracticePage />} />
+            <Route path="dialogues" element={<SignDialoguesPage />} />
+            <Route path="understanding" element={<SignUnderstandingPage />} />
             <Route path="knowledge" element={<KnowledgePage />} />
             <Route path="groups" element={<GroupsPage />} />
             <Route path="courses" element={<CoursesRoute />} />

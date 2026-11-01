@@ -76,3 +76,39 @@ The archive excludes the full 1.8 GB source-video subset, credentials, and the
 Python environment. It includes the source download script and checksums.
 The detector is pretrained Google MediaPipe; only the letter classifier was
 trained by this project. Packaging does not retrain or change the model.
+
+## Expanded cautious experiment (2026-11-01)
+
+The standard model is retained. An additional MLP model uses 3,013 training
+videos (up to 90/class) and the **same 612 held-out videos**. It was selected
+using 615 signer-disjoint validation videos inside the training partition.
+Five candidates were compared: linear C=0.1/1/10 and a 96-unit ReLU MLP with
+alpha=1/5. The selected MLP uses alpha=5 and random_state=42.
+
+| Metric | Standard | Cautious |
+|---|---:|---:|
+| Overall test accuracy | 76.47% | 75.33% |
+| Answer coverage | 78.10% | 38.07% |
+| Correct among accepted answers | 87.45% | 100% (233/233) |
+
+Overall improvement was **not** established. Zero observed errors on 233 accepted
+answers is not a guarantee on new people or webcam recordings. The cautious
+model is optional; refusing an answer is not an assessment that the learner is
+wrong. Neither model recognizes free words/phrases or controls avatar animation.
+
+Reproduce the experiment:
+
+```sh
+ml/rsl/.venv/bin/python ml/rsl/prepare_alphabet.py --train-per-class 90
+ml/rsl/.venv/bin/python ml/rsl/extract_alphabet.py
+ml/rsl/.venv/bin/python ml/rsl/train_alphabet_v3.py
+ml/rsl/.venv/bin/python ml/rsl/render_model_comparison.py
+npm --prefix frontend run test:sign-expansion
+```
+
+The `alphabet-cautious-*` files keep the new model and its report separate from
+the baseline. `check-sign-expansion.mjs` verifies Python/JavaScript probability
+parity for all 34 new-model classes, as well as no-hand rejection. In the downloadable
+training archive, `baseline-manifest.json` preserves the previous training selection.
+Situational dialogues and comprehension exercises are rule-based learning activities;
+they are not represented as newly trained AI.

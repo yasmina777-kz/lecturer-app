@@ -15,7 +15,8 @@
     "test:rsl": "node scripts/check-rsl-model.mjs",
     "test:sign-expansion": "node scripts/check-sign-expansion.mjs",
     "test:sign-motion": "node scripts/check-sign-motion.mjs",
-    "test:hand-workshop": "node scripts/check-hand-workshop.mjs"
+    "test:hand-workshop": "node scripts/check-hand-workshop.mjs",
+    "test:sign-activities": "node scripts/check-sign-activities.mjs"
   },
   "dependencies": {
     "@huggingface/transformers": "^4.3.2",

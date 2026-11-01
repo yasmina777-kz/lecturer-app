@@ -47,7 +47,7 @@ export function SignDictionaryPage() {
     [forms, setForms] = useState<DictionaryForms>({}),
     [loading, setLoading] = useState(true),
     [error, setError] = useState("");
-  const [text, setText] = useState(""),
+  const [text, setText] = useState(() => (params.get("text") || "").slice(0, 500)),
     [submitted, setSubmitted] = useState(""),
     [spelling, setSpelling] = useState(false),
     [search, setSearch] = useState(""),

@@ -1,0 +1,16 @@
+{
+  "source": "https://github.com/ai-forever/bukva",
+  "selection": "Up to 90 train and 18 test per class, SHA-256 ID order, official subject split",
+  "manifestSha256": "d68631b6f7ca87af9000bbd33f2322ad3b9b70a3733b780e538cdc7cdcfeee64",
+  "baselineTestIdsUnchanged": true,
+  "testIdsSha256": "4ebeba353aff289a9b7a61ef6b402504a4784acd2eb745f08d2069e25bf9c5fb",
+  "classifier": "MLP: 474 inputs, 96 ReLU hidden units, 34 softmax outputs; alpha=5; seed=42",
+  "validation": "615 held-out-signer train videos; compare linear C=.1,1,10 and MLP alpha=1,5; select by validation accuracy",
+  "pretrainedComponent": "MediaPipe Hand Landmarker (Google)",
+  "scripts": [
+    "ml/rsl/prepare_alphabet.py --train-per-class 90",
+    "ml/rsl/extract_alphabet.py",
+    "ml/rsl/train_alphabet_v3.py"
+  ],
+  "deployment": "Optional cautious mode; baseline remains default because overall test accuracy did not improve."
+}

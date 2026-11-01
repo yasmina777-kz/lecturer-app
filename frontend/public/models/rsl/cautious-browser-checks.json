@@ -1,0 +1,10 @@
+{
+  "date": "2026-11-01",
+  "model": "alphabet-cautious-classifier.json",
+  "environment": "Local Vite app in Chromium, actual local video input and MediaPipe inference",
+  "checks": [
+    {"attachmentId": "410e2f5f-ac6a-46a5-a70d-ec846488a45d", "expected": "Я", "selectedLesson": "Л", "predicted": "Я", "accepted": true},
+    {"attachmentId": "no_f936868d-691a-4b0d-a90f-5a3ab801a255", "expected": "no_event", "accepted": false}
+  ],
+  "limitations": ["Two smoke checks, not an accuracy estimate.", "Live personal webcam was not tested.", "Browser extraction can differ from offline video sampling."]
+}

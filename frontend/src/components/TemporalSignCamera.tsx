@@ -12,6 +12,55 @@ import {
 import { at } from "../i18n/automation";
 import { drawHandOverlay } from "../sign/handOverlay";
 export function TemporalSignCamera({ expected }: { expected: string }) {
+  const [cautious, setCautious] = useState(false);
+  return (
+    <div className="sign-camera-modes">
+      <label>
+        {at("Режим распознавания", "Recognition mode", "Тану режимі")}
+        <select
+          value={cautious ? "cautious" : "standard"}
+          onChange={(e) => setCautious(e.target.value === "cautious")}
+        >
+          <option value="standard">
+            {at("Обычный", "Standard", "Қалыпты")}
+          </option>
+          <option value="cautious">
+            {at(
+              "Осторожный · новая модель",
+              "Cautious · new model",
+              "Сақ · жаңа модель",
+            )}
+          </option>
+        </select>
+      </label>
+      <p>
+        {cautious
+          ? at(
+              "Новая модель обучена на 3 013 видео. Она чаще отказывается отвечать; отказ не означает, что вы ошиблись.",
+              "Trained on 3,013 videos. This model rejects more attempts; rejection does not mean your sign was wrong.",
+              "Жаңа модель 3 013 бейнемен оқытылды. Жауаптан жиі бас тартады; бұл сіз қателестіңіз деген сөз емес.",
+            )
+          : at(
+              "Обычный режим отвечает чаще. Можно сравнить его с новой осторожной моделью.",
+              "Standard mode answers more often. Compare it with the new cautious model.",
+              "Қалыпты режим жиірек жауап береді. Жаңа сақ модельмен салыстырыңыз.",
+            )}
+      </p>
+      <TemporalCameraSession
+        key={`${expected}:${cautious}`}
+        expected={expected}
+        cautious={cautious}
+      />
+    </div>
+  );
+}
+function TemporalCameraSession({
+  expected,
+  cautious,
+}: {
+  expected: string;
+  cautious: boolean;
+}) {
   const video = useRef<HTMLVideoElement>(null),
     overlay = useRef<HTMLCanvasElement>(null),
     loading = useRef<Promise<void>>(),
@@ -42,7 +91,9 @@ export function TemporalSignCamera({ expected }: { expected: string }) {
   useEffect(() => {
     alive.current = true;
     const abort = new AbortController();
-    fetch("/models/rsl/alphabet-report.json", { signal: abort.signal })
+    fetch(`/models/rsl/alphabet${cautious ? "-cautious" : ""}-report.json`, {
+      signal: abort.signal,
+    })
       .then((r) => (r.ok ? r.json() : null))
       .then((r) => {
         if (alive.current) setReport(r);
@@ -93,7 +144,9 @@ export function TemporalSignCamera({ expected }: { expected: string }) {
       const [{ FilesetResolver, HandLandmarker }, response] = await Promise.all(
         [
           import("@mediapipe/tasks-vision"),
-          fetch("/models/rsl/alphabet-classifier.json"),
+          fetch(
+            `/models/rsl/alphabet${cautious ? "-cautious" : ""}-classifier.json`,
+          ),
         ],
       );
       if (!response.ok) throw Error("model");
@@ -558,6 +611,18 @@ export function TemporalSignCamera({ expected }: { expected: string }) {
               "Осы сынақтағы дәлдік",
             )}
             : {(report.accuracy * 100).toFixed(1)}%.{" "}
+            {at("Выдано ответов", "Answered", "Жауап берілді")}:{" "}
+            {(report.acceptedCoverage * 100).toFixed(1)}%.{" "}
+            {at(
+              "Верно среди выданных",
+              "Correct among answers",
+              "Жауаптар ішіндегі дұрысы",
+            )}
+            :{" "}
+            {report.acceptedAccuracy === null
+              ? "—"
+              : (report.acceptedAccuracy * 100).toFixed(1)}
+            %.{" "}
             {at(
               "Это не точность на вашей камере.",
               "This is not accuracy on your camera.",
@@ -566,7 +631,11 @@ export function TemporalSignCamera({ expected }: { expected: string }) {
           </p>
         )}
         <a
-          href="/research/rsl/alphabet-report.html"
+          href={
+            cautious
+              ? "/research/rsl/alphabet-comparison.html"
+              : "/research/rsl/alphabet-report.html"
+          }
           target="_blank"
           rel="noreferrer"
         >

@@ -473,3 +473,4 @@
   margin-bottom: 20px;
   width: fit-content;
 }
+.sign-camera-modes>label{display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-weight:600;margin-bottom:12px}.sign-camera-modes>label select{padding:12px;color:var(--sw-ink);background:var(--sw-soft);border:1px solid var(--sw-border);border-radius:12px;max-width:100%}.sign-camera-modes>p{font-size:14px;line-height:1.6}

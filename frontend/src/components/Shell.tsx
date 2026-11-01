@@ -10,6 +10,8 @@ import {
 } from "react-router-dom";
 import {
   BookOpen,
+  MessageCircle,
+  Eye,
   Type,
   CircleHelp,
   GraduationCap,
@@ -50,6 +52,8 @@ export function Shell() {
       icon: GraduationCap,
       active: path === "/practice",
     },
+    { to: "/dialogues", label: at("Диалоги", "Dialogues", "Диалогтар"), icon: MessageCircle, active: path === "/dialogues" },
+    { to: "/understanding", label: at("Понимание жестов", "Understand signs", "Ымдарды түсіну"), icon: Eye, active: path === "/understanding" },
     {
       to: "/settings",
       label: t("Настройки"),

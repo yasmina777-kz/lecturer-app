@@ -32,6 +32,7 @@ const Camera = lazy(() =>
     default: m.TemporalSignCamera,
   })),
 );
+import { ActivityLinks } from "./SignActivities";
 export function SignCourseCatalog() {
   const [params] = useSearchParams();
   const stage = courseLevels().find(
@@ -58,13 +59,14 @@ export function SignCourseCatalog() {
           <p>
             {stage?.description ||
               at(
-                "1. Выберите уровень → 2. Смотрите аватара → 3. Повторяйте сами.",
-                "1. Choose a level → 2. Watch the avatar → 3. Practise.",
-                "1. Деңгейді таңдаңыз → 2. Аватарды қараңыз → 3. Қайталаңыз.",
+                "Изучайте жесты по уровням, узнавайте их на видео и практикуйте общение.",
+                "Learn signs by level, recognize them in videos and practise communication.",
+                "Ымдарды деңгеймен үйреніп, бейнеден таныңыз және қарым-қатынасты жаттықтырыңыз.",
               )}
           </p>
         </div>
       </div>
+      {!stage && <ActivityLinks/>}
       {!stage ? (
         <div className="sign-level-grid">
           {courseLevels().map((l) => (

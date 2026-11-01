@@ -7,6 +7,10 @@ const recognition=await module('../src/sign/recognition.ts');const temporal=awai
 const fixtures=await read('../public/models/rsl/alphabet-fixtures.json'),model=await read('../public/models/rsl/alphabet-classifier.json');
 assert.equal(model.labels.length,34);
 for(const f of fixtures){const features=temporal.temporalFeatures(f.frames);assert.ok(features);assert.equal(features.length,474);features.forEach((v,i)=>assert.ok(Math.abs(v-f.features[i])<1e-8));const predicted=temporal.recognizeSequence(f.frames,model);predicted.probabilities.forEach((v,i)=>assert.ok(Math.abs(v-f.probabilities[i])<1e-7));}
+const cautious=await read('../public/models/rsl/alphabet-cautious-classifier.json'), cautiousFixtures=await read('../public/models/rsl/alphabet-cautious-fixtures.json');
+assert.equal(cautious.layers.length,1);assert.equal(cautiousFixtures.length,34);
+for(const f of cautiousFixtures){const predicted=temporal.recognizeSequence(f.frames,cautious);predicted.probabilities.forEach((v,i)=>assert.ok(Math.abs(v-f.probabilities[i])<1e-7));}
+assert.equal(temporal.recognizeSequence(Array.from({length:16},()=>Array(66).fill(0)),cautious).accepted,false);
 assert.equal(temporal.temporalFeatures([]),null);assert.equal(temporal.temporalFeatures(Array.from({length:16},()=>Array(66).fill(NaN))),null);assert.equal(temporal.recognizeSequence(Array.from({length:16},()=>Array(66).fill(0)),model).accepted,false);
 const {decomposeText,alphabetEntries}=await import(await module('../src/sign/dictionary.ts'));const words=await read('../public/research/rsl/words/catalog.json'),forms=await read('../public/research/rsl/words/forms.json'),entries=[...alphabetEntries(),...words];
 assert.equal(alphabetEntries().length,33);assert.equal(words.length,170);

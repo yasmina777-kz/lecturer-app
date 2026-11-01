@@ -369,9 +369,9 @@ export function SignHelpPage() {
           "Қай бөлімде не бар",
         )}
         description={at(
-          "Три основных раздела — каждый для своей задачи.",
-          "Three main sections, each with a clear purpose.",
-          "Үш негізгі бөлімнің әрқайсысы өз міндетіне арналған.",
+          "Выберите задачу: изучать, понимать, общаться или проверять свой показ.",
+          "Choose a task: learn, understand, communicate or check your signing.",
+          "Міндет таңдаңыз: үйрену, түсіну, сөйлесу немесе өз қимылыңызды тексеру.",
         )}
       />
       <div className="sign-help-grid">
@@ -401,6 +401,24 @@ export function SignHelpPage() {
               "3D-показы и видео всех 33 букв. Запишите короткий жест камерой или выберите видео: экспериментальный ИИ предложит букву либо откажется от ответа.",
               "3D demonstrations and videos of all 33 letters. Record a short sign or choose a video: the experimental AI suggests a letter or declines to answer.",
               "3D көрсетілімдер және 33 әріптің бейнесі. Камерамен қысқа қимыл жазыңыз не бейне таңдаңыз: тәжірибелік ЖИ әріпті ұсынады немесе жауаптан бас тартады.",
+            ),
+          ],
+          [
+            "/dialogues",
+            at("Диалоги", "Dialogues", "Диалогтар"),
+            at(
+              "Знакомство, занятие и магазин: выберите ответ, получите объяснение и продолжите разговор. Это учебные сценарии, а не распознавание свободного ответа.",
+              "Meeting, class and shopping: choose replies, read feedback and continue. These are guided scenarios, not free-sign recognition.",
+              "Танысу, сабақ және дүкен: жауап таңдап, түсіндірме алып, әңгімені жалғастырыңыз. Бұл — еркін ымды тану емес, оқу сценарийлері.",
+            ),
+          ],
+          [
+            "/understanding",
+            at("Понимание жестов", "Understand signs", "Ымдарды түсіну"),
+            at(
+              "170 видеообразцов по темам. Посмотрите жест без подписи, выберите смысл и повторите слова, в которых ошиблись. Камера не нужна.",
+              "170 topic-based videos. Watch an unlabelled sign, choose its meaning and review mistakes. No camera needed.",
+              "Тақырып бойынша 170 бейне. Жазусыз ымды көріп, мағынасын таңдаңыз және қателескен сөздерді қайталаңыз. Камера қажет емес.",
             ),
           ],
         ].map(([url, title, text]) => (

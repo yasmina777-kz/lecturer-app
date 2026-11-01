@@ -16,55 +16,64 @@ def add(relative):
     file = ROOT / relative
     assert file.is_file(), relative
     files[relative] = file
-for name in ['train_alphabet.py', 'extract_alphabet.py', 'prepare_alphabet.py', 'prepare_data.py', 'requirements.txt', 'requirements-lock.txt']:
+for name in ['train_alphabet.py', 'train_alphabet_v3.py', 'render_model_comparison.py', 'extract_alphabet.py', 'prepare_alphabet.py', 'prepare_data.py', 'requirements.txt', 'requirements-lock.txt']:
     add('ml/rsl/' + name)
 add('ml/rsl/data/annotations.tsv')
 add('ml/rsl/data/alphabet/manifest.json')
+add('ml/rsl/data/alphabet/baseline-manifest.json')
 for row in manifest:
     add('ml/rsl/data/alphabet/features-v1/' + row['attachment_id'] + '.json')
 # train_alphabet.py also exports 33 example videos after fitting the classifier.
 for row in refs:
     add('ml/rsl/data/alphabet/' + row['attachment_id'] + '.mp4')
-for name in ['hand_landmarker.task', 'alphabet-classifier.json', 'alphabet-report.json', 'alphabet-provenance.json', 'alphabet-fixtures.json']:
+for name in ['hand_landmarker.task', 'alphabet-classifier.json', 'alphabet-report.json', 'alphabet-provenance.json', 'alphabet-fixtures.json', 'alphabet-cautious-classifier.json', 'alphabet-cautious-report.json', 'alphabet-cautious-fixtures.json', 'alphabet-cautious-provenance.json']:
     add('frontend/public/models/rsl/' + name)
 for name in ['ATTRIBUTION.txt', 'bukva-license.pdf', 'alphabet/sources.json']:
     add('frontend/public/research/rsl/' + name)
 for name in ['recognition.ts', 'temporal.ts']:
     add('frontend/src/sign/' + name)
-readme = '''AI Mentor — обучение распознаванию букв РЖЯ
+readme = """AI Mentor — два режима распознавания 33 букв РЖЯ
 
-Главный файл: ml/rsl/train_alphabet.py
-Готовая модель: frontend/public/models/rsl/alphabet-classifier.json
-Результаты: frontend/public/models/rsl/alphabet-report.json
+Файл нового обучения: ml/rsl/train_alphabet_v3.py
+Новая модель: frontend/public/models/rsl/alphabet-cautious-classifier.json
+Отчёт: frontend/public/models/rsl/alphabet-cautious-report.json
+Обычный режим сохранён в alphabet-classifier.json.
 
-Это обученный логистический классификатор 33 отдельных букв и «нет жеста».
-Он получает координаты кисти от готовой модели Google MediaPipe, которую мы
-не обучали. Вход: 16 кадров, 474 числовых признака. API-ключи не нужны.
-Слова, фразы, грамматику, лицо и тело эта модель НЕ распознаёт.
+Новая небольшая нейросеть получает координаты от готовой Google MediaPipe.
+Мы обучили классификатор, а не MediaPipe. 16 кадров, 474 признака,
+96 ReLU-нейронов, 34 выхода: 33 буквы и «нет жеста». API-ключи не нужны.
+Не распознаёт слова, свободные фразы, грамматику, лицо и корпус.
+Не обучает движения аватара.
 
-В архиве реальные признаки из 2 142 видео Bukva: 1 530 для обучения,
-612 для теста. Люди в тесте не пересекаются с людьми в обучении.
-manifest.json содержит метки и идентификаторы видео; features-v1 — извлечённые
-координаты. Также включены 33 видеообразца, нужные скрипту при экспорте.
-Все исходные видео (около 1,8 ГБ) не включены; их загрузит prepare_alphabet.py.
-Публичные данные и производные материалы сохраняют лицензию и атрибуцию Bukva:
-frontend/public/research/rsl/bukva-license.pdf и ATTRIBUTION.txt.
-MediaPipe: https://github.com/google-ai-edge/mediapipe (Apache 2.0).
+В архиве признаки 3 625 видео Bukva: 3 013 для обучения, 612 для теста.
+Тестовые люди не пересекаются с обучающими. Для выбора параметров выделено
+615 видео других людей внутри обучающей части; после выбора обучение
+повторено на всех 3 013 обучающих примерах. Тест тот же, что у старой модели.
+manifest.json — новая выборка; baseline-manifest.json — прежняя выборка.
 
-Повторить обучение на готовых признаках (из корня распакованного архива):
+Общая точность новой модели: 75,33% (старой: 76,47%). Рост не подтверждён.
+Новая модель выдала 233 ответа из 612; все 233 верны на этой выборке.
+Это НЕ гарантия 100% точности на камере. Она чаще отказывается, поэтому
+доступна как дополнительный осторожный режим, а прежняя остаётся основной.
+Порог 0,70, отрыв 0,20, рука видна минимум в 8/16 кадров.
+
+Повторить новое обучение из корня архива:
 python3.11 -m venv ml/rsl/.venv
 ml/rsl/.venv/bin/pip install -r ml/rsl/requirements-lock.txt
-ml/rsl/.venv/bin/python ml/rsl/train_alphabet.py
+ml/rsl/.venv/bin/python ml/rsl/train_alphabet_v3.py
 
-Чтобы заново извлечь признаки из видео, сначала запустите prepare_alphabet.py,
-затем переместите старую папку features-v1 в резервную копию и запустите
-extract_alphabet.py, после него train_alphabet.py.
+Чтобы заново извлечь признаки, скачайте видео:
+ml/rsl/.venv/bin/python ml/rsl/prepare_alphabet.py --train-per-class 90
+Затем сохраните старую features-v1 отдельно и запустите extract_alphabet.py.
+Сами исходные 3 625 видео в архив не включены. Включены 33 видеообразца.
+Для воспроизведения старого обучения замените manifest.json копией
+baseline-manifest.json и запустите train_alphabet.py; восстановите новый
+manifest.json перед новым обучением.
 
-Сохранённая точность на тестовых видео — 76,47%; это не точность вашей камеры.
-Модель может ошибаться или отказаться от ответа. Число после распознавания
-не является подтверждением правильности жеста преподавателем РЖЯ.
-CHECKSUMS.json позволяет проверить, что включены именно файлы проекта.
-'''
+Лицензии и атрибуция: frontend/public/research/rsl/ATTRIBUTION.txt
+и bukva-license.pdf. MediaPipe: https://github.com/google-ai-edge/mediapipe
+CHECKSUMS.json содержит SHA-256 каждого включённого файла проекта.
+"""
 output.parent.mkdir(parents=True, exist_ok=True)
 with zipfile.ZipFile(output, 'w', compression=zipfile.ZIP_DEFLATED) as archive:
     hashes = {}
