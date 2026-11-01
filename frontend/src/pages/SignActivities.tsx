@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft,
@@ -161,11 +161,12 @@ export function SignDialoguesPage() {
               </p>
             </div>
           </div>
+          <DialogueSteps />
           <p className="activity-method">
             {at(
-              "Пошаговые учебные сценарии с выбором ответа. Свободный ответ жестами через камеру пока не распознаётся.",
-              "Guided scenarios with selectable replies. Free signing through the camera is not recognized yet.",
-              "Жауап таңдауы бар қадамдық сценарийлер. Камерадағы еркін ым жауабы әзірге танылмайды.",
+              "Отвечайте кнопками: камера и микрофон не нужны. В каждой ситуации — три короткие реплики.",
+              "Reply using buttons: no camera or microphone needed. Each situation has three short turns.",
+              "Батырмамен жауап беріңіз: камера мен микрофон қажет емес. Әр жағдаятта үш қысқа реплика бар.",
             )}
           </p>
           <div className="activity-scenarios">
@@ -228,6 +229,29 @@ export function SignDialoguesPage() {
     </div>
   );
 }
+function DialogueSteps({ phase }: { phase?: "watch" | "answer" | "feedback" }) {
+  const steps = [
+    ["watch", at("Посмотрите жесты", "Watch the signs", "Ымдарды қараңыз")],
+    ["answer", at("Выберите ответ", "Choose a reply", "Жауап таңдаңыз")],
+    [
+      "feedback",
+      at("Разберите результат", "Review feedback", "Нәтижені талдаңыз"),
+    ],
+  ];
+  return (
+    <ol
+      className="dialogue-steps"
+      aria-label={at("Порядок занятия", "Activity steps", "Жаттығу реті")}
+    >
+      {steps.map(([id, label], i) => (
+        <li key={id} aria-current={phase === id ? "step" : undefined}>
+          <span>{i + 1}</span>
+          {label}
+        </li>
+      ))}
+    </ol>
+  );
+}
 function DialogueSession({
   scenario,
   data,
@@ -237,31 +261,42 @@ function DialogueSession({
   data: Catalog;
   leave: () => void;
 }) {
-  const [stepId, setStepId] = useState(scenario.start),
-    [selected, setSelected] = useState<string | null>(null),
-    [submitted, setSubmitted] = useState(false),
-    [done, setDone] = useState(false),
-    [history, setHistory] = useState<{ prompt: string; reply: string }[]>([]),
-    [run, setRun] = useState(() => crypto.randomUUID());
-  const recorded = useRef(new Set<string>());
-  const [firstAnswers, setFirstAnswers] = useState<
-    { item: string; correct: boolean }[]
+  const [stepId, setStepId] = useState(scenario.start);
+  const [phase, setPhase] = useState<"watch" | "answer" | "feedback">("watch");
+  const [selected, setSelected] = useState<string | null>(null);
+  const [done, setDone] = useState(false);
+  const [history, setHistory] = useState<
+    { item: string; prompt: string; reply: string }[]
   >([]);
+  const [run, setRun] = useState(() => crypto.randomUUID());
+  const [wordIndex, setWordIndex] = useState(0);
+  const [firstAnswers, setFirstAnswers] = useState<
+    { item: string; correct: boolean; reply: string; feedback: string }[]
+  >([]);
+  const recorded = useRef(new Set<string>());
+  const heading = useRef<HTMLHeadingElement>(null);
   const { record, error } = useActivityProgress();
   const step = scenario.steps.find((s) => s.id === stepId)!;
   const choice = step.choices.find((c) => c.id === selected);
-  const [wordIndex, setWordIndex] = useState(0);
   const signs = step.signs
     .map((label) => data.entries.find((e) => e.label === label))
     .filter((e): e is DictionaryEntry => !!e);
+  useEffect(() => {
+    heading.current?.focus();
+  }, [phase, stepId, done]);
   function submit() {
-    if (!choice || submitted) return;
-    setSubmitted(true);
+    if (!choice || phase !== "answer") return;
+    setPhase("feedback");
     if (!recorded.current.has(step.id)) {
       recorded.current.add(step.id);
       setFirstAnswers((a) => [
         ...a,
-        { item: step.id, correct: choice.accepted },
+        {
+          item: step.id,
+          correct: choice.accepted,
+          reply: choice.text,
+          feedback: choice.feedback,
+        },
       ]);
       record({
         id: `${run}:${step.id}`,
@@ -274,12 +309,15 @@ function DialogueSession({
     }
   }
   function next() {
-    if (!choice?.accepted) return;
-    setHistory((h) => [...h, { prompt: step.prompt, reply: choice.text }]);
+    if (!choice?.accepted || phase !== "feedback") return;
+    setHistory((h) => [
+      ...h,
+      { item: step.id, prompt: step.prompt, reply: choice.text },
+    ]);
     if (choice.next) {
       setStepId(choice.next);
       setSelected(null);
-      setSubmitted(false);
+      setPhase("watch");
       setWordIndex(0);
     } else setDone(true);
   }
@@ -287,11 +325,11 @@ function DialogueSession({
     setRun(crypto.randomUUID());
     recorded.current.clear();
     setFirstAnswers([]);
+    setHistory([]);
     setStepId(scenario.start);
     setSelected(null);
-    setSubmitted(false);
+    setPhase("watch");
     setDone(false);
-    setHistory([]);
     setWordIndex(0);
   }
   return (
@@ -311,224 +349,384 @@ function DialogueSession({
                   "Әңгіме аяқталды",
                 )
               : at(
-                  `Реплика ${history.length + 1}`,
-                  `Turn ${history.length + 1}`,
-                  `${history.length + 1}-реплика`,
+                  `Реплика ${history.length + 1} из 3`,
+                  `Turn ${history.length + 1} of 3`,
+                  `3 репликаның ${history.length + 1}-сі`,
                 )}
           </h1>
+          <p>
+            {at(
+              "Здесь вы выбираете ответ кнопкой. Камера и микрофон не нужны.",
+              "Choose your reply using the buttons. No camera or microphone needed.",
+              "Жауапты батырмамен таңдаңыз. Камера мен микрофон қажет емес.",
+            )}
+          </p>
         </div>
       </div>
+      {!done && <DialogueSteps phase={phase} />}
       {done ? (
         <section className="panel activity-result">
           <Check size={30} />
-          <h2>
-            {at(
-              "Вы прошли ситуацию",
-              "You completed the situation",
-              "Жағдаяттан өттіңіз",
-            )}
+          <h2 ref={heading} tabIndex={-1}>
+            {at("Что получилось", "Your results", "Нәтижеңіз")}
           </h2>
           <p>
             {at(
-              "Подходящих первых ответов",
-              "Relevant first replies",
-              "Орынды алғашқы жауаптар",
+              "Подходящих ответов с первой попытки",
+              "Relevant replies on the first attempt",
+              "Алғашқы әрекеттегі орынды жауаптар",
             )}
-            : {firstAnswers.filter((a) => a.correct).length}/
-            {firstAnswers.length}.{" "}
-            {at(
-              "Ошибки можно разобрать при повторном прохождении.",
-              "Review mistakes by trying the dialogue again.",
-              "Қайта өткенде қателерді талдауға болады.",
-            )}
+            :{" "}
+            <strong>
+              {firstAnswers.filter((a) => a.correct).length}/
+              {firstAnswers.length}
+            </strong>
+            .
           </p>
           <ol>
-            {history.map((h, i) => (
-              <li key={i}>
-                <strong>{h.prompt}</strong>
-                <p>{h.reply}</p>
-              </li>
-            ))}
+            {history.map((h, i) => {
+              const first = firstAnswers.find((a) => a.item === h.item);
+              return (
+                <li key={h.item}>
+                  <strong>
+                    {i + 1}. {h.prompt}
+                  </strong>
+                  <p>
+                    {at("Ваш ответ", "Your reply", "Жауабыңыз")}: {h.reply}
+                  </p>
+                  {first && !first.correct && (
+                    <div className="dialogue-review">
+                      <strong>
+                        {at(
+                          "Что стоит повторить",
+                          "What to review",
+                          "Нені қайталау керек",
+                        )}
+                      </strong>
+                      <p>
+                        {at("Первый выбор", "First choice", "Алғашқы таңдау")}:{" "}
+                        {first.reply}
+                      </p>
+                      <p>{first.feedback}</p>
+                    </div>
+                  )}
+                </li>
+              );
+            })}
           </ol>
           <div className="activity-actions">
-            <button className="button primary" onClick={restart}>
-              {at("Пройти ещё раз", "Try again", "Қайта өту")}
-            </button>
-            <Link className="button secondary" to="/understanding">
+            <button className="button primary" onClick={leave}>
               {at(
-                "Проверить понимание",
-                "Check understanding",
-                "Түсінуді тексеру",
+                "Выбрать другую ситуацию",
+                "Choose another situation",
+                "Басқа жағдаят таңдау",
+              )}
+            </button>
+            <button className="button secondary" onClick={restart}>
+              {at(
+                "Повторить этот диалог",
+                "Repeat this dialogue",
+                "Осы диалогты қайталау",
+              )}
+            </button>
+            <Link to="/understanding">
+              {at(
+                "Потренировать понимание видео →",
+                "Practise understanding videos →",
+                "Бейнені түсінуді жаттықтыру →",
               )}
             </Link>
           </div>
         </section>
       ) : (
-        <div className="activity-dialogue-layout">
-          <section className="panel activity-turn">
-            <span className="eyebrow">
-              {at("СОБЕСЕДНИК", "YOUR PARTNER", "ӘҢГІМЕЛЕСУШІ")}
+        <>
+          <div className="dialogue-partner">
+            <span>
+              {at(
+                "Собеседник спрашивает",
+                "Your partner asks",
+                "Әңгімелесуші сұрайды",
+              )}
             </span>
             <h2>{step.prompt}</h2>
             <p>{step.context}</p>
-            <fieldset className="activity-options">
-              <legend>
-                {at(
-                  "Как вы ответите?",
-                  "How will you reply?",
-                  "Қалай жауап бересіз?",
-                )}
-              </legend>
-              {step.choices.map((c) => (
-                <label
-                  key={c.id}
-                  className={selected === c.id ? "selected" : ""}
-                >
-                  <input
-                    type="radio"
-                    name="reply"
-                    value={c.id}
-                    checked={selected === c.id}
-                    disabled={submitted}
-                    onChange={() => setSelected(c.id)}
-                  />
-                  {c.text}
-                </label>
-              ))}
-            </fieldset>
-            {!submitted ? (
-              <>
-                <button
-                  className="button primary"
-                  disabled={!choice}
-                  onClick={submit}
-                >
-                  {at("Ответить", "Reply", "Жауап беру")}{" "}
-                  <ArrowRight size={17} />
-                </button>
-                {!choice && (
-                  <p className="activity-hint">
-                    {at(
-                      "Выберите одну реплику.",
-                      "Choose one reply.",
-                      "Бір жауапты таңдаңыз.",
+          </div>
+          <section className="panel dialogue-stage">
+            <h2 ref={heading} tabIndex={-1}>
+              {phase === "watch"
+                ? at(
+                    "1. Познакомьтесь с жестами",
+                    "1. Explore the signs",
+                    "1. Ымдармен танысыңыз",
+                  )
+                : phase === "answer"
+                  ? at(
+                      "2. Что вы ответите?",
+                      "2. How will you reply?",
+                      "2. Қалай жауап бересіз?",
+                    )
+                  : at(
+                      "3. Разберём ваш ответ",
+                      "3. Review your reply",
+                      "3. Жауабыңызды талдайық",
                     )}
-                  </p>
-                )}
+            </h2>
+            {phase === "watch" ? (
+              <>
+                <p className="dialogue-instruction">
+                  {at(
+                    "Нажмите «Смотреть жест». Переключайте слова под вопросом, затем переходите к ответу. Видео показывают отдельные слова для этой ситуации.",
+                    "Press Watch sign. Switch between the vocabulary words, then choose your reply. These videos show individual words for this situation.",
+                    "«Ымды көру» батырмасын басыңыз. Сөздерді ауыстырып, жауапқа өтіңіз. Бейнелер осы жағдайға арналған жеке сөздерді көрсетеді.",
+                  )}
+                </p>
+                <div className="dialogue-watch-layout">
+                  <div className="activity-signs">
+                    <div
+                      className="activity-word-tabs"
+                      role="group"
+                      aria-label={at(
+                        "Слова для этой реплики",
+                        "Words for this turn",
+                        "Осы репликаға арналған сөздер",
+                      )}
+                    >
+                      {signs.map((s, i) => (
+                        <button
+                          key={s.id}
+                          aria-pressed={wordIndex === i}
+                          onClick={() => setWordIndex(i)}
+                        >
+                          {s.label}
+                        </button>
+                      ))}
+                    </div>
+                    {signs[wordIndex] ? (
+                      <ReferenceVideo
+                        key={signs[wordIndex].id}
+                        entry={signs[wordIndex]}
+                        showPlayButton
+                      />
+                    ) : (
+                      <p role="status">
+                        {at(
+                          "Для этой реплики пока нет видеообразца. Можно перейти к ответу.",
+                          "No video reference is available for this turn. You can still choose a reply.",
+                          "Бұл репликаға бейнеүлгі әзірге жоқ. Жауапқа өтуге болады.",
+                        )}
+                      </p>
+                    )}
+                    {signs.length > 1 && (
+                      <div className="dialogue-word-navigation">
+                        <span>
+                          {at(
+                            `Жест ${wordIndex + 1} из ${signs.length}`,
+                            `Sign ${wordIndex + 1} of ${signs.length}`,
+                            `${signs.length} ымның ${wordIndex + 1}-і`,
+                          )}
+                        </span>
+                        <button
+                          className="sign-link-button"
+                          onClick={() =>
+                            setWordIndex((i) => (i + 1) % signs.length)
+                          }
+                        >
+                          {wordIndex === signs.length - 1
+                            ? at(
+                                "К первому жесту",
+                                "Back to first sign",
+                                "Бірінші ымға",
+                              )
+                            : at(
+                                "Следующий жест",
+                                "Next sign",
+                                "Келесі ым",
+                              )}{" "}
+                          <ArrowRight size={16} />
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                  <div className="dialogue-task-note">
+                    <h3>{at("Ваша задача", "Your task", "Тапсырмаңыз")}</h3>
+                    <p>
+                      {at(
+                        "Подумайте, какой ответ подходит к вопросу собеседника. Дальше появятся три варианта — выберите один.",
+                        "Think about a suitable reply. You will see three options next; choose one.",
+                        "Сұраққа сәйкес жауапты ойлаңыз. Келесі қадамда үш нұсқадан бірін таңдаңыз.",
+                      )}
+                    </p>
+                    <p>
+                      {at(
+                        "Если уже знаете эти жесты, можно сразу перейти к ответу.",
+                        "Already know these signs? Go straight to your reply.",
+                        "Бұл ымдарды білсеңіз, бірден жауапқа өтіңіз.",
+                      )}
+                    </p>
+                    <button
+                      className="button primary"
+                      onClick={() => setPhase("answer")}
+                    >
+                      {at("Перейти к ответу", "Choose my reply", "Жауапқа өту")}{" "}
+                      <ArrowRight size={17} />
+                    </button>
+                  </div>
+                </div>
+                <AvatarStudy key={step.id} text={step.avatar} data={data} />
               </>
             ) : (
-              <div
-                className={`activity-feedback ${choice?.accepted ? "correct" : "review"}`}
-                role="status"
-              >
-                <strong>
-                  {choice?.accepted
-                    ? at(
-                        "Ответ подходит к ситуации",
-                        "This reply fits",
-                        "Жауап жағдайға сәйкес",
-                      )
-                    : at(
-                        "Попробуйте другую реплику",
-                        "Try another reply",
-                        "Басқа жауапты көріңіз",
-                      )}
-                </strong>
-                <p>{choice?.feedback}</p>
-                {choice?.accepted ? (
-                  <button className="button primary" onClick={next}>
-                    {choice.next
-                      ? at("Продолжить разговор", "Continue", "Жалғастыру")
-                      : at(
-                          "Завершить диалог",
-                          "Finish dialogue",
-                          "Диалогты аяқтау",
-                        )}
-                  </button>
-                ) : (
+              <>
+                <div className="dialogue-response-context">
+                  <span>
+                    {at("Отвечаем на вопрос", "Replying to", "Сұраққа жауап")}:{" "}
+                    <strong>{step.prompt}</strong>
+                  </span>
                   <button
-                    className="button secondary"
-                    onClick={() => {
-                      setSelected(null);
-                      setSubmitted(false);
-                    }}
+                    className="sign-link-button"
+                    onClick={() => setPhase("watch")}
                   >
                     {at(
-                      "Выбрать другой ответ",
-                      "Choose another reply",
-                      "Басқа жауап таңдау",
+                      "Посмотреть жесты ещё раз",
+                      "Review the signs",
+                      "Ымдарды қайта қарау",
                     )}
                   </button>
+                </div>
+                {phase === "answer" ? (
+                  <>
+                    <fieldset className="activity-options">
+                      <legend>
+                        {at(
+                          "Выберите одну реплику",
+                          "Choose one reply",
+                          "Бір жауап таңдаңыз",
+                        )}
+                      </legend>
+                      {step.choices.map((c) => (
+                        <label
+                          key={c.id}
+                          className={selected === c.id ? "selected" : ""}
+                        >
+                          <input
+                            type="radio"
+                            name="reply"
+                            value={c.id}
+                            checked={selected === c.id}
+                            onChange={() => setSelected(c.id)}
+                          />
+                          {c.text}
+                        </label>
+                      ))}
+                    </fieldset>
+                    <button
+                      className="button primary"
+                      disabled={!choice}
+                      onClick={submit}
+                    >
+                      {at(
+                        "Проверить мой ответ",
+                        "Check my reply",
+                        "Жауабымды тексеру",
+                      )}{" "}
+                      <ArrowRight size={17} />
+                    </button>
+                    {!choice && (
+                      <p className="activity-hint">
+                        {at(
+                          "Сначала нажмите на один из вариантов выше.",
+                          "First select one of the options above.",
+                          "Алдымен жоғарыдағы нұсқаның бірін таңдаңыз.",
+                        )}
+                      </p>
+                    )}
+                  </>
+                ) : (
+                  <div
+                    className={`activity-feedback ${choice?.accepted ? "correct" : "review"}`}
+                  >
+                    <strong>
+                      {choice?.accepted
+                        ? at(
+                            "Ответ подходит к ситуации",
+                            "This reply fits",
+                            "Жауап жағдайға сәйкес",
+                          )
+                        : at(
+                            "Попробуем по-другому",
+                            "Let’s try another reply",
+                            "Басқа жауапты көрейік",
+                          )}
+                    </strong>
+                    <p>
+                      {at("Вы выбрали", "You chose", "Таңдағаныңыз")}:{" "}
+                      <b>{choice?.text}</b>
+                    </p>
+                    <p>{choice?.feedback}</p>
+                    {choice?.accepted ? (
+                      <>
+                        <button className="button primary" onClick={next}>
+                          {choice.next
+                            ? at(
+                                "К следующей реплике",
+                                "Next turn",
+                                "Келесі репликаға",
+                              )
+                            : at(
+                                "Посмотреть итог диалога",
+                                "View dialogue results",
+                                "Диалог қорытындысы",
+                              )}{" "}
+                          <ArrowRight size={17} />
+                        </button>
+                        {choice.example && (
+                          <Link
+                            className="sign-back"
+                            to={`/text-to-sign?text=${encodeURIComponent(choice.example)}`}
+                          >
+                            {at(
+                              "Дополнительно: посмотреть жесты ответа",
+                              "Optional: explore reply vocabulary",
+                              "Қосымша: жауап ымдарын қарау",
+                            )}{" "}
+                            <ArrowRight size={16} />
+                          </Link>
+                        )}
+                      </>
+                    ) : (
+                      <button
+                        className="button primary"
+                        onClick={() => {
+                          setSelected(null);
+                          setPhase("answer");
+                        }}
+                      >
+                        {at(
+                          "Выбрать другой ответ",
+                          "Choose another reply",
+                          "Басқа жауап таңдау",
+                        )}
+                      </button>
+                    )}
+                  </div>
                 )}
-              </div>
-            )}
-            {history.length > 0 && (
-              <details className="activity-transcript">
-                <summary>
-                  {at(
-                    "Предыдущие реплики",
-                    "Previous turns",
-                    "Алдыңғы репликалар",
-                  )}
-                </summary>
-                {history.map((h, i) => (
-                  <p key={i}>
-                    <strong>{h.prompt}</strong>
-                    <br />
-                    {h.reply}
-                  </p>
-                ))}
-              </details>
+              </>
             )}
           </section>
-          <aside className="activity-signs">
-            <h2>
-              {at(
-                "Жесты для этой ситуации",
-                "Vocabulary for this situation",
-                "Осы жағдайға арналған ымдар",
-              )}
-            </h2>
-            <p>
-              {at(
-                "Отдельные видеообразцы, не полный перевод реплики.",
-                "Individual video references, not a full translation of the prompt.",
-                "Жеке бейнеүлгілер, репликаның толық аудармасы емес.",
-              )}
-            </p>
-            <div className="activity-word-tabs">
-              {signs.map((s, i) => (
-                <button
-                  key={s.id}
-                  aria-pressed={wordIndex === i}
-                  onClick={() => setWordIndex(i)}
-                >
-                  {s.label}
-                </button>
+          {history.length > 0 && (
+            <details className="activity-transcript">
+              <summary>
+                {at("Наш разговор", "Our conversation", "Біздің әңгіме")}
+              </summary>
+              {history.map((h) => (
+                <p key={h.item}>
+                  <strong>{h.prompt}</strong>
+                  <br />
+                  {h.reply}
+                </p>
               ))}
-            </div>
-            {signs[wordIndex] && (
-              <ReferenceVideo
-                key={signs[wordIndex].id}
-                entry={signs[wordIndex]}
-              />
-            )}
-            <AvatarStudy key={step.id} text={step.avatar} data={data} />
-            {submitted && choice?.accepted && choice.example && (
-              <Link
-                className="sign-back"
-                to={`/text-to-sign?text=${encodeURIComponent(choice.example)}`}
-              >
-                {at(
-                  "Открыть слова ответа",
-                  "Open reply vocabulary",
-                  "Жауап сөздерін ашу",
-                )}{" "}
-                <ArrowRight size={16} />
-              </Link>
-            )}
-          </aside>
-        </div>
+            </details>
+          )}
+        </>
       )}
       {error && <p role="alert">{error}</p>}
       <p className="sign-save-note">{localNote()}</p>

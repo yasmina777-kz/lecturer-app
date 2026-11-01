@@ -39,3 +39,17 @@ Validation:
 Training archive: `AI-Mentor-training.zip`, 3,625 cached feature sequences, both
 models, training scripts, reports, baseline/expanded manifests, reference examples,
 licenses and per-file checksums. Raw full dataset videos are not included.
+
+## Guided dialogue refinement
+
+Each turn now has explicit Watch → Reply → Feedback steps. The prompt remains
+visible, vocabulary video playback has a labelled button, and users can skip
+familiar vocabulary. Returning to videos preserves a selected reply. The result
+shows the original mistaken reply and its explanation rather than only a score.
+No free-sign recognition or new model training is implied by these UI changes.
+
+Verified in the browser: launch video, return to video with a selected reply,
+wrong reply and retry, water shopping branch, keyboard Space/Enter selection,
+three-turn completion with 2/3 first-attempt score and first-error explanation.
+Dark desktop and cream 320px mobile answer layouts checked; theme and viewport
+restored. Production build and sign-activity logic checks passed.

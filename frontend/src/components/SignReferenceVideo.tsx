@@ -1,8 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import type { DictionaryEntry } from "../sign/dictionary";
 import { at } from "../i18n/automation";
-export function ReferenceVideo({ entry }: { entry: DictionaryEntry }) {
+export function ReferenceVideo({
+  entry,
+  showPlayButton = false,
+}: {
+  entry: DictionaryEntry;
+  showPlayButton?: boolean;
+}) {
   const ref = useRef<HTMLVideoElement>(null);
+  const [playError, setPlayError] = useState(false);
   const [speed, setSpeed] = useState(1),
     [loop, setLoop] = useState(false),
     [failed, setFailed] = useState(false);
@@ -36,6 +43,36 @@ export function ReferenceVideo({ entry }: { entry: DictionaryEntry }) {
           if (ref.current) ref.current.playbackRate = speed;
         }}
       />
+      {showPlayButton && (
+        <button
+          className="button secondary reference-play"
+          onClick={async () => {
+            if (!ref.current) return;
+            setPlayError(false);
+            ref.current.currentTime = 0;
+            try {
+              await ref.current.play();
+            } catch {
+              setPlayError(true);
+            }
+          }}
+        >
+          {at(
+            `Смотреть жест «${entry.label}»`,
+            `Watch sign: ${entry.label}`,
+            `«${entry.label}» ымын көру`,
+          )}
+        </button>
+      )}
+      {playError && (
+        <p role="status">
+          {at(
+            "Нажмите ▶ на самом видео, чтобы запустить показ.",
+            "Press play on the video to start.",
+            "Көрсетілім үшін бейнедегі ▶ батырмасын басыңыз.",
+          )}
+        </p>
+      )}
       {failed && (
         <p role="alert">
           {at(
