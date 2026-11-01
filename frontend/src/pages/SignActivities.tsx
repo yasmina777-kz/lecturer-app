@@ -52,8 +52,10 @@ export function ActivityLinks() {
   return (
     <div className="activity-entry-links">
       <Link to="/dialogues">
-        <MessageCircle />
-        <div>
+        <div className="activity-entry-cover">
+          <img src={phraseArt("Я хочу купить хлеб")} alt="" loading="lazy" />
+        </div>
+        <div className="activity-entry-copy">
           <strong>
             {at(
               "Диалоги в ситуациях",
@@ -72,8 +74,10 @@ export function ActivityLinks() {
         <ArrowRight />
       </Link>
       <Link to="/understanding">
-        <Eye />
-        <div>
+        <div className="activity-entry-cover">
+          <img src={phraseArt("Покажи мне")} alt="" loading="lazy" />
+        </div>
+        <div className="activity-entry-copy">
           <strong>
             {at("Понимание жестов", "Understand signs", "Ымдарды түсіну")}
           </strong>

@@ -691,19 +691,13 @@
 .sign-level-card:hover img {
   transform: scale(1.035);
 }
-.sign-level-cover > span {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  padding: 6px 10px;
-  border: 1px solid #ffffff40;
-  border-radius: 8px;
+.sign-level-number {
+  align-self: flex-start;
+  margin-bottom: 10px;
   font-size: 10px;
   font-weight: 750;
   letter-spacing: 0.08em;
-  color: #fff;
-  background: #101a2cce;
-  backdrop-filter: blur(8px);
+  color: var(--level-tint, var(--sw-muted));
 }
 .sign-level-body {
   display: flex;

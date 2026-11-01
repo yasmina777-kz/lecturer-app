@@ -162,7 +162,7 @@ export function courseLevels() {
         "All 33 letters: experimental avatar motion, reference videos and AI checks.",
         "33 әріптің сынақ аватар қимылдары, бейнеүлгілері және тәжірибелік ЖИ тексеруі.",
       ),
-      image: "knowledge-book.png",
+      image: "/illustrations/sign-phrases/alphabet-cover.jpg",
       count: at(
         "33 буквы · видео и ИИ",
         "33 letters · video and AI",
@@ -177,7 +177,7 @@ export function courseLevels() {
         "Move from hand shapes to motion. Greetings and thanks.",
         "Қол пішінінен қимылға өтіңіз. Амандасу және алғыс айту.",
       ),
-      image: "mentor-dialogue-v2.png",
+      image: "/illustrations/sign-phrases/phrase-02.jpg",
       count: at(
         "2 пробных показа · без ИИ-проверки",
         "2 trial demonstrations · no AI check",
@@ -196,7 +196,7 @@ export function courseLevels() {
         "Watch “What is your name?” and inspect its movements.",
         "«Сенің атың кім?» сөйлемін қарап, қимылдарын талдаңыз.",
       ),
-      image: "teacher-group-v1.png",
+      image: "/illustrations/sign-phrases/phrase-01.jpg",
       count: at(
         "1 пробная фраза · без ИИ-проверки",
         "1 trial phrase · no AI check",

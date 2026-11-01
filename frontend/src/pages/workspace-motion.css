@@ -1,115 +1,9 @@
 /* A shared motion language for the learning workspace, not the public landing. */
 .sign-course-workspace .learning-welcome {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 280px;
-  align-items: center;
-  gap: 24px;
-  min-height: 190px;
   margin-bottom: 28px;
 }
-.learning-welcome h1 {
-  max-width: 520px;
-}
 .learning-welcome p {
-  max-width: 54ch;
-}
-.learning-scene {
-  position: relative;
-  height: 180px;
-  perspective: 800px;
-  isolation: isolate;
-}
-.learning-orbit {
-  position: absolute;
-  inset: 12px 10px;
-  border: 1px solid var(--sw-border);
-  border-radius: 50%;
-  transform: rotate(-20deg);
-}
-.learning-orbit:after {
-  content: "";
-  position: absolute;
-  inset: 20px -10px;
-  border: 1px dashed var(--sw-border);
-  border-radius: 50%;
-}
-.learning-scene-card {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 112px;
-  height: 140px;
-  padding: 18px 14px;
-  border: 1px solid var(--sw-border);
-  border-radius: 20px;
-  background: var(--sw-soft);
-  color: var(--sw-ink);
-  box-shadow: 0 14px 30px #0002;
-  transform: translateY(var(--offset)) rotate(var(--angle));
-  animation: learning-card-arrive 650ms cubic-bezier(0.2, 0.75, 0.25, 1) backwards;
-  animation-delay: var(--delay);
-  transition: transform 250ms ease;
-}
-.learning-scene-card svg {
-  width: 32px;
-  height: 32px;
-}
-.learning-scene-card span {
-  font-size: 11px;
-  font-weight: 700;
-}
-.learning-scene-card i {
-  display: block;
-  width: 64%;
-  height: 3px;
-  border-radius: 4px;
-  background: currentColor;
-  opacity: 0.14;
-}
-.learning-scene-card i:last-child {
-  width: 40%;
-}
-.learning-scene-card--hand {
-  left: 8px;
-  top: 22px;
-  --angle: -15deg;
-  --offset: 0px;
-  --delay: 0ms;
-  color: #a6cfdf;
-  background: #152b3a;
-}
-.learning-scene-card--eye {
-  left: 87px;
-  top: 2px;
-  --angle: 0deg;
-  --offset: 0px;
-  --delay: 90ms;
-  z-index: 2;
-  color: #efcc8e;
-  background: #322b23;
-}
-.learning-scene-card--chat {
-  right: 0;
-  top: 28px;
-  --angle: 14deg;
-  --offset: 0px;
-  --delay: 180ms;
-  z-index: 3;
-  color: #a8ccba;
-  background: #1b302c;
-}
-:root[data-theme="light"] .learning-scene-card--hand {
-  background: #e1edf0;
-  color: #355f71;
-}
-:root[data-theme="light"] .learning-scene-card--eye {
-  background: #f4e6cb;
-  color: #795729;
-}
-:root[data-theme="light"] .learning-scene-card--chat {
-  background: #e5ede3;
-  color: #466c56;
+  max-width: 68ch;
 }
 .sign-workspace
   :is(
@@ -162,30 +56,10 @@
 .sign-workspace :is(.sign-level-link, .activity-entry-links > a) > svg {
   transition: transform 220ms ease;
 }
-.sign-workspace .activity-entry-links > a > svg:first-child {
-  padding: 10px;
-  width: 44px;
-  height: 44px;
-  border: 1px solid var(--sw-border);
-  border-radius: 14px;
-  background: color-mix(in srgb, var(--sw-ink) 5%, transparent);
-}
-.sign-workspace .activity-entry-links > a:nth-child(2) > svg:first-child {
-  border-radius: 50%;
-}
 .sign-workspace .activity-scenario-cover img {
   transition: transform 350ms cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 @media (hover: hover) and (pointer: fine) {
-  .learning-scene:hover .learning-scene-card--hand {
-    transform: translate(-9px, -6px) rotate(-19deg);
-  }
-  .learning-scene:hover .learning-scene-card--eye {
-    transform: translateY(-12px) rotate(0);
-  }
-  .learning-scene:hover .learning-scene-card--chat {
-    transform: translate(9px, -4px) rotate(18deg);
-  }
   .sign-workspace
     :is(
       .sign-level-card,
@@ -258,52 +132,7 @@
 .sign-workspace .dialogue-steps [aria-current="step"] > span {
   transform: scale(1.07);
 }
-@keyframes learning-card-arrive {
-  from {
-    opacity: 0;
-    transform: translateY(18px) rotate(0) scale(0.94);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(var(--offset)) rotate(var(--angle)) scale(1);
-  }
-}
-@media (max-width: 760px) {
-  .sign-course-workspace .learning-welcome {
-    grid-template-columns: 1fr;
-    gap: 8px;
-    min-height: 0;
-  }
-  .learning-scene {
-    width: 260px;
-    max-width: 100%;
-    height: 160px;
-    margin-inline: auto;
-  }
-  .learning-scene-card {
-    width: 105px;
-    height: 126px;
-    padding: 14px;
-  }
-  .learning-scene-card--eye {
-    left: 78px;
-  }
-  .learning-scene-card--chat {
-    right: 0;
-  }
-  .sign-workspace .activity-entry-links > a {
-    gap: 12px;
-  }
-  .sign-workspace .activity-entry-links > a > svg:first-child {
-    width: 38px;
-    height: 38px;
-    padding: 8px;
-  }
-}
 @media (prefers-reduced-motion: reduce) {
-  .learning-scene-card {
-    animation: none !important;
-  }
   .sign-workspace
     :is(
       .sign-level-card,
@@ -318,7 +147,6 @@
       .dialogue-steps li > span,
       .sign-level-link > svg
     ),
-  .learning-scene-card,
   .activity-entry-links > a > svg {
     transition: none !important;
   }
@@ -332,9 +160,6 @@
     ):is(:hover, :active),
   .sign-workspace :is(.sign-level-card, .activity-scenario):hover img {
     transform: none !important;
-  }
-  .learning-scene:hover .learning-scene-card {
-    transform: translateY(var(--offset)) rotate(var(--angle));
   }
   .sign-workspace .activity-entry-links > a:hover > svg:last-child,
   .sign-workspace

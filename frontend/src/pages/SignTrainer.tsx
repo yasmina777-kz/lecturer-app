@@ -1,9 +1,6 @@
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams, useLocation } from "react-router-dom";
 import {
-  Hand,
-  Eye,
-  MessageCircle,
   ArrowLeft,
   ArrowRight,
   Play,
@@ -69,29 +66,6 @@ export function SignCourseCatalog() {
               )}
           </p>
         </div>
-        {!stage && (
-          <div className="learning-scene" aria-hidden="true">
-            <div className="learning-orbit" />
-            <div className="learning-scene-card learning-scene-card--hand">
-              <Hand strokeWidth={1.5} />
-              <span>{at("Жесты", "Signs", "Ымдар")}</span>
-              <i />
-              <i />
-            </div>
-            <div className="learning-scene-card learning-scene-card--eye">
-              <Eye strokeWidth={1.5} />
-              <span>{at("Смысл", "Meaning", "Мағына")}</span>
-              <i />
-              <i />
-            </div>
-            <div className="learning-scene-card learning-scene-card--chat">
-              <MessageCircle strokeWidth={1.5} />
-              <span>{at("Общение", "Dialogue", "Диалог")}</span>
-              <i />
-              <i />
-            </div>
-          </div>
-        )}
       </div>
       {!stage && <ActivityLinks />}
       {!stage ? (
@@ -103,12 +77,12 @@ export function SignCourseCatalog() {
               key={l.id}
             >
               <div className="sign-level-cover">
-                <img src={`/images/${l.image}`} alt="" />
-                <span>
-                  {at("УРОВЕНЬ", "LEVEL", "ДЕҢГЕЙ")} 0{l.id}
-                </span>
+                <img src={l.image} alt="" loading="lazy" />
               </div>
               <div className="sign-level-body">
+                <span className="sign-level-number">
+                  {at("УРОВЕНЬ", "LEVEL", "ДЕҢГЕЙ")} 0{l.id}
+                </span>
                 <h2>{l.title}</h2>
                 <p>{l.description}</p>
                 <small>{l.count}</small>
