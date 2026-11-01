@@ -1,6 +1,8 @@
 import { at } from "../i18n/automation";
 import { t } from "../i18n";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useWorkspaceMotion } from "../hooks/useWorkspaceMotion";
+import "../pages/workspace-motion.css";
 import {
   Link,
   NavLink,
@@ -33,6 +35,8 @@ export function Shell() {
   const location = useLocation();
   const navigate = useNavigate();
   const path = location.pathname;
+  const workspace = useRef<HTMLElement>(null);
+  useWorkspaceMotion(workspace, location.pathname + location.search);
   const nav = [
     {
       to: "/learn",
@@ -167,7 +171,7 @@ export function Shell() {
             </Link>
           </div>
         </header>
-        <main className="main-content">
+        <main className="main-content" ref={workspace}>
           <ErrorMessage message={error} />
           <Outlet />
         </main>

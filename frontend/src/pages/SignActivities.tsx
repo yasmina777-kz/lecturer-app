@@ -365,7 +365,7 @@ function DialogueSession({
       </div>
       {!done && <DialogueSteps phase={phase} />}
       {done ? (
-        <section className="panel activity-result">
+        <section className="panel activity-result" data-workspace-enter>
           <Check size={30} />
           <h2 ref={heading} tabIndex={-1}>
             {at("Что получилось", "Your results", "Нәтижеңіз")}
@@ -451,7 +451,11 @@ function DialogueSession({
             <h2>{step.prompt}</h2>
             <p>{step.context}</p>
           </div>
-          <section className="panel dialogue-stage">
+          <section
+            className="panel dialogue-stage"
+            key={`${step.id}:${phase}`}
+            data-workspace-enter
+          >
             <h2 ref={heading} tabIndex={-1}>
               {phase === "watch"
                 ? at(
@@ -911,7 +915,7 @@ function UnderstandingSession({
         {at("Выбрать тему", "Choose topic", "Тақырып таңдау")}
       </button>
       {done ? (
-        <section className="panel activity-result">
+        <section className="panel activity-result" data-workspace-enter>
           <h1>
             {at(
               "Тренировка завершена",

@@ -53,3 +53,18 @@ wrong reply and retry, water shopping branch, keyboard Space/Enter selection,
 three-turn completion with 2/3 first-attempt score and first-error explanation.
 Dark desktop and cream 320px mobile answer layouts checked; theme and viewport
 restored. Production build and sign-activity logic checks passed.
+
+## Card motion and visual refinement
+
+The learning header now includes a small layered-card illustration. Course,
+exercise, dictionary and activity cards reveal once on entering the viewport;
+hover depth is limited to fine pointers, and touch receives a short press response.
+Dialogue phase/result panels use the same entrance motion. The observer handles
+lazy-rendered content and disconnects when routes change; removed cards are
+unobserved. Content is visible without the observer or Web Animations support.
+Reduced-motion preferences bypass JS entrances, cancel active animations when
+changed and disable decorative CSS motion. No gesture, score or model logic changed.
+
+Production build, TypeScript and existing activity checks passed. Visually checked
+dark desktop and cream 390px mobile cards, completed reveal states and navigation
+from the dialogue watch step to the answer step. Original viewport/theme restored.

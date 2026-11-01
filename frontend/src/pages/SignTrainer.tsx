@@ -1,6 +1,9 @@
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import {
+  Hand,
+  Eye,
+  MessageCircle,
   ArrowLeft,
   ArrowRight,
   Play,
@@ -39,14 +42,14 @@ export function SignCourseCatalog() {
     (l) => l.id === Number(params.get("stage")),
   );
   return (
-    <div className="sign-workspace">
+    <div className="sign-workspace sign-course-workspace">
       {stage && (
         <Link className="sign-back" to="/learn">
           <ArrowLeft size={18} />
           {at("Все уровни", "All levels", "Барлық деңгейлер")}
         </Link>
       )}
-      <div className="page-heading">
+      <div className={`page-heading ${!stage ? "learning-welcome" : ""}`}>
         <div>
           <h1>
             {stage?.title ||
@@ -65,8 +68,31 @@ export function SignCourseCatalog() {
               )}
           </p>
         </div>
+        {!stage && (
+          <div className="learning-scene" aria-hidden="true">
+            <div className="learning-orbit" />
+            <div className="learning-scene-card learning-scene-card--hand">
+              <Hand strokeWidth={1.5} />
+              <span>{at("Жесты", "Signs", "Ымдар")}</span>
+              <i />
+              <i />
+            </div>
+            <div className="learning-scene-card learning-scene-card--eye">
+              <Eye strokeWidth={1.5} />
+              <span>{at("Смысл", "Meaning", "Мағына")}</span>
+              <i />
+              <i />
+            </div>
+            <div className="learning-scene-card learning-scene-card--chat">
+              <MessageCircle strokeWidth={1.5} />
+              <span>{at("Общение", "Dialogue", "Диалог")}</span>
+              <i />
+              <i />
+            </div>
+          </div>
+        )}
       </div>
-      {!stage && <ActivityLinks/>}
+      {!stage && <ActivityLinks />}
       {!stage ? (
         <div className="sign-level-grid">
           {courseLevels().map((l) => (
@@ -103,7 +129,9 @@ export function SignCourseCatalog() {
                 to={`/practice?exercise=${e.id}`}
                 key={e.id}
               >
-                <div className={`sign-exercise-thumb${e.letter && alphabetIllustration(e.letter) ? " sign-exercise-thumb--illustrated" : ""}`}>
+                <div
+                  className={`sign-exercise-thumb${e.letter && alphabetIllustration(e.letter) ? " sign-exercise-thumb--illustrated" : ""}`}
+                >
                   {e.letter && alphabetIllustration(e.letter) ? (
                     <AlphabetCardArt letter={e.letter} />
                   ) : e.letter ? (
