@@ -13,7 +13,7 @@
     "Front-surface clearance checks do not certify arm-arm contacts or linguistic correctness.",
     "Text sequences retain Russian source order; no grammatical translation."
   ],
-  "source": "22 chart-authored letters; 101 video-timed clips including 1 VOG whole-phrase references; other clips retain per-entry provenance",
+  "source": "22 chart-authored letters; 102 video-timed clips including 1 VOG whole-phrase references; other clips retain per-entry provenance",
   "qualityGate": {
     "minPoseCoverage": 0.85,
     "minDominantHandCoverage": 0.65,
@@ -25,13 +25,13 @@
     "maxElbowPoleDeviationDegrees": 30
   },
   "chartAuthoredLetters": 22,
-  "videoTimedClips": 101,
+  "videoTimedClips": 102,
   "teacherReferences": 1,
   "observed": {
     "maxHingeOffAxis": 2.9802322387695312e-08,
     "maxJointStepDegrees": 7.917873743448832,
     "v8Clips": 207,
-    "maxSourceWristFitErrorMeters": 0.0002442985590578083,
+    "maxSourceWristFitErrorMeters": 0.0002443455936345966,
     "maxBodyOverlapAfterMeters": 0,
     "maxBodyOverlapBeforeMeters": 0.1918952502310276,
     "maxLegacyWristDriftMeters": 0.29551429508994154

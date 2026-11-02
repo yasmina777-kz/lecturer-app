@@ -8,6 +8,17 @@ ROOT=Path(__file__).resolve().parents[2]
 source=ROOT/'art/mira-blender-v3/animate.py';scope={'__file__':str(source)}
 exec(compile(source.read_text().split('\nface=bpy.data.objects')[0].replace('limit=math.radians(52)','limit=math.radians(100)'),str(source),'exec'),scope)
 globals().update({k:v for k,v in scope.items() if not k.startswith('__')})
+# MediaPipe's palm frame uses wrist -> middle MCP (landmarks 0 -> 9),
+# not the end of a finger. Using the model's curved middle fingertip here
+# introduced an 11.6 degree rest-frame bias before any motion was fitted.
+for side in ['Left','Right']:
+ wrist=B(side+'Hand').bone.head_local
+ forward=B(side+'HandMiddle1').bone.head_local-wrist
+ across=B(side+'HandIndex1').bone.head_local-B(side+'HandPinky1').bone.head_local
+ if side=='Left':across=-across
+ palm=basis(forward,across.cross(forward))
+ rest[side]={'basis':palm,'across':palm.col[0].copy(),'wrist':wrist.copy()}
+qrestR=orient('Right',(-.15,-.05,-1),(1,-.2,0));qrestL=orient('Left',(.15,-.05,-1),(-1,-.2,0))
 for ob in rig.children_recursive:
  if ob.type=='MESH':
   for mod in ob.modifiers:
@@ -34,6 +45,8 @@ manifest=[]
 repair_hand_weights(rig)
 for path in paths:
  d=json.loads(path.read_text());entry=d['entry'];frames=d['frames'];N=len(frames)
+ if entry['id']=='word-a8989f04':
+  assert entry['video']=='/research/rsl/words/a8989f04-a615-4a0d-bb49-583d3c0e94ab.mp4', 'Book correction is specific to the reviewed source recording'
  if d['poseCoverage']<.85:continue
  # Assign each detection to one anatomical hand by proximity to the pose wrists.
  assigned=[]
@@ -132,11 +145,18 @@ for path in paths:
     # One shared book hinge: independent monocular depths cannot preserve contact.
     pair={s:[V(x).lerp(V(y),u) for x,y in zip(tracks[s][a]['image'],tracks[s][b]['image'])] for s in ['Left','Right']}
     center=(pair['Left'][0]+pair['Right'][0])/2
-    # The reference opens once (about 0.30–0.55 s), rotating the palms
-    # toward the viewer around their ulnar edges, not fanning fingertips sideways.
-    opening=math.radians(58)*smooth(.24,.42,src)*(1-smooth(.44,.62,src))
+    # The exact linked recording opens TWICE. The old single pulse erased
+    # its second repetition. Keep these source-time keys specific to this
+    # recording; a different actor/take needs a separately reviewed curve.
+    amount=max(smooth(.30,.42,src)*(1-smooth(.46,.63,src)),
+               smooth(.72,.84,src)*(1-smooth(.92,1.10,src)))
+    opening=math.radians(58)*amount
     target=V(((center.x-mid.x)*d['aspect']*scale+sign*(.018+.035*math.sin(opening)),-.29,shoulder_mid.z-(center.y-mid.y)*scale))
-    rotation=Quaternion((0,0,1),sign*opening)@Quaternion((0,1,0),sign*opening*.25)
+    # Opening a book turns the palms upward as well as apart. Keeping the
+    # fingers vertical produced the wrong silhouette in the source comparison.
+    # In the recording the opened palms face the signer/upward: the camera
+    # sees the backs of the hands. The opposite yaw showed palms to the viewer.
+    rotation=Quaternion((1,0,0),math.radians(36)*amount)@Quaternion((0,1,0),sign*math.radians(24)*amount)@Quaternion((0,0,1),-sign*opening)
     q=orient(side,rotation@V((0,0,1)),rotation@V((-sign,0,0)))
    ei=13 if side=='Left' else 14;ep=p[ei]
    edepth=clamp(world[ei][2]-(world[11][2]+world[12][2])/2,-.35,.2) if world else -.05
@@ -164,7 +184,11 @@ for path in paths:
   for (side,name),values in hands.items():
    _,qs=finger_chain(side,name,values)
    for j,q in enumerate(qs,1):row[B(side+'Hand'+name+str(j)).name]=q
- arm_paths=coherent_arm_paths(arm_samples)
+ # This source-specific book path already uses smooth keyed curves. Filtering
+ # its rotations again and limiting degrees per *source* frame erased the
+ # brief fully-open pose. Preserve those targets; coordinated_times below
+ # controls speed by retiming the whole pose instead of shrinking the gesture.
+ arm_paths=arm_samples if entry['id']=='word-a8989f04' else coherent_arm_paths(arm_samples)
  forearm_twist.clear()
  final_wrist_error=0;legacy_wrist_drift=0;solved_rotations=[];solved_locations=[]
  for frame,row in enumerate(rotation_samples,1):
@@ -231,6 +255,9 @@ for path in paths:
  bpy.ops.export_scene.gltf(filepath=str(OUT/(entry['id']+'.glb')),export_format='GLB',use_selection=True,export_animations=True,export_animation_mode='ACTIVE_ACTIONS',export_frame_range=True,export_force_sampling=True,export_anim_slide_to_zero=True,export_yup=True)
  info={'id':entry['id'],'label':entry['label'],'url':'/avatars/sign-motion/'+entry['id']+'.glb','duration':round((count-1)/30,3),'source':entry['source'],'reference':entry['video'],'handCoverage':coverage,'maxGapFrames':longest,'poseCoverage':d['poseCoverage'],'maxJointStepDegrees':round(math.degrees(maxstep),3),'review':'experimental-unreviewed','method':'Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, monotone captured palm trajectories, final coordinated elbow IK, workshop hand priors and anatomical-parameter finger curves; no translation training','motionVersion':6,'handMechanics':'workshop-parameter-curves-v1','finalWristErrorMeters':final_wrist_error,'legacyWristDriftMeters':legacy_wrist_drift,'timing':'whole-pose retiming at 240 degrees/second; no independent joint slowdown','peakStep':peak,'leadIn':lead,'leadOut':tail,'maxHingeOffAxis':hinge_error,'meanFingerDirectionErrorDegrees':math.degrees(sum(finger_fit_errors)/max(1,len(finger_fit_errors)))}
  info['sourceTimeline']=source_timeline
+ info['palmCalibration']='wrist-middle-mcp-v1'
+ if entry['id']=='word-a8989f04':
+  info['referenceCorrection']={'method':'source-timed two-opening book curve; hand orientation manually adjusted against the linked recording','source':entry['video'],'closedSourceTimes':[.25,.65,1.25],'openSourceTimes':[.42,.85],'linguisticReview':'not-reviewed'}
  if entry['id'] in HAND_POSE_CORRECTIONS or entry['id'] in REFERENCE_HAND_SHAPES:
   info['trackedFitErrorBeforeCorrectionDegrees']=info.pop('meanFingerDirectionErrorDegrees');info['handPoseCorrection']='authored-fist-v1' if entry['id'] in HAND_POSE_CORRECTIONS else 'reference-workshop-handshape-v2';info['method']+='; explicit handshape correction from the linked video reference'
  (OUT/(entry['id']+'.json')).write_text(json.dumps(info,ensure_ascii=False,indent=2));manifest.append(info)

@@ -1,5 +1,15 @@
 # Saved video motion library
 
+## Reference fidelity correction
+
+`check_palm_frame.py` reproduces a coordinate-frame defect: tracking uses wrist → middle MCP, while the target used wrist → curved middle fingertip. The old frame introduced an 11.591° bias. `retarget.py` now uses the same anatomical landmarks on both sides; eight synthetic identity/rotated cases have <0.05° error. This removes a calibration bias, not the uncertainty of monocular capture.
+
+Five exports were rebuilt after the correction: А, К, О, «Привет!» and «книга». The source-specific book override previously opened only once, although its recording opens twice. It now retains closed/open/closed/open/closed phases at source times 0.25/0.42/0.65/0.85/1.25 s and turns the open palms toward the signer. The exporter rejects a different book recording rather than silently applying these timings to another take. `check-sign-motion.mjs` samples both openings in the final GLB. `render_reference_candidates.py` supports `times=...` and uses the imported action's actual start frame, avoiding the previous one-frame comparison offset.
+
+The book's already-smooth keyed arm targets bypass a second rotation filter: its per-source-frame speed projection had reduced the short opening's amplitude. Whole-pose retiming still enforces the existing speed bound without shrinking the key poses. Consequently this clip plays for 5.03 seconds including preparation/release; it does not reproduce the source tempo exactly. The comparison video follows the mapped source clock.
+
+See `palm-calibration-report.json` for affected assets and limits. Source recordings, hand occlusions, facial grammar and the remaining uncorrected motions still require review; this is not exact full-body motion capture and does not train a new language model.
+
 Current scope: 33 Russian letters, 171 dictionary words and three whole-phrase slots. The 32 ready text examples are compositions of these assets, not 32 learned grammatical translations. See `frontend/public/avatars/sign-motion/video-rebuild-report.json` for which candidates were actually promoted and which previous motions were retained.
 
 The November 2 rebuild promoted 101 candidates: 90 words, 10 letters (А, К, Н, О, Ф, Ъ, Ы, Ь, Э, Я), and the whole greeting «Здравствуйте». The other 106 entries retain their earlier experimental motions: candidate rejection is not a validation of the retained version. Sampled visual comparisons at 25%, 50% and 75% of source time cover the promoted candidates; this is not a complete temporal or linguistic review. Independent 60 Hz geometry checks passed for 208 library assets including idle, 32 browser-composed examples, and 78 selected idle transitions. Frontend build, motion composition, dictionary expansion and cache checks passed. Remaining problems include occluded fingers, hand contacts, long retimed releases and absent facial grammar.

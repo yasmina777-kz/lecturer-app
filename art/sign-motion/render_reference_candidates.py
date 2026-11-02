@@ -4,6 +4,9 @@ import bpy,sys,json,math
 from mathutils import Vector
 ROOT=Path(__file__).resolve().parents[2];args=sys.argv[sys.argv.index('--')+1:]
 base=Path(args[0]);ids=args[1:];hands_only='hands' in ids;ids=[id for id in ids if id!='hands']
+time_option=next((value for value in ids if value.startswith('times=')),None)
+source_times=[float(value) for value in time_option.split('=',1)[1].split(',')] if time_option else None
+ids=[id for id in ids if not id.startswith('times=')]
 audit=json.loads(base.read_text()) if base.suffix=='.json' else None
 if audit:
  entries=[e for e in audit['entries'] if e['status']=='candidate-ready' and (not ids or e['id'] in ids)]
@@ -25,8 +28,9 @@ for folder,id in targets:
  meta=json.loads((folder/(id+'.json')).read_text());points=meta['sourceTimeline'];last=points[-1][1]
  before=set(bpy.data.objects);bpy.ops.import_scene.gltf(filepath=str(folder/(id+'.glb')));added=set(bpy.data.objects)-before;src=next(o for o in added if o.type=='ARMATURE');rig.animation_data_create();rig.animation_data.action=src.animation_data.action;rig.animation_data.action_slot=src.animation_data.action_slot
  output=folder/('preview-hands' if hands_only else 'preview');output.mkdir(exist_ok=True)
- for index,fraction in enumerate([.25,.5,.75]):
-  source=last*fraction;a,b=next(((a,b) for a,b in zip(points,points[1:]) if a[1]<=source<=b[1] and b[1]>a[1]),(points[0],points[-1]));t=a[0]+(b[0]-a[0])*(source-a[1])/max(.000001,b[1]-a[1]);frame=1+t*30;scene.frame_set(math.floor(frame),subframe=frame%1)
+ for index,source in enumerate(source_times if source_times is not None else [last*f for f in [.25,.5,.75]]):
+  assert 0 <= source <= last, ('Source time outside recording', source, last)
+  a,b=next(((a,b) for a,b in zip(points,points[1:]) if a[1]<=source<=b[1] and b[1]>a[1]),(points[0],points[-1]));t=a[0]+(b[0]-a[0])*(source-a[1])/max(.000001,b[1]-a[1]);frame=rig.animation_data.action.frame_range[0]+t*30;scene.frame_set(math.floor(frame),subframe=frame%1)
   if hands_only:
    side=max(['Left','Right'],key=lambda s:rig.pose.bones['mixamorig:'+s+'Hand'].head.z)
    pts=[rig.matrix_world@b.head for b in rig.pose.bones if b.name.startswith('mixamorig:'+side+'Hand')]

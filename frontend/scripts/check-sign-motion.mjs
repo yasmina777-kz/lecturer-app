@@ -142,9 +142,18 @@ for(const asset of assets){
     }
   }
   if(asset.label==='книга') {
-   sample(1.7,true);const closed=point('LeftHand').distanceTo(point('RightHand'));
-   sample(1.13,true);const open=point('LeftHand').distanceTo(point('RightHand'));
-   assert.ok(closed<.065 && open>closed+.025,'book hands must close together then open from a shared hinge');
+   // Source-video review: close -> open -> close -> open -> close.
+   // The former one-pulse override passed a single open/closed assertion
+   // while silently dropping the second opening of the actual recording.
+   const distances=[.25,.42,.65,.85,1.25].map(t=>{
+    sample(t+.7,true);return point('LeftHand').distanceTo(point('RightHand'));
+   });
+   for(const index of [0,2,4])assert.ok(distances[index]<.065,'book: source closed phase '+index);
+   for(const index of [1,3])assert.ok(distances[index]>Math.max(distances[index-1],distances[index+1])+.025,'book: both recorded openings must survive retargeting');
+   for(const sourceTime of [.42,.85]) {
+    sample(sourceTime+.7,true);
+    for(const side of ['Left','Right'])assert.ok(point(side+'HandMiddle3').z>point(side+'Hand').z+.05,'book: opened fingers must tilt forward as in the recording, not remain vertical or point into the body');
+   }
   }
   mixer.stopAllAction();mixer.uncacheRoot(loaded.scene);
  }

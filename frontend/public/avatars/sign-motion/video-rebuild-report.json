@@ -2,7 +2,7 @@
   "method": "Saved video-derived motions; no new text-to-motion or RSL grammar model trained",
   "linguisticReview": "not-reviewed",
   "catalogSize": 207,
-  "updated": 101,
+  "updated": 102,
   "lettersUpdated": 10,
   "wholePhrasesUpdated": 1,
   "entries": [
@@ -11,7 +11,8 @@
       "label": "Привет!",
       "status": "updated",
       "candidateFlags": [],
-      "candidateStatus": "candidate-ready"
+      "candidateStatus": "candidate-ready",
+      "subsequentCorrection": "palm-calibration-report.json"
     },
     {
       "id": "word-0cca1e04",
@@ -398,12 +399,13 @@
     {
       "id": "word-a8989f04",
       "label": "книга",
-      "status": "retained-previous",
+      "status": "updated",
       "candidateFlags": [
         "Right: missing active hand observations",
         "Right: active hand gap over 250 ms"
       ],
-      "candidateStatus": "needs-correction"
+      "candidateStatus": "manually-corrected-experimental",
+      "subsequentCorrection": "palm-calibration-report.json"
     },
     {
       "id": "word-2c1fd7ff",
@@ -1407,7 +1409,8 @@
       "label": "А",
       "status": "updated",
       "candidateFlags": [],
-      "candidateStatus": "candidate-ready"
+      "candidateStatus": "candidate-ready",
+      "subsequentCorrection": "palm-calibration-report.json"
     },
     {
       "id": "letter-411",
@@ -1509,7 +1512,8 @@
       "label": "К",
       "status": "updated",
       "candidateFlags": [],
-      "candidateStatus": "candidate-ready"
+      "candidateStatus": "candidate-ready",
+      "subsequentCorrection": "palm-calibration-report.json"
     },
     {
       "id": "letter-41b",
@@ -1543,7 +1547,8 @@
       "label": "О",
       "status": "updated",
       "candidateFlags": [],
-      "candidateStatus": "candidate-ready"
+      "candidateStatus": "candidate-ready",
+      "subsequentCorrection": "palm-calibration-report.json"
     },
     {
       "id": "letter-41f",

@@ -1,0 +1,71 @@
+{
+  "method": "Matched wrist-to-middle-MCP coordinate frames, source-specific book timing correction",
+  "baselinePalmBiasDegrees": 11.5911,
+  "syntheticPalmFrameMaxErrorDegrees": 0,
+  "entries": [
+    {
+      "id": "letter-410",
+      "label": "А",
+      "revision": "c57b5372c65c",
+      "source": "/research/rsl/alphabet/0410.mp4",
+      "palmCalibration": "wrist-middle-mcp-v1",
+      "referenceCorrection": null,
+      "review": "sampled visual comparison, not linguistic validation"
+    },
+    {
+      "id": "letter-41a",
+      "label": "К",
+      "revision": "93a2faa1cf4f",
+      "source": "/research/rsl/alphabet/041a.mp4",
+      "palmCalibration": "wrist-middle-mcp-v1",
+      "referenceCorrection": null,
+      "review": "sampled visual comparison, not linguistic validation"
+    },
+    {
+      "id": "letter-41e",
+      "label": "О",
+      "revision": "f4e1e681d18b",
+      "source": "/research/rsl/alphabet/041e.mp4",
+      "palmCalibration": "wrist-middle-mcp-v1",
+      "referenceCorrection": null,
+      "review": "sampled visual comparison, not linguistic validation"
+    },
+    {
+      "id": "word-a8989f04",
+      "label": "книга",
+      "revision": "ffc479b082de",
+      "source": "/research/rsl/words/a8989f04-a615-4a0d-bb49-583d3c0e94ab.mp4",
+      "palmCalibration": "wrist-middle-mcp-v1",
+      "referenceCorrection": {
+        "method": "source-timed two-opening book curve; hand orientation manually adjusted against the linked recording",
+        "source": "/research/rsl/words/a8989f04-a615-4a0d-bb49-583d3c0e94ab.mp4",
+        "closedSourceTimes": [
+          0.25,
+          0.65,
+          1.25
+        ],
+        "openSourceTimes": [
+          0.42,
+          0.85
+        ],
+        "linguisticReview": "not-reviewed"
+      },
+      "review": "sampled visual comparison, not linguistic validation",
+      "timingNote": "Full opening retained; whole-pose speed limits lengthen playback to 5.03 s including preparation and release"
+    },
+    {
+      "id": "word-f17a6060",
+      "label": "Привет!",
+      "revision": "30c57d458c04",
+      "source": "/research/rsl/words/f17a6060-6ced-4bd1-9886-8578cfbb864f.mp4",
+      "palmCalibration": "wrist-middle-mcp-v1",
+      "referenceCorrection": null,
+      "review": "sampled visual comparison, not linguistic validation"
+    }
+  ],
+  "limitations": [
+    "No claim of exact motion reproduction",
+    "Occluded fingers and facial grammar are not recovered",
+    "Only the listed five animations were replaced in this correction"
+  ]
+}
