@@ -1,10 +1,36 @@
+# Saved video motion library
+
+Current scope: 33 Russian letters, 171 dictionary words and three whole-phrase slots. The 32 ready text examples are compositions of these assets, not 32 learned grammatical translations. See `frontend/public/avatars/sign-motion/video-rebuild-report.json` for which candidates were actually promoted and which previous motions were retained.
+
+The November 2 rebuild promoted 101 candidates: 90 words, 10 letters (А, К, Н, О, Ф, Ъ, Ы, Ь, Э, Я), and the whole greeting «Здравствуйте». The other 106 entries retain their earlier experimental motions: candidate rejection is not a validation of the retained version. Sampled visual comparisons at 25%, 50% and 75% of source time cover the promoted candidates; this is not a complete temporal or linguistic review. Independent 60 Hz geometry checks passed for 208 library assets including idle, 32 browser-composed examples, and 78 selected idle transitions. Frontend build, motion composition, dictionary expansion and cache checks passed. Remaining problems include occluded fingers, hand contacts, long retimed releases and absent facial grammar.
+
+## Isolated video rebuild
+
+`ml/rsl/build_video_library.py --workers 3` captures the complete local reference catalog at 30 fps, builds candidates in ignored `ml/rsl/data/video-library-v1`, retargets in Blender and independently checks exported geometry at 60 Hz. It never directly replaces public assets. `tracking_quality.py` measures both **active** hands, detecting long occlusions that a dominant-hand-only gate missed. `select_video_references.py` searches only Slovo TRAIN recordings for clearer exact-label observations; this is tracking selection, not evaluation-set tuning or recognizer training.
+
+Alternative manifests must use their explicitly captured video paths. Recapturing by label would silently restore the old public reference; the builder rejects a manifest/cache mismatch. Every export carries a source-video timeline through all retiming stages. This is necessary to compare the same moment of the human and avatar after speed correction.
+
+`audit_video_library.py` rejects geometry failures, missing active-hand observations, poor finger fits and timing regressions. These checks do **not** establish sign correctness. Render candidates with `art/sign-motion/render_reference_candidates.py`; `ml/rsl/compare_video_candidates.py` pairs actual rendered poses with source frames. `promote_video_library.py --ids ...` is a dry run; add `--apply` only for reviewed candidates. It verifies source identity and exported hashes, backs up old assets locally, updates stable dictionary references, and writes a per-entry public report. Refresh the catalog and all composed-phrase/idle checks after promotion.
+
+Three candidate whole-phrase sources are documented in `ml/rsl/teacher-references.json`: VOG / Zaitseva Centre's public “Давайте знакомиться!” teaching videos. `build_teacher_motions.py` crops and captures those references locally. Full recordings and crops are not committed or copied into public assets. The browser opens the owner’s timestamped YouTube link. Nose/shoulder landmarks adjust the teacher-to-avatar vertical proportions, but face/mouth motion is not captured. Rejected candidates must remain private and must not be described as completed phrases.
+
+## Playback
+
+The same saved clip is used by dictionary selection and typed text. `motionCache.ts` shares in-flight loads, keeps at most 64 animation clips, keys them by content revision, and evicts failed requests so retry works. Each playback clones its tracks before composition. No API key is required for replay, and no animation or grammar model is trained by this cache. Unknown words remain explicit missing motions.
+
+Video-timed clips use one pause/seek clock with their local source video. Retained legacy clips expose an independent comparison video; the UI never implies that an unrelated authored pose was motion-captured. All animations remain experimental until reviewed by qualified RSL signers.
+
+---
+
+## Earlier implementation history
+
 # Traceable reference-to-avatar motion
 
 203 experimental clips cover the current 33 letters and 170-word dictionary. This does not mean the full language is covered or that the motions have been validated by signers.
 
 ## Pipeline
 
-1. `ml/rsl/capture_motion.py` applies **pretrained** MediaPipe Hand Landmarker and Pose Landmarker to reference videos. No new motion/grammar model is trained. Samples are taken at up to 20 fps, capped at 180 frames per source. Original reference IDs remain attached.
+1. `ml/rsl/capture_motion.py` applies **pretrained** MediaPipe Hand Landmarker and Pose Landmarker to reference videos. No new motion/grammar model is trained. The standalone default is 20 fps; the isolated video rebuild samples at 30 fps and up to 1280 px, capped at 450 frames per source. Original reference IDs remain attached.
 2. `retarget.py` and `kinematics.py` map wrists and elbow poles relative to tracked shoulders. Whole finger chains are fitted to captured segment directions in the palm frame, with MCP flexion/spread and single-axis distal hinges, including bounded thumb flexion/opposition. Finger translations remain zero. Forearm roll is unwrapped before distribution across skin bones. Symmetric observation filtering, isolated-flip rejection and alternating angular-rate projection clean the curves. Added neutral lead/tail lasts 0.7 s each. This changes motion mechanics; it does not validate the sign's meaning.
 3. Animation-only GLBs share the existing avatar mesh. `publish_motion_catalog.py` publishes metadata, sources and the limitations report. In the browser, tracks are joined into one animation. The current v8 path retains the coordinated preparation and release. Every clip uses the same relaxed boundary pose; a short quintic eased transition joins those identical endpoints. The UI uses the same complete timing. Playback does not remount the avatar between words.
 

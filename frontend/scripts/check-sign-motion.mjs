@@ -59,6 +59,17 @@ for(let i=1;i<mapping.length;i++){
 }
 assert.ok(mapping.at(-1)[0]<=captured.duration+.04);
 console.log('Captured greeting: text lookup, source-video clock, retimed interpolation and held endpoints passed.');
+for (const asset of assets.filter(a=>a.videoRebuild)) {
+ const points=asset.sourceTimeline;
+ assert.ok(points?.length>10,asset.label+' missing source clock');
+ assert.equal(points[0][1],0);
+ for(let i=1;i<points.length;i++) assert.ok(points[i][0]>points[i-1][0]&&points[i][1]>=points[i-1][1],asset.label+' source clock reverses');
+ assert.ok(points.at(-1)[0]<=asset.duration+.04);
+ assert.deepEqual(asset.videoRebuild.tracking.flags,[],asset.label+' rejected observation was published');
+ assert.equal(asset.videoRebuild.linguisticReview,'not-reviewed');
+ if(asset.sourceRecording) assert.equal(asset.reference,asset.sourceRecording.url);
+ else if(asset.id.startsWith('word-')) assert.equal(asset.reference,words.find(w=>w.id===asset.id).video,asset.label+' wrong dictionary source');
+}
 let plan=planMotion('Я хочу читать книгу',entries,forms,assets);assert.deepEqual(plan.steps.map(s=>s.label),['я','хотеть','читать','книга']);assert.deepEqual(plan.missing,[]);
 const timeline=motionTimeline(plan.steps);assert.equal(timeline.length,4);assert.ok(timeline.every(s=>s.trimStart===0&&s.trimEnd===0),'phrase must preserve coordinated lead-in/out');assert.ok(timeline.every((s,i)=>i===0||s.start>timeline[i-1].end));
 plan=planMotion('Здравствуйте! Как тебя зовут? Спасибо.',entries,forms,assets);assert.equal(plan.steps.length,3);assert.deepEqual(plan.missing,[]);assert.ok(plan.steps.every(s=>s.url.startsWith('/avatars/sign-motion/') && s.revision),'prepared phrases must use rebuilt versioned clips');
@@ -101,7 +112,16 @@ for(const asset of assets){
    const bone=loaded.scene.getObjectByName('mixamorig'+suffix);
    assert.ok(bone,suffix);return bone.getWorldPosition(new Vector3());
   };
-  const sample=(t,sourceTime=false)=>{if(sourceTime){const times=asset.bodyClearance.sourceFrameTimes;const f=Math.min(t*30,times.length-1),i=Math.floor(f);t=times[i]+((times[i+1]??times[i])-times[i])*(f-i);}mixer.setTime(t);loaded.scene.updateMatrixWorld(true);};
+  const sample=(t,sourceTime=false)=>{if(sourceTime){
+   // Legacy regression timestamps include the original 0.7 s preparation.
+   // New clips retain the actual recording clock through every retiming pass.
+   if(asset.sourceTimeline){
+    const source=Math.max(0,t-.7),points=asset.sourceTimeline;
+    const index=points.findIndex((p,i)=>i>0&&p[1]>=source&&p[1]>points[i-1][1]);
+    assert.ok(index>0,asset.label+' regression source time not covered');
+    const [a,b]=[points[index-1],points[index]];t=a[0]+(b[0]-a[0])*(source-a[1])/(b[1]-a[1]);
+   }else{const times=asset.bodyClearance.sourceFrameTimes;const f=Math.min(t*30,times.length-1),i=Math.floor(f);t=times[i]+((times[i+1]??times[i])-times[i])*(f-i);}
+  }mixer.setTime(t);loaded.scene.updateMatrixWorld(true);};
   if(asset.label==='я') {
    sample(1.14,true);
    assert.ok(point('LeftHandIndex3').z<point('LeftHandIndex1').z-.025,'self-point must face back toward the chest');

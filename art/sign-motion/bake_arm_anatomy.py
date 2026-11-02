@@ -1,8 +1,8 @@
 """Rebake arm hinges/pronation while retaining source finger curves."""
 from pathlib import Path
-import bpy,json,math,sys,time,hashlib
+import bpy,json,math,sys,time,hashlib,os
 from mathutils import Vector as V,Matrix,Quaternion
-ROOT=Path(__file__).resolve().parents[2];OUT=ROOT/'frontend/public/avatars/sign-motion'
+ROOT=Path(__file__).resolve().parents[2];OUT=Path(os.environ.get('MOTION_OUTPUT_DIR',str(ROOT/'frontend/public/avatars/sign-motion')))
 args=sys.argv[sys.argv.index('--')+1:];INPUT=Path(next(x.split('=',1)[1] for x in args if x.startswith('input=')))
 bpy.ops.wm.open_mainfile(filepath=str(ROOT/'art/hand-rig/Mira-Hand-Workshop.blend'));rig=next(o for o in bpy.data.objects if o.type=='ARMATURE');rig['controls_enabled']=0;sc=bpy.context.scene;sc.render.fps=30
 bones=[b for b in rig.pose.bones if b.name.startswith('mixamorig:')];B=lambda name:rig.pose.bones['mixamorig:'+name]

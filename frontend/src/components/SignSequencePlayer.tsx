@@ -154,7 +154,7 @@ export function SignSequencePlayer({
       {(!blocked || naturalIdle) && (
         <>
           <div className="sign-avatar-player gesture-page">
-            <div className={current?.sourceTimeline && current.reference ? "motion-comparison-layout" : undefined}>
+            <div className={current?.reference ? "motion-comparison-layout" : undefined}>
             <div ref={stage} className="sign-avatar-stage sign-sequence-stage">
               <Suspense
                 fallback={
@@ -208,7 +208,7 @@ export function SignSequencePlayer({
                   : at("Приблизить руки", "Zoom hands", "Қолды үлкейту")}
               </button>
             </div>
-            {!blocked && current?.sourceTimeline && current.reference && (
+            {!blocked && current?.reference && (
               <MotionReferenceComparison motion={current} time={Math.max(0, time - current.start)} />
             )}
             </div>

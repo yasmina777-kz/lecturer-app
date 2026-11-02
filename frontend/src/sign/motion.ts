@@ -12,7 +12,9 @@ export type MotionAsset = {
   duration: number;
   reference?: string;
   source?: string;
+  referenceTracking?: { source?: string };
   sourceTimeline?: [number, number][];
+  sourceRecording?: { url: string; startSeconds: number; endSeconds: number; title: string; organization: string; index: string };
   review: string;
   handCoverage?: Record<string, number>;
   leadIn?: number;

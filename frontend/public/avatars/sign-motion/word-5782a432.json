@@ -6,113 +6,391 @@
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/5782a432-ef90-4cbc-b315-9995ad70acea.mp4",
   "handCoverage": {
-    "Left": 1,
-    "Right": 1
+    "Left": 1.0,
+    "Right": 1.0
   },
   "maxGapFrames": {
     "Left": 0,
     "Right": 0
   },
-  "poseCoverage": 1,
-  "maxJointStepDegrees": 7.917379408507653,
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 7.917576630219937,
   "review": "experimental-unreviewed",
   "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, monotone captured palm trajectories, final coordinated elbow IK, workshop hand priors and anatomical-parameter finger curves; no translation training",
   "motionVersion": 8,
   "handMechanics": "workshop-parameter-curves-v1",
-  "legacyWristDriftMeters": 0.11591770299934866,
+  "legacyWristDriftMeters": 0.11722982482497649,
   "timing": "whole-pose retiming at 240 degrees/second; no independent joint slowdown",
   "peakStep": {
     "bone": "mixamorig:RightForearmRoll0",
-    "frame": 15,
+    "frame": 14,
     "angle": 7.917675667962903
   },
-  "leadIn": 0.8653065252143993,
-  "leadOut": 0.8680268081189311,
+  "leadIn": 0.8707975477033006,
+  "leadOut": 0.8625357856300295,
   "maxHingeOffAxis": 1.4901161193847656e-08,
-  "meanFingerDirectionErrorDegrees": 11.216290548854744,
-  "revision": "b8704fd26e14",
-  "sourceWristFitErrorMeters": 1.7881393432617188e-07,
+  "meanFingerDirectionErrorDegrees": 11.876403930823736,
+  "sourceTimeline": [
+    [
+      0.0,
+      0
+    ],
+    [
+      0.033339,
+      0
+    ],
+    [
+      0.066794,
+      0
+    ],
+    [
+      0.100666,
+      0
+    ],
+    [
+      0.135541,
+      0
+    ],
+    [
+      0.172406,
+      0
+    ],
+    [
+      0.212525,
+      0
+    ],
+    [
+      0.257718,
+      0
+    ],
+    [
+      0.309375,
+      0
+    ],
+    [
+      0.368897,
+      0
+    ],
+    [
+      0.42906,
+      0
+    ],
+    [
+      0.484766,
+      0
+    ],
+    [
+      0.534727,
+      0
+    ],
+    [
+      0.579041,
+      0
+    ],
+    [
+      0.619055,
+      0
+    ],
+    [
+      0.656511,
+      0
+    ],
+    [
+      0.692257,
+      0
+    ],
+    [
+      0.727128,
+      0
+    ],
+    [
+      0.761842,
+      0
+    ],
+    [
+      0.797079,
+      0
+    ],
+    [
+      0.833693,
+      0
+    ],
+    [
+      0.872065,
+      0
+    ],
+    [
+      0.913142,
+      0.033333
+    ],
+    [
+      0.955894,
+      0.066667
+    ],
+    [
+      0.994361,
+      0.1
+    ],
+    [
+      1.031354,
+      0.133333
+    ],
+    [
+      1.066464,
+      0.166667
+    ],
+    [
+      1.100675,
+      0.2
+    ],
+    [
+      1.134296,
+      0.233333
+    ],
+    [
+      1.167705,
+      0.266667
+    ],
+    [
+      1.201038,
+      0.3
+    ],
+    [
+      1.234381,
+      0.333333
+    ],
+    [
+      1.267786,
+      0.366667
+    ],
+    [
+      1.301306,
+      0.4
+    ],
+    [
+      1.335154,
+      0.433333
+    ],
+    [
+      1.369402,
+      0.466667
+    ],
+    [
+      1.404711,
+      0.5
+    ],
+    [
+      1.440452,
+      0.533333
+    ],
+    [
+      1.479139,
+      0.566667
+    ],
+    [
+      1.515366,
+      0.6
+    ],
+    [
+      1.551385,
+      0.633333
+    ],
+    [
+      1.587067,
+      0.666667
+    ],
+    [
+      1.621692,
+      0.6667
+    ],
+    [
+      1.655875,
+      0.6667
+    ],
+    [
+      1.68959,
+      0.6667
+    ],
+    [
+      1.723111,
+      0.6667
+    ],
+    [
+      1.756504,
+      0.6667
+    ],
+    [
+      1.789884,
+      0.6667
+    ],
+    [
+      1.823363,
+      0.6667
+    ],
+    [
+      1.857178,
+      0.6667
+    ],
+    [
+      1.891739,
+      0.6667
+    ],
+    [
+      1.927683,
+      0.6667
+    ],
+    [
+      1.965823,
+      0.6667
+    ],
+    [
+      2.00727,
+      0.6667
+    ],
+    [
+      2.052248,
+      0.6667
+    ],
+    [
+      2.103321,
+      0.6667
+    ],
+    [
+      2.152297,
+      0.6667
+    ],
+    [
+      2.195484,
+      0.6667
+    ],
+    [
+      2.235148,
+      0.6667
+    ],
+    [
+      2.271959,
+      0.6667
+    ],
+    [
+      2.307008,
+      0.6667
+    ],
+    [
+      2.34118,
+      0.6667
+    ],
+    [
+      2.374868,
+      0.6667
+    ]
+  ],
+  "sourceWristFitErrorMeters": 3.182017282256875e-07,
   "bodyClearance": {
     "method": "evaluated torso/head/shirt front-surface clearance; paired-hand depth offset and elbow IK",
-    "beforeMaxMeters": 0.028858967125415802,
+    "beforeMaxMeters": 0.028858289122581482,
     "afterMaxMeters": 0,
-    "maxOffsetMeters": 0.037501766842603694,
+    "maxOffsetMeters": 0.03750059337615968,
     "failedFrames": [],
+    "refinementPasses": 0,
     "sourceFrameTimes": [
       0.0,
-      0.033336,
-      0.066768,
-      0.100529,
-      0.135071,
-      0.171107,
-      0.209393,
-      0.251141,
-      0.296173,
-      0.347288,
-      0.398689,
-      0.44472,
-      0.48725,
-      0.526327,
-      0.562895,
-      0.597796,
-      0.631754,
-      0.665278,
-      0.69864,
-      0.731973,
-      0.765307,
-      0.79864,
-      0.831973,
-      0.865307,
-      0.89864,
-      0.931973,
-      0.965307,
-      0.99864,
-      1.031973,
-      1.065307,
-      1.09864,
-      1.131973,
-      1.165307,
-      1.19864,
-      1.231973,
-      1.265307,
-      1.29864,
-      1.331973,
-      1.365307,
-      1.39864,
-      1.431973,
-      1.465307,
-      1.49864,
-      1.531973,
-      1.565307,
-      1.59864,
-      1.631973,
-      1.665307,
-      1.69864,
-      1.731973,
-      1.765307,
-      1.79865,
-      1.832073,
-      1.865725,
-      1.899903,
-      1.934999,
-      1.971575,
-      2.010033,
-      2.050812,
-      2.093962,
-      2.135649,
-      2.174519,
-      2.211539,
-      2.24691,
-      2.281274,
-      2.315024,
-      2.348492,
-      2.381854
+      0.033339,
+      0.066779,
+      0.100563,
+      0.135152,
+      0.171276,
+      0.209703,
+      0.251664,
+      0.297044,
+      0.348561,
+      0.400704,
+      0.448016,
+      0.491289,
+      0.530999,
+      0.567958,
+      0.6031,
+      0.637179,
+      0.670755,
+      0.704131,
+      0.737464,
+      0.770798,
+      0.804131,
+      0.837464,
+      0.870798,
+      0.904131,
+      0.937464,
+      0.970798,
+      1.004131,
+      1.037464,
+      1.070798,
+      1.104131,
+      1.137464,
+      1.170798,
+      1.204131,
+      1.237464,
+      1.270798,
+      1.304131,
+      1.337464,
+      1.370798,
+      1.404131,
+      1.437464,
+      1.470798,
+      1.504131,
+      1.537464,
+      1.570798,
+      1.604131,
+      1.637464,
+      1.670798,
+      1.704131,
+      1.737464,
+      1.770804,
+      1.804173,
+      1.837649,
+      1.871386,
+      1.905644,
+      1.940796,
+      1.977234,
+      2.015474,
+      2.055379,
+      2.098267,
+      2.139798,
+      2.178551,
+      2.215506,
+      2.250843,
+      2.285194,
+      2.31894,
+      2.352408,
+      2.38577
     ]
   },
   "armAnatomy": {
     "method": "hinge-aligned upper arm, forearm pronation +/-85 degrees, wrist swing <=65 degrees",
-    "beforeUpperPlaneErrorDegrees": 52.74165184623335,
+    "beforeUpperPlaneErrorDegrees": 53.18373242516785,
     "afterUpperPlaneErrorDegrees": 1.7302844014466245e-05,
-    "extraDepthMeters": 0.0
+    "extraDepthMeters": 0
+  },
+  "revision": "10ca0d915516",
+  "videoRebuild": {
+    "captureFps": 30,
+    "sourceKind": "Slovo",
+    "tracking": {
+      "hands": {
+        "Left": {
+          "active": false,
+          "activeCoverage": 0.0,
+          "missingActiveSeconds": 0.0
+        },
+        "Right": {
+          "active": true,
+          "activeCoverage": 1.0,
+          "missingActiveSeconds": 0.0
+        }
+      },
+      "flags": [],
+      "score": 1.0,
+      "scope": "Landmark visibility only; not sign correctness"
+    },
+    "linguisticReview": "not-reviewed",
+    "method": "Pretrained landmark tracking, constrained Blender retargeting, saved motion replay"
   }
 }

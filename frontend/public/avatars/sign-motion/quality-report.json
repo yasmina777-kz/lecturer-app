@@ -13,7 +13,7 @@
     "Front-surface clearance checks do not certify arm-arm contacts or linguistic correctness.",
     "Text sequences retain Russian source order; no grammatical translation."
   ],
-  "source": "32 chart-authored alphabet poses, 172 Bukva/Slovo reference adaptations and 3 project-authored phrases; Blender anatomical hand rebake",
+  "source": "22 chart-authored letters; 101 video-timed clips including 1 VOG whole-phrase references; other clips retain per-entry provenance",
   "qualityGate": {
     "minPoseCoverage": 0.85,
     "minDominantHandCoverage": 0.65,
@@ -24,12 +24,14 @@
     "maxWristSwingDegrees": 66,
     "maxElbowPoleDeviationDegrees": 30
   },
-  "chartAuthoredLetters": 32,
+  "chartAuthoredLetters": 22,
+  "videoTimedClips": 101,
+  "teacherReferences": 1,
   "observed": {
     "maxHingeOffAxis": 2.9802322387695312e-08,
     "maxJointStepDegrees": 7.917873743448832,
     "v8Clips": 207,
-    "maxSourceWristFitErrorMeters": 0.00027842892142870954,
+    "maxSourceWristFitErrorMeters": 0.0002442985590578083,
     "maxBodyOverlapAfterMeters": 0,
     "maxBodyOverlapBeforeMeters": 0.1918952502310276,
     "maxLegacyWristDriftMeters": 0.29551429508994154

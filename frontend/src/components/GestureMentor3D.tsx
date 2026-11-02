@@ -10,6 +10,16 @@ import { preserveJointVolume } from "../sign/volumeSkinning";
 import { signingBounds, fitSigningFrame } from "../sign/motionFraming";
 import { composeMotion } from "../sign/composeMotion";
 import { at } from "../i18n/automation";
+import { createMotionCache } from "../sign/motionCache";
+
+// Animation-only GLBs contain no character meshes. Each playback gets a clone
+// so its mixer cannot alter the saved clip used by another word or component.
+const loadSavedMotion = createMotionCache(async (url: string) => {
+  const asset = await new GLTFLoader().loadAsync(url);
+  const clip = asset.animations[0];
+  if (!clip) throw new Error("Empty animation");
+  return clip;
+});
 
 export type GestureAngle = "front" | "three-quarter" | "side";
 export function GestureMentor3D({
@@ -281,11 +291,9 @@ export function GestureMentor3D({
             if (!idleResponse.ok) throw new Error("Missing idle motion metadata");
             const idleMetadata = await idleResponse.json();
             if (typeof idleMetadata.revision !== "string") throw new Error("Missing idle motion revision");
-            const idle = await new GLTFLoader().loadAsync(
+            idleClip = (await loadSavedMotion(
               `/avatars/sign-motion/ready-idle.glb?v=${encodeURIComponent(idleMetadata.revision)}`,
-            );
-            idleClip = idle.animations[0];
-            disposeModel(idle.scene);
+            )).clone();
             if (!idleClip) throw new Error("Missing idle animation");
           }
           const urls: string[] = JSON.parse(motionKey);
@@ -293,10 +301,8 @@ export function GestureMentor3D({
             const sources = new Map<string, THREE.AnimationClip>();
             await Promise.all(
               [...new Set(urls)].map(async (url) => {
-                const asset = await new GLTFLoader().loadAsync(url);
-                const clip = asset.animations[0];
+                const clip = (await loadSavedMotion(url)).clone();
                 if (clip) sources.set(url, clip);
-                disposeModel(asset.scene);
                 if (!clip) throw new Error("Empty animation");
               }),
             );

@@ -1,0 +1,1726 @@
+{
+  "method": "Saved video-derived motions; no new text-to-motion or RSL grammar model trained",
+  "linguisticReview": "not-reviewed",
+  "catalogSize": 207,
+  "updated": 101,
+  "lettersUpdated": 10,
+  "wholePhrasesUpdated": 1,
+  "entries": [
+    {
+      "id": "word-f17a6060",
+      "label": "Привет!",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-0cca1e04",
+      "label": "я",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-44bc9933",
+      "label": "ты",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-0f02bf01",
+      "label": "вы",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-c1596705",
+      "label": "мы",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger direction fit exceeds 25 degrees"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-069645d8",
+      "label": "мой",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-aeed25a5",
+      "label": "твой",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-e29e36fe",
+      "label": "наш",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-8c1a7f26",
+      "label": "меня",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-b7dfae4f",
+      "label": "тебя",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-38153f62",
+      "label": "вам",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-4699249c",
+      "label": "нам",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-1ff178a6",
+      "label": "кто?",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-fc2a83a7",
+      "label": "что",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-7143af36",
+      "label": "когда",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-3df3b9dc",
+      "label": "почему",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger direction fit exceeds 25 degrees",
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-26e2d0ce",
+      "label": "сколько",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-8f8056fe",
+      "label": "да",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-d5e5068b",
+      "label": "не",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-d116eb89",
+      "label": "это",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-83b8a1b6",
+      "label": "вопрос",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-728c296d",
+      "label": "имя",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-38c6f832",
+      "label": "язык",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-f1a5226d",
+      "label": "помочь",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-03ac3272",
+      "label": "спросить",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-92e94ab2",
+      "label": "ответить",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger fit worsened versus previous capture"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-ed66b0ff",
+      "label": "показать",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback substantially slower than previous motion",
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-41df6170",
+      "label": "понять",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-c58e68e8",
+      "label": "сказать",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Visual screening: Say: hand placement is below the source mouth/chin region."
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-9e551d12",
+      "label": "говорить",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-b19972c4",
+      "label": "слышать",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-c3c582bb",
+      "label": "семья",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion",
+        "Visual screening: Family: two-hand palm orientations/contact diverge from the selected recording."
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-a1a428c3",
+      "label": "мать",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger fit worsened versus previous capture",
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-78a4ca40",
+      "label": "отец",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-5d7cb3db",
+      "label": "брат",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-22f60354",
+      "label": "сестра",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-be28b6af",
+      "label": "сын",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-6c7d80f0",
+      "label": "дочь",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-b4f237bd",
+      "label": "муж",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-cd6a9d0b",
+      "label": "жена",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger direction fit exceeds 25 degrees",
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-40af2c54",
+      "label": "друг",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-0b485a5f",
+      "label": "подруга",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-69586c66",
+      "label": "ребёнок",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-580edc90",
+      "label": "человек",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-e526814e",
+      "label": "люди",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-743cb1da",
+      "label": "мальчик",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger fit worsened versus previous capture"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-912db910",
+      "label": "девочка",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-6106a42d",
+      "label": "мужчина",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger direction fit exceeds 25 degrees"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-e10fbdcb",
+      "label": "женщина",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-6a2d01fd",
+      "label": "школа",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-a8989f04",
+      "label": "книга",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Right: missing active hand observations",
+        "Right: active hand gap over 250 ms"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-2c1fd7ff",
+      "label": "карандаш",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback substantially slower than previous motion",
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-30f82679",
+      "label": "ручка",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-54dee110",
+      "label": "бумага",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger direction fit exceeds 25 degrees",
+        "Finger fit worsened versus previous capture",
+        "Playback substantially slower than previous motion",
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-542b93a5",
+      "label": "читать",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-3d7e498c",
+      "label": "писать",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-0a42bb8f",
+      "label": "изучить",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-620a9fc5",
+      "label": "знать",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-1d06b313",
+      "label": "обучать",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-6911f183",
+      "label": "слушать",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-b58b7f9b",
+      "label": "смотреть",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger fit worsened versus previous capture"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-e35ba719",
+      "label": "проверить",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-5ac08628",
+      "label": "ошибка",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger fit worsened versus previous capture"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-c2304594",
+      "label": "Память",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion",
+        "Visual screening: Memory: closed-hand shape and forehead placement need manual correction."
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-d8326c48",
+      "label": "думать",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-8c3b0308",
+      "label": "вспомнить",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-a5983e98",
+      "label": "забыть",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-b047f8c8",
+      "label": "дом",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Visual screening: House: observed fingertip contact is not preserved."
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-23b3909e",
+      "label": "комната",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion",
+        "Visual screening: Upper-hand shape and lower-palm contact are not preserved."
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-24491c1c",
+      "label": "город",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-f8ff6bc7",
+      "label": "улица",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger fit worsened versus previous capture"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-cf4157f8",
+      "label": "магазин",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-5da64d7c",
+      "label": "вода",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-3eccaa2d",
+      "label": "хлеб",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger direction fit exceeds 25 degrees"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-55d32981",
+      "label": "еда",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger fit worsened versus previous capture",
+        "Playback substantially slower than previous motion",
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-9aa82def",
+      "label": "есть",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-b45703d1",
+      "label": "спать",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Left: missing active hand observations",
+        "Left: active hand gap over 250 ms"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-ffce2323",
+      "label": "работать",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-ceedcb88",
+      "label": "идти",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback substantially slower than previous motion",
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-9d32e897",
+      "label": "ехать",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-65c00b09",
+      "label": "жить",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Left: missing active hand observations",
+        "Left: active hand gap over 250 ms",
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-57c6880e",
+      "label": "играть",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-2ad51148",
+      "label": "любить",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-9fcf26f7",
+      "label": "хотеть",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-5fd8cf91",
+      "label": "дать",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback substantially slower than previous motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-71c24ba0",
+      "label": "взять",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger direction fit exceeds 25 degrees"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-360ff815",
+      "label": "открыть",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger fit worsened versus previous capture"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-2c57ef13",
+      "label": "закрыть",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-00af7ae9",
+      "label": "начать",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-317890bf",
+      "label": "закончить",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-b66bf5be",
+      "label": "ждать",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-5f337e79",
+      "label": "найти",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-25fed1ff",
+      "label": "купить",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion",
+        "Visual screening: Source hand crossing/contact is not preserved."
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-9357b146",
+      "label": "сегодня",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion",
+        "Visual screening: Two-hand orientation differs: one avatar palm turns down while both source palms face up."
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-58862482",
+      "label": "завтра",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-5bd9ab86",
+      "label": "вчера",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger fit worsened versus previous capture",
+        "Playback substantially slower than previous motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-9ee25d0d",
+      "label": "утро",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-16bf2a06",
+      "label": "день",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-e3b0e3b1",
+      "label": "вечер",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Visual screening: Both source hands are flatter than the captured finger shapes."
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-4fb38350",
+      "label": "ночь",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Left: missing active hand observations"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-4fa6cc2a",
+      "label": "час",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-aba2f273",
+      "label": "минута",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-1e422a1f",
+      "label": "неделя",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-c6b5c933",
+      "label": "месяц",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-628722ef",
+      "label": "год",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback substantially slower than previous motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-2a7729d7",
+      "label": "потом",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger direction fit exceeds 25 degrees",
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-594f0e3d",
+      "label": "скоро",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger direction fit exceeds 25 degrees",
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-c0f1e55b",
+      "label": "всегда",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-50b48f58",
+      "label": "никогда",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback substantially slower than previous motion",
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-5ed48b44",
+      "label": "иногда",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Left: missing active hand observations",
+        "Right: missing active hand observations",
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-44de272e",
+      "label": "понедельник",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-c446b714",
+      "label": "вторник",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-b0df4010",
+      "label": "среда",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-8e883b97",
+      "label": "четверг",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-bb899ccb",
+      "label": "пятница",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger direction fit exceeds 25 degrees"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-924b6df6",
+      "label": "суббота",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-ae2dce80",
+      "label": "воскресенье",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-175ce38d",
+      "label": "лето",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger fit worsened versus previous capture"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-9613dff0",
+      "label": "зима",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger fit worsened versus previous capture"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-c9b82a16",
+      "label": "осень",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-b854c147",
+      "label": "весна",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-803b0a5e",
+      "label": "еще нет",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Candidate did not pass capture or exported-geometry checks"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-8d20b0ee",
+      "label": "день и ночь",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Right: missing active hand observations",
+        "Right: active hand gap over 250 ms"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-f00a8a7f",
+      "label": "в этом году",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-72476e8f",
+      "label": "в прошлом году",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-91d7d717",
+      "label": "ноль",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger fit worsened versus previous capture"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-98521248",
+      "label": "один",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback substantially slower than previous motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-3637b257",
+      "label": "два",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-5782a432",
+      "label": "три",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-f8ffac36",
+      "label": "четыре",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-f872e2cb",
+      "label": "пять",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-2b21215c",
+      "label": "шесть",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-0c849b23",
+      "label": "семь",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-d7560665",
+      "label": "восемь",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-338e93e8",
+      "label": "девять",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-640f2b1f",
+      "label": "десять",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Visual screening: Source hands are close to the mouth; avatar hand placement remains too far away."
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-a98a74bc",
+      "label": "одиннадцать",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback substantially slower than previous motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-aab0e5db",
+      "label": "двенадцать",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-cd151b2a",
+      "label": "двадцать",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-7ee747b0",
+      "label": "сто",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Visual screening: Index-to-lips placement is too low on the avatar."
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-35e11a03",
+      "label": "хороший",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-858669cd",
+      "label": "плохой",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-6e24fd10",
+      "label": "большой",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-62813877",
+      "label": "маленький",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-84ff2040",
+      "label": "новый",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Visual screening: Hand-to-opposite-forearm contact/orientation needs manual correction."
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-defd5c39",
+      "label": "старый",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger fit worsened versus previous capture"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-151a37ef",
+      "label": "быстрый",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-ea7aa6fc",
+      "label": "медленный",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger direction fit exceeds 25 degrees",
+        "Finger fit worsened versus previous capture",
+        "Playback substantially slower than previous motion",
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-fd1c4073",
+      "label": "красивый",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-b08629fc",
+      "label": "трудный",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-32e530d7",
+      "label": "легкий",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-4893125c",
+      "label": "интересный",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger fit worsened versus previous capture"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-b6fe83ed",
+      "label": "счастливый",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-36b20a69",
+      "label": "грустный",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Left: missing active hand observations",
+        "Left: active hand gap over 250 ms",
+        "Right: missing active hand observations",
+        "Right: active hand gap over 250 ms"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-1ba0d285",
+      "label": "спокойный",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-9543d766",
+      "label": "радость",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-8cf533fa",
+      "label": "страх",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-71b45022",
+      "label": "любовь",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-ddc2e7ed",
+      "label": "цвет",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-e70fcfd6",
+      "label": "красный",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Left: missing active hand observations",
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-250f896a",
+      "label": "синий",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-f3848317",
+      "label": "зелёный",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-6d759966",
+      "label": "желтый",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-9c7faf34",
+      "label": "белый",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger fit worsened versus previous capture"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-5c794c1c",
+      "label": "черный",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-896d253f",
+      "label": "кошка",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-99afdafa",
+      "label": "собака",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "word-506f5596",
+      "label": "птица",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Right: missing active hand observations",
+        "Right: active hand gap over 250 ms",
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-76fc58e0",
+      "label": "рыба",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Right: missing active hand observations",
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-d388f4c7",
+      "label": "лошадь",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "word-0bf7a453",
+      "label": "животное",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "letter-410",
+      "label": "А",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "letter-411",
+      "label": "Б",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback substantially slower than previous motion",
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "letter-412",
+      "label": "В",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback substantially slower than previous motion",
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "letter-413",
+      "label": "Г",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger direction fit exceeds 25 degrees"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "letter-414",
+      "label": "Д",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Right: missing active hand observations"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "letter-415",
+      "label": "Е",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback substantially slower than previous motion",
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "letter-401",
+      "label": "Ё",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "letter-416",
+      "label": "Ж",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Visual screening: Flattened finger/thumb pinch in the source is not reproduced; the candidate looks like a fist."
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "letter-417",
+      "label": "З",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Right: missing active hand observations"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "letter-418",
+      "label": "И",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback substantially slower than previous motion",
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "letter-419",
+      "label": "Й",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback substantially slower than previous motion",
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "letter-41a",
+      "label": "К",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "letter-41b",
+      "label": "Л",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback substantially slower than previous motion",
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "letter-41c",
+      "label": "М",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Left: missing active hand observations",
+        "Right: missing active hand observations"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "letter-41d",
+      "label": "Н",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "letter-41e",
+      "label": "О",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "letter-41f",
+      "label": "П",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Visual screening: Both downward fingers bend more than the straight source fingers."
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "letter-420",
+      "label": "Р",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Visual screening: Thumb-to-ring-finger contact in the source is not preserved closely enough."
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "letter-421",
+      "label": "С",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Right: missing active hand observations",
+        "Right: active hand gap over 250 ms",
+        "Playback substantially slower than previous motion",
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "letter-422",
+      "label": "Т",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Right: missing active hand observations",
+        "Right: active hand gap over 250 ms",
+        "Finger direction fit exceeds 25 degrees"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "letter-423",
+      "label": "У",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback substantially slower than previous motion",
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "letter-424",
+      "label": "Ф",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "letter-425",
+      "label": "Х",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Right: missing active hand observations",
+        "Right: active hand gap over 250 ms"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "letter-426",
+      "label": "Ц",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Right: missing active hand observations",
+        "Right: active hand gap over 250 ms"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "letter-427",
+      "label": "Ч",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger direction fit exceeds 25 degrees"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "letter-428",
+      "label": "Ш",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Visual screening: The source three extended fingers are noticeably curled in the candidate."
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "letter-429",
+      "label": "Щ",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Finger direction fit exceeds 25 degrees",
+        "Playback substantially slower than previous motion",
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "letter-42a",
+      "label": "Ъ",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "letter-42b",
+      "label": "Ы",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "letter-42c",
+      "label": "Ь",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "letter-42d",
+      "label": "Э",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "letter-42e",
+      "label": "Ю",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Playback substantially slower than previous motion",
+        "Playback stretched over 2.5 times the source motion"
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "letter-42f",
+      "label": "Я",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "prepared-hello",
+      "label": "Здравствуйте",
+      "status": "updated",
+      "candidateFlags": [],
+      "candidateStatus": "candidate-ready"
+    },
+    {
+      "id": "prepared-thanks",
+      "label": "Спасибо",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Visual screening: The fist-to-forehead placement is not preserved closely enough."
+      ],
+      "candidateStatus": "needs-correction"
+    },
+    {
+      "id": "prepared-name-demo",
+      "label": "Как тебя зовут?",
+      "status": "retained-previous",
+      "candidateFlags": [
+        "Visual screening: Release retains raised hand shapes after the source hands lower; facial question markers are absent."
+      ],
+      "candidateStatus": "needs-correction"
+    }
+  ]
+}

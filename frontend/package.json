@@ -19,7 +19,8 @@
     "test:live-recognition": "node scripts/check-live-recognition.mjs",
     "test:admin-analytics": "node scripts/check-admin-analytics.mjs",
     "test:sign-captions": "node scripts/check-sign-captions.mjs",
-    "test:sign-activities": "node scripts/check-sign-activities.mjs"
+    "test:sign-activities": "node scripts/check-sign-activities.mjs",
+    "test:motion-cache": "node scripts/check-motion-cache.mjs"
   },
   "dependencies": {
     "@huggingface/transformers": "^4.3.2",

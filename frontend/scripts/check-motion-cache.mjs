@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import ts from 'typescript';
+const source=ts.transpileModule(await readFile(new URL('../src/sign/motionCache.ts',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2020}}).outputText;
+const {createMotionCache}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
+const calls=[];let fail=true;
+const load=createMotionCache(async url=>{calls.push(url);if(url==='retry'&&fail){fail=false;throw Error('temporary');}return {url};},2);
+const [a,b]=await Promise.all([load('a?v=1'),load('a?v=1')]);assert.equal(a,b);assert.deepEqual(calls,['a?v=1']);
+await load('a?v=2');assert.equal(calls.length,2,'new revision must reload');
+await load('b');await load('a?v=1');assert.equal(calls.length,4,'least recently used clip must be evicted');
+await assert.rejects(load('retry'));assert.deepEqual(await load('retry'),{url:'retry'});
+console.log('Motion cache: shared pending loads, revision invalidation, bounded eviction and retry passed.');

@@ -1,0 +1,23 @@
+{
+  "method": "Visual screening of actual Blender poses at 25%, 50% and 75% of source time. This is not an RSL teacher review or full temporal/contact validation.",
+  "reject": {
+    "word-c3c582bb": "Family: two-hand palm orientations/contact diverge from the selected recording.",
+    "word-c58e68e8": "Say: hand placement is below the source mouth/chin region.",
+    "word-c2304594": "Memory: closed-hand shape and forehead placement need manual correction.",
+    "word-b047f8c8": "House: observed fingertip contact is not preserved.",
+    "word-23b3909e": "Upper-hand shape and lower-palm contact are not preserved.",
+    "word-9357b146": "Two-hand orientation differs: one avatar palm turns down while both source palms face up.",
+    "word-e3b0e3b1": "Both source hands are flatter than the captured finger shapes.",
+    "word-25fed1ff": "Source hand crossing/contact is not preserved.",
+    "word-aa0e5db": "Finger configuration changes do not sufficiently match the source closed-hand phases.",
+    "word-640f2b1f": "Source hands are close to the mouth; avatar hand placement remains too far away.",
+    "prepared-thanks": "The fist-to-forehead placement is not preserved closely enough.",
+    "prepared-name-demo": "Release retains raised hand shapes after the source hands lower; facial question markers are absent.",
+    "letter-416": "Flattened finger/thumb pinch in the source is not reproduced; the candidate looks like a fist.",
+    "word-84ff2040": "Hand-to-opposite-forearm contact/orientation needs manual correction.",
+    "word-7ee747b0": "Index-to-lips placement is too low on the avatar.",
+    "letter-41f": "Both downward fingers bend more than the straight source fingers.",
+    "letter-420": "Thumb-to-ring-finger contact in the source is not preserved closely enough.",
+    "letter-428": "The source three extended fingers are noticeably curled in the candidate."
+  }
+}

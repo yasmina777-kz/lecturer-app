@@ -3,7 +3,7 @@ Exports compact animation-only GLBs, never a new mesh per word.
 Output is an unreviewed motion study, not a grammatical translation.
 """
 from pathlib import Path
-import sys,json,math
+import sys,json,math,os
 ROOT=Path(__file__).resolve().parents[2]
 source=ROOT/'art/mira-blender-v3/animate.py';scope={'__file__':str(source)}
 exec(compile(source.read_text().split('\nface=bpy.data.objects')[0].replace('limit=math.radians(52)','limit=math.radians(100)'),str(source),'exec'),scope)
@@ -12,8 +12,8 @@ for ob in rig.children_recursive:
  if ob.type=='MESH':
   for mod in ob.modifiers:
    if mod.type=='ARMATURE':mod.use_deform_preserve_volume=True
-OUT=ROOT/'frontend/public/avatars/sign-motion';OUT.mkdir(exist_ok=True)
-DATA=ROOT/'ml/rsl/data/motion';selected=sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [];render_stills='render' in selected;selected=[x for x in selected if x!='render']
+OUT=Path(os.environ.get('MOTION_OUTPUT_DIR',str(ROOT/'frontend/public/avatars/sign-motion')));OUT.mkdir(parents=True,exist_ok=True)
+DATA=Path(os.environ.get('MOTION_CAPTURE_DIR',str(ROOT/'ml/rsl/data/motion')));selected=sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [];render_stills='render' in selected;selected=[x for x in selected if x!='render']
 paths=sorted(DATA.glob('word-*.json'))+sorted(DATA.glob('letter-*.json'))
 batch=next((x for x in selected if x.startswith('batch=')),None)
 if selected==['missing']:
@@ -99,10 +99,22 @@ for path in paths:
    if world:
     middepth=(world[11][2]+world[12][2])/2;depth=max(-.44,min(-.08,(world[wi][2]-middepth)))
    target=V(((w.x-mid.x)*d['aspect']*scale,depth,shoulder_mid.z-(w.y-mid.y)*scale))
+   if entry['id'].startswith('word-teacher-'):
+    # A shoulder-width scale alone puts face signs below the face when the
+    # actor and avatar have different head/shoulder proportions. Map the
+    # observed nose and shoulder line to corresponding avatar landmarks.
+    shoulder_z=B('Neck').bone.head_local.z-.035
+    nose_z=B('Head').bone.head_local.z+.065
+    vertical_scale=clamp((nose_z-shoulder_z)/max(.09,mid.y-p[0].y),scale*.7,scale*1.7)
+    target.z=shoulder_z-(w.y-mid.y)*vertical_scale
    target.x=max(-.60,min(.60,target.x));target.z=max(.78,min(1.78,target.z))
    pts=[cv(x) for x in hand['world']];forward=(pts[9]-pts[0]).normalized();across=(pts[5]-pts[17]).normalized()
    if side=='Left':across=-across
    normal=across.cross(forward).normalized();q=orient(side,forward,normal)
+   if entry['id']=='word-teacher-thanks' and side=='Right':
+    # The VOG sample brings the closed hand sideways to the forehead, then
+    # down to the chest. Monocular tracking incorrectly points its fist upward.
+    q=orient(side,(1,0,.05),(0,-1,0));target.y=clamp(target.y,-.24,-.16)
    if entry['id']=='word-f1a5226d':
     # Both flat hands are edge/back-facing in this reference; the lower hand
     # must not turn into a palm-up offering pose when its depth is occluded.

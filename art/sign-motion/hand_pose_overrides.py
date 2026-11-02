@@ -28,6 +28,8 @@ def authored_finger_angles(entry_id,side,fade):
 # Reviewed against the exact catalog reference frames, not inferred from text.
 # These shapes remain stable through the captured wrist motion.
 REFERENCE_HAND_SHAPES={
+ 'word-teacher-hello':{'Left':'flat','Right':'flat'},
+ 'word-teacher-thanks':{'Right':'fist'},
  'word-f17a6060':{'Right':'flat'}, # Open palm throughout the Slovo greeting reference.
  'word-0cca1e04':{'Left':'point'},
  'word-8c1a7f26':{'Left':'point'},
@@ -58,7 +60,7 @@ def corrected_hand_pose(entry_id,side,fade):
  angles={}
  for name in finger_indices:
   if shape=='relaxed':values=[18,0,22,8] if name!='Thumb' else [0,-10,10,5]
-  elif name=='Thumb' and shape in ['point','straight-point']:
+  elif name=='Thumb' and shape in ['point','straight-point','fist']:
    angles[name]=closed_pose[side][name].copy();continue
   elif name=='Thumb':
    values={'thumb':[-30,30,0,0],'flat':[0,0,5,0],'flat-tucked':[20,35,25,15]}[shape]

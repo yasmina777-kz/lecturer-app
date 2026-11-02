@@ -42,5 +42,81 @@
   "белый": {
     "attachmentId": "69376af6-13c9-42ca-9ff3-0880d106a0c3",
     "stableId": "word-9c7faf34"
+  },
+  "тебя": {
+    "attachmentId": "85b61dde-f57e-418c-b84a-a0ea3ebc661f",
+    "stableId": "word-b7dfae4f"
+  },
+  "не": {
+    "attachmentId": "e21a9e04-b733-4b39-b1b7-a84de7730a06",
+    "stableId": "word-d5e5068b"
+  },
+  "понять": {
+    "attachmentId": "51b675c9-637c-4c40-a669-9fe439f30bb3",
+    "stableId": "word-41df6170"
+  },
+  "сын": {
+    "attachmentId": "b958f3a6-9e6c-4c46-a335-f0715cd7d5db",
+    "stableId": "word-be28b6af"
+  },
+  "ручка": {
+    "attachmentId": "e9daaa4b-0fbb-40c5-8df4-d33ec95b7a9f",
+    "stableId": "word-30f82679"
+  },
+  "проверить": {
+    "attachmentId": "4b949e28-1700-44bb-912b-930d89ead05a",
+    "stableId": "word-e35ba719"
+  },
+  "магазин": {
+    "attachmentId": "cb036314-9a5e-45ee-a7f1-2d08a07815c3",
+    "stableId": "word-cf4157f8"
+  },
+  "играть": {
+    "attachmentId": "26022416-930c-49e0-b1f3-0c0da57a8d2c",
+    "stableId": "word-57c6880e"
+  },
+  "любить": {
+    "attachmentId": "cc14b58e-ac2c-4484-a1d5-c2f387d361a7",
+    "stableId": "word-2ad51148"
+  },
+  "начать": {
+    "attachmentId": "98844c64-ba52-4352-a4c2-2fa0d9bb0dc1",
+    "stableId": "word-00af7ae9"
+  },
+  "закончить": {
+    "attachmentId": "c7e53269-b327-40ce-8ee9-6b73b105b165",
+    "stableId": "word-317890bf"
+  },
+  "ждать": {
+    "attachmentId": "21053e46-3985-42da-9b8c-3c9fbc414ae7",
+    "stableId": "word-b66bf5be"
+  },
+  "найти": {
+    "attachmentId": "c709009f-b7a0-40bb-93ef-82677c013336",
+    "stableId": "word-5f337e79"
+  },
+  "вторник": {
+    "attachmentId": "4a6b4832-a665-4eb3-8701-d3dcc31a327f",
+    "stableId": "word-c446b714"
+  },
+  "среда": {
+    "attachmentId": "506fbeb3-1282-4bb8-bd48-0afedad64d63",
+    "stableId": "word-b0df4010"
+  },
+  "воскресенье": {
+    "attachmentId": "417459bb-df1d-4bb9-89ae-f13d359e18d1",
+    "stableId": "word-ae2dce80"
+  },
+  "весна": {
+    "attachmentId": "30b8b721-5c62-4ddc-856b-3f328af48ebc",
+    "stableId": "word-b854c147"
+  },
+  "большой": {
+    "attachmentId": "2d0f77ff-000d-47dc-ad43-09c958b16185",
+    "stableId": "word-6e24fd10"
+  },
+  "маленький": {
+    "attachmentId": "7ab4ed20-bd2a-4fd2-a9f5-836058a3c7e4",
+    "stableId": "word-62813877"
   }
 }

@@ -2,199 +2,453 @@
   "id": "letter-42b",
   "label": "Ы",
   "url": "/avatars/sign-motion/letter-42b.glb",
-  "duration": 4.833333333333333,
-  "source": "/images/rsl-alphabet/source-chart.jpg",
+  "duration": 2.8,
+  "source": "https://github.com/ai-forever/bukva",
   "reference": "/research/rsl/alphabet/042b.mp4",
-  "maxJointStepDegrees": 7.917675667962903,
+  "handCoverage": {
+    "Left": 1.0,
+    "Right": 0.0
+  },
+  "maxGapFrames": {
+    "Left": 0,
+    "Right": 32
+  },
+  "poseCoverage": 1.0,
+  "maxJointStepDegrees": 7.9159937338797866,
   "review": "experimental-unreviewed",
-  "method": "Hand-authored chart handshape with Mixamo-calibrated finger axes, held presentation, authored movement path and anatomical arm IK; no model training",
+  "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, monotone captured palm trajectories, final coordinated elbow IK, workshop hand priors and anatomical-parameter finger curves; no translation training",
   "motionVersion": 8,
   "handMechanics": "workshop-parameter-curves-v1",
+  "legacyWristDriftMeters": 0.09453887648226655,
   "timing": "whole-pose retiming at 240 degrees/second; no independent joint slowdown",
-  "leadIn": 1.0157140058765366,
-  "leadOut": 1.0176193274567997,
-  "maxHingeOffAxis": 1.4901161193847656e-08,
-  "revision": "8cd0be930a33",
+  "peakStep": {
+    "bone": "mixamorig:LeftForeArm",
+    "frame": 69,
+    "angle": 7.917675667962903
+  },
+  "leadIn": 0.7886667562007491,
+  "leadOut": 0.9446665771325791,
+  "maxHingeOffAxis": 7.450580596923828e-09,
+  "meanFingerDirectionErrorDegrees": 8.863416076325711,
+  "sourceTimeline": [
+    [
+      0.0,
+      0
+    ],
+    [
+      0.033333,
+      0
+    ],
+    [
+      0.066667,
+      0
+    ],
+    [
+      0.100022,
+      0
+    ],
+    [
+      0.133461,
+      0
+    ],
+    [
+      0.16713,
+      0
+    ],
+    [
+      0.201316,
+      0
+    ],
+    [
+      0.236355,
+      0
+    ],
+    [
+      0.272983,
+      0
+    ],
+    [
+      0.311408,
+      0
+    ],
+    [
+      0.353101,
+      0
+    ],
+    [
+      0.394843,
+      0
+    ],
+    [
+      0.437428,
+      0
+    ],
+    [
+      0.479651,
+      0
+    ],
+    [
+      0.519869,
+      0
+    ],
+    [
+      0.55766,
+      0
+    ],
+    [
+      0.594008,
+      0
+    ],
+    [
+      0.629325,
+      0
+    ],
+    [
+      0.664492,
+      0
+    ],
+    [
+      0.70014,
+      0
+    ],
+    [
+      0.737619,
+      0
+    ],
+    [
+      0.776556,
+      0
+    ],
+    [
+      0.820261,
+      0.033333
+    ],
+    [
+      0.861831,
+      0.066667
+    ],
+    [
+      0.900604,
+      0.1
+    ],
+    [
+      0.937369,
+      0.133333
+    ],
+    [
+      0.972486,
+      0.166667
+    ],
+    [
+      1.006644,
+      0.2
+    ],
+    [
+      1.040258,
+      0.233333
+    ],
+    [
+      1.073657,
+      0.266667
+    ],
+    [
+      1.106991,
+      0.3
+    ],
+    [
+      1.140324,
+      0.333333
+    ],
+    [
+      1.173657,
+      0.366667
+    ],
+    [
+      1.206991,
+      0.4
+    ],
+    [
+      1.240324,
+      0.433333
+    ],
+    [
+      1.273657,
+      0.466667
+    ],
+    [
+      1.306991,
+      0.5
+    ],
+    [
+      1.340324,
+      0.533333
+    ],
+    [
+      1.373657,
+      0.566667
+    ],
+    [
+      1.406991,
+      0.6
+    ],
+    [
+      1.440324,
+      0.633333
+    ],
+    [
+      1.473657,
+      0.666667
+    ],
+    [
+      1.506991,
+      0.7
+    ],
+    [
+      1.540324,
+      0.733333
+    ],
+    [
+      1.573657,
+      0.766667
+    ],
+    [
+      1.606991,
+      0.8
+    ],
+    [
+      1.640324,
+      0.833333
+    ],
+    [
+      1.673657,
+      0.866667
+    ],
+    [
+      1.706991,
+      0.9
+    ],
+    [
+      1.740324,
+      0.933333
+    ],
+    [
+      1.773657,
+      0.966667
+    ],
+    [
+      1.806991,
+      1.0
+    ],
+    [
+      1.840324,
+      1.0333
+    ],
+    [
+      1.873657,
+      1.0333
+    ],
+    [
+      1.906991,
+      1.0333
+    ],
+    [
+      1.940324,
+      1.0333
+    ],
+    [
+      1.973719,
+      1.0333
+    ],
+    [
+      2.007354,
+      1.0333
+    ],
+    [
+      2.041567,
+      1.0333
+    ],
+    [
+      2.076943,
+      1.0333
+    ],
+    [
+      2.114296,
+      1.0333
+    ],
+    [
+      2.154654,
+      1.0333
+    ],
+    [
+      2.199348,
+      1.0333
+    ],
+    [
+      2.249751,
+      1.0333
+    ],
+    [
+      2.30914,
+      1.0333
+    ],
+    [
+      2.377015,
+      1.0333
+    ],
+    [
+      2.451751,
+      1.0333
+    ],
+    [
+      2.516917,
+      1.0333
+    ],
+    [
+      2.570547,
+      1.0333
+    ],
+    [
+      2.616836,
+      1.0333
+    ],
+    [
+      2.657593,
+      1.0333
+    ],
+    [
+      2.695011,
+      1.0333
+    ],
+    [
+      2.730832,
+      1.0333
+    ],
+    [
+      2.765611,
+      1.0333
+    ]
+  ],
+  "sourceWristFitErrorMeters": 2.5463115409962923e-07,
   "bodyClearance": {
-    "method": "chart-pose anatomical IK and evaluated torso/head/clothing front-surface correction",
+    "method": "evaluated torso/head/shirt front-surface clearance; paired-hand depth offset and elbow IK",
+    "beforeMaxMeters": 0.028857767581939697,
     "afterMaxMeters": 0,
+    "maxOffsetMeters": 0.037500210043787965,
     "failedFrames": [],
+    "refinementPasses": 0,
     "sourceFrameTimes": [
       0.0,
-      0.036581,
-      0.071355,
-      0.105822,
-      0.139641,
-      0.173239,
-      0.206677,
-      0.240111,
-      0.273617,
-      0.307282,
-      0.341193,
-      0.375384,
-      0.409974,
-      0.444808,
-      0.479587,
-      0.513993,
-      0.548085,
-      0.581901,
-      0.615506,
-      0.648974,
-      0.682361,
-      0.715711,
-      0.749047,
-      0.782381,
-      0.815714,
-      0.849047,
-      0.882381,
-      0.915714,
-      0.949047,
-      0.982381,
-      1.015714,
-      1.049047,
-      1.082381,
-      1.115714,
-      1.149047,
-      1.182381,
-      1.215714,
-      1.249047,
-      1.282381,
-      1.315714,
-      1.349047,
-      1.382381,
-      1.415714,
-      1.449047,
-      1.482381,
-      1.515714,
-      1.549047,
-      1.582381,
-      1.615714,
-      1.649047,
-      1.682381,
-      1.715714,
-      1.749047,
-      1.782381,
-      1.815714,
-      1.849047,
-      1.882381,
-      1.915714,
-      1.949047,
-      1.982381,
-      2.015714,
-      2.049047,
-      2.082381,
-      2.115714,
-      2.149047,
-      2.182381,
-      2.215714,
-      2.249047,
-      2.282381,
-      2.315714,
-      2.349047,
-      2.382381,
-      2.415714,
-      2.449047,
-      2.482381,
-      2.515714,
-      2.549047,
-      2.582381,
-      2.615714,
-      2.649047,
-      2.682381,
-      2.715714,
-      2.749047,
-      2.782381,
-      2.815714,
-      2.849047,
-      2.882381,
-      2.915714,
-      2.949047,
-      2.982381,
-      3.015714,
-      3.049047,
-      3.082381,
-      3.115714,
-      3.149047,
-      3.182381,
-      3.215714,
-      3.249047,
-      3.282381,
-      3.315714,
-      3.349047,
-      3.382381,
-      3.415714,
-      3.449047,
-      3.482381,
-      3.515714,
-      3.549047,
-      3.582381,
-      3.615714,
-      3.649047,
-      3.682381,
-      3.715714,
-      3.749047,
-      3.782381,
-      3.815714,
-      3.849047,
-      3.882381,
-      3.915714,
-      3.949047,
-      3.982381,
-      4.015714,
-      4.049047,
-      4.082381,
-      4.115717,
-      4.149067,
-      4.182454,
-      4.215922,
-      4.249527,
-      4.283343,
-      4.317435,
-      4.351841,
-      4.38662,
-      4.421455,
-      4.456045,
-      4.490236,
-      4.524147,
-      4.557812,
-      4.591319,
-      4.624753,
-      4.658197,
-      4.691808,
-      4.72565,
-      4.760141,
-      4.794888,
-      4.831469
+      0.033333,
+      0.066667,
+      0.100022,
+      0.13346,
+      0.167093,
+      0.201118,
+      0.235689,
+      0.271242,
+      0.307472,
+      0.345819,
+      0.382962,
+      0.418894,
+      0.453859,
+      0.488066,
+      0.52181,
+      0.555291,
+      0.588664,
+      0.622,
+      0.655333,
+      0.688667,
+      0.722,
+      0.755333,
+      0.788667,
+      0.822,
+      0.855333,
+      0.888667,
+      0.922,
+      0.955333,
+      0.988667,
+      1.022,
+      1.055333,
+      1.088667,
+      1.122,
+      1.155333,
+      1.188667,
+      1.222,
+      1.255333,
+      1.288667,
+      1.322,
+      1.355333,
+      1.388667,
+      1.422,
+      1.455333,
+      1.488667,
+      1.522,
+      1.555333,
+      1.588667,
+      1.622,
+      1.655333,
+      1.688667,
+      1.722,
+      1.755333,
+      1.788667,
+      1.822,
+      1.855333,
+      1.888667,
+      1.922,
+      1.955333,
+      1.988667,
+      2.022,
+      2.055333,
+      2.088667,
+      2.12203,
+      2.155515,
+      2.189315,
+      2.223749,
+      2.259292,
+      2.296425,
+      2.3358,
+      2.377221,
+      2.422391,
+      2.466421,
+      2.507269,
+      2.545992,
+      2.582658,
+      2.617837,
+      2.652048,
+      2.685717,
+      2.719146,
+      2.752495,
+      2.785828
     ]
   },
   "armAnatomy": {
     "method": "hinge-aligned upper arm, forearm pronation +/-85 degrees, wrist swing <=65 degrees",
-    "beforeUpperPlaneErrorDegrees": 50.84576550246165,
+    "beforeUpperPlaneErrorDegrees": 50.83701603013486,
     "afterUpperPlaneErrorDegrees": 1.7302844014466245e-05,
     "extraDepthMeters": 0
   },
-  "chartPose": {
-    "source": "/images/rsl-alphabet/source-chart.jpg",
-    "method": "hand-authored chart pose on calibrated finger joints",
-    "holdTime": 1.8490473392098725,
-    "hand": "Right",
-    "movement": "arc",
-    "review": "experimental-unreviewed"
-  },
-  "handPoseCorrection": "chart-study-v1",
-  "maxPlaybackHingeOffAxis": 0.06779459245586948,
-  "restHingeOffAxis": 0.06779458837757374,
-  "hingeMetricScope": "maxHingeOffAxis measures the authored active-hand pose; maxPlaybackHingeOffAxis includes the unchanged idle/rest hand",
-  "referenceTracking": {
-    "source": "https://github.com/ai-forever/bukva",
-    "poseCoverage": 1,
-    "handCoverage": {
-      "Left": 1,
-      "Right": 0
+  "revision": "9e2b7180de3e",
+  "videoRebuild": {
+    "captureFps": 30,
+    "sourceKind": "Bukva",
+    "tracking": {
+      "hands": {
+        "Left": {
+          "active": true,
+          "activeCoverage": 1.0,
+          "missingActiveSeconds": 0.0
+        },
+        "Right": {
+          "active": false,
+          "activeCoverage": 0.0,
+          "missingActiveSeconds": 0.1333
+        }
+      },
+      "flags": [],
+      "score": 1.0,
+      "scope": "Landmark visibility only; not sign correctness"
     },
-    "maxGapFrames": {
-      "Left": 0,
-      "Right": 21
-    }
+    "linguisticReview": "not-reviewed",
+    "method": "Pretrained landmark tracking, constrained Blender retargeting, saved motion replay"
   }
 }
