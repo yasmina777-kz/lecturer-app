@@ -185,6 +185,9 @@ for path in paths:
   solved_rotations.append({bone.name:bone.rotation_quaternion.copy() for bone in bones})
   solved_locations.append({bone.name:bone.location.copy() for bone in bones})
  times=coordinated_times(solved_rotations)
+ # Preserve the relation to the human recording through every later retime.
+ # Playback must not assume the exported motion and source have equal duration.
+ source_timeline=[[round(output,6),round(clamp(i/30-lead,0,frames[-1]['t']),6)] for i,output in enumerate(times)]
  lead_out_time=times[max(0,len(times)-1-round(tail*30))]
  lead=times[min(len(times)-1,round(lead*30))]
  sc.frame_end=math.ceil(times[-1]*30)+1;count=sc.frame_end
@@ -215,6 +218,7 @@ for path in paths:
  bpy.ops.object.select_all(action='DESELECT');rig.select_set(True)
  bpy.ops.export_scene.gltf(filepath=str(OUT/(entry['id']+'.glb')),export_format='GLB',use_selection=True,export_animations=True,export_animation_mode='ACTIVE_ACTIONS',export_frame_range=True,export_force_sampling=True,export_anim_slide_to_zero=True,export_yup=True)
  info={'id':entry['id'],'label':entry['label'],'url':'/avatars/sign-motion/'+entry['id']+'.glb','duration':round((count-1)/30,3),'source':entry['source'],'reference':entry['video'],'handCoverage':coverage,'maxGapFrames':longest,'poseCoverage':d['poseCoverage'],'maxJointStepDegrees':round(math.degrees(maxstep),3),'review':'experimental-unreviewed','method':'Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, monotone captured palm trajectories, final coordinated elbow IK, workshop hand priors and anatomical-parameter finger curves; no translation training','motionVersion':6,'handMechanics':'workshop-parameter-curves-v1','finalWristErrorMeters':final_wrist_error,'legacyWristDriftMeters':legacy_wrist_drift,'timing':'whole-pose retiming at 240 degrees/second; no independent joint slowdown','peakStep':peak,'leadIn':lead,'leadOut':tail,'maxHingeOffAxis':hinge_error,'meanFingerDirectionErrorDegrees':math.degrees(sum(finger_fit_errors)/max(1,len(finger_fit_errors)))}
+ info['sourceTimeline']=source_timeline
  if entry['id'] in HAND_POSE_CORRECTIONS or entry['id'] in REFERENCE_HAND_SHAPES:
   info['trackedFitErrorBeforeCorrectionDegrees']=info.pop('meanFingerDirectionErrorDegrees');info['handPoseCorrection']='authored-fist-v1' if entry['id'] in HAND_POSE_CORRECTIONS else 'reference-workshop-handshape-v2';info['method']+='; explicit handshape correction from the linked video reference'
  (OUT/(entry['id']+'.json')).write_text(json.dumps(info,ensure_ascii=False,indent=2));manifest.append(info)

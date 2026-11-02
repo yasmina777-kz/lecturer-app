@@ -28,6 +28,7 @@ def authored_finger_angles(entry_id,side,fade):
 # Reviewed against the exact catalog reference frames, not inferred from text.
 # These shapes remain stable through the captured wrist motion.
 REFERENCE_HAND_SHAPES={
+ 'word-f17a6060':{'Right':'flat'}, # Open palm throughout the Slovo greeting reference.
  'word-0cca1e04':{'Left':'point'},
  'word-8c1a7f26':{'Left':'point'},
  'word-ed66b0ff':{'Left':'flat','Right':'straight-point'},

@@ -337,6 +337,10 @@ export function SignDictionaryPage() {
                 )}
               </button>
             </div>
+            <button className="button secondary motion-reference-example" disabled={loading || !!error}
+              onClick={() => { setText("Привет!"); setSubmitted("Привет!"); setSpelling(false); setSelected(null); setRun(v => v + 1); requestAnimationFrame(() => sequenceRef.current?.scrollIntoView({ block: "start", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" })); }}>
+              <Play size={17} />{at("Пример с видео: «Привет!»", "Video-based example: «Привет!»", "Бейне бойынша мысал: «Привет!»")}
+            </button>
             <details className="sign-letter-picker">
               <summary>
                 {at(

@@ -13,7 +13,7 @@ for(const f of cautiousFixtures){const predicted=temporal.recognizeSequence(f.fr
 assert.equal(temporal.recognizeSequence(Array.from({length:16},()=>Array(66).fill(0)),cautious).accepted,false);
 assert.equal(temporal.temporalFeatures([]),null);assert.equal(temporal.temporalFeatures(Array.from({length:16},()=>Array(66).fill(NaN))),null);assert.equal(temporal.recognizeSequence(Array.from({length:16},()=>Array(66).fill(0)),model).accepted,false);
 const {decomposeText,alphabetEntries}=await import(await module('../src/sign/dictionary.ts'));const words=await read('../public/research/rsl/words/catalog.json'),forms=await read('../public/research/rsl/words/forms.json'),entries=[...alphabetEntries(),...words];
-assert.equal(alphabetEntries().length,33);assert.equal(words.length,170);
+assert.equal(alphabetEntries().length,33);assert.equal(words.length,171);
 const parsed=decomposeText('Я хочу читать книгу',entries,forms);assert.deepEqual(parsed.map(p=>p.entry?.label.toLowerCase()),['я','хотеть','читать','книга']);
 const negative=decomposeText('Я не абракадабра!',entries,forms);assert.equal(negative[1].entry.label,'не');assert.equal(negative[2].entry,undefined);assert.equal(negative[2].text,'абракадабра');assert.equal(negative[3].punctuation,true);
 assert.deepEqual(decomposeText('день и ночь',entries,forms).map(p=>p.entry.label),['день и ночь']);

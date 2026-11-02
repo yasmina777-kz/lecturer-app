@@ -1,5 +1,16 @@
 [
   {
+    "id": "word-f17a6060",
+    "label": "Привет!",
+    "category": "Общение",
+    "video": "/research/rsl/words/f17a6060-6ced-4bd1-9886-8578cfbb864f.mp4",
+    "poster": "/research/rsl/words/f17a6060-6ced-4bd1-9886-8578cfbb864f.jpg",
+    "source": "https://github.com/ai-forever/slovo",
+    "dataset": "Slovo",
+    "attachmentId": "f17a6060-6ced-4bd1-9886-8578cfbb864f",
+    "signerId": "db573f94204e56e0cf3fc2ea000e5bdc"
+  },
+  {
     "id": "word-0cca1e04",
     "label": "я",
     "category": "Общение",

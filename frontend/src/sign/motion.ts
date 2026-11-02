@@ -11,6 +11,8 @@ export type MotionAsset = {
   revision?: string;
   duration: number;
   reference?: string;
+  source?: string;
+  sourceTimeline?: [number, number][];
   review: string;
   handCoverage?: Record<string, number>;
   leadIn?: number;
@@ -30,6 +32,19 @@ export type MotionAsset = {
   };
 };
 export type MotionStep = MotionAsset & { text: string };
+/** Interpolate the recorded source clock, including frozen preparation/release. */
+export function referenceTime(points: [number, number][], time: number): number {
+  if (!points.length) return 0;
+  if (time <= points[0][0]) return points[0][1];
+  for (let i = 1; i < points.length; i++) {
+    if (time <= points[i][0]) {
+      const [a, b] = [points[i - 1], points[i]];
+      const t = (time - a[0]) / Math.max(.000001, b[0] - a[0]);
+      return a[1] + (b[1] - a[1]) * t;
+    }
+  }
+  return points[points.length - 1][1];
+}
 export type MotionPlan = {
   steps: MotionStep[];
   missing: string[];

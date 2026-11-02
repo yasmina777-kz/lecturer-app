@@ -144,6 +144,10 @@ for entry in catalog:
  entry['leadIn']=times[min(count-1,round(entry.get('leadIn',.7)*30))];entry['leadOut']=(sc.frame_end-1)/30-times[max(0,count-1-round(entry.get('leadOut',.7)*30))]
  entry['url']='/avatars/sign-motion/'+id+'.glb';entry['maxJointStepDegrees']=measured_peak
  if 'finalWristErrorMeters' in entry:entry['sourceWristFitErrorMeters']=entry.pop('finalWristErrorMeters')
+ if entry.get('sourceTimeline'):
+  def reference_remap(t):
+   f=min(t*30,len(times)-1);i=int(f);return times[i]+(times[min(i+1,len(times)-1)]-times[i])*(f-i)
+  entry['sourceTimeline']=[[round(reference_remap(t),6),source] for t,source in entry['sourceTimeline']]
  source_times=times
  if previous_clearance:
   def remap_time(t):

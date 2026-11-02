@@ -7,14 +7,14 @@
   ],
   "sources": {
     "frontend/src/sign/composeMotion.ts": "c2c1f46bdbe45e387ec80693d3c174c3684cef1966d8b75a03adc1533271c194",
-    "frontend/src/sign/motion.ts": "9248826e2ce817be4313bb0882438a2c0a6200c045bcf883b02888d5f0440378",
+    "frontend/src/sign/motion.ts": "e2941465a8895193b011f8b7da58e30ffec28d4829471166d3bc9375bac9a4b0",
     "frontend/src/sign/avatarPlayback.ts": "338e22e947ba243e83aacd17ee44a3004a795d5931c84e948ba7be84c6fb93d2",
     "frontend/src/sign/phraseExamples.ts": "15ca98106e125703f6274fa0946e41a2d43ae271ef8ecff79c675df4be279fc2",
     "frontend/src/sign/volumeSkinning.ts": "321258d67d4c5324e85c3e2123a9452e73811d3d4a9dea7206be8d89a2647b23",
     "frontend/public/avatars/hand-workshop/mira-rig.glb": "b2c2b3338fd30a24e98dd05031818a29115e3684d8baa0f4995182f26976bcec",
     "art/hand-rig/Mira-Hand-Workshop.blend": "1c0c91c77d552c5875af3f1603f6cc9787366e5a5005dac5c1bdad078372037c",
     "art/sign-motion/arm_anatomy.py": "80a571cbdf1882f5ebd38b8e1ae00132ad6e937e26814454702f8511f9bb6e11",
-    "art/sign-motion/bake_arm_anatomy.py": "1767f63499d1c4b50c913749a6af66d648d3587d40974afc1aa23d04205b2d32",
+    "art/sign-motion/bake_arm_anatomy.py": "13d75b88dd72c4e2414d3f45f30035b9447090f94f93bf022ceb3eee86903724",
     "art/sign-motion/body_clearance.py": "5fb7a8b6435ca1dc5bd179d47eae31026b6a386670608e1176a199411b5dcb46",
     "art/sign-motion/verify_body_clearance.py": "be24a755259b6c2ccbd857887549627b4d10ea3e294929b09909e13874d32485",
     "frontend/scripts/export-phrase-clearance-qa.mjs": "e3f3809fa6078fe8c67d032713a29605c37c783871e2ee6f7c16b5b6b2f6d7be"
@@ -2713,6 +2713,19 @@
           "forearmRollDegrees": 85.00022094034266,
           "wristSwingDegrees": 64.99990504777655
         }
+      },
+      {
+        "id": "word-f17a6060",
+        "sha256": "49c19d2c5b29ac1ba9ae02724cbcb44a4cb6db5d27b4637ade95cffab8cc37d2",
+        "maxOverlapMeters": 0,
+        "samples": 421,
+        "worst": null,
+        "armAnatomy": {
+          "elbowPoleDeviationDegrees": 14.476372502430463,
+          "upperPlaneErrorDegrees": 0.16312222022389733,
+          "forearmRollDegrees": 80.64052058381866,
+          "wristSwingDegrees": 65.00009629307331
+        }
       }
     ],
     "failed": []
@@ -4160,5 +4173,12 @@
       }
     ],
     "failed": []
-  }
+  },
+  "updates": [
+    {
+      "date": "2026-11-02",
+      "clip": "word-f17a6060",
+      "verification": "Independent 60 Hz exported-skin and arm-anatomy check. Existing GLBs unchanged. motion.ts adds source clock lookup/types; bake_arm_anatomy.py adds metadata remapping and optional original rest anchor. Existing composition/playback checks rerun."
+    }
+  ]
 }

@@ -26,7 +26,8 @@ def pose(row):
  bpy.context.view_layer.update()
 # A single relaxed boundary pose makes arbitrary word joins safe: independent
 # clip endpoints may each clear the body while their joint-space blend does not.
-before=set(bpy.data.objects);bpy.ops.import_scene.gltf(filepath=str(INPUT/'ready-idle.glb'));added=set(bpy.data.objects)-before;src=next(o for o in added if o.type=='ARMATURE');rig.animation_data_create();rig.animation_data.action=src.animation_data.action;rig.animation_data.action_slot=src.animation_data.action_slot
+anchor_path=Path(next((x.split('=',1)[1] for x in args if x.startswith('anchor=')),str(INPUT/'ready-idle.glb')))
+before=set(bpy.data.objects);bpy.ops.import_scene.gltf(filepath=str(anchor_path));added=set(bpy.data.objects)-before;src=next(o for o in added if o.type=='ARMATURE');rig.animation_data_create();rig.animation_data.action=src.animation_data.action;rig.animation_data.action_slot=src.animation_data.action_slot
 sc.frame_set(int(rig.animation_data.action.frame_range[0]));anchor={b.name:(b.rotation_quaternion.copy(),b.location.copy()) for b in bones};rig.animation_data_clear()
 for ob in added:bpy.data.objects.remove(ob,do_unlink=True)
 for e in entries:
@@ -102,6 +103,7 @@ for e in entries:
  bpy.ops.export_scene.gltf(filepath=str(OUT/(id+'.glb')),export_format='GLB',use_selection=True,export_def_bones=True,export_animations=True,export_animation_mode='ACTIVE_ACTIONS',export_frame_range=True,export_force_sampling=True,export_anim_slide_to_zero=True)
  def remap(t):
   f=min(t*30,len(times)-1);i=int(f);return times[i]+(times[min(i+1,len(times)-1)]-times[i])*(f-i)
+ if e.get('sourceTimeline'):e['sourceTimeline']=[[round(remap(t),6),source] for t,source in e['sourceTimeline']]
  old_duration=e['duration'];e['duration']=(sc.frame_end-1)/30;e['leadIn']=remap(e['leadIn']);e['leadOut']=e['duration']-remap(old_duration-e['leadOut'])
  e['bodyClearance']['sourceFrameTimes']=[round(remap(t),6) for t in e['bodyClearance']['sourceFrameTimes']];e['bodyClearance']['afterMaxMeters']=worst_body
  e['armAnatomy']={'method':'hinge-aligned upper arm, forearm pronation +/-85 degrees, wrist swing <=65 degrees','beforeUpperPlaneErrorDegrees':max_before,'afterUpperPlaneErrorDegrees':max_after,'extraDepthMeters':max(shifts)};e['motionVersion']=8;e['revision']=hashlib.sha256((OUT/(id+'.glb')).read_bytes()).hexdigest()[:12];e.pop('transitionPose',None)

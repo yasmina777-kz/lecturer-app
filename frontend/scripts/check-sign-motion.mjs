@@ -7,12 +7,12 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 const read=async p=>JSON.parse(await readFile(new URL(p,import.meta.url),'utf8'));
 async function source(p,replacements={}){let code=ts.transpileModule(await readFile(new URL(p,import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2020}}).outputText;for(const [a,b]of Object.entries(replacements))code=code.replaceAll(a,JSON.stringify(b));return 'data:text/javascript;base64,'+Buffer.from(code).toString('base64');}
 const dictionary=await source('../src/sign/dictionary.ts'),text=await source('../src/sign/textPlan.ts');
-const motion=await source('../src/sign/motion.ts',{'"./dictionary"':dictionary,'"./textPlan"':text});const {planMotion,motionTimeline,transitionDuration,TRANSITION_SPEED_DEGREES}=await import(motion);const {alphabetEntries}=await import(dictionary);
+const motion=await source('../src/sign/motion.ts',{'"./dictionary"':dictionary,'"./textPlan"':text});const {planMotion,motionTimeline,transitionDuration,TRANSITION_SPEED_DEGREES,referenceTime}=await import(motion);const {alphabetEntries}=await import(dictionary);
 const {composeMotion}=await import(await source('../src/sign/composeMotion.ts',{'"three"':new URL('../node_modules/three/build/three.module.js',import.meta.url).href,'"./motion"':motion}));
 const assets=await read('../public/avatars/sign-motion/catalog.json'),words=await read('../public/research/rsl/words/catalog.json'),forms=await read('../public/research/rsl/words/forms.json'),entries=[...alphabetEntries(),...words];
 const {phraseGroups}=await import(await source('../src/sign/phraseExamples.ts'));
 const bodyReport=await read('../public/avatars/sign-motion/body-clearance-report.json');
-assert.equal(bodyReport.library.clips.length,207);
+assert.equal(bodyReport.library.clips.length,208);
 assert.equal(bodyReport.phrases.clips.length,32);
 assert.equal(bodyReport.idleTransitions.clips.length,78);
 for(const group of [bodyReport.library,bodyReport.phrases,bodyReport.idleTransitions]){
@@ -46,7 +46,19 @@ for(const group of phraseGroups)for(const phrase of group.phrases){
 
 }
 console.log('Relaxed-boundary transition peak with 250 ms gap:',restTransitionAtFixedGap.toFixed(1),'degrees/s');
-assert.equal(assets.length,206);assert.equal(new Set(assets.map(a=>a.id)).size,206);
+assert.equal(assets.length,207);assert.equal(new Set(assets.map(a=>a.id)).size,207);
+const greeting=planMotion('Привет!',entries,forms,assets);
+assert.deepEqual(greeting.missing,[]);assert.equal(greeting.steps[0].id,'word-f17a6060');
+const captured=greeting.steps[0],mapping=captured.sourceTimeline;
+assert.ok(mapping.length>30);assert.equal(referenceTime(mapping,-1),0);
+assert.ok(Math.abs(referenceTime(mapping,captured.duration+1)-2.0667)<.001);
+for(let i=1;i<mapping.length;i++){
+ assert.ok(mapping[i][0]>mapping[i-1][0]&&mapping[i][1]>=mapping[i-1][1],'source video must never reverse');
+ const middle=(mapping[i][0]+mapping[i-1][0])/2;
+ assert.ok(Math.abs(referenceTime(mapping,middle)-(mapping[i][1]+mapping[i-1][1])/2)<1e-5);
+}
+assert.ok(mapping.at(-1)[0]<=captured.duration+.04);
+console.log('Captured greeting: text lookup, source-video clock, retimed interpolation and held endpoints passed.');
 let plan=planMotion('Я хочу читать книгу',entries,forms,assets);assert.deepEqual(plan.steps.map(s=>s.label),['я','хотеть','читать','книга']);assert.deepEqual(plan.missing,[]);
 const timeline=motionTimeline(plan.steps);assert.equal(timeline.length,4);assert.ok(timeline.every(s=>s.trimStart===0&&s.trimEnd===0),'phrase must preserve coordinated lead-in/out');assert.ok(timeline.every((s,i)=>i===0||s.start>timeline[i-1].end));
 plan=planMotion('Здравствуйте! Как тебя зовут? Спасибо.',entries,forms,assets);assert.equal(plan.steps.length,3);assert.deepEqual(plan.missing,[]);assert.ok(plan.steps.every(s=>s.url.startsWith('/avatars/sign-motion/') && s.revision),'prepared phrases must use rebuilt versioned clips');
@@ -200,7 +212,7 @@ for(const a of assets) {
    assert.ok(2*Math.acos(Math.min(1,dot))<.005,a.label+' non-neutral finger boundary '+bone);
   }
 }
-console.log('32 phrases: source-pose samples preserved:',verifiedPhraseFrames,'; all 206 clips join relaxed fingers.');
+console.log('32 phrases: source-pose samples preserved:',verifiedPhraseFrames,'; all 207 clips join relaxed fingers.');
 
 assert.throws(()=>composeMotion([ordered[0]],undefined,[{start:ordered[0].duration,end:0}]),/Invalid motion window/);
 for(const asset of assets){
@@ -218,4 +230,4 @@ for(const asset of assets){
   assert.equal(asset.chartPose.source,'/images/rsl-alphabet/source-chart.jpg');
  }
 }
-console.log('206 animation assets: skeleton compatibility, finite transforms, timelines, full phrase matching, morphology, unknown/negation preservation and alphabet selection passed.');
+console.log('207 animation assets: skeleton compatibility, finite transforms, timelines, full phrase matching, morphology, unknown/negation preservation and alphabet selection passed.');

@@ -1,7 +1,7 @@
 {
-  "total": 206,
+  "total": 207,
   "letters": 33,
-  "words": 170,
+  "words": 171,
   "preparedPhrases": 3,
   "missing": [],
   "review": "experimental-unreviewed",
@@ -13,7 +13,7 @@
     "Front-surface clearance checks do not certify arm-arm contacts or linguistic correctness.",
     "Text sequences retain Russian source order; no grammatical translation."
   ],
-  "source": "32 chart-authored alphabet poses, 171 Bukva/Slovo reference adaptations and 3 project-authored phrases; Blender anatomical hand rebake",
+  "source": "32 chart-authored alphabet poses, 172 Bukva/Slovo reference adaptations and 3 project-authored phrases; Blender anatomical hand rebake",
   "qualityGate": {
     "minPoseCoverage": 0.85,
     "minDominantHandCoverage": 0.65,
@@ -28,8 +28,8 @@
   "observed": {
     "maxHingeOffAxis": 2.9802322387695312e-08,
     "maxJointStepDegrees": 7.917873743448832,
-    "v8Clips": 206,
-    "maxSourceWristFitErrorMeters": 0.00023539843194510276,
+    "v8Clips": 207,
+    "maxSourceWristFitErrorMeters": 0.00027842892142870954,
     "maxBodyOverlapAfterMeters": 0,
     "maxBodyOverlapBeforeMeters": 0.1918952502310276,
     "maxLegacyWristDriftMeters": 0.29551429508994154

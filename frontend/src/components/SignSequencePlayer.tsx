@@ -4,6 +4,7 @@ import { at } from "../i18n/automation";
 import { motionTimeline, type MotionPlan } from "../sign/motion";
 import type { GestureAngle } from "./GestureMentor3D";
 import { AlphabetCardArt } from "./AlphabetCardArt";
+import { MotionReferenceComparison } from "./MotionReferenceComparison";
 import { alphabetIllustration } from "../sign/alphabetIllustrations";
 import "../pages/gesture-preview.css";
 import "../pages/sign-trainer.css";
@@ -153,6 +154,7 @@ export function SignSequencePlayer({
       {(!blocked || naturalIdle) && (
         <>
           <div className="sign-avatar-player gesture-page">
+            <div className={current?.sourceTimeline && current.reference ? "motion-comparison-layout" : undefined}>
             <div ref={stage} className="sign-avatar-stage sign-sequence-stage">
               <Suspense
                 fallback={
@@ -205,6 +207,10 @@ export function SignSequencePlayer({
                   ? at("Весь аватар", "Full avatar", "Толық аватар")
                   : at("Приблизить руки", "Zoom hands", "Қолды үлкейту")}
               </button>
+            </div>
+            {!blocked && current?.sourceTimeline && current.reference && (
+              <MotionReferenceComparison motion={current} time={Math.max(0, time - current.start)} />
+            )}
             </div>
             {blocked && (
               <p className="sign-sequence-note" role="status">

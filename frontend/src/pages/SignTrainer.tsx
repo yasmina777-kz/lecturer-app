@@ -133,16 +133,16 @@ export function SignCourseCatalog() {
         to="/text-to-sign?tab=dictionary"
       >
         {at(
-          "Открыть словарь · 170 слов",
-          "Open dictionary · 170 words",
-          "Сөздікті ашу · 170 сөз",
+          "Открыть словарь · 171 слово",
+          "Open dictionary · 171 words",
+          "Сөздікті ашу · 171 сөз",
         )}
       </Link>
       <p className="sign-catalog-note">
         {at(
-          "Все 33 буквы и 170 слов имеют пробные движения аватара и видео для сравнения. Откройте словарь, чтобы посмотреть слова и собрать последовательность.",
-          "All 33 letters and 170 words have experimental avatar motion and reference videos. Open the dictionary to view words and build sequences.",
-          "33 әріп пен 170 сөздің сынақ аватар қимылдары және бейнеүлгілері бар. Сөздер мен тізбектерді сөздіктен көріңіз.",
+          "Все 33 буквы и 171 слово имеют пробные движения аватара и видео для сравнения. Откройте словарь, чтобы посмотреть слова и собрать последовательность.",
+          "All 33 letters and 171 words have experimental avatar motion and reference videos. Open the dictionary to view words and build sequences.",
+          "33 әріп пен 171 сөздің сынақ аватар қимылдары және бейнеүлгілері бар. Сөздер мен тізбектерді сөздіктен көріңіз.",
         )}
       </p>
       <div className="sign-shortcuts">
@@ -616,9 +616,9 @@ function AnimatedExercisePlayer({
             to="/text-to-sign?tab=dictionary"
           >
             {at(
-              "Открыть словарь · 170 слов",
-              "Open dictionary · 170 words",
-              "Сөздікті ашу · 170 сөз",
+              "Открыть словарь · 171 слово",
+              "Open dictionary · 171 words",
+              "Сөздікті ашу · 171 сөз",
             )}
           </Link>
           <p className="sign-catalog-note">

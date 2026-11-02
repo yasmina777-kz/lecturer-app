@@ -164,6 +164,37 @@ For batched verification, pass all library reports after `--library`.
 `test:sign-motion` rejects a missing/stale validation report using the hashes of
 all 207 GLBs, the model, and the runtime composition/playback sources.
 
+### Video-reference pilot: «Привет!» (2026-11-02)
+
+`word-f17a6060` uses Slovo training recording
+`f17a6060-6ced-4bd1-9886-8578cfbb864f` (63 frames, 30 fps).
+The exact recording, signer ID and attribution are in the word catalog. Its
+open right-hand shape is manually constrained against the recording because
+motion blur causes missed hand detections; wrist/body paths come from tracking.
+This is motion retargeting, not new AI training or a certified RSL translation.
+
+```sh
+ml/rsl/.venv/bin/python ml/rsl/build_reference_motion.py word-f17a6060
+# Review the exported motion against its recording before publishing:
+ml/rsl/.venv/bin/python ml/rsl/publish_motion_catalog.py
+/Applications/Blender.app/Contents/MacOS/Blender -b --python-exit-code 1 --python art/sign-motion/export_workshop.py -- word-f17a6060 /tmp/Avatar-Privet-Motion.blend
+```
+
+The one-reference command checks the final GLB at 60 Hz. It does not silently
+publish or refresh the library validation report. Merge that new check into the
+existing report only when unchanged clips still match their recorded hashes.
+`retarget-rest-anchor.glb` preserves the original pre-v8 neutral pose from the
+project's Mixamo Standing Idle adaptation (same attribution as
+`frontend/public/avatars/mixamo-trial/ATTRIBUTION.txt`). Reusing the already
+corrected v8 idle as input would apply the arm solver twice and change endpoints.
+
+`sourceTimeline` maps final animation time to original video time through both
+Blender retiming passes. The «Видео → аватар» panel uses this mapping and the
+same pause/seek controls. Preparation/release freeze the source's boundary
+frames. Other clips do not claim synchronized comparison until rebuilt with
+this mapping. The pilot's release is still slower than the human recording;
+face/mouth motion and semantic correctness have not been validated.
+
 ### Arm anatomy v8 (current)
 
 v7 prevented front-surface intersections but preserved the captured forearm
