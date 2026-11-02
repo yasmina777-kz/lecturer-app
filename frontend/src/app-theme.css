@@ -106,3 +106,16 @@
   background: #fbf7efee;
   border-color: #e4d8c5;
 }
+
+/* Shared shell: keep sections connected without frame-like dividers. */
+:root .app-shell .sidebar {
+  border-right: 0;
+}
+:root .app-shell .topbar {
+  border-bottom: 0;
+  box-shadow: none;
+}
+:root .app-shell .sidebar-bottom,
+:root .app-shell .user-row {
+  border-top: 0;
+}

@@ -2,21 +2,18 @@ import { lazy, Suspense } from "react";
 const AutomationPanel = lazy(() => import("../components/AutomationPanel").then(m => ({default:m.AutomationPanel})));
 import { at } from "../i18n/automation";
 import { useNavigate } from "react-router-dom";
+import { AdminAudience } from "../components/AdminAudience";
 import { AiUsagePanel } from "../components/AiUsagePanel";
 import { t, getLanguage } from "../i18n";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  Activity,
   ArrowUpRight,
-  BookOpen,
-  Check,
   Eye,
   EyeOff,
   Search,
   ShieldCheck,
   Trash2,
-  Users,
 } from "lucide-react";
 import { apiGet, patch, request } from "../api/httpClient";
 import { useAuth } from "../context/AuthContext";
@@ -57,12 +54,16 @@ export function AdminPage() {
   const [search, setSearch] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const [updatedAt, setUpdatedAt] = useState(new Date());
   const [confirm, setConfirm] = useState<{
     title: string;
     detail: string;
     run: () => Promise<void>;
   } | null>(null);
   async function load() {
+    setRefreshing(true);
+    setError("");
     try {
       const [o, u, l] = await Promise.all([
         apiGet<Overview>("/admin/overview"),
@@ -72,8 +73,11 @@ export function AdminPage() {
       setOverview(o);
       setUsers(u);
       setLectures(l);
+      setUpdatedAt(new Date());
     } catch (e) {
       setError(messageOf(e));
+    } finally {
+      setRefreshing(false);
     }
   }
   useEffect(() => {
@@ -102,7 +106,7 @@ export function AdminPage() {
         <div>
           <span className="eyebrow">{t("УПРАВЛЕНИЕ ПЛАТФОРМОЙ")}</span>
           <h1>{t("Админ-панель")}</h1>
-          <p>{t("Пользователи, учебные материалы и состояние сервисов.")}</p>
+          <p>{t("Пользователи, регистрации и состояние платформы.")}</p>
         </div>
         <span className="tag">
           <ShieldCheck size={15} />
@@ -145,46 +149,7 @@ export function AdminPage() {
           {tab === "automation" && <Suspense fallback={<Loading/>}><AutomationPanel /></Suspense>}
           {tab === "overview" && (
             <>
-              <div className="admin-stats">
-                {[
-                  [overview.users, t("Пользователей"), Users],
-                  [overview.lectures, t("Лекций"), BookOpen],
-                  [overview.questions, t("Вопросов AI"), Activity],
-                  [overview.completed, t("Завершений"), Check],
-                ].map(([n, label, Icon]: any) => (
-                  <div className="panel" key={label}>
-                    <Icon size={21} />
-                    <strong>{n}</strong>
-                    <span>{label}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="panel">
-                <h2>{t("Последние вопросы")}</h2>
-                <p className="muted">
-                  {t("Помогают понять, какие темы нуждаются в пояснении.")}
-                </p>
-                {overview.recentQuestions.length ? (
-                  overview.recentQuestions.map((q) => (
-                    <div className="activity-row" key={q.id}>
-                      <span className="status-dot" />
-                      <div>
-                        <strong>{q.questionText}</strong>
-                        <p>{q.lectureTitle}</p>
-                      </div>
-                      <small>
-                        {new Date(q.createdAt).toLocaleDateString(
-                          getLanguage(),
-                        )}
-                      </small>
-                    </div>
-                  ))
-                ) : (
-                  <p className="empty-inline">
-                    {t("Студенты ещё не задавали вопросов.")}
-                  </p>
-                )}
-              </div>
+              <AdminAudience users={users} updatedAt={updatedAt} refreshing={refreshing} onRefresh={load} />
             </>
           )}
           {tab === "users" && (

@@ -678,3 +678,33 @@
     transform: none !important;
   }
 }
+
+.sign-live-feedback {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  margin-block: 16px;
+  border-radius: 16px;
+  background: var(--sw-soft);
+}
+.sign-live-feedback strong {
+  font-size: 14px;
+}
+.sign-live-feedback progress {
+  width: 100%;
+  height: 6px;
+  accent-color: #74bda2;
+}
+.sign-live-feedback small {
+  color: var(--sw-muted);
+}
+.sign-workspace .caption-auto-control label {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+.sign-workspace .caption-auto-control input {
+  width: 18px;
+  height: 18px;
+}

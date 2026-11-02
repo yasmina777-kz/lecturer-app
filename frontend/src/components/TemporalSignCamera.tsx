@@ -12,7 +12,11 @@ import {
   type TemporalFrame,
 } from "../sign/temporal";
 import { at } from "../i18n/automation";
-import { releaseGate } from "../sign/captions";
+import {
+  LiveLetterStream,
+  trackingQuality,
+  type TrackingQuality,
+} from "../sign/liveRecognition";
 import { drawHandOverlay } from "../sign/handOverlay";
 export type SignPrediction = ReturnType<typeof recognizeSequence>;
 type CameraProps = {
@@ -82,9 +86,10 @@ function TemporalCameraSession({
   cautious,
   onPrediction,
 }: CameraProps & { cautious: boolean }) {
-  const [automatic, setAutomatic] = useState(false);
-  const autoReady = useRef(true);
-  const emptyFrames = useRef(0);
+  const [automatic, setAutomatic] = useState(true);
+  const live = useRef(new LiveLetterStream());
+  const [quality, setQuality] = useState<TrackingQuality>("missing");
+  const [liveProgress, setLiveProgress] = useState(0);
   const capturing = useRef(false);
   function publish(prediction: SignPrediction) {
     setResult(prediction);
@@ -157,9 +162,9 @@ function TemporalCameraSession({
       video.current.srcObject = null;
     }
     setActive(false);
-    setAutomatic(false);
-    autoReady.current = true;
-    emptyFrames.current = 0;
+    live.current.reset();
+    setLiveProgress(0);
+    setQuality("missing");
     capturing.current = false;
     setFilePreview(false);
     setHandCount(null);
@@ -239,23 +244,26 @@ function TemporalCameraSession({
         source &&
         source.readyState >= 2 &&
         source.currentTime !== lastTime &&
-        now - lastRun >= 120
+        now - lastRun >= 66
       ) {
         try {
           lastTime = source.currentTime;
           lastRun = now;
           const detected = detector.current!.detect(source);
           paint(source, detected);
-          if (!detected.landmarks.length) {
-            const gate = releaseGate(emptyFrames.current, false);
-            emptyFrames.current = gate.emptyFrames;
-            if (gate.released) autoReady.current = true;
-          } else {
-            emptyFrames.current = 0;
-            if (automatic && autoReady.current && !capturing.current) {
-              autoReady.current = false;
-              void record();
-              return;
+          const nextQuality = trackingQuality(detected);
+          setQuality(nextQuality);
+          if (automatic) {
+            const frames = live.current.sample(
+              temporalFrame(detected),
+              now,
+              nextQuality,
+            );
+            setLiveProgress(live.current.progress);
+            if (frames) {
+              const prediction = recognizeSequence(frames, model.current!);
+              if (live.current.confirm(prediction)) publish(prediction);
+              else if (!prediction?.accepted) setResult(prediction);
             }
           }
         } catch (e) {
@@ -336,7 +344,12 @@ function TemporalCameraSession({
       if (!navigator.mediaDevices?.getUserMedia)
         throw Error("camera unavailable");
       const media = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: "user", width: 640, height: 480 },
+        video: {
+          facingMode: "user",
+          width: { ideal: 1280 },
+          height: { ideal: 720 },
+          frameRate: { ideal: 30 },
+        },
         audio: false,
       });
       if (!alive.current || token !== generation.current) {
@@ -355,7 +368,10 @@ function TemporalCameraSession({
       video.current!.removeAttribute("src");
       video.current!.srcObject = media;
       await video.current!.play();
-      if (alive.current && token === generation.current) setActive(true);
+      if (alive.current && token === generation.current) {
+        setAutomatic(true);
+        setActive(true);
+      }
     } catch (e) {
       if (alive.current && token === generation.current) {
         stop();
@@ -368,8 +384,7 @@ function TemporalCameraSession({
   async function record() {
     if (capturing.current) return;
     capturing.current = true;
-    autoReady.current = false;
-    emptyFrames.current = 0;
+    live.current.reset();
     const token = generation.current;
     setBusy(true);
     setResult(null);
@@ -535,17 +550,13 @@ function TemporalCameraSession({
               <span>2</span>
               <div>
                 <strong>
-                  {at(
-                    "Запишите букву · 3 секунды",
-                    "Record the sign · 3 seconds",
-                    "Ымды жазыңыз · 3 секунд",
-                  )}
+                  {at("Покажите букву", "Show a letter", "Әріпті көрсетіңіз")}
                 </strong>
                 <p>
                   {at(
-                    "Нажмите «Распознать букву» и покажите одну букву.",
-                    "Press Recognize letter and show one letter.",
-                    "«Қимылды жазу» түймесін басып, бір әріпті көрсетіңіз.",
+                    "Распознавание начнётся само. Показывайте одну букву около 3 секунд.",
+                    "Recognition starts automatically. Show one letter for about 3 seconds.",
+                    "Тану автоматты басталады. Бір әріпті шамамен 3 секунд көрсетіңіз.",
                   )}
                 </p>
               </div>
@@ -604,7 +615,52 @@ function TemporalCameraSession({
             ` · ${at("Кадр из видео", "Video frame", "Бейнеден кадр")}`}
         </p>
       )}
-      {!expected && active && (
+      {active && automatic && (
+        <div className="sign-live-feedback" role="status">
+          <strong>
+            {quality === "missing"
+              ? at(
+                  "Покажите руку — распознавание уже включено",
+                  "Show your hand — recognition is running",
+                  "Қолыңызды көрсетіңіз — тану қосулы",
+                )
+              : quality === "clipped"
+                ? at(
+                    "Отведите руку от края кадра",
+                    "Move your hand away from the edge",
+                    "Қолыңызды кадр шетінен алыстатыңыз",
+                  )
+                : quality === "distant"
+                  ? at(
+                      "Поднесите руку немного ближе",
+                      "Bring your hand a little closer",
+                      "Қолыңызды сәл жақындатыңыз",
+                    )
+                  : at(
+                      "Читаем движение автоматически…",
+                      "Reading movement automatically…",
+                      "Қимыл автоматты оқылуда…",
+                    )}
+          </strong>
+          <progress
+            max={100}
+            value={liveProgress}
+            aria-label={at(
+              "Сбор движения",
+              "Movement capture",
+              "Қимылды жинау",
+            )}
+          />
+          <small>
+            {at(
+              "21 точка на каждой кисти · ответ после двух согласующихся проверок",
+              "21 landmarks per hand · response after two agreeing checks",
+              "Әр қолда 21 нүкте · екі сәйкес тексеруден кейін жауап",
+            )}
+          </small>
+        </div>
+      )}
+      {active && (
         <div className="caption-auto-control">
           <label>
             <input
@@ -613,21 +669,21 @@ function TemporalCameraSession({
               disabled={busy}
               onChange={(e) => {
                 setAutomatic(e.target.checked);
-                autoReady.current = true;
-                emptyFrames.current = 0;
+                live.current.reset();
+                setLiveProgress(0);
               }}
             />
             {at(
-              "Распознавать по очереди",
-              "Recognize in sequence",
-              "Кезекпен тану",
+              "Автоматическое распознавание",
+              "Automatic recognition",
+              "Автоматты тану",
             )}
           </label>
           <p>
             {at(
-              "Одна буква → уберите руку из кадра на секунду → следующая буква. Слова жестами пока не поддерживаются.",
-              "One letter → remove your hand for a second → next letter. Word signs are not supported yet.",
-              "Бір әріп → қолды бір секундқа кадрдан алыңыз → келесі әріп. Сөз ымдары әзірге қолдау таппайды.",
+              "Покажите букву и дождитесь ответа — затем следующую. Для двух одинаковых букв подряд опустите руку из кадра на секунду. Слова жестами пока не поддерживаются.",
+              "Show a letter and wait for the result, then show the next. To repeat the same letter, lower your hand out of frame for a second. Word signs are not supported yet.",
+              "Әріпті көрсетіп, жауапты күтіңіз, содан кейін келесісін көрсетіңіз. Бірдей әріпті қайталау үшін қолды бір секундқа кадрдан алыңыз. Сөз ымдары әзірге танылмайды.",
             )}
           </p>
         </div>
@@ -643,7 +699,7 @@ function TemporalCameraSession({
             {at("Включить камеру", "Start camera", "Камераны қосу")}
           </button>
         )}
-        {active && (
+        {active && !automatic && (
           <button className="button primary" disabled={busy} onClick={record}>
             {at(
               "Распознать букву · 3 с",

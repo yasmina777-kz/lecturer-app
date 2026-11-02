@@ -128,7 +128,10 @@ export function SignCourseCatalog() {
             ))}
         </div>
       )}
-      <Link className="button primary" to="/text-to-sign?tab=dictionary">
+      <Link
+        className="button primary sign-catalog-dictionary"
+        to="/text-to-sign?tab=dictionary"
+      >
         {at(
           "Открыть словарь · 170 слов",
           "Open dictionary · 170 words",
@@ -608,7 +611,10 @@ function AnimatedExercisePlayer({
               </p>
             </li>
           </ol>
-          <Link className="button primary" to="/text-to-sign?tab=dictionary">
+          <Link
+            className="button primary sign-catalog-dictionary"
+            to="/text-to-sign?tab=dictionary"
+          >
             {at(
               "Открыть словарь · 170 слов",
               "Open dictionary · 170 words",

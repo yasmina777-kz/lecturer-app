@@ -123,3 +123,15 @@ to the panel. Space/delete controls were checked. Live webcam/automatic capture
 was not exercised with a human signer, so no accuracy or live-stream reliability
 claim is made. All four sets of eight covers were visually inspected in-app;
 dark desktop and cream 390px mobile layouts checked without horizontal overflow.
+
+
+## 2026-11-02 — continuous recognition and audience dashboard
+
+- Camera start enables continuous recognition by default in the shared camera component, including practice. The manual capture button appears only after automatic mode is turned off.
+- Live tracking is capped at about 15 updates/second. Requests a 1280×720 camera stream with ideal (not mandatory) constraints. Existing 21 landmarks per hand are retained; no fake additional sensors and no claim of face/phrase recognition.
+- Live classifier uses rolling 16-frame windows sampled no faster than 150 ms and checked every four new samples. Two agreeing accepted windows are required before appending a letter. Holding a letter does not duplicate it; changing letters can proceed without withdrawing the hand. A visible absence of at least 600 ms permits deliberate repeated letters. This is a stability filter, not measured accuracy improvement.
+- Clipped/distant hands and stalled frames clear incomplete windows. Existing classifier preprocessing, learned weights and thresholds remain unchanged.
+- `test:live-recognition`, `test:admin-analytics`, `test:sign-captions`, `test:sign-expansion`, TypeScript and production build passed. Build retained the existing large bundle warning.
+- Browser: camera start produced the truthful no-camera error in this environment. Live-person streaming accuracy and speed are not validated. Uploading the public control clip `research/rsl/alphabet/0411.mp4` produced Б and appended it to captions.
+- Admin overview now shows real account totals, enabled/disabled access counts, daily registrations over 7/30/90 days, role distribution, and latest registrations. It does not fabricate visits or online presence. Current local database has two accounts, both registered in September.
+- Verified 90-day filter, dark desktop and cream 390px layout without horizontal overflow. Header/sidebar divider widths are 0. Added 28px above the catalogue dictionary button and visually checked the gap.
