@@ -128,7 +128,7 @@ export function SignDialoguesPage() {
   if (error) return <CatalogError message={error} retry={retry} />;
   if (!data) return <Loading />;
   return (
-    <div className="sign-workspace activity-workspace">
+    <div className="sign-workspace activity-workspace dialogues-workspace">
       {selected ? (
         <DialogueSession
           key={selected.id}
@@ -758,7 +758,9 @@ export function SignUnderstandingPage() {
     if (items.length) setSession({ id: crypto.randomUUID(), items });
   }
   return (
-    <div className="sign-workspace activity-workspace">
+    <div
+      className={`sign-workspace activity-workspace understanding-workspace ${!session ? "understanding-overview" : ""}`}
+    >
       {session ? (
         <UnderstandingSession
           key={session.id}

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="340" viewBox="0 0 900 340" fill="none">
+  <defs>
+    <linearGradient id="ribbon" x1="220" y1="40" x2="760" y2="310" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#C7D9FF" stop-opacity=".55"/>
+      <stop offset=".58" stop-color="#78A7FF" stop-opacity=".88"/>
+      <stop offset="1" stop-color="#BDD4FF" stop-opacity=".28"/>
+    </linearGradient>
+    <linearGradient id="fold" x1="720" y1="45" x2="850" y2="300" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E8EFFF" stop-opacity=".12"/>
+      <stop offset="1" stop-color="#B2CDFF" stop-opacity=".8"/>
+    </linearGradient>
+    <linearGradient id="sweep" x1="70" y1="180" x2="700" y2="330" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#DCE7FF" stop-opacity=".25"/>
+      <stop offset="1" stop-color="#AAC9FF" stop-opacity=".8"/>
+    </linearGradient>
+  </defs>
+  <path d="M230 328V118C230 47 278 13 346 32L786 159 650 340Z" fill="url(#ribbon)"/>
+  <path d="M30 327C5 234 71 172 154 174C262 174 344 216 455 239C586 267 708 213 880 244L900 340H30Z" fill="url(#sweep)"/>
+  <path d="M578 340 752 111C790 60 826 47 858 60C887 74 894 113 900 150V340Z" fill="url(#fold)"/>
+</svg>

@@ -1,7 +1,7 @@
 import { t } from "../i18n";
 import { at } from "../i18n/automation";
 import { useState, type FormEvent } from "react";
-import { Check, Save } from "lucide-react";
+import { Check, Save, UserRound, Settings2 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { patch } from "../api/httpClient";
 import type { User } from "../types/auth";
@@ -36,13 +36,24 @@ export function SettingsPage() {
     }
   }
   return (
-    <>
+    <div className="profile-settings-page">
       <div className="page-heading">
         <div>
           <span className="eyebrow">{t("ПУСТЬ ВСЁ БУДЕТ ПО-ВАШЕМУ")}</span>
           <h1>{t("Настройки")}</h1>
-          <p>{at("Ваш профиль. Скорость жестов можно менять в плеере занятия.", "Your profile. Adjust signing speed in the lesson viewer.", "Сіздің профиліңіз. Ым қарқынын сабақ ойнатқышында өзгертуге болады.")}</p>
+          <p>
+            {at(
+              "Ваш профиль. Скорость жестов можно менять в плеере занятия.",
+              "Your profile. Adjust signing speed in the lesson viewer.",
+              "Сіздің профиліңіз. Ым қарқынын сабақ ойнатқышында өзгертуге болады.",
+            )}
+          </p>
         </div>
+        <Settings2
+          className="profile-heading-art"
+          size={88}
+          aria-hidden="true"
+        />
       </div>
       <ErrorMessage message={error} />
       {success && (
@@ -53,7 +64,12 @@ export function SettingsPage() {
       )}
       <div className="settings-layout settings-simple">
         <form className="panel" onSubmit={profile}>
-          <h2>{t("Личный профиль")}</h2>
+          <div className="profile-panel-heading">
+            <span className="profile-panel-icon" aria-hidden="true">
+              <UserRound size={25} />
+            </span>
+            <h2>{t("Личный профиль")}</h2>
+          </div>
           <label>
             {t("Имя")}
             <input
@@ -72,7 +88,13 @@ export function SettingsPage() {
           <label>
             {t("Роль")}
             <input
-              value={t(user!.role === "Admin" ? "Администратор" : user!.role === "Lecturer" ? "Преподаватель" : "Студент")}
+              value={t(
+                user!.role === "Admin"
+                  ? "Администратор"
+                  : user!.role === "Lecturer"
+                    ? "Преподаватель"
+                    : "Студент",
+              )}
               readOnly
               aria-describedby="profile-role-hint"
             />
@@ -86,6 +108,6 @@ export function SettingsPage() {
           </button>
         </form>
       </div>
-    </>
+    </div>
   );
 }

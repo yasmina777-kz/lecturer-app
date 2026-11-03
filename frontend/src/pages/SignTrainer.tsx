@@ -1,3 +1,4 @@
+import { LearningHome } from "./LearningHome";
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams, useLocation } from "react-router-dom";
 import {
@@ -38,6 +39,7 @@ export function SignCourseCatalog() {
   const stage = courseLevels().find(
     (l) => l.id === Number(params.get("stage")),
   );
+  if (!stage) return <LearningHome />;
   return (
     <div className="sign-workspace sign-course-workspace">
       {stage && (
@@ -232,7 +234,7 @@ export function SignTrainingRoom() {
   const exercise =
     options.find((e) => e.id === params.get("exercise")) || options[0];
   return (
-    <div className="sign-workspace">
+    <div className="sign-workspace practice-workspace">
       <div className="page-heading">
         <div>
           <h1>

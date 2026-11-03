@@ -1,0 +1,3055 @@
+/* Scoped to the learning overview. Other routes and the public landing retain their styles. */
+:root .product-ui[data-product-ui][data-product-theme] {
+  --p-bg: #f8f8fa;
+  --p-surface: #fff;
+  --p-subtle: #f0f1f5;
+  --p-text: #14171f;
+  --p-muted: #667085;
+  --p-line: #e5e7ee;
+  --p-blue: #2e6bff;
+  --p-blue-soft: #eaf0ff;
+  --p-primary: #1b1d23;
+  --p-on-primary: #fff;
+  --dark: var(--p-text);
+  --muted: var(--p-muted);
+  --line: var(--p-line);
+  --accent: var(--p-blue);
+  --cream: var(--p-subtle);
+  --sw-ink: var(--p-text);
+  --sw-muted: var(--p-muted);
+  --sw-soft: var(--p-subtle);
+  --sw-border: var(--p-line);
+  color-scheme: light;
+  background: var(--p-bg);
+  color: var(--p-text);
+  font-family:
+    "Manrope",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  font-size: 14px;
+  min-height: 100vh;
+
+  &[data-product-theme="dark"] {
+    --p-bg: #000;
+    --p-surface: #1c1c1e;
+    --p-subtle: #2c2c2e;
+    --p-text: #f5f5f7;
+    --p-muted: #a1a1a6;
+    --p-line: #38383a;
+    --p-blue: #0a84ff;
+    --p-blue-soft: #102a43;
+    --p-primary: #f5f5f7;
+    --p-on-primary: #1d1d1f;
+    color-scheme: dark;
+  }
+
+  & .sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    width: 220px;
+    padding: 26px 16px 18px;
+    background: var(--p-bg);
+    color: var(--p-text);
+    border-right: 1px solid var(--p-line);
+    box-shadow: none;
+  }
+  & .brand-link {
+    display: block;
+    padding: 0 12px;
+    margin: 0 0 42px;
+  }
+  & .brand {
+    font-size: 21px;
+    font-weight: 750;
+    letter-spacing: -0.06em;
+    gap: 9px;
+    color: var(--p-text);
+  }
+  & .brand-mark {
+    width: 33px;
+    height: 35px;
+    border-radius: 9px;
+    background: var(--p-blue);
+    color: #fff;
+    border: 0;
+    box-shadow: none;
+    transform: rotate(-8deg);
+  }
+  & .brand-mark i {
+    display: none;
+  }
+  & .sidebar nav {
+    padding: 0;
+    display: grid;
+    gap: 5px;
+  }
+  & .sidebar nav a,
+  & .sidebar-bottom > a {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-height: 45px;
+    padding: 11px 13px;
+    border-radius: 13px;
+    color: var(--p-muted);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    position: relative;
+    transition:
+      background 180ms,
+      color 180ms;
+  }
+  & .sidebar nav a:hover,
+  & .sidebar-bottom > a:hover {
+    background: var(--p-subtle);
+    color: var(--p-text);
+  }
+  & .sidebar nav a.active,
+  & .sidebar-bottom > a.active {
+    color: var(--p-text);
+    background: var(--p-blue-soft);
+  }
+  & .sidebar nav a.active::after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--p-blue);
+    margin-left: auto;
+    position: static;
+  }
+  & .sidebar nav a.active svg {
+    color: var(--p-blue);
+  }
+  & .sidebar-bottom {
+    margin-top: auto;
+    padding: 20px 0 0;
+    border: 0;
+  }
+  & .sidebar-bottom > a {
+    font-size: 12px;
+  }
+  & .user-row {
+    margin: 18px 0 0;
+    padding: 16px 5px 0;
+    border-top: 1px solid var(--p-line);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  & .user-row > div {
+    min-width: 0;
+    flex: 1;
+  }
+  & .user-row strong {
+    font-size: 12px;
+    color: var(--p-text);
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  & .user-row small {
+    color: var(--p-muted);
+    font-size: 11px;
+  }
+  & .user-avatar {
+    background: var(--p-primary);
+    color: var(--p-on-primary);
+    width: 31px;
+    height: 31px;
+    min-width: 31px;
+    border-radius: 50%;
+    font-size: 13px;
+    border: 0;
+  }
+  & .app-main {
+    background: var(--p-bg);
+    color: var(--p-text);
+    margin-left: 220px;
+    width: calc(100% - 220px);
+    min-height: 100vh;
+  }
+  & .topbar {
+    height: 72px;
+    padding: 0 32px;
+    background: var(--p-bg);
+    border: 0;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  & .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  & .topbar .button {
+    min-height: 36px;
+    padding: 8px 13px;
+    font-size: 12px;
+    background: var(--p-surface);
+    color: var(--p-text);
+    border: 1px solid var(--p-line);
+    border-radius: 20px;
+  }
+  & .theme-switcher {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-radius: 50%;
+    background: var(--p-surface);
+    border: 1px solid var(--p-line);
+    color: var(--p-text);
+    box-shadow: none;
+  }
+  & .language-segments {
+    display: flex;
+    background: var(--p-subtle);
+    border: 0;
+    border-radius: 30px;
+    box-shadow: none;
+    padding: 4px;
+    gap: 2px;
+  }
+  & .language-segments button {
+    color: var(--p-muted);
+    width: 32px;
+    min-width: 32px;
+    height: 28px;
+    padding: 0;
+    font-size: 10px;
+    background: none;
+    border: 0;
+    border-radius: 30px;
+    box-shadow: none;
+  }
+  & .language-segments button[aria-pressed="true"] {
+    background: var(--p-surface);
+    color: var(--p-text);
+    box-shadow: 0 1px 3px #10182808;
+  }
+  & .main-content {
+    max-width: 1540px;
+    margin: 0 auto;
+    padding: 0 36px 28px;
+    color: var(--p-text);
+  }
+  & .sign-workspace {
+    --sw-ink: var(--p-text);
+    --sw-muted: var(--p-muted);
+    --sw-soft: var(--p-subtle);
+    --sw-border: var(--p-line);
+    max-width: none;
+    margin: 0;
+  }
+  & :is(a, button, input, summary):focus-visible {
+    outline: 3px solid var(--p-blue);
+    outline-offset: 3px;
+  }
+  & .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    min-height: 44px;
+    padding: 11px 20px;
+    border-radius: 28px;
+    border: 1px solid var(--p-line);
+    font-size: 13px;
+    font-weight: 650;
+    line-height: 1.4;
+    box-shadow: none;
+    transition:
+      background 180ms,
+      border-color 180ms;
+  }
+  & .button:hover {
+    transform: none;
+  }
+  & .button:active {
+    transform: scale(0.98);
+  }
+  & .button.primary {
+    background: var(--p-primary);
+    color: var(--p-on-primary);
+    border-color: var(--p-primary);
+  }
+  & .button.primary:hover {
+    opacity: 0.9;
+  }
+  & .button.secondary {
+    background: var(--p-surface);
+    color: var(--p-text);
+  }
+  & .icon-button {
+    width: 34px;
+    height: 34px;
+    color: var(--p-muted);
+    background: none;
+    border-radius: 8px;
+  }
+  & .icon-button:hover {
+    background: var(--p-subtle);
+    color: var(--p-text);
+  }
+  & .menu-toggle,
+  & .close-menu {
+    display: none;
+  }
+  & h1,
+  & h2,
+  & h3 {
+    color: var(--p-text);
+    font-family: inherit;
+  }
+  & .learning-intro {
+    position: relative;
+    min-height: clamp(390px, 36vw, 520px);
+    display: flex;
+    align-items: center;
+    margin: -12px -18px 30px 0;
+    overflow: hidden;
+  }
+  & .learning-intro-copy {
+    position: relative;
+    z-index: 2;
+    width: 61%;
+    padding: 20px 0 28px;
+  }
+  & .learning-intro h1 {
+    font-size: clamp(34px, 3.35vw, 58px);
+    line-height: 1.03;
+    letter-spacing: -0.055em;
+    font-weight: 800;
+    white-space: pre-line;
+    margin: 0 0 20px;
+  }
+  & .learning-intro-copy > p {
+    color: var(--p-muted);
+    max-width: 470px;
+    font-size: 16px;
+    font-weight: 550;
+    line-height: 1.45;
+    margin-bottom: 26px;
+  }
+  & .learning-intro-art {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  & .learning-hero-artwork,
+  & .learning-level-hand {
+    overflow: hidden;
+  }
+  & .learning-hero-artwork {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: right bottom;
+  }
+  & .learning-intro-actions {
+    display: flex;
+    align-items: center;
+    gap: 23px;
+    flex-wrap: wrap;
+  }
+  & .learning-demo-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--p-muted);
+    font-size: 12px;
+    min-height: 44px;
+  }
+  & .learning-demo-link > span {
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--p-line);
+    border-radius: 50%;
+    background: var(--p-surface);
+    display: grid;
+    place-items: center;
+    color: var(--p-text);
+  }
+  & .section-heading {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: flex-end;
+    margin: 0 0 18px;
+  }
+  & .section-label {
+    margin: 0 0 5px;
+    color: var(--p-muted);
+    font-size: 11px;
+    font-weight: 650;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.5;
+  }
+  & .section-heading h2 {
+    font-size: 29px;
+    line-height: 1.25;
+    letter-spacing: -0.045em;
+    margin: 0;
+    font-weight: 750;
+  }
+  & .text-link {
+    display: inline-flex;
+    gap: 12px;
+    align-items: center;
+    min-height: 32px;
+    font-size: 12px;
+    color: var(--p-text);
+    white-space: nowrap;
+  }
+  & .learning-levels {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+  }
+  & .learning-levels::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: var(--p-line);
+    opacity: 1;
+  }
+  & .learning-level {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--p-line);
+    background: var(--p-surface);
+    border-radius: 20px;
+    min-height: 166px;
+    padding: 17px 18px;
+    text-decoration: none;
+    transition:
+      border-color 180ms,
+      background 180ms;
+  }
+  & .learning-level:hover {
+    border-color: var(--p-blue);
+  }
+  & .learning-level:focus-visible {
+    border-color: var(--p-blue);
+    box-shadow: inset 0 0 0 1px var(--p-blue);
+  }
+  & .learning-level-number {
+    display: grid;
+    place-items: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--p-muted);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  & .learning-level:is(:hover, :focus-visible) .learning-level-number {
+    background: var(--p-blue);
+  }
+  & .learning-level-copy {
+    position: relative;
+    z-index: 2;
+    max-width: 63%;
+  }
+  & .learning-level-copy h3 {
+    margin: 0 0 7px;
+    font-size: 16px;
+    line-height: 1.2;
+    font-weight: 750;
+    letter-spacing: -0.035em;
+  }
+  & .learning-level-copy p {
+    color: var(--p-muted);
+    font-size: 12px;
+    line-height: 1.4;
+    margin: 0 0 9px;
+  }
+  & .learning-level-copy small {
+    display: block;
+    color: var(--p-muted);
+    font-size: 10px;
+    line-height: 1.4;
+    max-width: 150px;
+  }
+  & .learning-level-hand {
+    position: absolute;
+    right: -2px;
+    bottom: 0;
+    height: 128px;
+    width: 110px;
+    border-radius: 0 0 19px 0;
+    object-fit: contain;
+    object-position: center bottom;
+    filter: grayscale(1);
+    transition:
+      filter 220ms ease,
+      transform 220ms ease;
+  }
+  & .learning-level-arrow {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    width: 29px;
+    height: 29px;
+    border-radius: 50%;
+    background: var(--p-subtle);
+    color: var(--p-text);
+    display: grid;
+    place-items: center;
+    z-index: 3;
+  }
+  & .learning-level:is(:hover, :focus-visible) .learning-level-arrow {
+    background: #2e6bff;
+    color: #fff;
+  }
+  & .learning-next-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 24px;
+    margin-top: 26px;
+  }
+  & .learning-practice-banner {
+    position: relative;
+    overflow: hidden;
+    background: #202125;
+    color: #fff;
+    border-radius: 22px;
+    min-height: 190px;
+    padding: 25px;
+  }
+  & .learning-practice-banner > div {
+    position: relative;
+    z-index: 2;
+    width: 60%;
+  }
+  & .learning-practice-banner h2 {
+    color: #fff;
+    font-size: 23px;
+    letter-spacing: -0.045em;
+    line-height: 1.1;
+    font-weight: 750;
+    white-space: pre-line;
+    margin: 0 0 10px;
+  }
+  & .learning-practice-banner p {
+    font-size: 12px;
+    color: #e2e4e9;
+    line-height: 1.4;
+    margin: 0 0 17px;
+  }
+  & .learning-practice-banner .button {
+    background: #fff;
+    color: #191b22;
+    min-height: 34px;
+    padding: 7px 14px;
+    font-size: 11px;
+  }
+  & .learning-practice-art {
+    position: absolute;
+    height: 100%;
+    width: 40%;
+    right: 0;
+    top: 0;
+  }
+  & .learning-activities {
+    background: var(--p-subtle);
+    border: 1px solid var(--p-line);
+    border-radius: 22px;
+    padding: 22px;
+  }
+  & .learning-activities h2 {
+    font-size: 18px;
+    font-weight: 750;
+    letter-spacing: -0.03em;
+    line-height: 1.3;
+    margin: 0 0 10px;
+  }
+  & .learning-activities > a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 63px;
+    padding: 10px 0;
+  }
+  & .learning-activities > a + a {
+    border-top: 1px solid var(--p-line);
+  }
+  & .learning-activities > a > svg:first-child {
+    color: var(--p-blue);
+  }
+  & .learning-activities > a > svg:last-child {
+    margin-left: auto;
+    color: var(--p-muted);
+  }
+  & .learning-activities strong {
+    font-size: 13px;
+    display: block;
+    font-weight: 650;
+  }
+  & .learning-activities span {
+    color: var(--p-muted);
+    font-size: 11px;
+    line-height: 1.4;
+    display: block;
+    margin-top: 3px;
+  }
+  & .learning-resources {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 24px 0 18px;
+    padding: 20px 0;
+    border-top: 1px solid var(--p-line);
+    border-bottom: 1px solid var(--p-line);
+  }
+  & .learning-resources > a {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+  & .learning-resources > a > svg:first-child {
+    color: var(--p-muted);
+  }
+  & .learning-resources > a > svg:last-child {
+    margin-left: auto;
+    color: var(--p-muted);
+  }
+  & .learning-resources h3 {
+    font-size: 13px;
+    margin: 0 0 3px;
+    line-height: 1.5;
+  }
+  & .learning-resources p {
+    font-size: 11px;
+    color: var(--p-muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+  & .learning-disclaimer {
+    font-size: 11px;
+    line-height: 1.6;
+    color: var(--p-muted);
+    margin: 0;
+    max-width: 100ch;
+  }
+  & .learning-level:is(:hover, :focus-visible) .learning-level-hand {
+    filter: grayscale(0);
+    transform: scale(1.035);
+  }
+  &[data-product-theme="dark"] .sidebar {
+    background: #161617;
+  }
+}
+@media (max-width: 1100px) {
+  :root .product-ui[data-product-ui][data-product-theme] {
+    & .sidebar {
+      width: 200px;
+      padding-inline: 12px;
+    }
+    & .app-main {
+      margin-left: 200px;
+      width: calc(100% - 200px);
+    }
+    & .main-content {
+      padding: 0 26px 26px;
+    }
+    & .topbar {
+      padding-inline: 26px;
+    }
+    & .learning-intro {
+      min-height: 310px;
+    }
+    & .learning-intro h1 {
+      font-size: 39px;
+    }
+    & .learning-intro-copy {
+      width: 64%;
+    }
+    & .learning-intro-copy > p {
+      font-size: 14px;
+      max-width: 360px;
+    }
+    & .learning-levels {
+      gap: 14px;
+    }
+    & .learning-level {
+      padding: 14px;
+      min-height: 180px;
+    }
+    & .learning-level-hand {
+      width: 86px;
+      height: 112px;
+    }
+    & .learning-level-copy {
+      max-width: 73%;
+    }
+    & .learning-level-copy small {
+      max-width: 130px;
+    }
+    & .learning-next-grid {
+      gap: 16px;
+      grid-template-columns: 1.1fr 1fr;
+    }
+    & .learning-practice-banner {
+      padding: 22px;
+    }
+    & .learning-practice-banner > div {
+      width: 74%;
+    }
+    & .learning-intro-actions {
+      gap: 12px;
+    }
+  }
+}
+@media (max-width: 900px) {
+  :root .product-ui[data-product-ui][data-product-theme] {
+    & .sidebar {
+      transform: translateX(-100%);
+      width: 240px;
+      transition: transform 200ms ease;
+    }
+    & .sidebar.open {
+      transform: translateX(0);
+    }
+    & .app-main {
+      margin-left: 0;
+      width: 100%;
+    }
+    & .menu-toggle,
+    & .close-menu {
+      display: inline-flex;
+    }
+    & .close-menu {
+      position: absolute;
+      top: 22px;
+      right: 12px;
+    }
+    & .mobile-scrim {
+      display: block;
+      position: fixed;
+      inset: 0;
+      z-index: 29;
+      background: #10182866;
+    }
+    & .brand-link {
+      padding-left: 5px;
+      margin-right: 28px;
+    }
+    & .brand {
+      font-size: 20px;
+    }
+    & .learning-intro h1 {
+      font-size: 44px;
+    }
+    & .learning-level {
+      min-height: 170px;
+    }
+    & .topbar {
+      height: 66px;
+    }
+  }
+}
+@media (max-width: 600px) {
+  :root .product-ui[data-product-ui][data-product-theme] {
+    & .topbar {
+      padding: 0 16px;
+      height: 64px;
+    }
+    & .topbar-right {
+      gap: 8px;
+    }
+    & .topbar .button {
+      font-size: 10px;
+      padding: 8px 10px;
+      gap: 5px;
+    }
+    & .topbar .button svg {
+      width: 14px;
+    }
+    & .theme-switcher {
+      height: 32px;
+      width: 32px;
+      min-width: 32px;
+    }
+    & .language-segments {
+      padding: 3px;
+    }
+    & .language-segments button {
+      width: 25px;
+      min-width: 25px;
+      font-size: 9px;
+    }
+    & .main-content {
+      padding: 0 18px 24px;
+    }
+    & .learning-intro {
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      margin: 0 0 27px;
+    }
+    & .learning-intro-copy {
+      width: 100%;
+      padding: 20px 0 0;
+    }
+    & .learning-intro h1 {
+      font-size: clamp(30px, 8vw, 43px);
+      line-height: 1.08;
+      margin-bottom: 16px;
+    }
+    & .learning-intro-copy > p {
+      font-size: 14px;
+      max-width: 330px;
+      margin-bottom: 20px;
+    }
+    & .learning-intro-actions {
+      gap: 12px;
+    }
+    & .learning-intro-actions .button {
+      min-height: 42px;
+      padding: 10px 15px;
+      font-size: 12px;
+    }
+    & .learning-demo-link {
+      font-size: 11px;
+      gap: 7px;
+    }
+    & .learning-demo-link > span {
+      width: 34px;
+      height: 34px;
+    }
+    & .learning-intro-art {
+      position: relative;
+      width: 100%;
+      height: 190px;
+      right: auto;
+      margin-top: 14px;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    & .learning-hero-artwork {
+      height: 100%;
+      width: 100%;
+    }
+    & .section-heading {
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    & .section-heading h2 {
+      font-size: 24px;
+    }
+    & .text-link {
+      font-size: 11px;
+      gap: 6px;
+    }
+    & .learning-levels {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    & .learning-levels::before {
+      display: none;
+    }
+    & .learning-level {
+      min-height: 146px;
+      padding: 16px 18px;
+      border-radius: 17px;
+    }
+    & .learning-level-copy {
+      max-width: 65%;
+    }
+    & .learning-level-copy h3 {
+      font-size: 17px;
+    }
+    & .learning-level-copy p {
+      font-size: 12px;
+    }
+    & .learning-level-copy small {
+      max-width: 180px;
+      font-size: 11px;
+    }
+    & .learning-level-hand {
+      width: 114px;
+      height: 135px;
+    }
+    & .learning-next-grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 20px;
+    }
+    & .learning-practice-banner {
+      padding: 22px;
+      min-height: 198px;
+      border-radius: 18px;
+    }
+    & .learning-practice-banner > div {
+      width: 69%;
+    }
+    & .learning-practice-banner h2 {
+      font-size: 23px;
+    }
+    & .learning-practice-art {
+      width: 53%;
+      opacity: 0.65;
+    }
+    & .learning-activities {
+      padding: 20px;
+      border-radius: 18px;
+    }
+    & .learning-resources {
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-top: 20px;
+    }
+    & .learning-resources h3 {
+      font-size: 13px;
+    }
+    & .learning-resources p,
+    & .learning-activities span {
+      font-size: 12px;
+    }
+    & .learning-disclaimer {
+      font-size: 12px;
+    }
+  }
+}
+@media (max-width: 360px) {
+  :root .product-ui[data-product-ui][data-product-theme] {
+    & .topbar {
+      padding-inline: 12px;
+    }
+    & .topbar-right {
+      gap: 5px;
+    }
+    & .topbar .button svg {
+      display: none;
+    }
+    & .main-content {
+      padding-inline: 15px;
+    }
+    & .learning-intro-actions {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 8px;
+    }
+    & .learning-intro-art {
+      height: 170px;
+    }
+    & .learning-practice-banner > div {
+      width: 78%;
+    }
+    & .learning-practice-banner h2 {
+      font-size: 22px;
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root .product-ui[data-product-ui][data-product-theme] *,
+  :root .product-ui[data-product-ui][data-product-theme] *::before {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Text → signs: existing editor, libraries and live avatar share one workspace. */
+:root .product-ui[data-product-ui][data-product-theme] {
+  & .learning-practice-banner {
+    transition: background-color 220ms ease;
+  }
+  & .learning-practice-art {
+    object-fit: contain;
+    object-position: right bottom;
+    filter: grayscale(1);
+    transition: filter 220ms ease;
+  }
+  & .learning-practice-banner:is(:hover, :focus-within) {
+    background: #1764ed;
+  }
+  & .learning-practice-banner:is(:hover, :focus-within) .learning-practice-art {
+    filter: grayscale(0);
+  }
+  & .text-sign-page {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.06fr);
+    gap: 18px 28px;
+    align-items: start;
+    padding-top: 24px;
+  }
+  & .text-sign-page > * {
+    grid-column: 1 / -1;
+    min-width: 0;
+  }
+  & .text-sign-page > .page-heading {
+    grid-column: 1;
+    margin: 0 0 12px;
+  }
+  & .text-sign-page .page-heading h1 {
+    font-size: clamp(32px, 3.2vw, 48px);
+    letter-spacing: -0.055em;
+    line-height: 1.1;
+    margin: 0 0 14px;
+  }
+  & .text-sign-page .page-heading p {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--p-muted);
+    max-width: 530px;
+  }
+  & .text-sign-page > .sign-action-cards {
+    grid-column: 1;
+    grid-row: 2;
+    display: flex;
+    gap: 8px;
+    margin: 0;
+  }
+  & .text-sign-page .sign-action-card {
+    flex: 1;
+    min-width: 0;
+    min-height: 44px;
+    padding: 12px 8px;
+    display: block;
+    border-radius: 24px;
+    border: 1px solid transparent;
+    background: var(--p-subtle);
+    color: var(--p-text);
+    box-shadow: none;
+  }
+  & .text-sign-page .sign-action-card[aria-pressed="true"] {
+    background: var(--p-blue);
+    color: #fff;
+  }
+  & .text-sign-page .sign-action-copy {
+    padding: 0;
+    display: block;
+  }
+  & .text-sign-page .sign-action-copy strong {
+    color: inherit;
+    font-size: 12px;
+    margin: 0;
+  }
+  & .text-sign-page .sign-action-cover,
+  & .text-sign-page .sign-action-art,
+  & .text-sign-page .sign-action-copy > span,
+  & .text-sign-page .sign-action-footer {
+    display: none;
+  }
+  & .text-sign-page > .sign-workspace-meta {
+    grid-column: 1;
+    grid-row: 3;
+    margin: 0;
+    font-size: 11px;
+    color: var(--p-muted);
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  & .text-sign-page .sign-help-link {
+    color: var(--p-muted);
+    background: transparent;
+  }
+  & .text-sign-page > .sign-text-editor,
+  & .text-sign-page > .sign-phrase-workspace {
+    grid-column: 1;
+    grid-row: 4;
+  }
+  & .text-sign-page .panel,
+  & .text-sign-page .sign-sequence,
+  & .text-sign-page .sign-grammar > div {
+    background: var(--p-surface);
+    border: 1px solid var(--p-line);
+    border-radius: 22px;
+    box-shadow: none;
+  }
+  & .text-sign-page .sign-text-editor {
+    padding: 22px;
+    margin: 0;
+  }
+  & .text-sign-page .sign-editor-title {
+    margin-bottom: 18px;
+  }
+  & .text-sign-page .sign-editor-title h2 {
+    font-size: 17px;
+    letter-spacing: -0.03em;
+  }
+  & .text-sign-page .sign-editor-title p {
+    color: var(--p-muted);
+    font-size: 12px;
+  }
+  & .text-sign-page .sign-step-number {
+    background: var(--p-blue-soft);
+    color: var(--p-blue);
+    border: 0;
+  }
+  & .text-sign-page label {
+    color: var(--p-text);
+  }
+  & .text-sign-page textarea {
+    background: transparent;
+    color: var(--p-text);
+    border: 0;
+    border-radius: 0;
+    padding: 12px 0;
+    font-size: 22px;
+    line-height: 1.4;
+    min-height: 150px;
+    resize: vertical;
+    box-shadow: none;
+  }
+  & .text-sign-page textarea::placeholder {
+    color: var(--p-muted);
+    opacity: 0.8;
+  }
+  & .text-sign-page textarea:focus {
+    outline: 0;
+    box-shadow: 0 2px 0 var(--p-blue);
+  }
+  & .text-sign-page .sign-reference-controls {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--p-line);
+  }
+  & .text-sign-page .sign-reference-controls label {
+    font-size: 11px;
+  }
+  & .text-sign-page .sign-reference-controls > span {
+    color: var(--p-muted);
+  }
+  & .text-sign-page .button.primary {
+    background: var(--p-blue);
+    color: #fff;
+    border-color: transparent;
+  }
+  & .text-sign-page .button.secondary {
+    background: var(--p-subtle);
+    color: var(--p-text);
+    border-color: var(--p-line);
+  }
+  & .text-sign-page .motion-reference-example {
+    margin-top: 18px;
+  }
+  & .text-sign-page .sign-letter-picker {
+    border-color: var(--p-line);
+    margin-top: 18px;
+  }
+  & .text-sign-page .sign-input-hint,
+  & .text-sign-page .sign-workflow-hint,
+  & .text-sign-page .sign-dictionary-reference,
+  & .text-sign-page .sign-sequence-note {
+    color: var(--p-muted);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  & .text-sign-page .sign-workflow-hint {
+    background: var(--p-subtle);
+    border-color: var(--p-line);
+    flex-wrap: wrap;
+  }
+  & .text-sign-page .sign-examples button {
+    background: var(--p-subtle);
+    color: var(--p-text);
+    border: 1px solid var(--p-line);
+  }
+  & .text-sign-page > .text-sign-player {
+    grid-column: 2;
+    grid-row: 2 / span 4;
+    margin: 0;
+    scroll-margin-top: 22px;
+  }
+  & .text-sign-page .sign-sequence {
+    padding: 16px;
+  }
+  & .text-sign-page .sign-sequence-heading {
+    margin: 0 0 12px;
+  }
+  & .text-sign-page .sign-sequence-heading h2 {
+    font-size: 16px;
+  }
+  & .text-sign-page .sign-sequence-heading > span {
+    color: var(--p-muted);
+    font-size: 10px;
+  }
+  & .text-sign-page .sign-avatar-player {
+    border: 0;
+    background: transparent;
+    padding: 0;
+    border-radius: 16px;
+    box-shadow: none;
+  }
+  & .text-sign-page .sign-avatar-stage {
+    height: clamp(320px, 33vw, 480px);
+    min-height: 320px;
+    border-radius: 16px;
+    background: var(--p-subtle);
+    border: 0;
+  }
+  & .text-sign-page .sign-sequence-stage {
+    width: 100%;
+  }
+  & .text-sign-page .sign-sequence-buttons {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  & .text-sign-page .sign-sequence-controls {
+    background: var(--p-subtle);
+    color: var(--p-text);
+    border: 1px solid var(--p-line);
+    border-radius: 15px;
+    padding: 12px;
+    margin-top: 12px;
+  }
+  & .text-sign-page .sign-sequence-bottom button {
+    background: var(--p-surface);
+    color: var(--p-text);
+    border-color: var(--p-line);
+  }
+  & .text-sign-page select,
+  & .text-sign-page input[type="search"] {
+    background: var(--p-surface);
+    color: var(--p-text);
+    border: 1px solid var(--p-line);
+    border-radius: 10px;
+  }
+  & .text-sign-page .sign-phrase-workspace {
+    padding: 20px;
+    margin: 0;
+  }
+  & .text-sign-page .sign-phrase-library p {
+    color: var(--p-muted);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  & .text-sign-page .sign-phrase-tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  & .text-sign-page .sign-phrase-tiles > button {
+    background: var(--p-surface);
+    color: var(--p-text);
+    border-color: var(--p-line);
+    border-radius: 15px;
+  }
+  & .text-sign-page .sign-phrase-caption strong {
+    color: var(--p-text);
+  }
+  & .text-sign-page .sign-word-card {
+    color: var(--p-text);
+  }
+  & .text-sign-page .sign-word-card small {
+    color: var(--p-muted);
+  }
+  & .text-sign-page > .sign-dictionary-result:empty {
+    display: none;
+  }
+  & .text-sign-page .sign-catalog-note {
+    color: var(--p-muted);
+  }
+  & .text-sign-page--grammar > .sign-workspace-meta {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 1100px) {
+  :root .product-ui[data-product-ui][data-product-theme] .text-sign-page {
+    gap: 16px;
+  }
+}
+@media (max-width: 900px) {
+  :root .product-ui[data-product-ui][data-product-theme] {
+    & .text-sign-page {
+      grid-template-columns: minmax(0, 1fr);
+      padding-top: 16px;
+    }
+    & .text-sign-page > .text-sign-player {
+      grid-column: 1;
+      grid-row: 5;
+    }
+    & .text-sign-page .sign-avatar-stage {
+      height: 400px;
+    }
+  }
+}
+@media (max-width: 600px) {
+  :root .product-ui[data-product-ui][data-product-theme] {
+    & .text-sign-page .sign-text-editor {
+      padding: 18px;
+    }
+    & .text-sign-page .sign-action-copy strong {
+      font-size: 10px;
+    }
+    & .text-sign-page .sign-action-card {
+      padding: 12px 5px;
+    }
+    & .text-sign-page .sign-avatar-stage {
+      height: 340px;
+    }
+    & .text-sign-page .sign-reference-controls .button {
+      width: 100%;
+      justify-content: center;
+    }
+    & .text-sign-page .sign-sequence-heading {
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    & .text-sign-page .sign-phrase-tiles {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+}
+:root .product-ui[data-product-ui][data-product-theme] {
+  & .text-sign-page--dictionary > .sign-dictionary-filter {
+    grid-column: 1;
+    grid-row: 4;
+    margin: 0;
+    flex-wrap: wrap;
+  }
+  & .text-sign-page--dictionary > .sign-dictionary-grid {
+    grid-column: 1;
+    grid-row: 5;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 900px) {
+  :root .product-ui[data-product-ui][data-product-theme] {
+    & .text-sign-page--dictionary > .text-sign-player {
+      grid-row: 5;
+    }
+    & .text-sign-page--dictionary > .sign-dictionary-grid {
+      grid-row: 6;
+    }
+  }
+}
+
+:root .product-ui[data-product-ui][data-product-theme] {
+  & .text-sign-page .sign-action-card,
+  & .text-sign-page .sign-action-copy,
+  & .text-sign-page .sign-action-copy strong {
+    text-align: center;
+  }
+  & .text-sign-page .sign-workflow-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 12px;
+    padding: 14px 12px;
+    border-radius: 12px;
+  }
+  & .sign-recognition {
+    padding-top: 24px;
+  }
+  & .sign-recognition > .page-heading {
+    margin: 0 0 30px;
+  }
+  & .sign-recognition > .page-heading h1 {
+    margin: 0 0 12px;
+    font-size: clamp(30px, 3vw, 42px);
+    line-height: 1.15;
+    letter-spacing: -0.045em;
+    font-weight: 750;
+  }
+  & .sign-recognition > .page-heading p {
+    color: var(--p-muted);
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 100ch;
+  }
+  & .sign-recognition .recognition-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    align-items: start;
+    gap: 24px;
+  }
+  & .sign-recognition .panel {
+    background: var(--p-surface);
+    border: 1px solid var(--p-line);
+    border-radius: 22px;
+    box-shadow: 0 8px 28px #17244305;
+    padding: 24px;
+    margin: 0;
+    min-width: 0;
+  }
+  & .sign-recognition .panel h2 {
+    margin: 0 0 12px;
+    font-size: 26px;
+    line-height: 1.2;
+    font-weight: 750;
+    letter-spacing: -0.04em;
+  }
+  & .sign-recognition .panel > p {
+    color: var(--p-muted);
+    font-size: 14px;
+    line-height: 1.55;
+    margin: 0 0 18px;
+  }
+  & .sign-recognition .recognition-edit-tools {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 14px 0;
+  }
+  & .sign-recognition .button {
+    border-radius: 11px;
+    font-size: 12px;
+    min-height: 42px;
+    padding: 10px 12px;
+    gap: 8px;
+    justify-content: center;
+  }
+  & .sign-recognition .button.primary {
+    background: var(--p-blue);
+    border: 1px solid transparent;
+    color: #fff;
+  }
+  & .sign-recognition .button.secondary {
+    background: var(--p-surface);
+    border: 1px solid var(--p-line);
+    color: var(--p-text);
+  }
+  & .sign-recognition .button.secondary:hover:not(:disabled) {
+    background: var(--p-subtle);
+  }
+  & .sign-recognition .button:disabled,
+  & .sign-recognition .krsl-upload:has(input:disabled) {
+    opacity: 0.48;
+    cursor: not-allowed;
+  }
+  & .sign-recognition .krsl-view {
+    background: #edf2ff;
+    border: 1px solid #dbe3f7;
+    border-radius: 18px;
+    aspect-ratio: 1.7;
+    margin: 16px 0;
+  }
+  & .sign-recognition .krsl-placeholder {
+    color: var(--p-muted);
+    gap: 16px;
+    font-size: 14px;
+  }
+  & .sign-recognition .krsl-placeholder svg {
+    width: 34px;
+    height: 34px;
+  }
+  & .sign-recognition .krsl-placeholder strong {
+    font-weight: 650;
+    color: var(--p-muted);
+  }
+  & .sign-recognition .recognition-live-status {
+    margin: 20px 0 0;
+    gap: 16px;
+  }
+  & .sign-recognition .recognition-live-status strong {
+    font-size: 13px;
+    color: var(--p-text);
+  }
+  & .sign-recognition .recognition-live-status span {
+    font-size: 13px;
+    color: var(--p-muted);
+  }
+  & .sign-recognition .recognition-live-status progress {
+    accent-color: var(--p-blue);
+  }
+  & .sign-recognition .panel > .krsl-status {
+    min-height: 0;
+    margin: 12px 0;
+    font-size: 13px;
+    color: var(--p-muted);
+    line-height: 1.6;
+  }
+  & .sign-recognition .panel > .krsl-status:empty {
+    margin: 0;
+  }
+  & .sign-recognition .panel > .recognition-privacy {
+    font-size: 11px;
+    line-height: 1.6;
+    border-top: 1px solid var(--p-line);
+    margin: 12px 0 0;
+    padding-top: 12px;
+  }
+  & .sign-recognition .recognition-captions {
+    position: static;
+  }
+  & .sign-recognition .recognition-caption-heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 10px;
+  }
+  & .sign-recognition .recognition-caption-heading h2 {
+    margin: 0;
+  }
+  & .sign-recognition .recognition-caption-heading > span {
+    margin-left: auto;
+    background: var(--p-blue-soft);
+    border: 0;
+    color: var(--p-blue);
+    font-size: 11px;
+    font-weight: 650;
+    padding: 7px 12px;
+    border-radius: 20px;
+  }
+  & .sign-recognition .recognition-captions label {
+    display: block;
+    font-size: 13px;
+    color: var(--p-text);
+    font-weight: 650;
+    margin: 22px 0 10px;
+  }
+  & .sign-recognition .recognition-captions textarea {
+    display: block;
+    background: var(--p-surface);
+    border: 1px solid var(--p-line);
+    color: var(--p-text);
+    border-radius: 13px;
+    padding: 15px;
+    font-family: inherit;
+    font-size: 17px;
+    line-height: 1.55;
+    width: 100%;
+    min-height: 108px;
+    resize: vertical;
+    box-shadow: none;
+  }
+  & .sign-recognition .recognition-captions textarea::placeholder {
+    color: var(--p-muted);
+    font-size: 14px;
+  }
+  & .sign-recognition .recognition-captions textarea:focus {
+    outline: 2px solid var(--p-blue);
+    outline-offset: 2px;
+  }
+  & .sign-recognition #krsl-text {
+    min-height: 280px;
+  }
+  & .sign-recognition .recognition-captions details {
+    margin-top: 22px;
+    font-size: 13px;
+    color: var(--p-muted);
+    line-height: 1.65;
+  }
+  & .sign-recognition .recognition-captions summary {
+    color: var(--p-text);
+    cursor: pointer;
+  }
+  & .sign-recognition .recognition-captions details a {
+    color: var(--p-blue);
+  }
+  &[data-product-theme="dark"] .sign-recognition .krsl-view {
+    background: var(--p-subtle);
+    border-color: var(--p-line);
+  }
+}
+@media (max-width: 1100px) {
+  :root .product-ui[data-product-ui][data-product-theme] {
+    & .sign-recognition .recognition-layout {
+      gap: 18px;
+    }
+    & .sign-recognition .panel {
+      padding: 20px;
+    }
+  }
+}
+@media (max-width: 900px) {
+  :root
+    .product-ui[data-product-ui][data-product-theme]
+    .sign-recognition
+    .recognition-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  :root .product-ui[data-product-ui][data-product-theme] {
+    & .sign-recognition {
+      padding-top: 14px;
+    }
+    & .sign-recognition .panel {
+      padding: 18px;
+    }
+    & .sign-recognition .panel h2 {
+      font-size: 23px;
+    }
+    & .sign-recognition .button {
+      font-size: 11px;
+      padding: 9px 10px;
+    }
+    & .sign-recognition .krsl-view {
+      aspect-ratio: 4 / 3;
+    }
+    & .sign-recognition #krsl-text {
+      min-height: 220px;
+    }
+  }
+}
+
+/* Decorative ribbon sits behind the live avatar card, as in the supplied reference. */
+:root .product-ui[data-product-ui][data-product-theme] {
+  & .text-sign-page > .text-sign-player {
+    position: relative;
+    isolation: isolate;
+  }
+  & .text-sign-page > .text-sign-player::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+    inset: -160px 0 auto;
+    height: 245px;
+    background: url("/illustrations/avatar-waves.svg") center bottom / 100% 100%
+      no-repeat;
+  }
+  &[data-product-theme="dark"] .text-sign-page > .text-sign-player::before {
+    opacity: 0.65;
+  }
+}
+@media (max-width: 900px) {
+  :root
+    .product-ui[data-product-ui][data-product-theme]
+    .text-sign-page
+    > .text-sign-player {
+    margin-top: 70px;
+  }
+  :root
+    .product-ui[data-product-ui][data-product-theme]
+    .text-sign-page
+    > .text-sign-player::before {
+    inset: -88px 0 auto;
+    height: 150px;
+  }
+}
+
+/* Dialogue scenarios retain their original interaction and learning content. */
+:root .product-ui[data-product-ui][data-product-theme] {
+  & .text-sign-page .sign-action-card {
+    transition:
+      background-color 160ms ease,
+      color 160ms ease;
+  }
+  & .text-sign-page [data-workspace-enter] {
+    animation: none;
+  }
+  & .dialogues-workspace {
+    max-width: 1400px;
+    padding-top: 20px;
+  }
+  & .dialogues-workspace > .page-heading {
+    position: relative;
+    isolation: isolate;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    padding: 20px 0 28px;
+    margin: 0 0 18px;
+  }
+  & .dialogues-workspace > .page-heading::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+    inset: -20px -18px 0 -18px;
+    width: auto;
+    background:
+      url("/images/learning/practice-hands.png") right bottom / auto 100%
+        no-repeat,
+      url("/illustrations/dialogue-waves.svg") center bottom / 100% 100%
+        no-repeat;
+    opacity: 0.7;
+  }
+  & .dialogues-workspace > .page-heading > div {
+    max-width: 65%;
+  }
+  & .dialogues-workspace .eyebrow {
+    color: var(--p-muted);
+    font-size: 11px;
+    font-weight: 650;
+    letter-spacing: 0.09em;
+  }
+  & .dialogues-workspace h1 {
+    font-size: clamp(30px, 3vw, 44px);
+    line-height: 1.15;
+    letter-spacing: -0.045em;
+    margin: 12px 0;
+  }
+  & .dialogues-workspace .page-heading p {
+    color: var(--p-muted);
+    line-height: 1.6;
+    font-size: 14px;
+  }
+  & .dialogues-workspace .dialogue-steps {
+    display: flex;
+    gap: 18px;
+    padding: 0;
+    margin: 18px 0;
+    list-style: none;
+  }
+  & .dialogues-workspace .dialogue-steps li {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    gap: 12px;
+    color: var(--p-text);
+    font-size: 13px;
+  }
+  & .dialogues-workspace .dialogue-steps li:not(:last-child)::after {
+    content: "";
+    flex: 1;
+    min-width: 20px;
+    height: 1px;
+    background: var(--p-line);
+  }
+  & .dialogues-workspace .dialogue-steps li > span {
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border: 1px solid var(--p-blue);
+    border-radius: 50%;
+    background: var(--p-surface);
+    color: var(--p-blue);
+  }
+  & .dialogues-workspace .dialogue-steps li:first-child > span,
+  & .dialogues-workspace .dialogue-steps li[aria-current="step"] > span {
+    background: var(--p-blue);
+    color: #fff;
+  }
+  & .dialogues-workspace .activity-method {
+    background: var(--p-blue-soft);
+    color: var(--p-text);
+    border: 1px solid var(--p-line);
+    border-radius: 14px;
+    padding: 15px 20px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  & .dialogues-workspace .activity-scenarios {
+    gap: 22px;
+    margin: 26px 0;
+  }
+  & .dialogues-workspace .activity-scenario {
+    background: var(--p-surface);
+    border: 1px solid var(--p-line);
+    border-radius: 20px;
+    box-shadow: 0 2px 4px #18213304;
+    transform: none;
+    transition: border-color 180ms ease;
+  }
+  & .dialogues-workspace .activity-scenario:hover {
+    border-color: var(--p-blue);
+    transform: none;
+  }
+  & .dialogues-workspace .activity-scenario-cover {
+    height: auto;
+    aspect-ratio: 1.95;
+    background: var(--p-subtle);
+  }
+  & .dialogues-workspace .activity-scenario-cover span {
+    top: 12px;
+    left: 14px;
+    background: var(--p-surface);
+    color: var(--p-text);
+    font-size: 15px;
+    border-radius: 11px;
+    padding: 7px 11px;
+  }
+  & .dialogues-workspace .activity-scenario > div:last-child {
+    padding: 16px 22px 20px;
+  }
+  & .dialogues-workspace .activity-scenario small {
+    font-size: 11px;
+    color: var(--p-muted);
+  }
+  & .dialogues-workspace .activity-scenario h2 {
+    margin: 8px 0;
+    font-size: 23px;
+    letter-spacing: -0.04em;
+  }
+  & .dialogues-workspace .activity-scenario p {
+    margin: 0;
+    min-height: 64px;
+    color: var(--p-muted);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  & .dialogues-workspace .activity-scenario strong {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 18px;
+    background: var(--p-subtle);
+    color: var(--p-text);
+    border-radius: 24px;
+    padding: 10px 18px;
+    font-size: 12px;
+    gap: 16px;
+  }
+  & .dialogues-workspace .activity-scenario:is(:hover, :focus-visible) strong {
+    background: var(--p-blue);
+    color: #fff;
+  }
+  & .dialogues-workspace .activity-explanation {
+    position: relative;
+    isolation: isolate;
+    max-width: none;
+    padding: 26px 30px;
+    border-radius: 24px;
+    background:
+      radial-gradient(ellipse at 100% 0%, #f0baf3 0%, transparent 46%),
+      linear-gradient(
+        115deg,
+        #dceaff 0%,
+        #eef2ff 42%,
+        #e5eaff 72%,
+        #c3c8ff 100%
+      );
+    overflow: hidden;
+  }
+  & .dialogues-workspace .activity-explanation::after {
+    content: none;
+  }
+  & .dialogues-workspace .activity-explanation h2 {
+    margin: 0 0 10px;
+    font-size: 23px;
+    letter-spacing: -0.035em;
+  }
+  & .dialogues-workspace .activity-explanation p {
+    max-width: 65%;
+    color: var(--p-muted);
+    font-size: 13px;
+    line-height: 1.65;
+  }
+  & .dialogues-workspace .activity-explanation a {
+    display: inline-flex;
+    margin-top: 6px;
+    background: var(--p-surface);
+    color: var(--p-text);
+    border-radius: 24px;
+    padding: 12px 20px;
+    font-size: 12px;
+    font-weight: 650;
+    text-decoration: none;
+  }
+  & .dialogues-workspace .panel:not(.activity-scenario) {
+    background: var(--p-surface);
+    border: 1px solid var(--p-line);
+    border-radius: 20px;
+    box-shadow: none;
+    color: var(--p-text);
+  }
+  & .dialogues-workspace .button.primary {
+    background: var(--p-blue);
+    color: #fff;
+    border-color: transparent;
+  }
+  & .dialogues-workspace .button.secondary {
+    background: var(--p-subtle);
+    color: var(--p-text);
+    border-color: var(--p-line);
+  }
+  & .dialogues-workspace .activity-options label {
+    background: var(--p-subtle);
+    color: var(--p-text);
+    border-color: var(--p-line);
+  }
+  & .dialogues-workspace .activity-options label.selected {
+    border-color: var(--p-blue);
+    box-shadow: inset 0 0 0 1px var(--p-blue);
+  }
+  & .dialogues-workspace input {
+    accent-color: var(--p-blue);
+  }
+  & .dialogues-workspace .activity-avatar .sign-avatar-stage {
+    background: var(--p-subtle);
+    border-radius: 16px;
+  }
+}
+@media (max-width: 1050px) {
+  :root
+    .product-ui[data-product-ui][data-product-theme]
+    .dialogues-workspace
+    .activity-scenario
+    > div:last-child {
+    padding: 16px;
+  }
+}
+@media (max-width: 750px) {
+  :root .product-ui[data-product-ui][data-product-theme] {
+    & .dialogues-workspace .activity-scenarios {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    & .dialogues-workspace > .page-heading > div {
+      max-width: 100%;
+    }
+    & .dialogues-workspace > .page-heading::after {
+      opacity: 0.3;
+      width: auto;
+    }
+    & .dialogues-workspace .dialogue-steps {
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    & .dialogues-workspace .dialogue-steps li {
+      flex-basis: 100%;
+      font-size: 12px;
+    }
+    & .dialogues-workspace .dialogue-steps li::after {
+      display: none;
+    }
+    & .dialogues-workspace .activity-explanation {
+      padding: 22px;
+    }
+    & .dialogues-workspace .activity-explanation p {
+      max-width: 100%;
+    }
+    & .dialogues-workspace .activity-dialogue-layout {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+}
+:root .product-ui[data-product-ui][data-product-theme] {
+  & .dialogues-workspace .dialogue-steps li {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+
+:root
+  .product-ui[data-product-ui][data-product-theme="dark"]
+  .dialogues-workspace
+  .activity-explanation {
+  background:
+    radial-gradient(ellipse at 100% 0%, #51324f 0%, transparent 46%),
+    linear-gradient(115deg, #172c48 0%, #222632 42%, #2a2942 72%, #393456 100%);
+}
+
+:root .product-ui[data-product-ui][data-product-theme] {
+  & .dialogues-workspace > .page-heading::after {
+    mask-image: linear-gradient(to bottom, #000 0%, #000 85%, transparent 100%);
+  }
+  & .understanding-workspace {
+    max-width: 1400px;
+    padding-top: 18px;
+  }
+  & .understanding-overview > .page-heading {
+    position: relative;
+    isolation: isolate;
+    min-height: 275px;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 12px 0 28px;
+  }
+  & .understanding-overview > .page-heading::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    z-index: -1;
+    inset: -30px -18px -10px 0;
+    background: url("/illustrations/understanding-player.svg") right center /
+      auto 100% no-repeat;
+  }
+  & .understanding-overview > .page-heading > div {
+    width: 52%;
+  }
+  & .understanding-workspace .eyebrow {
+    color: var(--p-muted);
+    font-size: 11px;
+    font-weight: 650;
+    letter-spacing: 0.06em;
+  }
+  & .understanding-workspace h1 {
+    font-size: clamp(30px, 3.1vw, 46px);
+    line-height: 1.12;
+    letter-spacing: -0.045em;
+    margin: 18px 0;
+    max-width: 10em;
+  }
+  & .understanding-workspace .page-heading p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--p-muted);
+    max-width: 510px;
+  }
+  & .understanding-workspace .panel {
+    background: var(--p-surface);
+    border: 1px solid var(--p-line);
+    border-radius: 24px;
+    box-shadow: 0 8px 24px #17244304;
+    color: var(--p-text);
+  }
+  & .understanding-workspace .activity-start {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: 32px;
+    padding: 30px;
+    margin: 0 0 28px;
+  }
+  & .understanding-workspace .activity-start > div:first-child {
+    position: relative;
+  }
+  & .understanding-workspace .activity-start > div:first-child::before {
+    content: "▷";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 58px;
+    height: 58px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(140deg, #3987ff, #a9ceff);
+    color: #fff;
+    border-radius: 17px;
+    font-size: 34px;
+    line-height: 1;
+  }
+  & .understanding-workspace .activity-start h2 {
+    font-size: 28px;
+    letter-spacing: -0.04em;
+    line-height: 1.2;
+    margin: 0 0 10px 80px;
+  }
+  &
+    .understanding-workspace
+    .activity-start
+    > div:first-child
+    > p:first-of-type {
+    margin: 0 0 28px 80px;
+  }
+  & .understanding-workspace .activity-start p {
+    color: var(--p-muted);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  & .understanding-workspace .activity-start label {
+    display: grid;
+    gap: 8px;
+    color: var(--p-text);
+    font-weight: 650;
+    font-size: 14px;
+  }
+  & .understanding-workspace select {
+    width: 100%;
+    background: var(--p-surface);
+    color: var(--p-text);
+    border: 1px solid var(--p-line);
+    padding: 14px 16px;
+    border-radius: 14px;
+    font-size: 15px;
+    min-height: 50px;
+  }
+  & .understanding-workspace .activity-start > div:first-child > p:last-child {
+    margin: 18px 0 0;
+    font-size: 14px;
+  }
+  & .understanding-workspace .activity-start-actions {
+    border-left: 1px solid var(--p-line);
+    padding: 12px 0 0 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+  }
+  & .understanding-workspace .activity-start-actions p {
+    margin: 0;
+    font-size: 14px;
+  }
+  & .understanding-workspace .button {
+    border-radius: 24px;
+    min-height: 48px;
+    padding: 12px 20px;
+    font-size: 14px;
+    justify-content: center;
+    gap: 10px;
+  }
+  & .understanding-workspace .button.primary {
+    background: var(--p-primary);
+    color: var(--p-on-primary);
+    border: 1px solid transparent;
+  }
+  & .understanding-workspace .button.secondary {
+    background: var(--p-subtle);
+    color: var(--p-text);
+    border: 1px solid var(--p-line);
+  }
+  & .understanding-workspace .activity-start-actions .button {
+    width: 100%;
+  }
+  & .understanding-workspace .sign-save-note {
+    position: relative;
+    border-radius: 24px;
+    background: linear-gradient(115deg, #e4edff, #f0f4ff 60%, #d6e4ff);
+    border: 0;
+    color: var(--p-muted);
+    padding: 30px 34% 30px 64px;
+    font-size: 14px;
+    line-height: 1.65;
+    min-height: 105px;
+    margin: 28px 0 0;
+  }
+  & .understanding-workspace .sign-save-note::before {
+    content: "ⓘ";
+    position: absolute;
+    left: 26px;
+    top: 30px;
+    font-size: 23px;
+    color: var(--p-blue);
+  }
+  & .understanding-overview .sign-save-note::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    inset: 0 0 0 auto;
+    width: 32%;
+    border-radius: 24px;
+    background: url("/illustrations/understanding-player.svg") center / cover
+      no-repeat;
+    opacity: 0.6;
+  }
+  & .understanding-workspace .activity-progress {
+    accent-color: var(--p-blue);
+  }
+  & .understanding-workspace .activity-options label {
+    background: var(--p-subtle);
+    border-color: var(--p-line);
+    color: var(--p-text);
+  }
+  & .understanding-workspace .activity-options label.selected {
+    border-color: var(--p-blue);
+    box-shadow: inset 0 0 0 1px var(--p-blue);
+  }
+  & .understanding-workspace input {
+    accent-color: var(--p-blue);
+  }
+  & .understanding-workspace .activity-feedback {
+    border-color: var(--p-line);
+    background: var(--p-subtle);
+  }
+  & .understanding-workspace .activity-video video {
+    border-radius: 16px;
+  }
+  & .understanding-workspace .activity-actions {
+    flex-wrap: wrap;
+  }
+  &[data-product-theme="dark"] .understanding-workspace .sign-save-note {
+    background: linear-gradient(115deg, #172c48, #202535 60%, #25395a);
+  }
+  &[data-product-theme="dark"] .understanding-overview > .page-heading::after {
+    opacity: 0.75;
+  }
+}
+@media (max-width: 1050px) {
+  :root .product-ui[data-product-ui][data-product-theme] {
+    & .understanding-workspace .activity-start {
+      padding: 24px;
+      gap: 22px;
+    }
+    & .understanding-workspace .activity-start-actions {
+      padding-left: 22px;
+    }
+    & .understanding-workspace .activity-start h2 {
+      font-size: 23px;
+    }
+  }
+}
+@media (max-width: 750px) {
+  :root .product-ui[data-product-ui][data-product-theme] {
+    & .understanding-overview > .page-heading {
+      min-height: 250px;
+    }
+    & .understanding-overview > .page-heading > div {
+      width: 100%;
+    }
+    & .understanding-overview > .page-heading::after {
+      opacity: 0.17;
+      inset: 0 -10px;
+    }
+    & .understanding-workspace .activity-start {
+      grid-template-columns: minmax(0, 1fr);
+      padding: 22px;
+    }
+    & .understanding-workspace .activity-start-actions {
+      border-left: 0;
+      border-top: 1px solid var(--p-line);
+      padding: 22px 0 0;
+    }
+    & .understanding-workspace .activity-start > div:first-child::before {
+      width: 44px;
+      height: 44px;
+      font-size: 28px;
+      border-radius: 13px;
+    }
+    & .understanding-workspace .activity-start h2 {
+      margin-left: 60px;
+      font-size: 22px;
+    }
+    &
+      .understanding-workspace
+      .activity-start
+      > div:first-child
+      > p:first-of-type {
+      margin-left: 60px;
+      font-size: 13px;
+    }
+    & .understanding-workspace .sign-save-note {
+      padding: 22px 22px 22px 54px;
+      font-size: 12px;
+    }
+    & .understanding-workspace .sign-save-note::before {
+      left: 20px;
+      top: 20px;
+    }
+    & .understanding-overview .sign-save-note::after {
+      display: none;
+    }
+    & .understanding-workspace .activity-quiz-layout {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+}
+:root .product-ui[data-product-ui][data-product-theme] {
+  & .understanding-overview h1 {
+    max-width: 7.5em;
+  }
+  & .understanding-workspace .activity-start label {
+    max-width: none;
+  }
+  & .understanding-overview .sign-save-note::after {
+    background-size: contain;
+  }
+}
+
+/* Profile and section guide share the platform's light/dark surfaces. */
+:root .product-ui[data-product-ui][data-product-theme] {
+  & .profile-settings-page,
+  & .help-overview {
+    padding-top: 24px;
+    max-width: 1400px;
+    margin-inline: auto;
+  }
+  & .profile-settings-page > .page-heading,
+  & .help-overview > .page-heading {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 160px;
+    padding: 12px 0 24px;
+    margin: 0 0 24px;
+  }
+  & .profile-settings-page > .page-heading::after,
+  & .help-overview > .page-heading::after {
+    content: "";
+    pointer-events: none;
+    z-index: -1;
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 58%;
+    background: url("/illustrations/dialogue-waves.svg") right center / 100%
+      100% no-repeat;
+    opacity: 0.45;
+  }
+  & .profile-settings-page .eyebrow,
+  & .help-overview .eyebrow {
+    color: var(--p-muted);
+    font-size: 11px;
+    font-weight: 650;
+    letter-spacing: 0.07em;
+  }
+  & .profile-settings-page h1,
+  & .help-overview h1 {
+    font-size: clamp(30px, 3.1vw, 44px);
+    line-height: 1.12;
+    letter-spacing: -0.045em;
+    margin: 14px 0;
+  }
+  & .profile-settings-page .page-heading p,
+  & .help-overview .page-heading p {
+    color: var(--p-muted);
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+    max-width: 650px;
+  }
+  & .profile-heading-art {
+    flex-shrink: 0;
+    color: var(--p-blue);
+    margin: 0 50px 0 24px;
+    stroke-width: 1.2;
+    transform: rotate(-10deg);
+  }
+  & .profile-settings-page .settings-simple {
+    max-width: 900px;
+    margin: 0;
+  }
+  & .profile-settings-page .panel {
+    padding: 30px;
+    background: var(--p-surface);
+    border: 1px solid var(--p-line);
+    border-radius: 24px;
+    box-shadow: 0 8px 24px #17244304;
+  }
+  & .profile-panel-heading {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 24px;
+    margin-bottom: 26px;
+    border-bottom: 1px solid var(--p-line);
+  }
+  & .profile-panel-icon {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    color: var(--p-blue);
+    background: var(--p-blue-soft);
+  }
+  & .profile-settings-page .profile-panel-heading h2 {
+    margin: 0;
+    font-size: 25px;
+    line-height: 1.25;
+    letter-spacing: -0.035em;
+  }
+  & .profile-settings-page form > label {
+    display: grid;
+    gap: 10px;
+    margin: 0 0 24px;
+    color: var(--p-text);
+    font-size: 13px;
+    font-weight: 650;
+  }
+  & .profile-settings-page form input {
+    width: 100%;
+    min-height: 50px;
+    border-radius: 13px;
+    padding: 12px 16px;
+    border: 1px solid var(--p-line);
+    background: var(--p-surface);
+    color: var(--p-text);
+    font-size: 15px;
+    font-family: inherit;
+    box-shadow: none;
+  }
+  & .profile-settings-page form input:disabled,
+  & .profile-settings-page form input[readonly] {
+    background: var(--p-subtle);
+    color: var(--p-muted);
+    opacity: 1;
+  }
+  & .profile-settings-page form input:focus-visible {
+    outline: 2px solid var(--p-blue);
+    outline-offset: 2px;
+  }
+  & .profile-settings-page .form-hint {
+    margin: -10px 0 28px;
+    color: var(--p-muted);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  & .profile-settings-page .button.primary {
+    border: 1px solid transparent;
+    border-radius: 24px;
+    min-height: 46px;
+    padding: 12px 20px;
+    gap: 10px;
+    background: var(--p-blue);
+    color: #fff;
+    font-size: 13px;
+  }
+  & .profile-settings-page .button:disabled {
+    opacity: 0.5;
+    cursor: wait;
+  }
+  & .profile-settings-page .success-msg {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    margin: 0 0 20px;
+    background: var(--p-blue-soft);
+    color: var(--p-text);
+    border: 1px solid var(--p-line);
+    border-radius: 14px;
+    font-size: 13px;
+    max-width: 900px;
+  }
+  & .help-overview .sign-help-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    margin-bottom: 28px;
+  }
+  & .help-overview .sign-help-grid > a {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+    background: var(--p-surface);
+    color: var(--p-text);
+    border: 1px solid var(--p-line);
+    border-radius: 22px;
+    box-shadow: 0 2px 4px #17244304;
+    text-decoration: none;
+    transition:
+      border-color 180ms ease,
+      background-color 180ms ease;
+  }
+  & .help-section-icon {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    background: var(--p-subtle);
+    color: var(--p-muted);
+    margin-bottom: 22px;
+    transition:
+      background-color 180ms ease,
+      color 180ms ease;
+  }
+  & .help-overview .sign-help-grid h2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    margin: 0 0 12px;
+    font-size: 21px;
+    font-weight: 750;
+    letter-spacing: -0.035em;
+    line-height: 1.2;
+  }
+  & .help-overview .sign-help-grid h2 > svg {
+    color: var(--p-muted);
+    flex-shrink: 0;
+  }
+  & .help-overview .sign-help-grid p {
+    color: var(--p-muted);
+    font-size: 13px;
+    line-height: 1.65;
+    margin: 0;
+  }
+  & .help-overview .sign-help-grid > a:is(:hover, :focus-visible) {
+    border-color: var(--p-blue);
+  }
+  &
+    .help-overview
+    .sign-help-grid
+    > a:is(:hover, :focus-visible)
+    .help-section-icon {
+    color: #fff;
+    background: var(--p-blue);
+  }
+  & .help-overview > .sign-reading {
+    max-width: none;
+    padding: 28px 30px;
+    border: 1px solid var(--p-line);
+    border-radius: 24px;
+    background: linear-gradient(115deg, #e3edff, #f0f2ff 58%, #e8ddfb);
+    box-shadow: none;
+  }
+  & .help-overview > .sign-reading h2 {
+    margin: 0 0 14px;
+    color: var(--p-text);
+    font-size: 24px;
+    letter-spacing: -0.035em;
+  }
+  & .help-overview > .sign-reading p {
+    color: var(--p-muted);
+    font-size: 13px;
+    line-height: 1.7;
+    max-width: 100ch;
+  }
+  & .help-overview > .sign-reading p:last-child {
+    margin-bottom: 0;
+  }
+  &[data-product-theme="dark"] .help-overview > .sign-reading {
+    background: linear-gradient(115deg, #172c48, #222632 58%, #342b45);
+  }
+}
+@media (max-width: 1100px) {
+  :root
+    .product-ui[data-product-ui][data-product-theme]
+    .help-overview
+    .sign-help-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  :root .product-ui[data-product-ui][data-product-theme] {
+    & .profile-settings-page,
+    & .help-overview {
+      padding-top: 14px;
+    }
+    & .profile-settings-page > .page-heading,
+    & .help-overview > .page-heading {
+      min-height: 0;
+      padding: 12px 0 22px;
+    }
+    & .profile-heading-art {
+      width: 42px;
+      height: 42px;
+      margin: 0 0 0 12px;
+    }
+    & .profile-settings-page .panel {
+      padding: 22px;
+    }
+    & .profile-settings-page .profile-panel-heading h2 {
+      font-size: 22px;
+    }
+    & .profile-settings-page .button {
+      width: 100%;
+      justify-content: center;
+    }
+    & .help-overview .sign-help-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 14px;
+    }
+    & .help-overview .sign-help-grid > a {
+      padding: 22px;
+    }
+    & .help-section-icon {
+      margin-bottom: 18px;
+    }
+    & .help-overview > .sign-reading {
+      padding: 22px;
+    }
+  }
+}
+:root
+  .product-ui[data-product-ui][data-product-theme]
+  .profile-settings-page
+  .eyebrow {
+  display: block;
+}
+:root .product-ui[data-product-ui][data-product-theme] .help-overview .eyebrow {
+  display: block;
+}
+
+/* A few editorial contrast accents; the existing layouts and actions stay intact. */
+:root .product-ui[data-product-ui][data-product-theme] {
+  & .profile-panel-icon {
+    background: var(--p-primary);
+    color: var(--p-on-primary);
+  }
+  & .profile-settings-page .button.primary,
+  & .text-sign-page .button.primary,
+  & .sign-recognition .button.primary {
+    background: var(--p-primary);
+    color: var(--p-on-primary);
+  }
+  & .profile-panel-heading {
+    border-bottom-color: var(--p-text);
+  }
+  & .profile-heading-art {
+    transition: transform 320ms ease;
+  }
+  & .profile-settings-page .page-heading:hover .profile-heading-art {
+    transform: rotate(0deg) translateY(-4px);
+  }
+  & .help-overview .sign-help-grid > a:first-child {
+    background: var(--p-primary);
+    color: var(--p-on-primary);
+    border-color: transparent;
+  }
+  & .help-overview .sign-help-grid > a:first-child h2,
+  & .help-overview .sign-help-grid > a:first-child h2 > svg {
+    color: inherit;
+  }
+  & .help-overview .sign-help-grid > a:first-child p {
+    color: inherit;
+    opacity: 0.78;
+  }
+  & .help-overview .sign-help-grid > a:first-child .help-section-icon {
+    color: var(--p-on-primary);
+    background: color-mix(in srgb, var(--p-on-primary) 12%, transparent);
+  }
+  & .help-overview .sign-help-grid h2 > svg {
+    transition: transform 180ms ease;
+  }
+  & .help-overview .sign-help-grid > a:hover h2 > svg {
+    transform: translate(3px, -3px);
+  }
+  & .help-overview > .page-heading::after {
+    background:
+      url("/images/learning/practice-hands.png") right center / auto 100%
+        no-repeat,
+      url("/illustrations/dialogue-waves.svg") center / 100% 100% no-repeat;
+    opacity: 0.35;
+  }
+  & .help-overview > .page-heading > div {
+    max-width: 75%;
+  }
+  & .sign-recognition > .page-heading {
+    position: relative;
+    isolation: isolate;
+    padding: 8px 0 18px;
+  }
+  & .sign-recognition > .page-heading::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+    inset: -10px 0 -5px 45%;
+    background: url("/illustrations/dialogue-waves.svg") center / 100% 100%
+      no-repeat;
+    opacity: 0.35;
+  }
+  & .sign-recognition .recognition-caption-heading {
+    background: var(--p-primary);
+    color: var(--p-on-primary);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  & .sign-recognition .recognition-caption-heading h2 {
+    color: inherit;
+    font-size: 24px;
+  }
+  & .sign-recognition .recognition-caption-heading > span {
+    color: #a9cbff;
+    background: #20509955;
+  }
+  & .text-sign-page .sign-step-number {
+    background: var(--p-primary);
+    color: var(--p-on-primary);
+  }
+  & .text-sign-page > .text-sign-player::before {
+    animation: quiet-wave 7s ease-in-out infinite;
+  }
+  & .text-sign-page .sign-sequence-heading h2::after {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin: 0 0 3px 9px;
+    background: var(--p-blue);
+    border-radius: 50%;
+  }
+  & .profile-settings-page .page-heading::before,
+  & .help-overview .page-heading::before,
+  & .sign-recognition > .page-heading::before {
+    content: "+";
+    position: absolute;
+    right: 30%;
+    top: 0;
+    font-size: 30px;
+    font-weight: 400;
+    color: var(--p-blue);
+    opacity: 0.5;
+    pointer-events: none;
+    animation: quiet-wave 6s ease-in-out infinite;
+  }
+
+  & .practice-workspace {
+    max-width: 1400px;
+    padding-top: 20px;
+  }
+  & .practice-workspace > .page-heading {
+    position: relative;
+    isolation: isolate;
+    min-height: 155px;
+    margin: 0 0 22px;
+    padding: 12px 0 20px;
+    display: flex;
+    align-items: center;
+  }
+  & .practice-workspace > .page-heading::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+    inset: -8px 0 0 35%;
+    background:
+      url("/images/learning/hands-alphabet.png") right bottom / auto 100%
+        no-repeat,
+      url("/illustrations/dialogue-waves.svg") center / 100% 100% no-repeat;
+    mask-image: linear-gradient(to bottom, #000 80%, transparent);
+    opacity: 0.65;
+  }
+  & .practice-workspace > .page-heading > div {
+    max-width: 75%;
+  }
+  & .practice-workspace h1 {
+    font-size: clamp(30px, 3vw, 44px);
+    line-height: 1.13;
+    letter-spacing: -0.045em;
+    margin: 0 0 16px;
+  }
+  & .practice-workspace .page-heading p {
+    color: var(--p-muted);
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 650px;
+  }
+  & .practice-workspace .sign-training-levels {
+    gap: 10px;
+    margin: 0 0 18px;
+  }
+  & .practice-workspace .sign-training-levels button {
+    background: var(--p-subtle);
+    color: var(--p-text);
+    border: 1px solid var(--p-line);
+    border-radius: 24px;
+    padding: 12px 18px;
+    font-size: 13px;
+  }
+  & .practice-workspace .sign-training-levels button[aria-pressed="true"] {
+    background: var(--p-primary);
+    color: var(--p-on-primary);
+    border-color: transparent;
+    box-shadow: none;
+  }
+  & .practice-workspace .sign-exercise-picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 24px;
+    padding: 16px;
+    background: var(--p-surface);
+    border: 1px solid var(--p-line);
+    border-radius: 18px;
+  }
+  & .practice-workspace .sign-exercise-picker button {
+    background: var(--p-subtle);
+    color: var(--p-text);
+    border: 1px solid transparent;
+    border-radius: 10px;
+    min-width: 42px;
+    min-height: 42px;
+    padding: 9px 12px;
+    font-size: 16px;
+  }
+  & .practice-workspace .sign-exercise-picker button[aria-pressed="true"] {
+    background: var(--p-blue);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: none;
+  }
+  & .practice-workspace > .sign-action-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin: 0 0 24px;
+  }
+  & .practice-workspace .sign-action-card {
+    display: grid;
+    grid-template-columns: 108px minmax(0, 1fr);
+    align-items: center;
+    gap: 8px 16px;
+    padding: 12px;
+    background: var(--p-surface);
+    color: var(--p-text);
+    border-color: var(--p-line);
+    border-radius: 18px;
+    box-shadow: none;
+  }
+  & .practice-workspace .sign-action-card[aria-pressed="true"] {
+    border-color: var(--p-blue);
+    box-shadow: inset 0 0 0 1px var(--p-blue);
+  }
+  & .practice-workspace .sign-action-art {
+    grid-row: 1 / span 2;
+    height: 100px;
+    border-radius: 12px;
+  }
+  & .practice-workspace .sign-action-copy {
+    padding: 0;
+  }
+  & .practice-workspace .sign-action-copy strong {
+    font-size: 18px;
+    color: var(--p-text);
+  }
+  & .practice-workspace .sign-action-copy > span {
+    color: var(--p-muted);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  & .practice-workspace .sign-action-footer {
+    padding: 0;
+    font-size: 11px;
+    color: var(--p-muted);
+    margin: 0;
+    border: 0;
+  }
+  & .practice-workspace .sign-action-tag {
+    background: #ffffffec;
+    color: #1d1d1f;
+    font-size: 9px;
+    padding: 4px 6px;
+  }
+  & .practice-workspace .panel,
+  & .practice-workspace .sign-sequence {
+    background: var(--p-surface);
+    color: var(--p-text);
+    border: 1px solid var(--p-line);
+    border-radius: 22px;
+    box-shadow: none;
+  }
+  & .practice-workspace .sign-sequence {
+    padding: 22px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(220px, 0.8fr);
+    gap: 18px 24px;
+  }
+  & .practice-workspace .sign-sequence > * {
+    grid-column: 1 / -1;
+  }
+  & .practice-workspace .sign-sequence-heading {
+    margin: 0;
+  }
+  & .practice-workspace .sign-sequence-heading h2 {
+    font-size: 23px;
+    letter-spacing: -0.035em;
+  }
+  & .practice-workspace .sign-sequence-heading > span {
+    color: var(--p-muted);
+    font-size: 11px;
+  }
+  & .practice-workspace .sign-letter-comparison {
+    grid-column: 2;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--p-subtle);
+    border: 1px solid var(--p-line);
+    border-radius: 16px;
+    padding: 18px;
+    margin: 0;
+  }
+  & .practice-workspace .sign-letter-comparison > .alphabet-card-art {
+    width: 160px;
+    height: 220px;
+  }
+  & .practice-workspace .sign-letter-comparison p {
+    color: var(--p-muted);
+    line-height: 1.6;
+    font-size: 12px;
+  }
+  & .practice-workspace .sign-sequence > .sign-avatar-player {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  & .practice-workspace .sign-avatar-player {
+    border: 0;
+    border-radius: 16px;
+    background: var(--p-subtle);
+  }
+  & .practice-workspace .sign-avatar-stage {
+    background: var(--p-subtle);
+    height: 450px;
+  }
+  & .practice-workspace .button {
+    border-radius: 24px;
+    min-height: 44px;
+    padding: 11px 16px;
+    font-size: 12px;
+    gap: 8px;
+    justify-content: center;
+  }
+  & .practice-workspace .button.primary {
+    background: var(--p-primary);
+    color: var(--p-on-primary);
+    border: 1px solid transparent;
+  }
+  & .practice-workspace .button.secondary {
+    background: var(--p-surface);
+    color: var(--p-text);
+    border: 1px solid var(--p-line);
+  }
+  & .practice-workspace .sign-sequence-controls,
+  & .practice-workspace .sign-player-controls {
+    padding: 16px;
+    background: var(--p-subtle);
+    color: var(--p-text);
+    border-color: var(--p-line);
+  }
+  & .practice-workspace .sign-sequence-buttons {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  & .practice-workspace .sign-sequence-buttons label {
+    color: var(--p-muted);
+  }
+  & .practice-workspace .sign-sequence-bottom button,
+  & .practice-workspace .sign-view-buttons button,
+  & .practice-workspace .sign-sequence-words button,
+  & .practice-workspace .sign-motion-steps button {
+    background: var(--p-surface);
+    color: var(--p-text);
+    border-color: var(--p-line);
+    border-radius: 10px;
+  }
+  & .practice-workspace .sign-sequence-bottom button[aria-pressed="true"] {
+    background: var(--p-blue-soft);
+    color: var(--p-blue);
+    box-shadow: none;
+  }
+  & .practice-workspace select {
+    background: var(--p-surface);
+    color: var(--p-text);
+    border: 1px solid var(--p-line);
+    border-radius: 10px;
+    padding: 8px;
+  }
+  & .practice-workspace input {
+    accent-color: var(--p-blue);
+  }
+  & .practice-workspace .sign-sequence-note,
+  & .practice-workspace .sign-catalog-note {
+    color: var(--p-muted);
+    font-size: 12px;
+    line-height: 1.65;
+  }
+  & .practice-workspace .sign-exercise-instructions {
+    padding: 24px;
+  }
+  & .practice-workspace .sign-exercise-instructions p {
+    color: var(--p-muted);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  & .practice-workspace .sign-status-label {
+    background: var(--p-blue-soft);
+    color: var(--p-blue);
+    border-color: var(--p-line);
+  }
+  & .practice-workspace .sign-next-practice {
+    margin-top: 20px;
+  }
+  & .practice-workspace .sign-camera {
+    background: var(--p-surface);
+    color: var(--p-text);
+    border: 1px solid var(--p-line);
+    border-radius: 22px;
+    padding: 24px;
+  }
+  & .practice-workspace .sign-camera-settings,
+  & .practice-workspace .caption-auto-control {
+    background: var(--p-subtle);
+    border: 1px solid var(--p-line);
+    border-radius: 16px;
+    padding: 18px;
+    color: var(--p-text);
+  }
+  & .practice-workspace .sign-camera-settings p,
+  & .practice-workspace .sign-camera p {
+    color: var(--p-muted);
+  }
+}
+@keyframes quiet-wave {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+@media (max-width: 900px) {
+  :root .product-ui[data-product-ui][data-product-theme] {
+    & .practice-workspace .sign-sequence {
+      display: block;
+      padding: 18px;
+    }
+    & .practice-workspace .sign-letter-comparison {
+      flex-direction: row;
+      margin: 18px 0;
+    }
+    & .practice-workspace .sign-letter-comparison > .alphabet-card-art {
+      width: 110px;
+      height: 160px;
+    }
+    & .practice-workspace .sign-trainer-layout {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+}
+@media (max-width: 600px) {
+  :root .product-ui[data-product-ui][data-product-theme] {
+    & .help-overview > .page-heading > div,
+    & .practice-workspace > .page-heading > div {
+      max-width: 100%;
+    }
+    & .practice-workspace > .page-heading::after {
+      opacity: 0.2;
+    }
+    & .practice-workspace > .sign-action-cards {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 12px;
+    }
+    & .practice-workspace .sign-action-card {
+      grid-template-columns: 85px minmax(0, 1fr);
+    }
+    & .practice-workspace .sign-action-art {
+      height: 90px;
+    }
+    & .practice-workspace .sign-action-copy strong {
+      font-size: 16px;
+    }
+    & .practice-workspace .sign-training-levels {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+    }
+    & .practice-workspace .sign-exercise-picker {
+      gap: 7px;
+      padding: 12px;
+    }
+    & .practice-workspace .sign-exercise-picker button {
+      min-width: 40px;
+      font-size: 15px;
+    }
+    & .practice-workspace .sign-avatar-stage {
+      height: 360px;
+    }
+    & .practice-workspace .sign-camera {
+      padding: 18px;
+    }
+    & .sign-recognition .recognition-caption-heading h2 {
+      font-size: 21px;
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root .product-ui[data-product-ui][data-product-theme] {
+    & .text-sign-page > .text-sign-player::before,
+    & .profile-settings-page .page-heading::before,
+    & .help-overview .page-heading::before,
+    & .sign-recognition > .page-heading::before {
+      animation: none;
+    }
+  }
+}
+:root .product-ui[data-product-ui][data-product-theme] {
+  & .practice-workspace h1 { font-weight: 750; }
+  & .profile-settings-page .page-heading::before,
+  & .help-overview .page-heading::before,
+  & .sign-recognition > .page-heading::before {
+    content: "";
+    width: 22px;
+    height: 22px;
+    background: linear-gradient(var(--p-blue),var(--p-blue)) center / 2px 20px no-repeat,
+      linear-gradient(var(--p-blue),var(--p-blue)) center / 20px 2px no-repeat;
+  }
+}

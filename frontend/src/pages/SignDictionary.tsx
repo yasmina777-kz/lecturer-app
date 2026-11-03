@@ -16,7 +16,6 @@ import { phraseGroups } from "../sign/phraseExamples";
 import { alphabetIllustration } from "../sign/alphabetIllustrations";
 import { AlphabetCardArt } from "../components/AlphabetCardArt";
 import { SignActionCards } from "../components/SignActionCards";
-const emptyMotionPlan = { steps: [], missing: [], spelling: false };
 const categoryTranslations: Record<string, [string, string]> = {
   Алфавит: ["Alphabet", "Әліпби"],
   Общение: ["Communication", "Қарым-қатынас"],
@@ -174,16 +173,12 @@ export function SignDictionaryPage() {
     );
   }
   return (
-    <div className="sign-workspace sign-dictionary">
+    <div
+      className={`sign-workspace sign-dictionary text-sign-page text-sign-page--${tab}`}
+    >
       <div className="page-heading">
         <div>
-          <h1>
-            {at(
-              "Текст и словарь жестов",
-              "Text and sign dictionary",
-              "Мәтін және ым сөздігі",
-            )}
-          </h1>
+          <h1>{at("Текст → жесты", "Text → signs", "Мәтін → ым")}</h1>
           <p>
             {at(
               "Введите фразу — аватар покажет доступные жесты подряд. Или выберите слово в словаре.",
@@ -203,8 +198,6 @@ export function SignDictionaryPage() {
         onChange={(next) => {
           if (next === "text" || next === "phrases" || next === "dictionary") {
             setTab(next);
-            setSelected(null);
-            setSubmitted("");
           }
         }}
         items={[
@@ -336,9 +329,29 @@ export function SignDictionaryPage() {
                 )}
               </button>
             </div>
-            <button className="button secondary motion-reference-example" disabled={loading || !!error}
-              onClick={() => { setText("Привет!"); setSubmitted("Привет!"); setSpelling(false); setSelected(null); setRun(v => v + 1); requestAnimationFrame(() => sequenceRef.current?.scrollIntoView({ block: "start", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" })); }}>
-              <Play size={17} />{at("Показать «Привет!»", "Show «Привет!»", "«Привет!» көрсету")}
+            <button
+              className="button secondary motion-reference-example"
+              disabled={loading || !!error}
+              onClick={() => {
+                setText("Привет!");
+                setSubmitted("Привет!");
+                setSpelling(false);
+                setSelected(null);
+                setRun((v) => v + 1);
+                requestAnimationFrame(() =>
+                  sequenceRef.current?.scrollIntoView({
+                    block: "start",
+                    behavior: window.matchMedia(
+                      "(prefers-reduced-motion: reduce)",
+                    ).matches
+                      ? "auto"
+                      : "smooth",
+                  }),
+                );
+              }}
+            >
+              <Play size={17} />
+              {at("Показать «Привет!»", "Show «Привет!»", "«Привет!» көрсету")}
             </button>
             <details className="sign-letter-picker">
               <summary>
@@ -466,25 +479,17 @@ export function SignDictionaryPage() {
           </div>
         </section>
       )}
-      {tab !== "grammar" && !!(selected || submitted) && (
-        <div ref={sequenceRef} className="sign-dictionary-result">
+      {tab !== "grammar" && (
+        <div
+          ref={sequenceRef}
+          className="sign-dictionary-result text-sign-player"
+        >
           <SignSequencePlayer
-            key={`${tab}-${run}-${spelling}-${selected?.id ?? submitted}`}
-            plan={
-              selectedPlan ??
-              (tab === "text" || tab === "phrases"
-                ? motionPlan
-                : emptyMotionPlan)
-            }
-            autoPlay={
-              !!(
-                selected ||
-                ((tab === "text" || tab === "phrases") && submitted)
-              )
-            }
+            key={`${run}-${spelling}-${selected?.id ?? submitted}`}
+            plan={selectedPlan ?? motionPlan}
+            autoPlay={!!(selected || submitted)}
           />
-          {(((tab === "text" || tab === "phrases") && submitted) ||
-            selected) && (
+          {!!(submitted || selected) && (
             <details className="sign-dictionary-reference">
               <summary>
                 {at(

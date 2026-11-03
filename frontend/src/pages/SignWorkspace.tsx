@@ -10,6 +10,9 @@ import {
   Play,
   RotateCcw,
   Type,
+  ScanLine,
+  MessageCircle,
+  Eye,
 } from "lucide-react";
 import { at } from "../i18n/automation";
 import { Empty, ErrorMessage, Loading } from "../components/UI";
@@ -361,7 +364,7 @@ export function SignPracticePage() {
 }
 export function SignHelpPage() {
   return (
-    <div className="sign-workspace">
+    <div className="sign-workspace help-overview">
       <Heading
         title={at(
           "Что где находится",
@@ -430,15 +433,23 @@ export function SignHelpPage() {
               "Тақырып бойынша 171 бейне. Жазусыз ымды көріп, мағынасын таңдаңыз және қателескен сөздерді қайталаңыз. Камера қажет емес.",
             ),
           ],
-        ].map(([url, title, text]) => (
-          <Link className="panel" to={url} key={url}>
-            <h2>
-              {title}
-              <ArrowUpRight size={20} />
-            </h2>
-            <p>{text}</p>
-          </Link>
-        ))}
+        ].map(([url, title, text], index) => {
+          const Icon = [BookOpen, Type, ScanLine, Hand, MessageCircle, Eye][
+            index
+          ];
+          return (
+            <Link className="panel" to={url} key={url}>
+              <span className="help-section-icon" aria-hidden="true">
+                <Icon size={24} />
+              </span>
+              <h2>
+                {title}
+                <ArrowUpRight size={20} />
+              </h2>
+              <p>{text}</p>
+            </Link>
+          );
+        })}
       </div>
       <section className="panel sign-reading">
         <h2>

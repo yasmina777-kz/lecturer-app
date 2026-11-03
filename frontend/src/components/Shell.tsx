@@ -1,3 +1,4 @@
+import { ProductSurface } from "./ProductSurface";
 import { at } from "../i18n/automation";
 import { t } from "../i18n";
 import { useRef, useState } from "react";
@@ -56,8 +57,18 @@ export function Shell() {
       icon: ScanLine,
       active: path === "/recognition",
     },
-    { to: "/dialogues", label: at("Диалоги", "Dialogues", "Диалогтар"), icon: MessageCircle, active: path === "/dialogues" },
-    { to: "/understanding", label: at("Понимание жестов", "Understand signs", "Ымдарды түсіну"), icon: Eye, active: path === "/understanding" },
+    {
+      to: "/dialogues",
+      label: at("Диалоги", "Dialogues", "Диалогтар"),
+      icon: MessageCircle,
+      active: path === "/dialogues",
+    },
+    {
+      to: "/understanding",
+      label: at("Понимание жестов", "Understand signs", "Ымдарды түсіну"),
+      icon: Eye,
+      active: path === "/understanding",
+    },
     {
       to: "/settings",
       label: t("Настройки"),
@@ -65,8 +76,19 @@ export function Shell() {
       active: path === "/settings",
     },
   ];
+  const Surface =
+    (path === "/learn" && !location.search) ||
+    path === "/text-to-sign" ||
+    path === "/recognition" ||
+    path === "/dialogues" ||
+    path === "/understanding" ||
+    path === "/settings" ||
+    path === "/help" ||
+    path === "/practice"
+      ? ProductSurface
+      : "div";
   return (
-    <div
+    <Surface
       className={`app-shell ${/^\/lectures\/[^/]+$/.test(location.pathname) ? "player-shell" : ""}`}
     >
       {menu && <div className="mobile-scrim" onClick={() => setMenu(false)} />}
@@ -165,10 +187,6 @@ export function Shell() {
           <div className="topbar-right">
             <ThemeSwitcher />
             <LanguageSwitcher />
-            <Link to="/learn" className="button primary small">
-              <BookOpen size={16} />
-              {at("Все уровни", "All levels", "Барлық деңгейлер")}
-            </Link>
           </div>
         </header>
         <main className="main-content" ref={workspace}>
@@ -176,6 +194,6 @@ export function Shell() {
           <Outlet />
         </main>
       </div>
-    </div>
+    </Surface>
   );
 }

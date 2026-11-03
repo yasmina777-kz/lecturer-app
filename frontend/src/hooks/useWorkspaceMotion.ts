@@ -6,6 +6,9 @@ export function useWorkspaceMotion(
   route: string,
 ) {
   useEffect(() => {
+    // Tabs are controls in a persistent workspace; never replay entrance effects.
+    if (route.startsWith("/text-to-sign") || route.startsWith("/practice"))
+      return;
     const element = root.current;
     if (!element || !("IntersectionObserver" in window)) return;
     const preference = matchMedia("(prefers-reduced-motion: reduce)");
