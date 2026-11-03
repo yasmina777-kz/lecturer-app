@@ -100,10 +100,14 @@ export function LectureCard({
 export function Brand() {
   return (
     <span className="brand">
-      <span className="brand-mark">
-        <BookOpen size={21} />
-        <i />
-      </span>
+      <img
+        className="brand-symbol"
+        src="/images/brand/ai-mentor-symbol-v1.png"
+        width={42}
+        height={42}
+        alt=""
+        aria-hidden="true"
+      />
       <span>AI Mentor</span>
     </span>
   );

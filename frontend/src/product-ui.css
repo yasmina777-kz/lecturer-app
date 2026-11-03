@@ -3042,14 +3042,54 @@
   }
 }
 :root .product-ui[data-product-ui][data-product-theme] {
-  & .practice-workspace h1 { font-weight: 750; }
+  & .practice-workspace h1 {
+    font-weight: 750;
+  }
   & .profile-settings-page .page-heading::before,
   & .help-overview .page-heading::before,
   & .sign-recognition > .page-heading::before {
     content: "";
     width: 22px;
     height: 22px;
-    background: linear-gradient(var(--p-blue),var(--p-blue)) center / 2px 20px no-repeat,
-      linear-gradient(var(--p-blue),var(--p-blue)) center / 20px 2px no-repeat;
+    background:
+      linear-gradient(var(--p-blue), var(--p-blue)) center / 2px 20px no-repeat,
+      linear-gradient(var(--p-blue), var(--p-blue)) center / 20px 2px no-repeat;
+  }
+}
+:root .product-ui[data-product-ui][data-product-theme] {
+  &[data-product-theme="dark"]
+    .sign-recognition
+    .recognition-caption-heading
+    > span {
+    color: #1467d7;
+    background: #dce8ff;
+  }
+  & .practice-page > .sign-history {
+    border: 1px solid var(--p-line);
+    border-radius: 18px;
+    padding: 20px;
+    margin-top: 24px;
+    background: var(--p-surface);
+    color: var(--p-text);
+  }
+  & .practice-page .sign-history summary {
+    color: var(--p-text);
+    cursor: pointer;
+  }
+  & .practice-page .sign-history .panel,
+  & .practice-page .sign-history .empty-state {
+    background: var(--p-subtle);
+    color: var(--p-text);
+    border-color: var(--p-line);
+    border-radius: 16px;
+  }
+  & .practice-page .sign-history p {
+    color: var(--p-muted);
+  }
+  & .practice-page .sign-history .button.primary {
+    background: var(--p-primary);
+    color: var(--p-on-primary);
+    border-color: transparent;
+    border-radius: 24px;
   }
 }

@@ -5,14 +5,17 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
   ArrowRight,
-  Check,
   Eye,
   EyeOff,
-  Sparkles,
+  LoaderCircle,
+  Pause,
+  Play,
 } from "lucide-react";
 import { login, register } from "../api/authApi";
 import { useAuth } from "../context/AuthContext";
-import { AvatarPlayer } from "../components/AvatarPlayer";
+import { ProductSurface } from "../components/ProductSurface";
+import { LandingWaves } from "../components/LandingWaves";
+import "./auth-page.css";
 import { Brand, ErrorMessage, messageOf } from "../components/UI";
 import { ThemeSwitcher } from "../components/ThemeSwitcher";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
@@ -27,6 +30,7 @@ export function AuthPage({ signup = false }: { signup?: boolean }) {
   const [show, setShow] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [motionPaused, setMotionPaused] = useState(false);
   if (user) return <Navigate to="/dashboard" replace />;
   async function submit(e: FormEvent) {
     e.preventDefault();
@@ -53,154 +57,217 @@ export function AuthPage({ signup = false }: { signup?: boolean }) {
     }
   }
   return (
-    <div className="auth-layout">
-      <section className="auth-story">
-        <Link to="/">
-          <Brand />
-        </Link>
-        <div className="auth-story-text">
-          <span className="eyebrow">
-            <Sparkles size={14} /> {at("ИЗУЧАЕМ ЯЗЫК ЖЕСТОВ", "EXPLORE SIGN LANGUAGE", "ЫМ ТІЛІН ҮЙРЕНЕМІЗ")}
-          </span>
-          <h1>
-            {at("Смотрите жесты.", "Watch signs.", "Ымдарды қараңыз.")}
-            <br />
-            <em>{at("Учитесь понимать.", "Learn to understand.", "Түсінуді үйреніңіз.")}</em>
-          </h1>
-          <p>
-            {at("Карточки, примеры и повторение.", "Cards, examples and practice.", "Карточкалар, мысалдар және қайталау.")}
-            <br />
-            {at("Постепенно, в вашем темпе.", "Step by step, at your pace.", "Біртіндеп, өз қарқыныңызбен.")}
-          </p>
-        </div>
-        <AvatarPlayer avatarId="classic-female" />
-        <div className="auth-benefits">
-          <span>
-            <Check size={16} />
-            {t("Ваш темп")}
-          </span>
-          <span>
-            <Check size={16} />
-            {at("Разбор движений", "Movement breakdown", "Қимылды талдау")}
-          </span>
-          <span>
-            <Check size={16} />
-            {t("Практика")}
-          </span>
-        </div>
-        <small>{t("Знания начинаются с любопытства.")}</small>
-      </section>
-      <section className="auth-form-area">
-        <Link to="/" className="auth-back">
-          <ArrowLeft size={14} />
-          {t("На главную")}
-        </Link>
-        <div className="auth-preferences"><ThemeSwitcher /><LanguageSwitcher /></div>
-        <div className="auth-mobile-brand">
-          <Brand />
-        </div>
-        <div className="auth-form">
-          <span className="eyebrow">
-            {signup ? t("НОВОЕ НАЧАЛО") : t("РАДЫ ВАС ВИДЕТЬ")}
-          </span>
-          <h2>{signup ? t("Начните с любопытства") : t("С возвращением")}</h2>
-          <p>
-            {signup
-              ? t("Создайте аккаунт — и найдите свой способ учиться.")
-              : at("Продолжайте знакомство с языком жестов.", "Continue exploring sign language.", "Ым тілімен танысуды жалғастырыңыз.")}
-          </p>
-          <form onSubmit={submit}>
-            <ErrorMessage message={error} />
-            {signup && (
-              <p className="form-hint">
-                {t(
-                  "Все новые аккаунты — студенты. Роль преподавателя назначает администратор.",
-                )}
-              </p>
-            )}
-            {signup && (
-              <label>
-                {t("Как вас зовут")}
-                <input
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  autoComplete="name"
-                  placeholder={t("Имя и фамилия")}
-                  minLength={2}
-                  maxLength={80}
-                  required
-                />
-              </label>
-            )}
-            <label>
-              Email
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                autoComplete="email"
-                placeholder="you@example.com"
-                maxLength={254}
-                required
-              />
-            </label>
-            <label>
-              {t("Пароль")}
-              <div className="password-input">
-                <input
-                  type={show ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  autoComplete={signup ? "new-password" : "current-password"}
-                  placeholder={
-                    signup ? t("Не менее 8 символов") : t("Ваш пароль")
-                  }
-                  minLength={signup ? 8 : undefined}
-                  maxLength={64}
-                  required
-                />
-                <button
-                  type="button"
-                  className="icon-button"
-                  aria-label={show ? t("Скрыть пароль") : t("Показать пароль")}
-                  onClick={() => setShow(!show)}
-                >
-                  {show ? <EyeOff size={18} /> : <Eye size={18} />}
-                </button>
-              </div>
-            </label>
-            {signup && (
-              <p className="form-hint">
-                {t(
-                  "Загружайте только материалы, которые имеете право использовать. При генерации текст передаётся AI-провайдеру.",
-                )}
-              </p>
-            )}
-            <button className="button primary full" disabled={busy}>
-              {busy
-                ? t("Подождите…")
-                : signup
-                  ? t("Создать аккаунт")
-                  : t("Войти в аккаунт")}
-              <ArrowRight size={18} />
+    <ProductSurface className="auth-surface">
+      <div
+        className={`auth-entry auth-entry--${signup ? "signup" : "login"}${motionPaused ? " motion-paused" : ""}`}
+      >
+        <header className="auth-entry-header">
+          <Link to="/" aria-label="AI Mentor">
+            <Brand />
+          </Link>
+          <Link to="/" className="auth-entry-back">
+            <ArrowLeft size={16} />
+            {t("На главную")}
+          </Link>
+          <div className="auth-entry-preferences">
+            <ThemeSwitcher />
+            <LanguageSwitcher />
+          </div>
+        </header>
+        <main className="auth-entry-main">
+          <section
+            className="auth-entry-story"
+            aria-labelledby="auth-story-title"
+          >
+            <div className="auth-entry-copy">
+              <h2 id="auth-story-title">
+                {signup
+                  ? at("Язык жестов.", "Sign language.", "Ым тілі.")
+                  : at("Продолжим", "Let’s keep", "Оқуды")}
+                <br />
+                <span>
+                  {signup
+                    ? at("Начнём?", "Shall we?", "Бастаймыз ба?")
+                    : at("обучение.", "learning.", "жалғастырайық.")}
+                </span>
+              </h2>
+              <svg
+                className="auth-entry-underline"
+                viewBox="0 0 260 28"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path d="M4 21C70 2 161 1 250 10M92 25C153 12 211 12 256 17" />
+              </svg>
+            </div>
+            <div className="auth-entry-art" aria-hidden="true">
+              <LandingWaves paused={motionPaused} />
+              <div className="auth-entry-orbit" />
+              <span className="auth-entry-spark">✳</span>
+            </div>
+            <button
+              type="button"
+              className="auth-entry-motion"
+              aria-pressed={motionPaused}
+              aria-label={
+                motionPaused
+                  ? at(
+                      "Продолжить анимацию",
+                      "Resume animation",
+                      "Анимацияны жалғастыру",
+                    )
+                  : at(
+                      "Остановить анимацию",
+                      "Pause animation",
+                      "Анимацияны тоқтату",
+                    )
+              }
+              title={
+                motionPaused
+                  ? at(
+                      "Продолжить анимацию",
+                      "Resume animation",
+                      "Анимацияны жалғастыру",
+                    )
+                  : at(
+                      "Остановить анимацию",
+                      "Pause animation",
+                      "Анимацияны тоқтату",
+                    )
+              }
+              onClick={() => setMotionPaused(!motionPaused)}
+            >
+              {motionPaused ? <Play size={16} /> : <Pause size={16} />}
             </button>
-          </form>
-          <p className="switch-link">
-            {signup ? t("Уже есть аккаунт?") : t("Впервые здесь?")}{" "}
-            <Link to={signup ? "/login" : "/register"}>
-              {signup ? t("Войти") : t("Зарегистрироваться")}
-            </Link>
-          </p>
-          {!signup && (
-            <p className="form-hint center">
-              {t("Не помните пароль? Обратитесь к владельцу вашей установки.")}
-            </p>
-          )}
-        </div>
-        <small className="auth-footer">
-          {t("Одна тема. Один вопрос. На шаг ближе к пониманию.")}
-        </small>
-      </section>
-    </div>
+          </section>
+          <section
+            className="auth-entry-panel"
+            aria-labelledby="auth-form-title"
+          >
+            <nav
+              className="auth-entry-tabs"
+              aria-label={at(
+                "Вход и регистрация",
+                "Sign in and sign up",
+                "Кіру және тіркелу",
+              )}
+            >
+              <Link to="/login" aria-current={!signup ? "page" : undefined}>
+                {t("Войти")}
+              </Link>
+              <Link to="/register" aria-current={signup ? "page" : undefined}>
+                {at("Регистрация", "Sign up", "Тіркелу")}
+              </Link>
+            </nav>
+            <div className="auth-entry-form">
+              <h1 id="auth-form-title">
+                {signup
+                  ? at("Регистрация", "Sign up", "Тіркелу")
+                  : at("Вход", "Sign in", "Кіру")}
+              </h1>
+              <form onSubmit={submit} aria-busy={busy}>
+                <ErrorMessage message={error} />
+                {signup && (
+                  <label>
+                    {t("Как вас зовут")}
+                    <input
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      autoComplete="name"
+                      placeholder={t("Имя и фамилия")}
+                      minLength={2}
+                      maxLength={80}
+                      required
+                    />
+                  </label>
+                )}
+                <label>
+                  Email
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    autoComplete="email"
+                    placeholder="you@example.com"
+                    maxLength={254}
+                    required
+                  />
+                </label>
+                <label>
+                  {t("Пароль")}
+                  <div className="password-input">
+                    <input
+                      type={show ? "text" : "password"}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      autoComplete={
+                        signup ? "new-password" : "current-password"
+                      }
+                      placeholder={
+                        signup ? t("Не менее 8 символов") : t("Ваш пароль")
+                      }
+                      minLength={signup ? 8 : undefined}
+                      maxLength={64}
+                      required
+                    />
+                    <button
+                      type="button"
+                      className="auth-entry-password-toggle"
+                      aria-pressed={show}
+                      aria-label={
+                        show ? t("Скрыть пароль") : t("Показать пароль")
+                      }
+                      onClick={() => setShow(!show)}
+                    >
+                      {show ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
+                  </div>
+                </label>
+                <button className="auth-entry-submit" disabled={busy}>
+                  {busy
+                    ? t("Подождите…")
+                    : signup
+                      ? t("Создать аккаунт")
+                      : t("Войти в аккаунт")}
+                  {busy ? (
+                    <LoaderCircle size={18} className="spin" />
+                  ) : (
+                    <ArrowRight size={18} />
+                  )}
+                </button>
+              </form>
+              {signup && (
+                <details className="auth-entry-details">
+                  <summary>
+                    {at(
+                      "Об аккаунте и материалах",
+                      "About your account and materials",
+                      "Аккаунт пен материалдар туралы",
+                    )}
+                  </summary>
+                  <p>
+                    {t(
+                      "Все новые аккаунты — студенты. Роль преподавателя назначает администратор.",
+                    )}
+                  </p>
+                  <p>
+                    {t(
+                      "Загружайте только материалы, которые имеете право использовать. При генерации текст передаётся AI-провайдеру.",
+                    )}
+                  </p>
+                </details>
+              )}
+              {!signup && (
+                <p className="form-hint center">
+                  {t(
+                    "Не помните пароль? Обратитесь к владельцу вашей установки.",
+                  )}
+                </p>
+              )}
+            </div>
+          </section>
+        </main>
+      </div>
+    </ProductSurface>
   );
 }

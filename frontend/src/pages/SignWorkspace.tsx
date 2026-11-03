@@ -279,7 +279,7 @@ export function SignPracticePage() {
   const { progress, error, save } = useSignProgress();
   const marked = lessons().filter((l) => progress[l.id]);
   return (
-    <div className="sign-workspace">
+    <div className="sign-workspace practice-page">
       <SignTrainingRoom />
       <details className="sign-history">
         <summary>
