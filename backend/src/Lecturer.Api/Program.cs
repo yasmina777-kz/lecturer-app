@@ -152,13 +152,31 @@ app.Use(async (ctx, next) =>
 if (app.Environment.IsDevelopment()) { app.UseSwagger(); app.UseSwaggerUI(); }
 app.UseCors(); app.UseAuthentication(); app.UseRateLimiter(); app.UseAuthorization();
 app.MapGet("/api/health", () => Results.Ok(new { status = "ok" }));
+// The local Vite proxy reaches the Python sidecar; this deployment does not.
+if (vercelHosting)
+{
+    app.MapGet("/api/krsl/status", () => Results.Ok(new
+    {
+        ready = false, vocabulary = 0, local = false, experimental = true,
+        error = "Распознавание фраз на сервере пока не подключено. Камера и распознавание букв доступны."
+    }));
+    app.MapPost("/api/krsl/recognize", () => Results.Json(new
+    {
+        detail = "Распознавание фраз на сервере пока не подключено."
+    }, statusCode: 503)).RequireAuthorization();
+}
 app.MapGet("/api/capabilities", (AiService ai, SpeechService speech) => Results.Ok(new { aiConfigured = ai.Available, speech = speech.Available ? "azure" : "browser", uploadFormats = new[] { "pdf", "docx", "pptx", "txt", "md" } })).RequireAuthorization();
 app.MapControllers();
 // Serve the bundled React app on the same origin as the API in the cloud image.
 if (Directory.Exists(Path.Combine(app.Environment.ContentRootPath, "wwwroot")))
 {
     app.UseDefaultFiles();
-    app.UseStaticFiles();
+    var assetTypes = new Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider();
+    assetTypes.Mappings[".task"] = "application/octet-stream";
+    assetTypes.Mappings[".onnx"] = "application/octet-stream";
+    assetTypes.Mappings[".glb"] = "model/gltf-binary";
+    assetTypes.Mappings[".gltf"] = "model/gltf+json";
+    app.UseStaticFiles(new StaticFileOptions { ContentTypeProvider = assetTypes });
     app.MapFallbackToFile("index.html");
     // Unknown API paths must return JSON, never the SPA document.
     app.Map("/api/{**path}", () => Results.NotFound(new { message = "API route not found." }));

@@ -1,0 +1,2720 @@
+{
+  "revision": "fbd33f1ddfbdc444d7b63dbd3ead92aa417630ee",
+  "files": [
+    {
+      "path": "frontend/public/avatars/hand-workshop/fist.glb",
+      "sha256": "bf3c87018eb4191f2b74b26cdb1cccfddb2db789c1f8485673cc16fae7cb64a3",
+      "size": 205760
+    },
+    {
+      "path": "frontend/public/avatars/hand-workshop/grasp-scene.glb",
+      "sha256": "fca90bc069b18395ec4fed8d0f11c2e2de9fdb14fbbcdf5aa4a95499a17e35df",
+      "size": 10854380
+    },
+    {
+      "path": "frontend/public/avatars/hand-workshop/grasp.glb",
+      "sha256": "0b462713d647e3b086125d545d8dedcc72f8caf9ddc1c0f4b79ab15c6f016ad6",
+      "size": 215060
+    },
+    {
+      "path": "frontend/public/avatars/hand-workshop/mira-rig.glb",
+      "sha256": "28746234d175f180848f281ad5c48863ed01a10c50b4edc29d487a9b07a4040d",
+      "size": 19734588
+    },
+    {
+      "path": "frontend/public/avatars/hand-workshop/pinch.glb",
+      "sha256": "be849ff27ce34b4ede0c28652b7a64ca4c490ad3c15eab88832301d4e1c04763",
+      "size": 205760
+    },
+    {
+      "path": "frontend/public/avatars/hand-workshop/point.glb",
+      "sha256": "09976bc7aad82dc42f42a3892ffb0ad9934ab48912e0496330fe41dfd65f1fc6",
+      "size": 186708
+    },
+    {
+      "path": "frontend/public/avatars/hand-workshop/wave.glb",
+      "sha256": "17a9f07da206a2267e38767de0e65e4e5813bc8ef60870bdcbabf941e03e12ee",
+      "size": 202584
+    },
+    {
+      "path": "frontend/public/avatars/lecture-demo/female-demo.mp4",
+      "sha256": "655e2208e511e968a8760ee9c3d35861ef63c2ed4c139cadddd6b2b8a48a16eb",
+      "size": 6509593
+    },
+    {
+      "path": "frontend/public/avatars/lecture-demo/female-kim-v2.mp4",
+      "sha256": "655e2208e511e968a8760ee9c3d35861ef63c2ed4c139cadddd6b2b8a48a16eb",
+      "size": 6509593
+    },
+    {
+      "path": "frontend/public/avatars/lecture-demo/female-portrait.png",
+      "sha256": "cbc0898f6c3445a8ca0d032db28fa04afdad02c718a26dfb3b0e00ad8d2975e6",
+      "size": 2370879
+    },
+    {
+      "path": "frontend/public/avatars/lecture-demo/male-demo.mp4",
+      "sha256": "a92ebab520150588ec5b1354f1a729647e770bbaa1ad872f10e22c68b2bba934",
+      "size": 965161
+    },
+    {
+      "path": "frontend/public/avatars/lecture-demo/male-portrait.png",
+      "sha256": "5cb04d0b9485d26d5e98e6d82106b4a078aca176fa7224c9d7088b2202ddad02",
+      "size": 2359644
+    },
+    {
+      "path": "frontend/public/avatars/live/kim.m4a",
+      "sha256": "f78eabf1caf17c0becc268b010623565daee4ecb6da5ffa627d1dca9a49511ef",
+      "size": 545593
+    },
+    {
+      "path": "frontend/public/avatars/live/mentor-female.glb",
+      "sha256": "3be9508679455b9fb5f099f645a8d2fd5f30368d8c1e4a674ca900c65309f370",
+      "size": 12970928
+    },
+    {
+      "path": "frontend/public/avatars/live/reference-woman.glb",
+      "sha256": "4deb38929dfd25347b5c8008767e2eb3f80dbd2e52517ea88031529651f38c2e",
+      "size": 35221012
+    },
+    {
+      "path": "frontend/public/avatars/mira-blender/letter-a.glb",
+      "sha256": "67f3dd848f91f7c549cc80864904f9cabd0a4eac7c99005f8a43214cc5a5780a",
+      "size": 10775652
+    },
+    {
+      "path": "frontend/public/avatars/mira-blender/letter-g.glb",
+      "sha256": "04044b2fefd3095a9a11d38fdb4e67d2a68842a495744547658ecf5b8065cd7e",
+      "size": 10775652
+    },
+    {
+      "path": "frontend/public/avatars/mira-blender/letter-l.glb",
+      "sha256": "e566bb9cc0e4e6c9e01217f79ce1369b3f7ecf49c068582bc45e8a41ca27b79e",
+      "size": 10775652
+    },
+    {
+      "path": "frontend/public/avatars/mira-blender/letter-sh.glb",
+      "sha256": "35c4ee382286312b81737b5f0f156e535e5ce2da26c7568877724b489b5fe428",
+      "size": 10775652
+    },
+    {
+      "path": "frontend/public/avatars/mira-blender/letter-u.glb",
+      "sha256": "959c7142886bc1afbd0b3c5c080498d453a21810dfb6defe4d9ea198d6f7b107",
+      "size": 10775652
+    },
+    {
+      "path": "frontend/public/avatars/mira-blender/letter-v.glb",
+      "sha256": "e00c2d5d5d7a855b68d5d484c5d6ca441e28209bd7294de85d52d2d4ecbc854a",
+      "size": 10775652
+    },
+    {
+      "path": "frontend/public/avatars/mira-blender/letter-y.glb",
+      "sha256": "efd032f75a8150451348942e46c66372a46da27ed5e09d525d40f02c4730a4e8",
+      "size": 10775652
+    },
+    {
+      "path": "frontend/public/avatars/mira-blender/mira-hello.glb",
+      "sha256": "e182072f719007a0e537827cdc2abba732ef8cc8100c816fe892627ecca638c6",
+      "size": 10832104
+    },
+    {
+      "path": "frontend/public/avatars/mira-blender/mira-signing-soft.glb",
+      "sha256": "2c1d093d36695a30c0d5204886440e44d97bba769874ee8d07caea145d4ae152",
+      "size": 10844848
+    },
+    {
+      "path": "frontend/public/avatars/mira-blender/mira-signing.glb",
+      "sha256": "88453b6ab374ff05d2e2ea760ad2f4ac9160e476872b8b93816f408661d9fd21",
+      "size": 10800276
+    },
+    {
+      "path": "frontend/public/avatars/mira-blender/mira-thanks.glb",
+      "sha256": "3757c2c1873f2909aa0a2b7702a9251b6c276b104a6f1878ec848e19f616d611",
+      "size": 10774656
+    },
+    {
+      "path": "frontend/public/avatars/mixamo-trial/standing-idle.glb",
+      "sha256": "e146b3ad23bbd85273bae04804b55515cf541b646775dcae6ba9310d79017e7d",
+      "size": 184360
+    },
+    {
+      "path": "frontend/public/avatars/mixamo-trial/talking.glb",
+      "sha256": "756ad2cf338e4cf869c752734fc3f98ed67465e027742b033e9e971714989071",
+      "size": 147520
+    },
+    {
+      "path": "frontend/public/avatars/portrait-study/kim-preview.wav",
+      "sha256": "3f27a79c673b4432f8086267dd958445a69fde4964c41f62da36cc38f5cdf911",
+      "size": 384044
+    },
+    {
+      "path": "frontend/public/avatars/portrait-study/portrait-final.png",
+      "sha256": "dc9fc39120bfbb6d285a77f4985ff09891e0b7889ed3736928fd5a4157c396a8",
+      "size": 772489
+    },
+    {
+      "path": "frontend/public/avatars/portrait-study/portrait-study.glb",
+      "sha256": "34c00e8231bebabfc7c15e00e0b9f872416201e7b89058a3ed23bc36f255c508",
+      "size": 11393436
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/body-clearance-report.json",
+      "sha256": "906c0b6b7dacc3252ba8d23e928ccef29ef75c7da9889b7050bc59c08e8bc131",
+      "size": 197547
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/catalog.json",
+      "sha256": "675ae160f34f8e985f5273ab4b362b660e492234b0d21053cba5effd4bee4271",
+      "size": 2252960
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-401.glb",
+      "sha256": "d6fac5f950541409937d446fd09216b7abad0fe66bc7d4415bc05934b5011506",
+      "size": 346636
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-410.glb",
+      "sha256": "0de7b748ef32c907630b3a2b9df5f9d8681206cb590d7d3a6ed14a31633c9985",
+      "size": 184512
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-411.glb",
+      "sha256": "1c64f9d28a7ab31a4f8fe08d0312ae36f6db8e12b0bf6900a87c0372da031dc9",
+      "size": 120508
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-412.glb",
+      "sha256": "f0dbeeeb3421937b570075125018121214d69afb6a10dafacf903bbb28eebed7",
+      "size": 120496
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-413.glb",
+      "sha256": "9616452bb6efd681b7e3c0ade2ad1597db9ef53568bfd8409c16a3c9b0cb99c9",
+      "size": 117844
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-414.glb",
+      "sha256": "c9f78f85a1b77aca3a2a2f3ff45d6f2f5eb3982299c21265196b6e1b1a659a42",
+      "size": 120520
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-415.glb",
+      "sha256": "a6f37efc61b596629017632e0e2f243565b7906c9357ae67823d08f1e77c4718",
+      "size": 119216
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-416.glb",
+      "sha256": "5cec15c8f535a07e447c6a15b734e9fb2fb0c64da61e9bfbae3c0d967f3c52f5",
+      "size": 119556
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-417.glb",
+      "sha256": "1a06d7909d2157c6f0631245ea7d22edeb73964bd610c474225d3eb0ba4430ad",
+      "size": 120500
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-418.glb",
+      "sha256": "6ed4d6d054ad82b3cdd92c6d6fcddbe2c1cbcfaa93820edd8d5e143c2894d4b9",
+      "size": 120520
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-419.glb",
+      "sha256": "c49607d5f4f7b084850a41d0225de9d0f7614134700dc3957d47d1ea0965702e",
+      "size": 120524
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-41a.glb",
+      "sha256": "ecb425039e47dc9f14302c003797ee8e234bb63810531dc2be2019cf8c994e26",
+      "size": 183624
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-41b.glb",
+      "sha256": "960770d65d16fc58ad750c400aa8ed801466b96687595067b5a0642b72bb7822",
+      "size": 117820
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-41c.glb",
+      "sha256": "15495cf5b3f4e4d6f881151c577c6a6173bea1059412fc55ab6c7aa46007757e",
+      "size": 117828
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-41d.glb",
+      "sha256": "457ee25ae366d39489c58f18873b2dc44d27faa8bb870b16b495c7b7843e90ee",
+      "size": 154596
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-41e.glb",
+      "sha256": "a604ad06cabb929b87d6fd143aebed0e2e88ba6160734777c649efd9070e419d",
+      "size": 212828
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-41f.glb",
+      "sha256": "d883db3071f262e943eb5a61cccc6d3bf6901214cf0710a6f7c924f6f63fa240",
+      "size": 117832
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-420.glb",
+      "sha256": "6dfb7aa00935c7dd744b2f68e7cab5b58f572e9ba6d54e44fe7e87640c0bda0c",
+      "size": 120516
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-421.glb",
+      "sha256": "526ac7c458ae4f16288068dce4edaf4646d0c0b2f2bf8cc3443e0bcff3edaf1c",
+      "size": 119192
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-422.glb",
+      "sha256": "bba7abd08bccb082ae467d42a021393f385828158d89c006cc176fcb0f3e9ab9",
+      "size": 117836
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-423.glb",
+      "sha256": "0563ffae71dde942fac54355f8caa3dbdf6fa17ba128a8c8705df74f26ad0e77",
+      "size": 119224
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-424.glb",
+      "sha256": "cb6cb64fa7f55193d94e5be7cce3ebaffa46d97f9666c0078c5f7848d839a609",
+      "size": 169600
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-425.glb",
+      "sha256": "8875def293dbe09e009b0b8232184b5cfd3b64bbb39d123cee05d9f0cd079082",
+      "size": 120524
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-426.glb",
+      "sha256": "0ac09acc8aa426ae00cfb1d6acdffb1cb6ce0de682d5da3f1f893dba73c6219e",
+      "size": 120520
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-427.glb",
+      "sha256": "de2097bc63ffb4694bc1cfcc4ab509b9c5cc37c09d4cd3bfbba32f1a4e7865df",
+      "size": 120516
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-428.glb",
+      "sha256": "04466740395a33e4fbb2f1cb58eb20e6555216e2124e7f135450f33459ed0a8b",
+      "size": 120528
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-429.glb",
+      "sha256": "3e90367ea26238af62a04ecbb53c53c885cc1475bc28182bf82450ba74b87bfc",
+      "size": 120512
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-42a.glb",
+      "sha256": "4f81cba7322c2898dfd21aa1f190c388645d6e38143147a4156e796ca97fc3f6",
+      "size": 188508
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-42b.glb",
+      "sha256": "847e80d24a6369ca0e57777f87b487f09ba81220e183e0f8a2e353be1b7effa4",
+      "size": 148280
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-42c.glb",
+      "sha256": "0c29e5befc11e7b48a55671f4ff510e8efafd3c59b5bd2c2cde41cf0e44b89bb",
+      "size": 200360
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-42d.glb",
+      "sha256": "34dfaaf1c3bc961ad555903a75b225e9d4e1562038e19ac491cb1b160bce0455",
+      "size": 175808
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-42e.glb",
+      "sha256": "0a6ef83837cffc495f5d8d88b80abc39a5d35b0ea693b29a50624a1d267d06f1",
+      "size": 119216
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/letter-42f.glb",
+      "sha256": "907dd42911a23ba8ce8eb632fcbf8c94d36b0308c9339dff03bf6e1c043c430f",
+      "size": 167736
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/prepared-hello.glb",
+      "sha256": "06323659fc59b3ba1d073ade151bf55e218cf0f3627ea536c8a9029e80ef35e3",
+      "size": 228684
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/prepared-name-demo.glb",
+      "sha256": "b74fc94e24da28d10e337431f4f19d786f6604167e14b50a355211cd57889509",
+      "size": 309000
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/prepared-thanks.glb",
+      "sha256": "889a7043e290f3e0e9d5283618d86ed0e06c69f659cf75a9fd50b30ad0923f2b",
+      "size": 299412
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/preview.png",
+      "sha256": "66a87087d206703c414d184c8ab3d0c68dff61b12f4a33d4b6ad766a65f3b4e4",
+      "size": 125490
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/ready-idle.glb",
+      "sha256": "fde96f65dc7662f3bdbb12051850189845fed8ea699ef1dae1280df32d08a1f8",
+      "size": 184336
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-00af7ae9.glb",
+      "sha256": "6f6510e2b67e151a1463e323f3317ae81c84bff350769d7dd5692fb7e5b1c76a",
+      "size": 182004
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-03ac3272.glb",
+      "sha256": "1b06857f97c0949de14f5ed5222b6dfadbfbd37d8e1085de638aac1e92ac588a",
+      "size": 172248
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-069645d8.glb",
+      "sha256": "ad7bb96b75ae78738f14a60ce7ebd668ac91562c68547d1478b5863effcf2b77",
+      "size": 146548
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-0a42bb8f.glb",
+      "sha256": "c5238932b4fc4d4d7639066b6decf1855f4a426f907090d3ea54be08d5cecf52",
+      "size": 284152
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-0b485a5f.glb",
+      "sha256": "d44ce8d962422f94cacc85929430622df08412ad364baba512c656ef867f517c",
+      "size": 211940
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-0bf7a453.glb",
+      "sha256": "27665ae40ea1c1783ddf0715f870c5485f8d640c7aa259886822ff32a331f59e",
+      "size": 234852
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-0c849b23.glb",
+      "sha256": "9e65a4224d0a5d3a8a41e01030cb091ca64f973d9ac48a6ddd7e7ce0cbb34ad2",
+      "size": 200492
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-0cca1e04.glb",
+      "sha256": "848e19c821f0adc575832ac543b3a18420abee49245c482a9f365514105fa216",
+      "size": 151828
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-0f02bf01.glb",
+      "sha256": "a36ee0a2e90f818aa66cef50a830bb1897828ae27718aa5fdd4e4670ca13ef74",
+      "size": 165096
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-151a37ef.glb",
+      "sha256": "9350eaed5db791a249881ab8471da41ca8a8c8b571616efcaabebececd480fd8",
+      "size": 209280
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-16bf2a06.glb",
+      "sha256": "14a9b4fb24c270fe95e799b1660ac3cc5c5a71448a0bec63d6f7cf0e2f07a0a5",
+      "size": 200496
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-175ce38d.glb",
+      "sha256": "0a342fc9a4f6eec4e70d23b49bfc9faba0927e9d027711fbea76e759cc4db7fe",
+      "size": 190644
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-1ba0d285.glb",
+      "sha256": "cbf16e781355d86d0fa5a0be3b5ae6a3958bc9d5bf93db9745bb28609a7aead5",
+      "size": 201184
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-1d06b313.glb",
+      "sha256": "febb387bc07d9936353f0db6afab73e9011c2d3f9d13295e44d6eb584be0d2f1",
+      "size": 305288
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-1e422a1f.glb",
+      "sha256": "be9b6bca87ec5937044dc98b58db1c3c8a3c2b8f3944df50bdc287525246a8bc",
+      "size": 186052
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-1ff178a6.glb",
+      "sha256": "3e6c469a469b1e678058b8aefdbceff92b995ca655bfaee057d581895475b566",
+      "size": 178324
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-22f60354.glb",
+      "sha256": "c6d198ff0f40be3e60bf93c86fd8ed7c85de94b8f15d6b73c62238b03c26b8e3",
+      "size": 213520
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-23b3909e.glb",
+      "sha256": "40b6c2d0ab4f61171c359f308f7ee3a16c82752dd01e6176a5553ccbbdbf82b4",
+      "size": 325484
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-24491c1c.glb",
+      "sha256": "fcfda74b8b484e0282ecd444a9f2b4be60e80ec9f550b29b941cd7d286a83767",
+      "size": 251560
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-250f896a.glb",
+      "sha256": "e8c231b46953fd8b747683811947cbab1e02d9db624d4062279f655e1fc0863a",
+      "size": 203044
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-25fed1ff.glb",
+      "sha256": "e98a117df9aaad5f03ffd8f151e164db362f120073adfca1cfee4e9c95c79229",
+      "size": 226048
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-26e2d0ce.glb",
+      "sha256": "b805f154c8170609eac042d3a51d4c465c9ba5b68f3896e5fc729ea16602cd99",
+      "size": 202132
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-2a7729d7.glb",
+      "sha256": "1e525c625676a276e568c1040dcc6c5a64a2275212bdc5154b8649e144e960ad",
+      "size": 235704
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-2ad51148.glb",
+      "sha256": "18a3ccabd9c97e7ebbc45597134ae691ba7ee0418e66836e881a669bbed97b53",
+      "size": 159672
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-2b21215c.glb",
+      "sha256": "6bffac2efda37b58ab2e178084e0675e09e98ace1016326ba2b8b0f42263577a",
+      "size": 188136
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-2c1fd7ff.glb",
+      "sha256": "85dad2580d5efc79a592cee09520e6147b4afe56bb288066b5e455a53c03b17f",
+      "size": 173028
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-2c57ef13.glb",
+      "sha256": "8ed52efd5a3fde59bc83ea0672a4bdb2000aac7353da83ebc33007646b4183a0",
+      "size": 216228
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-30f82679.glb",
+      "sha256": "ff757d6e5bdf47dafd8fed9ea45e1f7012c1a91dc502ac4b3b98658849ff7bd3",
+      "size": 195212
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-317890bf.glb",
+      "sha256": "c407b71cb7fd1a0beeaf92e4dba6e24287132504aa8d777f9d03d08fde84997e",
+      "size": 173148
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-32e530d7.glb",
+      "sha256": "eefd2951e64e43c8ae94eaf15be82964ffcbf5a0f776df60932a4ab8fc3ce3b7",
+      "size": 317320
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-338e93e8.glb",
+      "sha256": "ebf6a1b51d6b140e061d30b36312efb8f12fbfb442c9f0375e75c985181fb4f8",
+      "size": 166824
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-35e11a03.glb",
+      "sha256": "b88683c34e012b4eabb1e8d0c8a56c6915e42e82417dc81b461c8dc7144a6f90",
+      "size": 216364
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-360ff815.glb",
+      "sha256": "c2067492c8c702c30b74d95a1ed2884356528c6674a767101bdf8dff8f1ccf3e",
+      "size": 195224
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-3637b257.glb",
+      "sha256": "1a903610cd72cfecac40e5c5db0aa14d095045c40309b9878ca5cd2347cfd00c",
+      "size": 141412
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-36b20a69.glb",
+      "sha256": "7f6731613a1f6fc1128c8c6946a1ee8addd605bd8a52a32e3e2d644a70e59cad",
+      "size": 173160
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-38153f62.glb",
+      "sha256": "37ef731b9fae7755b9e36d82c6df064ade0304a69e6dd0cbf1398b13bcbf0793",
+      "size": 185500
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-38c6f832.glb",
+      "sha256": "bb9cd86bfbae214c417fc2dab224145648751dbf02e1f3fd27a3ae0a5749952f",
+      "size": 158132
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-3d7e498c.glb",
+      "sha256": "99dfc7c763f240f30c2fb3d53c55f72986c05fbcc99553c63d3149cb381c82e6",
+      "size": 160816
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-3df3b9dc.glb",
+      "sha256": "b66ecfde9e3fbf7aca67cdb5aac613d824eb391bce52c9237da59078442b59eb",
+      "size": 240004
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-3eccaa2d.glb",
+      "sha256": "de529aec0693b080e1aeb4dc6ea24c90be87e816f1c5fbd0e126895929815bc7",
+      "size": 188144
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-40af2c54.glb",
+      "sha256": "185ced26d4208f0db91ad58773ab89eef266e7002459e139d2f5bfd170b35bdf",
+      "size": 178336
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-41df6170.glb",
+      "sha256": "7e28d4adcbb843e290b8c34030acfd63b6888c2ee149972eba6fad7d962b8ab5",
+      "size": 224160
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-44bc9933.glb",
+      "sha256": "f5bbf1e430ddb0b36b9e8d1be51900be188b23fc99c7dd16439651ef5a2b903f",
+      "size": 166100
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-44de272e.glb",
+      "sha256": "6eb15067f1f5ffd475698c0ff67e6b61c8f5f3a6e8747f961a92c03e010db47d",
+      "size": 180688
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-4699249c.glb",
+      "sha256": "25eaee1902ff2bad16276f097deb9b7f8bc31646432f99e198f2124feb894178",
+      "size": 177532
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-4893125c.glb",
+      "sha256": "59214a684b333596e2c7bf34075216de72a369b21a745a820569f453ab67f59c",
+      "size": 181124
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-4fa6cc2a.glb",
+      "sha256": "007b45a24ee84e42362edf9f931fb847c36546d9a6293edcf09859e71d4ffc26",
+      "size": 184652
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-4fb38350.glb",
+      "sha256": "b7f549459588db16424f3435016b177f5cfa624d73f018ec920bfff25e83b331",
+      "size": 188888
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-506f5596.glb",
+      "sha256": "7485474cf76f8798f68d4afb154c3b6aec819067a04e06460e8f06b04f6abcab",
+      "size": 498052
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-50b48f58.glb",
+      "sha256": "e262d615362674ed3fd0e13bed1de745f861d381033bc84a158679fa39fbc216",
+      "size": 189792
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-542b93a5.glb",
+      "sha256": "e4303f45dd09e5d48a04192f25e809319fee29d26ea9f8725d64e673eda54815",
+      "size": 185492
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-54dee110.glb",
+      "sha256": "697a5dfdce888e94503ae5b40ea8ebcc69c5cbaa8ff47b4ceeee35072ca405d5",
+      "size": 179320
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-55d32981.glb",
+      "sha256": "7aa37c4512614f19ce7b99b6f78c1a636cb693291bbe4f1035d33cbb665928e1",
+      "size": 180988
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-5782a432.glb",
+      "sha256": "521f2907a4f6318d770792de8798a5519514012585197e4a46c4bd89c8a0493d",
+      "size": 138768
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-57c6880e.glb",
+      "sha256": "8c6191d7f313617b4e5f5fc2561341e9c6c252156455e057d0d0565abed11c08",
+      "size": 172256
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-580edc90.glb",
+      "sha256": "e19babb621d9c400a51db0a8fbdfc656859bbe794d394929845442300116ff44",
+      "size": 207572
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-58862482.glb",
+      "sha256": "48f3e1dfa1402ef62348254643c3e73119890b51a85f41d5673744149e80264b",
+      "size": 184644
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-594f0e3d.glb",
+      "sha256": "d7c1a88c9b4046ee07280468c4b39d8ddd2750c8c79e530e079a0022fa464130",
+      "size": 312144
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-5ac08628.glb",
+      "sha256": "09ca9a59e16e7067a2f5e0f6ac55184cc4a3fc34f4f0640e4ca36ef006adbef2",
+      "size": 277984
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-5bd9ab86.glb",
+      "sha256": "a4013291fb38fab18b3171294c6af9865e3ad6f193b35671b46db401960a1846",
+      "size": 142756
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-5c794c1c.glb",
+      "sha256": "0b668ce6423d9423364119735286c8fb6c1e425050e3a12bed809975ada14f9d",
+      "size": 189044
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-5d7cb3db.glb",
+      "sha256": "5ec13629dc1c7fda2b5eeb87237d43a07b9994f1a1e9966bdbdbede33cf41f04",
+      "size": 191696
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-5da64d7c.glb",
+      "sha256": "9de2079c8fa23cb5d36b7c6eefe9a1bca5dd54cd9ca1357ba0f25c24cd818739",
+      "size": 177528
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-5ed48b44.glb",
+      "sha256": "f45482bfdcfdef6bcc309f64dcdad59986490d1be42869adde0c1609feeda35d",
+      "size": 244536
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-5f337e79.glb",
+      "sha256": "9812cc983ee9dc1c809d581b52335d9ce02273d3cc2b828d68b32ba079299372",
+      "size": 247188
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-5fd8cf91.glb",
+      "sha256": "59a55f11c7dc75853da645ce52e3c5088853b6d540e424fbe941589f878caa45",
+      "size": 178340
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-6106a42d.glb",
+      "sha256": "1661323437c96521ad7e4785bd684d9d7594b12d0894e7fbbab54d101e7f8c9b",
+      "size": 183616
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-620a9fc5.glb",
+      "sha256": "2697dd3b93024343c55d0417f02fbc17f7f05502386a415774a4cde623abe74a",
+      "size": 210936
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-62813877.glb",
+      "sha256": "38f6522c2cb166ea1507438443c4b2ed9c1a8437f27823ec9b509715e1496988",
+      "size": 179920
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-628722ef.glb",
+      "sha256": "5d94ea8209bb700fd64583b4e53db2ef111c0494d6ab914b19703a650a30d5f0",
+      "size": 149628
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-640f2b1f.glb",
+      "sha256": "926319a0eae58ff5fa8179a737cd243d0b8f2f9a57f0c241dc82b49ade23875d",
+      "size": 171976
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-65c00b09.glb",
+      "sha256": "8e33882e37a73c3b3646b3ae02ec9edc2cc08ba40b2a8e8c5d60c1798cb6971b",
+      "size": 192560
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-6911f183.glb",
+      "sha256": "5eec3ff1767971a2a6fef573f3e78492e0aa60de262d87eb2adf63bc0f3dec20",
+      "size": 174048
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-69586c66.glb",
+      "sha256": "00fa7831a375486091c9bc30f51a25d5450039d91e9c95a6edf7476c6eb62d92",
+      "size": 177396
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-6a2d01fd.glb",
+      "sha256": "ab2371b4085b7ee1cb1bcaf0be1743c1039b6607bdd1e3828bc9fa470dc7201a",
+      "size": 188116
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-6c7d80f0.glb",
+      "sha256": "5abb716f6d62f1d0ad5f3eb689528b1a8a1229d621791f9427fcc6563dab9e14",
+      "size": 218992
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-6d759966.glb",
+      "sha256": "6bdf744956807ff6da90eb80e4913a2a2bd8e4cc4b57831688726cca746a0f80",
+      "size": 181116
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-6e24fd10.glb",
+      "sha256": "ca11cf6cd69a49c16da45ca3b4a64ad840bcc26245e23b7d2d2f81d27516698d",
+      "size": 189792
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-7143af36.glb",
+      "sha256": "efdcc8f98280f5f08cafa2e28890c864eb6c36dcb1371a49bb18507eb8fcb19c",
+      "size": 189056
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-71b45022.glb",
+      "sha256": "9ddb12e9c158f766b282cd00bdbe2b326fbbf0426cec5ac1e7303151ab669b1a",
+      "size": 171276
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-71c24ba0.glb",
+      "sha256": "2ec04b3e150010d0269f80928564809967c5d8eb406427c5b18bf145407a9792",
+      "size": 212836
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-72476e8f.glb",
+      "sha256": "ccb756a3c0a2d2bdaec811c5c40ac64c29e90eac3d68eba0fccdbfc88e75c3f4",
+      "size": 180196
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-728c296d.glb",
+      "sha256": "c038f232a729cf50d16ba790fc30fb0b9370d64275f8c09d77e9a293a74a7043",
+      "size": 177544
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-743cb1da.glb",
+      "sha256": "9ba98bbb348482cefc5053721093ff78343d00d10312528db3a78a6c5617f00c",
+      "size": 209264
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-76fc58e0.glb",
+      "sha256": "67b31bdeb9ab1401cd1db31aaf30b9c0e42b188171108e68dc6f9fbf70fbdbab",
+      "size": 179128
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-78a4ca40.glb",
+      "sha256": "eeb7ba3ea56c555982b2e5a1979a09365da359f35ea821a991df4ca8a8dd6571",
+      "size": 174052
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-7ee747b0.glb",
+      "sha256": "39d2e5f2c55245ad37b645700f18cf8ce39b8415b7adbbb7be9793b707240ac5",
+      "size": 202264
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-803b0a5e.glb",
+      "sha256": "37d5b36dd886dfb4b3ef59e4474607275f39c6817209f0cc037a18d2b8466e1d",
+      "size": 186280
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-83b8a1b6.glb",
+      "sha256": "c9aed35c6eeb9da2feaa560a59d44686e5564a55239a8e2ee0ea4974384a5917",
+      "size": 198704
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-84ff2040.glb",
+      "sha256": "b57e8b6b49dc3520e99f96efbbeb2660a567d3be79918a0ae3d064375a8fe9b8",
+      "size": 225136
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-858669cd.glb",
+      "sha256": "882e97d2c3cfcbb0963c264cd838b6fd3e92e08c892a79be3a25caaf4df983d3",
+      "size": 260256
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-896d253f.glb",
+      "sha256": "5c92fcce94ed400a98c38510e9d7e091de46e16bdaaacf0c07ac6b98fafdb7a2",
+      "size": 278568
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-8c1a7f26.glb",
+      "sha256": "faf346a2f4676a0ac9de8284c220863bebd2f9231370c6413cedf4d23e9ff630",
+      "size": 144040
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-8c3b0308.glb",
+      "sha256": "f741c02f07e41c3e84364d275e1672a3741f3ecdafedb47befe07ef3e38b30b2",
+      "size": 191688
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-8cf533fa.glb",
+      "sha256": "e3340fa1256f14d6db394fd85d72f34feec453dc93217113126fa5acd40bf4bd",
+      "size": 155480
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-8d20b0ee.glb",
+      "sha256": "8d8c0cefc545dad731ad23abba843a77c119a4d0cbc1780bd2d455b64d81fad6",
+      "size": 282408
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-8e883b97.glb",
+      "sha256": "bb62564ee75788e76566928d4987df0638430f2cd337534a9328179f03ba132c",
+      "size": 180064
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-8f8056fe.glb",
+      "sha256": "7838dab8b487803377e9920e105ca1213521604c606415f792234a17af06ab18",
+      "size": 216296
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-912db910.glb",
+      "sha256": "42e4c3501fbf761c3ebde8c73d5588b043da73c6f24692917f9f58dcff0f993e",
+      "size": 169332
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-91d7d717.glb",
+      "sha256": "a508322f7044340d1030b1a5b99f38fab73ef9e0090e43de9434e3370e3ea055",
+      "size": 177548
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-924b6df6.glb",
+      "sha256": "fedfeeb881ae933fa266a9e0582802227115409c548cee571ebc82436dcb0782",
+      "size": 188908
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-92e94ab2.glb",
+      "sha256": "9b4ee374295a0798de8517325f0b75bfcfd5fa651b01504eed5d03ab3d829c16",
+      "size": 177400
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-9357b146.glb",
+      "sha256": "f53fb653e08d8073711d5ba92a9e468a07d6d2ace986b902d6b2023035352b19",
+      "size": 243488
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-9543d766.glb",
+      "sha256": "2b1616228c5a6de895d1472cf1faf343e29b12672ed8a9a798e39cb494a1fc09",
+      "size": 247168
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-9613dff0.glb",
+      "sha256": "af8a56b1e44e824e6b87188fe4189b4eeb4360106ffab2322125ce546a389e25",
+      "size": 181996
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-98521248.glb",
+      "sha256": "1e172a9032b92fd2c0c5fc6f1b16684bcddbe1a303699ab7a52cca2107843351",
+      "size": 144936
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-99afdafa.glb",
+      "sha256": "ca39472b988f5f20e67fcb7f626fa37ea5f804fb8d627ad89bf2da9184062fe6",
+      "size": 201328
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-9aa82def.glb",
+      "sha256": "9d4fd14def8f7f7fb62f51e1bd9903cad5b0123b1ff7475efb29a3af73c55697",
+      "size": 226948
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-9c7faf34.glb",
+      "sha256": "525f3268496cc02fb8e83b627c14768d5962d21d828fa48cc8120fba6c176d13",
+      "size": 168764
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-9d32e897.glb",
+      "sha256": "1a7bb58a63ff072680f391d7283b8b702ff82b6d13eaba3f22a6d8594964b0f5",
+      "size": 354556
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-9e551d12.glb",
+      "sha256": "62b6c66e33630d2cacc0550cfe13cc374b7c37c5436a2abfe866327949ae6cd7",
+      "size": 159812
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-9ee25d0d.glb",
+      "sha256": "74ec40f1789e35aa573876ad3bcc17510ca059f9aab37497b0060dfee71480ef",
+      "size": 176680
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-9fcf26f7.glb",
+      "sha256": "834c969396c8a83659a51622d04c8c93c30405cef4af67fb50e2dc9fad58e5b8",
+      "size": 158896
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-a1a428c3.glb",
+      "sha256": "f72d45afdf3f764251a81939f2e95be94d5a51dced61af622276f3ce73fa1d77",
+      "size": 192444
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-a5983e98.glb",
+      "sha256": "925ea45571f384628432526227dfa041129ca393928ec1e02fd421988243692b",
+      "size": 173160
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-a8989f04.glb",
+      "sha256": "7f76ba2cfa3cd264569207ae4897f5d936431c1cf5b6088495ea1086fcc5edb7",
+      "size": 207556
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-a98a74bc.glb",
+      "sha256": "177db1931d036844cdeace8b5fd4ef54fe6dd0e7c6d96da7a1dc08b167048707",
+      "size": 155492
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-aab0e5db.glb",
+      "sha256": "9a9a6e82f49fef85d1b4f9d4449a45618d365516de376b6cc73d6c534c77f581",
+      "size": 177400
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-aba2f273.glb",
+      "sha256": "e62db1207e3ac372f460fc963528277baabd553262b5055eda475aeda9f2387d",
+      "size": 196980
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-ae2dce80.glb",
+      "sha256": "fbb51b671bfdb4c99e800adc559d188577333e358a95e11105af8269ca3857c5",
+      "size": 180204
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-aeed25a5.glb",
+      "sha256": "454436c82e8277462b16d85e97d7df2c164faf134794e1680e81609a5606604e",
+      "size": 153692
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-b047f8c8.glb",
+      "sha256": "4b8c2ec1d12c1fec5bc1d7dcc1b95147b3c9b3c87d432e425f632eebad013f10",
+      "size": 149332
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-b08629fc.glb",
+      "sha256": "aeb4b694fa3d37d39d07723558198cdd51924c7dfab1a302fde70a1680f199d4",
+      "size": 176688
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-b0df4010.glb",
+      "sha256": "98e7230f284a22562ca9e70ed5d649f717fb7d9847e8632e0b04611f3e40a633",
+      "size": 170520
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-b19972c4.glb",
+      "sha256": "6288bfb7fcf56a6622256512228b6f066fc83c671cfab34ceb9902629524bed7",
+      "size": 164408
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-b45703d1.glb",
+      "sha256": "9951f5d4e8272ae3f4a469b73619e2ae8bc61333c30fc42d64660d3a8866828b",
+      "size": 158760
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-b4f237bd.glb",
+      "sha256": "d20ee21f3c6fbefb36cb443ae723b7f16b2385132600848ee4991ae0bb5d78ee",
+      "size": 214580
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-b58b7f9b.glb",
+      "sha256": "8265199ff4e598b127b84afbee3270d5e91aa675484d5c856c979b1eae827f9a",
+      "size": 171388
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-b66bf5be.glb",
+      "sha256": "cb58c8822d32278b1761df3e6e1082ac7843958ac5d288ed0c4bfb4fa8f3128c",
+      "size": 185364
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-b6fe83ed.glb",
+      "sha256": "4f8658e145e0d466e9c4f08a7fcbafa70d6aeb120344d9f10293ccc5df01c3ff",
+      "size": 205784
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-b7dfae4f.glb",
+      "sha256": "66c6b0f065658fae5a72818a0bfff1ca3e7103e233688b7f98afe8239dfbb402",
+      "size": 182476
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-b854c147.glb",
+      "sha256": "4470a124370eecf1d7dc635eda8ab6746c59aed6ad83811ac76394298e180c98",
+      "size": 217080
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-bb899ccb.glb",
+      "sha256": "caa8ff2de4b8d829d0a534712b5f8c698922a82299752804ce667bac2483a3aa",
+      "size": 167884
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-be28b6af.glb",
+      "sha256": "99827cd5fc3ec635ab841f388fbff021096015e02c49ad247a816b57502e0279",
+      "size": 176548
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-c0f1e55b.glb",
+      "sha256": "ef6f73e991b62a09dd1056142a3d4552c1f249a35f8e0b1db4a6586da64754ad",
+      "size": 165224
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-c1596705.glb",
+      "sha256": "2ea8eefe97e7d7d67e5d6a1ee4c66bc7b913c7aca9e9d5b144438f074d9a8f47",
+      "size": 220668
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-c2304594.glb",
+      "sha256": "0a47caa2402bdd6e289379aba7b515e0c8b7e0af033ef0c86acfef1f38a584f5",
+      "size": 182844
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-c3c582bb.glb",
+      "sha256": "83e09836420fe07e8c5683d1331e8588f41b4c733bf7b97e058e312be5f91ab3",
+      "size": 248908
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-c446b714.glb",
+      "sha256": "06ce15677268662f19e1f0e5d88649ec8557ab1323a90d1d90ff110bb6b606c0",
+      "size": 169608
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-c58e68e8.glb",
+      "sha256": "5d174f265720ba0cd0dd18693deb2c44e5d36b7e58da6e3b2c328eee95318efd",
+      "size": 158116
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-c6b5c933.glb",
+      "sha256": "db04d3a70cc9b7fb3dd0671fc3da00c44e45cb6f4ba44ac0e192c60a546b31b1",
+      "size": 196840
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-c9b82a16.glb",
+      "sha256": "b67115197ff0360ff4eecd98a674298f21980de1ec56d5f3f318f613ea472e2c",
+      "size": 203852
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-cd151b2a.glb",
+      "sha256": "faa8283b543c0d19a85a5a9c58590d0b4efad61f952fca9ec27589ab2ae8a07a",
+      "size": 174756
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-cd6a9d0b.glb",
+      "sha256": "99067a1e25827a85e211aa0dcc28a9993eb398a2701d569f163d6d72b2a61d9d",
+      "size": 196976
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-ceedcb88.glb",
+      "sha256": "1c7405fe5b6d462deabfcd0bcfb82fd1a8e68cd52531418cb4873bdc74a49ef0",
+      "size": 232212
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-cf4157f8.glb",
+      "sha256": "526a68702163f13a000d1b329f06161cace027bd231404c6b92fda410e44382a",
+      "size": 170228
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-d116eb89.glb",
+      "sha256": "4e8b01bc98341f8a5695ed96db3f8a66042d2f2729e69b1156e768a528f6a3af",
+      "size": 177544
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-d388f4c7.glb",
+      "sha256": "5a7520fccc4646228587a86f15d7ae16dec0db944ab6a14625347587e20cc4ca",
+      "size": 230408
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-d5e5068b.glb",
+      "sha256": "a6a92c2536fc1d4b7d51a30d64eec0836bc1c21ed220e083f189753099cc98f5",
+      "size": 162588
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-d7560665.glb",
+      "sha256": "01a1a3cb7b610c146ed0e36c2f2a76be135e1f130cd3d64b4feee50342723f93",
+      "size": 283104
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-d8326c48.glb",
+      "sha256": "c69904fa469c817e9645b6eb769b07a8cda67c06780a075349b720fdeb64e479",
+      "size": 220564
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-ddc2e7ed.glb",
+      "sha256": "f0daf8cd622d5fa0667613a31a1834006166d1d38159688e25cf979acc40b2e6",
+      "size": 165220
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-defd5c39.glb",
+      "sha256": "f74d7eaf3866e7811a69d5c970ea650acaf2855785271ff6b6ec392ef994123f",
+      "size": 225136
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-e10fbdcb.glb",
+      "sha256": "d55635e14dee7a3474ceee2d8881e0c08d61bf7c94ec32127817b5d9c3aedff2",
+      "size": 173032
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-e29e36fe.glb",
+      "sha256": "01cff8f73795cc14bacf84c4b63f3500c2dd72be3826f61d9fd23f76764b88ed",
+      "size": 143004
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-e35ba719.glb",
+      "sha256": "1743843aefdd6bc5b17bb2f3fb35899346ef477691d7203f80dc06ca3d7eb7bc",
+      "size": 170220
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-e3b0e3b1.glb",
+      "sha256": "d6d85bffe2970f5acf5afd13ce0b8d6f73f477dee78772bb3f5d8aa37aaf5b5b",
+      "size": 257732
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-e526814e.glb",
+      "sha256": "93cdce47c22314121d839f84ef38b8a9834f44fbe4f5a0d69ec75c894e74bd4e",
+      "size": 277600
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-e70fcfd6.glb",
+      "sha256": "39dda0e909f3f877b311bcfda9c330b23f261d7ff096a42bffc815f5ef07fd95",
+      "size": 288972
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-ea7aa6fc.glb",
+      "sha256": "7b6e9f7bc6eede95d8c27440e1404092e7e29dd5532b5f0b898a8b083a05383a",
+      "size": 214576
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-ed66b0ff.glb",
+      "sha256": "22418bb61ac20de031e6d2ba871c2e69dd0e92db240b2b9bcd103cc3e2824a30",
+      "size": 172260
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-f00a8a7f.glb",
+      "sha256": "255c3f5d20ede7b09aec808a93bae581db47553b1dbd1b51073d7066622b8927",
+      "size": 218864
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-f17a6060.glb",
+      "sha256": "9fd2eee8c53296f614dfcdcebbafe482587aafcafe11c5e6b943b5a1fcff5958",
+      "size": 199028
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-f1a5226d.glb",
+      "sha256": "ca19a318589a28f0c41d10d76698887995d861f8adf80db6152aa2bcdbc00526",
+      "size": 170512
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-f3848317.glb",
+      "sha256": "7ffc532731dad354bd2d4a21f99ef05cee96ff102ee506d17f952ae3bc405972",
+      "size": 186396
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-f872e2cb.glb",
+      "sha256": "be95bd4e3c836dbd30ec301978ba62965f5e854da2f34753d95c69161792cfa0",
+      "size": 169472
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-f8ff6bc7.glb",
+      "sha256": "81efb2ef6bbf524ab540315b593a424c32e683b8ac1106ea2bea1c7b0e97fbc4",
+      "size": 173020
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-f8ffac36.glb",
+      "sha256": "10812d4f40dbbbf7393a1bbfee3bd62bff1b184e48f0839a5d5565d526263ad1",
+      "size": 148420
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-fc2a83a7.glb",
+      "sha256": "67283c0557802e2f2815898a52856d558e62b05adbbc7b0b1e4f1aeeb1a87510",
+      "size": 191528
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-fd1c4073.glb",
+      "sha256": "2f35b24816c6d741e9d21551ee804737da179054e91ebf90b8665b69d6ee1e4c",
+      "size": 162644
+    },
+    {
+      "path": "frontend/public/avatars/sign-motion/word-ffce2323.glb",
+      "sha256": "5a7e18e9489bfacbf9f7914007683a71ec89efabdcd92fb96a647063e1d7fed9",
+      "size": 167876
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/alphabet-cover.jpg",
+      "sha256": "ce326ddaf22427b868d05a4edc0158d9ac38423f07a8973dc1c5b3ff95514ac1",
+      "size": 163325
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-01.jpg",
+      "sha256": "0d10684e4287d18ce25eb5beff41d598e39c30a4af3d0d7612e8d79964327c7a",
+      "size": 126096
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-02.jpg",
+      "sha256": "c5477c8e013193862fc737a48e330062700c1f77a29e170dc37a18f2212bd538",
+      "size": 133617
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-03.jpg",
+      "sha256": "6d9697ced3cbc2e738e511b7f5f7b5b88016bdc0eea0c53c6ae99ce7495d728e",
+      "size": 145214
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-04.jpg",
+      "sha256": "548573aa972310e5c82cc1fbc6eb7fc47e6e25dfdc23e82d014c04b49f15b677",
+      "size": 124597
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-05.jpg",
+      "sha256": "77becec7737aa1bcd2013cdf99ae4700fe925f0987a62e7602f5cc06b0a6acb7",
+      "size": 126033
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-06.jpg",
+      "sha256": "6b37624c5d717e4f8d7ec6355637162f7ff588b91aabfcf9521e284e3e4eed1d",
+      "size": 122037
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-07.jpg",
+      "sha256": "02978911eb27447498208d859b26ed1a78b1101138561c24c3cc018a5a7826a0",
+      "size": 142213
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-08.jpg",
+      "sha256": "7dc7d26ca2380bb6b866ec72fb78492b8f729c2b97cef77a0fffb4804d00fb06",
+      "size": 124110
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-09.jpg",
+      "sha256": "d872e5111459733030b9b6329274d3c2a7ceb8e99e26c7053d86a2672c196130",
+      "size": 120157
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-10.jpg",
+      "sha256": "b05f78c075517362541155be2ccb337564504f695f5d4cf9b3fd5b5fa7e15f77",
+      "size": 106450
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-11.jpg",
+      "sha256": "e0d7a24b24e3844c5044cb2071cc6ee689bc4b9994a63732f5396f017928b39e",
+      "size": 100661
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-12.jpg",
+      "sha256": "ec518836b45ce094a1c244b8d135e2f5f22aacbfef6c22aff09e58bc058ab2fc",
+      "size": 114544
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-13.jpg",
+      "sha256": "72a0bf28183dbb6741a3a6311f3b3641a2e3e30028abc45fc6d930c28ff184b9",
+      "size": 109581
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-14.jpg",
+      "sha256": "8c979294d5ce2531bff95a3fbd083f431802769727f93fe2fee956862fd13a06",
+      "size": 126008
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-15.jpg",
+      "sha256": "bf24e16acdbf3ba5239064877d6ed9b9b8ed4295535b46ca852d9b6ef3a18af0",
+      "size": 132756
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-16.jpg",
+      "sha256": "edbdf6947b26954d3648a4cad4a5e96ae1050c26c6e0a37b3b52e5bffed5ad9f",
+      "size": 124704
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-17.jpg",
+      "sha256": "8da329ab2c2672786b861e846c1ba1b3fdf9580dec480bc447ec0f52220b8046",
+      "size": 131925
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-18.jpg",
+      "sha256": "5295a1b64ff91d60e862bc09f5dbcb101e1635e7c7f6dd5e9ad67d596a20a1f5",
+      "size": 127571
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-19.jpg",
+      "sha256": "a1755b1cfaa4a0ba6872cd6fc482f084822cc2249fff8df63c608f2678a2aad7",
+      "size": 154035
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-20.jpg",
+      "sha256": "7389bec3ac3b37232f1b8e36db481f4d3345d1819876a06d32a3ce742a2d2b2d",
+      "size": 146470
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-21.jpg",
+      "sha256": "6c4070f7cc2ffaa1e368560695064da91d2b0f8a20a630e368ca8f6fb0785c9b",
+      "size": 137173
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-22.jpg",
+      "sha256": "7ea82b9395fc36111c0de707eb1725e817382845c4be62b3117e0a272be414d0",
+      "size": 115337
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-23.jpg",
+      "sha256": "9127c63007ce5631e94261670c61229f70fe2c2a7c199d416f14248a14b1572e",
+      "size": 118352
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-24.jpg",
+      "sha256": "76a78b1c2986f380f00931f582a9288df529a3283852821f89bdebfb1f40dfbd",
+      "size": 132893
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-25.jpg",
+      "sha256": "abf7f531f217840461cc98a5baed302c943311c21b97f5a1a912303b0e64b7d1",
+      "size": 119853
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-26.jpg",
+      "sha256": "d73afa54b6f1ae68ee749c44c10b59c0150fe5881f0f3649a3070439df66ec21",
+      "size": 119363
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-27.jpg",
+      "sha256": "3f2cc7fdf8ef03fd3fc9aac9c0a724960e2d5bccc49a4ae025d00b5f860df65d",
+      "size": 159994
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-28.jpg",
+      "sha256": "bdb61b50ce310e2fb7f7ed4b79869e6ca6935cf1a85afebe3ab3015928c6366c",
+      "size": 115801
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-29.jpg",
+      "sha256": "45404872962652458dc2288db536fa9affaa09e24133b06c8b6cddf937b0d04a",
+      "size": 118334
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-30.jpg",
+      "sha256": "3b64d870b54df4011f93522511d48309f49bca32eefa886998b54c2fcc74f5cc",
+      "size": 122057
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-31.jpg",
+      "sha256": "ee89a06b7ebab6dd4e355c0b689c0620c4f016cdd8fe94aa0cc40cc8b23ad617",
+      "size": 132120
+    },
+    {
+      "path": "frontend/public/illustrations/sign-phrases/phrase-32.jpg",
+      "sha256": "e15676ace8cf8bc69d56557e2ea48091d0f313aa390fcab624130c0a2d828239",
+      "size": 133719
+    },
+    {
+      "path": "frontend/public/images/avatars/mentor-3d-v1.png",
+      "sha256": "f43028ffdffce81c076949cc91ad51f647084913a10e706f9a63f3e83ab8d453",
+      "size": 2319543
+    },
+    {
+      "path": "frontend/public/images/avatars/mentor-vector-v1.png",
+      "sha256": "b8469e3b6dc0e237044cf454d078e84ada2b70b997a6606aeaf4e7e69bf43bd6",
+      "size": 1413549
+    },
+    {
+      "path": "frontend/public/images/avatars/mira-portrait-v3.png",
+      "sha256": "63635abfd87fa003635007a4c012bebf07e79b7208dc98b705e5711e587bf3e7",
+      "size": 1962373
+    },
+    {
+      "path": "frontend/public/images/dialogue-sculpture.png",
+      "sha256": "b534ee564a3b2bdd9c0b2c35ddc97d46c2e39eb14505cabad1b8de23ed4334f6",
+      "size": 2058396
+    },
+    {
+      "path": "frontend/public/images/knowledge-book.png",
+      "sha256": "8d13202d007a0cf1f85945db655c5d6be8ec8d9b3647576a8f103b8a76fc6385",
+      "size": 2215482
+    },
+    {
+      "path": "frontend/public/images/learning-path-v1.png",
+      "sha256": "deac0456be94ed21a00d568afaa6723118d559ead751d06828949e00840be864",
+      "size": 1948918
+    },
+    {
+      "path": "frontend/public/images/learning-universe-v2.png",
+      "sha256": "17641e08f51f30a44eeebf3aa97482cde9b8c51d944e4d29587447df869f5d1b",
+      "size": 2007261
+    },
+    {
+      "path": "frontend/public/images/mentor-dialogue-v2.png",
+      "sha256": "232459a001c5014ad107322a6a07929170597c2a3ca90f7ba53f8c1af1747665",
+      "size": 1918186
+    },
+    {
+      "path": "frontend/public/images/rsl-alphabet/design-v2/pastel-background.png",
+      "sha256": "7b23eebb8f577a32662e9d1d980a74f39e9a0afb446d003ef1bfd6fc8e700b5a",
+      "size": 1926263
+    },
+    {
+      "path": "frontend/public/images/rsl-alphabet/source-chart.jpg",
+      "sha256": "691e4d8bcbd190eb0d13f096cfb603d9ed9f50c0b50f8fafc151b6ce8623155a",
+      "size": 172037
+    },
+    {
+      "path": "frontend/public/images/self-study-v1.png",
+      "sha256": "d5b9b60ab48229253c8e4e82492d4074a11d14e4e2c3a95e373e3b4bb6fdf71c",
+      "size": 1962803
+    },
+    {
+      "path": "frontend/public/images/teacher-group-v1.png",
+      "sha256": "070126f29c287484fd3e802f60768db8c6f83073dad8a7b25265e8fd74f0fcb7",
+      "size": 2067757
+    },
+    {
+      "path": "frontend/public/models/rsl/alphabet-cautious-classifier.json",
+      "sha256": "6dcae99cde384912d5a2ad791c62164fd842a259788068b92d12aea03461a2f6",
+      "size": 1118968
+    },
+    {
+      "path": "frontend/public/models/rsl/alphabet-cautious-fixtures.json",
+      "sha256": "1ab9c84281918ee2bfc09b22b1d64404604143baa5060f293e38fc0f279c1c78",
+      "size": 1035596
+    },
+    {
+      "path": "frontend/public/models/rsl/alphabet-classifier.json",
+      "sha256": "d2c0b2ecca3cc67651506b05b87563bd1c5dfbf9026449b8cfbae2855d134b5d",
+      "size": 361366
+    },
+    {
+      "path": "frontend/public/models/rsl/alphabet-fixtures.json",
+      "sha256": "4f45c1c5b1a047b8a89a295054d2b1039618903d5c5ae7647d6bbe0317b98205",
+      "size": 173261
+    },
+    {
+      "path": "frontend/public/models/rsl/hand_landmarker.task",
+      "sha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1",
+      "size": 7819105
+    },
+    {
+      "path": "frontend/public/models/rsl/letter-camera-worker.js",
+      "sha256": "91fbec693e0761c5b255245bcbd9b136d0becce589ac1343eff27b79b240c115",
+      "size": 160316
+    },
+    {
+      "path": "frontend/public/models/rsl/pose_landmarker_lite.task",
+      "sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a",
+      "size": 5777746
+    },
+    {
+      "path": "frontend/public/models/rsl/wasm/vision_wasm_internal.js",
+      "sha256": "85c1a342be70427987f900969a5f26e17557351111364e6585e97fb03e93e108",
+      "size": 334128
+    },
+    {
+      "path": "frontend/public/models/rsl/wasm/vision_wasm_internal.wasm",
+      "sha256": "bcc13df22d3d69ec8cbe8e280989356d844ae00f4523eb82072d2484f44134dc",
+      "size": 14466654
+    },
+    {
+      "path": "frontend/public/models/rsl/wasm/vision_wasm_module_internal.js",
+      "sha256": "60384c9014750321c0fc1d489b3329e5eaed0fcf3c328d404ecb1a6c75e89d17",
+      "size": 334166
+    },
+    {
+      "path": "frontend/public/models/rsl/wasm/vision_wasm_module_internal.wasm",
+      "sha256": "2e326b9d9584ac22e230c263f47e6fe694a7df1ce22a8546c72df0e5c0fc1066",
+      "size": 14466676
+    },
+    {
+      "path": "frontend/public/models/rsl/wasm/vision_wasm_nosimd_internal.js",
+      "sha256": "e9b2b799e0f1078f5538b300a57835b823742c37e2646308a03f0f25b39fdcdc",
+      "size": 333931
+    },
+    {
+      "path": "frontend/public/models/rsl/wasm/vision_wasm_nosimd_internal.wasm",
+      "sha256": "ed5e5e5812490bd90d6a440290845ff9e4c516f696847a28a0c0e0573470d469",
+      "size": 12915401
+    },
+    {
+      "path": "frontend/public/research/rsl/a-reference.mp4",
+      "sha256": "0362084afb33b92317601000912caf9f75e8d6c72ae343a3928ca2b144478619",
+      "size": 999892
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/0401.mp4",
+      "sha256": "41fbc2e223057b51ed2d27a4bff59e3b4d3f60fee9310d85514064b48861dcb2",
+      "size": 446268
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/0410.mp4",
+      "sha256": "0362084afb33b92317601000912caf9f75e8d6c72ae343a3928ca2b144478619",
+      "size": 999892
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/0411.mp4",
+      "sha256": "34eff549f75dcd2b289c29db068a4e7b8e7f31c937852a085958fad028dfe653",
+      "size": 218568
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/0412.mp4",
+      "sha256": "0242c25b4a65d039dd87932fac0851d1cf6224a50a56c3ca507eb784ecf1a12f",
+      "size": 512534
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/0413.mp4",
+      "sha256": "ec680e47b49cd9f9e8ee6f67ceb97eee004ce441620267e309640f70f65a4a8d",
+      "size": 789755
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/0414.mp4",
+      "sha256": "19c15380a47ae78b7721f7aa4590ca8ca9df7a932125bb4bc555344018cd0bb6",
+      "size": 1286967
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/0415.mp4",
+      "sha256": "804c53bebfa0ba2be6d9d10fd3c55252cc138877795aa98a409597d2eec71d00",
+      "size": 567550
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/0416.mp4",
+      "sha256": "742c337ba5af254c12fc4ea3da19ff83ef12adf3b14d4341c5cfd2844b9eaabf",
+      "size": 1108278
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/0417.mp4",
+      "sha256": "3a2fd3538ab3c3cd01fc35d57c5d38ff3c40547dddd9c0143d1de85620e3e5d5",
+      "size": 1038558
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/0418.mp4",
+      "sha256": "59b91310ff6e8c1f35336feb126127b4adc6d78e9ec895a27b4fcd82ce051d5a",
+      "size": 801142
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/0419.mp4",
+      "sha256": "5afa76cd62e0111a4d6a3d18abe5194b4ef5b743f4803a9c732775b5bc38ed64",
+      "size": 703686
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/041a.mp4",
+      "sha256": "ff8fb906303270fedc598796d7bfb993d1890f8b91fe9800af54ff7d3a3c9bba",
+      "size": 397289
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/041b.mp4",
+      "sha256": "04482fc083c3db3448ab503d967499c50facf36ae2ee254619e3a06d689ce442",
+      "size": 291620
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/041c.mp4",
+      "sha256": "82f3dcf91b18220974b6734d71b1ad3dc245809e95bf4ece4911ab8730f25288",
+      "size": 232791
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/041d.mp4",
+      "sha256": "682180ec799c56fb0c1ed5349048588d9bfc404048980cc7aed75d6ef3dfa5e7",
+      "size": 666360
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/041e.mp4",
+      "sha256": "d443ecccc2da697d0ee34fa2809a850c069aa05bfe8bd882fbc8bd62f581d2d5",
+      "size": 1705250
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/041f.mp4",
+      "sha256": "4d1d31516743beba2e7644fd4b409f047197eb13db43ed57cf1e66166d2dd4dc",
+      "size": 985642
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/0420.mp4",
+      "sha256": "caf4664108326c8ef3b6dbf190dcddb50eb3021339502f795f9470f7ffdf270d",
+      "size": 397159
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/0421.mp4",
+      "sha256": "67d8ba0023c7e02747531619cd190aa6c2877d27b3b6ff43b0d1dcb0d51b0dbb",
+      "size": 728589
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/0422.mp4",
+      "sha256": "045363ce42a95d981965f7a8b090dadbb6d56139e59e0df42a5104d049c338ad",
+      "size": 1145051
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/0423.mp4",
+      "sha256": "56d97ab7eeb149c6687796cbb643337038de6bd628f06e89340081e9f54c6e92",
+      "size": 799660
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/0424.mp4",
+      "sha256": "9864b3e428c4044ccc41bd97760a3c0da9361ba3c232ec169a610d8145837197",
+      "size": 584822
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/0425.mp4",
+      "sha256": "ead9963754e3274bc420d06d9a16e60b5271f59d1e9835e9fc1ab073b292d8b9",
+      "size": 438298
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/0426.mp4",
+      "sha256": "4b1e5ff1489fc6dd794b65910a861c0e06541acb42607c060539fcb6425ab0fd",
+      "size": 510774
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/0427.mp4",
+      "sha256": "937f46a7e28593009b002e2de9e45a5aacd9e08f996d03d52949068c2fd1c081",
+      "size": 809886
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/0428.mp4",
+      "sha256": "2a6997c177d681eb170a451d0bb5a80b4f1c78ed88451a103521c2d956dc334d",
+      "size": 342326
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/0429.mp4",
+      "sha256": "b2bc31c85d5eb5c2a5248f58e40c07a1b5d580e19a1944d0fe9f20ec6d62a024",
+      "size": 639720
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/042a.mp4",
+      "sha256": "54f14c3eaab6d299150d9cbb305120236b8b2425ec9a80be903bb7fd20105d79",
+      "size": 636796
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/042b.mp4",
+      "sha256": "b5fd7b6dadc75319120a30a2334af3f3972aeed6bf1f29892adb02302b8f807e",
+      "size": 521021
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/042c.mp4",
+      "sha256": "5a9b8c61d557badb7e0d8e00ee6c91b0b1af4f00a52b9e48adcc7cb3b6845b31",
+      "size": 1458377
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/042d.mp4",
+      "sha256": "58a2c910c92a5c2c112fbed603ea544073e35783dca1528f78fed6a7991cd33f",
+      "size": 520157
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/042e.mp4",
+      "sha256": "40839a864f32bd348c7acb3d16f042bc0b15cc2296b3317489e5fbfd040ed56f",
+      "size": 407203
+    },
+    {
+      "path": "frontend/public/research/rsl/alphabet/042f.mp4",
+      "sha256": "ed35926cecd38c602ac84069f68557b3ca653096fe7776c593a73a6cd6d50562",
+      "size": 470915
+    },
+    {
+      "path": "frontend/public/research/rsl/bukva-license.pdf",
+      "sha256": "14f4845e9c8d3de875cbac4139491da368ab1040a7f565e02894477279134d22",
+      "size": 157632
+    },
+    {
+      "path": "frontend/public/research/rsl/g-reference.mp4",
+      "sha256": "51521623064559490a4eeb2ca1f8343a16b3b2df3660612b9931eb44902963dc",
+      "size": 624792
+    },
+    {
+      "path": "frontend/public/research/rsl/l-reference.mp4",
+      "sha256": "0aa301dc1a13a080e709b30873a5102852b0710f9f294ef8356ca553c914a0ad",
+      "size": 415963
+    },
+    {
+      "path": "frontend/public/research/rsl/sh-reference.mp4",
+      "sha256": "816a60ac6299ac98b8b2d5dae45dd811ef53fd9fcd25b25a498543ca2a6adffa",
+      "size": 586677
+    },
+    {
+      "path": "frontend/public/research/rsl/u-reference.mp4",
+      "sha256": "48e9f89b20f766ceda5a9a9be9278914b9893fbac5a93e5e3c08356ee33e3741",
+      "size": 485527
+    },
+    {
+      "path": "frontend/public/research/rsl/v-reference.mp4",
+      "sha256": "0242c25b4a65d039dd87932fac0851d1cf6224a50a56c3ca507eb784ecf1a12f",
+      "size": 512534
+    },
+    {
+      "path": "frontend/public/research/rsl/words/00af7ae9-fdb5-4416-8ba1-980b5880528c.mp4",
+      "sha256": "95806289b993d12c3746de11cf7ca42612e8ec546e0abc9e7207bdaeda0423d9",
+      "size": 1189438
+    },
+    {
+      "path": "frontend/public/research/rsl/words/03ac3272-aac5-4d46-81ec-4b4fc902b94b.mp4",
+      "sha256": "dd1571ffcb2fff12974980caaf9362157d4a6d9a0d29f07ca457de18b91adbcc",
+      "size": 1056454
+    },
+    {
+      "path": "frontend/public/research/rsl/words/069645d8-301f-45e9-85f8-da55a30cc020.mp4",
+      "sha256": "3ee95a10f6fdf8953398a2b86421f61fb408cf1cac6209164d251e6ce65d6c33",
+      "size": 597537
+    },
+    {
+      "path": "frontend/public/research/rsl/words/0a42bb8f-9a48-425d-a900-e4396cf41414.mp4",
+      "sha256": "afd062236cb7a630c6ccb4a969e920ef2c1fe5a82c637a3cc650aff4151f1f92",
+      "size": 2082008
+    },
+    {
+      "path": "frontend/public/research/rsl/words/0b485a5f-a4eb-49db-9088-2d318869e25d.mp4",
+      "sha256": "9e152337cd64f565fb6a8ecd7e7da9a92e09bc58cadaa5598a5cc45e3c10a6cc",
+      "size": 1352674
+    },
+    {
+      "path": "frontend/public/research/rsl/words/0bf7a453-36e6-45f4-91ab-6468427ca16e.mp4",
+      "sha256": "e608dbe77e1fa42967cdb775bba974efa96ade8ffa13abbcecf64f6e6ce6bba6",
+      "size": 1086966
+    },
+    {
+      "path": "frontend/public/research/rsl/words/0c849b23-1f52-42e4-bf2b-c7fea97e147a.mp4",
+      "sha256": "99b9c8891548822cdb1c224d9d5ef6650487faa4efe1c7bdc5669e44019e75a6",
+      "size": 374577
+    },
+    {
+      "path": "frontend/public/research/rsl/words/0cca1e04-3f13-45e2-918c-190de5231e2a.mp4",
+      "sha256": "1f6b70eccecb289b3d96f46cc2ed5a5bf648e2736c02be4a96c115274cfc7450",
+      "size": 772776
+    },
+    {
+      "path": "frontend/public/research/rsl/words/0f02bf01-0f76-448a-a0e4-b43096c92990.mp4",
+      "sha256": "06b326261a4078082085cac7c285f580d67260d98d3b9ad3e73465e32914502c",
+      "size": 331534
+    },
+    {
+      "path": "frontend/public/research/rsl/words/151a37ef-302b-4fb8-91b4-505c935e207c.mp4",
+      "sha256": "f8db167c5b6d236dfb7196c6d693665c5fe7a89670a003374b4d5237c090f52f",
+      "size": 703871
+    },
+    {
+      "path": "frontend/public/research/rsl/words/16bf2a06-f5a8-43a3-a362-ed4c09055d12.mp4",
+      "sha256": "30b46260e1862f77af1805b5da5b3685e203b4c47f2f3acc4490e2248cef101d",
+      "size": 375520
+    },
+    {
+      "path": "frontend/public/research/rsl/words/175ce38d-d704-4f30-a522-35d5d1c8cfd2.mp4",
+      "sha256": "13420b0252bf2ba8cb5ee291cb1642b67c4fbb17ff9eaf607e2332b49b47ef94",
+      "size": 918111
+    },
+    {
+      "path": "frontend/public/research/rsl/words/191d0ce8-7e6a-4ca0-893c-4eeb9af27e2b.mp4",
+      "sha256": "5622b778504a6f07de4f7a829228388b1592eda219238d2d94c024ef8e46dc29",
+      "size": 309210
+    },
+    {
+      "path": "frontend/public/research/rsl/words/1ba0d285-5260-40a6-b13e-1b68b4c5dcee.mp4",
+      "sha256": "70222f9e38863e7f0e0dc789479721cf0fb4566d7105d5a382ea0e99ef533f1c",
+      "size": 598376
+    },
+    {
+      "path": "frontend/public/research/rsl/words/1d06b313-c771-44a4-9a7a-bd7b956eedb2.mp4",
+      "sha256": "6c435e4124fd18a5a359d90daa04e015f5352922469c16234b713275fe444489",
+      "size": 821536
+    },
+    {
+      "path": "frontend/public/research/rsl/words/1e422a1f-65e7-4125-865d-d15f244d6b2b.mp4",
+      "sha256": "047ec32e5585ea327069c80084559f5b60a7f79aa9b83e557c2ae7db03259db1",
+      "size": 283012
+    },
+    {
+      "path": "frontend/public/research/rsl/words/1ff178a6-9a24-4f31-a658-c7c25140b6cb.mp4",
+      "sha256": "9defcddabc8c003b8ed7cbe8937f2937ef5420d92f3cbe6b4c7804249404b9a1",
+      "size": 750029
+    },
+    {
+      "path": "frontend/public/research/rsl/words/21053e46-3985-42da-9b8c-3c9fbc414ae7.mp4",
+      "sha256": "300d0b875cb06cdf82e117984b3d501f0efc75ae9598cb29ec4bebf4b74dd110",
+      "size": 905095
+    },
+    {
+      "path": "frontend/public/research/rsl/words/22f60354-befe-442f-9017-c6f28d160825.mp4",
+      "sha256": "f6b6624236bf389d44e738c23d5a48c78de9f5139df7dfb067ba61fece680ae6",
+      "size": 627197
+    },
+    {
+      "path": "frontend/public/research/rsl/words/23b3909e-a63a-44dd-b5be-56182b039e3b.mp4",
+      "sha256": "ba4db23290fdbfe263eda1030b62bb02b3bc44a096e5134488eec94da201d21f",
+      "size": 621464
+    },
+    {
+      "path": "frontend/public/research/rsl/words/24491c1c-fc65-4fa9-9f20-047fcd4f44e0.mp4",
+      "sha256": "e113025306a1b641d1ea58af89059bfbd7e3dcb114ffe03f73b0c094ffa2e4ff",
+      "size": 622885
+    },
+    {
+      "path": "frontend/public/research/rsl/words/250f896a-b06b-4096-bc8f-d5d628f0cda3.mp4",
+      "sha256": "5858e8752dd6b73c03aa59930524d725c59e97fa735f40209094d28040d3f154",
+      "size": 379445
+    },
+    {
+      "path": "frontend/public/research/rsl/words/25fed1ff-0407-4848-aa57-25bf1159ff08.mp4",
+      "sha256": "8ae180366b248c0c807bc0a5daaec21dcfa5668a3d1fc52cb777cc5cd37fb912",
+      "size": 422454
+    },
+    {
+      "path": "frontend/public/research/rsl/words/26022416-930c-49e0-b1f3-0c0da57a8d2c.mp4",
+      "sha256": "e733d82096e0c2a1173a0dbdb8e3f461a4a0ace90988ebd1da31fd5f4a0ab4a4",
+      "size": 496697
+    },
+    {
+      "path": "frontend/public/research/rsl/words/26e2d0ce-9425-4a44-88b3-5373a109e49f.mp4",
+      "sha256": "e18b6a2482605d3fe3bb5f5de71d5467ad6eb1c9f18efa22550a17643a9e9bd9",
+      "size": 712095
+    },
+    {
+      "path": "frontend/public/research/rsl/words/2a7729d7-507e-4748-8588-6954d0d52c18.mp4",
+      "sha256": "fc8e0d2b0637e6933eeeaed53a67f1c442a841e2347c3acf95a8089969f366b1",
+      "size": 1424204
+    },
+    {
+      "path": "frontend/public/research/rsl/words/2ad51148-b6c8-4298-9d04-cffa81e2fc01.mp4",
+      "sha256": "c369802c4af1643120c04fd5388556da426fad7e5ee8433403191480bf54da53",
+      "size": 428371
+    },
+    {
+      "path": "frontend/public/research/rsl/words/2b21215c-6693-4faa-998a-8cccaa00707f.mp4",
+      "sha256": "b19013628a486868274f6c6f73e25281696442b0f355a14cb45fd41988a59070",
+      "size": 692377
+    },
+    {
+      "path": "frontend/public/research/rsl/words/2c1fd7ff-e6c7-442d-bb43-d86eb04fb5c8.mp4",
+      "sha256": "3357fd3c01ae25f41dc9bf3daa9e864ed16c970a46b4ad09a11a279cde5e63c1",
+      "size": 400312
+    },
+    {
+      "path": "frontend/public/research/rsl/words/2c57ef13-e81c-4ea8-bf6e-c0cb597adfca.mp4",
+      "sha256": "f0139d20fc456db10e4915eb398d8d0e663885baac074ad732081771bad3b44b",
+      "size": 475488
+    },
+    {
+      "path": "frontend/public/research/rsl/words/2d0f77ff-000d-47dc-ad43-09c958b16185.mp4",
+      "sha256": "b36fcccc6b5d6b8793752d99f84613cb56965d2d6b355a4e413f72c3357a8814",
+      "size": 747484
+    },
+    {
+      "path": "frontend/public/research/rsl/words/30b8b721-5c62-4ddc-856b-3f328af48ebc.mp4",
+      "sha256": "ac78e91d8ea4e38161dbc01f905a9f6dd0e9f33c80ca8a6da14974b28ccf8729",
+      "size": 377727
+    },
+    {
+      "path": "frontend/public/research/rsl/words/30f82679-8520-47b4-8ba8-3accdf750ff4.mp4",
+      "sha256": "16a63e96543b7a2248b9773662814336fe0670648d62d26548858688e6257f28",
+      "size": 618945
+    },
+    {
+      "path": "frontend/public/research/rsl/words/317890bf-b47f-437e-bcc7-c06f31ceeebf.mp4",
+      "sha256": "05ca3c944b0b27382d8255ba752a53c136292ae37e9cd012a4f1b9ea240ce714",
+      "size": 663060
+    },
+    {
+      "path": "frontend/public/research/rsl/words/32e530d7-3598-47d3-b344-ceb36bb6fe58.mp4",
+      "sha256": "130cb3ea72bd9cfd605c9b8bb963fe060e00ab287db0a42f4645c2560ca5f95d",
+      "size": 1562739
+    },
+    {
+      "path": "frontend/public/research/rsl/words/338e93e8-4033-4af6-8a62-12573c53bfcc.mp4",
+      "sha256": "9dd9710192064355af5c877d9c7b047f8c416bfa74702959c1133ad01d55edca",
+      "size": 371532
+    },
+    {
+      "path": "frontend/public/research/rsl/words/34d54421-d709-4b48-b6c7-58e0e3e0710c.mp4",
+      "sha256": "00348e137699a2e9e4b250ae3529396eaf5adfcfc6e7fbcd9b6bbe664e88e52a",
+      "size": 243124
+    },
+    {
+      "path": "frontend/public/research/rsl/words/35e11a03-37fa-4be9-83e9-ee1afd137710.mp4",
+      "sha256": "bb04f08c8c430ed61d80f51105eac77bd1771337b769326be8e7bd9f621d5538",
+      "size": 426509
+    },
+    {
+      "path": "frontend/public/research/rsl/words/360ff815-e7c0-4a06-b387-9dae69ad1c1f.mp4",
+      "sha256": "a8a7ef88e16d974dcb50087d60fcde4e9ea40bf32ea40a8d3d0e38355c12f764",
+      "size": 661475
+    },
+    {
+      "path": "frontend/public/research/rsl/words/3637b257-3d29-409a-bd6a-36908d24f8cb.mp4",
+      "sha256": "fff0e8056440d5807b60b724d921a3f3c97225a86098e48f1da68c47b2bc6455",
+      "size": 550683
+    },
+    {
+      "path": "frontend/public/research/rsl/words/36b20a69-877f-4358-8074-94f3c386b357.mp4",
+      "sha256": "79b6823b8bbc09444f8c8b0b219f1fedb4507e3574e1b53f5a13abedb720a1fa",
+      "size": 286222
+    },
+    {
+      "path": "frontend/public/research/rsl/words/38153f62-4706-40c8-a74c-4c0a615cb67a.mp4",
+      "sha256": "0786dce620069bdb3256b55b12dcb22eaceef7305e4021dd709644edc856a407",
+      "size": 354835
+    },
+    {
+      "path": "frontend/public/research/rsl/words/38c6f832-9af4-4db8-a211-16313de1ef9c.mp4",
+      "sha256": "a66ea99c37805f47cd06d7b60e8af48772057fbdcedab1f845049f4aa7145bcd",
+      "size": 643770
+    },
+    {
+      "path": "frontend/public/research/rsl/words/3d7e498c-feed-4cfb-bcb9-624ef427fda8.mp4",
+      "sha256": "10b8382b5939a68e49d344100322e4ea2f286d8cd3842d1a155f9fdc04341b28",
+      "size": 686088
+    },
+    {
+      "path": "frontend/public/research/rsl/words/3df3b9dc-c35e-493b-b942-82d06357d686.mp4",
+      "sha256": "0f38c337c7204266cf6a4e2dba1af87ff44325ad7b66624e8cf06a9d249b5c3e",
+      "size": 1069790
+    },
+    {
+      "path": "frontend/public/research/rsl/words/3eccaa2d-ba0b-49bb-b39e-3db358ddd6e4.mp4",
+      "sha256": "d20a5e32d44acd04a5b99eec6e91912dd541e497a5cd45ddd9691ce097681bb9",
+      "size": 824259
+    },
+    {
+      "path": "frontend/public/research/rsl/words/40af2c54-a282-47de-b505-b93c647f13d2.mp4",
+      "sha256": "b3f492f89d1936f83b6c3d3ed6ca4372e7bb49e5bfec86b861c20527720074ad",
+      "size": 1010593
+    },
+    {
+      "path": "frontend/public/research/rsl/words/417459bb-df1d-4bb9-89ae-f13d359e18d1.mp4",
+      "sha256": "e463c2285c340893ff918541e89b2d66d64b51e224256d7c45d8e49655b5ae41",
+      "size": 703445
+    },
+    {
+      "path": "frontend/public/research/rsl/words/41df6170-e50c-427f-a442-ff71b99d6087.mp4",
+      "sha256": "f13f49338d691654e3a7083f8c66964cc4687660cc0aae9896db5a683b392fea",
+      "size": 1081437
+    },
+    {
+      "path": "frontend/public/research/rsl/words/43720683-c4e2-4f43-83f7-0aefffa411b6.mp4",
+      "sha256": "1ffc68f5aeef40670143438285c93f3cf8c96791aefbebdff5382254a9c37491",
+      "size": 1002755
+    },
+    {
+      "path": "frontend/public/research/rsl/words/44bc9933-192e-478f-9ac3-d398cb022076.mp4",
+      "sha256": "9bf78cded04280c44136a723484c0300f60eadac40e86d0bf8099ed2f666d813",
+      "size": 839741
+    },
+    {
+      "path": "frontend/public/research/rsl/words/44de272e-c50b-4663-b113-eb50505d58db.mp4",
+      "sha256": "6c0339e6ae038f83a336cb5f3b053ccd5adb4f639b0f5899b4b344ce82fc900e",
+      "size": 323406
+    },
+    {
+      "path": "frontend/public/research/rsl/words/4699249c-3f2b-48fa-bd7b-4359dbe491f4.mp4",
+      "sha256": "0b0b9ba7394170fa3759b0cee7639a13c1017e733a3cf8b3ef7e05e68987f013",
+      "size": 899751
+    },
+    {
+      "path": "frontend/public/research/rsl/words/4893125c-dccf-4a97-8b67-861fd3ada825.mp4",
+      "sha256": "d790fa0f6e4eda5cc582a431cbdd8ad9a2ac0bac0b1d5662ba77c8a99de5ac1d",
+      "size": 704557
+    },
+    {
+      "path": "frontend/public/research/rsl/words/4a6b4832-a665-4eb3-8701-d3dcc31a327f.mp4",
+      "sha256": "ada6ff809286accf2f59646ed450050d2630d0c14a8700f6b16bfd5b9727e35c",
+      "size": 896607
+    },
+    {
+      "path": "frontend/public/research/rsl/words/4b949e28-1700-44bb-912b-930d89ead05a.mp4",
+      "sha256": "e3e0bd3c33e59084501482513c016b29d79bd2532601e0e8293a92e959a284e5",
+      "size": 587888
+    },
+    {
+      "path": "frontend/public/research/rsl/words/4fa6cc2a-f6d4-45ae-896c-36b618a373ce.mp4",
+      "sha256": "fcacd8db16a6711198a9542600cd1b5191ea6e23f5c4da9c0170b35fbf0bb5c1",
+      "size": 254056
+    },
+    {
+      "path": "frontend/public/research/rsl/words/4fb38350-eb94-4257-a094-013dcce6ac27.mp4",
+      "sha256": "fe17f9f52c654d5db1d75a8b5ebe9bd5405f28edef4d1f0a5e5f2f94e38ccb0b",
+      "size": 371777
+    },
+    {
+      "path": "frontend/public/research/rsl/words/506d755c-400e-479a-ac78-e402cd8287be.mp4",
+      "sha256": "30e41aca25480e2fa0ecb6a8dbee76d81286ca7fd63987632ea48dc96702dd41",
+      "size": 830214
+    },
+    {
+      "path": "frontend/public/research/rsl/words/506f5596-ace8-426e-b97c-f5d5953abd65.mp4",
+      "sha256": "bf598045c467f9d07faa75341385a331a0eb9a68b4ec2aca64ca6741d4606c84",
+      "size": 917383
+    },
+    {
+      "path": "frontend/public/research/rsl/words/506fbeb3-1282-4bb8-bd48-0afedad64d63.mp4",
+      "sha256": "1869c29ba4c2414446143a455644f105433dd98fd6979d4e5aa2ecd890c6367b",
+      "size": 687585
+    },
+    {
+      "path": "frontend/public/research/rsl/words/50b48f58-5b8c-41f2-8438-d7d07c4e86bc.mp4",
+      "sha256": "f89ac002dc44c7032c3dbe166a684393ac6baca036ea0b74478f34b7ba727e4e",
+      "size": 467111
+    },
+    {
+      "path": "frontend/public/research/rsl/words/51b675c9-637c-4c40-a669-9fe439f30bb3.mp4",
+      "sha256": "695d2503b88d7191a82d8da2725a0ab75cc42fc65dedaf897699c9a4c87def46",
+      "size": 1219728
+    },
+    {
+      "path": "frontend/public/research/rsl/words/542b93a5-b251-4899-92ba-e836da1e6ec4.mp4",
+      "sha256": "ead7cd6bd37811d7c3b7236247e15b2f49e154d6deab84ace6a4fe9756e89856",
+      "size": 1056682
+    },
+    {
+      "path": "frontend/public/research/rsl/words/54dee110-03b2-4417-9edc-c98843a4a125.mp4",
+      "sha256": "72f9ccfe41e66ba600aae6ee4bf5ad3c620418fe54846f8c184bb22451690171",
+      "size": 300109
+    },
+    {
+      "path": "frontend/public/research/rsl/words/55d32981-a821-421e-b641-decd4465163d.mp4",
+      "sha256": "38ae4ad6be5165ba7f1a714682fd7898d5d89dd63faacc8b380f2db92734939c",
+      "size": 1168047
+    },
+    {
+      "path": "frontend/public/research/rsl/words/5782a432-ef90-4cbc-b315-9995ad70acea.mp4",
+      "sha256": "29379c3db650a7bf46d6877b5174f04c3637da79496330486885e1b5ab7f2319",
+      "size": 176407
+    },
+    {
+      "path": "frontend/public/research/rsl/words/57c6880e-9d4f-4e03-a1d9-4169d18f4f43.mp4",
+      "sha256": "15a65f31df15c2a3e59aca3e7eb4893814f86ad25621dd53eaebdbad516ae7f5",
+      "size": 390757
+    },
+    {
+      "path": "frontend/public/research/rsl/words/580edc90-daea-483e-a310-ab68cb8dcd4d.mp4",
+      "sha256": "c301f3eba55bf2d4558a47a7ea7ebead7a361118a2eba4f6682ee037c02568a9",
+      "size": 519101
+    },
+    {
+      "path": "frontend/public/research/rsl/words/58862482-a788-4e35-9c74-b65fda962a6f.mp4",
+      "sha256": "5aeb8eb17db154400299e661add77d8e8d9c46c194af9b783d4a7e0184b6811f",
+      "size": 252862
+    },
+    {
+      "path": "frontend/public/research/rsl/words/594f0e3d-531f-44a9-bded-fb18c9cd8a24.mp4",
+      "sha256": "f2ac430097c4ccc6b3d2a943b2a84ff59fed272252c033b53fe4084511235dce",
+      "size": 1205073
+    },
+    {
+      "path": "frontend/public/research/rsl/words/5ac08628-5d6a-43a7-a99d-625d26e43977.mp4",
+      "sha256": "e458321a2f19fcbf924b3a711c602c739b76ad855420d28a426a68fee08e706c",
+      "size": 1052232
+    },
+    {
+      "path": "frontend/public/research/rsl/words/5bd9ab86-fe3b-4cf8-8b7b-5098424ff789.mp4",
+      "sha256": "26c870ea82915136b6f5e3e940a300935847ac94f7b05c3a9e0a9e2623238ec8",
+      "size": 251516
+    },
+    {
+      "path": "frontend/public/research/rsl/words/5c794c1c-fd02-43d7-9938-4804fe6b8877.mp4",
+      "sha256": "07d775e52e83b1ceac4c16ceb0e10ed82ea4ad994881c674d4adf5f8be19c9f2",
+      "size": 746866
+    },
+    {
+      "path": "frontend/public/research/rsl/words/5d7cb3db-0b02-4edd-8238-be0706020cba.mp4",
+      "sha256": "3b7d4ce7b6661b3adf68ad99d4406cf3d9ca54623651efb183d7f202239aeda6",
+      "size": 1118865
+    },
+    {
+      "path": "frontend/public/research/rsl/words/5da64d7c-2131-4b7a-ae00-728d8b8dda5d.mp4",
+      "sha256": "491c30d835a331d0371d34c62890173eae0a3b903170035dcf332e4c8412ced1",
+      "size": 1294301
+    },
+    {
+      "path": "frontend/public/research/rsl/words/5ea53ce1-5cdf-461c-a814-b8f678f7a7b8.mp4",
+      "sha256": "39f0f0e3ae38bf34e0a78763d8d9b7f40c6a53e703223baa0061ffe62b798a0b",
+      "size": 774325
+    },
+    {
+      "path": "frontend/public/research/rsl/words/5ed48b44-4292-4771-a499-40b126901b50.mp4",
+      "sha256": "0a198a71306e158f9490b4382e55ea32f01ac09fc589beb4e3e1be3819916e21",
+      "size": 535789
+    },
+    {
+      "path": "frontend/public/research/rsl/words/5f337e79-b6d4-45c8-84b2-7003d344627c.mp4",
+      "sha256": "8b407bfde3a8ea317c9955b0ec43e3c4b9c601ebfbf89cb3dc49e13de75ed1fe",
+      "size": 313104
+    },
+    {
+      "path": "frontend/public/research/rsl/words/5fd28b57-9261-44fc-9648-e519d00eca14.mp4",
+      "sha256": "6317f4b4412890f9d80c54031e70e7169e598940a838738d4008ffa7cef68e8e",
+      "size": 752502
+    },
+    {
+      "path": "frontend/public/research/rsl/words/5fd8cf91-10c1-4f76-a070-24956a9a4557.mp4",
+      "sha256": "ae416be59ca12a25844e91b600f8d951a799be0cd2d89e9100772c3562ef5ab1",
+      "size": 1303143
+    },
+    {
+      "path": "frontend/public/research/rsl/words/6106a42d-83ff-45d2-98fe-a6e5101396a2.mp4",
+      "sha256": "f88fcf37ad2441ca2216cae8ee03c74c17a6422b084c45c4d9f5367e692d9e21",
+      "size": 1000127
+    },
+    {
+      "path": "frontend/public/research/rsl/words/620a9fc5-4b35-4cfc-864a-8385dd8b74c3.mp4",
+      "sha256": "93212cbc010e23c2bd94c99a5b838300214ae891f8bf31c8bcb2ebc9329aec0f",
+      "size": 233288
+    },
+    {
+      "path": "frontend/public/research/rsl/words/62813877-fba9-4ca9-85e0-6c832874b249.mp4",
+      "sha256": "75d8330adb00fa525778075f4b85901a8aade4cf3249ecaf9f3568a317adcb3f",
+      "size": 472819
+    },
+    {
+      "path": "frontend/public/research/rsl/words/628722ef-4a4c-4715-8728-4d3675c326fe.mp4",
+      "sha256": "8b859dec22532dbe3dd54b609a728699030d1fb3dd64fe8ccee25531178217ce",
+      "size": 304694
+    },
+    {
+      "path": "frontend/public/research/rsl/words/640f2b1f-88b8-4616-af20-12f020350797.mp4",
+      "sha256": "4b1598ca6923c9f043f6b6ed4f8c326d469342c426dc9fd91eea33c58e0d31ad",
+      "size": 348899
+    },
+    {
+      "path": "frontend/public/research/rsl/words/65c00b09-513d-4026-aafb-4e045a4e7d40.mp4",
+      "sha256": "ef48608d02e94bb66b7991b689cfaeeb5c7fb68c1dd3b5dbfa9bac13af3ac865",
+      "size": 964376
+    },
+    {
+      "path": "frontend/public/research/rsl/words/6911f183-7abe-4505-a770-b48a1db994b5.mp4",
+      "sha256": "0a093a7104460d75d6bab0361037c2ce624e62957c187185b9da5d6733df3d2b",
+      "size": 537829
+    },
+    {
+      "path": "frontend/public/research/rsl/words/69376af6-13c9-42ca-9ff3-0880d106a0c3.mp4",
+      "sha256": "85e6e30930e5fd65629faf3cee0173937ba89d9011baf3b1c36928d953b0182e",
+      "size": 453668
+    },
+    {
+      "path": "frontend/public/research/rsl/words/69586c66-7348-4881-8390-b56dbca08817.mp4",
+      "sha256": "d654d9924989fade50affa99f82123bb327d705c9394d2751955c4ac01f9ed76",
+      "size": 900204
+    },
+    {
+      "path": "frontend/public/research/rsl/words/6a2d01fd-1428-48a3-a218-252b79b21426.mp4",
+      "sha256": "7fec59b1e53d5976e6776bc4a3c9312fd05adf5f52607351eb05292a16bcaad9",
+      "size": 839748
+    },
+    {
+      "path": "frontend/public/research/rsl/words/6c7d80f0-e435-487e-a2bc-31bdaaa4d788.mp4",
+      "sha256": "48a843c3f42ba5598ab542338bf42ca7abfde3ddc526118bbdc3f5fd5b0b2cf0",
+      "size": 1030299
+    },
+    {
+      "path": "frontend/public/research/rsl/words/6d759966-0116-477e-b4da-5f61fddd5f0c.mp4",
+      "sha256": "4e845d44d279df488bfcccf456fa8de8221539406e0a6e85e0eeea8b0e0d29c8",
+      "size": 658561
+    },
+    {
+      "path": "frontend/public/research/rsl/words/6e24fd10-7198-4f7c-8af5-3d6f2c116cd6.mp4",
+      "sha256": "12a629003d824385a0a8e8033f12b28543aaa1150bef780920246025a808c133",
+      "size": 830080
+    },
+    {
+      "path": "frontend/public/research/rsl/words/7143af36-d46e-40b5-a875-d96c8e4f0a85.mp4",
+      "sha256": "cc2beb55239f6b93f8dc57fb1c2841440d259ec4cd8f7d6580abff47c96f359c",
+      "size": 670325
+    },
+    {
+      "path": "frontend/public/research/rsl/words/71b45022-d29a-45c3-837d-5496333083af.mp4",
+      "sha256": "a24e469c3768525793da333a87b7230972c95060d1280fb545d0a7b826c15b3d",
+      "size": 794779
+    },
+    {
+      "path": "frontend/public/research/rsl/words/71c24ba0-d579-4c71-8e67-2134d7dc10d0.mp4",
+      "sha256": "6250724d465fda83f95d675f0843ed7d33f7cd0111ebcaa33a820fb334fc788a",
+      "size": 909948
+    },
+    {
+      "path": "frontend/public/research/rsl/words/72476e8f-288e-4b8a-b7a3-c0ba2e694d44.mp4",
+      "sha256": "c2fb75dc34d41c4c660caaf1054480c2680fea1fe237bb0454da84693bbbdc1b",
+      "size": 867522
+    },
+    {
+      "path": "frontend/public/research/rsl/words/728c296d-1cc6-4475-865b-8a3396221970.mp4",
+      "sha256": "4fc75ba9701c41ac35b41dc5d8435f00039d590f60227a6a3c8add06c904d3ef",
+      "size": 766758
+    },
+    {
+      "path": "frontend/public/research/rsl/words/743cb1da-6fdb-40a1-92e5-0c85c480876d.mp4",
+      "sha256": "a9fba1936b03c1f7c26f3a3543cff4bb8ef1af434deca981f1fe8d307b0c2bc9",
+      "size": 349756
+    },
+    {
+      "path": "frontend/public/research/rsl/words/76fc58e0-5691-455b-9eef-547200f9295b.mp4",
+      "sha256": "a3e7fcae0b5b371fa8939aaa2cd404f689403f8a972c118ccc7c6427b67b6482",
+      "size": 426070
+    },
+    {
+      "path": "frontend/public/research/rsl/words/78a4ca40-8a78-437e-8024-13935bd3abdb.mp4",
+      "sha256": "3962573fc8bcf6fa83cfd19b4f623161a987040ec16dbb3a62a3265051d07284",
+      "size": 344086
+    },
+    {
+      "path": "frontend/public/research/rsl/words/7ab4ed20-bd2a-4fd2-a9f5-836058a3c7e4.mp4",
+      "sha256": "b8f30ac1a69d02bbd334739d1e03a15d1e17d55bb226ea8a84c90c6cac65ffdf",
+      "size": 387788
+    },
+    {
+      "path": "frontend/public/research/rsl/words/7ee747b0-05fa-4481-955d-429b641b719f.mp4",
+      "sha256": "c85fc5aa1e1734cd8bd8477c29726ab4aeb57f1645c119d0ebb0cf465b904499",
+      "size": 397047
+    },
+    {
+      "path": "frontend/public/research/rsl/words/803b0a5e-7415-4723-af3d-ecccddd1faf5.mp4",
+      "sha256": "af9db4ca70ad0c2a742a4d416344610af71f73251019fead98c8bb75a2808794",
+      "size": 475340
+    },
+    {
+      "path": "frontend/public/research/rsl/words/83b8a1b6-5f62-4003-93aa-cf121cd0f8e1.mp4",
+      "sha256": "e82cbd9a3e135c058a513f0e281317e04bc446a5a686c8f6621228bd78ef4b31",
+      "size": 1331599
+    },
+    {
+      "path": "frontend/public/research/rsl/words/84ff2040-2ace-4600-bdf2-d613883c459a.mp4",
+      "sha256": "cf039df23a7f75bc46018c229a7fad01ec2e9ec30d70520a9fd8a0ffd0f46e64",
+      "size": 346247
+    },
+    {
+      "path": "frontend/public/research/rsl/words/858669cd-c8a4-4ed8-b29a-9a091adcdde0.mp4",
+      "sha256": "ea2907fc14c49095764410226573dd7b9c3b294256323ea2ead6470d7107622d",
+      "size": 217479
+    },
+    {
+      "path": "frontend/public/research/rsl/words/85b61dde-f57e-418c-b84a-a0ea3ebc661f.mp4",
+      "sha256": "3ba331ab51f037c4c857fdef79af1fb88afa86533bafac0402459ce8e801f082",
+      "size": 654521
+    },
+    {
+      "path": "frontend/public/research/rsl/words/875d68f6-5916-49f6-ba93-359b4d37dde3.mp4",
+      "sha256": "d108d417ba86f0100e30b1e3408c46988a75c6968fbb82c2ea2b9236dd07e3f2",
+      "size": 548106
+    },
+    {
+      "path": "frontend/public/research/rsl/words/896d253f-9191-43f3-9b63-58ee8658cc3f.mp4",
+      "sha256": "ce6be6ce59e770272b6c79a76287fc54b7d4629b59ca2a8b977b716d1d9fc47e",
+      "size": 657521
+    },
+    {
+      "path": "frontend/public/research/rsl/words/8b39dda1-b863-438a-b85c-659b9345d1d6.mp4",
+      "sha256": "a8676e4e958045bc6b0799ee1b602a55a4b740b6a60eb13bfa8403d8df19f39a",
+      "size": 500270
+    },
+    {
+      "path": "frontend/public/research/rsl/words/8c1a7f26-480c-4108-90ed-221586015d7b.mp4",
+      "sha256": "50a540197259be2ef5109797ed5677f753682eaa9f174f8cbfa15f121c40bb95",
+      "size": 241915
+    },
+    {
+      "path": "frontend/public/research/rsl/words/8c3b0308-8f51-4847-bc97-8dccdc15e900.mp4",
+      "sha256": "a799dc42612f4a7730eac6eedb6f86101766ed687baaad554c07b31828eb2772",
+      "size": 748433
+    },
+    {
+      "path": "frontend/public/research/rsl/words/8cf533fa-b177-4ceb-80ff-18d130192300.mp4",
+      "sha256": "a0d34341b59215d81f20ddb81b28fe552230a70ea5827600bec78a4be7e7a387",
+      "size": 643924
+    },
+    {
+      "path": "frontend/public/research/rsl/words/8d20b0ee-e64c-4f5a-a1ee-81a5a9462686.mp4",
+      "sha256": "4ec9e9e88c10cc55996b3db12bbe4f7fd4a7bd819cdb2547fa73e00b66bfdfc0",
+      "size": 588160
+    },
+    {
+      "path": "frontend/public/research/rsl/words/8e883b97-6b67-4404-8d9a-c17117421c18.mp4",
+      "sha256": "3f9497eb750a1aaddc90ed4f34981c42ad354925e1214ed58d7520b8d9c2209f",
+      "size": 642580
+    },
+    {
+      "path": "frontend/public/research/rsl/words/8f8056fe-ceb5-4324-a5ca-6d8e95184692.mp4",
+      "sha256": "baabff1961d76597660445d3581cccfeddf6122f6630221d15b47db8f8534e48",
+      "size": 652817
+    },
+    {
+      "path": "frontend/public/research/rsl/words/912db910-dc13-472c-8a22-51c2765945cf.mp4",
+      "sha256": "3df0541d4377d384ebf8d5e9bda82e4bcc01b51030cacdffa47e5a7554f867d1",
+      "size": 332044
+    },
+    {
+      "path": "frontend/public/research/rsl/words/91d7d717-b06e-4eb7-85dd-2981b9dd7cfc.mp4",
+      "sha256": "0d4c7b24cec0decd09f0188073e730a7f7fb5974835e9a07b7f925d35f0f180b",
+      "size": 327518
+    },
+    {
+      "path": "frontend/public/research/rsl/words/924b6df6-312e-4448-bd48-d37ab27c9db1.mp4",
+      "sha256": "ed7499582af6b8dea3125ca06b875e35ae1e5d852878e0a1f64a34d2307844f1",
+      "size": 1085003
+    },
+    {
+      "path": "frontend/public/research/rsl/words/92e94ab2-b1ae-453a-8288-2bdfc052a71e.mp4",
+      "sha256": "20a3ef8096d2dffa8da0704aec585d7cb9c5bd7fe742a4fb68b7dc8504cd83c8",
+      "size": 1083942
+    },
+    {
+      "path": "frontend/public/research/rsl/words/9357b146-2273-48a9-8f27-65e8bd13de76.mp4",
+      "sha256": "d83592d3933ddd750cc5b68be1c1372738b663aa921ef56061c2e990ad3b96d5",
+      "size": 843620
+    },
+    {
+      "path": "frontend/public/research/rsl/words/9543d766-c852-4d5b-8638-3987a05d901f.mp4",
+      "sha256": "7df554a3313a9a2d520be54a89144c6fb7683fbb1d96f1fb93b3925c5f7b07bd",
+      "size": 506154
+    },
+    {
+      "path": "frontend/public/research/rsl/words/9613dff0-6050-4f02-86d4-04a49ab40a60.mp4",
+      "sha256": "f6950ff177a9249a0ed179a18be4c9278be0e3d18586f6d7b64070216893eea5",
+      "size": 232810
+    },
+    {
+      "path": "frontend/public/research/rsl/words/98521248-2877-43fb-8a38-695b1ccd0a3d.mp4",
+      "sha256": "60fe9e878ada4c03be19db7d230ab7828ff819bd138038f0db7429ec13717818",
+      "size": 266267
+    },
+    {
+      "path": "frontend/public/research/rsl/words/98844c64-ba52-4352-a4c2-2fa0d9bb0dc1.mp4",
+      "sha256": "fecfb66fdbb6a9711b841adc4db613250e179a12b2703539a5443b965c20d33b",
+      "size": 1029121
+    },
+    {
+      "path": "frontend/public/research/rsl/words/99afdafa-c186-48e2-b2cc-f33d2e5cd8da.mp4",
+      "sha256": "b4762a2907831d6d7ff80b9f42c221cde4e78bc92252c3963b3de6717b32bc9b",
+      "size": 280121
+    },
+    {
+      "path": "frontend/public/research/rsl/words/9aa82def-81ea-49c7-af40-2db2ad366921.mp4",
+      "sha256": "2e6bc1d8e72c877c068ee2bc7f283dc8f1efb497697f3e578f04908562dff5f2",
+      "size": 348367
+    },
+    {
+      "path": "frontend/public/research/rsl/words/9c7faf34-1c78-4852-a49f-d5823d8efd54.mp4",
+      "sha256": "aec12f4a171eaea12bea2387c861b619f74a310f8a37eff4d0f9b009a125d60f",
+      "size": 437439
+    },
+    {
+      "path": "frontend/public/research/rsl/words/9d32e897-7fae-48fc-8936-8abd9a81eb7c.mp4",
+      "sha256": "4bc33e0ad68afc7ecbf814b9c433f4c0cbf9d98be8582815c8ceb637d97c16c6",
+      "size": 1076586
+    },
+    {
+      "path": "frontend/public/research/rsl/words/9e551d12-7bb8-40f1-b910-0d7b464b6a60.mp4",
+      "sha256": "b46acb5b14f09a9d96b27d06803b7f2a95e729fa7b858925894920bb8bc36ce2",
+      "size": 551567
+    },
+    {
+      "path": "frontend/public/research/rsl/words/9ee25d0d-a522-4099-bc42-b1eaeef688d7.mp4",
+      "sha256": "74cb75edbea1dcf82724820cbd957fbef703b8996689a80930e42f3fa4fc5230",
+      "size": 1018910
+    },
+    {
+      "path": "frontend/public/research/rsl/words/9fcf26f7-f7db-45b2-8334-083a30751af0.mp4",
+      "sha256": "1892794576aa869f6d798ef87518d619302c3ccc8930b01d3cd0eeb0e440012b",
+      "size": 598998
+    },
+    {
+      "path": "frontend/public/research/rsl/words/a1a428c3-5ddd-4baa-9de5-723eb9fe3f00.mp4",
+      "sha256": "5e0ccd3d44f8e92a8cd4040604d9b7b488b6b8a632b888a67e368842b88c1420",
+      "size": 373399
+    },
+    {
+      "path": "frontend/public/research/rsl/words/a5983e98-c147-407f-bd44-753b2dfa5b60.mp4",
+      "sha256": "d63e6eca33d12268d7ce95300513349b9d46623f377c69f0e9c5b72087c5dae6",
+      "size": 296315
+    },
+    {
+      "path": "frontend/public/research/rsl/words/a8989f04-a615-4a0d-bb49-583d3c0e94ab.mp4",
+      "sha256": "379361407de5d5f74a93ef4afcafda28aa7476e9c663959a99c665d86454d197",
+      "size": 321618
+    },
+    {
+      "path": "frontend/public/research/rsl/words/a98a74bc-f4f8-4792-a631-57300dbb18ad.mp4",
+      "sha256": "e444750244485ba5ab862a66879d4a36291b0483a134699a939ade5b65a3ffa8",
+      "size": 718604
+    },
+    {
+      "path": "frontend/public/research/rsl/words/aab0e5db-ed15-47de-b79b-6fd97beadb66.mp4",
+      "sha256": "384a8a57a010cba1432dc414711d0abbef48c16a8cb15a0bc05dac2d01d41183",
+      "size": 868114
+    },
+    {
+      "path": "frontend/public/research/rsl/words/aba2f273-425d-4fd1-892b-1dd9d21e615c.mp4",
+      "sha256": "41624bdbd42650b215d3ba292a98255c9aadbb8c5f1b43548af0940613ce58cf",
+      "size": 604258
+    },
+    {
+      "path": "frontend/public/research/rsl/words/ae2dce80-8cd7-41f6-9094-181684a2ded8.mp4",
+      "sha256": "e368b423c3483518d89dff1600182778852353b3928cea431e56c03a22481185",
+      "size": 300238
+    },
+    {
+      "path": "frontend/public/research/rsl/words/aeed25a5-ba8d-42f1-88f3-9c0770a8b281.mp4",
+      "sha256": "662307099063279dcb261b7eb2c7b167ffd23be07d16c83922b004a5349606c2",
+      "size": 693344
+    },
+    {
+      "path": "frontend/public/research/rsl/words/b047f8c8-9b3e-4873-851e-2738517ef94e.mp4",
+      "sha256": "262743335b769c54b07b41416cc203e06ccbe6d58c6ab9bdfdb5743d777ad3be",
+      "size": 596551
+    },
+    {
+      "path": "frontend/public/research/rsl/words/b08629fc-4f47-4fb6-a288-028b56256f4b.mp4",
+      "sha256": "db46598dce639dc4d1ab348ec70938cf268723fefced93ee67964375c6d46899",
+      "size": 783298
+    },
+    {
+      "path": "frontend/public/research/rsl/words/b0df4010-985a-4522-98c0-4ad5218f8007.mp4",
+      "sha256": "819a42eda871ef9167f2e869bc73d08dfbae00cc6e0e03416a1066ebc5b97ccb",
+      "size": 446222
+    },
+    {
+      "path": "frontend/public/research/rsl/words/b19972c4-75f9-492c-a6c1-0dbbdd154f92.mp4",
+      "sha256": "af5642bbb2c3a8a9a29b0c7d24a57f9a8b6a1d432385d8137fab82e0f2b9a682",
+      "size": 328091
+    },
+    {
+      "path": "frontend/public/research/rsl/words/b45703d1-bc4e-4ec7-87cb-ecf59c7d49b5.mp4",
+      "sha256": "9307152c14c56fee092360615b5b2e04d3a9b1261f84c63b00ee11fec7e9b6b7",
+      "size": 1275200
+    },
+    {
+      "path": "frontend/public/research/rsl/words/b4f237bd-f7cd-4d03-9a0e-0d07ef3b7aa0.mp4",
+      "sha256": "5a957665d54fd2a27ec4215f81a7c1c862926e64ca1cabb9a7065c893ff8979f",
+      "size": 1233236
+    },
+    {
+      "path": "frontend/public/research/rsl/words/b58b7f9b-fde5-45d5-b41b-b3ebeef68a41.mp4",
+      "sha256": "be934d4feb213a2a6be8083ad050727e4cc3d2fded80f304bcf3e6317a348116",
+      "size": 976783
+    },
+    {
+      "path": "frontend/public/research/rsl/words/b66bf5be-fb7f-4963-9146-061c2cc0936b.mp4",
+      "sha256": "af6d85dcba0c23d1908d402b6f795b4dc6af4b2f5727996d53ab2ac2994a7208",
+      "size": 350170
+    },
+    {
+      "path": "frontend/public/research/rsl/words/b6fe83ed-47c6-442f-8e6f-77fa4d6473df.mp4",
+      "sha256": "4f186072e60f4598800f646baf4631fbf346892e26129afdd89990f5ed82c34e",
+      "size": 990699
+    },
+    {
+      "path": "frontend/public/research/rsl/words/b7dfae4f-14a6-4c35-81fe-9586217836dd.mp4",
+      "sha256": "38a980012c14e4c1496e1d9830c474d8ff2643d1b28956f5a290141525b10b47",
+      "size": 475193
+    },
+    {
+      "path": "frontend/public/research/rsl/words/b854c147-373f-4b87-bcf6-fd1ed63987ca.mp4",
+      "sha256": "c67c1b2c4fb386ea070c5c0ab5a937068820159b20c2a0ffa119f2e49b46f3ee",
+      "size": 677580
+    },
+    {
+      "path": "frontend/public/research/rsl/words/b958f3a6-9e6c-4c46-a335-f0715cd7d5db.mp4",
+      "sha256": "78d037ce872c28db3c69d1c3ca85f52b1bdee4ef7e523ec3c1511bf61dcc6ed2",
+      "size": 353077
+    },
+    {
+      "path": "frontend/public/research/rsl/words/bb899ccb-e512-4521-bbf3-7718a3923e72.mp4",
+      "sha256": "ee2957f21327fd38856d3837569b6a718a082cd9fddf1ad09485aea480ee6f7a",
+      "size": 502498
+    },
+    {
+      "path": "frontend/public/research/rsl/words/be28b6af-defd-46e4-a21e-b0a0334fea59.mp4",
+      "sha256": "05e61cbf488f6b57720061403ba1509bccdd65cf59eaa2de054bf6f2ca1936dd",
+      "size": 907944
+    },
+    {
+      "path": "frontend/public/research/rsl/words/c0f1e55b-ad7b-43df-8735-e740078a5225.mp4",
+      "sha256": "67defa0ded6d5d7b6335a131c740368c741bc0d8d52e45f12d1409051df235d4",
+      "size": 376958
+    },
+    {
+      "path": "frontend/public/research/rsl/words/c1596705-39b0-4295-8942-d3cb5cf62444.mp4",
+      "sha256": "c839d37068a9fc37bde6c28c98d5c68d42ea6a833078841264401b4f1d3292ce",
+      "size": 363905
+    },
+    {
+      "path": "frontend/public/research/rsl/words/c2304594-a1fa-4e0b-a84d-4a2fe3f403c5.mp4",
+      "sha256": "9edf7c2cb4f9eae06a09a9c02e9d91d3b1fefafec0a31711ff87981e63a7a437",
+      "size": 757762
+    },
+    {
+      "path": "frontend/public/research/rsl/words/c3c582bb-00ef-48cd-b8f5-cbf21473ca56.mp4",
+      "sha256": "63b203f7dd38f73212fc2905d173a875741c2ed5ed9d60059d6c83e68fa9b83d",
+      "size": 349630
+    },
+    {
+      "path": "frontend/public/research/rsl/words/c446b714-580d-403c-a2ce-b91566a91432.mp4",
+      "sha256": "0fd0ff97cd0c981b9bf04913a11e9a682d685d7e2a39fedd301570f25fe66ca9",
+      "size": 362078
+    },
+    {
+      "path": "frontend/public/research/rsl/words/c58e68e8-cac4-4676-9699-ff06de3061bd.mp4",
+      "sha256": "043cc321e1dd5b7c35612431d92b09266aa5b8ed68d1cf4b5f48464c8f9eee3c",
+      "size": 881831
+    },
+    {
+      "path": "frontend/public/research/rsl/words/c6b5c933-f993-45fb-9875-59f87fc4aeda.mp4",
+      "sha256": "e16614ebb26f09d7862fd9bb14846912702c264586038b5d8844612eda2ab5ee",
+      "size": 658152
+    },
+    {
+      "path": "frontend/public/research/rsl/words/c709009f-b7a0-40bb-93ef-82677c013336.mp4",
+      "sha256": "b27fe183e4f53594bb061324e37a4693ad471c8673fa70ca137fabec27b59b0a",
+      "size": 1551550
+    },
+    {
+      "path": "frontend/public/research/rsl/words/c7e53269-b327-40ce-8ee9-6b73b105b165.mp4",
+      "sha256": "d2315cfe7bd768c169a36d86dafd9fc0cf7089e6caeb37f019ebeea8dad063e4",
+      "size": 797995
+    },
+    {
+      "path": "frontend/public/research/rsl/words/c9b82a16-dba8-4012-98b3-29be7978a8ca.mp4",
+      "sha256": "04f82c586a8ce05b562be44bafe3eed493992a5a00a87bad82da8008ed856b3c",
+      "size": 872471
+    },
+    {
+      "path": "frontend/public/research/rsl/words/cb036314-9a5e-45ee-a7f1-2d08a07815c3.mp4",
+      "sha256": "90ac437c290f932512b67eccc3c415b90cf69503fcc26fb6a13c7e1920c513c9",
+      "size": 439532
+    },
+    {
+      "path": "frontend/public/research/rsl/words/cc14b58e-ac2c-4484-a1d5-c2f387d361a7.mp4",
+      "sha256": "0725e0633e60b3aec0994ae1f7b882efc8f006b55260d8a6bd0aca11b0d9cd30",
+      "size": 786840
+    },
+    {
+      "path": "frontend/public/research/rsl/words/cd151b2a-4bdb-4446-b8fb-fe2a11841690.mp4",
+      "sha256": "0c41fb1183d50d746d2c3981b2001754c12e89b707d7b3984260e66371de4912",
+      "size": 252255
+    },
+    {
+      "path": "frontend/public/research/rsl/words/cd6a9d0b-4948-4e49-ac61-437223ed759a.mp4",
+      "sha256": "34af8e188b1a2f693d1c5cafd000ba3a0a77589366b73ec8d54a34c78ddf6977",
+      "size": 941954
+    },
+    {
+      "path": "frontend/public/research/rsl/words/ceedcb88-163e-49e4-b11d-172c52a97b2b.mp4",
+      "sha256": "e9e1cb7d246a2a30f8eaada6f53d9da4334d393bd921da38328f59028a2fa019",
+      "size": 277128
+    },
+    {
+      "path": "frontend/public/research/rsl/words/cf4157f8-d295-4493-abac-036e1929c18c.mp4",
+      "sha256": "80c8f8fac23d74c38276b6f7fa15a37ee65e08e9e78511ae09c46dcba0603cc6",
+      "size": 360981
+    },
+    {
+      "path": "frontend/public/research/rsl/words/d116eb89-9f5b-4e4c-906f-51820266e3fe.mp4",
+      "sha256": "081ce777b4d3db50fc8608d12216afe902996ddab7f43606c6472089333def48",
+      "size": 273792
+    },
+    {
+      "path": "frontend/public/research/rsl/words/d388f4c7-842f-406e-9c34-862b9c7cad2f.mp4",
+      "sha256": "b5fa8a6a321d14c5048432bbbcf49efcb0bbe5bd79aff51ed9014fe474647d3b",
+      "size": 537899
+    },
+    {
+      "path": "frontend/public/research/rsl/words/d5e5068b-369d-408e-a560-89254b90328c.mp4",
+      "sha256": "35269afdc7229dd05c20ea70cdc5f35a969db49ad1e38d34f69fcf2dfb8325b7",
+      "size": 922913
+    },
+    {
+      "path": "frontend/public/research/rsl/words/d7560665-dcdc-4ee5-8687-a314e9f631d3.mp4",
+      "sha256": "fe45a2001e4389d42b6e29ad50df42c10e74bc4c02b1dee48edf6746e36c1af5",
+      "size": 307773
+    },
+    {
+      "path": "frontend/public/research/rsl/words/d8326c48-f788-4e5c-bff2-838e61630061.mp4",
+      "sha256": "66c01f4aeceb4261cc72923af4578ed1d817c438e789176a47e4866278d51437",
+      "size": 1019161
+    },
+    {
+      "path": "frontend/public/research/rsl/words/ddc2e7ed-5d21-48f0-bfb7-dd668c754fcc.mp4",
+      "sha256": "a726723680b5b588f508d9923964dd3dde2a99f46817b122e7ac1a0245386dc9",
+      "size": 248503
+    },
+    {
+      "path": "frontend/public/research/rsl/words/defd5c39-68d2-46dd-9482-afd9f8c9aafb.mp4",
+      "sha256": "76e7d04e45b491da7abeff911be189cd46a88bed9a4a8df2b2fa83405b0a09ec",
+      "size": 326520
+    },
+    {
+      "path": "frontend/public/research/rsl/words/e10fbdcb-14a6-4a4b-8073-f646db0d4f28.mp4",
+      "sha256": "b3f8f02bd11e109c1643fe126c50c5c3a62d1a4e4c672f650546ca5ab339d353",
+      "size": 505793
+    },
+    {
+      "path": "frontend/public/research/rsl/words/e21a9e04-b733-4b39-b1b7-a84de7730a06.mp4",
+      "sha256": "1a1582c1612bef1c4b0b1c75921d4f7eb8452c611503ef5b63a2b1837361c052",
+      "size": 1080104
+    },
+    {
+      "path": "frontend/public/research/rsl/words/e29e36fe-ddad-4ac8-9fe1-a3d8af3fb983.mp4",
+      "sha256": "d80d912cba89d4c5d641755b6516d34ab2b1d8268f66a3c527a194292a210531",
+      "size": 371145
+    },
+    {
+      "path": "frontend/public/research/rsl/words/e35ba719-4086-41ce-bd78-9312d355b31c.mp4",
+      "sha256": "f8b4ebe112b481de1d1df9bbdc7a5f00f2f20c9883b721543a0c9e59fa757f1f",
+      "size": 661536
+    },
+    {
+      "path": "frontend/public/research/rsl/words/e3b0e3b1-ee70-4eb3-8559-2c0f84cc066f.mp4",
+      "sha256": "fc1a42de2ece86ebbafa6765bbaa4ade4373c5a9fd81b9fcba69a2c8c739dad3",
+      "size": 1037340
+    },
+    {
+      "path": "frontend/public/research/rsl/words/e526814e-0962-4c44-8a18-e4b8ef513a7e.mp4",
+      "sha256": "caaacd90d001fde3d90b554ad7e0f387e80739ebbbdfb47f985f8b427a604c6f",
+      "size": 374695
+    },
+    {
+      "path": "frontend/public/research/rsl/words/e70fcfd6-52db-4656-ac39-c4dfbf73939e.mp4",
+      "sha256": "ab8e681be3df5f49e95d0104bcf14ac428ccd1d993cfb1099ac276d247c20b95",
+      "size": 581079
+    },
+    {
+      "path": "frontend/public/research/rsl/words/e9daaa4b-0fbb-40c5-8df4-d33ec95b7a9f.mp4",
+      "sha256": "b8712d198d028debfbb07b4f691433dd0112b07b68d979879d50f1e9df9e1ded",
+      "size": 272346
+    },
+    {
+      "path": "frontend/public/research/rsl/words/ea7aa6fc-bd78-477e-9fe4-d97f5402570a.mp4",
+      "sha256": "ce37670e66b1a983dc8a31fc5abe68d353e186e3d78bb240623aee604be4ea81",
+      "size": 959236
+    },
+    {
+      "path": "frontend/public/research/rsl/words/ec185ca1-6a96-4094-938e-6a6ce6d8363a.mp4",
+      "sha256": "b1fb465b8cea9365f3d9e9351c00b305f173fab1d75f039a90f633615fa5400f",
+      "size": 975371
+    },
+    {
+      "path": "frontend/public/research/rsl/words/ed66b0ff-fd37-4050-ab98-6114d72d9826.mp4",
+      "sha256": "ed73a59c004ed306e7b2417ec29dd89f30fef08f3eb323526fdb04db9150cdfd",
+      "size": 352139
+    },
+    {
+      "path": "frontend/public/research/rsl/words/f00a8a7f-91a8-491f-9813-7b9e29425cb2.mp4",
+      "sha256": "183975d551d1617db8bf97482645f885423cfe638f8a131d3a1743b39ed0e24b",
+      "size": 563994
+    },
+    {
+      "path": "frontend/public/research/rsl/words/f17a6060-6ced-4bd1-9886-8578cfbb864f.mp4",
+      "sha256": "b8bfec2fab2990aac8c1fee2a34fd441461c28a873fe448ba03aeabe65977444",
+      "size": 480247
+    },
+    {
+      "path": "frontend/public/research/rsl/words/f1a5226d-37c2-46bb-bff6-7db98c61ced0.mp4",
+      "sha256": "45fb066757b77463dd320f5e4b8b609dabbec228bf9f6a692de77da5fbce030c",
+      "size": 898216
+    },
+    {
+      "path": "frontend/public/research/rsl/words/f3848317-a25f-48cb-bc3f-66efe08de15a.mp4",
+      "sha256": "533ab310b3fc5fb41861c0b607d756f35933d4ff41470b14c82a932661686aaf",
+      "size": 533124
+    },
+    {
+      "path": "frontend/public/research/rsl/words/f872e2cb-9fd7-4d62-914c-d469883e2215.mp4",
+      "sha256": "a27d509576c58bebbfae12bcc91c00a6d65013337c059ecadc9ca86927f6b768",
+      "size": 282926
+    },
+    {
+      "path": "frontend/public/research/rsl/words/f8ff6bc7-5750-4565-b058-d16050b0d00e.mp4",
+      "sha256": "0ef617827303c9955521193d536b0ecf3d7fc33f5c1b2b523948aaf202c5b7f2",
+      "size": 768646
+    },
+    {
+      "path": "frontend/public/research/rsl/words/f8ffac36-0b54-4b30-897c-ce34d8ef62bf.mp4",
+      "sha256": "3bdb4a40dc27dc7bbbe06dc80baa71e0092ec849602beab14999fa6fabdfe412",
+      "size": 441013
+    },
+    {
+      "path": "frontend/public/research/rsl/words/fc2a83a7-c69c-4d53-83dd-c2357d50cf1f.mp4",
+      "sha256": "09601a21a13093a684e00361cc195d626a4e2b72c528fde61ccbb3398fda8d68",
+      "size": 1089893
+    },
+    {
+      "path": "frontend/public/research/rsl/words/fd1c4073-e36e-4f12-be21-4d47b1efabc0.mp4",
+      "sha256": "b75d7713ec3f282bada6e69715054fd93bdb849bcedf06009c8110920802538b",
+      "size": 691747
+    },
+    {
+      "path": "frontend/public/research/rsl/words/ffce2323-7036-46ee-af8a-82f010ce9aff.mp4",
+      "sha256": "c79a12c0ac203c61d013255eaf7b940bfeb6ba3dec1ac68d8620b3455d725301",
+      "size": 282118
+    },
+    {
+      "path": "frontend/public/research/rsl/words/forms.json",
+      "sha256": "1a728cad1983cf723cdfbe8c193c061b6097622559c5e7a3de1d0c05b5317b40",
+      "size": 131292
+    },
+    {
+      "path": "frontend/public/research/rsl/words/license.pdf",
+      "sha256": "14f4845e9c8d3de875cbac4139491da368ab1040a7f565e02894477279134d22",
+      "size": 157632
+    },
+    {
+      "path": "frontend/public/research/rsl/y-reference.mp4",
+      "sha256": "b5fd7b6dadc75319120a30a2334af3f3972aeed6bf1f29892adb02302b8f807e",
+      "size": 521021
+    }
+  ]
+}
