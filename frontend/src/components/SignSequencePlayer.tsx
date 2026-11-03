@@ -13,7 +13,7 @@ const Mentor = lazy(() =>
 );
 export function SignSequencePlayer({
   plan,
-  modelUrl = "/avatars/hand-workshop/mira-rig.glb",
+  modelUrl = "/avatars/hand-workshop/mira-rig.glb?v=denim-4",
   autoPlay = false,
   framing = "sign",
   note,

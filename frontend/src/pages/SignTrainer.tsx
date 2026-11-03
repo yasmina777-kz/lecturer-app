@@ -66,7 +66,41 @@ export function SignCourseCatalog() {
           </p>
         </div>
       </div>
-      {!stage && <ActivityLinks />}
+      {!stage && (
+        <section className="learning-start panel">
+          <div>
+            <span className="eyebrow">
+              {at("НАЧНИТЕ ЗДЕСЬ", "START HERE", "ОСЫНАН БАСТАҢЫЗ")}
+            </span>
+            <h2>
+              {at(
+                "Первая буква — первый шаг",
+                "Your first letter",
+                "Алғашқы әрпіңіз",
+              )}
+            </h2>
+            <p>
+              {at(
+                "Посмотрите движение аватара и повторите. Дальше — слова и короткие диалоги.",
+                "Watch and repeat. Then move on to words and short dialogues.",
+                "Аватарды көріп, қайталаңыз. Одан кейін сөздер мен диалогтарға өтіңіз.",
+              )}
+            </p>
+            <Link
+              className="button primary"
+              to={`/practice?exercise=${exercises()[0].id}`}
+            >
+              {at(
+                "Начать с буквы А",
+                "Start with letter А",
+                "А әрпінен бастау",
+              )}{" "}
+              <ArrowRight size={18} />
+            </Link>
+          </div>
+          <AlphabetCardArt letter="А" />
+        </section>
+      )}
       {!stage ? (
         <div className="sign-level-grid">
           {courseLevels().map((l) => (
@@ -127,8 +161,16 @@ export function SignCourseCatalog() {
             ))}
         </div>
       )}
+      {!stage && (
+        <>
+          <h2 className="learning-section-title">
+            {at("Попробуйте, когда освоитесь", "Explore next", "Келесі қадам")}
+          </h2>
+          <ActivityLinks />
+        </>
+      )}
       <Link
-        className="button primary sign-catalog-dictionary"
+        className="button secondary sign-catalog-dictionary"
         to="/text-to-sign?tab=dictionary"
       >
         {at(
@@ -411,7 +453,7 @@ function AnimatedExercisePlayer({
           <div className="sign-avatar-stage">
             <Suspense fallback={<Loading />}>
               <Mentor
-                modelUrl="/avatars/hand-workshop/mira-rig.glb"
+                modelUrl="/avatars/hand-workshop/mira-rig.glb?v=denim-4"
                 motionUrls={[`/avatars/mira-blender/${exercise.model}`]}
                 time={animationTime(time, isLetter)}
                 framing={isLetter ? "letter" : "sign"}

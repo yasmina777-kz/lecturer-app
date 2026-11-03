@@ -646,3 +646,25 @@
 .activity-result > h2:focus {
   outline: none;
 }
+
+.dialogue-watch-layout {
+  grid-template-columns: minmax(0, 1fr) 240px;
+}
+.activity-avatar {
+  min-width: 0;
+  margin-top: 16px;
+}
+.activity-avatar > small {
+  display: block;
+  color: var(--sw-muted);
+  font-size: 12px;
+  margin: 12px 0;
+}
+.activity-avatar .gesture-3d-stage {
+  min-height: 360px;
+}
+@media (max-width: 1000px) {
+  .dialogue-watch-layout {
+    grid-template-columns: 1fr;
+  }
+}

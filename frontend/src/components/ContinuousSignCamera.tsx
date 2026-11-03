@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Camera, Square, Upload, RefreshCw, Copy } from "lucide-react";
+import { useLiveLetters } from "../sign/useLiveLetters";
 import { at } from "../i18n/automation";
 
 type Result = {
@@ -18,15 +19,23 @@ type Health = {
 
 export function ContinuousSignCamera() {
   const [health, setHealth] = useState<Health | null>(null);
+  const healthRef = useRef(health);
+  healthRef.current = health;
   const [phase, setPhase] = useState<
     "idle" | "starting" | "recording" | "processing"
   >("idle");
   const [message, setMessage] = useState("");
-  const [remaining, setRemaining] = useState(6);
+  const [remaining, setRemaining] = useState(4);
+  const [processing, setProcessing] = useState(false);
+  const [skipped, setSkipped] = useState(0);
+  const inFlight = useRef(false);
+  const pending = useRef<{ blob: Blob; id: number } | null>(null);
   const [result, setResult] = useState<Result | null>(null);
   const [text, setText] = useState("");
   const [hasPreview, setHasPreview] = useState(false);
   const video = useRef<HTMLVideoElement>(null);
+  const overlay = useRef<HTMLCanvasElement>(null);
+  const letters = useLiveLetters(video, overlay, phase === "recording");
   const stream = useRef<MediaStream | null>(null);
   const recorder = useRef<MediaRecorder | null>(null);
   const generation = useRef(0);
@@ -70,6 +79,8 @@ export function ContinuousSignCamera() {
     clearTimeout(timer.current);
     clearInterval(ticker.current);
     request.current?.abort();
+    pending.current = null;
+    inFlight.current = false;
     if (recorder.current?.state === "recording") recorder.current.stop();
     stream.current?.getTracks().forEach((track) => track.stop());
     stream.current = null;
@@ -78,6 +89,7 @@ export function ContinuousSignCamera() {
   function stop() {
     release();
     setPhase("idle");
+    setProcessing(false);
     setMessage(
       at(
         "Камера выключена. Текст сохранён на этой странице.",
@@ -97,7 +109,13 @@ export function ContinuousSignCamera() {
   }, []);
 
   async function recognize(blob: Blob, id: number) {
-    setPhase("processing");
+    if (inFlight.current) {
+      if (pending.current) setSkipped((n) => n + 1);
+      pending.current = { blob, id };
+      return;
+    }
+    inFlight.current = true;
+    setProcessing(true);
     setMessage(
       at(
         "Читаем движения рук, тела и лица…",
@@ -131,8 +149,6 @@ export function ContinuousSignCamera() {
         );
     } catch (error) {
       if (id !== generation.current || !alive.current) return;
-      release();
-      setPhase("idle");
       setMessage(
         error instanceof Error && error.name !== "AbortError"
           ? error.message
@@ -140,6 +156,13 @@ export function ContinuousSignCamera() {
       );
     } finally {
       clearTimeout(timeout);
+      if (id === generation.current) {
+        inFlight.current = false;
+        setProcessing(false);
+        const next = pending.current;
+        pending.current = null;
+        if (next) void recognize(next.blob, next.id);
+      }
     }
   }
   function record(id: number) {
@@ -166,30 +189,24 @@ export function ContinuousSignCamera() {
     rec.onstop = async () => {
       if (id !== generation.current) return;
       clearInterval(ticker.current);
-      await recognize(new Blob(parts, { type: rec.mimeType }), id);
+      if (healthRef.current?.ready)
+        void recognize(new Blob(parts, { type: rec.mimeType }), id);
       if (id === generation.current && stream.current) record(id);
     };
     setPhase("recording");
-    setRemaining(6);
-    setMessage(
-      at(
-        "Покажите короткую фразу. После отсчёта дождитесь ответа.",
-        "Show a short phrase. Wait for the result after the countdown.",
-        "Қысқа сөйлем көрсетіңіз. Санақтан кейін нәтижені күтіңіз.",
-      ),
-    );
+    setRemaining(4);
     const started = Date.now();
     ticker.current = setInterval(
       () =>
         setRemaining(
-          Math.max(0, 6 - Math.floor((Date.now() - started) / 1000)),
+          Math.max(0, 4 - Math.floor((Date.now() - started) / 1000)),
         ),
       250,
     );
     rec.start();
     timer.current = setTimeout(() => {
       if (rec.state === "recording") rec.stop();
-    }, 6000);
+    }, 4000);
   }
   async function start() {
     release();
@@ -221,6 +238,12 @@ export function ContinuousSignCamera() {
         video.current.srcObject = media;
         await video.current.play();
       }
+      setSkipped(0);
+      setMessage(
+        health?.ready
+          ? ""
+          : "Фразы пока недоступны; буквы работают. Запустите локальный сервис распознавания.",
+      );
       record(id);
     } catch (error) {
       if (id !== generation.current || !alive.current) return;
@@ -246,6 +269,7 @@ export function ContinuousSignCamera() {
     if (preview.current) URL.revokeObjectURL(preview.current);
     preview.current = URL.createObjectURL(file);
     setHasPreview(true);
+    setPhase("processing");
     if (video.current) {
       video.current.src = preview.current;
       video.current.controls = true;
@@ -256,29 +280,48 @@ export function ContinuousSignCamera() {
   const active = phase !== "idle";
   return (
     <>
-      <div className="recognition-scope">
-        <span>
-          KRSL · {health?.vocabulary || "…"}{" "}
-          {at("слов и меток", "vocabulary entries", "сөз бен белгі")}
-        </span>
-        <p>
-          {at(
-            "Экспериментальные субтитры для казахско-русского жестового языка. Модель выдаёт предположение о словах, может ошибаться и не восстанавливает грамматику.",
-            "Experimental Kazakh–Russian Sign Language captions. Predicted words can be wrong; grammar is not reconstructed.",
-            "Қазақ-орыс ым тіліне арналған тәжірибелік субтитрлер. Сөздерді қате тануы мүмкін; грамматика қалпына келтірілмейді.",
-          )}
-        </p>
-      </div>
       <div className="recognition-layout">
         <section className="panel krsl-camera">
-          <h2>{at("Покажите фразу", "Show a phrase", "Сөйлем көрсетіңіз")}</h2>
+          <h2>{at("Камера", "Camera", "Камера")}</h2>
           <p>
             {at(
-              "В кадре должны быть лицо, плечи и кисти. Запись длится 6 секунд, затем появится ответ и начнётся следующий показ — без повторных нажатий.",
-              "Keep your face, shoulders and hands visible. Each 6-second recording is followed by a result and the next recording, automatically.",
-              "Бет, иық пен қол кадрда болсын. Әр 6 секундтық жазбадан кейін нәтиже шығып, келесі жазба автоматты басталады.",
+              "Держите лицо, плечи и обе руки в кадре.",
+              "Keep your face, shoulders and both hands visible.",
+              "Бет, иық пен қол кадрда болсын. Әріптер мен сөйлемдер бірге тексеріледі.",
             )}
           </p>
+          <div className="recognition-edit-tools">
+            <button
+              className="button primary"
+              onClick={start}
+              disabled={active}
+            >
+              <Camera size={18} />
+              {at("Включить камеру", "Start camera", "Камераны қосу")}
+            </button>
+            <button
+              className="button secondary"
+              onClick={stop}
+              disabled={!active}
+            >
+              <Square size={18} />
+              {at("Остановить", "Stop", "Тоқтату")}
+            </button>
+            <label className="button secondary krsl-upload">
+              <Upload size={18} />
+              {at("Загрузить видео", "Upload video", "Бейне жүктеу")}
+              <input
+                type="file"
+                accept="video/mp4,video/webm,video/quicktime,video/ogg"
+                disabled={active || !health?.ready}
+                onChange={(event) => {
+                  const file = event.target.files?.[0];
+                  event.target.value = "";
+                  void upload(file);
+                }}
+              />
+            </label>
+          </div>
           <div className="krsl-view">
             {!stream.current && !hasPreview && (
               <div className="krsl-placeholder">
@@ -307,44 +350,17 @@ export function ContinuousSignCamera() {
               controls={hasPreview && phase === "idle"}
               className={stream.current ? "krsl-mirror" : ""}
             />
-            {phase === "recording" && (
+            <canvas
+              ref={overlay}
+              className="unified-hand-overlay krsl-mirror"
+              aria-hidden="true"
+            />
+            {phase === "recording" && health?.ready && (
               <span className="krsl-countdown" aria-label="Осталось секунд">
                 {remaining}
               </span>
             )}
             {phase === "starting" && <span className="krsl-countdown">…</span>}
-          </div>
-          <div className="recognition-edit-tools">
-            <button
-              className="button primary"
-              onClick={start}
-              disabled={active || !health?.ready}
-            >
-              <Camera size={18} />
-              {at("Включить камеру", "Start camera", "Камераны қосу")}
-            </button>
-            <button
-              className="button secondary"
-              onClick={stop}
-              disabled={!active}
-            >
-              <Square size={18} />
-              {at("Остановить", "Stop", "Тоқтату")}
-            </button>
-            <label className="button secondary krsl-upload">
-              <Upload size={18} />
-              {at("Загрузить видео", "Upload video", "Бейне жүктеу")}
-              <input
-                type="file"
-                accept="video/mp4,video/webm,video/quicktime,video/ogg"
-                disabled={active || !health?.ready}
-                onChange={(event) => {
-                  const file = event.target.files?.[0];
-                  event.target.value = "";
-                  void upload(file);
-                }}
-              />
-            </label>
           </div>
           {!health?.ready && (
             <button className="button secondary" onClick={check}>
@@ -355,6 +371,50 @@ export function ContinuousSignCamera() {
                 "Қосылымды тексеру",
               )}
             </button>
+          )}
+          <div className="recognition-live-status">
+            <div>
+              <strong>{at("Буквы", "Letters", "Әріптер")}</strong>
+              <span>{letters.status}</span>
+              {phase === "recording" && (
+                <progress
+                  value={letters.progress}
+                  max={100}
+                  aria-label="Сбор движения буквы"
+                />
+              )}
+            </div>
+            <div>
+              <strong>{at("Фразы", "Phrases", "Сөйлемдер")}</strong>
+              <span>
+                {processing
+                  ? at(
+                      "Обрабатываем предыдущий фрагмент… Камера продолжает работать.",
+                      "Processing the previous clip… Camera is still running.",
+                      "Алдыңғы үзінді өңделуде… Камера жұмыс істеп тұр.",
+                    )
+                  : health?.ready
+                    ? at(
+                        "Готово · фрагменты по 4 секунды",
+                        "Ready · 4-second clips",
+                        "Дайын · 4 секундтық үзінділер",
+                      )
+                    : at(
+                        "Сервис не подключён",
+                        "Service offline",
+                        "Қызмет қосылмаған",
+                      )}
+              </span>
+            </div>
+          </div>
+          {skipped > 0 && (
+            <p role="status">
+              {at(
+                "Обработка медленнее камеры: промежуточные фрагменты пропущены. Показывайте короткие фразы с паузами.",
+                "Processing is slower than the camera: intermediate clips were skipped. Use short phrases with pauses.",
+                "Өңдеу камерадан баяу: аралық үзінділер өткізіліп жіберілді. Қысқа сөйлемдерді үзіліспен көрсетіңіз.",
+              )}
+            </p>
           )}
           <p role="status" aria-live="polite" className="krsl-status">
             {message}
@@ -394,13 +454,55 @@ export function ContinuousSignCamera() {
           </div>
           <p>
             {at(
-              "Каждый показ — новая строка. Проверьте результат и исправьте ошибки.",
-              "Each recording adds a line. Review and correct the result.",
+              "Черновик: проверьте результат и исправьте ошибки.",
+              "Draft: review and correct the result.",
               "Әр көрсетілім жаңа жолға жазылады. Нәтижені тексеріп, қателерді түзетіңіз.",
             )}
           </p>
+          <label htmlFor="live-letter-text">
+            {at("Буквы", "Letters", "Әріптер")}
+            {letters.last && ` · ${letters.last}`}
+          </label>
+          <textarea
+            id="live-letter-text"
+            rows={2}
+            value={letters.text}
+            maxLength={2000}
+            onChange={(e) => letters.setText(e.target.value)}
+            placeholder={at(
+              "Покажите букву целиком…",
+              "Show a complete letter…",
+              "Әріпті толық көрсетіңіз…",
+            )}
+          />
+          <div className="recognition-edit-tools">
+            <button
+              className="button secondary"
+              disabled={!letters.text}
+              onClick={() => letters.setText((v) => (v + " ").slice(0, 2000))}
+            >
+              {at("Пробел", "Space", "Бос орын")}
+            </button>
+            <button
+              className="button secondary"
+              disabled={!letters.text}
+              onClick={() => letters.setText((v) => v.slice(0, -1))}
+            >
+              {at("Стереть букву", "Delete letter", "Әріпті өшіру")}
+            </button>
+            <button
+              className="button secondary"
+              disabled={!letters.text}
+              onClick={() => {
+                setText((v) => (v + "\n" + letters.text).trim().slice(0, 4000));
+                letters.setText("");
+              }}
+            >
+              {at("Добавить в текст ↓", "Add to text ↓", "Мәтінге қосу ↓")}
+            </button>
+          </div>
           <label htmlFor="krsl-text">
-            {at("Распознанные слова", "Recognized words", "Танылған сөздер")}
+            {at("Фразы — черновик", "Phrases — draft", "Сөйлемдер — нобай")}
           </label>
           <textarea
             id="krsl-text"

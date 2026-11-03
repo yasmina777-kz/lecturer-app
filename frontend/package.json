@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "test": "playwright test",
     "prepare:local-ai": "node scripts/prepare-local-ai.mjs",
-    "prebuild": "node scripts/prepare-local-ai.mjs",
+    "prebuild": "node scripts/prepare-local-ai.mjs && node scripts/prepare-letter-worker.mjs",
     "test:local-ai": "node scripts/check-local-ai.mjs",
     "test:sign": "node scripts/check-sign-text.mjs",
     "test:rsl": "node scripts/check-rsl-model.mjs",
@@ -20,7 +20,8 @@
     "test:admin-analytics": "node scripts/check-admin-analytics.mjs",
     "test:sign-captions": "node scripts/check-sign-captions.mjs",
     "test:sign-activities": "node scripts/check-sign-activities.mjs",
-    "test:motion-cache": "node scripts/check-motion-cache.mjs"
+    "test:motion-cache": "node scripts/check-motion-cache.mjs",
+    "predev": "node scripts/prepare-letter-worker.mjs"
   },
   "dependencies": {
     "@huggingface/transformers": "^4.3.2",
@@ -38,6 +39,7 @@
     "@types/three": "^0.186.0",
     "@vitejs/plugin-react": "^6.1.1",
     "prettier": "^3.9.9",
+    "rolldown": "1.2.16",
     "typescript": "^5.5.4",
     "vite": "^8.3.1"
   }

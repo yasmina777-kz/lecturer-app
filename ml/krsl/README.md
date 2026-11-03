@@ -32,7 +32,7 @@ Uploads: MP4/WebM/MOV/OGG, ≤25 MiB, ≤20 s, ≤1920×1080. Temporary uploads 
 
 ## Actual pipeline
 
-`runtime.py`: MediaPipe **Holistic 0.10.35**, IMAGE mode, original rounded FPS stride, no mirrored pixels or coordinate renormalization. Feature order: 21 left-hand landmarks, 21 right-hand, six upper-body landmarks, 12 eyebrow/mouth landmarks; xyz = 180 features/frame. This is the exact author's input layout, not extra invented sensors. `model.py` implements the compatible Conformer and greedy CTC (collapse repeats BEFORE blank removal). Original beam search is not used; its reported WER must not be attributed to our greedy decoder.
+`runtime.py`: MediaPipe **Holistic 0.10.35**, IMAGE mode with a fresh Holistic graph per clip (avoids cross-resolution segmentation-state crashes), original rounded FPS stride, no mirrored pixels or coordinate renormalization. Feature order: 21 left-hand landmarks, 21 right-hand, six upper-body landmarks, 12 eyebrow/mouth landmarks; xyz = 180 features/frame. This is the exact author's input layout, not extra invented sensors. `model.py` implements the compatible Conformer and greedy CTC (collapse repeats BEFORE blank removal). Original beam search is not used; its reported WER must not be attributed to our greedy decoder.
 
 Low landmark coverage, unknown labels, annotation-only symbols and low token posterior produce a refusal. Posterior threshold 0.4 is an **uncalibrated heuristic**, not a guarantee; wrong words can pass. Returned words remain explicitly editable AI drafts. The UI's tracking percentages measure landmark visibility, not recognition accuracy. No grammar is generated and no predicted text is silently sent to the avatar.
 
@@ -63,3 +63,7 @@ Checks:
 ml/krsl/.venv/bin/python ml/krsl/test_runtime.py
 ml/krsl/.venv/bin/python ml/krsl/check_service.py
 ```
+
+The camera UI now records 4-second clips while inference runs. At most one request and one newest pending clip are retained; skipped intermediate clips are reported. Letters run concurrently in a local Web Worker on the same camera stream. The 16-frame letter model still needs a complete motion window and two agreeing predictions, approximately 3 seconds at normal sampling speed. A single hand pose during a phrase can be classified as a letter; outputs are kept separate rather than inventing automatic language-mode confidence.
+
+`docs/recognition-service-check.json` records the four real Slovo smoke examples after the graph reset fix. All HTTP requests work; three are refused and one predicts an incorrect word. This is not a successful translation benchmark and no new weights were trained.

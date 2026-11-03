@@ -58,7 +58,7 @@ export function GesturePreviewPage({ embedded = false }: { embedded?: boolean } 
         <div className="gesture-stage-caption"><span>MIRA / BLENDER</span><span>{guides ? at(`ШАГ ${lessonStep+1} / 2`, `STEP ${lessonStep+1} / 2`, `${lessonStep+1} / 2 ҚАДАМ`) : "05"}</span></div>
         <div className="gesture-backdrop" aria-hidden="true"/>
         <div className="gesture-greeting" style={{opacity:phase>0?1:0,transform:`translateY(${phase>0?0:6}px)`}} aria-hidden="true">{phrase}</div>
-        <GestureMentor3D modelUrl="/avatars/hand-workshop/mira-rig.glb" motionUrls={["/avatars/mira-blender/mira-signing-soft.glb"]} time={time} closeup={closeup} angle={angle} resetToken={cameraRevision}/>
+        <GestureMentor3D modelUrl="/avatars/hand-workshop/mira-rig.glb?v=denim-4" motionUrls={["/avatars/mira-blender/mira-signing-soft.glb"]} time={time} closeup={closeup} angle={angle} resetToken={cameraRevision}/>
         {<button className="gesture-closeup" aria-pressed={closeup} onClick={()=>setCloseup(!closeup)}><ScanSearch size={16}/>{closeup ? at("Весь аватар", "Full avatar", "Толық аватар") : at("Крупнее руки", "Hands close-up", "Қолдарды үлкейту")}</button>}
         <div className="gesture-stage-footer"><span>{guides ? at("РАЗБОР ДВИЖЕНИЯ", "MOVEMENT BREAKDOWN", "ҚИМЫЛДЫ ТАЛДАУ") : "3D / WEBGL"}</span><span>{guides ? (lessonStep===0 ? at("Контакт пальцев", "Finger contact", "Саусақтардың жанасуы") : at("К собеседнику", "Towards the viewer", "Сұхбаттасушыға")) : phases[phase]}</span></div>
       </section>

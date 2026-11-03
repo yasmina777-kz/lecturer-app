@@ -39,6 +39,7 @@ for e in entries:
   for side in previous:
    metrics=arm_anatomy(side,roll_hint=previous[side],solve=True);hint[side]=math.radians(metrics['forearmRollDegrees']);previous[side]=hint[side];max_before=max(max_before,arm_anatomy(side)['upperPlaneErrorDegrees'])
   hints.append(hint)
+ original_edges=[{name:(q.copy(),loc.copy()) for name,(q,loc) in row.items()} for row in [rows[0],rows[-1]]]
  rig.animation_data_clear()
  for ob in added:bpy.data.objects.remove(ob,do_unlink=True)
  # Change only the preparation/release, leaving meaningful sign frames intact.
@@ -76,6 +77,10 @@ for e in entries:
   corrected.append({b.name:b.rotation_quaternion.copy() for b in bones});locations.append({b.name:b.location.copy() for b in bones})
   worst_body=max(worst_body,max(v['deficit'] for v in clearance.inspect(margin=0,stride=1).values()))
   for side in previous:max_after=max(max_after,arm_anatomy(side)['upperPlaneErrorDegrees'])
+ if 'keep-boundaries' in args:
+  for index,row in zip([0,-1],original_edges):
+   corrected[index]={name:q.copy() for name,(q,loc) in row.items()}
+   locations[index]={name:loc.copy() for name,(q,loc) in row.items()}
  if worst_body>.002:raise RuntimeError(f'{id}: body overlap {worst_body}')
  for a,b in zip(corrected,corrected[1:]):
   for name,q in b.items():

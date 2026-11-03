@@ -1,0 +1,91 @@
+{
+  "scope": "Four isolated Slovo signs; operational smoke test, not a phrase accuracy evaluation. No retraining.",
+  "cases": [
+    {
+      "expected": "книга",
+      "http": 200,
+      "response": {
+        "duration": 1.73,
+        "frames": 26,
+        "tracking": {
+          "hands": 1.0,
+          "body": 1.0,
+          "face": 1.0
+        },
+        "model": "KRSL Conformer · stage5",
+        "experimental": true,
+        "status": "uncertain",
+        "text": "",
+        "tokens": [],
+        "message": "Модель не смогла надёжно разобрать этот фрагмент. Повторите короткую фразу.",
+        "seconds": 0.47
+      },
+      "wallSeconds": 0.48
+    },
+    {
+      "expected": "мать",
+      "http": 200,
+      "response": {
+        "duration": 1.57,
+        "frames": 24,
+        "tracking": {
+          "hands": 1.0,
+          "body": 1.0,
+          "face": 1.0
+        },
+        "model": "KRSL Conformer · stage5",
+        "experimental": true,
+        "status": "uncertain",
+        "text": "",
+        "tokens": [],
+        "message": "Модель не смогла надёжно разобрать этот фрагмент. Повторите короткую фразу.",
+        "seconds": 1.07
+      },
+      "wallSeconds": 1.08
+    },
+    {
+      "expected": "отец",
+      "http": 200,
+      "response": {
+        "duration": 1.73,
+        "frames": 26,
+        "tracking": {
+          "hands": 1.0,
+          "body": 1.0,
+          "face": 1.0
+        },
+        "model": "KRSL Conformer · stage5",
+        "experimental": true,
+        "status": "uncertain",
+        "text": "",
+        "tokens": [],
+        "message": "Модель не смогла надёжно разобрать этот фрагмент. Повторите короткую фразу.",
+        "seconds": 1.37
+      },
+      "wallSeconds": 1.37
+    },
+    {
+      "expected": "семья",
+      "http": 200,
+      "response": {
+        "duration": 1.7,
+        "frames": 26,
+        "tracking": {
+          "hands": 0.65,
+          "body": 1.0,
+          "face": 1.0
+        },
+        "model": "KRSL Conformer · stage5",
+        "experimental": true,
+        "status": "draft",
+        "text": "культура",
+        "tokens": [
+          "культура"
+        ],
+        "message": "Предположение модели: проверьте слова. Это не проверенный перевод.",
+        "seconds": 2.37
+      },
+      "wallSeconds": 2.37
+    }
+  ]
+}

@@ -473,4 +473,58 @@
   margin-bottom: 20px;
   width: fit-content;
 }
-.sign-camera-modes>label{display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-weight:600;margin-bottom:12px}.sign-camera-modes>label select{padding:12px;color:var(--sw-ink);background:var(--sw-soft);border:1px solid var(--sw-border);border-radius:12px;max-width:100%}.sign-camera-modes>p{font-size:14px;line-height:1.6}
+.sign-camera-modes > label {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.sign-camera-modes > label select {
+  padding: 12px;
+  color: var(--sw-ink);
+  background: var(--sw-soft);
+  border: 1px solid var(--sw-border);
+  border-radius: 12px;
+  max-width: 100%;
+}
+.sign-camera-modes > p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.sign-workspace .learning-start {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 180px;
+  gap: 24px;
+  align-items: center;
+  padding: 28px;
+  margin: 0 0 32px;
+  background: var(--sw-soft);
+}
+.learning-start h2 {
+  margin: 10px 0;
+  font-size: 28px;
+}
+.learning-start p {
+  max-width: 560px;
+}
+.learning-start > :last-child {
+  max-width: 180px;
+  max-height: 210px;
+  overflow: hidden;
+  border-radius: 18px;
+}
+.learning-section-title {
+  margin-top: 36px;
+}
+@media (max-width: 600px) {
+  .learning-start {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+  .learning-start > :last-child {
+    display: none;
+  }
+}

@@ -11,10 +11,10 @@
     "frontend/src/sign/avatarPlayback.ts": "338e22e947ba243e83aacd17ee44a3004a795d5931c84e948ba7be84c6fb93d2",
     "frontend/src/sign/phraseExamples.ts": "15ca98106e125703f6274fa0946e41a2d43ae271ef8ecff79c675df4be279fc2",
     "frontend/src/sign/volumeSkinning.ts": "321258d67d4c5324e85c3e2123a9452e73811d3d4a9dea7206be8d89a2647b23",
-    "frontend/public/avatars/hand-workshop/mira-rig.glb": "b2c2b3338fd30a24e98dd05031818a29115e3684d8baa0f4995182f26976bcec",
-    "art/hand-rig/Mira-Hand-Workshop.blend": "1c0c91c77d552c5875af3f1603f6cc9787366e5a5005dac5c1bdad078372037c",
+    "frontend/public/avatars/hand-workshop/mira-rig.glb": "28746234d175f180848f281ad5c48863ed01a10c50b4edc29d487a9b07a4040d",
+    "art/hand-rig/Mira-Hand-Workshop.blend": "536b9bfbfb1991c95bdf80b7e16ea9cb045ac358cfcfd19865b64e111f9a360c",
     "art/sign-motion/arm_anatomy.py": "85bec917edd05097f7fd9dbacf81e881c184d11343cdf9cbd19e159a702d9c5b",
-    "art/sign-motion/bake_arm_anatomy.py": "6a6000bf0ba116d8d1b6af6d19b0d7bdccd422464b831c70e881de4bdc68b316",
+    "art/sign-motion/bake_arm_anatomy.py": "62c19e0cffab255ed01afc5d18d01aab661bbbd54a888be62dadf06b85188101",
     "art/sign-motion/body_clearance.py": "5fb7a8b6435ca1dc5bd179d47eae31026b6a386670608e1176a199411b5dcb46",
     "art/sign-motion/verify_body_clearance.py": "339a7385e9b4348930723bbd6b71aa98a95b6a38625c37968a9a97314d1a01be",
     "frontend/scripts/export-phrase-clearance-qa.mjs": "cc99ef77f8dd40b7736b6bbdf5c38612a0b41d1c7d4e84ba09e266577f5933b2"
@@ -3145,18 +3145,18 @@
       },
       {
         "id": "word-e70fcfd6",
-        "sha256": "12f367d64dd933b8f7aa263da0f242d6c3d7800666dc761fd1f1e47fb1c47511",
+        "sha256": "a4b8679548751f61572dc66f5793b4fcd17c2f6de67f6164d54b7bc4bf04569c",
         "maxOverlapMeters": 0,
-        "samples": 539,
+        "samples": 543,
         "worst": null,
         "armAnatomy": {
-          "elbowPoleDeviationDegrees": 2.88065576122815,
+          "elbowPoleDeviationDegrees": 2.1265166457204705,
           "upperPlaneErrorDegrees": 0.148041162536515,
-          "forearmRollDegrees": 85.0001067727922,
-          "wristSwingDegrees": 59.3388120372382,
-          "wristFlexionDegrees": 59.283591451902524,
-          "wristDeviationDegrees": 24.99873862258276,
-          "wristEnvelope": 1.000001490134036
+          "forearmRollDegrees": 85.00016596878046,
+          "wristSwingDegrees": 58.92840646057964,
+          "wristFlexionDegrees": 58.86160827771398,
+          "wristDeviationDegrees": 24.998094663810075,
+          "wristEnvelope": 1.000001175716807
         }
       },
       {
@@ -3322,9 +3322,17 @@
       {
         "id": "word-fd1c4073",
         "sha256": "2f35b24816c6d741e9d21551ee804737da179054e91ebf90b8665b69d6ee1e4c",
-        "maxOverlapMeters": 0,
+        "maxOverlapMeters": 0.0016800016164779663,
         "samples": 211,
-        "worst": null,
+        "worst": {
+          "frame": 86.0,
+          "side": "Right",
+          "point": [
+            -0.16608835756778717,
+            -0.11395992338657379,
+            0.7854548692703247
+          ]
+        },
         "armAnatomy": {
           "elbowPoleDeviationDegrees": 2.126792841495033,
           "upperPlaneErrorDegrees": 0.1370582183511715,
@@ -4743,98 +4751,98 @@
       },
       {
         "id": "phrase-55",
-        "sha256": "59ae9e95996ea56957640f6cff3850d45bb4e89cd63d3054f0fcc60f472cd188",
+        "sha256": "cffd3a9b7e395b519cff67ce1619275b0a1fbe2f9a56e26774a9befabe0d1568",
         "maxOverlapMeters": 0,
         "samples": 31,
         "worst": null,
         "armAnatomy": {
-          "elbowPoleDeviationDegrees": 1.9026919869493875,
-          "upperPlaneErrorDegrees": 0.16784871112957944,
-          "forearmRollDegrees": 72.11647283134947,
-          "wristSwingDegrees": 37.921360536072534,
-          "wristFlexionDegrees": 32.87260540384835,
-          "wristDeviationDegrees": 22.689015652672477,
-          "wristEnvelope": 1.0000001330335098
+          "elbowPoleDeviationDegrees": 1.9573475875746524,
+          "upperPlaneErrorDegrees": 0.148041162536515,
+          "forearmRollDegrees": 69.32450511190751,
+          "wristSwingDegrees": 37.72571659748669,
+          "wristFlexionDegrees": 32.852926668354186,
+          "wristDeviationDegrees": 22.556664809288893,
+          "wristEnvelope": 0.9983789827508005
         }
       },
       {
         "id": "phrase-56",
-        "sha256": "9a573573ec662686dc40c5f059890631c19567429dfc5daaad91fe915da91bf0",
+        "sha256": "90cd49d365dd11ced3e60aeea0c52285d6ae2c6873a515b5635b364ab9daf99d",
         "maxOverlapMeters": 0,
         "samples": 31,
         "worst": null,
         "armAnatomy": {
-          "elbowPoleDeviationDegrees": 3.4649235897659687,
+          "elbowPoleDeviationDegrees": 2.1358836098369083,
           "upperPlaneErrorDegrees": 1.7302844014466245e-05,
-          "forearmRollDegrees": 65.73329683903663,
-          "wristSwingDegrees": 31.405991860378595,
-          "wristFlexionDegrees": 31.391752516784706,
-          "wristDeviationDegrees": 2.8768848297956415,
-          "wristEnvelope": 0.5245608114782072
+          "forearmRollDegrees": 67.4868036364449,
+          "wristSwingDegrees": 31.591045590656336,
+          "wristFlexionDegrees": 31.56343775258773,
+          "wristDeviationDegrees": 2.684731304638658,
+          "wristEnvelope": 0.5287050115861042
         }
       },
       {
         "id": "phrase-57",
-        "sha256": "c7cc3eab55388c7a9429d52330be6f47b62a9b1db3dcf5c7e99b162799180649",
+        "sha256": "6e896c2531fea220af3961faf12f4facb0da6648303fac9949ec349ed5f9740a",
         "maxOverlapMeters": 0,
         "samples": 31,
         "worst": null,
         "armAnatomy": {
-          "elbowPoleDeviationDegrees": 1.8238114128853795,
-          "upperPlaneErrorDegrees": 0.20934894052658137,
-          "forearmRollDegrees": 72.11647283134947,
-          "wristSwingDegrees": 37.921360536072534,
-          "wristFlexionDegrees": 32.87260540384835,
-          "wristDeviationDegrees": 22.689015652672477,
-          "wristEnvelope": 1.0000001330335098
+          "elbowPoleDeviationDegrees": 1.7131506089435369,
+          "upperPlaneErrorDegrees": 0.148041162536515,
+          "forearmRollDegrees": 69.98549576186325,
+          "wristSwingDegrees": 37.72571659748669,
+          "wristFlexionDegrees": 32.852926668354186,
+          "wristDeviationDegrees": 22.556664809288893,
+          "wristEnvelope": 0.9983789827508005
         }
       },
       {
         "id": "phrase-58",
-        "sha256": "9a573573ec662686dc40c5f059890631c19567429dfc5daaad91fe915da91bf0",
+        "sha256": "90cd49d365dd11ced3e60aeea0c52285d6ae2c6873a515b5635b364ab9daf99d",
         "maxOverlapMeters": 0,
         "samples": 31,
         "worst": null,
         "armAnatomy": {
-          "elbowPoleDeviationDegrees": 3.4649235897659687,
+          "elbowPoleDeviationDegrees": 2.1358836098369083,
           "upperPlaneErrorDegrees": 1.7302844014466245e-05,
-          "forearmRollDegrees": 65.73329683903663,
-          "wristSwingDegrees": 31.405991860378595,
-          "wristFlexionDegrees": 31.391752516784706,
-          "wristDeviationDegrees": 2.8768848297956415,
-          "wristEnvelope": 0.5245608114782072
+          "forearmRollDegrees": 67.4868036364449,
+          "wristSwingDegrees": 31.591045590656336,
+          "wristFlexionDegrees": 31.56343775258773,
+          "wristDeviationDegrees": 2.684731304638658,
+          "wristEnvelope": 0.5287050115861042
         }
       },
       {
         "id": "phrase-59",
-        "sha256": "a37c0c5a6d56a80d251f4efb11b8a8fe6fe4649a896681bc23586fb10f103a9f",
+        "sha256": "95cee063fcee9103fa4fecb783c832a3b7136a0fb555484f6995dc9124c2f653",
         "maxOverlapMeters": 0,
         "samples": 31,
         "worst": null,
         "armAnatomy": {
-          "elbowPoleDeviationDegrees": 1.9312776092863602,
-          "upperPlaneErrorDegrees": 0.18557988221493815,
-          "forearmRollDegrees": 72.11647283134947,
-          "wristSwingDegrees": 37.921360536072534,
-          "wristFlexionDegrees": 32.87260540384835,
-          "wristDeviationDegrees": 22.689015652672477,
-          "wristEnvelope": 1.0000001330335098
+          "elbowPoleDeviationDegrees": 1.9290469121921163,
+          "upperPlaneErrorDegrees": 0.148041162536515,
+          "forearmRollDegrees": 69.32450511190751,
+          "wristSwingDegrees": 37.72571659748669,
+          "wristFlexionDegrees": 32.852926668354186,
+          "wristDeviationDegrees": 22.556664809288893,
+          "wristEnvelope": 0.9983789827508005
         }
       },
       {
         "id": "phrase-60",
-        "sha256": "9a573573ec662686dc40c5f059890631c19567429dfc5daaad91fe915da91bf0",
+        "sha256": "90cd49d365dd11ced3e60aeea0c52285d6ae2c6873a515b5635b364ab9daf99d",
         "maxOverlapMeters": 0,
         "samples": 31,
         "worst": null,
         "armAnatomy": {
-          "elbowPoleDeviationDegrees": 3.4649235897659687,
+          "elbowPoleDeviationDegrees": 2.1358836098369083,
           "upperPlaneErrorDegrees": 1.7302844014466245e-05,
-          "forearmRollDegrees": 65.73329683903663,
-          "wristSwingDegrees": 31.405991860378595,
-          "wristFlexionDegrees": 31.391752516784706,
-          "wristDeviationDegrees": 2.8768848297956415,
-          "wristEnvelope": 0.5245608114782072
+          "forearmRollDegrees": 67.4868036364449,
+          "wristSwingDegrees": 31.591045590656336,
+          "wristFlexionDegrees": 31.56343775258773,
+          "wristDeviationDegrees": 2.684731304638658,
+          "wristEnvelope": 0.5287050115861042
         }
       },
       {

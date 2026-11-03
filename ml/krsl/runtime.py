@@ -42,14 +42,24 @@ class Engine:
         self.model.eval()
         self.metrics = ckpt.get('metrics', {})
         self.epoch = ckpt.get('epoch')
-        options = mp.tasks.vision.HolisticLandmarkerOptions(
+        self.options = mp.tasks.vision.HolisticLandmarkerOptions(
             base_options=mp.tasks.BaseOptions(model_asset_path=str(DATA / 'holistic_landmarker.task')),
             running_mode=mp.tasks.vision.RunningMode.IMAGE)
-        self.detector = mp.tasks.vision.HolisticLandmarker.create_from_options(options)
+        self.detector = mp.tasks.vision.HolisticLandmarker.create_from_options(self.options)
 
     def extract(self, path):
-        cap = cv2.VideoCapture(str(path))
         rows = []
+        # Holistic 0.10.35 retains segmentation smoothing state even in IMAGE
+        # mode. Reusing it across portrait uploads and landscape camera clips
+        # crashes the graph (current_mat rows != previous_mat rows). A fresh
+        # graph per clip also prevents carrying another person's state forward.
+        try:
+            self.detector.close()
+        except RuntimeError:
+            pass  # A failed native graph may already be closed.
+        self.detector = mp.tasks.vision.HolisticLandmarker.create_from_options(self.options)
+        shape = None
+        cap = cv2.VideoCapture(str(path))
         try:
             if not cap.isOpened():
                 raise ValueError('Не удалось открыть видео. Используйте MP4 или WebM.')
@@ -70,6 +80,9 @@ class Engine:
                     raise ValueError('Видео слишком длинное. Выберите фрагмент до 20 секунд.')
                 if frame.shape[0] * frame.shape[1] > 1920 * 1080:
                     raise ValueError('Выберите видео размером не больше 1920 × 1080.')
+                if shape is not None and frame.shape != shape:
+                    raise ValueError('Размер кадра изменился внутри видео. Сохраните его с постоянным разрешением.')
+                shape = frame.shape
                 if n % step == 0:
                     rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                     result = self.detector.detect(mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb))

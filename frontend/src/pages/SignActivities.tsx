@@ -12,7 +12,6 @@ import {
 import { phraseArt } from "../sign/phraseArt";
 import { at } from "../i18n/automation";
 import { Loading } from "../components/UI";
-import { ReferenceVideo } from "../components/SignReferenceVideo";
 import { SignSequencePlayer } from "../components/SignSequencePlayer";
 import { planMotion } from "../sign/motion";
 import type { DictionaryEntry } from "../sign/dictionary";
@@ -95,34 +94,32 @@ export function ActivityLinks() {
   );
 }
 function AvatarStudy({ text, data }: { text: string; data: Catalog }) {
-  const [open, setOpen] = useState(false);
   const plan = useMemo(
     () => planMotion(text, data.entries, data.forms, data.motions),
     [text, data],
   );
   return (
-    <details
-      className="activity-avatar"
-      onToggle={(e) => setOpen(e.currentTarget.open)}
-    >
-      <summary>
-        {at(
-          "Посмотреть пробный показ аватара",
-          "View experimental avatar",
-          "Сынақ аватарын қарау",
+    <div className="activity-avatar">
+      <SignSequencePlayer
+        key={text}
+        plan={plan}
+        note={at(
+          "Пробный показ: точность жестов ещё проверяется.",
+          "Experimental motion: sign accuracy is still being reviewed.",
+          "Сынақ қимылдары: ымдардың дәлдігі әлі тексерілуде.",
         )}
-      </summary>
-      <p>
+      />
+      <small>
         {at(
-          "Показ доступных жестов. Составленная последовательность не является переводом с грамматикой РЖЯ; анимации ещё требуют проверки.",
-          "Available signs in sequence, not a grammatical RSL translation. Animations still need review.",
-          "Қолжетімді ымдар тізбегі РЖЯ грамматикасымен аударма емес. Анимациялар әлі тексеруді қажет етеді.",
+          "Движения перенесены с видео. Пробный показ отдельных жестов.",
+          "Motion retargeted from video. Experimental sign sequence.",
+          "Қимылдар бейнеден көшірілген. Ымдардың сынақ көрсетілімі.",
         )}
-      </p>
-      {open && <SignSequencePlayer key={text} plan={plan} />}
-    </details>
+      </small>
+    </div>
   );
 }
+
 export function SignDialoguesPage() {
   const { data, error, retry } = useActivityCatalog();
   const [params, setParams] = useSearchParams();
@@ -159,7 +156,7 @@ export function SignDialoguesPage() {
               </h1>
               <p>
                 {at(
-                  "Выберите ситуацию. Посмотрите опорные жесты, ответьте собеседнику и узнайте, почему ответ подходит.",
+                  "Выберите ситуацию → посмотрите аватара → ответьте.",
                   "Choose a situation. Watch relevant signs, reply and learn why your response works.",
                   "Жағдаят таңдаңыз. Тірек ымдарды көріп, жауап беріңіз және оның сәйкестігін біліңіз.",
                 )}
@@ -222,7 +219,7 @@ export function SignDialoguesPage() {
             </h2>
             <p>
               {at(
-                "Смысл ответа зависит от ситуации: назвать имя, попросить помощи или уточнить количество. Здесь можно ошибаться и пробовать другую реплику. Видео показывают отдельные опорные жесты, а текст описывает ситуацию.",
+                "Смысл ответа зависит от ситуации: назвать имя, попросить помощи или уточнить количество. Здесь можно ошибаться и пробовать другую реплику. Аватар показывает опорные жесты, а текст описывает ситуацию.",
                 "A reply depends on context: give a name, ask for help or specify quantity. Try another reply after a mistake. Videos show individual vocabulary signs; text describes the situation.",
                 "Жауап жағдайға байланысты: есімді айту, көмек сұрау немесе санын нақтылау. Қателессеңіз, басқа жауапты таңдаңыз. Бейнелер жеке ымдарды, мәтін жағдайды көрсетеді.",
               )}
@@ -280,7 +277,7 @@ function DialogueSession({
     { item: string; prompt: string; reply: string }[]
   >([]);
   const [run, setRun] = useState(() => crypto.randomUUID());
-  const [wordIndex, setWordIndex] = useState(0);
+  const [wordIndex, setWordIndex] = useState(-1);
   const [firstAnswers, setFirstAnswers] = useState<
     { item: string; correct: boolean; reply: string; feedback: string }[]
   >([]);
@@ -329,7 +326,7 @@ function DialogueSession({
       setStepId(choice.next);
       setSelected(null);
       setPhase("watch");
-      setWordIndex(0);
+      setWordIndex(-1);
     } else setDone(true);
   }
   function restart() {
@@ -341,7 +338,7 @@ function DialogueSession({
     setSelected(null);
     setPhase("watch");
     setDone(false);
-    setWordIndex(0);
+    setWordIndex(-1);
   }
   return (
     <>
@@ -490,8 +487,8 @@ function DialogueSession({
               <>
                 <p className="dialogue-instruction">
                   {at(
-                    "Нажмите «Смотреть жест». Переключайте слова под вопросом, затем переходите к ответу. Видео показывают отдельные слова для этой ситуации.",
-                    "Press Watch sign. Switch between the vocabulary words, then choose your reply. These videos show individual words for this situation.",
+                    "Посмотрите показ аватара, затем выберите ответ собеседнику.",
+                    "Watch the avatar, then choose your reply.",
                     "«Ымды көру» батырмасын басыңыз. Сөздерді ауыстырып, жауапқа өтіңіз. Бейнелер осы жағдайға арналған жеке сөздерді көрсетеді.",
                   )}
                 </p>
@@ -506,6 +503,12 @@ function DialogueSession({
                         "Осы репликаға арналған сөздер",
                       )}
                     >
+                      <button
+                        aria-pressed={wordIndex === -1}
+                        onClick={() => setWordIndex(-1)}
+                      >
+                        {at("Все жесты", "All signs", "Барлық ымдар")}
+                      </button>
                       {signs.map((s, i) => (
                         <button
                           key={s.id}
@@ -516,22 +519,15 @@ function DialogueSession({
                         </button>
                       ))}
                     </div>
-                    {signs[wordIndex] ? (
-                      <ReferenceVideo
-                        key={signs[wordIndex].id}
-                        entry={signs[wordIndex]}
-                        showPlayButton
-                      />
-                    ) : (
-                      <p role="status">
-                        {at(
-                          "Для этой реплики пока нет видеообразца. Можно перейти к ответу.",
-                          "No video reference is available for this turn. You can still choose a reply.",
-                          "Бұл репликаға бейнеүлгі әзірге жоқ. Жауапқа өтуге болады.",
-                        )}
-                      </p>
-                    )}
-                    {signs.length > 1 && (
+                    <AvatarStudy
+                      text={
+                        wordIndex === -1
+                          ? signs.map((sign) => sign.label).join(" ")
+                          : signs[wordIndex]?.label || step.avatar
+                      }
+                      data={data}
+                    />
+                    {signs.length > 1 && wordIndex >= 0 && (
                       <div className="dialogue-word-navigation">
                         <span>
                           {at(
@@ -566,16 +562,9 @@ function DialogueSession({
                     <h3>{at("Ваша задача", "Your task", "Тапсырмаңыз")}</h3>
                     <p>
                       {at(
-                        "Подумайте, какой ответ подходит к вопросу собеседника. Дальше появятся три варианта — выберите один.",
-                        "Think about a suitable reply. You will see three options next; choose one.",
+                        "После показа выберите один из трёх ответов.",
+                        "After watching, choose one of three replies.",
                         "Сұраққа сәйкес жауапты ойлаңыз. Келесі қадамда үш нұсқадан бірін таңдаңыз.",
-                      )}
-                    </p>
-                    <p>
-                      {at(
-                        "Если уже знаете эти жесты, можно сразу перейти к ответу.",
-                        "Already know these signs? Go straight to your reply.",
-                        "Бұл ымдарды білсеңіз, бірден жауапқа өтіңіз.",
                       )}
                     </p>
                     <button
@@ -587,7 +576,6 @@ function DialogueSession({
                     </button>
                   </div>
                 </div>
-                <AvatarStudy key={step.id} text={step.avatar} data={data} />
               </>
             ) : (
               <>
@@ -879,23 +867,6 @@ export function SignUnderstandingPage() {
               </p>
             </div>
           </section>
-          <ActivityLinks />
-          <section className="activity-explanation">
-            <h2>
-              {at(
-                "Почему это полезно",
-                "Why practise this",
-                "Бұл неге пайдалы",
-              )}
-            </h2>
-            <p>
-              {at(
-                "Можно уметь повторять движение и при этом не узнавать его у другого человека. Эти задания отдельно тренируют связь между увиденным жестом и его значением. Проверка вариантов и список повторения работают по правилам; это не оценка исполнения жестов ИИ.",
-                "Repeating a movement and recognizing it in someone else are different tasks. These exercises connect a seen sign with its meaning. Answer checking and review scheduling use rules, not AI assessment of signing.",
-                "Қимылды қайталау мен оны басқа адамнан тану — бөлек тапсырмалар. Бұл жаттығулар ым мен мағынаны байланыстырады. Жауап пен қайталау ережемен тексеріледі, ЖИ ым орындауды бағаламайды.",
-              )}
-            </p>
-          </section>
         </>
       )}
       {progress.error && <p role="alert">{progress.error}</p>}
@@ -1028,11 +999,13 @@ function UnderstandingQuestion({
     [submitted, setSubmitted] = useState(false),
     [hint, setHint] = useState(false),
     [ready, setReady] = useState(false),
+    [watched, setWatched] = useState(false),
+    [playError, setPlayError] = useState(""),
     [failed, setFailed] = useState(false);
   const video = useRef<HTMLVideoElement>(null);
   const correct = selected === answer.id;
   function check(skip = false) {
-    if (submitted || !ready || failed || (!selected && !skip)) return;
+    if (submitted || !watched || failed || (!selected && !skip)) return;
     setSubmitted(true);
     record(!skip && correct, hint);
     if (skip) setSelected(null);
@@ -1081,6 +1054,11 @@ function UnderstandingQuestion({
               "Unlabelled sign video",
               "Жазусыз ым бейнесі",
             )}
+            onPlaying={() => {
+              setWatched(true);
+              setReady(true);
+              setPlayError("");
+            }}
             onLoadedData={() => {
               setReady(true);
               setFailed(false);
@@ -1113,10 +1091,6 @@ function UnderstandingQuestion({
                 )}
               </button>
             </div>
-          ) : !ready ? (
-            <p role="status">
-              {at("Загружаем видео…", "Loading video…", "Бейне жүктелуде…")}
-            </p>
           ) : (
             <div className="activity-actions">
               <button
@@ -1124,12 +1098,24 @@ function UnderstandingQuestion({
                 onClick={() => {
                   if (video.current) {
                     video.current.currentTime = 0;
-                    void video.current.play().catch(() => {});
+                    void video.current
+                      .play()
+                      .catch(() =>
+                        setPlayError(
+                          at(
+                            "Не удалось начать просмотр. Нажмите ▶ на самом видео или попробуйте снова.",
+                            "Could not play. Press ▶ on the video or retry.",
+                            "Бейне ойнатылмады. Бейнедегі ▶ батырмасын басыңыз.",
+                          ),
+                        ),
+                      );
                   }
                 }}
               >
                 <RotateCcw size={16} />
-                {at("Посмотреть ещё раз", "Watch again", "Қайта қарау")}
+                {watched
+                  ? at("Посмотреть ещё раз", "Watch again", "Қайта қарау")
+                  : at("Смотреть жест", "Watch sign", "Ымды көру")}
               </button>
               <label>
                 {at("Скорость", "Speed", "Жылдамдық")}
@@ -1146,6 +1132,16 @@ function UnderstandingQuestion({
                 </select>
               </label>
             </div>
+          )}
+          {playError && <p role="alert">{playError}</p>}
+          {!ready && !failed && (
+            <p role="status">
+              {at(
+                "Нажмите «Смотреть жест», чтобы начать.",
+                "Press Watch sign to begin.",
+                "Бастау үшін «Ымды көру» батырмасын басыңыз.",
+              )}
+            </p>
           )}
         </section>
         <section className="panel activity-answer">
@@ -1178,14 +1174,14 @@ function UnderstandingQuestion({
               <div className="activity-actions">
                 <button
                   className="button primary"
-                  disabled={!selected || !ready || failed}
+                  disabled={!selected || !watched || failed}
                   onClick={() => check()}
                 >
                   {at("Проверить ответ", "Check answer", "Жауапты тексеру")}
                 </button>
                 <button
                   className="button secondary"
-                  disabled={!ready || failed}
+                  disabled={!watched || failed}
                   onClick={() => check(true)}
                 >
                   {at("Не знаю", "I do not know", "Білмеймін")}
@@ -1194,7 +1190,7 @@ function UnderstandingQuestion({
               {!selected && (
                 <p className="activity-hint">
                   {at(
-                    "Выберите значение или нажмите «Не знаю».",
+                    "Сначала посмотрите жест, затем выберите значение.",
                     "Select a meaning or choose “I do not know”.",
                     "Мағынаны таңдаңыз не «Білмеймін» басыңыз.",
                   )}
