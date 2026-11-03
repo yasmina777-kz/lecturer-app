@@ -67,3 +67,9 @@ ml/krsl/.venv/bin/python ml/krsl/check_service.py
 The camera UI now records 4-second clips while inference runs. At most one request and one newest pending clip are retained; skipped intermediate clips are reported. Letters run concurrently in a local Web Worker on the same camera stream. The 16-frame letter model still needs a complete motion window and two agreeing predictions, approximately 3 seconds at normal sampling speed. A single hand pose during a phrase can be classified as a letter; outputs are kept separate rather than inventing automatic language-mode confidence.
 
 `docs/recognition-service-check.json` records the four real Slovo smoke examples after the graph reset fix. All HTTP requests work; three are refused and one predicts an incorrect word. This is not a successful translation benchmark and no new weights were trained.
+
+### Letter camera tracking performance
+
+The letter worker uses MediaPipe VIDEO tracking (`detectForVideo`) with monotonically increasing capture timestamps and `minTrackingConfidence: 0.7`, as described in the [official Hand Landmarker guide](https://developers.google.com/edge/mediapipe/solutions/vision/hand_landmarker/web_js). Detection stays off the UI thread. A preliminary accepted prediction is shown as “Возможно…” while confirmation is pending; only the existing two-window consensus appends a letter. The 16-frame feature window, sampling cadence, weights and classifier thresholds are unchanged.
+
+A browser comparison on 72 frames from А/Б/В recorded examples measured median detector latency 77.7 ms IMAGE vs 66.0 ms VIDEO; detected-hand frames were 72 vs 70. This small replay check is not a recognition-accuracy evaluation or a promise of instantaneous captions. Scene changes can require tracking reacquisition. Phrase processing still uses complete 4-second clips; its model quality has not been improved by these frontend changes. See `docs/motion-flow-check.json`.

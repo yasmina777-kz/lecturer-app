@@ -37,6 +37,7 @@ sources = [
     'art/hand-rig/Mira-Hand-Workshop.blend',
     'art/sign-motion/arm_anatomy.py', 'art/sign-motion/bake_arm_anatomy.py',
     'art/sign-motion/body_clearance.py', 'art/sign-motion/verify_body_clearance.py',
+    'art/sign-motion/polish_release.py',
     'frontend/scripts/export-phrase-clearance-qa.mjs',
 ]
 # Locate the skinning implementation without assuming its component folder.

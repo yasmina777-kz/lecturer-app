@@ -10,6 +10,7 @@ import { preserveJointVolume } from "../sign/volumeSkinning";
 import { signingBounds, fitSigningFrame } from "../sign/motionFraming";
 import { composeMotion } from "../sign/composeMotion";
 import { at } from "../i18n/automation";
+import { loadAvatar } from "../sign/avatarModel";
 import { createMotionCache } from "../sign/motionCache";
 
 // Animation-only GLBs contain no character meshes. Each playback gets a clone
@@ -69,7 +70,7 @@ export function GestureMentor3D({
       setError(true);
       return;
     }
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.08;
@@ -92,7 +93,7 @@ export function GestureMentor3D({
     key.target.position.set(0, 1.2, 0);
     scene.add(key, key.target);
     key.castShadow = true;
-    key.shadow.mapSize.set(2048, 2048);
+    key.shadow.mapSize.set(1024, 1024);
     key.shadow.camera.left = -1.0;
     key.shadow.camera.right = 1.0;
     key.shadow.camera.top = 1.2;
@@ -139,6 +140,7 @@ export function GestureMentor3D({
       textures.forEach((t) => {
         t.dispose();
         if (
+          !t.userData.sharedAvatarImage &&
           typeof ImageBitmap !== "undefined" &&
           t.image instanceof ImageBitmap
         )
@@ -161,6 +163,9 @@ export function GestureMentor3D({
     };
     // Scrubbing and pause use the same Blender-baked animation clock.
     const pose = (t: number) => {
+      // The idle RAF also owns playing frames. React time updates must not
+      // skin and render the same scene a second time in the same display frame.
+      if (playback && current.current.playbackState !== "paused") return;
       actions.forEach((action) => {
         action.paused = false;
         action.enabled = true;
@@ -169,6 +174,7 @@ export function GestureMentor3D({
         playback.update(t, current.current.playbackState ?? "paused", 0);
       else mixer?.setTime(Math.min(clipDuration, Math.max(0, t)));
       mount.dataset.poseTime = t.toFixed(2);
+      mount.dataset.playbackState = current.current.playbackState ?? "paused";
       render();
     };
     const view = (close: boolean, direction: GestureAngle) => {
@@ -225,7 +231,11 @@ export function GestureMentor3D({
         orbit.target.copy(fit.target);
         radius = fit.radius;
       }
-      if (!close && (framing === "sign" || framing === "letter") && !fullMotionBounds.isEmpty()) {
+      if (
+        !close &&
+        (framing === "sign" || framing === "letter") &&
+        !fullMotionBounds.isEmpty()
+      ) {
         const fit = fitSigningFrame(fullMotionBounds, camera.aspect, theta);
         orbit.target.copy(fit.target);
         radius = Math.max(radius, fit.radius);
@@ -265,9 +275,30 @@ export function GestureMentor3D({
     setError(false);
     setLoading(true);
     readyCallback.current?.(false);
-    new GLTFLoader().load(
-      modelUrl,
-      async (gltf) => {
+    const urls: string[] = JSON.parse(motionKey);
+    const clipsPromise = Promise.all(
+      [...new Set(urls)].map(
+        async (url) => [url, await loadSavedMotion(url)] as const,
+      ),
+    );
+    const idlePromise = naturalIdle
+      ? fetch("/avatars/sign-motion/ready-idle.json", {
+          cache: "no-cache",
+        }).then(async (response) => {
+          if (!response.ok) throw new Error("Missing idle motion metadata");
+          const meta = await response.json();
+          if (typeof meta.revision !== "string")
+            throw new Error("Missing idle revision");
+          return loadSavedMotion(
+            `/avatars/sign-motion/ready-idle.glb?v=${encodeURIComponent(meta.revision)}`,
+          );
+        })
+      : Promise.resolve(undefined);
+    // Attach handlers immediately: model loading may finish after a failed clip.
+    const motionsPromise = Promise.all([clipsPromise, idlePromise]);
+    void motionsPromise.catch(() => {});
+    loadAvatar(modelUrl)
+      .then(async (gltf) => {
         if (!alive) {
           disposeModel(gltf.scene);
           return;
@@ -286,26 +317,10 @@ export function GestureMentor3D({
         let clips = naturalIdle ? [] : gltf.animations;
         let idleClip: THREE.AnimationClip | undefined;
         try {
-          if (naturalIdle) {
-            const idleResponse = await fetch("/avatars/sign-motion/ready-idle.json", { cache: "no-cache" });
-            if (!idleResponse.ok) throw new Error("Missing idle motion metadata");
-            const idleMetadata = await idleResponse.json();
-            if (typeof idleMetadata.revision !== "string") throw new Error("Missing idle motion revision");
-            idleClip = (await loadSavedMotion(
-              `/avatars/sign-motion/ready-idle.glb?v=${encodeURIComponent(idleMetadata.revision)}`,
-            )).clone();
-            if (!idleClip) throw new Error("Missing idle animation");
-          }
-          const urls: string[] = JSON.parse(motionKey);
+          const [sourcesList, idle] = await motionsPromise;
+          idleClip = idle?.clone();
           if (urls.length) {
-            const sources = new Map<string, THREE.AnimationClip>();
-            await Promise.all(
-              [...new Set(urls)].map(async (url) => {
-                const clip = (await loadSavedMotion(url)).clone();
-                if (clip) sources.set(url, clip);
-                if (!clip) throw new Error("Empty animation");
-              }),
-            );
+            const sources = new Map(sourcesList);
             if (!alive) return;
             clips = [
               composeMotion(
@@ -327,7 +342,10 @@ export function GestureMentor3D({
         clipDuration = Math.max(0, ...clips.map((clip) => clip.duration));
         if (motionKey !== "[]" && clips[0]) {
           fullMotionBounds = signingBounds(model, clips[0]);
-          motionBounds = framing === "letter" ? signingBounds(model, clips[0], true) : fullMotionBounds;
+          motionBounds =
+            framing === "letter"
+              ? signingBounds(model, clips[0], true)
+              : fullMotionBounds;
           view(current.current.closeup, current.current.angle);
         }
         if (idleClip) {
@@ -337,12 +355,13 @@ export function GestureMentor3D({
               ? Math.min(0.05, (now - lastIdleFrame) / 1000)
               : 0;
             lastIdleFrame = visible && !document.hidden ? now : 0;
-            if (visible && !document.hidden) {
+            if (visible && !document.hidden && current.current.playbackState !== "paused") {
               playback!.update(
                 current.current.time,
                 current.current.playbackState ?? "paused",
                 dt,
               );
+              mount.dataset.poseTime = current.current.time.toFixed(2);
               mount.dataset.playbackState =
                 current.current.playbackState ?? "paused";
               if (current.current.playbackState !== "paused") render();
@@ -362,15 +381,13 @@ export function GestureMentor3D({
         readyCallback.current?.(true);
         mount.dataset.model = "blender-mira-v3-soft";
         pose(current.current.time);
-      },
-      undefined,
-      () => {
+      })
+      .catch(() => {
         if (alive) {
           setLoading(false);
           setError(true);
         }
-      },
-    );
+      });
     return () => {
       alive = false;
       cancelAnimationFrame(idleFrame);

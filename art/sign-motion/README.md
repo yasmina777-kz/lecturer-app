@@ -1,5 +1,13 @@
 # Saved video motion library
 
+## Phrase flow / November 3
+
+Nineteen word clips had 2–7 second return-to-rest tails. `polish_release.py` replaces only the tail after the recorded sign with a quintic return, anatomical arm solving, front-surface clearance and coordinated speed limiting. The recorded portion and initial pose remain unchanged. «мать» is now 4.57 s (was 8.37); «семья» 6.70 s (was 11.87). The preferred «Привет!» clip is unchanged. These are mechanical improvements, not a new linguistic review.
+
+Build candidates outside the public directory with `MOTION_INPUT_DIR=<previous-library> MOTION_OUTPUT_DIR=<candidates>` and Blender `--python polish_release.py -- <word IDs>`. Preserve the previous GLBs for comparison. Run `node frontend/scripts/check-release-polish.mjs <previous-library> <candidates> <report.json>` to compare the entire retained interval at 60 Hz. Then independently run `verify_body_clearance.py` before publishing and repeat the composed-phrase/idle checks described below. `docs/motion-flow-check.json` contains the 19 before/after durations and comparison errors.
+
+Shared relaxed endpoints now have a minimum one-frame (1/60 s) join instead of a fixed 250 ms pause; the angular speed bound still applies. The verified return/preparation paths remain in place, so this is not direct handshape blending or generated RSL coarticulation. All 32 examples and 78 idle joins were re-exported and checked. The frontend caches a decoded model with independent cloned resources, loads motions in parallel, and renders playing frames once per RAF. The play clock uses elapsed visible time rather than slowing every frame longer than 50 ms. Shadow resolution is 1024 and DPR is capped at 1.5.
+
 ## Wrist correction (motion v9)
 
 The former circular wrist-swing cone accepted 65° of sideways bend. This was mechanically inside its old gate but visibly kinked the wrist in phrases. `arm_anatomy.py` now separates flexion and lateral deviation in the **pronated forearm frame**, using the rig's index-to-pinky palm axis. A continuous elliptical envelope uses 60° flexion and 25° sideways deviation. These are conservative rig settings, not a clinical model or linguistic validation. Measuring before forearm pronation would constrain the wrong direction.

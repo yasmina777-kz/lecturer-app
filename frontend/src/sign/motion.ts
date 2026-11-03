@@ -85,7 +85,8 @@ export function planMotion(
   }
   return { steps, missing, spelling };
 }
-export const MOTION_GAP = 0.25;
+// Shared relaxed boundaries need only one frame, not a visible quarter-second stop.
+export const MOTION_GAP = 1 / 60;
 // Quintic easing has peak derivative 1.875. Bound transition speed to the
 // same 8 degrees/frame limit used by the baked clips at 30 fps.
 export const TRANSITION_SPEED_DEGREES = 240;

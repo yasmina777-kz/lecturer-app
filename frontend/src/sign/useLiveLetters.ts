@@ -19,7 +19,7 @@ export function useLiveLetters(
   const activeRef = useRef(active);
   activeRef.current = active;
   useEffect(() => {
-    const w = new Worker("/models/rsl/letter-camera-worker.js?v=1");
+    const w = new Worker("/models/rsl/letter-camera-worker.js?v=2");
     worker.current = w;
     const fail = () => {
       busy.current = false;
@@ -56,7 +56,9 @@ export function useLiveLetters(
       if (data.accepted) {
         setLast(data.prediction.label);
         setText((v) => appendRecognizedLetter(v, data.prediction));
-      } else if (data.prediction && !data.prediction.accepted)
+      } else if (data.prediction?.accepted)
+        setStatus(`Возможно, «${data.prediction.label}» — проверяю движение`);
+      else if (data.prediction && !data.prediction.accepted)
         setStatus("Буква неясна — повторите движение");
     };
     w.postMessage({ type: "init", origin: location.origin });

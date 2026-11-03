@@ -21,8 +21,9 @@ self.onmessage = async ({ data }) => {
           modelAssetPath: `${data.origin}/models/rsl/hand_landmarker.task`,
           delegate: "CPU",
         },
-        runningMode: "IMAGE",
+        runningMode: "VIDEO",
         numHands: 2,
+        minTrackingConfidence: 0.7,
       });
       self.postMessage({ type: "ready" });
     } catch (error) {
@@ -35,7 +36,7 @@ self.onmessage = async ({ data }) => {
   } else if (data.type === "reset") live.reset();
   else if (data.type === "frame") {
     try {
-      const detected = detector.detect(data.bitmap);
+      const detected = detector.detectForVideo(data.bitmap, data.now);
       const quality = trackingQuality(detected);
       const frames = live.sample(temporalFrame(detected), data.now, quality);
       const prediction = frames ? recognizeSequence(frames, model) : null;

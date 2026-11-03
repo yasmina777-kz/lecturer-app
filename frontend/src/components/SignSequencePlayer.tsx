@@ -76,7 +76,9 @@ export function SignSequencePlayer({
         frame = requestAnimationFrame(tick);
         return;
       }
-      clock.current += last ? Math.min(0.05, (now - last) / 1000) * speed : 0;
+      // Keep 1× tied to elapsed time. Capping every frame at 50 ms made
+      // playback run in slow motion whenever rendering dropped below 20 fps.
+      clock.current += last ? Math.max(0, (now - last) / 1000) * speed : 0;
       last = now;
       if (clock.current >= duration) {
         if (loop) clock.current %= duration;

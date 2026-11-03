@@ -21,7 +21,8 @@
     "test:sign-captions": "node scripts/check-sign-captions.mjs",
     "test:sign-activities": "node scripts/check-sign-activities.mjs",
     "test:motion-cache": "node scripts/check-motion-cache.mjs",
-    "predev": "node scripts/prepare-letter-worker.mjs"
+    "predev": "node scripts/prepare-letter-worker.mjs",
+    "test:avatar-model": "node scripts/check-avatar-model.mjs"
   },
   "dependencies": {
     "@huggingface/transformers": "^4.3.2",

@@ -41,6 +41,7 @@ for(const group of phraseGroups)for(const phrase of group.phrases){
    const angle=2*Math.acos(Math.min(1,dot))*180/Math.PI;
    restTransitionAtFixedGap=Math.max(restTransitionAtFixedGap,angle*1.875/.25);
    assert.ok(angle*1.875/transitionDuration(example.steps[i-1],example.steps[i])<=TRANSITION_SPEED_DEGREES+.1,phrase+' transition too fast');
+   assert.ok(transitionDuration(example.steps[i-1],example.steps[i])<=1/30,phrase+' unnecessary rest pause');
   }
  }
 
