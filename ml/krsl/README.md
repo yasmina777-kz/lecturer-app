@@ -26,7 +26,7 @@ ml/krsl/.venv/bin/python ml/krsl/server.py
 
 `setup.py` verifies SHA-256 and resumes chunked weight downloads. It never executes upstream Python. After installation, `start.command` starts the service alongside the existing platform unless port 5070 is already occupied. Vite dev/preview proxy `/api/krsl` to `127.0.0.1:5070`. A hosted deployment must configure an authenticated reverse proxy and a separate Python service; the local integration does not magically run on static/Vercel hosting.
 
-Open `/recognition` → **Фразы · KRSL**. Turn on the camera once: 6-second recording → result → next recording. The processing interval is a visible pause, not gapless streaming. Long phrases may be cut at chunk boundaries; upload a complete clip instead. Stop/tab changes close tracks and discard stale pending results. No microphone is requested.
+Open `/recognition` (the unified **Жесты → текст** page). Turn on the camera once: four-second clips are recorded automatically while inference on the previous clip runs. This is chunked processing, not a frame-by-frame sentence decoder. Long phrases may be cut at chunk boundaries; upload a complete clip instead. Stop/tab changes close tracks and discard stale pending results. No microphone is requested.
 
 Uploads: MP4/WebM/MOV/OGG, ≤25 MiB, ≤20 s, ≤1920×1080. Temporary uploads are removed after processing. No webcam samples or predictions are automatically saved or used for training. Edited captions live only in the current page.
 
