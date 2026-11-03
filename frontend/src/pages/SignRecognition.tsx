@@ -12,9 +12,9 @@ export function SignRecognitionPage() {
           <h1>{at("Жесты → текст", "Signs → text", "Ымдар → мәтін")}</h1>
           <p>
             {at(
-              "Включите камеру один раз. Буквы и короткие фразы появятся справа — переключать режимы не нужно.",
-              "Start the camera once. Letters and short phrases appear alongside it, without switching modes.",
-              "Камераны бір рет қосыңыз. Әріптер мен қысқа сөйлемдер жанында шығады — режим ауыстыру қажет емес.",
+              "Покажите букву или короткую фразу. После фразы опустите руки и сделайте паузу.",
+              "Start the camera and show a sign. Letters and phrases are checked together. Pause after a phrase; a result appears if the model can identify it.",
+              "Камераны қосып, ымды көрсетіңіз. Әріптер мен сөйлемдер бірге тексеріледі. Сөйлемнен кейін үзіліс жасаңыз; модель анықтай алса, нәтиже шығады.",
             )}
           </p>
         </div>

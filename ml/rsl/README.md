@@ -2,6 +2,10 @@
 
 Independent project code; no SignStart code or models were used.
 
+Current unified-page confirmation policy: both saved letter classifiers must agree; see `docs/recognition-capture-check.json`. This reduces accepted coverage and is not new training. Letter lesson modes remain separate.
+
+Current audited Russian overview: `frontend/public/research/ai-system-report.html`.
+
 ## Current model: 33 isolated letters
 
 `alphabet-classifier.json` is a multinomial logistic classifier trained locally on Bukva. Google's pretrained MediaPipe Hand Landmarker supplies hand landmarks; we did not train that detector. The classifier uses 16 frames: four temporal bins of normalized hand coordinates, wrist movement and visibility, plus 210 average pairwise hand distances (474 features). It has 33 Russian letter classes and `no_event`.
@@ -14,9 +18,9 @@ These are subset-video results, not live-camera or pedagogical accuracy. The bro
 
 ## Dictionary and text
 
-`/text-to-sign` contains all 33 letter references and **170 words/expressions from Slovo**, with eight thematic word categories. Russian inflections are looked up using a precomputed pymorphy3/OpenCorpora table (3,430 forms). Ambiguities and unsupported words remain visible; negation is not removed. The longest available phrase is matched first.
+`/text-to-sign` contains all 33 letter references and **171 dictionary words/expressions** (the 170-entry Slovo selection plus the added greeting), with eight thematic word categories. Russian inflections are looked up using a precomputed pymorphy3/OpenCorpora table (3,430 forms). Ambiguities and unsupported words remain visible; negation is not removed. The longest available phrase is matched first.
 
-This is **dictionary lookup, not a trained Russian-to-RSL grammatical translator**. The existing 10 hand-authored 3D clips can be opened by supported exact text. All dictionary entries also have experimental avatar motion captured from the human references. The 170 reference videos are not training samples for a word recognizer; word/phrase recognition has not been trained. Continuous translation requires licensed aligned sentence data, a separate model and evaluation by RSL signers.
+This is **dictionary lookup, not a trained Russian-to-RSL grammatical translator**. The current catalog has 207 experimental clips: 33 letters, 171 dictionary entries and three prepared phrases. All dictionary entries also have experimental avatar motion captured from the human references. The 170 reference videos are not training samples for a word recognizer; a project-trained word/phrase recognizer has not been produced. A separate pretrained KRSL integration is described in `ml/krsl/README.md`; it remains unreliable. Continuous translation requires licensed aligned sentence data, a separate model and evaluation by RSL signers.
 
 ## Reproduce
 
@@ -36,11 +40,11 @@ npm run test:sign-expansion --prefix frontend
 
 Training downloads, extraction caches and the virtual environment stay ignored by Git. Clear `data/alphabet/features-v1` when changing extraction. The generated model, reports and selected public reference media are versioned. The previous three-letter pilot remains for regression comparison in `classifier.json` and `training-report.json`; the active practice UI uses the alphabet model.
 
-Inference runs in the browser with locally served MediaPipe weights/WASM and classifier, without an external AI API key. Camera permission is requested only after Start; leaving the exercise closes tracks. User recordings are processed in memory and are not uploaded.
+Inference runs in the browser with locally served MediaPipe weights/WASM and classifier, without an external AI API key. Camera permission is requested only after Start; leaving the exercise closes tracks. The letter classifier processes frames in browser memory. On the unified recognition page, the separate KRSL pipeline sends video chunks to the platform server (currently loopback on the same computer); see `ml/krsl/README.md`.
 
 ## Avatar
 
-The original seven letter clips and three word/phrase clips are independently authored Blender motion studies, **not expert-verified RSL instruction**. All 33 letters have real human video references. The dictionary and practice room now additionally use 203 experimental reference-captured motions, including all 33 letters; original videos remain available for comparison. These are not expert-verified. Alphabet body animation includes connected shoulders/spine/neck, staggered finger transitions and a stable handshape viewing interval. Finite transforms, loop continuity and quaternion steps are checked during export. Gesture semantics still require an RSL specialist's review.
+The original seven letter clips and three word/phrase clips are independently authored Blender motion studies, **not expert-verified RSL instruction**. All 33 letters have real human video references. The dictionary and practice room now additionally use 207 experimental saved motions, including all 33 letters; original videos remain available for comparison. These are not expert-verified. Alphabet body animation includes connected shoulders/spine/neck, staggered finger transitions and a stable handshape viewing interval. Finite transforms, loop continuity and quaternion steps are checked during export. Gesture semantics still require an RSL specialist's review.
 
 Scripts: `art/mira-alphabet/build.py`, `art/mira-blender-phrases/animate.py`, `art/mira-blender-v3/animate.py`. Recognition and playback are separate systems. Phrase playback preserves each Blender clip’s coordinated preparation and release, joining only relaxed endpoints. It does not interpolate directly between the meaningful handshapes of different signs. This adds a brief return between words; it is not natural continuous RSL coarticulation. Legacy constant STEP channels are converted to linear output tracks during composition so later moving clips are not played as discontinuous steps.
 
@@ -57,14 +61,13 @@ The practice camera now draws the detected hand landmarks continuously (about
 8 updates/second) before recording. These points show detection, not a letter
 prediction. Recording still collects 16 frames for the trained classifier.
 Uploaded videos show the sampled frame and its landmarks as well. Video and
-landmarks share one aspect ratio; only the live preview is mirrored. No image
-or recording is sent to a server.
+landmarks share one aspect ratio; only the live preview is mirrored. This description concerns the letter-only exercise. The unified recognition page also sends four-second video chunks to the local KRSL server.
 
 Stopping/leaving closes the camera tracks. Disposing the MediaPipe detector
 also clears its references, so development hot reload cannot reuse a closed
 WebGL context. Camera permission/device errors are separate from model errors.
 
-Create a shareable archive of the actual training code, 2,142 cached feature
+Create a shareable archive of the actual training code, 3,625 cached feature
 sequences, labels/splits, 33 required reference videos, detector weights, fitted
 classifier, reports and source licenses:
 
@@ -72,7 +75,7 @@ classifier, reports and source licenses:
 python3 ml/rsl/package_training.py /path/to/AI-Mentor-training.zip
 ```
 
-The archive excludes the full 1.8 GB source-video subset, credentials, and the
+The archive excludes the complete raw source-video subset, credentials, and the
 Python environment. It includes the source download script and checksums.
 The detector is pretrained Google MediaPipe; only the letter classifier was
 trained by this project. Packaging does not retrain or change the model.

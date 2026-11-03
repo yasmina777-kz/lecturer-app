@@ -24,3 +24,12 @@
 **/__pycache__
 **/.DS_Store
 backups
+art
+ml
+docs
+outputs
+**/*.blend
+**/*.blend1
+**/*.zip
+frontend/tests
+backend/tests

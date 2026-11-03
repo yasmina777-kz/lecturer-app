@@ -1,0 +1,14 @@
+{
+  "testVideos": 612,
+  "baseline": {
+    "accepted": 478,
+    "correct": 418,
+    "wrong": 60
+  },
+  "agreement": {
+    "accepted": 232,
+    "correct": 232,
+    "wrong": 0
+  },
+  "limitations": "Cached isolated-video test only; no new training, no webcam or word-negative evaluation. Agreement trades coverage for fewer accepted errors."
+}

@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
+import { drawBodyOverlay } from "./bodyOverlay";
+import type { Landmark } from "./phraseCapture";
 import { drawHandOverlay } from "./handOverlay";
 import { appendRecognizedLetter } from "./captions";
 import type { TrackingQuality } from "./liveRecognition";
@@ -7,7 +9,13 @@ export function useLiveLetters(
   video: RefObject<HTMLVideoElement>,
   canvas: RefObject<HTMLCanvasElement>,
   active: boolean,
+  onTracking?: (now: number, hands: Landmark[][], pose: Landmark[]) => void,
 ) {
+  const trackingCallback = useRef(onTracking);
+  trackingCallback.current = onTracking;
+  const [bodyStatus, setBodyStatus] = useState(
+    "Ориентиры тела появятся после включения камеры",
+  );
   const [text, setText] = useState("");
   const [status, setStatus] = useState("Загружаем модель букв…");
   const [ready, setReady] = useState(false);
@@ -19,7 +27,7 @@ export function useLiveLetters(
   const activeRef = useRef(active);
   activeRef.current = active;
   useEffect(() => {
-    const w = new Worker("/models/rsl/letter-camera-worker.js?v=2");
+    const w = new Worker("/models/rsl/letter-camera-worker.js?v=3");
     worker.current = w;
     const fail = () => {
       busy.current = false;
@@ -35,6 +43,12 @@ export function useLiveLetters(
         setStatus("Буквы готовы");
         return;
       }
+      if (data.type === "body-error") {
+        setBodyStatus(
+          "Ориентиры тела не загрузились. Фразы всё ещё проверяются сервером.",
+        );
+        return;
+      }
       if (data.type === "error") {
         busy.current = false;
         setStatus(data.message);
@@ -43,21 +57,43 @@ export function useLiveLetters(
       if (data.type !== "frame") return;
       busy.current = false;
       if (data.generation !== session.current || !activeRef.current) return;
-      if (video.current && canvas.current)
+      if (video.current && canvas.current) {
         drawHandOverlay(canvas.current, video.current, data.detected);
+        drawBodyOverlay(canvas.current, data.pose ?? []);
+      }
+      const body = (data.pose ?? []) as Landmark[];
+      const seen = (i: number) => body[i] && (body[i].visibility ?? 0) > 0.6;
+      setBodyStatus(
+        [11, 12, 13, 14].every(seen)
+          ? "Плечи и локти видны"
+          : "Отойдите немного: нужны плечи и локти в кадре",
+      );
+      const slots = ["Left", "Right"].map((side) => {
+        const index = data.detected.handedness.findIndex(
+          (h: { categoryName: string }[]) => h[0]?.categoryName === side,
+        );
+        return index < 0 ? [] : data.detected.landmarks[index];
+      });
+      trackingCallback.current?.(performance.now(), slots, body);
       const tips: Record<TrackingQuality, string> = {
         ready: "Покажите одну букву целиком",
         missing: "Покажите руки в кадре",
         clipped: "Отодвиньте руки от края кадра",
         distant: "Поднесите кисть чуть ближе",
       };
-      setStatus(tips[data.quality as TrackingQuality]);
+      if (data.quality !== "ready" || data.progress < 100)
+        setStatus(tips[data.quality as TrackingQuality]);
       setProgress(data.progress);
       if (data.accepted) {
+        setStatus(`Добавлена буква «${data.prediction.label}»`);
         setLast(data.prediction.label);
         setText((v) => appendRecognizedLetter(v, data.prediction));
       } else if (data.prediction?.accepted)
         setStatus(`Возможно, «${data.prediction.label}» — проверяю движение`);
+      else if (data.disagreement)
+        setStatus(
+          "Модели не согласны — буква не добавлена. Покажите её отдельно и целиком.",
+        );
       else if (data.prediction && !data.prediction.accepted)
         setStatus("Буква неясна — повторите движение");
     };
@@ -121,5 +157,5 @@ export function useLiveLetters(
       cancelAnimationFrame(raf);
     };
   }, [active, ready]);
-  return { text, setText, status, progress, last, ready };
+  return { text, setText, status, progress, last, ready, bodyStatus };
 }
