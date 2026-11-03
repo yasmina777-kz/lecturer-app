@@ -85,6 +85,15 @@ signal.signal(signal.SIGINT, stop)
 signal.signal(signal.SIGTERM, stop)
 try:
     processes.append(subprocess.Popen([DOTNET, 'run', '--no-build'], cwd=API, env=ENV, start_new_session=True))
+    krsl_python = ROOT / 'ml/krsl/.venv/bin/python'
+    if krsl_python.exists() and (ROOT / 'ml/krsl/data/checkpoint.pt').exists():
+        import socket
+        with socket.socket() as check:
+            running = check.connect_ex(('127.0.0.1', 5070)) == 0
+        if not running:
+            processes.append(subprocess.Popen([str(krsl_python), str(ROOT / 'ml/krsl/server.py')], cwd=ROOT, env=ENV, start_new_session=True))
+    else:
+        print('Распознавание фраз KRSL не установлено. Инструкция: ml/krsl/README.md', flush=True)
     processes.append(subprocess.Popen([NPM, 'run', 'dev'], cwd=ROOT / 'frontend', env=ENV, start_new_session=True))
     print('\nОткройте http://localhost:5173\nОстановка: Ctrl+C\n', flush=True)
     import time

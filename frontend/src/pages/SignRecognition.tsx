@@ -1,3 +1,4 @@
+import { ContinuousSignCamera } from "../components/ContinuousSignCamera";
 import { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -19,6 +20,7 @@ import "./sign-dictionary.css";
 import "./sign-trainer.css";
 import "./sign-recognition.css";
 export function SignRecognitionPage() {
+  const [mode, setMode] = useState<"phrases" | "letters">("phrases");
   const [text, setText] = useState("");
   const [last, setLast] = useState<SignPrediction>(null);
   const [notice, setNotice] = useState("");
@@ -58,147 +60,176 @@ export function SignRecognitionPage() {
           </h1>
           <p>
             {at(
-              "Показывайте буквы — собирайте текст в субтитрах рядом с камерой.",
-              "Show letters and build text in captions next to the camera.",
-              "Әріптерді көрсетіп, камера жанындағы субтитрге мәтін жинаңыз.",
+              "Выберите распознавание фраз или букв. Результат появится рядом с камерой.",
+              "Choose phrase or letter recognition. Results appear beside the camera.",
+              "Сөйлем не әріп тануды таңдаңыз. Нәтиже камераның жанында шығады.",
             )}
           </p>
         </div>
       </div>
-      <div className="recognition-scope">
-        <span>
-          {at(
-            "33 буквы · эксперимент",
-            "33 letters · experimental",
-            "33 әріп · тәжірибе",
-          )}
-        </span>
-        <p>
-          {at(
-            "Сейчас распознаются отдельные буквы дактиля. Это ещё не перевод свободной речи на РЖЯ: слова, фразы и грамматика не распознаются.",
-            "Currently recognizes individual fingerspelled letters. This is not a translator for continuous RSL: words, phrases and grammar are not recognized.",
-            "Қазір жеке дактиль әріптері танылады. Бұл еркін ым тілінің аудармашысы емес: сөздер, сөйлемдер және грамматика танылмайды.",
-          )}
-        </p>
+      <div className="recognition-edit-tools" aria-label="Режим распознавания">
+        <button
+          className={`button ${mode === "phrases" ? "primary" : "secondary"}`}
+          aria-pressed={mode === "phrases"}
+          onClick={() => setMode("phrases")}
+        >
+          {at("Фразы · KRSL", "Phrases · KRSL", "Сөйлемдер · KRSL")}
+        </button>
+        <button
+          className={`button ${mode === "letters" ? "primary" : "secondary"}`}
+          aria-pressed={mode === "letters"}
+          onClick={() => setMode("letters")}
+        >
+          {at("Буквы · РЖЯ", "Letters · RSL", "Әріптер · ОЫТ")}
+        </button>
       </div>
-      <div className="recognition-layout">
-        <TemporalSignCamera onPrediction={onPrediction} />
-        <aside className="panel recognition-captions">
-          <div className="recognition-caption-heading">
-            <Captions />
-            <h2>{at("Субтитры", "Captions", "Субтитрлер")}</h2>
-            <span>{at("Черновик", "Draft", "Жоба")}</span>
+      {mode === "phrases" ? (
+        <ContinuousSignCamera />
+      ) : (
+        <>
+          <div className="recognition-scope">
+            <span>
+              {at(
+                "33 буквы · эксперимент",
+                "33 letters · experimental",
+                "33 әріп · тәжірибе",
+              )}
+            </span>
+            <p>
+              {at(
+                "Сейчас распознаются отдельные буквы дактиля. Это ещё не перевод свободной речи на РЖЯ: слова, фразы и грамматика не распознаются.",
+                "Currently recognizes individual fingerspelled letters. This is not a translator for continuous RSL: words, phrases and grammar are not recognized.",
+                "Қазір жеке дактиль әріптері танылады. Бұл еркін ым тілінің аудармашысы емес: сөздер, сөйлемдер және грамматика танылмайды.",
+              )}
+            </p>
           </div>
-          <div className="recognition-last" role="status">
-            {last ? (
-              last.accepted ? (
-                <>
-                  <strong>{last.label}</strong>
-                  <span>
-                    {at(
-                      "Последняя распознанная буква",
-                      "Last recognized letter",
-                      "Соңғы танылған әріп",
-                    )}
-                  </span>
-                </>
-              ) : (
-                <span>
-                  {at(
-                    "Не уверен — повторите букву. Текст не изменён.",
-                    "Not confident — repeat the letter. Text unchanged.",
-                    "Сенімсіз — әріпті қайталаңыз. Мәтін өзгерген жоқ.",
-                  )}
-                </span>
-              )
-            ) : (
-              <>
-                <span className="recognition-empty-glyph" aria-hidden="true">
-                  Аа
-                </span>
-                <span>
-                  {at(
-                    "Здесь появится результат вашего показа",
-                    "Your recognized letters will appear here",
-                    "Көрсеткен әріптердің нәтижесі осында шығады",
-                  )}
-                </span>
-              </>
-            )}
-          </div>
-          <label htmlFor="recognized-captions">
-            {at(
-              "Распознанный текст — можно исправить",
-              "Recognized text — editable",
-              "Танылған мәтін — түзетуге болады",
-            )}
-          </label>
-          <textarea
-            id="recognized-captions"
-            value={text}
-            maxLength={2000}
-            rows={7}
-            onChange={(e) => {
-              setText(e.target.value);
-              setNotice("");
-            }}
-            placeholder={at(
-              "Включите камеру и покажите букву…",
-              "Start the camera and show a letter…",
-              "Камераны қосып, әріпті көрсетіңіз…",
-            )}
-          />
-          <div className="recognition-edit-tools">
-            <button
-              className="button secondary"
-              disabled={!text || text.length >= 2000}
-              onClick={() => setText((v) => (v + " ").slice(0, 2000))}
-            >
-              <Space size={17} />
-              {at("Пробел", "Space", "Бос орын")}
-            </button>
-            <button
-              className="button secondary"
-              disabled={!text}
-              onClick={() =>
-                setText((v) => Array.from(v).slice(0, -1).join(""))
-              }
-            >
-              <Delete size={17} />
-              {at("Удалить символ", "Delete character", "Таңбаны жою")}
-            </button>
-            <button className="button primary" disabled={!text} onClick={copy}>
-              <Copy size={17} />
-              {at("Копировать", "Copy", "Көшіру")}
-            </button>
-          </div>
-          <p className="recognition-privacy">
-            {at(
-              "Буквы добавляются только после принятого ответа модели. Исправляйте ошибки; текст не сохраняется после закрытия страницы.",
-              "Letters are added only after an accepted model result. Correct mistakes; text is not saved after closing the page.",
-              "Әріптер модель жауапты қабылдағанда ғана қосылады. Қателерді түзетіңіз; бет жабылғанда мәтін сақталмайды.",
-            )}
-          </p>
-          <p role="status">
-            {notice ||
-              (text.length >= 2000
-                ? at(
-                    "Достигнут лимит 2000 символов. Скопируйте текст и освободите место.",
-                    "2,000 character limit reached. Copy the text and free some space.",
-                    "2000 таңба шегіне жетті. Мәтінді көшіріп, орын босатыңыз.",
+          <div className="recognition-layout">
+            <TemporalSignCamera onPrediction={onPrediction} />
+            <aside className="panel recognition-captions">
+              <div className="recognition-caption-heading">
+                <Captions />
+                <h2>{at("Субтитры", "Captions", "Субтитрлер")}</h2>
+                <span>{at("Черновик", "Draft", "Жоба")}</span>
+              </div>
+              <div className="recognition-last" role="status">
+                {last ? (
+                  last.accepted ? (
+                    <>
+                      <strong>{last.label}</strong>
+                      <span>
+                        {at(
+                          "Последняя распознанная буква",
+                          "Last recognized letter",
+                          "Соңғы танылған әріп",
+                        )}
+                      </span>
+                    </>
+                  ) : (
+                    <span>
+                      {at(
+                        "Не уверен — повторите букву. Текст не изменён.",
+                        "Not confident — repeat the letter. Text unchanged.",
+                        "Сенімсіз — әріпті қайталаңыз. Мәтін өзгерген жоқ.",
+                      )}
+                    </span>
                   )
-                : "")}
-          </p>
-          <Link className="recognition-reference" to="/practice">
-            {at(
-              "Сначала посмотреть буквы у аватара",
-              "First watch the avatar demonstrate letters",
-              "Алдымен аватардың әріптерін қарау",
-            )}
-            <ArrowRight size={16} />
-          </Link>
-        </aside>
-      </div>
+                ) : (
+                  <>
+                    <span
+                      className="recognition-empty-glyph"
+                      aria-hidden="true"
+                    >
+                      Аа
+                    </span>
+                    <span>
+                      {at(
+                        "Здесь появится результат вашего показа",
+                        "Your recognized letters will appear here",
+                        "Көрсеткен әріптердің нәтижесі осында шығады",
+                      )}
+                    </span>
+                  </>
+                )}
+              </div>
+              <label htmlFor="recognized-captions">
+                {at(
+                  "Распознанный текст — можно исправить",
+                  "Recognized text — editable",
+                  "Танылған мәтін — түзетуге болады",
+                )}
+              </label>
+              <textarea
+                id="recognized-captions"
+                value={text}
+                maxLength={2000}
+                rows={7}
+                onChange={(e) => {
+                  setText(e.target.value);
+                  setNotice("");
+                }}
+                placeholder={at(
+                  "Включите камеру и покажите букву…",
+                  "Start the camera and show a letter…",
+                  "Камераны қосып, әріпті көрсетіңіз…",
+                )}
+              />
+              <div className="recognition-edit-tools">
+                <button
+                  className="button secondary"
+                  disabled={!text || text.length >= 2000}
+                  onClick={() => setText((v) => (v + " ").slice(0, 2000))}
+                >
+                  <Space size={17} />
+                  {at("Пробел", "Space", "Бос орын")}
+                </button>
+                <button
+                  className="button secondary"
+                  disabled={!text}
+                  onClick={() =>
+                    setText((v) => Array.from(v).slice(0, -1).join(""))
+                  }
+                >
+                  <Delete size={17} />
+                  {at("Удалить символ", "Delete character", "Таңбаны жою")}
+                </button>
+                <button
+                  className="button primary"
+                  disabled={!text}
+                  onClick={copy}
+                >
+                  <Copy size={17} />
+                  {at("Копировать", "Copy", "Көшіру")}
+                </button>
+              </div>
+              <p className="recognition-privacy">
+                {at(
+                  "Буквы добавляются только после принятого ответа модели. Исправляйте ошибки; текст не сохраняется после закрытия страницы.",
+                  "Letters are added only after an accepted model result. Correct mistakes; text is not saved after closing the page.",
+                  "Әріптер модель жауапты қабылдағанда ғана қосылады. Қателерді түзетіңіз; бет жабылғанда мәтін сақталмайды.",
+                )}
+              </p>
+              <p role="status">
+                {notice ||
+                  (text.length >= 2000
+                    ? at(
+                        "Достигнут лимит 2000 символов. Скопируйте текст и освободите место.",
+                        "2,000 character limit reached. Copy the text and free some space.",
+                        "2000 таңба шегіне жетті. Мәтінді көшіріп, орын босатыңыз.",
+                      )
+                    : "")}
+              </p>
+              <Link className="recognition-reference" to="/practice">
+                {at(
+                  "Сначала посмотреть буквы у аватара",
+                  "First watch the avatar demonstrate letters",
+                  "Алдымен аватардың әріптерін қарау",
+                )}
+                <ArrowRight size={16} />
+              </Link>
+            </aside>
+          </div>
+        </>
+      )}
     </div>
   );
 }

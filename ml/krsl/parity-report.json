@@ -1,0 +1,11 @@
+{
+  "upstreamRevision": "af4819927e58079f6aad5f3e62a140bb1cdbbb7b",
+  "maxLogitDifference": 0.0,
+  "batch": 2,
+  "timesteps": 40,
+  "lengths": [
+    40,
+    29
+  ],
+  "scope": "Architecture/weight compatibility, not recognition accuracy"
+}

@@ -1,0 +1,35 @@
+{
+  "scope": "Private-source capture to Blender to GLB reproducibility check. One gesture, not all catalog correctness.",
+  "id": "word-a8989f04",
+  "sourceSha256": "379361407de5d5f74a93ef4afcafda28aa7476e9c663959a99c665d86454d197",
+  "sampleFps": 30,
+  "exportMatchesPublishedBytes": true,
+  "validation": {
+    "method": "evaluated hand/forearm skin versus torso, head and clothing front surfaces; sampled at 60 Hz",
+    "sampleRate": 60,
+    "toleranceMeters": 0.002,
+    "clips": [
+      {
+        "id": "word-a8989f04",
+        "sha256": "ffc479b082dea50a435febe7584ae761bd3fdd7698666c5dc5fb5139f9e64588",
+        "maxOverlapMeters": 0,
+        "samples": 303,
+        "worst": null,
+        "armAnatomy": {
+          "elbowPoleDeviationDegrees": 10.663927393590365,
+          "upperPlaneErrorDegrees": 0.18557988221493815,
+          "forearmRollDegrees": 63.66406108432166,
+          "wristSwingDegrees": 65.00005531193828
+        }
+      }
+    ],
+    "seconds": 2.572291851043701,
+    "failed": []
+  },
+  "limitations": [
+    "Hand opening uses source-specific authored corrections; not pure measured mocap.",
+    "Face and mouth animation are not transferred.",
+    "Not linguistically reviewed; passing geometry checks does not prove correct RSL.",
+    "Original public samples remain for the separate video-based understanding exercises; avatar reference players no longer render or request them."
+  ]
+}

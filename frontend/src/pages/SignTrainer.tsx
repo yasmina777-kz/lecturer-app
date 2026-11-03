@@ -18,7 +18,6 @@ import "./sign-trainer.css";
 import "./sign-dictionary.css";
 import { SignSequencePlayer } from "../components/SignSequencePlayer";
 import { planMotion, type MotionAsset } from "../sign/motion";
-import { ReferenceVideo } from "../components/SignReferenceVideo";
 import { alphabetEntries } from "../sign/dictionary";
 import { alphabetIllustration } from "../sign/alphabetIllustrations";
 import { AlphabetCardArt } from "../components/AlphabetCardArt";
@@ -140,9 +139,9 @@ export function SignCourseCatalog() {
       </Link>
       <p className="sign-catalog-note">
         {at(
-          "Все 33 буквы и 171 слово имеют пробные движения аватара и видео для сравнения. Откройте словарь, чтобы посмотреть слова и собрать последовательность.",
-          "All 33 letters and 171 words have experimental avatar motion and reference videos. Open the dictionary to view words and build sequences.",
-          "33 әріп пен 171 сөздің сынақ аватар қимылдары және бейнеүлгілері бар. Сөздер мен тізбектерді сөздіктен көріңіз.",
+          "Все 33 буквы и 171 слово имеют пробные движения аватара. Откройте словарь, чтобы посмотреть слова и собрать последовательность.",
+          "All 33 letters and 171 words have experimental avatar motion. Open the dictionary to view words and build sequences.",
+          "33 әріп пен 171 сөздің сынақ аватар қимылдары бар. Сөздер мен тізбектерді сөздіктен көріңіз.",
         )}
       </p>
       <div className="sign-shortcuts">
@@ -284,7 +283,6 @@ function CapturedLetterPlayer({ letter }: { letter: string }) {
     return () => abort.abort();
   }, []);
   const references = useMemo(() => alphabetEntries(), []);
-  const reference = references.find((e) => e.label === letter)!;
   const plan = useMemo(
     () => planMotion(letter, references, {}, motions, true),
     [letter, references, motions],
@@ -329,16 +327,6 @@ function CapturedLetterPlayer({ letter }: { letter: string }) {
           ) : (
             <SignSequencePlayer key={letter} plan={plan} />
           )}
-          <details className="sign-dictionary-reference">
-            <summary>
-              {at(
-                "Сравнить с видео человека",
-                "Compare with a human reference",
-                "Адам бейнесімен салыстыру",
-              )}
-            </summary>
-            <ReferenceVideo entry={reference} />
-          </details>
           <button
             className="button primary sign-next-practice"
             onClick={() => setMode("camera")}
@@ -661,45 +649,6 @@ function AnimatedExercisePlayer({
           )}
         </aside>
       </div>
-      {exercise.letter && (
-        <details className="sign-reference-video panel">
-          <summary>
-            {at(
-              "Сравнить с видео человека",
-              "Compare with a human demonstration",
-              "Адамның бейнеүлгісімен салыстыру",
-            )}
-          </summary>
-          <video
-            key={exercise.id}
-            controls
-            playsInline
-            preload="none"
-            src={
-              alphabetEntries().find((e) => e.label === exercise.letter)?.video
-            }
-          />
-          <p>
-            Bukva · {exercise.letter}.{" "}
-            {at(
-              "Видео из открытого набора; 3D-показ — наша пробная адаптация.",
-              "Video from the open dataset; the 3D demonstration is our trial adaptation.",
-              "Ашық деректердегі бейне; 3D көрсетілімі — біздің сынақ бейімдеуіміз.",
-            )}
-          </p>
-          <a
-            href="/research/rsl/ATTRIBUTION.txt"
-            target="_blank"
-            rel="noreferrer"
-          >
-            {at(
-              "Авторы и условия использования ↗",
-              "Credits and license ↗",
-              "Авторлар мен қолдану шарттары ↗",
-            )}
-          </a>
-        </details>
-      )}
       {canRecognize && exercise.letter && (
         <Suspense fallback={<Loading />}>
           <Camera key={exercise.id} expected={exercise.letter} />

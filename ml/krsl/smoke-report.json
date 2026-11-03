@@ -1,0 +1,87 @@
+{
+  "scope": "Small out-of-domain Slovo smoke test, NOT a KRSL benchmark. No training performed.",
+  "examples": [
+    {
+      "expected": "книга",
+      "source": "/research/rsl/words/a8989f04-a615-4a0d-bb49-583d3c0e94ab.mp4",
+      "result": {
+        "duration": 1.73,
+        "frames": 26,
+        "tracking": {
+          "hands": 1.0,
+          "body": 1.0,
+          "face": 1.0
+        },
+        "model": "KRSL Conformer · stage5",
+        "experimental": true,
+        "status": "uncertain",
+        "text": "",
+        "tokens": [],
+        "message": "Модель не смогла надёжно разобрать этот фрагмент. Повторите короткую фразу.",
+        "seconds": 0.39
+      }
+    },
+    {
+      "expected": "мать",
+      "source": "/research/rsl/words/a1a428c3-5ddd-4baa-9de5-723eb9fe3f00.mp4",
+      "result": {
+        "duration": 1.57,
+        "frames": 24,
+        "tracking": {
+          "hands": 1.0,
+          "body": 1.0,
+          "face": 1.0
+        },
+        "model": "KRSL Conformer · stage5",
+        "experimental": true,
+        "status": "uncertain",
+        "text": "",
+        "tokens": [],
+        "message": "Модель не смогла надёжно разобрать этот фрагмент. Повторите короткую фразу.",
+        "seconds": 0.33
+      }
+    },
+    {
+      "expected": "отец",
+      "source": "/research/rsl/words/78a4ca40-8a78-437e-8024-13935bd3abdb.mp4",
+      "result": {
+        "duration": 1.73,
+        "frames": 26,
+        "tracking": {
+          "hands": 1.0,
+          "body": 1.0,
+          "face": 1.0
+        },
+        "model": "KRSL Conformer · stage5",
+        "experimental": true,
+        "status": "uncertain",
+        "text": "",
+        "tokens": [],
+        "message": "Модель не смогла надёжно разобрать этот фрагмент. Повторите короткую фразу.",
+        "seconds": 0.35
+      }
+    },
+    {
+      "expected": "семья",
+      "source": "/research/rsl/words/c3c582bb-00ef-48cd-b8f5-cbf21473ca56.mp4",
+      "result": {
+        "duration": 1.7,
+        "frames": 26,
+        "tracking": {
+          "hands": 0.62,
+          "body": 1.0,
+          "face": 1.0
+        },
+        "model": "KRSL Conformer · stage5",
+        "experimental": true,
+        "status": "draft",
+        "text": "культура",
+        "tokens": [
+          "культура"
+        ],
+        "message": "Предположение модели: проверьте слова. Это не проверенный перевод.",
+        "seconds": 0.35
+      }
+    }
+  ]
+}

@@ -4,7 +4,6 @@ import { at } from "../i18n/automation";
 import { motionTimeline, type MotionPlan } from "../sign/motion";
 import type { GestureAngle } from "./GestureMentor3D";
 import { AlphabetCardArt } from "./AlphabetCardArt";
-import { MotionReferenceComparison } from "./MotionReferenceComparison";
 import { alphabetIllustration } from "../sign/alphabetIllustrations";
 import "../pages/gesture-preview.css";
 import "../pages/sign-trainer.css";
@@ -154,7 +153,7 @@ export function SignSequencePlayer({
       {(!blocked || naturalIdle) && (
         <>
           <div className="sign-avatar-player gesture-page">
-            <div className={current?.reference ? "motion-comparison-layout" : undefined}>
+            <div className="motion-avatar-only">
             <div ref={stage} className="sign-avatar-stage sign-sequence-stage">
               <Suspense
                 fallback={
@@ -208,9 +207,6 @@ export function SignSequencePlayer({
                   : at("Приблизить руки", "Zoom hands", "Қолды үлкейту")}
               </button>
             </div>
-            {!blocked && current?.reference && (
-              <MotionReferenceComparison motion={current} time={Math.max(0, time - current.start)} />
-            )}
             </div>
             {blocked && (
               <p className="sign-sequence-note" role="status">
@@ -367,8 +363,8 @@ export function SignSequencePlayer({
           : ""}
         {note ??
           at(
-            "Движения перенесены с видео или подготовлены вручную. Пальцы при перекрытии рук могут отображаться неточно; сверяйте с видеообразцом.",
-            "Motion is captured from video or authored manually. Occluded fingers may be inaccurate; compare the reference.",
+            "Движения перенесены с видео или подготовлены вручную. Пальцы при перекрытии рук могут отображаться неточно; рассмотрите форму кисти на паузе.",
+            "Motion is captured from video or authored manually. Occluded fingers may be inaccurate; pause to inspect the handshape.",
             "Қимылдар бейнеден көшірілген не қолмен жасалған. Қолдар жабылғанда саусақтар дәл болмауы мүмкін; үлгімен салыстырыңыз.",
           )}
       </p>

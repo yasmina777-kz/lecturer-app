@@ -158,15 +158,15 @@ export function courseLevels() {
         "Әріптер мен дактиль",
       ),
       description: at(
-        "Все 33 буквы: пробные движения аватара, видео для сравнения и экспериментальная ИИ-проверка.",
-        "All 33 letters: experimental avatar motion, reference videos and AI checks.",
-        "33 әріптің сынақ аватар қимылдары, бейнеүлгілері және тәжірибелік ЖИ тексеруі.",
+        "Все 33 буквы: пробные движения аватара, пауза, ракурсы и экспериментальная ИИ-проверка.",
+        "All 33 letters: experimental avatar motion, pause, viewpoints and AI checks.",
+        "33 әріптің сынақ аватар қимылдары, кідірту, ракурстар және тәжірибелік ЖИ тексеруі.",
       ),
       image: "/illustrations/sign-phrases/alphabet-cover.jpg",
       count: at(
-        "33 буквы · видео и ИИ",
-        "33 letters · video and AI",
-        "33 әріп · бейне және ЖИ",
+        "33 буквы · аватар и ИИ",
+        "33 letters · avatar and AI",
+        "33 әріп · аватар және ЖИ",
       ),
     },
     {

@@ -11,7 +11,7 @@ from capture_motion import entries
 rows=json.loads(Path(args.manifest).read_text()) if args.manifest else entries()
 if args.ids:rows=[e for e in rows if e['id'] in args.ids]
 BLENDER='/Applications/Blender.app/Contents/MacOS/Blender';PUBLIC=ROOT/'frontend/public/avatars/sign-motion'
-sources=['art/sign-motion/'+p for p in ['retarget.py','kinematics.py','hand_pose_overrides.py','trajectory.py','clear_body.py','bake_arm_anatomy.py','body_clearance.py','arm_anatomy.py','verify_body_clearance.py']]+['ml/rsl/capture_motion.py','ml/rsl/build_video_library.py']
+sources=['art/sign-motion/'+p for p in ['retarget.py','kinematics.py','hand_pose_overrides.py','trajectory.py','clear_body.py','bake_arm_anatomy.py','body_clearance.py','arm_anatomy.py','verify_body_clearance.py']]+['ml/rsl/capture_motion.py','ml/rsl/reference_store.py','ml/rsl/build_video_library.py']
 version=hashlib.sha256(b''.join((ROOT/p).read_bytes() for p in sources)).hexdigest()
 def work(entry):
  id=entry['id'];folder=RUN/'candidates'/id;folder.mkdir(parents=True,exist_ok=True);status_path=folder/'status.json'

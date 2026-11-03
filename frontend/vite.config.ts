@@ -8,6 +8,11 @@ export default defineConfig({
     port: 5173,
     strictPort: true,
     proxy: {
+      "/api/krsl": {
+        target: "http://127.0.0.1:5070",
+        timeout: 120000,
+        proxyTimeout: 120000,
+      },
       "/api": {
         target: process.env.VITE_API_TARGET || "http://localhost:5050",
         changeOrigin: true,
@@ -20,6 +25,11 @@ export default defineConfig({
     host: "127.0.0.1",
     port: 5173,
     proxy: {
+      "/api/krsl": {
+        target: "http://127.0.0.1:5070",
+        timeout: 120000,
+        proxyTimeout: 120000,
+      },
       "/api": {
         target: process.env.VITE_API_TARGET || "http://localhost:5050",
         changeOrigin: true,

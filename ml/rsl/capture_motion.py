@@ -4,14 +4,18 @@ Keeps source identities and missing detections for explicit quality checks.
 import os
 os.environ.setdefault('OMP_NUM_THREADS','1')
 from pathlib import Path
-import json,sys,concurrent.futures,multiprocessing
+import json,sys,concurrent.futures,multiprocessing,hashlib
+from reference_store import source_path
 import numpy as np,cv2,mediapipe as mp
 ROOT=Path(__file__).resolve().parents[2];PUBLIC=ROOT/'frontend/public';MODELS=ROOT/'ml/rsl/data/motion';OUT=Path(os.environ.get('MOTION_CAPTURE_DIR',str(MODELS)));OUT.mkdir(parents=True,exist_ok=True)
 def capture(entry):
  dest=OUT/(entry['id']+'.json')
- if dest.exists() and json.loads(dest.read_text())['entry']['video']==entry['video']:return entry['id'],'cached'
+ source=source_path(entry['video']);digest=hashlib.sha256(source.read_bytes()).hexdigest()
+ if dest.exists():
+  cached=json.loads(dest.read_text())
+  if cached['entry']['video']==entry['video'] and cached.get('sourceSha256')==digest and cached.get('captureFps')==int(os.environ.get('MOTION_CAPTURE_FPS','20')):return entry['id'],'cached'
  cv2.setNumThreads(1)
- cap=cv2.VideoCapture(str(PUBLIC/entry['video'].lstrip('/')));fps=cap.get(cv2.CAP_PROP_FPS);total=int(cap.get(cv2.CAP_PROP_FRAME_COUNT));duration=total/max(fps,1)
+ cap=cv2.VideoCapture(str(source));fps=cap.get(cv2.CAP_PROP_FPS);total=int(cap.get(cv2.CAP_PROP_FRAME_COUNT));duration=total/max(fps,1)
  if total<2 or not .4<duration<30:raise ValueError((entry['label'],duration))
  sample_fps=int(os.environ.get('MOTION_CAPTURE_FPS','20'))
  indices=np.unique(np.linspace(0,total-1,min(450,max(16,int(duration*sample_fps)))).astype(int));wanted=set(indices);frames=[]
@@ -27,7 +31,7 @@ def capture(entry):
    xyz=lambda pts:[[round(v.x,6),round(v.y,6),round(v.z,6)] for v in pts]
    frames.append({'t':round(i/fps,4),'pose':xyz(p.pose_landmarks[0]) if p.pose_landmarks else None,'world':xyz(p.pose_world_landmarks[0]) if p.pose_world_landmarks else None,'hands':[{'image':xyz(im),'world':xyz(wo),'side':side[0].category_name} for im,wo,side in zip(hs.hand_landmarks,hs.hand_world_landmarks,hs.handedness)]})
  cap.release();detected=sum(bool(f['pose']) for f in frames)/len(frames)
- dest.write_text(json.dumps({'entry':entry,'duration':duration,'aspect':w/h,'frames':frames,'poseCoverage':detected,'captureFps':sample_fps},ensure_ascii=False))
+ dest.write_text(json.dumps({'sourceSha256':digest,'entry':entry,'duration':duration,'aspect':w/h,'frames':frames,'poseCoverage':detected,'captureFps':sample_fps},ensure_ascii=False))
  return entry['id'],round(detected,3)
 def entries():
  words=json.loads((PUBLIC/'research/rsl/words/catalog.json').read_text())

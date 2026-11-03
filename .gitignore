@@ -80,6 +80,7 @@ art/local-ai-cache/
 # Reproducible local sign-training inputs and Python environment
 ml/rsl/data/
 ml/rsl/.venv/
+ml/krsl/data/
 
 # Keep Blender scripts and the reusable base; omit duplicate renders and research scratch files.
 art/**/*

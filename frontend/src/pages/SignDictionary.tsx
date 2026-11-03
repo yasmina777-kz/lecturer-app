@@ -11,7 +11,6 @@ import { planMotion, type MotionAsset } from "../sign/motion";
 import { SignSequencePlayer } from "../components/SignSequencePlayer";
 import { exercises } from "../sign/exercises";
 import "./sign-dictionary.css";
-import { ReferenceVideo } from "../components/SignReferenceVideo";
 import { phraseArt } from "../sign/phraseArt";
 import { phraseGroups } from "../sign/phraseExamples";
 import { alphabetIllustration } from "../sign/alphabetIllustrations";
@@ -339,7 +338,7 @@ export function SignDictionaryPage() {
             </div>
             <button className="button secondary motion-reference-example" disabled={loading || !!error}
               onClick={() => { setText("Привет!"); setSubmitted("Привет!"); setSpelling(false); setSelected(null); setRun(v => v + 1); requestAnimationFrame(() => sequenceRef.current?.scrollIntoView({ block: "start", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" })); }}>
-              <Play size={17} />{at("Пример с видео: «Привет!»", "Video-based example: «Привет!»", "Бейне бойынша мысал: «Привет!»")}
+              <Play size={17} />{at("Показать «Привет!»", "Show «Привет!»", "«Привет!» көрсету")}
             </button>
             <details className="sign-letter-picker">
               <summary>
@@ -508,19 +507,6 @@ export function SignDictionaryPage() {
       <div className="sign-dictionary-result">
         {selected && (
           <>
-            <details
-              className="sign-dictionary-reference"
-              open={!selectedPlan?.steps.length}
-            >
-              <summary>
-                {at(
-                  "Сравнить с видео человека",
-                  "Compare with the human reference",
-                  "Адамның бейнесімен салыстыру",
-                )}
-              </summary>
-              <ReferenceVideo key={selected.id} entry={selected} />
-            </details>
             {selected.category === "Алфавит" && (
               <Link
                 className="button secondary"
