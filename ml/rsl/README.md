@@ -2,6 +2,8 @@
 
 Independent project code; no SignStart code or models were used.
 
+Current unified-page confirmation policy: both saved letter classifiers must agree; see `docs/recognition-capture-check.json`. This reduces accepted coverage and is not new training. Letter lesson modes remain separate.
+
 Current audited Russian overview: `frontend/public/research/ai-system-report.html`.
 
 ## Current model: 33 isolated letters

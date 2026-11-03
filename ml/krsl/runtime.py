@@ -109,11 +109,13 @@ class Engine:
     def recognize(self, path):
         started = time.monotonic()
         rows, duration = self.extract(path)
+        left = float(np.any(rows[:, :63] != 0, axis=1).mean())
+        right = float(np.any(rows[:, 63:126] != 0, axis=1).mean())
         hands = float(np.any(rows[:, :126] != 0, axis=1).mean())
         pose = float(np.any(rows[:, 126:144] != 0, axis=1).mean())
         face = float(np.any(rows[:, 144:] != 0, axis=1).mean())
         base = dict(duration=round(duration, 2), frames=len(rows),
-                    tracking={'hands': round(hands, 2), 'body': round(pose, 2), 'face': round(face, 2)},
+                    tracking={'hands': round(hands, 2), 'leftHand': round(left, 2), 'rightHand': round(right, 2), 'body': round(pose, 2), 'face': round(face, 2)},
                     model='KRSL Conformer · stage5', experimental=True)
         if hands < .35 or pose < .5 or face < .3:
             return dict(base, status='no_tracking', text='', tokens=[],
@@ -126,7 +128,7 @@ class Engine:
                       not any(c.isalnum() for c in t) for t in tokens)
         if not tokens or unknown or score < .4:
             return dict(base, status='uncertain', text='', tokens=[],
-                        message='Модель не смогла надёжно разобрать этот фрагмент. Повторите короткую фразу.',
+                        message='Ориентиры найдены, но модель не смогла определить слова. Текст не добавлен: качество этой модели для ваших жестов пока недостаточно.',
                         seconds=round(time.monotonic() - started, 2))
         return dict(base, status='draft', text=' '.join(tokens), tokens=tokens,
                     message='Предположение модели: проверьте слова. Это не проверенный перевод.',

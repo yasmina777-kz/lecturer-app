@@ -36,7 +36,7 @@ export class LiveLetterStream {
   private candidate = "";
   private votes = 0;
   private emitted = "";
-  reset() {
+  reset(preserveEmitted = false) {
     this.frames = [];
     this.sampledAt = -Infinity;
     this.seenAt = -Infinity;
@@ -44,7 +44,7 @@ export class LiveLetterStream {
     this.sincePrediction = 0;
     this.candidate = "";
     this.votes = 0;
-    this.emitted = "";
+    if (!preserveEmitted) this.emitted = "";
   }
   sample(
     frame: TemporalFrame,

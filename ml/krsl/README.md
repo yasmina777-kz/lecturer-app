@@ -26,7 +26,7 @@ ml/krsl/.venv/bin/python ml/krsl/server.py
 
 `setup.py` verifies SHA-256 and resumes chunked weight downloads. It never executes upstream Python. After installation, `start.command` starts the service alongside the existing platform unless port 5070 is already occupied. Vite dev/preview proxy `/api/krsl` to `127.0.0.1:5070`. A hosted deployment must configure an authenticated reverse proxy and a separate Python service; the local integration does not magically run on static/Vercel hosting.
 
-Open `/recognition` (the unified **Жесты → текст** page). Turn on the camera once: four-second clips are recorded automatically while inference on the previous clip runs. This is chunked processing, not a frame-by-frame sentence decoder. Long phrases may be cut at chunk boundaries; upload a complete clip instead. Stop/tab changes close tracks and discard stale pending results. No microphone is requested.
+Open `/recognition` (the unified **Жесты → текст** page). Turn on the camera once: Clips finish after 1.3 seconds without detected hand movement (minimum 2.4 seconds, maximum 12 seconds), or with the optional finish button. This pause heuristic is not a linguistic boundary detector. Recording continues during inference until the one pending slot fills; then recording pauses visibly until a slot is free. No pending clip is silently overwritten. This is chunked processing, not a frame-by-frame sentence decoder. Long phrases may be cut at chunk boundaries; upload a complete clip instead. Stop/tab changes close tracks and discard stale pending results. No microphone is requested.
 
 Uploads: MP4/WebM/MOV/OGG, ≤25 MiB, ≤20 s, ≤1920×1080. Temporary uploads are removed after processing. No webcam samples or predictions are automatically saved or used for training. Edited captions live only in the current page.
 
@@ -64,7 +64,7 @@ ml/krsl/.venv/bin/python ml/krsl/test_runtime.py
 ml/krsl/.venv/bin/python ml/krsl/check_service.py
 ```
 
-The camera UI now records 4-second clips while inference runs. At most one request and one newest pending clip are retained; skipped intermediate clips are reported. Letters run concurrently in a local Web Worker on the same camera stream. The 16-frame letter model still needs a complete motion window and two agreeing predictions, approximately 3 seconds at normal sampling speed. A single hand pose during a phrase can be classified as a letter; outputs are kept separate rather than inventing automatic language-mode confidence.
+The camera UI records pause-bounded clips while inference runs. At most one request and one pending clip are retained; recording pauses visibly under backpressure. Letters run concurrently in a local Web Worker on the same camera stream. The 16-frame letter model still needs a complete motion window and two agreeing predictions, approximately 3 seconds at normal sampling speed. A single hand pose during a phrase can be classified as a letter; outputs are kept separate rather than inventing automatic language-mode confidence.
 
 `docs/recognition-service-check.json` records the four real Slovo smoke examples after the graph reset fix. All HTTP requests work; three are refused and one predicts an incorrect word. This is not a successful translation benchmark and no new weights were trained.
 
@@ -73,3 +73,11 @@ The camera UI now records 4-second clips while inference runs. At most one reque
 The letter worker uses MediaPipe VIDEO tracking (`detectForVideo`) with monotonically increasing capture timestamps and `minTrackingConfidence: 0.7`, as described in the [official Hand Landmarker guide](https://developers.google.com/edge/mediapipe/solutions/vision/hand_landmarker/web_js). Detection stays off the UI thread. A preliminary accepted prediction is shown as “Возможно…” while confirmation is pending; only the existing two-window consensus appends a letter. The 16-frame feature window, sampling cadence, weights and classifier thresholds are unchanged.
 
 A browser comparison on 72 frames from А/Б/В recorded examples measured median detector latency 77.7 ms IMAGE vs 66.0 ms VIDEO; detected-hand frames were 72 vs 70. This small replay check is not a recognition-accuracy evaluation or a promise of instantaneous captions. Scene changes can require tracking reacquisition. Phrase processing still uses complete 4-second clips; its model quality has not been improved by these frontend changes. See `docs/motion-flow-check.json`.
+
+### Capture and letter confirmation update
+
+The browser now draws Google Pose Landmarker Lite body landmarks alongside hand landmarks. This is framing feedback, not new recognition training; the server still extracts the same 180-D Holistic features. Response tracking reports left and right hands separately. One-handed signs are not rejected just because the other hand is absent.
+
+On the unified page, both existing letter classifiers must accept the same letter, followed by the existing two-window confirmation. A change in the largest hand's anatomical identity clears the sample window without rearming duplicate letters. The conservative agreement gate reduces coverage and can still accept errors; it is not validated for unrestricted phrase negatives. `docs/recognition-capture-check.json` records cached 612-video evaluation: baseline 478 accepted / 60 wrong, agreement 232 accepted / 0 wrong. This is not 100% general or webcam accuracy, and no new training ran.
+
+Checks: `npm run test:phrase-capture --prefix frontend`; add `-- --evaluate` with the local feature cache present to regenerate the cached evaluation. Real browser replay confirmed body/hand overlays, automatic 12-second limit, manual completion, visible queue backpressure and stop cleanup. The same reference letter clip remained rejected by KRSL; no phrase-quality improvement is claimed.

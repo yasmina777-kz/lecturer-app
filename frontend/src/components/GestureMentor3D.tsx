@@ -364,7 +364,7 @@ export function GestureMentor3D({
               mount.dataset.poseTime = current.current.time.toFixed(2);
               mount.dataset.playbackState =
                 current.current.playbackState ?? "paused";
-              if (current.current.playbackState !== "paused") render();
+              render();
             }
             if (alive) idleFrame = requestAnimationFrame(tickIdle);
           };

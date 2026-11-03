@@ -289,5 +289,30 @@
   min-height: 90px;
   margin-top: 8px;
 }
-.recognition-edit-tools { align-items: center; }
-.recognition-edit-tools .krsl-upload { display: inline-flex; flex-direction: row; align-items: center; gap: 8px; margin: 0; }
+.recognition-edit-tools {
+  align-items: center;
+}
+.recognition-edit-tools .krsl-upload {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.krsl-capture-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  width: fit-content;
+  max-width: calc(100% - 24px);
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: #182a38;
+  color: #fff;
+  font-size: 14px;
+}
+.krsl-view + .button {
+  margin-top: 16px;
+}

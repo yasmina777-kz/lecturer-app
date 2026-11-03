@@ -1,0 +1,6 @@
+Google MediaPipe Pose Landmarker Lite float16 version 1
+https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task
+SHA256 59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a
+Purpose: browser body landmark overlay and framing feedback. Not a sign-language classifier. Not retrained here. The KRSL server still extracts its original 180-D Holistic input.
+Guide: https://developers.google.com/edge/mediapipe/solutions/vision/pose_landmarker/web_js
+MediaPipe license: /research/rsl/mediapipe-LICENSE.txt

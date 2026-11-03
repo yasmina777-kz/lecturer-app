@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Camera, Square, Upload, RefreshCw, Copy } from "lucide-react";
+import { PhraseCapture, type Landmark } from "../sign/phraseCapture";
 import { useLiveLetters } from "../sign/useLiveLetters";
 import { at } from "../i18n/automation";
 
@@ -8,7 +9,13 @@ type Result = {
   text: string;
   message: string;
   seconds: number;
-  tracking: { hands: number; body: number; face: number };
+  tracking: {
+    hands: number;
+    leftHand?: number;
+    rightHand?: number;
+    body: number;
+    face: number;
+  };
 };
 type Health = {
   ready: boolean;
@@ -25,9 +32,14 @@ export function ContinuousSignCamera() {
     "idle" | "starting" | "recording" | "processing"
   >("idle");
   const [message, setMessage] = useState("");
-  const [remaining, setRemaining] = useState(4);
+  const [elapsed, setElapsed] = useState(0);
+  const [captureStatus, setCaptureStatus] = useState("waiting");
+  const [waitingForSlot, setWaitingForSlot] = useState(false);
+  const segment = useRef(new PhraseCapture());
+  const hasMotion = useRef(false);
+  const finishCapture = useRef<(send: boolean) => void>();
   const [processing, setProcessing] = useState(false);
-  const [skipped, setSkipped] = useState(0);
+
   const inFlight = useRef(false);
   const pending = useRef<{ blob: Blob; id: number } | null>(null);
   const [result, setResult] = useState<Result | null>(null);
@@ -35,7 +47,20 @@ export function ContinuousSignCamera() {
   const [hasPreview, setHasPreview] = useState(false);
   const video = useRef<HTMLVideoElement>(null);
   const overlay = useRef<HTMLCanvasElement>(null);
-  const letters = useLiveLetters(video, overlay, phase === "recording");
+  const letters = useLiveLetters(
+    video,
+    overlay,
+    phase === "recording",
+    (now: number, hands: Landmark[][], pose: Landmark[]) => {
+      if (recorder.current?.state !== "recording") return;
+      const decision = segment.current.sample(now, hands, pose);
+      setCaptureStatus(decision);
+      if (decision === "signing") hasMotion.current = true;
+      if (decision === "pause" || decision === "limit")
+        finishCapture.current?.(true);
+      if (decision === "empty") finishCapture.current?.(false);
+    },
+  );
   const stream = useRef<MediaStream | null>(null);
   const recorder = useRef<MediaRecorder | null>(null);
   const generation = useRef(0);
@@ -80,8 +105,10 @@ export function ContinuousSignCamera() {
     clearInterval(ticker.current);
     request.current?.abort();
     pending.current = null;
+    finishCapture.current = undefined;
     inFlight.current = false;
     if (recorder.current?.state === "recording") recorder.current.stop();
+    recorder.current = null;
     stream.current?.getTracks().forEach((track) => track.stop());
     stream.current = null;
     if (video.current) video.current.srcObject = null;
@@ -90,6 +117,7 @@ export function ContinuousSignCamera() {
     release();
     setPhase("idle");
     setProcessing(false);
+    setWaitingForSlot(false);
     setMessage(
       at(
         "Камера выключена. Текст сохранён на этой странице.",
@@ -110,8 +138,9 @@ export function ContinuousSignCamera() {
 
   async function recognize(blob: Blob, id: number) {
     if (inFlight.current) {
-      if (pending.current) setSkipped((n) => n + 1);
+      // Recording pauses when this slot is occupied; never replace a phrase.
       pending.current = { blob, id };
+      setWaitingForSlot(true);
       return;
     }
     inFlight.current = true;
@@ -162,11 +191,20 @@ export function ContinuousSignCamera() {
         const next = pending.current;
         pending.current = null;
         if (next) void recognize(next.blob, next.id);
+        if (stream.current && recorder.current === null) {
+          setWaitingForSlot(false);
+          record(id);
+        }
       }
     }
   }
   function record(id: number) {
-    if (!stream.current || id !== generation.current) return;
+    if (
+      !stream.current ||
+      id !== generation.current ||
+      recorder.current !== null
+    )
+      return;
     const mime = ["video/webm;codecs=vp8", "video/mp4", "video/webm"].find(
       (value) => MediaRecorder.isTypeSupported(value),
     );
@@ -176,6 +214,13 @@ export function ContinuousSignCamera() {
       mime ? { mimeType: mime, videoBitsPerSecond: 1500000 } : undefined,
     );
     recorder.current = rec;
+    let submit = false;
+    finishCapture.current = (send) => {
+      if (rec.state !== "recording") return;
+      submit = send;
+      clearTimeout(timer.current);
+      rec.stop();
+    };
     rec.ondataavailable = (event) => {
       if (event.data.size) parts.push(event.data);
     };
@@ -188,25 +233,30 @@ export function ContinuousSignCamera() {
     };
     rec.onstop = async () => {
       if (id !== generation.current) return;
+      recorder.current = null;
+      finishCapture.current = undefined;
       clearInterval(ticker.current);
-      if (healthRef.current?.ready)
+      if (healthRef.current?.ready && submit && parts.length)
         void recognize(new Blob(parts, { type: rec.mimeType }), id);
-      if (id === generation.current && stream.current) record(id);
+      if (id === generation.current && stream.current && !pending.current)
+        record(id);
     };
     setPhase("recording");
-    setRemaining(4);
+    setElapsed(0);
+    setCaptureStatus("waiting");
+    hasMotion.current = false;
+    segment.current.reset(performance.now());
     const started = Date.now();
     ticker.current = setInterval(
-      () =>
-        setRemaining(
-          Math.max(0, 4 - Math.floor((Date.now() - started) / 1000)),
-        ),
+      () => setElapsed(Math.floor((Date.now() - started) / 1000)),
       250,
     );
     rec.start();
-    timer.current = setTimeout(() => {
-      if (rec.state === "recording") rec.stop();
-    }, 4000);
+    // Bounded memory/upload duration even if tracking fails or the tab stalls.
+    timer.current = setTimeout(
+      () => finishCapture.current?.(hasMotion.current),
+      12000,
+    );
   }
   async function start() {
     release();
@@ -238,7 +288,7 @@ export function ContinuousSignCamera() {
         video.current.srcObject = media;
         await video.current.play();
       }
-      setSkipped(0);
+      setWaitingForSlot(false);
       setMessage(
         health?.ready
           ? ""
@@ -265,6 +315,7 @@ export function ContinuousSignCamera() {
       return;
     }
     release();
+    setResult(null);
     const id = generation.current;
     if (preview.current) URL.revokeObjectURL(preview.current);
     preview.current = URL.createObjectURL(file);
@@ -285,7 +336,7 @@ export function ContinuousSignCamera() {
           <h2>{at("Камера", "Camera", "Камера")}</h2>
           <p>
             {at(
-              "Держите лицо, плечи и обе руки в кадре.",
+              "Держите лицо, плечи, локти и обе кисти в кадре.",
               "Keep your face, shoulders and both hands visible.",
               "Бет, иық пен қол кадрда болсын. Әріптер мен сөйлемдер бірге тексеріледі.",
             )}
@@ -356,12 +407,25 @@ export function ContinuousSignCamera() {
               aria-hidden="true"
             />
             {phase === "recording" && health?.ready && (
-              <span className="krsl-countdown" aria-label="Осталось секунд">
-                {remaining}
+              <span className="krsl-capture-badge">
+                {waitingForSlot
+                  ? "Подождите — обрабатываем фразы"
+                  : captureStatus === "waiting"
+                    ? "Ожидаем движение"
+                    : `Записываем фразу · ${elapsed} с`}
               </span>
             )}
             {phase === "starting" && <span className="krsl-countdown">…</span>}
           </div>
+          {phase === "recording" && health?.ready && (
+            <button
+              className="button secondary"
+              disabled={waitingForSlot || elapsed < 1}
+              onClick={() => finishCapture.current?.(true)}
+            >
+              Фраза закончена — распознать
+            </button>
+          )}
           {!health?.ready && (
             <button className="button secondary" onClick={check}>
               <RefreshCw size={16} />
@@ -373,6 +437,13 @@ export function ContinuousSignCamera() {
             </button>
           )}
           <div className="recognition-live-status">
+            <div>
+              <strong>Тело и руки</strong>
+              <span>
+                {letters.bodyStatus}. Кисти — зелёные и жёлтые точки, тело —
+                голубые.
+              </span>
+            </div>
             <div>
               <strong>{at("Буквы", "Letters", "Әріптер")}</strong>
               <span>{letters.status}</span>
@@ -389,15 +460,17 @@ export function ContinuousSignCamera() {
               <span>
                 {processing
                   ? at(
-                      "Обрабатываем предыдущий фрагмент… Камера продолжает работать.",
+                      waitingForSlot
+                        ? "Очередь заполнена. Подождите перед следующей фразой — записанные фразы не пропускаются."
+                        : "Распознаём предыдущую фразу. Можно показать следующую.",
                       "Processing the previous clip… Camera is still running.",
                       "Алдыңғы үзінді өңделуде… Камера жұмыс істеп тұр.",
                     )
                   : health?.ready
                     ? at(
-                        "Готово · фрагменты по 4 секунды",
-                        "Ready · 4-second clips",
-                        "Дайын · 4 секундтық үзінділер",
+                        "Запись завершается после паузы · максимум 12 секунд",
+                        "Finish after a pause · maximum 12 seconds",
+                        "Үзілістен кейін аяқталады · ең көбі 12 секунд",
                       )
                     : at(
                         "Сервис не подключён",
@@ -407,15 +480,6 @@ export function ContinuousSignCamera() {
               </span>
             </div>
           </div>
-          {skipped > 0 && (
-            <p role="status">
-              {at(
-                "Обработка медленнее камеры: промежуточные фрагменты пропущены. Показывайте короткие фразы с паузами.",
-                "Processing is slower than the camera: intermediate clips were skipped. Use short phrases with pauses.",
-                "Өңдеу камерадан баяу: аралық үзінділер өткізіліп жіберілді. Қысқа сөйлемдерді үзіліспен көрсетіңіз.",
-              )}
-            </p>
-          )}
           <p role="status" aria-live="polite" className="krsl-status">
             {message}
           </p>
@@ -426,9 +490,15 @@ export function ContinuousSignCamera() {
                 "Frames with landmarks:",
                 "Бағдарлар анықталған кадрлар:",
               )}{" "}
-              {at("руки", "hands", "қол")}{" "}
-              {Math.round(result.tracking.hands * 100)}% ·{" "}
-              {at("тело", "body", "дене")}{" "}
+              левая кисть{" "}
+              {Math.round(
+                (result.tracking.leftHand ?? result.tracking.hands) * 100,
+              )}
+              % · правая кисть{" "}
+              {Math.round(
+                (result.tracking.rightHand ?? result.tracking.hands) * 100,
+              )}
+              % · {at("тело", "body", "дене")}{" "}
               {Math.round(result.tracking.body * 100)}% ·{" "}
               {at("лицо", "face", "бет")}{" "}
               {Math.round(result.tracking.face * 100)}%.{" "}
@@ -441,8 +511,8 @@ export function ContinuousSignCamera() {
           )}
           <p className="recognition-privacy">
             {at(
-              "До 20 секунд · 25 МБ · до Full HD. Видео обрабатывается локальным сервисом на этом компьютере и удаляется после обработки. Звук не записывается.",
-              "Up to 20 seconds · 25 MB · Full HD. Video is processed by the local service on this computer and deleted afterwards. No audio is recorded.",
+              "Загрузка видео: до 20 секунд · 25 МБ · до Full HD. Видео обрабатывается сервисом распознавания платформы и удаляется после обработки. Звук не записывается.",
+              "Uploads up to 20 seconds · 25 MB · Full HD. Video is processed by the platform recognition service and deleted afterwards. No audio is recorded.",
               "20 секундқа дейін · 25 МБ · Full HD. Бейне осы компьютерде өңделіп, кейін жойылады. Дыбыс жазылмайды.",
             )}
           </p>
@@ -454,8 +524,8 @@ export function ContinuousSignCamera() {
           </div>
           <p>
             {at(
-              "Черновик: проверьте результат и исправьте ошибки.",
-              "Draft: review and correct the result.",
+              "Проверьте черновик. Неясные буквы не добавляются; распознавание фраз пока экспериментальное.",
+              "Review the draft. Uncertain letters are not added; phrase recognition is experimental.",
               "Әр көрсетілім жаңа жолға жазылады. Нәтижені тексеріп, қателерді түзетіңіз.",
             )}
           </p>
@@ -567,9 +637,9 @@ export function ContinuousSignCamera() {
             </summary>
             <p>
               {at(
-                "Она читает последовательность ориентиров двух рук, плеч, локтей, бровей и рта. Буквы распознаёт отдельный режим. Автоматические фрагменты могут обрывать длинные фразы; для целой фразы загрузите видео.",
-                "It reads landmarks from both hands, shoulders, elbows, brows and mouth. Letters use a separate mode. Automatic chunks may split long phrases; upload a video for a complete phrase.",
-                "Екі қол, иық, шынтақ, қас және ауыз бағдарларын оқиды. Әріптер жеке режимде танылады. Ұзақ сөйлемдер үзілуі мүмкін; толық сөйлем үшін бейне жүктеңіз.",
+                "Фразы читает сервер по ориентирам обеих рук, плеч, локтей, бровей и рта. Буквы проверяются одновременно отдельными моделями. Пауза завершает запись; длинный показ ограничен 12 секундами. Для более длинной фразы загрузите видео до 20 секунд. Голубые точки тела помогают расположиться в кадре; они не означают, что фраза распознана.",
+                "The server reads both hands, shoulders, elbows, brows and mouth. Letters are checked concurrently. A pause ends capture, with a 12-second maximum. Upload a video up to 20 seconds for a longer phrase. Blue body landmarks are framing feedback, not a recognized phrase.",
+                "Сервер екі қол, иық, шынтақ, қас пен ауыз бағдарларын оқиды. Әріптер қатар тексеріледі. Үзіліс жазбаны аяқтайды, шегі 12 секунд. Ұзақ сөйлем үшін 20 секундқа дейінгі бейнені жүктеңіз.",
               )}
             </p>
             <p>
