@@ -103,8 +103,9 @@ for e in entries:
  bpy.ops.export_scene.gltf(filepath=str(OUT/(id+'.glb')),export_format='GLB',use_selection=True,export_def_bones=True,export_animations=True,export_animation_mode='ACTIVE_ACTIONS',export_frame_range=True,export_force_sampling=True,export_anim_slide_to_zero=True)
  def remap(t):
   f=min(t*30,len(times)-1);i=int(f);return times[i]+(times[min(i+1,len(times)-1)]-times[i])*(f-i)
+ if e.get('chartPose'):e['chartPose']={**e['chartPose'],'holdTime':remap(e['chartPose']['holdTime'])}
  if e.get('sourceTimeline'):e['sourceTimeline']=[[round(remap(t),6),source] for t,source in e['sourceTimeline']]
  old_duration=e['duration'];e['duration']=(sc.frame_end-1)/30;e['leadIn']=remap(e['leadIn']);e['leadOut']=e['duration']-remap(old_duration-e['leadOut'])
  e['bodyClearance']['sourceFrameTimes']=[round(remap(t),6) for t in e['bodyClearance']['sourceFrameTimes']];e['bodyClearance']['afterMaxMeters']=worst_body
- e['armAnatomy']={'method':'hinge-aligned upper arm, forearm pronation +/-85 degrees, wrist swing <=65 degrees','beforeUpperPlaneErrorDegrees':max_before,'afterUpperPlaneErrorDegrees':max_after,'extraDepthMeters':max(shifts)};e['motionVersion']=8;e['revision']=hashlib.sha256((OUT/(id+'.glb')).read_bytes()).hexdigest()[:12];e.pop('transitionPose',None)
+ e['armAnatomy']={'method':'hinge-aligned upper arm, forearm pronation +/-85 degrees, wrist ellipse: flexion +/-60 degrees, sideways deviation +/-25 degrees','beforeUpperPlaneErrorDegrees':max_before,'afterUpperPlaneErrorDegrees':max_after,'extraDepthMeters':max(shifts)};e['motionVersion']=9;e['revision']=hashlib.sha256((OUT/(id+'.glb')).read_bytes()).hexdigest()[:12];e.pop('transitionPose',None)
  (OUT/(id+'.json')).write_text(json.dumps(e,ensure_ascii=False,indent=2));print('ANATOMY',id,e['label'],round(time.time()-started,1),flush=True)

@@ -16,7 +16,7 @@ def combine(paths):
         assert report['sampleRate'] == 60
         for row in report['clips']:
             rows[row['id']] = row
-    failed = [r['id'] for r in rows.values() if r['maxOverlapMeters'] > .002 or r.get('armAnatomy',{}).get('upperPlaneErrorDegrees',999)>8 or r.get('armAnatomy',{}).get('forearmRollDegrees',999)>86 or r.get('armAnatomy',{}).get('wristSwingDegrees',999)>66 or r.get('armAnatomy',{}).get('elbowPoleDeviationDegrees',999)>30]
+    failed = [r['id'] for r in rows.values() if r['maxOverlapMeters'] > .002 or r.get('armAnatomy',{}).get('upperPlaneErrorDegrees',999)>8 or r.get('armAnatomy',{}).get('forearmRollDegrees',999)>86 or r.get('armAnatomy',{}).get('wristSwingDegrees',999)>66 or r.get('armAnatomy',{}).get('elbowPoleDeviationDegrees',999)>30 or r.get('armAnatomy',{}).get('wristEnvelope',999)>1.025]
     assert not failed, f'Unresolved exported motion violations: {failed}'
     return {'sampleRate': 60, 'toleranceMeters': .002,
             'clips': sorted(rows.values(), key=lambda r: r['id']), 'failed': failed}

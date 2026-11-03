@@ -1,0 +1,44 @@
+{
+  "change": "Replace circular wrist swing limit with a forearm-relative flexion/deviation ellipse; rebuild saved motions",
+  "before": {
+    "sampleRate": 12,
+    "clips": 208,
+    "maxSidewaysDegrees": 64.99679400333132,
+    "clipsAbove30Degrees": 175
+  },
+  "after": {
+    "library": {
+      "clips": 208,
+      "samples": 63748,
+      "sampleRate": 60,
+      "maxSidewaysDegrees": 25.000004795580576,
+      "maxWristEnvelope": 1.0000048127854817,
+      "maxBodyOverlapMeters": 0,
+      "failed": []
+    },
+    "phrases": {
+      "clips": 32,
+      "samples": 24580,
+      "sampleRate": 60,
+      "maxSidewaysDegrees": 24.999965388590716,
+      "maxWristEnvelope": 1.000003384582049,
+      "maxBodyOverlapMeters": 0,
+      "failed": []
+    },
+    "idleTransitions": {
+      "clips": 78,
+      "samples": 2418,
+      "sampleRate": 60,
+      "maxSidewaysDegrees": 24.546516359989138,
+      "maxWristEnvelope": 1.0000007467866565,
+      "maxBodyOverlapMeters": 0,
+      "failed": []
+    }
+  },
+  "syntheticRigCases": 16,
+  "limitations": [
+    "Mechanical correction, not linguistic validation of RSL.",
+    "Hand-hand contacts and occluded fingers are not certified.",
+    "Face and mouth grammar are not reconstructed."
+  ]
+}

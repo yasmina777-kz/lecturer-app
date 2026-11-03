@@ -14,10 +14,10 @@
     "Right": 27
   },
   "poseCoverage": 1,
-  "maxJointStepDegrees": 6.783997454429601,
+  "maxJointStepDegrees": 7.764132161647369,
   "review": "experimental-unreviewed",
   "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, monotone captured palm trajectories, final coordinated elbow IK, workshop hand priors and anatomical-parameter finger curves; no translation training",
-  "motionVersion": 8,
+  "motionVersion": 9,
   "handMechanics": "workshop-parameter-curves-v1",
   "legacyWristDriftMeters": 0.02111423099557008,
   "timing": "whole-pose retiming at 240 degrees/second; no independent joint slowdown",
@@ -27,10 +27,10 @@
     "angle": 6.783997454429601
   },
   "leadIn": 0.7,
-  "leadOut": 0.6999999999999948,
+  "leadOut": 0.6999999999999922,
   "maxHingeOffAxis": 3.725290298461914e-09,
   "meanFingerDirectionErrorDegrees": 8.903646534574222,
-  "revision": "a1aee5d65b3c",
+  "revision": "a4013291fb38",
   "sourceWristFitErrorMeters": 4.580410685964495e-06,
   "bodyClearance": {
     "method": "evaluated torso/head/shirt front-surface clearance; paired-hand depth offset and elbow IK",
@@ -125,9 +125,9 @@
     ]
   },
   "armAnatomy": {
-    "method": "hinge-aligned upper arm, forearm pronation +/-85 degrees, wrist swing <=65 degrees",
-    "beforeUpperPlaneErrorDegrees": 51.067927650500074,
+    "method": "hinge-aligned upper arm, forearm pronation +/-85 degrees, wrist ellipse: flexion +/-60 degrees, sideways deviation +/-25 degrees",
+    "beforeUpperPlaneErrorDegrees": 1.7302844014466245e-05,
     "afterUpperPlaneErrorDegrees": 1.7302844014466245e-05,
-    "extraDepthMeters": 0.0
+    "extraDepthMeters": 0.005177373349666596
   }
 }

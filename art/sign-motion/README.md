@@ -1,5 +1,15 @@
 # Saved video motion library
 
+## Wrist correction (motion v9)
+
+The former circular wrist-swing cone accepted 65° of sideways bend. This was mechanically inside its old gate but visibly kinked the wrist in phrases. `arm_anatomy.py` now separates flexion and lateral deviation in the **pronated forearm frame**, using the rig's index-to-pinky palm axis. A continuous elliptical envelope uses 60° flexion and 25° sideways deviation. These are conservative rig settings, not a clinical model or linguistic validation. Measuring before forearm pronation would constrain the wrong direction.
+
+The correction is baked into saved animation assets, so dictionary playback, typed phrases, pause and seeking share the same corrected poses. Finger articulation is retained. Whole-pose speed limiting, shared relaxed endpoints and evaluated skin/body clearance still apply. `check_wrist_limits.py` exercises 16 deliberately extreme poses on the actual rig, on both hands, and checks the corrected envelope, wrist targets and unchanged finger rotations. `verify_body_clearance.py` checks the exported motion at 60 Hz, including interpolated half frames; the publication gate now rejects missing wrist-envelope measurements.
+
+Rebuild in a separate `MOTION_OUTPUT_DIR` using `bake_arm_anatomy.py input=<current-library>` (three disjoint `batch=0/3`, `1/3`, `2/3` jobs are supported). Validate candidates with `verify_body_clearance.py anatomy directory=<candidates> report=<report.json>`. Only replace the public GLBs and metadata after the complete library passes. Refresh `publish_motion_catalog.py`, export the 32 actual browser phrases and 78 idle transitions with `export-phrase-clearance-qa.mjs`, independently verify those exports, then publish all verification reports with `publish_clearance_validation.py`.
+
+Visual review can use `render_reference_candidates.py` with `view=front`, `view=three-quarter` or `view=side`; `times=...` uses the source-video clock and `animation-times=...` supports legacy clips without that clock. Fixing joint mechanics does not recover occluded hands, arm-arm contact, facial grammar or guarantee the meaning of every gesture.
+
 ## Reference fidelity correction
 
 `check_palm_frame.py` reproduces a coordinate-frame defect: tracking uses wrist → middle MCP, while the target used wrist → curved middle fingertip. The old frame introduced an 11.591° bias. `retarget.py` now uses the same anatomical landmarks on both sides; eight synthetic identity/rotated cases have <0.05° error. This removes a calibration bias, not the uncertainty of monocular capture.

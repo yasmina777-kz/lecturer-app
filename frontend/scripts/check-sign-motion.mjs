@@ -18,7 +18,7 @@ assert.equal(bodyReport.idleTransitions.clips.length,78);
 for(const group of [bodyReport.library,bodyReport.phrases,bodyReport.idleTransitions]){
  assert.equal(group.sampleRate,60);assert.deepEqual(group.failed,[]);
  assert.ok(group.clips.every(c=>c.samples>1&&c.maxOverlapMeters<=.002));
- assert.ok(group.clips.every(c=>c.armAnatomy.upperPlaneErrorDegrees<=8&&c.armAnatomy.forearmRollDegrees<=86&&c.armAnatomy.wristSwingDegrees<=66&&c.armAnatomy.elbowPoleDeviationDegrees<=30),'invalid arm articulation');
+ assert.ok(group.clips.every(c=>c.armAnatomy.upperPlaneErrorDegrees<=8&&c.armAnatomy.forearmRollDegrees<=86&&c.armAnatomy.wristSwingDegrees<=66&&c.armAnatomy.elbowPoleDeviationDegrees<=30&&c.armAnatomy.wristEnvelope<=1.025&&c.armAnatomy.wristDeviationDegrees<=25.7),'invalid arm articulation');
 }
 for(const [path,hash]of Object.entries(bodyReport.sources)){
  assert.equal(createHash('sha256').update(await readFile(new URL('../../'+path,import.meta.url))).digest('hex'),hash,'stale clearance validation: '+path);
@@ -245,7 +245,7 @@ console.log('32 phrases: source-pose samples preserved:',verifiedPhraseFrames,';
 
 assert.throws(()=>composeMotion([ordered[0]],undefined,[{start:ordered[0].duration,end:0}]),/Invalid motion window/);
 for(const asset of assets){
- assert.equal(asset.motionVersion,8,asset.label);
+ assert.equal(asset.motionVersion,9,asset.label);
  assert.ok(asset.bodyClearance?.afterMaxMeters<=.002,`${asset.label}: body clearance failed`);
  assert.equal(asset.handMechanics,'workshop-parameter-curves-v1',asset.label);
  if (!asset.id.startsWith('prepared-') && !asset.chartPose) assert.ok(asset.sourceWristFitErrorMeters<.001,`${asset.label}: coordinated wrist target lost`);

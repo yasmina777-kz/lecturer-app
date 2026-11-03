@@ -22,7 +22,7 @@ for file in files:
  revision=hashlib.sha256(file.read_bytes()).hexdigest();before=set(bpy.data.objects);bpy.ops.import_scene.gltf(filepath=str(file));added=set(bpy.data.objects)-before;src=next(o for o in added if o.type=='ARMATURE');rig.animation_data.action=src.animation_data.action;rig.animation_data.action_slot=src.animation_data.action_slot
  for fc in rig.animation_data.action.fcurves:
   if 'pose.bones["mixamorig' in fc.data_path and 'pose.bones["mixamorig:' not in fc.data_path:fc.data_path=fc.data_path.replace('pose.bones["mixamorig','pose.bones["mixamorig:')
- start,end=rig.animation_data.action.frame_range;maximum=0;worst=None;samples=0;arm_limits={'elbowPoleDeviationDegrees':0,'upperPlaneErrorDegrees':0,'forearmRollDegrees':0,'wristSwingDegrees':0}
+ start,end=rig.animation_data.action.frame_range;maximum=0;worst=None;samples=0;arm_limits={'elbowPoleDeviationDegrees':0,'upperPlaneErrorDegrees':0,'forearmRollDegrees':0,'wristSwingDegrees':0,'wristFlexionDegrees':0,'wristDeviationDegrees':0,'wristEnvelope':0}
  for i in range(math.ceil((end-start)*2)+1):
   frame=min(end,start+i*.5);sc.frame_set(math.floor(frame),subframe=frame%1);values=clearance.inspect(margin=0,stride=1);samples+=1
   if 'anatomy' in args:
@@ -33,6 +33,6 @@ for file in files:
  result={'id':file.stem,'sha256':revision,'maxOverlapMeters':maximum,'samples':samples,'worst':worst,'armAnatomy':arm_limits};report['clips'].append(result)
  print('VERIFIED',file.stem,round(maximum*1000,3),'mm',flush=True)
  for ob in added:bpy.data.objects.remove(ob,do_unlink=True)
-report['seconds']=time.time()-started;report['failed']=[e['id'] for e in report['clips'] if e['maxOverlapMeters']>.002 or e['armAnatomy']['elbowPoleDeviationDegrees']>30 or e['armAnatomy']['upperPlaneErrorDegrees']>8 or e['armAnatomy']['forearmRollDegrees']>86 or e['armAnatomy']['wristSwingDegrees']>66]
+report['seconds']=time.time()-started;report['failed']=[e['id'] for e in report['clips'] if e['maxOverlapMeters']>.002 or e['armAnatomy']['elbowPoleDeviationDegrees']>30 or e['armAnatomy']['upperPlaneErrorDegrees']>8 or e['armAnatomy']['forearmRollDegrees']>86 or e['armAnatomy']['wristSwingDegrees']>66 or e['armAnatomy']['wristEnvelope']>1.025]
 output=next((x.split('=',1)[1] for x in args if x.startswith('report=')),'/tmp/body-clearance-validation.json');Path(output).write_text(json.dumps(report,ensure_ascii=False,indent=2));print('RESULT',len(report['clips']),'clips; failures',report['failed'],flush=True)
 if report['failed']:raise RuntimeError('Exported motion violates clearance or arm articulation: '+', '.join(report['failed']))

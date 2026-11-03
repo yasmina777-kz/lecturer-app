@@ -2,7 +2,7 @@
   "id": "word-ea7aa6fc",
   "label": "медленный",
   "url": "/avatars/sign-motion/word-ea7aa6fc.glb",
-  "duration": 5.366666666666666,
+  "duration": 5.4,
   "source": "https://github.com/ai-forever/slovo",
   "reference": "/research/rsl/words/ea7aa6fc-bd78-477e-9fe4-d97f5402570a.mp4",
   "handCoverage": {
@@ -17,7 +17,7 @@
   "maxJointStepDegrees": 7.917576630219937,
   "review": "experimental-unreviewed",
   "method": "Constrained whole-finger chain fitting on Mixamo-calibrated joint axes, monotone captured palm trajectories, final coordinated elbow IK, workshop hand priors and anatomical-parameter finger curves; no translation training",
-  "motionVersion": 8,
+  "motionVersion": 9,
   "handMechanics": "workshop-parameter-curves-v1",
   "legacyWristDriftMeters": 0.12304380579556864,
   "timing": "whole-pose retiming at 240 degrees/second; no independent joint slowdown",
@@ -27,10 +27,10 @@
     "angle": 7.917675667962903
   },
   "leadIn": 0.7333333333333333,
-  "leadOut": 0.9666666666666774,
+  "leadOut": 1.0000000000000178,
   "maxHingeOffAxis": 1.4901161193847656e-08,
   "meanFingerDirectionErrorDegrees": 13.393509205586032,
-  "revision": "df5c5af89357",
+  "revision": "7b6e9f7bc6ee",
   "sourceWristFitErrorMeters": 0.00022728807014174132,
   "bodyClearance": {
     "method": "evaluated torso/head/shirt front-surface clearance; paired-hand depth offset and elbow IK",
@@ -180,28 +180,28 @@
       4.60021,
       4.633883,
       4.667891,
-      4.702648,
-      4.738432,
-      4.776884,
-      4.816581,
-      4.859762,
-      4.906868,
-      4.959035,
-      5.011451,
-      5.059898,
-      5.103987,
-      5.144042,
-      5.1812,
-      5.21642,
-      5.250544,
-      5.284143,
-      5.317539
+      4.70265,
+      4.738473,
+      4.777118,
+      4.817404,
+      4.862073,
+      4.912666,
+      4.971822,
+      5.033405,
+      5.08792,
+      5.134959,
+      5.176148,
+      5.213731,
+      5.24907,
+      5.283215,
+      5.316814,
+      5.35021
     ]
   },
   "armAnatomy": {
-    "method": "hinge-aligned upper arm, forearm pronation +/-85 degrees, wrist swing <=65 degrees",
-    "beforeUpperPlaneErrorDegrees": 100.16435534802181,
+    "method": "hinge-aligned upper arm, forearm pronation +/-85 degrees, wrist ellipse: flexion +/-60 degrees, sideways deviation +/-25 degrees",
+    "beforeUpperPlaneErrorDegrees": 0.10468312168529792,
     "afterUpperPlaneErrorDegrees": 1.7302844014466245e-05,
-    "extraDepthMeters": 0.04783215636014938
+    "extraDepthMeters": 0.01875053095817566
   }
 }

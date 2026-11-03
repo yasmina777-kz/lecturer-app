@@ -1,11 +1,15 @@
 /** Export the exact browser-composed examples for independent Blender skin checks. */
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import ts from 'typescript';
+import {pathToFileURL} from 'node:url';
+import {resolve,basename} from 'node:path';
 import {AnimationMixer,AnimationClip,QuaternionKeyframeTrack,VectorKeyframeTrack} from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {GLTFExporter} from 'three/addons/exporters/GLTFExporter.js';
 globalThis.FileReader=class {readAsArrayBuffer(blob){blob.arrayBuffer().then(v=>{this.result=v;this.onloadend?.();});}readAsDataURL(blob){blob.arrayBuffer().then(v=>{this.result=`data:${blob.type};base64,${Buffer.from(v).toString('base64')}`;this.onloadend?.();});}};
-const read=async p=>JSON.parse(await readFile(new URL(p,import.meta.url),'utf8'));
+const motionRoot=process.env.MOTION_OUTPUT_DIR?pathToFileURL(resolve(process.env.MOTION_OUTPUT_DIR)+'/'):new URL('../public/avatars/sign-motion/',import.meta.url);
+const motionPath=p=>new URL(basename(p),motionRoot);
+const read=async p=>JSON.parse(await readFile(p.startsWith('../public/avatars/sign-motion/')?motionPath(p):new URL(p,import.meta.url),'utf8'));
 async function source(p,replacements={}){let code=ts.transpileModule(await readFile(new URL(p,import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2020}}).outputText;for(const[a,b]of Object.entries(replacements))code=code.replaceAll(a,JSON.stringify(b));return 'data:text/javascript;base64,'+Buffer.from(code).toString('base64');}
 const dict=await source('../src/sign/dictionary.ts'),text=await source('../src/sign/textPlan.ts'),motion=await source('../src/sign/motion.ts',{'"./dictionary"':dict,'"./textPlan"':text});
 const {alphabetEntries}=await import(dict),{planMotion,motionTimeline}=await import(motion),{phraseGroups}=await import(await source('../src/sign/phraseExamples.ts'));
@@ -31,10 +35,10 @@ const output=process.argv[2]??'/tmp/sign-phrase-clearance-qa';await mkdir(output
 const idleQA=process.argv[3]==='--idle-transitions';
 if(idleQA){
  const {AvatarPlayback}=await import(await source('../src/sign/avatarPlayback.ts',{'"three"':new URL('../node_modules/three/build/three.module.js',import.meta.url).href}));
- const idleBytes=await readFile(new URL('../public/avatars/sign-motion/ready-idle.glb',import.meta.url)),idle=(await new GLTFLoader().parseAsync(idleBytes.buffer.slice(idleBytes.byteOffset,idleBytes.byteOffset+idleBytes.byteLength),'')).animations[0];
+ const idleBytes=await readFile(motionPath('ready-idle.glb')),idle=(await new GLTFLoader().parseAsync(idleBytes.buffer.slice(idleBytes.byteOffset,idleBytes.byteOffset+idleBytes.byteLength),'')).animations[0];
  const selected=assets.filter(a=>['я','книга','показать','читать','помочь','красный','вода','люди','ехать','не'].includes(a.label)||a.id.startsWith('prepared-'));
  for(const asset of selected)for(const phase of [0,1.5,3])for(const end of [false,true]){
-  const original=await readFile(new URL('../public'+asset.url,import.meta.url)),loaded=await new GLTFLoader().parseAsync(original.buffer.slice(original.byteOffset,original.byteOffset+original.byteLength),'');
+  const original=await readFile(motionPath(asset.url)),loaded=await new GLTFLoader().parseAsync(original.buffer.slice(original.byteOffset,original.byteOffset+original.byteLength),'');
   const scene=loaded.scene,clip=loaded.animations[0],mixer=new AnimationMixer(scene),player=new AvatarPlayback(mixer,[clip],idle);
   for(let t=0;t<phase;t+=1/60)player.update(0,'idle',1/60);
   if(end)player.update(clip.duration,'paused',0);
@@ -51,8 +55,8 @@ if(idleQA){
 const examples=idleQA?[]:process.argv[3]?[process.argv[3]]:phraseGroups.flatMap(group=>group.phrases);
 for(const phrase of examples){
  const plan=planMotion(phrase,[...alphabetEntries(),...words],forms,assets),timeline=motionTimeline(plan.steps),clips=[];
- for(const s of plan.steps){if(!cache.has(s.url)){const b=await readFile(new URL('../public'+s.url,import.meta.url));cache.set(s.url,await new GLTFLoader().parseAsync(b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength),''));}clips.push(cache.get(s.url).animations[0]);}
+ for(const s of plan.steps){if(!cache.has(s.url)){const b=await readFile(motionPath(s.url));cache.set(s.url,await new GLTFLoader().parseAsync(b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength),''));}clips.push(cache.get(s.url).animations[0]);}
  const composed=composeMotion(clips,undefined,timeline.map(s=>({start:s.trimStart,end:s.trimEnd,gapAfter:s.gapAfter}))),scene=cache.get(plan.steps[0].url).scene;
- const bytes=await new GLTFExporter().parseAsync(scene,{binary:true,animations:[composed],onlyVisible:false});const id='phrase-'+String(++i).padStart(2,'0');await writeFile(output+'/'+id+'.glb',restoreSkin(bytes,await readFile(new URL('../public'+plan.steps[0].url,import.meta.url))));manifest.push({id,phrase,duration:composed.duration});
+ const bytes=await new GLTFExporter().parseAsync(scene,{binary:true,animations:[composed],onlyVisible:false});const id='phrase-'+String(++i).padStart(2,'0');await writeFile(output+'/'+id+'.glb',restoreSkin(bytes,await readFile(motionPath(plan.steps[0].url))));manifest.push({id,phrase,duration:composed.duration});
 }
 await writeFile(output+'/manifest.json',JSON.stringify(manifest,null,2));console.log('Exported',i,'actual browser-composed phrases to',output);

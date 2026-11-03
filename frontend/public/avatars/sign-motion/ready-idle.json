@@ -6,10 +6,10 @@
   "review": "mechanical-idle",
   "handMechanics": "workshop-parameter-curves-v1",
   "leadIn": 0.7,
-  "leadOut": 0.7000000000000188,
+  "leadOut": 0.7000000000000277,
   "url": "/avatars/sign-motion/ready-idle.glb",
   "maxJointStepDegrees": 0.4861793217847074,
-  "motionVersion": 8,
+  "motionVersion": 9,
   "bodyClearance": {
     "method": "evaluated torso/head/shirt front-surface clearance; paired-hand depth offset and elbow IK",
     "beforeMaxMeters": 0,
@@ -201,11 +201,11 @@
       6.0
     ]
   },
-  "revision": "9fc1f6463054",
+  "revision": "fde96f65dc76",
   "armAnatomy": {
-    "method": "hinge-aligned upper arm, forearm pronation +/-85 degrees, wrist swing <=65 degrees",
-    "beforeUpperPlaneErrorDegrees": 17.709714046075508,
+    "method": "hinge-aligned upper arm, forearm pronation +/-85 degrees, wrist ellipse: flexion +/-60 degrees, sideways deviation +/-25 degrees",
+    "beforeUpperPlaneErrorDegrees": 1.7302844014466245e-05,
     "afterUpperPlaneErrorDegrees": 1.7302844014466245e-05,
-    "extraDepthMeters": 0.0
+    "extraDepthMeters": 0
   }
 }

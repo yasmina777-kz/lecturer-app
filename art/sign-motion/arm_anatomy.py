@@ -39,12 +39,23 @@ def arm_anatomy(side,apply=False,roll_hint=None,depth=0,solve=False):
  # Limits are relative to this rig's anatomical rest plane, never to a noisy
  # first sample. Retiming alone cannot repair an impossible wrist orientation.
  limited_roll=max(-math.radians(85),min(math.radians(85),roll))
- limited_swing=Quaternion().slerp(swing,min(1,math.radians(65)/max(swing.angle,1e-8)))
+ # Wrist flexion and sideways deviation are different degrees of freedom.
+ # Measure in the already-pronated forearm frame, not the unrolled arm plane.
+ # A circular 65-degree cone allowed an equally large sideways wrist kink.
+ applied_twist=Quaternion(axis,limited_roll)
+ wrist_swing=applied_twist.inverted()@swing@applied_twist
+ across=hand.bone.matrix_local.to_quaternion().inverted()@(B(side+'HandIndex1').bone.head_local-B(side+'HandPinky1').bone.head_local)
+ across=(across-axis*across.dot(axis)).normalized();lateral=axis.cross(across).normalized()
+ vector=wrist_swing.axis*wrist_swing.angle
+ flexion=vector.dot(across);deviation=vector.dot(lateral)
+ envelope=math.sqrt((flexion/math.radians(60))**2+(deviation/math.radians(25))**2)
+ limited_local=Quaternion().slerp(wrist_swing,min(1,1/max(envelope,1e-8)))
+ limited_swing=applied_twist@limited_local@applied_twist.inverted()
  upper_error=math.degrees(upper.matrix.to_quaternion().rotation_difference(uq).angle)
  if upper_error>180:upper_error=360-upper_error
  reach=(wrist-shoulder).normalized();actual_pole=elbow-shoulder;actual_pole-=reach*actual_pole.dot(reach);preferred_pole=V((.65 if side=='Left' else -.65,.08,-1));preferred_pole-=reach*preferred_pole.dot(reach)
  pole_error=math.degrees(actual_pole.angle(preferred_pole))
- result={'elbowPoleDeviationDegrees':pole_error,'upperPlaneErrorDegrees':upper_error,'forearmRollDegrees':math.degrees(roll),'wristSwingDegrees':math.degrees(swing.angle)}
+ result={'elbowPoleDeviationDegrees':pole_error,'upperPlaneErrorDegrees':upper_error,'forearmRollDegrees':math.degrees(roll),'wristSwingDegrees':math.degrees(swing.angle),'wristFlexionDegrees':math.degrees(flexion),'wristDeviationDegrees':math.degrees(deviation),'wristEnvelope':envelope}
  if apply:
   put(upper,shoulder,uq)
   put(fore,elbow,Quaternion(f,limited_roll)@fq)

@@ -1,8 +1,10 @@
 /** Export relaxed boundary poses so UI and animation share a speed-bounded transition. */
+import { pathToFileURL } from "node:url";
+import { resolve } from "node:path";
 import { readFile, writeFile } from "node:fs/promises";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { QuaternionLinearInterpolant } from "three";
-const root = new URL("../public/avatars/sign-motion/", import.meta.url);
+const root = process.env.MOTION_OUTPUT_DIR ? pathToFileURL(resolve(process.env.MOTION_OUTPUT_DIR) + "/") : new URL("../public/avatars/sign-motion/", import.meta.url);
 const catalog = JSON.parse(
   await readFile(new URL("catalog.json", root), "utf8"),
 );

@@ -39,7 +39,7 @@ for row in selected:
         file = RUN / 'source-public' / source['video'].lstrip('/')
         if not file.exists(): file = PUBLIC / source['video'].lstrip('/')
         assert file.exists(), 'Source movie missing'
-    assert meta['sourceTimeline'] and meta['motionVersion'] == 8
+    assert meta['sourceTimeline'] and meta['motionVersion'] == 9
     checked = dict(check['clips'][0], id=row['id'])
     checks.append(checked)
 print('Validated', len(selected), 'candidates; apply:', args.apply)
