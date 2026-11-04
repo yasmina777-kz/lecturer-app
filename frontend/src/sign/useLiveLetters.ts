@@ -3,7 +3,7 @@ import { drawBodyOverlay } from "./bodyOverlay";
 import type { Landmark } from "./phraseCapture";
 import { drawHandOverlay } from "./handOverlay";
 import { appendRecognizedLetter } from "./captions";
-import type { TrackingQuality } from "./liveRecognition";
+import { LETTER_SAMPLE_MS, type TrackingQuality } from "./liveRecognition";
 
 export function useLiveLetters(
   video: RefObject<HTMLVideoElement>,
@@ -27,7 +27,7 @@ export function useLiveLetters(
   const activeRef = useRef(active);
   activeRef.current = active;
   useEffect(() => {
-    const w = new Worker("/models/rsl/letter-camera-worker.js?v=3");
+    const w = new Worker("/models/rsl/letter-camera-worker.js?v=4");
     worker.current = w;
     const fail = () => {
       busy.current = false;
@@ -128,7 +128,7 @@ export function useLiveLetters(
         !v ||
         v.readyState < 2 ||
         v.currentTime === lastTime ||
-        now - lastRun < 150
+        now - lastRun < LETTER_SAMPLE_MS
       )
         return;
       lastTime = v.currentTime;

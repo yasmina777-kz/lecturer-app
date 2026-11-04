@@ -77,7 +77,8 @@ export function Shell() {
     },
   ];
   const Surface =
-    (path === "/learn" && !location.search) ||
+    path.startsWith("/learn") ||
+    path === "/admin" ||
     path === "/text-to-sign" ||
     path === "/recognition" ||
     path === "/dialogues" ||

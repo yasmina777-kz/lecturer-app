@@ -509,13 +509,6 @@ export function ContinuousSignCamera() {
               )}
             </p>
           )}
-          <p className="recognition-privacy">
-            {at(
-              "Загрузка видео: до 20 секунд · 25 МБ · до Full HD. Видео обрабатывается сервисом распознавания платформы и удаляется после обработки. Звук не записывается.",
-              "Uploads up to 20 seconds · 25 MB · Full HD. Video is processed by the platform recognition service and deleted afterwards. No audio is recorded.",
-              "20 секундқа дейін · 25 МБ · Full HD. Бейне осы компьютерде өңделіп, кейін жойылады. Дыбыс жазылмайды.",
-            )}
-          </p>
         </section>
         <aside className="panel recognition-captions">
           <div className="recognition-caption-heading">
@@ -635,6 +628,11 @@ export function ContinuousSignCamera() {
                 "Модель мүмкіндіктері",
               )}
             </summary>
+            <p>{at(
+              "Видео обрабатывается сервисом распознавания и удаляется после обработки. Звук не записывается. Лимит файла: 20 секунд и 25 МБ.",
+              "Video is processed by the recognition service and deleted afterwards. No audio is recorded. File limit: 20 seconds and 25 MB.",
+              "Бейне тану қызметінде өңделіп, кейін жойылады. Дыбыс жазылмайды. Файл шегі: 20 секунд және 25 МБ.",
+            )}</p>
             <p>
               {at(
                 "Фразы читает сервер по ориентирам обеих рук, плеч, локтей, бровей и рта. Буквы проверяются одновременно отдельными моделями. Пауза завершает запись; длинный показ ограничен 12 секундами. Для более длинной фразы загрузите видео до 20 секунд. Голубые точки тела помогают расположиться в кадре; они не означают, что фраза распознана.",

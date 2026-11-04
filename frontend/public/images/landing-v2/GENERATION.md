@@ -22,3 +22,7 @@ Use case: photorealistic-natural. Asset: macro editorial photograph for a sign l
 
 Use case: photorealistic-natural. Asset: editorial lifestyle photograph for a sign language self-study website. A realistic young Central Asian woman with loosely tied dark hair in a powder-blue linen shirt practising a simple open-hand movement at chest height while looking attentively at her laptop. Three-quarter side view, hands fully visible, laptop seen from back with no logo. Quiet minimalist study corner, cool ivory table, pale gray-blue wall, diffuse daylight from side. Candid, calm concentration, not smiling at camera. Natural skin texture, tiny imperfections, flyaway hair, real fabric weave, anatomically correct hands. Color photograph, restrained palette only powder-blue, ivory, dark navy, natural skin; no colorful props, no plants. Landscape 3:2, close medium shot. No floating graphics, no diagrams, no text, no glowing effects, no illustration or CGI, no overly smooth skin, no excessive background blur. Illustrative scene, not a certified instructional sign.
 
+
+## shop-signing-v1.webp
+
+Generated with ImageGen for the shopping dialogue card. Photorealistic editorial bakery scene: two adults communicating with their hands at a pale counter, a paper bag and bread, soft daylight, restrained ivory, ice-blue and navy palette matching the landing photographs. Hands and faces remain visible. Decorative learning illustration, not a verified RSL sign reference. Converted to WebP for the card.

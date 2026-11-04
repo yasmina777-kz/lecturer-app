@@ -13,6 +13,8 @@ let model: SignClassifier;
 let verifier: SignClassifier;
 let poseDetector: PoseLandmarker | undefined;
 let selectedSide = "";
+let poseAt = -Infinity;
+let lastPose: import("@mediapipe/tasks-vision").NormalizedLandmark[] = [];
 
 const live = new LiveLetterStream();
 // Detection and classification run off the UI thread. Only one bitmap is in flight.
@@ -60,15 +62,20 @@ self.onmessage = async ({ data }) => {
   } else if (data.type === "reset") {
     live.reset();
     selectedSide = "";
+    poseAt = -Infinity;
+    lastPose = [];
   } else if (data.type === "frame") {
     try {
       const detected = detector.detectForVideo(data.bitmap, data.now);
-      let pose: import("@mediapipe/tasks-vision").NormalizedLandmark[] = [];
       try {
-        pose =
-          poseDetector?.detectForVideo(data.bitmap, data.now).landmarks[0] ??
-          [];
+        // Framing feedback needs fewer updates than fingers. Do not block every
+        // hand frame on a second neural network; discard stale poses on gaps.
+        if (data.now - poseAt >= 250) {
+          lastPose = poseDetector?.detectForVideo(data.bitmap, data.now).landmarks[0] ?? [];
+          poseAt = data.now;
+        }
       } catch {
+        lastPose = [];
         self.postMessage({ type: "body-error" });
       }
       // Use the trained largest-hand rule, but reset whenever its identity
@@ -103,7 +110,7 @@ self.onmessage = async ({ data }) => {
         type: "frame",
         generation: data.generation,
         detected,
-        pose,
+        pose: lastPose,
         disagreement: !!(primary?.accepted && !prediction?.accepted),
         quality,
         progress: live.progress,

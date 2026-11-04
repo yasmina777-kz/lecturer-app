@@ -101,7 +101,7 @@ export function AdminPage() {
     }
   }
   return (
-    <>
+    <div className="admin-workspace">
       <div className="page-heading">
         <div>
           <span className="eyebrow">{t("УПРАВЛЕНИЕ ПЛАТФОРМОЙ")}</span>
@@ -470,6 +470,6 @@ export function AdminPage() {
           </section>
         </div>
       )}
-    </>
+    </div>
   );
 }

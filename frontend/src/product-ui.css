@@ -3093,3 +3093,59 @@
     border-radius: 24px;
   }
 }
+
+/* Shared neutral surfaces: admin and nested lessons use the product theme too. */
+:root .product-ui[data-product-ui][data-product-theme] {
+  & .admin-workspace { max-width: 1280px; margin-inline: auto; }
+  & .admin-workspace :is(.panel, .modal, .stat-card),
+  & :is(.sign-exercise-card, .sign-word-card) {
+    background: var(--p-surface);
+    color: var(--p-text);
+    border: 1px solid var(--p-line);
+    box-shadow: none;
+  }
+  & .admin-workspace :is(input, select, textarea) {
+    background: var(--p-surface);
+    color: var(--p-text);
+    border-color: var(--p-line);
+  }
+  & .admin-workspace :is(th, .tag, .count, .notice, .audience-user-initial) {
+    background: var(--p-subtle);
+    color: var(--p-text);
+  }
+  & .admin-workspace :is(td, th, .service-row) { border-color: var(--p-line); }
+  & .admin-workspace :is(.muted, small, .audience-note) { color: var(--p-muted); }
+  & .admin-workspace .tabs {
+    gap: 8px;
+    border-bottom: 1px solid var(--p-line);
+    padding-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  & .admin-workspace .tabs button {
+    border: 1px solid var(--p-line);
+    border-radius: 24px;
+    padding: 10px 18px;
+    background: var(--p-surface);
+    color: var(--p-muted);
+  }
+  & .admin-workspace .tabs button.active {
+    background: var(--p-primary);
+    border-color: var(--p-primary);
+    color: var(--p-on-primary);
+  }
+  & .admin-workspace .audience-stat { border-top: 1px solid var(--p-line) !important; }
+  & .admin-workspace .audience-stat svg { color: var(--p-blue); }
+  & .dialogues-workspace .activity-method {
+    background: transparent;
+    color: var(--p-muted);
+    border: 0;
+    padding: 4px 0;
+  }
+  & .activity-scenario-cover img,
+  & .sign-phrase-art img { object-position: center; }
+  & .sign-exercise-thumb--illustrated > svg {
+    background: #fff;
+    color: #2e6bff;
+    box-shadow: 0 3px 14px #344c7b15;
+  }
+}

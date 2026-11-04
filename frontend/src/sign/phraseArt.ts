@@ -1,9 +1,10 @@
 import { phraseGroups } from "./phraseExamples";
-const phrases = phraseGroups.flatMap((group) => [...group.phrases]);
 /** Decorative signed-communication scenes, not instructional handshape diagrams. */
 export function phraseArt(phrase: string) {
-  const index = phrases.findIndex((item) => item === phrase);
-  return index < 0
-    ? undefined
-    : `/illustrations/sign-phrases/phrase-${String(index + 1).padStart(2, "0")}.jpg`;
+  const group = phraseGroups.findIndex((group) => group.phrases.some(item => item === phrase));
+  if (group < 0) return undefined;
+  const image = /купить|хлеб|есть|воду/.test(phrase)
+    ? "shop-signing-v1"
+    : ["conversation", "practice", "workshop", "conversation"][group];
+  return `/images/landing-v2/${image}.webp`;
 }

@@ -3,7 +3,21 @@ import {readFile} from 'node:fs/promises';
 import ts from 'typescript';
 const source = await readFile(new URL('../src/sign/liveRecognition.ts',import.meta.url),'utf8');
 const js=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2020}}).outputText;
-const {LiveLetterStream,trackingQuality}=await import('data:text/javascript;base64,'+Buffer.from(js).toString('base64'));
+const {LiveLetterStream,trackingQuality,LETTER_SAMPLE_MS}=await import('data:text/javascript;base64,'+Buffer.from(js).toString('base64'));
+// End-to-end stream scheduling, including confirmation; not a webcam accuracy test.
+const fast=new LiveLetterStream();
+const fastFrame=Array(66).fill(0);fastFrame[65]=.2;
+let firstAccepted=-1;
+for(let now=0;now<=2200;now+=10){
+  if(fast.sample(fastFrame,now,'ready') && fast.confirm({accepted:true,label:'А'})) firstAccepted=now;
+}
+assert.equal(LETTER_SAMPLE_MS,100);
+assert.equal(firstAccepted,1900,'two agreeing windows should confirm after 1.9 seconds at target cadence');
+const slower=new LiveLetterStream();let slowAccepted=-1;
+for(let now=0;now<=4000;now+=200){
+  if(slower.sample(fastFrame,now,'ready') && slower.confirm({accepted:true,label:'А'})) slowAccepted=now;
+}
+assert.equal(slowAccepted,3800,'slow hardware must still provide all samples, never fake early acceptance');
 const stream=new LiveLetterStream();
 const frame=Array(66).fill(0);frame[65]=0.2;
 let windows=0;

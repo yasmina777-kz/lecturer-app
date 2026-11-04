@@ -24,6 +24,8 @@ export function trackingQuality(result: HandLandmarkerResult): TrackingQuality {
   return "ready";
 }
 type Prediction = { accepted: boolean; label: string } | null;
+// 16 samples plus a four-sample confirmation stride: 1.9 s at target cadence.
+export const LETTER_SAMPLE_MS = 100;
 /** Streaming windows preserve the trained 16-frame feature format.
  * Two agreeing windows are a debounce, not a calibrated accuracy estimate.
  */
@@ -70,7 +72,7 @@ export class LiveLetterStream {
       return null;
     }
     this.missingSince = null;
-    if (now - this.sampledAt < 150) return null;
+    if (now - this.sampledAt < LETTER_SAMPLE_MS) return null;
     this.sampledAt = now;
     this.frames.push(frame);
     if (this.frames.length > 16) this.frames.shift();
