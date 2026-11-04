@@ -186,13 +186,7 @@ export function SignCourseCatalog() {
           "Сөздікті ашу · 171 сөз",
         )}
       </Link>
-      <p className="sign-catalog-note">
-        {at(
-          "Все 33 буквы и 171 слово имеют пробные движения аватара. Откройте словарь, чтобы посмотреть слова и собрать последовательность.",
-          "All 33 letters and 171 words have experimental avatar motion. Open the dictionary to view words and build sequences.",
-          "33 әріп пен 171 сөздің сынақ аватар қимылдары бар. Сөздер мен тізбектерді сөздіктен көріңіз.",
-        )}
-      </p>
+
       <div className="sign-shortcuts">
         <Link className="panel" to="/practice">
           <Play />
@@ -279,23 +273,25 @@ export function SignTrainingRoom() {
           </button>
         ))}
       </nav>
-      <div
-        className="sign-exercise-picker"
-        role="group"
-        aria-label={at("Упражнение", "Exercise", "Жаттығу")}
-      >
-        {options
-          .filter((e) => e.level === exercise.level)
-          .map((e) => (
-            <button
-              key={e.id}
-              aria-pressed={e.id === exercise.id}
-              onClick={() => setParams({ exercise: e.id })}
-            >
-              {e.letter || e.title}
-            </button>
-          ))}
-      </div>
+      {!exercise.letter && (
+        <div
+          className="sign-exercise-picker"
+          role="group"
+          aria-label={at("Упражнение", "Exercise", "Жаттығу")}
+        >
+          {options
+            .filter((e) => e.level === exercise.level)
+            .map((e) => (
+              <button
+                key={e.id}
+                aria-pressed={e.id === exercise.id}
+                onClick={() => setParams({ exercise: e.id })}
+              >
+                {e.letter || e.title}
+              </button>
+            ))}
+        </div>
+      )}
       <ExercisePlayer key={exercise.id} exercise={exercise} />
     </div>
   );
@@ -362,11 +358,7 @@ function CapturedLetterPlayer({ letter }: { letter: string }) {
               "Show a letter to the camera → AI feedback",
               "Камераға әріпті көрсетіңіз → ЖИ жауабы",
             ),
-            tag: at(
-              "Камера · 3 секунды",
-              "Camera · 3 seconds",
-              "Камера · 3 секунд",
-            ),
+            tag: at("Камера", "Camera", "Камера"),
           },
         ]}
       />

@@ -63,7 +63,7 @@ export function SignSequencePlayer({
     [ready, setReady] = useState(false),
     [speed, setSpeed] = useState(1),
     [loop, setLoop] = useState(false),
-    [close, setClose] = useState(singleLetter),
+    [close, setClose] = useState(false),
     [inspecting, setInspecting] = useState(initialPreview),
     [angle, setAngle] = useState<GestureAngle>("front");
   const clock = useRef(initialPreview ? previewTime : 0);
@@ -153,18 +153,11 @@ export function SignSequencePlayer({
           <div>
             <strong>
               {at(
-                "Сравните с карточкой",
-                "Compare with the card",
-                "Карточкамен салыстырыңыз",
+                `Буква ${chartLetter}`,
+                `Letter ${chartLetter}`,
+                `${chartLetter} әрпі`,
               )}
             </strong>
-            <p>
-              {at(
-                "Смотрите на согнутые пальцы, большой палец и поворот ладони. Стрелки на рисунке обозначают движение.",
-                "Check bent fingers, thumb and palm direction. Arrows indicate movement.",
-                "Бүгілген саусақтарды, бас бармақты және алақан бағытын қараңыз. Жебелер қозғалысты білдіреді.",
-              )}
-            </p>
             <button
               className="button secondary"
               disabled={!ready || blocked}
@@ -176,7 +169,7 @@ export function SignSequencePlayer({
               }}
             >
               <ScanSearch size={17} />
-              {at("Рассмотреть букву", "Inspect the letter", "Әріпті қарау")}
+              {at("Крупнее", "Enlarge", "Үлкейту")}
             </button>
           </div>
         </div>
@@ -445,7 +438,7 @@ export function SignSequencePlayer({
               </div>
             )}
           </div>
-          {!blocked && (
+          {!blocked && !singleLetter && (
             <div
               className="sign-sequence-words"
               aria-label={at(
@@ -471,21 +464,7 @@ export function SignSequencePlayer({
           )}
         </>
       )}
-      <p className="sign-sequence-note">
-        {plan.steps.length > 1 && !plan.spelling
-          ? at(
-              "Жесты показываются подряд в порядке введённого текста. Грамматика РЖЯ автоматически не переводится. ",
-              "Signs play in input order. RSL grammar is not translated automatically. ",
-              "Ымдар мәтін ретімен көрсетіледі. Ым тілі грамматикасы автоматты аударылмайды. ",
-            )
-          : ""}
-        {note ??
-          at(
-            "Движения перенесены с видео или подготовлены вручную. Пальцы при перекрытии рук могут отображаться неточно; рассмотрите форму кисти на паузе.",
-            "Motion is captured from video or authored manually. Occluded fingers may be inaccurate; pause to inspect the handshape.",
-            "Қимылдар бейнеден көшірілген не қолмен жасалған. Қолдар жабылғанда саусақтар дәл болмауы мүмкін; үлгімен салыстырыңыз.",
-          )}
-      </p>
+      {note && <p className="sign-sequence-note">{note}</p>}
     </section>
   );
 }

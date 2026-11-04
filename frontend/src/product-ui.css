@@ -3149,3 +3149,108 @@
     box-shadow: 0 3px 14px #344c7b15;
   }
 }
+
+/* Compact workspaces: keep the sign, alphabet and controls together. */
+:root .product-ui[data-product-ui][data-product-theme] {
+  & .sidebar { padding: 18px 12px 14px; }
+  & .brand-link { padding-inline: 8px; margin-bottom: 24px; }
+  & .brand { font-size: 19px; gap: 8px; }
+  & .brand-symbol { width: 29px; height: 29px; }
+  & .sidebar nav { gap: 3px; }
+  & .sidebar nav a, & .sidebar-bottom > a { min-height: 40px; padding: 9px 10px; gap: 10px; font-size: 13px; line-height: 1.35; border-radius: 10px; }
+  & .sidebar nav svg, & .sidebar-bottom > a svg { width: 18px; height: 18px; flex-shrink: 0; }
+  & .sidebar-bottom { padding-top: 12px; }
+  & .user-row { margin-top: 12px; padding-top: 12px; }
+  & .topbar { height: 56px; padding-inline: 24px; }
+  & .main-content { max-width: 1160px; padding: 0 24px 24px; }
+  & .practice-workspace > .page-heading { min-height: 0; margin-bottom: 16px; padding: 8px 0; }
+  & .practice-workspace > .page-heading::after { display: none; }
+  & .practice-workspace > .page-heading > div { max-width: 100%; }
+  & .practice-workspace h1, & .text-sign-page .page-heading h1 { font-size: clamp(26px, 2.4vw, 32px); margin-bottom: 8px; }
+  & .practice-workspace .page-heading p, & .text-sign-page .page-heading p { font-size: 14px; margin: 0; }
+  & .practice-workspace .sign-training-levels { gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+  & .practice-workspace .sign-training-levels button { padding: 8px 12px; min-height: 36px; font-size: 12px; }
+  & .practice-workspace > .sign-action-cards { gap: 12px; margin-bottom: 16px; }
+  & .practice-workspace .sign-action-card { grid-template-columns: 64px minmax(0,1fr); grid-template-rows: auto; gap: 6px 12px; padding: 10px; border-radius: 14px; }
+  & .practice-workspace .sign-action-art { height: 64px; grid-row: 1; }
+  & .practice-workspace .sign-action-cover { width: 100%; height: 100%; object-fit: cover; }
+  & .practice-workspace .sign-action-copy strong { font-size: 15px; }
+  & .practice-workspace .sign-action-copy > span { font-size: 12px; }
+  & .practice-workspace .sign-action-tag, & .practice-workspace .sign-action-footer { display: none; }
+  & .practice-workspace .sign-sequence { display: block; padding: 16px; max-width: 920px; margin-inline: auto; }
+  & .practice-workspace .sign-sequence-heading { margin-bottom: 12px; }
+  & .practice-workspace .sign-sequence-heading h2 { font-size: 18px; }
+  & .sign-sequence .sign-letter-comparison {
+    display: flex; flex-direction: row; align-items: center; gap: 12px;
+    padding: 8px 12px; margin: 0 0 12px; border-radius: 12px;
+    background: var(--p-subtle); border: 1px solid var(--p-line);
+  }
+  & .sign-sequence .sign-letter-comparison > .alphabet-card-art { width: 52px; height: 68px; flex: 0 0 52px; border-radius: 8px; }
+  & .sign-sequence .sign-letter-comparison > div:last-child { display: flex; align-items: center; justify-content: space-between; flex: 1; gap: 10px; min-width: 0; }
+  & .sign-letter-comparison strong { font-size: 14px; }
+  & .sign-sequence .sign-letter-comparison .button { min-height: 32px; padding: 6px 10px; font-size: 12px; }
+  & .practice-workspace .sign-avatar-stage, & .text-sign-page .sign-avatar-stage { height: 320px; min-height: 0; }
+  & .practice-workspace .sign-avatar-stage .gesture-3d, & .text-sign-page .sign-avatar-stage .gesture-3d { height: 100%; min-height: 0; }
+  & .sign-alphabet-navigation { padding: 8px 10px; margin: 0 0 10px; border-radius: 12px; }
+  & .sign-letter-arrows { margin-bottom: 6px; }
+  & .sign-letter-arrows > strong { font-size: 19px; }
+  & .sign-letter-arrows > button { min-height: 32px; padding: 6px 3px; font-size: 12px; }
+  & .sign-alphabet-menu { gap: 4px; }
+  & .sign-alphabet-menu > button { min-height: 28px; padding: 3px; font-size: 13px; }
+  & .practice-workspace .sign-sequence-controls, & .text-sign-page .sign-sequence-controls { padding: 10px 12px; border-radius: 12px; }
+  & .practice-workspace .sign-sequence-buttons, & .text-sign-page .sign-sequence-buttons { gap: 8px; }
+  & .practice-workspace .sign-sequence-buttons .button, & .text-sign-page .sign-sequence-buttons .button { min-height: 36px; padding: 8px 12px; font-size: 12px; }
+  & .sign-sequence-buttons label { font-size: 12px; gap: 6px; }
+  & .sign-sequence-buttons select { min-height: 32px; padding: 5px 8px; font-size: 12px; }
+  & .sign-sequence-range { margin-block: 10px; }
+  & .sign-sequence-bottom { font-size: 12px; }
+  & .sign-sequence-bottom button { padding: 6px 10px; font-size: 12px; min-height: 32px; }
+  & .sign-zoom { padding: 7px 10px; font-size: 12px; min-height: 32px; border-radius: 12px; }
+  & .practice-workspace .sign-next-practice { margin-top: 12px; min-height: 36px; padding: 8px 12px; }
+  & .practice-workspace .sign-camera { padding: 16px; border-radius: 16px; }
+  & .sign-help-link { border: 1px solid var(--p-line); border-radius: 999px; padding: 8px 12px; text-decoration: none; }
+  & .sign-help-link[aria-pressed="true"] { background: var(--p-subtle); border-color: var(--p-blue); }
+  & .sign-grammar-visual { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; margin-top: 8px; }
+  & .grammar-visual-card { display: grid; grid-template-columns: 130px minmax(0,1fr); gap: 16px; padding: 14px; border: 1px solid var(--p-line); border-radius: 16px; color: var(--p-text); background: var(--p-surface); text-decoration: none; transition: transform 180ms, border-color 180ms; }
+  & .grammar-visual-image { min-height: 160px; overflow: hidden; border-radius: 10px; background: #eef2fa; }
+  & .grammar-visual-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 220ms ease; }
+  & .grammar-visual-copy { align-self: center; }
+  & .grammar-visual-copy h2 { font-size: 18px; margin: 0 0 8px; line-height: 1.25; }
+  & .grammar-visual-copy p { font-size: 14px; line-height: 1.5; color: var(--p-muted); margin: 0 0 12px; }
+  & .grammar-visual-copy > span { display: inline-flex; align-items: center; gap: 6px; color: var(--p-blue); font-size: 12px; font-weight: 650; }
+  & .learning-source-details { margin-top: 20px; border-top: 1px solid var(--p-line); padding-top: 16px; font-size: 13px; color: var(--p-muted); }
+  & .learning-source-details summary { cursor: pointer; color: var(--p-text); }
+  & .learning-source-links { display: flex; flex-wrap: wrap; gap: 12px 20px; }
+}
+@media (min-width: 901px) {
+  :root .product-ui[data-product-ui][data-product-theme] {
+    & .sidebar { width: 200px; }
+    & .app-main { margin-left: 200px; width: calc(100% - 200px); }
+  }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  :root .product-ui[data-product-ui][data-product-theme] {
+    & .grammar-visual-card:hover { transform: translateY(-3px); border-color: var(--p-blue); }
+    & .grammar-visual-card:hover img { transform: scale(1.035); }
+  }
+}
+@media (max-width: 1100px) {
+  :root .product-ui[data-product-ui][data-product-theme] .grammar-visual-card { grid-template-columns: 90px minmax(0,1fr); gap: 12px; }
+}
+@media (max-width: 600px) {
+  :root .product-ui[data-product-ui][data-product-theme] {
+    & .main-content { padding-inline: 14px; }
+    & .practice-workspace > .sign-action-cards { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+    & .practice-workspace .sign-action-card { grid-template-columns: 1fr; padding: 10px; }
+    & .practice-workspace .sign-action-art { display: none; }
+    & .practice-workspace .sign-action-copy strong { font-size: 14px; }
+    & .practice-workspace .sign-sequence { padding: 12px; }
+    & .sign-grammar-visual { grid-template-columns: 1fr; }
+    & .grammar-visual-card { grid-template-columns: 100px minmax(0,1fr); }
+    & .grammar-visual-image { min-height: 140px; }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root .product-ui[data-product-ui][data-product-theme] .grammar-visual-card,
+  :root .product-ui[data-product-ui][data-product-theme] .grammar-visual-image img { transition: none; }
+}

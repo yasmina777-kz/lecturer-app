@@ -24,61 +24,13 @@ type CameraProps = {
   onPrediction?: (prediction: SignPrediction) => void;
 };
 export function TemporalSignCamera({ expected, onPrediction }: CameraProps) {
-  const [cautious, setCautious] = useState(false);
   return (
-    <div className="sign-camera-modes">
-      <TemporalCameraSession
-        key={`${expected}:${cautious}`}
-        expected={expected}
-        cautious={cautious}
-        onPrediction={onPrediction}
-      />
-      <details className="sign-camera-settings">
-        <summary>
-          {at(
-            "Настройки распознавания",
-            "Recognition settings",
-            "Тану параметрлері",
-          )}
-        </summary>
-        <label>
-          {at("Режим распознавания", "Recognition mode", "Тану режимі")}
-          <select
-            aria-label={at(
-              "Режим распознавания",
-              "Recognition mode",
-              "Тану режимі",
-            )}
-            value={cautious ? "cautious" : "standard"}
-            onChange={(e) => setCautious(e.target.value === "cautious")}
-          >
-            <option value="standard">
-              {at("Обычный", "Standard", "Қалыпты")}
-            </option>
-            <option value="cautious">
-              {at(
-                "Осторожный · новая модель",
-                "Cautious · new model",
-                "Сақ · жаңа модель",
-              )}
-            </option>
-          </select>
-        </label>
-        <p>
-          {cautious
-            ? at(
-                "Новая модель обучена на 3 013 видео. Она чаще отказывается отвечать; отказ не означает, что вы ошиблись.",
-                "Trained on 3,013 videos. This model rejects more attempts; rejection does not mean your sign was wrong.",
-                "Жаңа модель 3 013 бейнемен оқытылды. Жауаптан жиі бас тартады; бұл сіз қателестіңіз деген сөз емес.",
-              )
-            : at(
-                "Обычный режим отвечает чаще. Можно сравнить его с новой осторожной моделью.",
-                "Standard mode answers more often. Compare it with the new cautious model.",
-                "Қалыпты режим жиірек жауап береді. Жаңа сақ модельмен салыстырыңыз.",
-              )}
-        </p>
-      </details>
-    </div>
+    <TemporalCameraSession
+      key={expected}
+      expected={expected}
+      cautious={false}
+      onPrediction={onPrediction}
+    />
   );
 }
 function TemporalCameraSession({
@@ -115,24 +67,8 @@ function TemporalCameraSession({
     [progress, setProgress] = useState(0),
     [error, setError] = useState(""),
     [result, setResult] = useState<ReturnType<typeof recognizeSequence>>(null);
-  const [report, setReport] = useState<{
-    accuracy: number;
-    acceptedAccuracy: number | null;
-    acceptedCoverage: number;
-    trainVideos: number;
-    testVideos: number;
-  } | null>(null);
   useEffect(() => {
     alive.current = true;
-    const abort = new AbortController();
-    fetch(`/models/rsl/alphabet${cautious ? "-cautious" : ""}-report.json`, {
-      signal: abort.signal,
-    })
-      .then((r) => (r.ok ? r.json() : null))
-      .then((r) => {
-        if (alive.current) setReport(r);
-      })
-      .catch(() => {});
     return () => {
       alive.current = false;
       generation.current++;
@@ -140,7 +76,6 @@ function TemporalCameraSession({
       stream.current = undefined;
       disposeDetector();
       if (fileUrl.current) URL.revokeObjectURL(fileUrl.current);
-      abort.abort();
     };
   }, []);
   function disposeDetector() {
@@ -799,72 +734,6 @@ function TemporalCameraSession({
           )}
         </div>
       )}
-      <small>
-        {at(
-          "Обработка на устройстве, без отправки видео. Модель распознаёт отдельные буквы; слова, грамматику и правильность мимики она не оценивает.",
-          "Processed on your device without uploads. The model recognizes isolated letters, not words, grammar or facial correctness.",
-          "Бейне жіберілмейді, өңдеу құрылғыда жүреді. Модель жеке әріптерді таниды; сөздер, грамматика мен мимиканы бағаламайды.",
-        )}
-      </small>
-      <details>
-        <summary>
-          {at(
-            "Результаты обучения и ограничения",
-            "Training results and limitations",
-            "Оқыту нәтижелері мен шектеулері",
-          )}
-        </summary>
-        {report && (
-          <p>
-            {at("Обучение", "Training", "Оқыту")}: {report.trainVideos}{" "}
-            {at("видео", "videos", "бейне")}.{" "}
-            {at(
-              "Тест на других людях",
-              "Test on other signers",
-              "Басқа адамдардағы сынақ",
-            )}
-            : {report.testVideos}.{" "}
-            {at(
-              "Точность на этом тесте",
-              "Accuracy on this test",
-              "Осы сынақтағы дәлдік",
-            )}
-            : {(report.accuracy * 100).toFixed(1)}%.{" "}
-            {at("Выдано ответов", "Answered", "Жауап берілді")}:{" "}
-            {(report.acceptedCoverage * 100).toFixed(1)}%.{" "}
-            {at(
-              "Верно среди выданных",
-              "Correct among answers",
-              "Жауаптар ішіндегі дұрысы",
-            )}
-            :{" "}
-            {report.acceptedAccuracy === null
-              ? "—"
-              : (report.acceptedAccuracy * 100).toFixed(1)}
-            %.{" "}
-            {at(
-              "Это не точность на вашей камере.",
-              "This is not accuracy on your camera.",
-              "Бұл сіздің камераңыздағы дәлдік емес.",
-            )}
-          </p>
-        )}
-        <a
-          href={
-            cautious
-              ? "/research/rsl/alphabet-comparison.html"
-              : "/research/rsl/alphabet-report.html"
-          }
-          target="_blank"
-          rel="noreferrer"
-        >
-          {at(
-            "Полный отчёт по каждой букве ↗",
-            "Full per-letter report ↗",
-            "Әр әріптің толық есебі ↗",
-          )}
-        </a>
-      </details>
     </section>
   );
 }

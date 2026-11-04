@@ -8,7 +8,6 @@ import {
   Check,
   Hand,
   Play,
-  RotateCcw,
   Type,
   ScanLine,
   MessageCircle,
@@ -276,89 +275,9 @@ export function SignTextPage() {
   return <SignDictionaryPage />;
 }
 export function SignPracticePage() {
-  const { progress, error, save } = useSignProgress();
-  const marked = lessons().filter((l) => progress[l.id]);
   return (
     <div className="sign-workspace practice-page">
       <SignTrainingRoom />
-      <details className="sign-history">
-        <summary>
-          {at(
-            "История вводных занятий",
-            "Introduction history",
-            "Кіріспе сабақтар тарихы",
-          )}
-        </summary>
-        <p className="sign-info-note">{storageNote()}</p>
-        <ErrorMessage message={error} />
-        {marked.length ? (
-          <div className="sign-practice-list">
-            {marked.map((l) => (
-              <article className="panel" key={l.id}>
-                <div>
-                  <span className="eyebrow">
-                    {l.kind === "prototype"
-                      ? at(
-                          "САМОСТОЯТЕЛЬНАЯ ОТМЕТКА",
-                          "SELF-REPORTED",
-                          "ӨЗ БЕЛГІҢІЗ",
-                        )
-                      : at("ВВОДНЫЙ УРОК", "INTRODUCTION", "КІРІСПЕ")}
-                  </span>
-                  <h2>{l.title}</h2>
-                  <p>
-                    {l.kind === "prototype"
-                      ? at(
-                          "Исполнение жеста автоматически не проверялось.",
-                          "Signing performance was not automatically assessed.",
-                          "Ым орындау автоматты тексерілмеді.",
-                        )
-                      : at(
-                          "Вы ответили на вопрос по тексту урока.",
-                          "You answered the lesson reading question.",
-                          "Сабақ мәтіні бойынша сұраққа жауап бердіңіз.",
-                        )}
-                  </p>
-                </div>
-                <div>
-                  <Link to={`/learn/${l.id}`} className="button secondary">
-                    <RotateCcw size={16} />
-                    {at("Повторить", "Review", "Қайталау")}
-                  </Link>
-                  <button
-                    className="sign-link-button"
-                    onClick={() => save(l.id, true)}
-                  >
-                    {at("Убрать отметку", "Remove mark", "Белгіні алып тастау")}
-                  </button>
-                </div>
-              </article>
-            ))}
-          </div>
-        ) : (
-          <Empty
-            title={at(
-              "Первое занятие впереди",
-              "Your first lesson awaits",
-              "Алғашқы сабақ алда",
-            )}
-            text={at(
-              "Откройте вводный урок и ответьте на вопрос. После сохранения отметка появится здесь.",
-              "Open an introduction and answer the question. Your mark will appear here after saving.",
-              "Кіріспені ашып, сұраққа жауап беріңіз. Сақтағаннан кейін белгі осы жерде пайда болады.",
-            )}
-            action={
-              <Link className="button primary" to="/learn/getting-started">
-                {at(
-                  "Начать первый урок",
-                  "Start the first lesson",
-                  "Бірінші сабақты бастау",
-                )}
-              </Link>
-            }
-          />
-        )}
-      </details>
     </div>
   );
 }
@@ -474,6 +393,65 @@ export function SignHelpPage() {
           )}
         </p>
       </section>
+      <details className="learning-source-details">
+        <summary>
+          {at(
+            "О модели и материалах",
+            "Model and materials",
+            "Модель мен материалдар",
+          )}
+        </summary>
+        <p>
+          {at(
+            "Аватар воспроизводит сохранённые движения. Они пока не прошли полную проверку преподавателем РЖЯ; автоматического перевода грамматики нет. Модель букв работает на устройстве и не оценивает слова и мимику.",
+            "The avatar plays saved motions that have not completed RSL teacher review. Grammar is not translated automatically. The on-device letter model does not assess words or facial expressions.",
+            "Аватар сақталған қимылдарды көрсетеді; оларды РЖЯ мұғалімі толық тексермеген. Грамматика автоматты аударылмайды. Құрылғыдағы әріп моделі сөздер мен мимиканы бағаламайды.",
+          )}
+        </p>
+        <div className="learning-source-links">
+          <a
+            href="/research/rsl/alphabet-report.html"
+            target="_blank"
+            rel="noreferrer"
+          >
+            {at(
+              "Отчёт по буквам",
+              "Letter model report",
+              "Әріп моделі туралы есеп",
+            )}
+          </a>
+          <a
+            href="/research/rsl/alphabet-comparison.html"
+            target="_blank"
+            rel="noreferrer"
+          >
+            {at(
+              "Сравнение моделей",
+              "Model comparison",
+              "Модельдерді салыстыру",
+            )}
+          </a>
+          <a
+            href="/research/rsl/words/ATTRIBUTION.txt"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Slovo ·{" "}
+            {at(
+              "авторы и лицензия",
+              "credits and license",
+              "авторлар мен лицензия",
+            )}
+          </a>
+          <a
+            href="/research/rsl/ATTRIBUTION.txt"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Bukva · {at("источник", "source", "дереккөз")}
+          </a>
+        </div>
+      </details>
     </div>
   );
 }

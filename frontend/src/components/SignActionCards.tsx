@@ -4,11 +4,11 @@ import "./sign-action-cards.css";
 
 type Kind = "text" | "phrases" | "dictionary" | "watch" | "camera";
 const covers = {
-  text: "13",
-  phrases: "01",
-  dictionary: "09",
-  watch: "06",
-  camera: "03",
+  text: "hands-detail",
+  phrases: "conversation",
+  dictionary: "hand-open",
+  watch: "hands-detail",
+  camera: "practice",
 };
 export function SignActionCards({
   items,
@@ -36,7 +36,7 @@ export function SignActionCards({
             <span className="sign-action-art" aria-hidden="true">
               <img
                 className="sign-action-cover"
-                src={`/illustrations/sign-phrases/phrase-${covers[item.id]}.jpg`}
+                src={`/images/landing-v2/${covers[item.id]}.webp`}
                 alt=""
                 width="800"
                 height="533"

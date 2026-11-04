@@ -646,126 +646,88 @@ export function SignDictionaryPage() {
         </>
       )}
       {tab === "grammar" && <GrammarGuide />}
-      <p className="sign-catalog-note">
-        <a
-          href="/research/rsl/words/ATTRIBUTION.txt"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Slovo ·{" "}
-          {at(
-            "авторы и лицензия",
-            "credits and license",
-            "авторлар мен лицензия",
-          )}
-        </a>{" "}
-        ·{" "}
-        <a
-          href="/research/rsl/ATTRIBUTION.txt"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Bukva
-        </a>
-      </p>
     </div>
   );
 }
 function GrammarGuide() {
+  const cards = [
+    {
+      image: "hands-detail",
+      title: at("Форма и движение", "Shape and movement", "Пішін мен қимыл"),
+      text: at(
+        "Смотрите, как сложены пальцы, куда направлена ладонь и как движется кисть.",
+        "Watch the finger shape, palm direction and hand movement.",
+        "Саусақ пішінін, алақан бағытын және қол қозғалысын бақылаңыз.",
+      ),
+      to: "/learn?stage=1",
+      action: at("Изучить буквы", "Explore letters", "Әріптерді үйрену"),
+    },
+    {
+      image: "conversation",
+      title: at("От букв к словам", "From letters to words", "Әріптен сөзге"),
+      text: at(
+        "Имена можно показать по буквам. У многих слов есть отдельный жест.",
+        "Names can be fingerspelled. Many words have their own sign.",
+        "Есімді әріптеп көрсетуге болады. Көп сөздің жеке ымы бар.",
+      ),
+      to: "/text-to-sign?tab=dictionary",
+      action: at("Открыть словарь", "Open dictionary", "Сөздікті ашу"),
+    },
+    {
+      image: "mentor-pointing",
+      title: at(
+        "Лицо тоже говорит",
+        "The face carries meaning",
+        "Бет те сөйлейді",
+      ),
+      text: at(
+        "Взгляд, брови и наклон головы помогают передать смысл вместе с руками.",
+        "Gaze, eyebrows and head position convey meaning alongside the hands.",
+        "Көзқарас, қас және бас қалпы қолмен бірге мағынаны жеткізеді.",
+      ),
+      to: "/understanding",
+      action: at("Узнать жест", "Recognize a sign", "Ымды тану"),
+    },
+    {
+      image: "workshop",
+      title: at(
+        "Фразы в контексте",
+        "Phrases in context",
+        "Контекстегі сөйлемдер",
+      ),
+      text: at(
+        "Изучайте жесты в разговоре: вопрос, ответ и ситуация связаны между собой.",
+        "Learn through conversation: the question, answer and situation belong together.",
+        "Әңгімеде үйреніңіз: сұрақ, жауап және жағдай өзара байланысты.",
+      ),
+      to: "/dialogues",
+      action: at("Начать диалог", "Start a dialogue", "Диалогты бастау"),
+    },
+  ];
   return (
-    <section className="sign-grammar">
-      <div className="panel">
-        <BookOpen />
-        <h2>
-          {at(
-            "РЖЯ — самостоятельный язык",
-            "RSL is a language in its own right",
-            "Ым тілі — дербес тіл",
-          )}
-        </h2>
-        <p>
-          {at(
-            "Переставить русские слова и показать их руками недостаточно. Значение передают форма кисти, место, направление и движение, а также лицо и корпус.",
-            "Reordering Russian words and signing them is not enough. Hand shape, location, orientation, motion, face and torso carry meaning.",
-            "Орыс сөздерінің орнын ауыстырып, қолмен көрсету жеткіліксіз. Мағынаны қол пішіні, орны, бағыты, қимылы, бет пен дене жеткізеді.",
-          )}
-        </p>
-      </div>
-      {[
-        [
-          at(
-            "Буквы и слова — разные упражнения",
-            "Letters and words are different tasks",
-            "Әріп пен сөз — бөлек жаттығу",
-          ),
-          at(
-            "Дактиль передаёт буквенную запись. У многих слов есть собственные жесты. Начните с коротких имён, затем изучайте слова по видео.",
-            "Fingerspelling represents written letters. Many words have lexical signs. Start with short names, then learn words from videos.",
-            "Дактиль әріптік жазбаны береді. Көп сөздің жеке ымы бар. Қысқа есімнен бастап, сөздерді бейнемен үйреніңіз.",
-          ),
-        ],
-        [
-          at(
-            "Смотрите на лицо и тело",
-            "Watch the face and body",
-            "Бет пен денеге қараңыз",
-          ),
-          at(
-            "Наблюдайте за бровями, взглядом, ртом и наклоном головы вместе с руками. Наша модель букв эти признаки не проверяет.",
-            "Observe eyebrows, gaze, mouth and head position alongside the hands. Our letter model does not assess these features.",
-            "Қолмен бірге қас, көзқарас, ауыз және бас қалпын бақылаңыз. Біздің әріп моделі бұл белгілерді тексермейді.",
-          ),
-        ],
-        [
-          at(
-            "Разбирайте целую фразу",
-            "Study the whole phrase",
-            "Толық сөйлемді талдаңыз",
-          ),
-          at(
-            "Для грамматики нужны образцы целых высказываний с контекстом. Нет одного правила перестановки слов, которое переводит любые предложения.",
-            "Grammar needs complete utterances in context. No single word-order rule translates every sentence.",
-            "Грамматика үшін контексті бар тұтас сөйлемдер қажет. Кез келген сөйлемді аударатын жалғыз сөз реті ережесі жоқ.",
-          ),
-        ],
-      ].map(([title, body]) => (
-        <article className="panel" key={title}>
-          <h3>{title}</h3>
-          <p>{body}</p>
-        </article>
+    <section
+      className="sign-grammar sign-grammar-visual"
+      aria-label={at("Как устроен РЖЯ", "How RSL works", "РЖЯ қалай құрылған")}
+    >
+      {cards.map((card) => (
+        <Link className="grammar-visual-card" to={card.to} key={card.image}>
+          <div className="grammar-visual-image">
+            <img
+              src={`/images/landing-v2/${card.image}.webp`}
+              alt=""
+              loading="lazy"
+            />
+          </div>
+          <div className="grammar-visual-copy">
+            <h2>{card.title}</h2>
+            <p>{card.text}</p>
+            <span>
+              {card.action}
+              <ArrowRight size={16} />
+            </span>
+          </div>
+        </Link>
       ))}
-      <p>
-        {at(
-          "Материалы для дальнейшего изучения:",
-          "Further reading:",
-          "Қосымша материалдар:",
-        )}{" "}
-        <a
-          href="https://minlang.iling-ran.ru/en/lang/russian-sign-language"
-          target="_blank"
-          rel="noreferrer"
-        >
-          {at(
-            "Институт языкознания РАН — РЖЯ",
-            "Institute of Linguistics — RSL",
-            "Тіл білімі институты — ым тілі",
-          )}
-        </a>
-        ;{" "}
-        <a
-          href="https://krslproject.github.io/FluentSigners-50/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          FluentSigners-50
-        </a>
-        .{" "}
-        {at(
-          "FluentSigners-50 содержит казахско-русский жестовый язык; региональные варианты нельзя автоматически считать одинаковыми.",
-          "FluentSigners-50 contains Kazakh-Russian signing; regional variants should not automatically be treated as identical.",
-          "FluentSigners-50 қазақ-орыс ым тілін қамтиды; аймақтық нұсқалар автоматты түрде бірдей саналмайды.",
-        )}
-      </p>
     </section>
   );
 }

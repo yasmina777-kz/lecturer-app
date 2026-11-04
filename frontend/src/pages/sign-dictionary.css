@@ -324,7 +324,7 @@
   color: var(--sw-muted);
 }
 .sign-sequence-stage {
-  height: 450px !important;
+  height: 450px;
   min-height: 0 !important;
 }
 .sign-sequence-controls {
@@ -415,7 +415,7 @@
 }
 @media (max-width: 600px) {
   .sign-sequence-stage {
-    height: 390px !important;
+    height: 390px;
   }
   .sign-sequence-buttons > .button {
     flex: 1;

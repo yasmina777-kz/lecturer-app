@@ -215,13 +215,6 @@ export function LearningHome() {
           <ArrowRight size={18} />
         </Link>
       </section>
-      <p className="learning-disclaimer">
-        {at(
-          "Все 33 буквы и 171 слово имеют пробные движения аватара. Движения требуют проверки специалистом РЖЯ — сверяйтесь с видеообразцами человека.",
-          "All 33 letters and 171 words have experimental avatar motion. Movements need review by an RSL specialist; compare with human references.",
-          "33 әріп пен 171 сөздің сынақ аватар қимылдары бар. Қимылдарды ым тілі маманы тексеруі керек — адамның бейнеүлгісімен салыстырыңыз.",
-        )}
-      </p>
     </div>
   );
 }

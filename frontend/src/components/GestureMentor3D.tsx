@@ -200,7 +200,9 @@ export function GestureMentor3D({
           ? 3.6
           : framing === "full"
             ? 1.95
-            : 1.62;
+            : framing === "letter"
+              ? 1.25
+              : 1.62;
       let radius =
         !close && motionKey !== "[]"
           ? Math.max(
@@ -355,7 +357,11 @@ export function GestureMentor3D({
               ? Math.min(0.05, (now - lastIdleFrame) / 1000)
               : 0;
             lastIdleFrame = visible && !document.hidden ? now : 0;
-            if (visible && !document.hidden && current.current.playbackState !== "paused") {
+            if (
+              visible &&
+              !document.hidden &&
+              current.current.playbackState !== "paused"
+            ) {
               playback!.update(
                 current.current.time,
                 current.current.playbackState ?? "paused",
