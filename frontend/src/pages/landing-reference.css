@@ -350,7 +350,7 @@
 /* Fill the first desktop viewport without enlarging the typography. */
 @media(min-width:801px) {
  :root .landing-surface[data-product-ui][data-product-theme] .landing-site {
-  & .mentor-hero { min-height: max(480px,calc(100svh - 72px)); align-items: center; }
+  & .mentor-hero { min-height: max(480px,calc(100svh - 72px)); align-items: flex-start; padding-top: 48px; }
   & .mentor-hero-copy { padding-top: 0; }
   & .mentor-hero-art { top: 16px; bottom: 48px; }
   & .mentor-motion-toggle { bottom: 16px; }
