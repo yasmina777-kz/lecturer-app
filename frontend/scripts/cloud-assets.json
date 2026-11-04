@@ -1,5 +1,5 @@
 {
-  "revision": "fbd33f1ddfbdc444d7b63dbd3ead92aa417630ee",
+  "revision": "89b84a4fd8b8d2ba58c3132c0acdca8ff22cf178",
   "files": [
     {
       "path": "frontend/public/avatars/hand-workshop/fist.glb",
@@ -1392,6 +1392,11 @@
       "size": 1962373
     },
     {
+      "path": "frontend/public/images/brand/ai-mentor-symbol-v1.png",
+      "sha256": "9e0676cb284ec9eefd3c30948bde9206e3e8078ccd282edb3e466e43d68606b2",
+      "size": 550222
+    },
+    {
       "path": "frontend/public/images/dialogue-sculpture.png",
       "sha256": "b534ee564a3b2bdd9c0b2c35ddc97d46c2e39eb14505cabad1b8de23ed4334f6",
       "size": 2058396
@@ -1402,14 +1407,164 @@
       "size": 2215482
     },
     {
+      "path": "frontend/public/images/landing-v2/blue-ribbon.png",
+      "sha256": "1630164f9548ad520887d3a9f4b968d3188c9c03a329ac779ad7dd4c17de7a9c",
+      "size": 1380717
+    },
+    {
+      "path": "frontend/public/images/landing-v2/conversation.png",
+      "sha256": "7db82763b0d9d9eae20343f1d1b98f3f781470fefd43b9cdb31377ad2c9c8aec",
+      "size": 2496441
+    },
+    {
+      "path": "frontend/public/images/landing-v2/conversation.webp",
+      "sha256": "8dc6db05dd87910a2d6e883aba3f007c81500b39c9172c6551d2448d02eb8a79",
+      "size": 189138
+    },
+    {
+      "path": "frontend/public/images/landing-v2/hand-circle.png",
+      "sha256": "15fd9df41e386dcbf0b408b943542975a6187da7ce64a1131ad4e519e5054871",
+      "size": 1792628
+    },
+    {
+      "path": "frontend/public/images/landing-v2/hand-circle.webp",
+      "sha256": "a346737427fa04b7adf8ade8b1e4d45619690a8c166825432f0b849f7b714ece",
+      "size": 128580
+    },
+    {
+      "path": "frontend/public/images/landing-v2/hand-open.png",
+      "sha256": "ee41255ed8544f6aa80a958498e5cc8307070df82d2df1fd80d4c574b79bb09b",
+      "size": 2028625
+    },
+    {
+      "path": "frontend/public/images/landing-v2/hand-open.webp",
+      "sha256": "52d1469cc0b624ab911590fc3b649fc65b08e1d55d8c69db314444672f5fb628",
+      "size": 202162
+    },
+    {
+      "path": "frontend/public/images/landing-v2/hand-v.png",
+      "sha256": "db766b6b3722cf987c5e655879d362393cfbfaa3ee58e7842dca54ad9ebdbf70",
+      "size": 1735056
+    },
+    {
+      "path": "frontend/public/images/landing-v2/hand-v.webp",
+      "sha256": "9a74e3c4cace1e4d3fe32f0fb2b4b2ae88f9b85848d84e3098cdfc5c8300f6b1",
+      "size": 119160
+    },
+    {
+      "path": "frontend/public/images/landing-v2/hands-detail.png",
+      "sha256": "c3fab0234f9cc4bcd60e03306b90bb5e9273e5c5531e6f1b2b2a8409cbf64fec",
+      "size": 2150339
+    },
+    {
+      "path": "frontend/public/images/landing-v2/hands-detail.webp",
+      "sha256": "977fe720ac3899e242c75bbdd87b11858fa45e3dcaec08a21ccb14c46d39bda4",
+      "size": 123966
+    },
+    {
+      "path": "frontend/public/images/landing-v2/mentor-cutout.png",
+      "sha256": "8af94b6053805550a4d2172ccc0d88f0dd93719e41c6e69cdadadf36ebca4742",
+      "size": 1594318
+    },
+    {
+      "path": "frontend/public/images/landing-v2/mentor-cutout.webp",
+      "sha256": "26646c65e7d66a739105729bbb468c2bb2b02a750adf1b0d275031292570eed0",
+      "size": 190748
+    },
+    {
+      "path": "frontend/public/images/landing-v2/mentor-pointing.png",
+      "sha256": "1917f5ab92d3d6bdcd016c8d07dabf6798b28ca8d624e237ef1e09bf794c5b31",
+      "size": 1600327
+    },
+    {
+      "path": "frontend/public/images/landing-v2/mentor-pointing.webp",
+      "sha256": "ea8fc4f7fcd496db9e7b13cc65c32916c003f8699c04a0595c84a8d822922f7e",
+      "size": 204344
+    },
+    {
+      "path": "frontend/public/images/landing-v2/mentor-wave.png",
+      "sha256": "c103d65b7f902f3d52c24a122ed5d32cf8bb414e979da83a459c503c1ee40cf8",
+      "size": 1709673
+    },
+    {
+      "path": "frontend/public/images/landing-v2/mentor-wave.webp",
+      "sha256": "4ead37f5bcf70aa6506fcdc4b94b6569d3ad577f17cfb7f9b9c2122150a0d90f",
+      "size": 208338
+    },
+    {
+      "path": "frontend/public/images/landing-v2/practice.png",
+      "sha256": "6031d9e41707b001802f48a93aa4299e227dc28c7a48dc3f7567b916d869e782",
+      "size": 2218330
+    },
+    {
+      "path": "frontend/public/images/landing-v2/practice.webp",
+      "sha256": "c637dd63e64bc00a735cebeb3d8eb4eb2898a2c118e27151d7c576211f8f08df",
+      "size": 121032
+    },
+    {
+      "path": "frontend/public/images/landing-v2/shop-signing-v1.webp",
+      "sha256": "f33be1441b804743d23453c5156d39de39ffc8c760d47fad6b7a7b70271edf08",
+      "size": 102122
+    },
+    {
+      "path": "frontend/public/images/landing-v2/study-desk.png",
+      "sha256": "915cecb27dbb6fb7f5129b038e65ac0df535b15c750e5f57f6c1e3a7c36d8798",
+      "size": 2029397
+    },
+    {
+      "path": "frontend/public/images/landing-v2/study-desk.webp",
+      "sha256": "5ec5ea28d47df280e99c6de3371dfc48bb605b0d245986d7ae3e5723795c408c",
+      "size": 100520
+    },
+    {
+      "path": "frontend/public/images/landing-v2/workshop.png",
+      "sha256": "dfa55fae3be7e1f1be5db2e632a28856e0d778f6a0e67ce5bfad4809243e678a",
+      "size": 2276475
+    },
+    {
+      "path": "frontend/public/images/landing-v2/workshop.webp",
+      "sha256": "7e15f8731f34ed0c9a646a669d67a4417595456f43db5462dc01971138900f9e",
+      "size": 139580
+    },
+    {
       "path": "frontend/public/images/learning-path-v1.png",
       "sha256": "deac0456be94ed21a00d568afaa6723118d559ead751d06828949e00840be864",
       "size": 1948918
     },
     {
+      "path": "frontend/public/images/learning-reference/source.png",
+      "sha256": "7d642db4bc259262479db22e141848923fe318a79fbfbc59e421d17f0221f4a4",
+      "size": 2002020
+    },
+    {
       "path": "frontend/public/images/learning-universe-v2.png",
       "sha256": "17641e08f51f30a44eeebf3aa97482cde9b8c51d944e4d29587447df869f5d1b",
       "size": 2007261
+    },
+    {
+      "path": "frontend/public/images/learning/hand-phrases.png",
+      "sha256": "f6ec3623212836a98122f1220829e425823273aa5f7b3aae57ea510172562330",
+      "size": 1920715
+    },
+    {
+      "path": "frontend/public/images/learning/hand-words.png",
+      "sha256": "cfd92d71ab6c55c91f04bf322f7a247c96dd6eaeb48824d4be2bc45698b67131",
+      "size": 1360085
+    },
+    {
+      "path": "frontend/public/images/learning/hands-alphabet.png",
+      "sha256": "fa929a64fb42bf12493284dfffc9b9526e1f10b2497f6d7ff2f7dc10669143c3",
+      "size": 1577692
+    },
+    {
+      "path": "frontend/public/images/learning/hero.png",
+      "sha256": "3b7bd65aaf366f6a26a8e99cb510354850078ea7df5786aea06db9a3e030abdc",
+      "size": 1223528
+    },
+    {
+      "path": "frontend/public/images/learning/practice-hands.png",
+      "sha256": "93b8a9ecbc101ad98820ff9a4eaa739196306302b2186096c12fef9782e1cc85",
+      "size": 1272222
     },
     {
       "path": "frontend/public/images/mentor-dialogue-v2.png",
@@ -1463,8 +1618,8 @@
     },
     {
       "path": "frontend/public/models/rsl/letter-camera-worker.js",
-      "sha256": "91fbec693e0761c5b255245bcbd9b136d0becce589ac1343eff27b79b240c115",
-      "size": 160316
+      "sha256": "9b53f02309674e79abee748e753bbcf02161065349de7b198e10aa10b7c811fc",
+      "size": 160373
     },
     {
       "path": "frontend/public/models/rsl/pose_landmarker_lite.task",
