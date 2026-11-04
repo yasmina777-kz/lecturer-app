@@ -1,7 +1,16 @@
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
-import { Play, Pause, RotateCcw, ScanSearch } from "lucide-react";
+import {
+  Play,
+  Pause,
+  RotateCcw,
+  ScanSearch,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import { at } from "../i18n/automation";
 import { motionTimeline, type MotionPlan } from "../sign/motion";
+import { letterPreviewTime, letterEndTime } from "../sign/letterPreview";
+import { alphabet } from "../sign/exercises";
 import type { GestureAngle } from "./GestureMentor3D";
 import { AlphabetCardArt } from "./AlphabetCardArt";
 import { alphabetIllustration } from "../sign/alphabetIllustrations";
@@ -17,6 +26,7 @@ export function SignSequencePlayer({
   autoPlay = false,
   framing = "sign",
   note,
+  onLetterChange,
   naturalIdle = framing === "sign",
 }: {
   plan: MotionPlan;
@@ -24,6 +34,7 @@ export function SignSequencePlayer({
   autoPlay?: boolean;
   framing?: "sign" | "body";
   note?: string;
+  onLetterChange?: (letter: string) => void;
   naturalIdle?: boolean;
 }) {
   const timeline = useMemo(() => motionTimeline(plan.steps), [plan.steps]);
@@ -43,24 +54,28 @@ export function SignSequencePlayer({
   );
   const duration = timeline[timeline.length - 1]?.end ?? 0;
   const singleLetter = plan.spelling && plan.steps.length === 1;
-  const [started, setStarted] = useState(autoPlay);
-  const [time, setTime] = useState(0),
+  const previewTime = singleLetter ? letterPreviewTime(plan.steps[0]) : 0;
+  const letterEnd = singleLetter ? letterEndTime(plan.steps[0]) : duration;
+  const initialPreview = singleLetter && !autoPlay;
+  const [started, setStarted] = useState(autoPlay || initialPreview);
+  const [time, setTime] = useState(initialPreview ? previewTime : 0),
     [playing, setPlaying] = useState(autoPlay),
     [ready, setReady] = useState(false),
     [speed, setSpeed] = useState(1),
     [loop, setLoop] = useState(false),
-    [close, setClose] = useState(false),
-    [inspecting, setInspecting] = useState(false),
+    [close, setClose] = useState(singleLetter),
+    [inspecting, setInspecting] = useState(initialPreview),
     [angle, setAngle] = useState<GestureAngle>("front");
-  const clock = useRef(0);
+  const clock = useRef(initialPreview ? previewTime : 0);
   const stage = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     const node = stage.current;
     if (!node) return;
     const observer = new IntersectionObserver(
-      ([entry]) => setVisible(entry.isIntersecting),
-      { threshold: 0.2 },
+      ([entry]) =>
+        setVisible(entry.isIntersecting && entry.intersectionRatio >= 0.5),
+      { threshold: 0.5 },
     );
     observer.observe(node);
     return () => observer.disconnect();
@@ -80,11 +95,15 @@ export function SignSequencePlayer({
       // playback run in slow motion whenever rendering dropped below 20 fps.
       clock.current += last ? Math.max(0, (now - last) / 1000) * speed : 0;
       last = now;
-      if (clock.current >= duration) {
+      const end = singleLetter && !loop ? letterEnd : duration;
+      if (clock.current >= end) {
         if (loop) clock.current %= duration;
         else {
-          clock.current = duration;
-          setTime(duration);
+          // Keep the letter visible after its full motion, rather than leaving
+          // the learner looking at the relaxed hands in the release frames.
+          clock.current = end;
+          setTime(clock.current);
+          setInspecting(singleLetter);
           setPlaying(false);
           return;
         }
@@ -94,11 +113,23 @@ export function SignSequencePlayer({
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [playing, ready, blocked, visible, speed, loop, duration]);
+  }, [
+    playing,
+    ready,
+    blocked,
+    visible,
+    speed,
+    loop,
+    duration,
+    singleLetter,
+    letterEnd,
+  ]);
   const current =
     timeline.find((s) => time < s.end) ?? timeline[timeline.length - 1];
-  const chartLetter = current?.id.startsWith("letter-") && alphabetIllustration(current.label)
-    ? current.label : undefined;
+  const chartLetter =
+    current?.id.startsWith("letter-") && alphabetIllustration(current.label)
+      ? current.label
+      : undefined;
   function seek(t: number) {
     setInspecting(false);
     setStarted(true);
@@ -120,15 +151,32 @@ export function SignSequencePlayer({
         <div className="sign-letter-comparison">
           <AlphabetCardArt letter={chartLetter} />
           <div>
-            <strong>{at("Сравните с карточкой", "Compare with the card", "Карточкамен салыстырыңыз")}</strong>
-            <p>{at("Смотрите на согнутые пальцы, большой палец и поворот ладони. Стрелки на рисунке обозначают движение.", "Check bent fingers, thumb and palm direction. Arrows indicate movement.", "Бүгілген саусақтарды, бас бармақты және алақан бағытын қараңыз. Жебелер қозғалысты білдіреді.")}</p>
-            <button className="button secondary" disabled={!ready || blocked} onClick={() => {
-              seek(current.start + (current.chartPose?.holdTime ?? ((current.leadIn ?? 0) + current.duration - (current.leadOut ?? 0)) / 2));
-              setInspecting(true);
-              setClose(true);
-              setAngle("front");
-            }}>
-              <ScanSearch size={17} />{at("Рассмотреть букву", "Inspect the letter", "Әріпті қарау")}
+            <strong>
+              {at(
+                "Сравните с карточкой",
+                "Compare with the card",
+                "Карточкамен салыстырыңыз",
+              )}
+            </strong>
+            <p>
+              {at(
+                "Смотрите на согнутые пальцы, большой палец и поворот ладони. Стрелки на рисунке обозначают движение.",
+                "Check bent fingers, thumb and palm direction. Arrows indicate movement.",
+                "Бүгілген саусақтарды, бас бармақты және алақан бағытын қараңыз. Жебелер қозғалысты білдіреді.",
+              )}
+            </p>
+            <button
+              className="button secondary"
+              disabled={!ready || blocked}
+              onClick={() => {
+                seek(current.start + letterPreviewTime(current));
+                setInspecting(true);
+                setClose(true);
+                setAngle("front");
+              }}
+            >
+              <ScanSearch size={17} />
+              {at("Рассмотреть букву", "Inspect the letter", "Әріпті қарау")}
             </button>
           </div>
         </div>
@@ -156,60 +204,125 @@ export function SignSequencePlayer({
         <>
           <div className="sign-avatar-player gesture-page">
             <div className="motion-avatar-only">
-            <div ref={stage} className="sign-avatar-stage sign-sequence-stage">
-              <Suspense
-                fallback={
-                  <p role="status">
-                    {at(
-                      "Загружаем аватара…",
-                      "Loading avatar…",
-                      "Аватар жүктелуде…",
-                    )}
-                  </p>
-                }
+              <div
+                ref={stage}
+                className="sign-avatar-stage sign-sequence-stage"
               >
-                <Mentor
-                  modelUrl={modelUrl}
-                  motionUrls={blocked ? [] : urls}
-                  playbackState={
-                    naturalIdle
-                      ? blocked || !started || time >= duration
-                        ? "idle"
-                        : playing
-                          ? "playing"
-                          : "paused"
-                      : undefined
+                <Suspense
+                  fallback={
+                    <p role="status">
+                      {at(
+                        "Загружаем аватара…",
+                        "Loading avatar…",
+                        "Аватар жүктелуде…",
+                      )}
+                    </p>
                   }
-                  motionTrims={trims}
-                  onReadyChange={setReady}
-                  time={time}
-                  closeup={close}
-                  angle={angle}
-                  resetToken={0}
-                  framing={plan.spelling && plan.steps.length === 1 ? "letter" : framing}
-                />
-              </Suspense>
-              <span className="sign-avatar-label" aria-live="off">
-                {blocked || !started || time >= duration
-                  ? at(
-                      "Готова показать",
-                      "Ready to demonstrate",
-                      "Көрсетуге дайын",
-                    )
-                  : current?.text}
-              </span>
-              <button
-                className="sign-zoom"
-                onClick={() => setClose((v) => !v)}
-                aria-pressed={close}
+                >
+                  <Mentor
+                    modelUrl={modelUrl}
+                    motionUrls={blocked ? [] : urls}
+                    playbackState={
+                      naturalIdle
+                        ? blocked || !started || time >= duration
+                          ? "idle"
+                          : playing
+                            ? "playing"
+                            : "paused"
+                        : undefined
+                    }
+                    motionTrims={trims}
+                    onReadyChange={setReady}
+                    time={time}
+                    closeup={close}
+                    angle={angle}
+                    resetToken={0}
+                    framing={
+                      plan.spelling && plan.steps.length === 1
+                        ? "letter"
+                        : framing
+                    }
+                  />
+                </Suspense>
+                <span className="sign-avatar-label" aria-live="off">
+                  {blocked || !started || time >= duration
+                    ? at(
+                        "Готова показать",
+                        "Ready to demonstrate",
+                        "Көрсетуге дайын",
+                      )
+                    : current?.text}
+                </span>
+                <button
+                  className="sign-zoom"
+                  onClick={() => setClose((v) => !v)}
+                  aria-pressed={close}
+                >
+                  <ScanSearch size={16} />
+                  {close
+                    ? at("Весь аватар", "Full avatar", "Толық аватар")
+                    : at("Приблизить руки", "Zoom hands", "Қолды үлкейту")}
+                </button>
+              </div>
+            </div>
+            {singleLetter && onLetterChange && (
+              <nav
+                className="sign-alphabet-navigation"
+                aria-label={at(
+                  "Выбор буквы",
+                  "Choose a letter",
+                  "Әріпті таңдау",
+                )}
               >
-                <ScanSearch size={16} />
-                {close
-                  ? at("Весь аватар", "Full avatar", "Толық аватар")
-                  : at("Приблизить руки", "Zoom hands", "Қолды үлкейту")}
-              </button>
-            </div>
-            </div>
+                <div className="sign-letter-arrows">
+                  <button
+                    type="button"
+                    disabled={alphabet.indexOf(plan.steps[0].label) <= 0}
+                    onClick={() =>
+                      onLetterChange(
+                        alphabet[alphabet.indexOf(plan.steps[0].label) - 1],
+                      )
+                    }
+                  >
+                    <ChevronLeft size={18} />
+                    {at("Предыдущая буква", "Previous letter", "Алдыңғы әріп")}
+                  </button>
+                  <strong aria-live="polite">{plan.steps[0].label}</strong>
+                  <button
+                    type="button"
+                    disabled={
+                      alphabet.indexOf(plan.steps[0].label) >=
+                      alphabet.length - 1
+                    }
+                    onClick={() =>
+                      onLetterChange(
+                        alphabet[alphabet.indexOf(plan.steps[0].label) + 1],
+                      )
+                    }
+                  >
+                    {at("Следующая буква", "Next letter", "Келесі әріп")}
+                    <ChevronRight size={18} />
+                  </button>
+                </div>
+                <div className="sign-alphabet-menu">
+                  {alphabet.map((letter) => (
+                    <button
+                      type="button"
+                      key={letter}
+                      aria-label={at(
+                        `Буква ${letter}`,
+                        `Letter ${letter}`,
+                        `${letter} әрпі`,
+                      )}
+                      aria-pressed={letter === plan.steps[0].label}
+                      onClick={() => onLetterChange(letter)}
+                    >
+                      {letter}
+                    </button>
+                  ))}
+                </div>
+              </nav>
+            )}
             {blocked && (
               <p className="sign-sequence-note" role="status">
                 {at(
@@ -230,7 +343,7 @@ export function SignSequencePlayer({
                         clock.current = 0;
                         setTime(0);
                       }
-                      if (inspecting) setClose(false);
+                      if (inspecting && !singleLetter) setClose(false);
                       setInspecting(false);
                       setStarted(true);
                       setPlaying((v) => !v);
@@ -248,7 +361,11 @@ export function SignSequencePlayer({
                         : !inspecting && time > 0 && time < duration
                           ? at("Продолжить", "Continue", "Жалғастыру")
                           : singleLetter
-                            ? at("Показать букву целиком", "Play the whole letter", "Әріпті толық көрсету")
+                            ? at(
+                                "Показать букву целиком",
+                                "Play the whole letter",
+                                "Әріпті толық көрсету",
+                              )
                             : at("Показать всё", "Play all", "Толық көрсету")}
                   </button>
                   <button
@@ -258,7 +375,6 @@ export function SignSequencePlayer({
                       clock.current = 0;
                       setTime(0);
                       setInspecting(false);
-                      if (singleLetter) setClose(false);
                       setStarted(true);
                       setPlaying(true);
                     }}

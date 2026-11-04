@@ -488,6 +488,16 @@ export function SignDictionaryPage() {
             key={`${run}-${spelling}-${selected?.id ?? submitted}`}
             plan={selectedPlan ?? motionPlan}
             autoPlay={!!(selected || submitted)}
+            onLetterChange={(letter) => {
+              const entry = entries.find(
+                (e) => e.category === "Алфавит" && e.label === letter,
+              );
+              if (!entry) return;
+              setSelected(entry);
+              setText(letter);
+              setSubmitted(letter);
+              setRun((v) => v + 1);
+            }}
           />
           {!!(submitted || selected) && (
             <details className="sign-dictionary-reference">

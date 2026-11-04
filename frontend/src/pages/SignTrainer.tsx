@@ -1,6 +1,11 @@
 import { LearningHome } from "./LearningHome";
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
-import { Link, useSearchParams, useLocation } from "react-router-dom";
+import {
+  Link,
+  useSearchParams,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import {
   ArrowLeft,
   ArrowRight,
@@ -305,6 +310,7 @@ export function ExercisePlayer({
   return <AnimatedExercisePlayer key={exercise.id} exercise={exercise} />;
 }
 function CapturedLetterPlayer({ letter }: { letter: string }) {
+  const navigate = useNavigate();
   const location = useLocation();
   const [mode, setMode] = useState("watch");
   useEffect(() => {
@@ -369,7 +375,17 @@ function CapturedLetterPlayer({ letter }: { letter: string }) {
           {!loaded ? (
             <Loading />
           ) : (
-            <SignSequencePlayer key={letter} plan={plan} />
+            <SignSequencePlayer
+              key={letter}
+              plan={plan}
+              onLetterChange={(next) => {
+                const target = exercises().find((e) => e.letter === next);
+                if (target)
+                  navigate(`/practice?exercise=${target.id}`, {
+                    preventScrollReset: true,
+                  });
+              }}
+            />
           )}
           <button
             className="button primary sign-next-practice"
