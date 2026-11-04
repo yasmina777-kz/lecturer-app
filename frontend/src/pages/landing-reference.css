@@ -17,7 +17,7 @@
   & .mentor-hero { min-height: 480px; padding: 36px 0 48px; align-items: flex-start; }
   & .mentor-hero-copy { width: 53%; max-width: 650px; padding-top: 30px; }
   & .mentor-hero-copy>.mentor-kicker { display: none; }
-  & h1 { font-size: clamp(36px,3.6vw,48px); line-height: 1.1; letter-spacing: -.045em; white-space: pre-line; text-wrap: initial; }
+  & h1 { font-size: clamp(34px,3.4vw,44px); line-height: 1.1; letter-spacing: -.045em; white-space: pre-line; text-wrap: initial; }
   & .mentor-hero-copy>p { font-size: 17px; line-height: 1.5; max-width: 460px; margin: 20px 0 24px; }
   & .mentor-hero-actions { gap: 20px; }
   & .mentor-cta { min-height: 44px; font-size: 14px; padding: 11px 18px; gap: 14px; }
@@ -350,7 +350,7 @@
 /* Fill the first desktop viewport without enlarging the typography. */
 @media(min-width:801px) {
  :root .landing-surface[data-product-ui][data-product-theme] .landing-site {
-  & .mentor-hero { min-height: max(480px,calc(100svh - 72px)); align-items: flex-start; padding-top: 76px; }
+  & .mentor-hero { min-height: max(480px,calc(100svh - 72px)); align-items: flex-start; padding-top: clamp(88px,14svh,112px); }
   & .mentor-hero-copy { padding-top: 0; }
   & .mentor-hero-art { top: 16px; bottom: 48px; }
   & .mentor-motion-toggle { bottom: 16px; }
