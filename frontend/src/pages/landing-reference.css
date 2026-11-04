@@ -17,7 +17,7 @@
   & .mentor-hero { min-height: 480px; padding: 36px 0 48px; align-items: flex-start; }
   & .mentor-hero-copy { width: 53%; max-width: 650px; padding-top: 30px; }
   & .mentor-hero-copy>.mentor-kicker { display: none; }
-  & h1 { font-size: clamp(34px,3.4vw,44px); line-height: 1.1; letter-spacing: -.045em; white-space: pre-line; text-wrap: initial; }
+  & h1 { font-size: clamp(40px,4.2vw,56px); line-height: 1.1; letter-spacing: -.045em; white-space: pre-line; text-wrap: initial; }
   & .mentor-hero-copy>p { font-size: 17px; line-height: 1.5; max-width: 460px; margin: 20px 0 24px; }
   & .mentor-hero-actions { gap: 20px; }
   & .mentor-cta { min-height: 44px; font-size: 14px; padding: 11px 18px; gap: 14px; }
@@ -195,7 +195,7 @@
   & .mentor-hero { min-height: 460px; }
   & .mentor-hero-art { left: 40%; }
   & .landing-hero-image { width: 86%; }
-  & h1 { font-size: 42px; }
+  & h1 { font-size: 48px; }
   & .mentor-hero-copy>p { font-size: 17px; }
   & .mentor-demo-link { font-size: 14px; }
   & .mentor-hero-actions { gap: 14px; }
@@ -234,7 +234,7 @@
   & .mentor-header .mentor-signin { font-size: 15px; padding: 10px 16px; }
   & .mentor-hero { padding: 32px 0 30px; min-height: 0; }
   & .mentor-hero-copy { width: 100%; padding: 0; }
-  & h1 { font-size: clamp(34px,5.5vw,42px); }
+  & h1 { font-size: clamp(38px,6vw,48px); }
   & .mentor-hero-copy>p { font-size: 17px; max-width: 550px; margin: 20px 0 24px; }
   & .mentor-hero-art { position: relative; inset: auto; height: 400px; margin: -20px -20px 0; }
   & .landing-hero-image { width: 60%; right: 5%; }
@@ -299,7 +299,7 @@
   & .mentor-header nav a { font-size: 14px; }
   & .brand { font-size: 23px; }
   & .mentor-hero { padding-top: 26px; }
-  & h1 { font-size: clamp(30px,7.2vw,36px); }
+  & h1 { font-size: clamp(32px,8vw,40px); }
   & .mentor-hero-copy>p { font-size: 16px; }
   & .mentor-hero-actions .mentor-cta { width: auto; font-size: 14px; min-height: 44px; padding: 11px 16px; }
   & .mentor-hero-actions { gap: 12px 18px; }
