@@ -1,0 +1,115 @@
+{
+  "source": "YouTube-SL-25",
+  "indexSha256": "79e8d2c35b0d3ed31b7e3c32348a1ce64513ca0ef217d7c1cbbd6b14410e7f08",
+  "indexedRslVideos": 715,
+  "downloadedVideos": 3,
+  "downloadedMinutes": 50.38333333333333,
+  "candidateSegments": 468,
+  "usableForTraining": 0,
+  "rejected": [],
+  "requiredReview": [
+    "Confirm signing language and visible signer",
+    "Align full utterance boundaries; subtitle cues can split a phrase",
+    "Annotate gesture glosses for CTC; translation is not a gloss sequence",
+    "Assign signer-disjoint splits, not random clips from one channel"
+  ],
+  "sources": [
+    {
+      "video_id": "D3nturQl4k8",
+      "url": "https://www.youtube.com/watch?v=D3nturQl4k8",
+      "title": "Вышел проект с тематическим глоссарием на жестовом языке.  С субтитрами.",
+      "channel_id": "UCoA3JvRkP1z3GE6x5jo6OzA",
+      "duration": 1015.0,
+      "videoSha256": "bf9f57a3aa389d5b6e7397cc91d4238c3c34f4e0e4a47fb58c7e8c1f82dcf725",
+      "captionSha256": "5d5205f5830c6fd3cf0e0a66ab338bde0f4bf7eca36847245a81b14f0fbe8b93",
+      "sourceLicense": null,
+      "captionType": "original Russian subtitle track; not verified gloss annotation",
+      "localVideoDirectory": "ml/krsl/data/sources/youtube-sl-25/pilot/"
+    },
+    {
+      "video_id": "dJdN5kopJks",
+      "url": "https://www.youtube.com/watch?v=dJdN5kopJks",
+      "title": "Галина Лазаревна Зайцева. 1 часть. С субтитрами",
+      "channel_id": "UCoA3JvRkP1z3GE6x5jo6OzA",
+      "duration": 1009.0,
+      "videoSha256": "224f2c97bb50a5da746f6d4efe20b683e257ba45079c5e3886c2708e63076536",
+      "captionSha256": "6d775382886335e6f36eadd25e58fa9ea2fea65bb44c973c4b9409b6363f04e7",
+      "sourceLicense": null,
+      "captionType": "original Russian subtitle track; not verified gloss annotation",
+      "localVideoDirectory": "ml/krsl/data/sources/youtube-sl-25/pilot/"
+    },
+    {
+      "video_id": "ncJBYIb5DOs",
+      "url": "https://www.youtube.com/watch?v=ncJBYIb5DOs",
+      "title": "Галина Лазаревна Зайцева. 2 часть. С субтитрами",
+      "channel_id": "UCoA3JvRkP1z3GE6x5jo6OzA",
+      "duration": 999.0,
+      "videoSha256": "3aaf7c490be19753d7675bb1cbb3bdbc8c538649501727f6d4638ebd9ec1caa8",
+      "captionSha256": "40ccacce7aee39f1e7767bd45352d8e498487dc8a47519ac24b050f8e3d4294f",
+      "sourceLicense": null,
+      "captionType": "original Russian subtitle track; not verified gloss annotation",
+      "localVideoDirectory": "ml/krsl/data/sources/youtube-sl-25/pilot/"
+    }
+  ],
+  "checkedAt": "2026-11-05",
+  "indexUrl": "https://storage.googleapis.com/gresearch/youtube-sl-25/youtube-sl-25-metadata.csv",
+  "projectUrl": "https://github.com/google-research/google-research/tree/master/youtube_sl_25",
+  "mediaChecks": [
+    {
+      "video_id": "D3nturQl4k8",
+      "fps": 25.0,
+      "decodedFrames": 25363,
+      "decodedSeconds": 1014.52,
+      "captionDuration": 1015.0
+    },
+    {
+      "video_id": "dJdN5kopJks",
+      "fps": 25.0,
+      "decodedFrames": 25212,
+      "decodedSeconds": 1008.48,
+      "captionDuration": 1009.0
+    },
+    {
+      "video_id": "ncJBYIb5DOs",
+      "fps": 25.0,
+      "decodedFrames": 24981,
+      "decodedSeconds": 999.24,
+      "captionDuration": 999.0
+    }
+  ],
+  "newModelTrained": false,
+  "otherSources": [
+    {
+      "name": "SignVerse-2M",
+      "url": "https://huggingface.co/datasets/SignerX/SignVerse-2M",
+      "revision": "0c7e956a8471acad3a9cebaeb66bb23bf5deaafa",
+      "rslIndexRows": 715,
+      "rslWithArchiveMapping": 0,
+      "note": "Inspected processed CSV and archive upload map; no RSL pose payload acquired. xy-confidence differs from xyz MediaPipe input."
+    },
+    {
+      "name": "KRSL-OnlineSchool",
+      "url": "https://krslproject.github.io/online-school/",
+      "note": "Public site has sample-video link but both transcript/gloss annotation hrefs are empty."
+    },
+    {
+      "name": "FluentSigners-50",
+      "url": "https://krslproject.github.io/FluentSigners-50/",
+      "note": "Gloss/translation CSV available; full-video Drive link returned 404 in preceding audit; Zenodo files restricted."
+    },
+    {
+      "name": "VOG educational dialogues",
+      "url": "https://voginfo.ru/vog/2015/05/14/learningsigns-3/",
+      "videoIds": [
+        "XhfuzmNWmGA",
+        "3-OUmHsClhE"
+      ],
+      "note": "Public phrase examples; checked first video metadata, no separate captions listed. Would require manual temporal annotation."
+    },
+    {
+      "name": "Parallel Russian/RSL gloss text",
+      "url": "https://huggingface.co/datasets/Arseniy-Polyakov/parallel_corpus_russian_rsl_glosses",
+      "note": "Text-only; no video features, unsuitable as visual recognition training data by itself."
+    }
+  ]
+}

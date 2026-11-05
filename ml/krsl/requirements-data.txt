@@ -1,0 +1,2 @@
+# Optional acquisition tool; not needed by the recognition server.
+yt-dlp==2026.10.26

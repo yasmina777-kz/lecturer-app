@@ -62,7 +62,29 @@ Reports contain baseline validation/test WER, per-example predictions and candid
 
 Each run writes to its own `data/training/<UTC-time>-<run-id>/` directory, so an old candidate cannot be mistaken for the current result. Reports include corpus counts, signer/broadcast groups, labels absent from training, exact transcript match rate, and a separate false-positive rate on no-sign clips (not folded into positive-clip WER). Candidate selection requires lower validation WER without increasing validation no-sign false positives when negatives are present. `--patience 3` stops after three non-improving epochs; `--learning-rate` defaults to `1e-5`. The feature cache is keyed by extractor source, landmark asset and library versions. Reports record manifest and starting-checkpoint hashes.
 
-As of 2026-11-05, no accessible labeled continuous-phrase corpus is present locally. The [FluentSigners-50 record](https://zenodo.org/records/6043739) restricts file access; the project's linked Drive download returns 404. Local Bukva letters and selected Slovo isolated words cannot replace a phrase corpus. These training fixes have been tested with unit/synthetic pipeline checks; no new phrase weights or accuracy gain are claimed. Production still reports `/api/krsl/status` as unavailable; it needs a hosted Python service as well as validated weights. The camera now avoids recording phrase clips while that service is unavailable and leaves letter recognition active.
+The initial search on 2026-11-05 found no accessible gloss-labeled continuous-phrase corpus locally. The [FluentSigners-50 record](https://zenodo.org/records/6043739) restricts file access; the project's linked Drive download returns 404. Local Bukva letters and selected Slovo isolated words cannot replace a phrase corpus. The subsequent YouTube-SL-25 acquisition below provides real signing videos with subtitle translations, still pending gloss annotation. These training fixes have been tested with unit/synthetic pipeline checks; no new phrase weights or accuracy gain are claimed. Production still reports `/api/krsl/status` as unavailable; it needs a hosted Python service as well as validated weights. The camera now avoids recording phrase clips while that service is unavailable and leaves letter recognition active.
+
+### YouTube-SL-25 source acquisition (2026-11-05)
+
+The [Google Research source](https://github.com/google-research/google-research/tree/master/youtube_sl_25) publishes a [video index](https://storage.googleapis.com/gresearch/youtube-sl-25/youtube-sl-25-metadata.csv) containing **715 RSL-labeled video IDs** (SHA-256 `79e8d2c35b0d3ed31b7e3c32348a1ce64513ca0ef217d7c1cbbd6b14410e7f08`). The authors describe coarse human filtering, not perfect alignment. This index is a useful acquisition source, not 715 locally downloaded videos.
+
+Downloaded pilot: `ncJBYIb5DOs`, `dJdN5kopJks`, `D3nturQl4k8`: three silent videos, **50.38 minutes**, original Russian subtitle tracks, and **468 subtitle intervals**. They share one channel; speaker identities and split independence have not been established. Sampled frames from the first video visibly contain signing, including changes of signer. All media and full subtitle text remain in ignored `data/sources/youtube-sl-25/`, not in Git or the frontend.
+
+Reproduce acquisition with the optional data tool (`requirements-data.txt`, separate from serving dependencies):
+
+```sh
+ml/krsl/.venv/bin/pip install -r ml/krsl/requirements-data.txt
+mkdir -p ml/krsl/data/sources/youtube-sl-25/pilot
+curl -fL 'https://storage.googleapis.com/gresearch/youtube-sl-25/youtube-sl-25-metadata.csv' -o ml/krsl/data/sources/youtube-sl-25/metadata.csv
+ml/krsl/.venv/bin/yt-dlp --no-playlist --skip-download --write-subs --sub-langs ru --sub-format vtt --write-info-json -o 'ml/krsl/data/sources/youtube-sl-25/pilot/%(id)s.%(ext)s' 'https://www.youtube.com/watch?v=ncJBYIb5DOs'
+ml/krsl/.venv/bin/yt-dlp --no-playlist -f 'bestvideo[height<=480]' --max-filesize 150M -o 'ml/krsl/data/sources/youtube-sl-25/pilot/%(id)s.%(ext)s' 'https://www.youtube.com/watch?v=ncJBYIb5DOs'
+python3 ml/krsl/prepare_youtube_corpus.py ml/krsl/data/sources/youtube-sl-25/metadata.csv ml/krsl/data/sources/youtube-sl-25/pilot ml/krsl/data/sources/youtube-sl-25/review
+python3 ml/krsl/test_youtube_corpus.py
+```
+
+`review/review-segments.json` preserves original subtitle times and provides half-second context for review. It explicitly leaves `glossTokens`, `signerGroup` and `split` unset. It must not be passed directly to `train.py`: Russian translation text is not the sign gloss sequence required by its CTC objective, and subtitle intervals may cut through signs. Review full utterance boundaries, annotate glosses, identify signing groups, and establish independent train/validation/test samples first. Original video rights are not transferred by publication of the Google index. Metadata retains source license information; these three sources do not declare an explicit license in the downloaded metadata.
+
+Also inspected [SignVerse-2M](https://huggingface.co/datasets/SignerX/SignVerse-2M) at revision `0c7e956a8471acad3a9cebaeb66bb23bf5deaafa`. Although its metadata includes the same 715 RSL IDs, **none have a published archive mapping** in that revision's processed metadata/upload index. Its stated DWPose format uses `(x,y,confidence)`, not our MediaPipe `(x,y,z)` features. Do not claim those RSL poses were downloaded or feed that format into the current checkpoint. Source search and pilot media checks are recorded in `docs/phrase-source-search.json`.
 
 Checks:
 
