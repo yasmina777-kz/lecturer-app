@@ -46,3 +46,58 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Use the same product palette in the shell, controls and 3D studio. */
+:root .product-ui[data-product-ui][data-product-theme] .woman-avatar-trial {
+  max-width: 1120px;
+  margin-inline: auto;
+  --g-bg: var(--p-surface);
+  --g-text: var(--p-text);
+  --g-muted: var(--p-muted);
+  --g-line: var(--p-line);
+}
+:root .product-ui[data-product-ui][data-product-theme] .woman-avatar-trial .page-heading {
+  margin: 16px 0 20px;
+}
+:root .product-ui[data-product-ui][data-product-theme] .woman-avatar-trial .woman-trial-controls {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+}
+:root .product-ui[data-product-ui][data-product-theme] .woman-avatar-trial :is(input, select) {
+  background: var(--p-surface);
+  color: var(--p-text);
+  border: 1px solid var(--p-line);
+  border-radius: 12px;
+  min-height: 44px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+:root .product-ui[data-product-ui][data-product-theme] .woman-avatar-trial .woman-trial-alphabet button {
+  min-width: 36px;
+  min-height: 36px;
+  background: var(--p-surface);
+  border: 1px solid var(--p-line);
+  color: var(--p-text);
+}
+:root .product-ui[data-product-ui][data-product-theme] .woman-avatar-trial .woman-trial-alphabet button[aria-pressed="true"] {
+  background: var(--p-primary);
+  color: var(--p-on-primary);
+  border-color: var(--p-primary);
+}
+:root .product-ui[data-product-ui][data-product-theme] .woman-avatar-trial .sign-sequence {
+  max-width: none;
+  margin-top: 20px;
+}
+:root .product-ui[data-product-ui][data-product-theme] .woman-avatar-trial .sign-avatar-stage {
+  height: clamp(320px, 48vh, 480px);
+  background: var(--p-subtle);
+}
+:root .product-ui[data-product-ui][data-product-theme] .woman-avatar-trial .sign-zoom {
+  background: var(--p-surface);
+  color: var(--p-text);
+  border: 1px solid var(--p-line);
+}
+@media (max-width: 600px) {
+  :root .product-ui[data-product-ui][data-product-theme] .woman-avatar-trial .woman-trial-controls { grid-template-columns: 1fr; }
+  .woman-avatar-trial .woman-trial-text { flex-wrap: wrap; }
+  .woman-avatar-trial .woman-trial-text input { flex-basis: 180px; }
+}

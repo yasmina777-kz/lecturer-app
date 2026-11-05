@@ -28,6 +28,7 @@ export function SignSequencePlayer({
   note,
   onLetterChange,
   naturalIdle = framing === "sign",
+  studio = false,
 }: {
   plan: MotionPlan;
   modelUrl?: string;
@@ -36,6 +37,7 @@ export function SignSequencePlayer({
   note?: string;
   onLetterChange?: (letter: string) => void;
   naturalIdle?: boolean;
+  studio?: boolean;
 }) {
   const timeline = useMemo(() => motionTimeline(plan.steps), [plan.steps]);
   const urls = useMemo(
@@ -213,6 +215,7 @@ export function SignSequencePlayer({
                   }
                 >
                   <Mentor
+                    studio={studio}
                     modelUrl={modelUrl}
                     motionUrls={blocked ? [] : urls}
                     playbackState={

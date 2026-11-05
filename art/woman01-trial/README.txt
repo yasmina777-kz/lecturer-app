@@ -53,3 +53,20 @@ Reproduction (Blender 4.5.3 LTS)
 Intermediate .blend files/renders remain local and ignored. Web assets and
 reproduction scripts are committed. The separately delivered colored .blend
 contains the greeting animation and opens with vertex colors enabled.
+
+Studio polish — 2026-11-05
+- Run polish_surface.py after build_rig.py to export the current web model.
+  It reopens the untouched intermediate rig, so repeated runs are deterministic.
+- Eight gentle smoothing iterations restricted to clothing, tapered at cuffs,
+  collar and shoes. Displacement capped at 2.5 mm; face and hand vertices remain
+  exactly unchanged. Bone rest axes and deform weights are retained.
+- Neutral charcoal clothing and separate matte fabric, skin and hair materials.
+- /avatar-woman now uses ProductSurface's shared light/dark palette. Its studio
+  uses neutral fill lighting without harsh low-resolution self-shadows.
+- Dense arm rotation samples get a symmetric, bounded correction (at most 1.25°)
+  to soften small capture oscillations. No changes to finger, hand, head or
+  position tracks, clip duration or endpoints. Fast turns are bypassed. This is
+  rendering polish, not correction or validation of sign-language meaning.
+- check-arm-polish.mjs checks synthetic invariants and the real greeting clip
+  (791 refined arm samples; largest correction 0.626°).
+- The limitations above, including finger contacts and fused topology, remain.

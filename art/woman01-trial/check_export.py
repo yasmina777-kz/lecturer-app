@@ -14,9 +14,14 @@ def finite(doc,binary):
   if a['componentType']==5126:
    assert all(math.isfinite(v) for row in accessor(doc,binary,i) for v in row),f'nonfinite accessor {i}'
 m,b=read(OUT/'woman01.glb');finite(m,b)
-attrs=m['meshes'][0]['primitives'][0]['attributes'];assert 'COLOR_0' in attrs
-colors=accessor(m,b,attrs['COLOR_0']);assert len(set(colors))>20
-weights=accessor(m,b,attrs['WEIGHTS_0']);assert all(abs(sum(v)-1)<.00001 for v in weights)
+weights=[];colors=[]
+for primitive in m['meshes'][0]['primitives']:
+ attrs=primitive['attributes'];assert 'COLOR_0' in attrs and 'NORMAL' in attrs
+ colors.extend(accessor(m,b,attrs['COLOR_0']))
+ weights.extend(accessor(m,b,attrs['WEIGHTS_0']))
+ assert all(abs(sum(v*v for v in n)-1)<.0001 for n in accessor(m,b,attrs['NORMAL']))
+assert len(set(colors))>20
+assert all(abs(sum(v)-1)<.00001 for v in weights)
 names={n.get('name') for n in m['nodes']};joints=m['skins'][0]['joints'];assert len(joints)==51
 assert sum('Hand' in m['nodes'][i]['name'] and m['nodes'][i]['name'][-1] in '123' for i in joints)==30
 catalog=json.loads((OUT/'catalog.json').read_text());assert len(catalog)==212

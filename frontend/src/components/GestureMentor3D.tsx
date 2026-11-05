@@ -12,6 +12,7 @@ import { composeMotion } from "../sign/composeMotion";
 import { at } from "../i18n/automation";
 import { loadAvatar } from "../sign/avatarModel";
 import { createMotionCache } from "../sign/motionCache";
+import { softenArmMotion } from "../sign/softenArmMotion";
 
 // Animation-only GLBs contain no character meshes. Each playback gets a clone
 // so its mixer cannot alter the saved clip used by another word or component.
@@ -34,6 +35,7 @@ export function GestureMentor3D({
   resetToken,
   framing = "full",
   modelUrl = "/avatars/mira-blender/mira-signing-soft.glb",
+  studio = false,
 }: {
   time: number;
   playbackState?: AvatarPlaybackState;
@@ -45,6 +47,7 @@ export function GestureMentor3D({
   resetToken: number;
   modelUrl?: string;
   framing?: "full" | "sign" | "letter" | "body";
+  studio?: boolean;
 }) {
   const readyCallback = useRef(onReadyChange);
   readyCallback.current = onReadyChange;
@@ -75,7 +78,7 @@ export function GestureMentor3D({
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.08;
     renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFShadowMap;
+    renderer.shadowMap.type = studio ? THREE.PCFSoftShadowMap : THREE.PCFShadowMap;
     renderer.domElement.setAttribute("role", "img");
     renderer.domElement.setAttribute(
       "aria-label",
@@ -87,8 +90,8 @@ export function GestureMentor3D({
     );
     mount.appendChild(renderer.domElement);
     const scene = new THREE.Scene();
-    scene.add(new THREE.HemisphereLight(0xfff5e7, 0x657a91, 1.2));
-    const key = new THREE.DirectionalLight(0xffecd5, 2.4);
+    scene.add(new THREE.HemisphereLight(studio ? 0xfffaf5 : 0xfff5e7, studio ? 0x9a9691 : 0x657a91, studio ? 2.0 : 1.2));
+    const key = new THREE.DirectionalLight(studio ? 0xfff5ea : 0xffecd5, studio ? 1.8 : 2.4);
     key.position.set(-2, 4, 4);
     key.target.position.set(0, 1.2, 0);
     scene.add(key, key.target);
@@ -103,10 +106,10 @@ export function GestureMentor3D({
     key.shadow.normalBias = 0.0008;
     key.shadow.bias = -0.00005;
     key.shadow.radius = 3;
-    const fill = new THREE.DirectionalLight(0xd6e9ff, 1.1);
+    const fill = new THREE.DirectionalLight(studio ? 0xf4f5ff : 0xd6e9ff, studio ? 1.5 : 1.1);
     fill.position.set(3, 2, 1);
     scene.add(fill);
-    const rim = new THREE.DirectionalLight(0xffe1af, 1.2);
+    const rim = new THREE.DirectionalLight(studio ? 0xffffff : 0xffe1af, studio ? 0.7 : 1.2);
     rim.position.set(0, 3, -3);
     scene.add(rim);
     let clipDuration = 8;
@@ -310,7 +313,9 @@ export function GestureMentor3D({
           if (o instanceof THREE.Mesh) {
             if (o instanceof THREE.SkinnedMesh) preserveJointVolume(o);
             o.castShadow = true;
-            o.receiveShadow = true;
+            // Broad fill keeps facial/hand contours readable without the small
+            // shadow map's jagged self-shadow on the fused scan surface.
+            o.receiveShadow = !studio;
             o.frustumCulled = false;
           }
         });
@@ -326,7 +331,7 @@ export function GestureMentor3D({
             if (!alive) return;
             clips = [
               composeMotion(
-                urls.map((url) => sources.get(url)!),
+                urls.map((url) => studio ? softenArmMotion(sources.get(url)!) : sources.get(url)!),
                 undefined,
                 JSON.parse(trimKey),
               ),
@@ -385,7 +390,7 @@ export function GestureMentor3D({
         }
         setLoading(false);
         readyCallback.current?.(true);
-        mount.dataset.model = "blender-mira-v3-soft";
+        mount.dataset.model = modelUrl.includes("woman01") ? "woman01-studio-v3" : "blender-mira-v3-soft";
         pose(current.current.time);
       })
       .catch(() => {
@@ -409,7 +414,7 @@ export function GestureMentor3D({
       renderer.dispose();
       renderer.domElement.remove();
     };
-  }, [modelUrl, framing, motionKey, trimKey, naturalIdle]);
+  }, [modelUrl, framing, motionKey, trimKey, naturalIdle, studio]);
   useEffect(() => api.current?.pose(time), [time, playbackState]);
   useEffect(
     () => api.current?.view(closeup, angle),

@@ -86,7 +86,7 @@ export function WomanAvatarPreviewPage() {
         }
       : plan;
   return (
-    <main className="sign-workspace practice-workspace woman-avatar-trial">
+    <section className="sign-workspace practice-workspace woman-avatar-trial">
       <Link to="/text-to-sign">
         ← {at("Текст и жесты", "Text and signs", "Мәтін және ымдар")}
       </Link>
@@ -106,7 +106,7 @@ export function WomanAvatarPreviewPage() {
         <label>
           {at("Модель", "Model", "Модель")}
           <select value={model} onChange={(e) => setModel(e.target.value)}>
-            <option value="woman01">Woman 01</option>
+            <option value="woman01">Woman 01 · {at("новый аватар", "new avatar", "жаңа аватар")}</option>
             <option value="mira">
               {at("Текущий аватар", "Current avatar", "Қазіргі аватар")}
             </option>
@@ -171,6 +171,7 @@ export function WomanAvatarPreviewPage() {
             key={a}
             onClick={() => letter(a)}
             disabled={!assets.length}
+            aria-pressed={assets.find((asset) => asset.id === selected)?.label === a}
             aria-label={at(`Буква ${a}`, `Letter ${a}`, `${a} әрпі`)}
           >
             {a}
@@ -191,11 +192,12 @@ export function WomanAvatarPreviewPage() {
           key={`${model}:${run}`}
           modelUrl={
             model === "woman01"
-              ? "/avatars/woman01/woman01.glb?v=color-2"
+              ? "/avatars/woman01/woman01.glb?v=studio-3"
               : undefined
           }
           plan={shown}
           naturalIdle={false}
+          studio
           onLetterChange={letter}
         />
       ) : (
@@ -203,6 +205,6 @@ export function WomanAvatarPreviewPage() {
           {at("Загружаем движения…", "Loading motions…", "Қимылдар жүктелуде…")}
         </p>
       )}
-    </main>
+    </section>
   );
 }
