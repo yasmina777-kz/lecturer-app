@@ -58,7 +58,7 @@ ml/krsl/.venv/bin/python ml/krsl/train.py /absolute/path/manifest.json --evaluat
 ml/krsl/.venv/bin/python ml/krsl/train.py /absolute/path/manifest.json --epochs 5
 ```
 
-Reports contain baseline validation/test WER, per-example predictions and candidate results. Only validation chooses the best epoch. A candidate is saved only when validation improves, and is never automatically deployed. Check untouched test results and human review before replacing the serving model. The current work includes the executable training path; it does **not** claim new trained weights.
+Reports contain baseline validation/test WER, per-example predictions and candidate results. Only validation chooses the best epoch. A candidate is saved only when validation improves, and is never automatically deployed. Check untouched test results and human review before replacing the serving model. This CTC training path has not yet produced newly trained serving weights. The separate subtitle translation experiment below does produce research weights.
 
 Each run writes to its own `data/training/<UTC-time>-<run-id>/` directory, so an old candidate cannot be mistaken for the current result. Reports include corpus counts, signer/broadcast groups, labels absent from training, exact transcript match rate, and a separate false-positive rate on no-sign clips (not folded into positive-clip WER). Candidate selection requires lower validation WER without increasing validation no-sign false positives when negatives are present. `--patience 3` stops after three non-improving epochs; `--learning-rate` defaults to `1e-5`. The feature cache is keyed by extractor source, landmark asset and library versions. Reports record manifest and starting-checkpoint hashes.
 
@@ -92,6 +92,71 @@ Checks:
 ml/krsl/.venv/bin/python ml/krsl/test_runtime.py
 ml/krsl/.venv/bin/python ml/krsl/check_service.py
 ```
+
+### Actual subtitle-supervised training pilot (2026-11-05)
+
+`extract_subtitle_features.py`, `subtitle_model.py`, and
+`train_subtitle_translation.py` provide a **separate, trainable video-to-text
+experiment**. The additional source `0EQJSyjbSAQ` has an original Russian
+subtitle track and visibly signing presenter in sampled frames. The complete
+pilot now contains four videos (55.83 minutes), 508 subtitle intervals. RGB
+frames are used only to extract Holistic landmarks; on-screen subtitle pixels
+never enter the learned translator.
+
+This model is initialized from scratch: a 722,357-parameter temporal Transformer
+encoder and character decoder, with no pretrained language model or LLM API.
+Features include both hands, six upper-body points and twelve facial points.
+Body-relative normalization preserves missing observations; frame differences
+provide motion information. Translation targets are subtitle text, **not**
+fabricated gloss labels. An autoregressive decoder can learn a different output
+word order, but that architecture alone does not establish translation quality.
+
+`subtitle-pilot-splits.json` fixes whole recordings before training: both parts
+of the Zaitseva biography stay in training, glossary news is validation, and a
+different-channel recording is the untouched final test. This is not a verified
+signer-disjoint benchmark: identities were not audited, validation shares a
+channel with training, and test topic differs substantially. Tracking and length
+filters retain 262 training, 144 validation and 40 test clips. Subtitle boundaries
+and translations remain unreviewed weak supervision.
+
+```sh
+# First acquire all four IDs with original ru subtitles as above, including:
+# https://www.youtube.com/watch?v=0EQJSyjbSAQ
+python3 ml/krsl/prepare_youtube_corpus.py ml/krsl/data/sources/youtube-sl-25/metadata.csv ml/krsl/data/sources/youtube-sl-25/pilot ml/krsl/data/sources/youtube-sl-25/review
+ml/krsl/.venv/bin/python ml/krsl/extract_subtitle_features.py
+ml/krsl/.venv/bin/python ml/krsl/train_subtitle_translation.py --splits ml/krsl/subtitle-pilot-splits.json --device cpu --epochs 60
+ml/krsl/.venv/bin/python -m unittest discover -s ml/krsl -p 'test_*.py'
+```
+
+Each run saves `candidate.pt`, `report.json`, and local-only
+`test-predictions.json` under ignored `data/subtitle-training/<run>/`. Extraction
+caches are fingerprinted by source video, feature code, landmark model and
+library versions. Missing/stale caches, duplicate videos and related recording
+groups crossing splits are rejected. Only training text determines the character
+vocabulary. Validation uses free-running generation every five epochs; test is
+evaluated after checkpoint selection, not used to select epochs. The report
+includes WER, character error rate, whole-phrase matches, a constant-text
+baseline, and a zero-visual-input ablation. WER can exceed 100% because insertions
+count as errors. Teacher-forced training loss is not reported as recognition
+accuracy.
+
+This pilot never activates a candidate in `runtime.py`, changes the working
+letter model, or uploads source footage. The weights remain research-only until
+reviewed phrase data, independent signer/webcam tests and no-sign negatives
+establish useful quality. Existing phrase service hosting is a separate
+unresolved production requirement.
+
+**Measured outcome:** run `20261105T121751Z-1e4fbe` stopped after 55 epochs;
+validation selected epoch 40. On the 40 held-out test clips, exact matches were
+**0/40**, WER **207.17%** (520 edits / 251 reference words), CER **168.77%**.
+The constant-text baseline had WER 141.04%; removing all visual features gave
+154.58%. Thus this experiment did **not** establish useful gesture recognition
+or improve the platform. Do not use these weights for user-visible subtitles.
+The checkpoint is 5,008,301 bytes and remains in the local run directory; the
+reproducibility report without full subtitle text is
+`docs/phrase-subtitle-training-pilot.json`. The 15 passing protocol/unit tests
+verify implementation behavior, not recognition quality. Further work needs
+more diverse, reviewed phrase data and separate live-camera evaluation.
 
 The camera UI records pause-bounded clips while inference runs. At most one request and one pending clip are retained; recording pauses visibly under backpressure. Letters run concurrently in a local Web Worker on the same camera stream. The 16-frame letter model still needs a complete motion window and two agreeing predictions, approximately 3 seconds at normal sampling speed. A single hand pose during a phrase can be classified as a letter; outputs are kept separate rather than inventing automatic language-mode confidence.
 

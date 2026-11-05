@@ -1,0 +1,6 @@
+{
+  "ncJBYIb5DOs": {"split": "train", "recordingGroup": "zaitseva-biography-both-parts"},
+  "dJdN5kopJks": {"split": "train", "recordingGroup": "zaitseva-biography-both-parts"},
+  "D3nturQl4k8": {"split": "val", "recordingGroup": "bilingual-glossary-news"},
+  "0EQJSyjbSAQ": {"split": "test", "recordingGroup": "james-chapter-2-1-13"}
+}

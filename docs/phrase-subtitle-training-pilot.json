@@ -1,0 +1,566 @@
+{
+  "run": "20261105T121751Z-1e4fbe",
+  "status": "complete",
+  "researchOnly": true,
+  "deploymentEligible": false,
+  "model": "Holistic 180D + temporal Transformer encoder + character decoder",
+  "pretrainedLanguageModel": false,
+  "initializedFrom": "random seed 42",
+  "parameters": 722357,
+  "normalization": "body-relative-xy-group-relative-z-v1",
+  "supervision": "unreviewed subtitle translation; not gesture glosses",
+  "splits": {
+    "ncJBYIb5DOs": {
+      "split": "train",
+      "recordingGroup": "zaitseva-biography-both-parts"
+    },
+    "dJdN5kopJks": {
+      "split": "train",
+      "recordingGroup": "zaitseva-biography-both-parts"
+    },
+    "D3nturQl4k8": {
+      "split": "val",
+      "recordingGroup": "bilingual-glossary-news"
+    },
+    "0EQJSyjbSAQ": {
+      "split": "test",
+      "recordingGroup": "james-chapter-2-1-13"
+    }
+  },
+  "rejected": {
+    "tracking": 62
+  },
+  "featureFingerprints": {
+    "0EQJSyjbSAQ": "12b030a39565c00ea7aa13c76d060065f65202292b9f175365a4e241ddd0a352",
+    "D3nturQl4k8": "179e4b3df960433e75a32d8bd2124591d884b64e6811f294cc5bd5cca4ef96ec",
+    "dJdN5kopJks": "7a9a82e53b85e4953a29d16e74b1ea8157adbd62a69ca7952f1107fb08036e6b",
+    "ncJBYIb5DOs": "ad263b50ac5d1bba4aa88b53b16e435a3f88230492c0512ce163046700edfe08"
+  },
+  "manifestSha256": "5080d6406ce95cf9af532d898c688b49d3875a53d208e077fa97518f75854e28",
+  "splitSha256": "08d335c68d1ca99eefb36241763d04dc4e065931b21d03df68244bda468066bc",
+  "sourceIndexSha256": "79e8d2c35b0d3ed31b7e3c32348a1ce64513ca0ef217d7c1cbbd6b14410e7f08",
+  "torch": "2.15.0",
+  "device": "cpu",
+  "sources": [
+    {
+      "video_id": "0EQJSyjbSAQ",
+      "url": "https://www.youtube.com/watch?v=0EQJSyjbSAQ",
+      "channel_id": "UCTIBRINUegVQ_RtoLWTL-zw",
+      "videoSha256": "ff8b98f10c3f80332a35dc722736d82d497a9ea62ca4e2c361f82e0c2cc0872a",
+      "captionSha256": "e13e51f91aca9fd4c80e45086472d9e74ff9f4e3b8c76f991ce04a55cf66f0d6",
+      "sourceLicense": null
+    },
+    {
+      "video_id": "D3nturQl4k8",
+      "url": "https://www.youtube.com/watch?v=D3nturQl4k8",
+      "channel_id": "UCoA3JvRkP1z3GE6x5jo6OzA",
+      "videoSha256": "bf9f57a3aa389d5b6e7397cc91d4238c3c34f4e0e4a47fb58c7e8c1f82dcf725",
+      "captionSha256": "5d5205f5830c6fd3cf0e0a66ab338bde0f4bf7eca36847245a81b14f0fbe8b93",
+      "sourceLicense": null
+    },
+    {
+      "video_id": "dJdN5kopJks",
+      "url": "https://www.youtube.com/watch?v=dJdN5kopJks",
+      "channel_id": "UCoA3JvRkP1z3GE6x5jo6OzA",
+      "videoSha256": "224f2c97bb50a5da746f6d4efe20b683e257ba45079c5e3886c2708e63076536",
+      "captionSha256": "6d775382886335e6f36eadd25e58fa9ea2fea65bb44c973c4b9409b6363f04e7",
+      "sourceLicense": null
+    },
+    {
+      "video_id": "ncJBYIb5DOs",
+      "url": "https://www.youtube.com/watch?v=ncJBYIb5DOs",
+      "channel_id": "UCoA3JvRkP1z3GE6x5jo6OzA",
+      "videoSha256": "3aaf7c490be19753d7675bb1cbb3bdbc8c538649501727f6d4638ebd9ec1caa8",
+      "captionSha256": "40ccacce7aee39f1e7767bd45352d8e498487dc8a47519ac24b050f8e3d4294f",
+      "sourceLicense": null
+    }
+  ],
+  "limitations": [
+    "Only four videos; not representative of live webcam use",
+    "Validation shares a channel with training; signer identities not audited",
+    "Test is a held-out channel and topic, not a general phrase benchmark",
+    "Subtitle timing/translation has not been checked by an RSL annotator",
+    "No silent/no-sign negatives; hallucination rejection not calibrated"
+  ],
+  "history": [
+    {
+      "epoch": 1,
+      "loss": 3.484383092207067,
+      "elapsed": 0.7
+    },
+    {
+      "epoch": 2,
+      "loss": 3.0131981793571923,
+      "elapsed": 1.4
+    },
+    {
+      "epoch": 3,
+      "loss": 2.8596192668466007,
+      "elapsed": 2.1
+    },
+    {
+      "epoch": 4,
+      "loss": 2.7886149462531593,
+      "elapsed": 2.7
+    },
+    {
+      "epoch": 5,
+      "loss": 2.7461006080403045,
+      "elapsed": 3.4,
+      "validation": {
+        "wer": 3.973821989528796,
+        "cer": 1.6693168741500157,
+        "wordErrors": 5313,
+        "referenceWords": 1337,
+        "phrases": 144,
+        "exactPhrases": 0,
+        "exactPhraseRate": 0.0
+      }
+    },
+    {
+      "epoch": 6,
+      "loss": 2.719141062568216,
+      "elapsed": 25.1
+    },
+    {
+      "epoch": 7,
+      "loss": 2.697976420907413,
+      "elapsed": 25.8
+    },
+    {
+      "epoch": 8,
+      "loss": 2.672156979055966,
+      "elapsed": 26.5
+    },
+    {
+      "epoch": 9,
+      "loss": 2.650538584765266,
+      "elapsed": 27.1
+    },
+    {
+      "epoch": 10,
+      "loss": 2.6296902824850643,
+      "elapsed": 27.8,
+      "validation": {
+        "wer": 2.3044128646222886,
+        "cer": 1.0670572235589497,
+        "wordErrors": 3081,
+        "referenceWords": 1337,
+        "phrases": 144,
+        "exactPhrases": 0,
+        "exactPhraseRate": 0.0
+      }
+    },
+    {
+      "epoch": 11,
+      "loss": 2.6172580438501694,
+      "elapsed": 39.4
+    },
+    {
+      "epoch": 12,
+      "loss": 2.59198278539321,
+      "elapsed": 40.0
+    },
+    {
+      "epoch": 13,
+      "loss": 2.5841162905973545,
+      "elapsed": 40.7
+    },
+    {
+      "epoch": 14,
+      "loss": 2.556962658377255,
+      "elapsed": 41.4
+    },
+    {
+      "epoch": 15,
+      "loss": 2.5333051962011,
+      "elapsed": 42.0,
+      "validation": {
+        "wer": 2.068810770381451,
+        "cer": 1.1322314049586777,
+        "wordErrors": 2766,
+        "referenceWords": 1337,
+        "phrases": 144,
+        "exactPhrases": 0,
+        "exactPhraseRate": 0.0
+      }
+    },
+    {
+      "epoch": 16,
+      "loss": 2.510583751341876,
+      "elapsed": 60.2
+    },
+    {
+      "epoch": 17,
+      "loss": 2.4954671999987434,
+      "elapsed": 60.8
+    },
+    {
+      "epoch": 18,
+      "loss": 2.485124994726742,
+      "elapsed": 61.5
+    },
+    {
+      "epoch": 19,
+      "loss": 2.4554255709928623,
+      "elapsed": 62.1
+    },
+    {
+      "epoch": 20,
+      "loss": 2.4247103017919205,
+      "elapsed": 62.8,
+      "validation": {
+        "wer": 2.281974569932685,
+        "cer": 1.2930222826655509,
+        "wordErrors": 3051,
+        "referenceWords": 1337,
+        "phrases": 144,
+        "exactPhrases": 0,
+        "exactPhraseRate": 0.0
+      }
+    },
+    {
+      "epoch": 21,
+      "loss": 2.415082440656774,
+      "elapsed": 82.8
+    },
+    {
+      "epoch": 22,
+      "loss": 2.4008314188788917,
+      "elapsed": 83.5
+    },
+    {
+      "epoch": 23,
+      "loss": 2.3896370635313144,
+      "elapsed": 84.1
+    },
+    {
+      "epoch": 24,
+      "loss": 2.357306354186114,
+      "elapsed": 84.8
+    },
+    {
+      "epoch": 25,
+      "loss": 2.332437837825102,
+      "elapsed": 85.4,
+      "validation": {
+        "wer": 1.5400149588631264,
+        "cer": 0.9186107333403075,
+        "wordErrors": 2059,
+        "referenceWords": 1337,
+        "phrases": 144,
+        "exactPhrases": 0,
+        "exactPhraseRate": 0.0
+      }
+    },
+    {
+      "epoch": 26,
+      "loss": 2.319829884697409,
+      "elapsed": 91.2
+    },
+    {
+      "epoch": 27,
+      "loss": 2.3101381133584415,
+      "elapsed": 91.9
+    },
+    {
+      "epoch": 28,
+      "loss": 2.2863648498759552,
+      "elapsed": 92.5
+    },
+    {
+      "epoch": 29,
+      "loss": 2.2789102021385643,
+      "elapsed": 93.2
+    },
+    {
+      "epoch": 30,
+      "loss": 2.2432865255019245,
+      "elapsed": 93.9,
+      "validation": {
+        "wer": 2.3223635003739718,
+        "cer": 1.2858039543885345,
+        "wordErrors": 3105,
+        "referenceWords": 1337,
+        "phrases": 144,
+        "exactPhrases": 0,
+        "exactPhraseRate": 0.0
+      }
+    },
+    {
+      "epoch": 31,
+      "loss": 2.2300189242643467,
+      "elapsed": 114.5
+    },
+    {
+      "epoch": 32,
+      "loss": 2.219700448653277,
+      "elapsed": 115.1
+    },
+    {
+      "epoch": 33,
+      "loss": 2.2007055282592773,
+      "elapsed": 115.8
+    },
+    {
+      "epoch": 34,
+      "loss": 2.1856689733617447,
+      "elapsed": 116.5
+    },
+    {
+      "epoch": 35,
+      "loss": 2.167383909225464,
+      "elapsed": 117.2,
+      "validation": {
+        "wer": 1.468960359012715,
+        "cer": 0.9300135997489277,
+        "wordErrors": 1964,
+        "referenceWords": 1337,
+        "phrases": 144,
+        "exactPhrases": 0,
+        "exactPhraseRate": 0.0
+      }
+    },
+    {
+      "epoch": 36,
+      "loss": 2.1377443145303165,
+      "elapsed": 124.8
+    },
+    {
+      "epoch": 37,
+      "loss": 2.126548640868243,
+      "elapsed": 125.4
+    },
+    {
+      "epoch": 38,
+      "loss": 2.1025124437668743,
+      "elapsed": 126.1
+    },
+    {
+      "epoch": 39,
+      "loss": 2.0809178282232845,
+      "elapsed": 126.8
+    },
+    {
+      "epoch": 40,
+      "loss": 2.0644386586020973,
+      "elapsed": 127.5,
+      "validation": {
+        "wer": 1.3111443530291698,
+        "cer": 0.92133068312585,
+        "wordErrors": 1753,
+        "referenceWords": 1337,
+        "phrases": 144,
+        "exactPhrases": 0,
+        "exactPhraseRate": 0.0
+      }
+    },
+    {
+      "epoch": 41,
+      "loss": 2.0455979178933537,
+      "elapsed": 134.1
+    },
+    {
+      "epoch": 42,
+      "loss": 2.03134646135218,
+      "elapsed": 134.8
+    },
+    {
+      "epoch": 43,
+      "loss": 2.0170380227706013,
+      "elapsed": 135.5
+    },
+    {
+      "epoch": 44,
+      "loss": 1.9985116579953361,
+      "elapsed": 136.1
+    },
+    {
+      "epoch": 45,
+      "loss": 1.9809487637351542,
+      "elapsed": 136.8,
+      "validation": {
+        "wer": 1.824981301421092,
+        "cer": 1.1137148237263312,
+        "wordErrors": 2440,
+        "referenceWords": 1337,
+        "phrases": 144,
+        "exactPhrases": 0,
+        "exactPhraseRate": 0.0
+      }
+    },
+    {
+      "epoch": 46,
+      "loss": 1.9539541006088257,
+      "elapsed": 156.8
+    },
+    {
+      "epoch": 47,
+      "loss": 1.9362521662431604,
+      "elapsed": 157.5
+    },
+    {
+      "epoch": 48,
+      "loss": 1.9302361782859354,
+      "elapsed": 158.2
+    },
+    {
+      "epoch": 49,
+      "loss": 1.9136751048705156,
+      "elapsed": 158.8
+    },
+    {
+      "epoch": 50,
+      "loss": 1.8945087474935196,
+      "elapsed": 159.5,
+      "validation": {
+        "wer": 1.3904263275991025,
+        "cer": 0.9437179621299299,
+        "wordErrors": 1859,
+        "referenceWords": 1337,
+        "phrases": 144,
+        "exactPhrases": 0,
+        "exactPhraseRate": 0.0
+      }
+    },
+    {
+      "epoch": 51,
+      "loss": 1.8738939902361702,
+      "elapsed": 170.7
+    },
+    {
+      "epoch": 52,
+      "loss": 1.8658979219548844,
+      "elapsed": 171.4
+    },
+    {
+      "epoch": 53,
+      "loss": 1.8399895780226763,
+      "elapsed": 172.0
+    },
+    {
+      "epoch": 54,
+      "loss": 1.8207191649605245,
+      "elapsed": 172.7
+    },
+    {
+      "epoch": 55,
+      "loss": 1.8147118231829475,
+      "elapsed": 173.4,
+      "validation": {
+        "wer": 1.4338070306656694,
+        "cer": 0.9535516267391987,
+        "wordErrors": 1917,
+        "referenceWords": 1337,
+        "phrases": 144,
+        "exactPhrases": 0,
+        "exactPhraseRate": 0.0
+      }
+    }
+  ],
+  "dataset": {
+    "train": {
+      "clips": 262,
+      "videos": 2,
+      "words": 2265,
+      "unknownWordFraction": 0.0
+    },
+    "val": {
+      "clips": 144,
+      "videos": 1,
+      "words": 1337,
+      "unknownWordFraction": 0.5721765145848915
+    },
+    "test": {
+      "clips": 40,
+      "videos": 1,
+      "words": 251,
+      "unknownWordFraction": 0.5896414342629482
+    }
+  },
+  "constantBaseline": {
+    "val": {
+      "wer": 1.1099476439790577,
+      "cer": 0.8746730829584685,
+      "wordErrors": 1484,
+      "referenceWords": 1337,
+      "phrases": 144,
+      "exactPhrases": 0,
+      "exactPhraseRate": 0.0
+    },
+    "test": {
+      "wer": 1.4103585657370519,
+      "cer": 1.1948404616429056,
+      "wordErrors": 354,
+      "referenceWords": 251,
+      "phrases": 40,
+      "exactPhrases": 0,
+      "exactPhraseRate": 0.0
+    }
+  },
+  "bestEpoch": 40,
+  "validation": {
+    "wer": 1.3111443530291698,
+    "cer": 0.92133068312585,
+    "wordErrors": 1753,
+    "referenceWords": 1337,
+    "phrases": 144,
+    "exactPhrases": 0,
+    "exactPhraseRate": 0.0
+  },
+  "test": {
+    "wer": 2.0717131474103585,
+    "cer": 1.6877121520706042,
+    "wordErrors": 520,
+    "referenceWords": 251,
+    "phrases": 40,
+    "exactPhrases": 0,
+    "exactPhraseRate": 0.0
+  },
+  "testWithZeroVisualInput": {
+    "wer": 1.545816733067729,
+    "cer": 1.442634080108622,
+    "wordErrors": 388,
+    "referenceWords": 251,
+    "phrases": 40,
+    "exactPhrases": 0,
+    "exactPhraseRate": 0.0
+  },
+  "visualWerGain": -0.5258964143426295,
+  "seconds": 195.6,
+  "checkpointSha256": "faf8a880a9ca30df840e3f82333b22d98013c9e504d2b48d31ae5b42b6ce08e1",
+  "checkpointBytes": 5008301,
+  "conclusion": "Research pilot only. No production activation; reviewed phrase data and webcam evaluation are still required.",
+  "hyperparameters": {
+    "seed": 42,
+    "maxEpochs": 60,
+    "completedEpochs": 55,
+    "earlyStoppingPatience": 15,
+    "validationEveryEpochs": 5,
+    "learningRate": 0.0007,
+    "batchSize": 16,
+    "weightDecay": 0.01,
+    "labelSmoothing": 0.05,
+    "landmarkNoiseStd": 0.005,
+    "dModel": 128,
+    "layers": 2,
+    "heads": 4,
+    "dropout": 0.15,
+    "maxOutputCharacters": 240
+  },
+  "codeSha256": {
+    "ml/krsl/subtitle_model.py": "865b75406cfcee6b759c509c8977a61b52daf3560d3747b025d562ed6a2d03e1",
+    "ml/krsl/train_subtitle_translation.py": "db31d03c64aa281a443a38decb8558d379c2eb1cc074042208d832da82611315",
+    "ml/krsl/extract_subtitle_features.py": "1d44a4852db64589c1cfc32be6d1d6a2a40d9de9cc13b2773c30a47ccfafd0ce"
+  },
+  "outcome": "FAILED: no exact test phrases, worse than the constant-text baseline, and no evidence of useful visual dependence. Do not deploy.",
+  "nextDataRequirements": [
+    "More independent signers and everyday phrase topics, not additional cuts of the same broadcast",
+    "Review utterance boundaries and translation alignment with an RSL annotator",
+    "Keep signer/recording-disjoint validation and a new untouched test for future experiments",
+    "Add no-sign/unknown-gesture negatives and live-camera evaluation"
+  ],
+  "servingCheckpointModified": false,
+  "letterClassifierModified": false,
+  "productionDeploymentPerformed": false
+}
