@@ -50,12 +50,19 @@ Low landmark coverage, unknown labels, annotation-only symbols and low token pos
 
 These are format examples, **not a sufficient training set**. Use many independently labeled performances per target, signer/broadcast-disjoint splits, negative/no-sign clips and different cameras. Tokens must match `data/vocab.json`; unknown labels are rejected rather than converted to UNK. Same file hashes and shared signer/broadcast groups across splits are rejected. Features are extracted from real supplied videos using the same pipeline.
 
+For a reviewed video with no signing, use `"tokens": [], "negative": true`. Empty transcripts without that explicit flag are rejected to avoid training missing annotations as silence. Every split must still contain labeled signing. Keep genuinely continuous phrases in the data; concatenated isolated-word videos do not validate phrase recognition.
+
 ```sh
+ml/krsl/.venv/bin/python ml/krsl/train.py /absolute/path/manifest.json --check-only
 ml/krsl/.venv/bin/python ml/krsl/train.py /absolute/path/manifest.json --evaluate-only
 ml/krsl/.venv/bin/python ml/krsl/train.py /absolute/path/manifest.json --epochs 5
 ```
 
 Reports contain baseline validation/test WER, per-example predictions and candidate results. Only validation chooses the best epoch. A candidate is saved only when validation improves, and is never automatically deployed. Check untouched test results and human review before replacing the serving model. The current work includes the executable training path; it does **not** claim new trained weights.
+
+Each run writes to its own `data/training/<UTC-time>-<run-id>/` directory, so an old candidate cannot be mistaken for the current result. Reports include corpus counts, signer/broadcast groups, labels absent from training, exact transcript match rate, and a separate false-positive rate on no-sign clips (not folded into positive-clip WER). Candidate selection requires lower validation WER without increasing validation no-sign false positives when negatives are present. `--patience 3` stops after three non-improving epochs; `--learning-rate` defaults to `1e-5`. The feature cache is keyed by extractor source, landmark asset and library versions. Reports record manifest and starting-checkpoint hashes.
+
+As of 2026-11-05, no accessible labeled continuous-phrase corpus is present locally. The [FluentSigners-50 record](https://zenodo.org/records/6043739) restricts file access; the project's linked Drive download returns 404. Local Bukva letters and selected Slovo isolated words cannot replace a phrase corpus. These training fixes have been tested with unit/synthetic pipeline checks; no new phrase weights or accuracy gain are claimed. Production still reports `/api/krsl/status` as unavailable; it needs a hosted Python service as well as validated weights. The camera now avoids recording phrase clips while that service is unavailable and leaves letter recognition active.
 
 Checks:
 

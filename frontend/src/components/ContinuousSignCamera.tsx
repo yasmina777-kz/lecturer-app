@@ -81,7 +81,9 @@ export function ContinuousSignCamera() {
       if (!response.ok) throw new Error();
       const data: Health = await response.json();
       if (!alive.current) return;
+      healthRef.current = data;
       setHealth(data);
+      if (data.ready && stream.current) record(generation.current);
       setMessage(
         data.ready
           ? ""
@@ -89,12 +91,13 @@ export function ContinuousSignCamera() {
       );
     } catch {
       if (!alive.current) return;
+      healthRef.current = { ready: false, vocabulary: 0 };
       setHealth({ ready: false, vocabulary: 0 });
       setMessage(
         at(
-          "Сервис распознавания не запущен. Откройте start.command в папке платформы и повторите проверку.",
-          "Recognition service is offline. Open start.command in the platform folder and retry.",
-          "Тану қызметі қосылмаған. Платформа қалтасындағы start.command файлын ашып, қайта тексеріңіз.",
+          "Сервис фраз недоступен. Распознавание букв можно использовать отдельно.",
+          "Phrase service is unavailable. Letter recognition is still available.",
+          "Сөйлемдерді тану қызметі қолжетімсіз. Әріптерді тануды қолдана аласыз.",
         ),
       );
     }
@@ -166,6 +169,14 @@ export function ContinuousSignCamera() {
         signal: controller.signal,
       });
       const body = await response.json();
+      if (id !== generation.current || !alive.current) return;
+      if (response.status === 503) {
+        healthRef.current = { ready: false, vocabulary: 0, error: body.detail };
+        setHealth(healthRef.current);
+        pending.current = null;
+        setWaitingForSlot(false);
+        finishCapture.current?.(false);
+      }
       if (!response.ok)
         throw new Error(body.detail || "Не удалось распознать видео.");
       if (id !== generation.current || !alive.current) return;
@@ -201,6 +212,8 @@ export function ContinuousSignCamera() {
   function record(id: number) {
     if (
       !stream.current ||
+      !healthRef.current?.ready ||
+      !window.MediaRecorder ||
       id !== generation.current ||
       recorder.current !== null
     )
@@ -265,7 +278,7 @@ export function ContinuousSignCamera() {
     setResult(null);
     setHasPreview(false);
     try {
-      if (!navigator.mediaDevices?.getUserMedia || !window.MediaRecorder)
+      if (!navigator.mediaDevices?.getUserMedia)
         throw new Error(
           "Этот браузер не поддерживает запись. Загрузите видео с устройства.",
         );
@@ -294,7 +307,8 @@ export function ContinuousSignCamera() {
           ? ""
           : "Фразы пока недоступны; буквы работают. Проверьте подключение сервиса распознавания.",
       );
-      record(id);
+      setPhase("recording");
+      if (healthRef.current?.ready && window.MediaRecorder) record(id);
     } catch (error) {
       if (id !== generation.current || !alive.current) return;
       release();
@@ -309,7 +323,7 @@ export function ContinuousSignCamera() {
     }
   }
   async function upload(file?: File) {
-    if (!file) return;
+    if (!file || !healthRef.current?.ready) return;
     if (file.size > 25 * 1024 * 1024) {
       setMessage("Выберите видео до 25 МБ и 20 секунд.");
       return;
@@ -567,13 +581,28 @@ export function ContinuousSignCamera() {
           <label htmlFor="krsl-text">
             {at("Фразы — черновик", "Phrases — draft", "Сөйлемдер — нобай")}
           </label>
+          {!health?.ready && (
+            <p role="status">
+              {health === null
+                ? at("Проверяем доступность фраз…", "Checking phrase service…", "Сөйлемдерді тану тексерілуде…")
+                : at(
+                    "Распознавание фраз недоступно: сервис не подключён. Сейчас камера распознаёт только буквы.",
+                    "Phrase recognition is unavailable: the service is offline. The camera currently recognizes letters only.",
+                    "Сөйлемдерді тану қолжетімсіз: қызмет қосылмаған. Камера қазір тек әріптерді таниды.",
+                  )}
+            </p>
+          )}
           <textarea
             id="krsl-text"
             rows={8}
             maxLength={4000}
             value={text}
             onChange={(event) => setText(event.target.value)}
-            placeholder={at(
+            placeholder={!health?.ready ? at(
+              "Можно добавить распознанные буквы или ввести текст вручную",
+              "Add recognized letters or enter text manually",
+              "Танылған әріптерді қосыңыз немесе мәтінді енгізіңіз",
+            ) : at(
               "Здесь появятся слова из вашего видео…",
               "Words from your video will appear here…",
               "Бейнедегі сөздер осында шығады…",
