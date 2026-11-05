@@ -1,0 +1,150 @@
+{
+  "-TM9wjZ3rvY": {
+    "recordingGroup": "young-chairpersons-both-parts",
+    "proposedSplit": "train",
+    "visualSampleSeconds": [
+      48,
+      199,
+      318
+    ],
+    "visualNotes": "Three sampled interview shots show different presenters signing. Performer changes need segment-level annotation; both parts stay together.",
+    "semanticReview": "pending",
+    "technicalChecks": [
+      {
+        "segmentId": "-TM9wjZ3rvY:87",
+        "sampleSeconds": [
+          392,
+          394,
+          396
+        ],
+        "decision": "review_end_boundary",
+        "scope": "technical_only",
+        "note": "На 392/394 с ведущий показывает жесты; на 396 с остаётся заставка. Нужна проверка конца реплики перед обрезкой. Смысл перевода не подтверждён."
+      }
+    ]
+  },
+  "9hAXWlZ2Bdg": {
+    "recordingGroup": "russian-museum-excursions",
+    "proposedSplit": "val",
+    "visualSampleSeconds": [
+      10,
+      42,
+      67
+    ],
+    "visualNotes": "Outdoor presenter, hands and upper body visible in sampled frames. Source index labels RSL; linguistic content is unverified.",
+    "semanticReview": "pending"
+  },
+  "Bu2aOSlL5vo": {
+    "recordingGroup": "young-chairpersons-both-parts",
+    "proposedSplit": "train",
+    "visualSampleSeconds": [
+      45,
+      189,
+      302
+    ],
+    "visualNotes": "Three sampled interview shots show different presenters signing. Do not split related recording parts or infer signer IDs from channel IDs.",
+    "semanticReview": "pending"
+  },
+  "EM4Ybtt1Syo": {
+    "recordingGroup": "vog-interpreter-training-report",
+    "proposedSplit": "train",
+    "visualSampleSeconds": [
+      49,
+      205,
+      328
+    ],
+    "visualNotes": "Studio host and interview shots with presenter changes. Cuts and subtitle boundaries need review.",
+    "semanticReview": "pending"
+  },
+  "G4DFpHRhzgo": {
+    "recordingGroup": "communication-center-game-report",
+    "proposedSplit": "train",
+    "visualSampleSeconds": [
+      16,
+      65,
+      104
+    ],
+    "visualNotes": "Human presenter signing against a blue background; not just a game avatar. Hands approach frame edges.",
+    "semanticReview": "pending"
+  },
+  "GhuCvTuEx1s": {
+    "recordingGroup": "saratov-accessibility-report",
+    "proposedSplit": "train",
+    "visualSampleSeconds": [
+      21,
+      90,
+      143
+    ],
+    "visualNotes": "Signing presenter at 21s. At 90s and 143s, architecture/plaque cutaways without signer. Subtitle pairs intersecting these shots need exclusion or corrected boundaries.",
+    "semanticReview": "pending",
+    "technicalChecks": [
+      {
+        "segmentId": "GhuCvTuEx1s:6",
+        "sampleSeconds": [
+          105,
+          108
+        ],
+        "decision": "needs_reextraction",
+        "scope": "technical_only",
+        "note": "Человек показывает жесты, но находится далеко и изображение размыто. Отсутствие точек лица здесь — ошибка трекинга, а не доказательство неверных субтитров."
+      }
+    ]
+  },
+  "IBeed1Vp-fU": {
+    "recordingGroup": "verbal-portrait-interview",
+    "proposedSplit": "train",
+    "visualSampleSeconds": [
+      85,
+      354,
+      566
+    ],
+    "visualNotes": "Seated presenter signs at a desk. Hands overlap and approach desk edge; inspect landmark losses before accepting clips.",
+    "semanticReview": "pending",
+    "technicalChecks": [
+      {
+        "segmentId": "IBeed1Vp-fU:47",
+        "sampleSeconds": [
+          331,
+          333,
+          334
+        ],
+        "decision": "exclude",
+        "scope": "technical_only",
+        "note": "Внутри реплики человек сменяется фотографией: руки перестают быть видны. Подтверждено просмотром кадров 331/333/334 с. Смысл перевода не проверен."
+      }
+    ]
+  },
+  "VrPTtiKS5DQ": {
+    "recordingGroup": "mgo-monthly-news-april-2023",
+    "proposedSplit": "train",
+    "visualSampleSeconds": [
+      47,
+      196,
+      313
+    ],
+    "visualNotes": "Standing studio presenter with both hands visible in sampled frames. Group with VOG-related channels conservatively for training.",
+    "semanticReview": "pending"
+  },
+  "cdg4CF9S--M": {
+    "recordingGroup": "russian-museum-excursions",
+    "proposedSplit": "val",
+    "visualSampleSeconds": [
+      29,
+      122,
+      196
+    ],
+    "visualNotes": "Signing presenter at 29s and 196s. Painting-only cutaway at 122s. Verify subtitle intervals over art cutaways; keep museum sources together.",
+    "semanticReview": "pending"
+  },
+  "qjnl1J5BXmQ": {
+    "recordingGroup": "volkova-squirrel-in-wheel",
+    "proposedSplit": "test",
+    "visualSampleSeconds": [
+      25,
+      105,
+      168
+    ],
+    "visualNotes": "Close webcam-like framing, moving hands and face visible. Six empty subtitle cues were excluded explicitly. Proposed test is only one presenter/video and cannot establish broad generalization.",
+    "semanticReview": "pending"
+  }
+}

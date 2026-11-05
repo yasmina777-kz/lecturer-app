@@ -158,6 +158,70 @@ reproducibility report without full subtitle text is
 verify implementation behavior, not recognition quality. Further work needs
 more diverse, reviewed phrase data and separate live-camera evaluation.
 
+### Expanded corpus and alignment review (2026-11-05)
+
+After the failed pilot, `expand_subtitle_corpus.py` inspected 48 additional
+indexed sources. Ten selected videos from **six channels** were downloaded with
+their original Russian subtitle tracks: **52.22 additional minutes / 624
+nonempty subtitle intervals**. The total local corpus is now **14 videos,
+108.05 minutes, 1,132 intervals**. Full media and captions remain ignored under
+`data/sources/youtube-sl-25/expansion/`; only provenance/quality summaries are
+committed. Source publication is not a transfer of the original video license.
+
+Visual inspection sampled three frames in each new recording. Interview videos
+contain changes between presenters; other sources show outdoor, studio and
+webcam-like settings. `subtitle-expansion-catalog.json` records sample times and
+observations, rather than inventing a verified unique-signer count. Related
+interview parts stay in the same proposed training group. Museum recordings are
+proposed for validation and a separate-channel recording for test. These are
+**provisional** groups: channel separation is not proof of signer separation.
+The prior test source/channel is excluded from new training acquisitions.
+
+`audit_subtitle_alignment.py` decoded the cached Holistic sequences, checked
+subtitle timing and landmark coverage for every new interval. Seven empty
+caption cues are explicitly logged and excluded, not mislabeled as silence.
+**17** intervals enter technical quarantine (short clips, long hand-tracking
+gaps, or missing face/hands). **607** pass this technical filter; none is
+automatically approved semantically. **260** have hand motion at a subtitle
+edge and are prioritized for boundary review; this is a heuristic warning, not
+proof of a wrong boundary. No boundaries are silently adjusted.
+
+Three focused visual checks distinguish actual issues:
+
+- `IBeed1Vp-fU:47`: an interview changes into a still photograph inside the cue;
+  excluded from training candidates after visual inspection.
+- `GhuCvTuEx1s:6`: the presenter is visibly signing but small/blurry; missing
+  facial landmarks indicate an extraction problem, not necessarily bad captions.
+- `-TM9wjZ3rvY:87`: the end includes an outro without the presenter; the phrase
+  end needs review before trimming.
+
+The local review page shows the video, subtitle, timestamps, flags and editable
+translation together. It supports slow playback, clipping with context,
+reviewer/signer IDs, split choices, saved decisions and JSON export. Positive
+approval requires explicit RSL, meaning and timing confirmations; both the UI
+and `validate_reviewed` reject an annotated signer or recording crossing splits.
+No model is trained or activated by clicking Save. Semantic review still
+requires an annotator competent in RSL; automated tracking cannot supply it.
+
+```sh
+# Discovery is bounded and resumable; review selection before media acquisition.
+ml/krsl/.venv/bin/python ml/krsl/expand_subtitle_corpus.py scan --count 48
+ml/krsl/.venv/bin/python ml/krsl/expand_subtitle_corpus.py download --selection ml/krsl/subtitle-expansion-catalog.json
+ml/krsl/.venv/bin/python ml/krsl/prepare_youtube_corpus.py ml/krsl/data/sources/youtube-sl-25/metadata.csv ml/krsl/data/sources/youtube-sl-25/expansion/media ml/krsl/data/sources/youtube-sl-25/expansion/review
+ml/krsl/.venv/bin/python ml/krsl/extract_subtitle_features.py --audit ml/krsl/data/sources/youtube-sl-25/expansion/review/source-audit.json --output ml/krsl/data/sources/youtube-sl-25/expansion/features
+ml/krsl/.venv/bin/python ml/krsl/audit_subtitle_alignment.py --audit ml/krsl/data/sources/youtube-sl-25/expansion/review/source-audit.json --segments ml/krsl/data/sources/youtube-sl-25/expansion/review/review-segments.json --features ml/krsl/data/sources/youtube-sl-25/expansion/features --catalog ml/krsl/subtitle-expansion-catalog.json --output ml/krsl/data/sources/youtube-sl-25/expansion/quality
+ml/krsl/.venv/bin/python ml/krsl/serve_subtitle_review.py
+# Open http://127.0.0.1:8782/quality/index.html
+```
+
+Use the provided loopback-only server: byte-range responses are required for
+reliable video seeking in the in-app browser; plain `python -m http.server` did
+not seek correctly. Exported annotation JSON contains source hashes and the
+original text/timings alongside corrections. Keep it local until checked.
+`docs/phrase-corpus-expansion-audit.json` contains the measured audit. No new
+training or deployment is claimed for this expansion, and recognition quality
+has not yet improved merely because more videos were collected.
+
 The camera UI records pause-bounded clips while inference runs. At most one request and one pending clip are retained; recording pauses visibly under backpressure. Letters run concurrently in a local Web Worker on the same camera stream. The 16-frame letter model still needs a complete motion window and two agreeing predictions, approximately 3 seconds at normal sampling speed. A single hand pose during a phrase can be classified as a letter; outputs are kept separate rather than inventing automatic language-mode confidence.
 
 `docs/recognition-service-check.json` records the four real Slovo smoke examples after the graph reset fix. All HTTP requests work; three are refused and one predicts an incorrect word. This is not a successful translation benchmark and no new weights were trained.

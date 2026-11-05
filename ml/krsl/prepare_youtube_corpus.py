@@ -22,7 +22,7 @@ def seconds(value):
     return sum(x * 60 ** i for i, x in enumerate(reversed(parts)))
 
 
-def parse_vtt(text):
+def parse_vtt(text, issues=None):
     if not text.lstrip('\ufeff').startswith('WEBVTT'):
         raise ValueError('Expected WebVTT captions')
     for block in re.split(r'\n\s*\n', text.replace('\r\n', '\n')):
@@ -37,7 +37,11 @@ def parse_vtt(text):
             words = html.unescape(re.sub(r'<[^>]*>', '', ' '.join(lines[i + 1:])))
             words = ' '.join(words.split())
             if not 0 <= start < end or not words:
-                raise ValueError('Invalid subtitle interval or empty text')
+                reason = 'invalid_interval' if not 0 <= start < end else 'empty_caption'
+                if issues is None:
+                    raise ValueError('Invalid subtitle interval or empty text')
+                issues.append(dict(start=start, end=end, reason=reason))
+                break
             yield {'start': start, 'end': end, 'translation': words}
             break
 
@@ -53,7 +57,7 @@ def prepare(metadata, pilot, output):
     output.mkdir(parents=True, exist_ok=True)
     index = [{'video_id': v, 'url': f'https://www.youtube.com/watch?v={v}'} for v in ids]
     (output / 'rsl-index.json').write_text(json.dumps(index, ensure_ascii=False, indent=2))
-    sources, segments, rejected = [], [], []
+    sources, segments, rejected, caption_issues = [], [], [], []
     for path in sorted(pilot.glob('*.info.json')):
         info = json.loads(path.read_text())
         video_id = info['id']
@@ -74,7 +78,8 @@ def prepare(metadata, pilot, output):
                       captionSha256=digest(caption), sourceLicense=info.get('license'),
                       captionType='original Russian subtitle track; not verified gloss annotation')
         sources.append(source)
-        for cue in parse_vtt(caption.read_text(encoding='utf-8-sig')):
+        issues = []
+        for cue in parse_vtt(caption.read_text(encoding='utf-8-sig'), issues=issues):
             if cue['end'] > duration + 1:
                 raise ValueError(f'{video_id}: subtitle extends beyond video')
             start, end = max(0, cue['start'] - .5), min(duration, cue['end'] + .5)
@@ -82,9 +87,11 @@ def prepare(metadata, pilot, output):
                                  withinRuntimeLimit=1 <= end - start <= 20,
                                  reviewStatus='pending', glossTokens=None, signerGroup=None,
                                  split=None))
+        caption_issues.extend(dict(video_id=video_id, **issue) for issue in issues)
     report = dict(source='YouTube-SL-25', indexSha256=digest(metadata), indexedRslVideos=len(ids),
                   downloadedVideos=len(sources), downloadedMinutes=sum(s['duration'] for s in sources) / 60,
                   candidateSegments=len(segments), usableForTraining=0, rejected=rejected,
+                  captionIssues=caption_issues,
                   requiredReview=['Confirm signing language and visible signer',
                                   'Align full utterance boundaries; subtitle cues can split a phrase',
                                   'Annotate gesture glosses for CTC; translation is not a gloss sequence',

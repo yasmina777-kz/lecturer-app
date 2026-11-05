@@ -6,6 +6,14 @@ from prepare_youtube_corpus import parse_vtt, prepare
 
 
 class CorpusTests(unittest.TestCase):
+    def test_empty_captions_are_logged_not_treated_as_silence_labels(self):
+        issues = []
+        text = 'WEBVTT\n\n00:01.000 --> 00:03.000\n\n00:03.000 --> 00:05.000\nПривет\n'
+        rows = list(parse_vtt(text, issues=issues))
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]['translation'], 'Привет')
+        self.assertEqual(issues, [dict(start=1., end=3., reason='empty_caption')])
+
     def test_caption_timing_markup_multiline_and_notes(self):
         text = 'WEBVTT\r\n\r\nNOTE ignored\r\ncomment\r\n\r\ncue-1\r\n00:01:02.125 --> 00:01:04.875 align:start\r\n<v signer>Привет &amp; пока</v>\r\nВторая строка\r\n\r\n'
         self.assertEqual(list(parse_vtt(text)), [dict(start=62.125, end=64.875,

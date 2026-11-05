@@ -1,0 +1,347 @@
+{
+  "downloadedVideos": 10,
+  "minutes": 52.21666666666667,
+  "channels": 6,
+  "subtitleSegments": 624,
+  "technicalEligible": 607,
+  "technicalQuarantine": 17,
+  "invalidCaptionIntervals": [
+    {
+      "video_id": "G4DFpHRhzgo",
+      "start": 116.56700000000001,
+      "end": 131.8,
+      "reason": "empty_caption"
+    },
+    {
+      "video_id": "qjnl1J5BXmQ",
+      "start": 51.42,
+      "end": 53.42,
+      "reason": "empty_caption"
+    },
+    {
+      "video_id": "qjnl1J5BXmQ",
+      "start": 79.42,
+      "end": 81.42,
+      "reason": "empty_caption"
+    },
+    {
+      "video_id": "qjnl1J5BXmQ",
+      "start": 117.46000000000001,
+      "end": 118.78,
+      "reason": "empty_caption"
+    },
+    {
+      "video_id": "qjnl1J5BXmQ",
+      "start": 172.78,
+      "end": 174.78,
+      "reason": "empty_caption"
+    },
+    {
+      "video_id": "qjnl1J5BXmQ",
+      "start": 196.78,
+      "end": 198.78,
+      "reason": "empty_caption"
+    },
+    {
+      "video_id": "qjnl1J5BXmQ",
+      "start": 204.78,
+      "end": 206.78,
+      "reason": "empty_caption"
+    }
+  ],
+  "quarantineReasons": {
+    "duration_outside_1_20_seconds": 5,
+    "long_gap_without_hands": 5,
+    "face_missing": 6,
+    "hands_missing": 4,
+    "manual_visual_exclusion": 1
+  },
+  "reviewWarnings": {
+    "movement_at_subtitle_boundary": 260,
+    "little_observed_hand_motion": 1
+  },
+  "manualTechnicalChecks": 3,
+  "manualExclusions": 1,
+  "semanticallyApproved": 0,
+  "trainingReady": 0,
+  "note": "Technical eligibility is not semantic alignment. Proposed splits require signer review.",
+  "sourceAuditSha256": "d434f8d29eb639b6df0b3fc674bccd15ba2145e9f7df8d5fd9f4409088f874ca",
+  "sourceCatalogSha256": "c359ad8193d5c4b2679f60a2239ba4cd5eff27ecc3dab8f5502830da39e47a81",
+  "sources": [
+    {
+      "video_id": "-TM9wjZ3rvY",
+      "url": "https://www.youtube.com/watch?v=-TM9wjZ3rvY",
+      "title": "Интервью с молодыми председателями (2 часть)",
+      "videoSha256": "80f83d0d1359b643d55bd7d16b937e8314d1796fae72e37be5051cd14ca37d5a",
+      "captionSha256": "7b0282635cfd55fbc068df85d9e08fe0e32d361278347666b51ac426c43d6e76",
+      "channel_id": "UCaDrIDvpB0HdFTkpdjTPwSQ",
+      "duration": 398.0,
+      "segments": 88,
+      "technicalEligible": 86,
+      "recordingGroup": "young-chairpersons-both-parts",
+      "proposedSplit": "train",
+      "visualSampleSeconds": [
+        48,
+        199,
+        318
+      ],
+      "visualNotes": "Three sampled interview shots show different presenters signing. Performer changes need segment-level annotation; both parts stay together.",
+      "semanticReview": "pending",
+      "technicalChecks": [
+        {
+          "segmentId": "-TM9wjZ3rvY:87",
+          "sampleSeconds": [
+            392,
+            394,
+            396
+          ],
+          "decision": "review_end_boundary",
+          "scope": "technical_only",
+          "note": "На 392/394 с ведущий показывает жесты; на 396 с остаётся заставка. Нужна проверка конца реплики перед обрезкой. Смысл перевода не подтверждён."
+        }
+      ]
+    },
+    {
+      "video_id": "9hAXWlZ2Bdg",
+      "url": "https://www.youtube.com/watch?v=9hAXWlZ2Bdg",
+      "title": "Итальянский футуризм / Русский кубофутуризм. Экскурсии на русском жестовом языке",
+      "videoSha256": "6a65506e58e133f49cb221c7120748ea36c12f7cccbe7f07a9f8cc13a064eeb4",
+      "captionSha256": "3bc62d71e6cb7b550bc090dba720983d06e3c2713a1feeb4b4a513b88a86f01e",
+      "channel_id": "UCOmvWULNEqpzpHm3kxNGaBA",
+      "duration": 84.0,
+      "segments": 18,
+      "technicalEligible": 18,
+      "recordingGroup": "russian-museum-excursions",
+      "proposedSplit": "val",
+      "visualSampleSeconds": [
+        10,
+        42,
+        67
+      ],
+      "visualNotes": "Outdoor presenter, hands and upper body visible in sampled frames. Source index labels RSL; linguistic content is unverified.",
+      "semanticReview": "pending"
+    },
+    {
+      "video_id": "Bu2aOSlL5vo",
+      "url": "https://www.youtube.com/watch?v=Bu2aOSlL5vo",
+      "title": "Интервью с молодыми председателями (1 часть)",
+      "videoSha256": "c19b711c1d182578379e8b449d31edc4b2b65b55df3f77d4a36f70ab12b7d049",
+      "captionSha256": "e0b60665c1765083d0977bfbbe04af84058ee240f1002eee0c315e8c9a0532db",
+      "channel_id": "UCaDrIDvpB0HdFTkpdjTPwSQ",
+      "duration": 378.0,
+      "segments": 75,
+      "technicalEligible": 75,
+      "recordingGroup": "young-chairpersons-both-parts",
+      "proposedSplit": "train",
+      "visualSampleSeconds": [
+        45,
+        189,
+        302
+      ],
+      "visualNotes": "Three sampled interview shots show different presenters signing. Do not split related recording parts or infer signer IDs from channel IDs.",
+      "semanticReview": "pending"
+    },
+    {
+      "video_id": "EM4Ybtt1Syo",
+      "url": "https://www.youtube.com/watch?v=EM4Ybtt1Syo",
+      "title": "Переводчики РЖЯ повышают квалификацию",
+      "videoSha256": "c866322bad42cf6562cbc224d7e2b12d6fd284b942e1cacac2ff8c5b41f2925b",
+      "captionSha256": "11140fdabc2565846801c956fda2baa93d5d09e3a6551dddeae7ebea4aa7de61",
+      "channel_id": "UCaDrIDvpB0HdFTkpdjTPwSQ",
+      "duration": 410.0,
+      "segments": 70,
+      "technicalEligible": 70,
+      "recordingGroup": "vog-interpreter-training-report",
+      "proposedSplit": "train",
+      "visualSampleSeconds": [
+        49,
+        205,
+        328
+      ],
+      "visualNotes": "Studio host and interview shots with presenter changes. Cuts and subtitle boundaries need review.",
+      "semanticReview": "pending"
+    },
+    {
+      "video_id": "G4DFpHRhzgo",
+      "url": "https://www.youtube.com/watch?v=G4DFpHRhzgo",
+      "title": "Первая видеоигра с сурдопереводом",
+      "videoSha256": "6db19c0ccb1feeaa6757e759ad589c6a360980f0a03ca7794114391588f7c511",
+      "captionSha256": "1f1183fe699ca42c7b48ed5ebd69e91665de2ccdbecb0d1a199a72987707c6c4",
+      "channel_id": "UCKqWekepRydW1vQIMV0ei8Q",
+      "duration": 130.0,
+      "segments": 11,
+      "technicalEligible": 11,
+      "recordingGroup": "communication-center-game-report",
+      "proposedSplit": "train",
+      "visualSampleSeconds": [
+        16,
+        65,
+        104
+      ],
+      "visualNotes": "Human presenter signing against a blue background; not just a game avatar. Hands approach frame edges.",
+      "semanticReview": "pending"
+    },
+    {
+      "video_id": "GhuCvTuEx1s",
+      "url": "https://www.youtube.com/watch?v=GhuCvTuEx1s",
+      "title": "Доступная среда в Саратове",
+      "videoSha256": "c64f464cfec25433fad2247d78b00addef07a1db43181fb5ea67f17ce351329a",
+      "captionSha256": "d1e2300e9102a8646025a201e9952c3b24a3af191064a695321f780e2eb33ae2",
+      "channel_id": "UCoA3JvRkP1z3GE6x5jo6OzA",
+      "duration": 179.0,
+      "segments": 15,
+      "technicalEligible": 10,
+      "recordingGroup": "saratov-accessibility-report",
+      "proposedSplit": "train",
+      "visualSampleSeconds": [
+        21,
+        90,
+        143
+      ],
+      "visualNotes": "Signing presenter at 21s. At 90s and 143s, architecture/plaque cutaways without signer. Subtitle pairs intersecting these shots need exclusion or corrected boundaries.",
+      "semanticReview": "pending",
+      "technicalChecks": [
+        {
+          "segmentId": "GhuCvTuEx1s:6",
+          "sampleSeconds": [
+            105,
+            108
+          ],
+          "decision": "needs_reextraction",
+          "scope": "technical_only",
+          "note": "Человек показывает жесты, но находится далеко и изображение размыто. Отсутствие точек лица здесь — ошибка трекинга, а не доказательство неверных субтитров."
+        }
+      ]
+    },
+    {
+      "video_id": "IBeed1Vp-fU",
+      "url": "https://www.youtube.com/watch?v=IBeed1Vp-fU",
+      "title": "\"Словесный портрет\". Интервью с Максимом Ларионовым",
+      "videoSha256": "3475fa373973a7376cc826381115ad6bce877c6f56766bac1fe28c445818d5ad",
+      "captionSha256": "ac5c39e2e0c11b6fe405c9e100fcfcaaf7bd38e4ead5d0ec69ec8bcbb7722930",
+      "channel_id": "UCoA3JvRkP1z3GE6x5jo6OzA",
+      "duration": 708.0,
+      "segments": 95,
+      "technicalEligible": 89,
+      "recordingGroup": "verbal-portrait-interview",
+      "proposedSplit": "train",
+      "visualSampleSeconds": [
+        85,
+        354,
+        566
+      ],
+      "visualNotes": "Seated presenter signs at a desk. Hands overlap and approach desk edge; inspect landmark losses before accepting clips.",
+      "semanticReview": "pending",
+      "technicalChecks": [
+        {
+          "segmentId": "IBeed1Vp-fU:47",
+          "sampleSeconds": [
+            331,
+            333,
+            334
+          ],
+          "decision": "exclude",
+          "scope": "technical_only",
+          "note": "Внутри реплики человек сменяется фотографией: руки перестают быть видны. Подтверждено просмотром кадров 331/333/334 с. Смысл перевода не проверен."
+        }
+      ]
+    },
+    {
+      "video_id": "VrPTtiKS5DQ",
+      "url": "https://www.youtube.com/watch?v=VrPTtiKS5DQ",
+      "title": "Итоги месяца - апрель 2023",
+      "videoSha256": "244f70fac5ee863c11797e92879c3ed3a102e63316c21f884bef05c3d060f8ad",
+      "captionSha256": "7dc467c25255f65870dc23b88037ede2d0b2ac865b201824da781b319fa6fa10",
+      "channel_id": "UCbNFGU5k0zsWr2OJdoSDy1g",
+      "duration": 391.0,
+      "segments": 107,
+      "technicalEligible": 104,
+      "recordingGroup": "mgo-monthly-news-april-2023",
+      "proposedSplit": "train",
+      "visualSampleSeconds": [
+        47,
+        196,
+        313
+      ],
+      "visualNotes": "Standing studio presenter with both hands visible in sampled frames. Group with VOG-related channels conservatively for training.",
+      "semanticReview": "pending"
+    },
+    {
+      "video_id": "cdg4CF9S--M",
+      "url": "https://www.youtube.com/watch?v=cdg4CF9S--M",
+      "title": "\"Не ждали\" | О Репине на жестовом языке",
+      "videoSha256": "71722596c4aa6761a94afbfc19d655046ee0e3e0b7515125ce5d839d65a1b13b",
+      "captionSha256": "1c31176ff1cc1f8eb4037ed95f9651a096026f70313502d69cdd988bdaf043f5",
+      "channel_id": "UCOmvWULNEqpzpHm3kxNGaBA",
+      "duration": 245.0,
+      "segments": 51,
+      "technicalEligible": 50,
+      "recordingGroup": "russian-museum-excursions",
+      "proposedSplit": "val",
+      "visualSampleSeconds": [
+        29,
+        122,
+        196
+      ],
+      "visualNotes": "Signing presenter at 29s and 196s. Painting-only cutaway at 122s. Verify subtitle intervals over art cutaways; keep museum sources together.",
+      "semanticReview": "pending"
+    },
+    {
+      "video_id": "qjnl1J5BXmQ",
+      "url": "https://www.youtube.com/watch?v=qjnl1J5BXmQ",
+      "title": "Белка в колесе",
+      "videoSha256": "828938cf5305586b790b514798e10a92b548a8fff15a44fc8a0658a3a48c39c3",
+      "captionSha256": "74a74e3f30ba88dd627bbd762f614655fd9e7f13ecc23729d24e2e61d35e0416",
+      "channel_id": "UCJzu69TgtBwVc03QEP9gL6A",
+      "duration": 210.0,
+      "segments": 94,
+      "technicalEligible": 94,
+      "recordingGroup": "volkova-squirrel-in-wheel",
+      "proposedSplit": "test",
+      "visualSampleSeconds": [
+        25,
+        105,
+        168
+      ],
+      "visualNotes": "Close webcam-like framing, moving hands and face visible. Six empty subtitle cues were excluded explicitly. Proposed test is only one presenter/video and cannot establish broad generalization.",
+      "semanticReview": "pending"
+    }
+  ],
+  "discovery": {
+    "checkedSources": 48,
+    "metadataAvailable": 42,
+    "unavailable": 6
+  },
+  "totalLocalCorpus": {
+    "videos": 14,
+    "minutes": 108.05000000000001,
+    "subtitleIntervals": 1132
+  },
+  "reservedPreviousTest": {
+    "video_id": "0EQJSyjbSAQ",
+    "channelExcludedFromExpansion": "UCTIBRINUegVQ_RtoLWTL-zw"
+  },
+  "proposedSourceSplits": {
+    "train": 7,
+    "val": 2,
+    "test": 1
+  },
+  "automaticallyVerifiedMeaning": false,
+  "trainingExecuted": false,
+  "deployed": false,
+  "reviewInterface": "ml/krsl/data/sources/youtube-sl-25/expansion/quality/index.html (local only)",
+  "limitations": [
+    "Three sampled frames per new source, plus focused technical checks; not exhaustive linguistic review",
+    "Technical eligibility does not validate the meaning of subtitles or RSL grammar",
+    "Proposed test contains one recording/presenter; additional independent test performers remain desirable",
+    "Performer identities must be annotated before claiming signer-disjoint splits",
+    "Source footage, full captions and landmark arrays remain local, outside Git"
+  ],
+  "verification": {
+    "unitTestsPassed": 22,
+    "javascriptSyntax": "passed",
+    "reviewBrowser": "In-app browser: metadata seek, playback, clip-end pause, quarantine filter and rejection display verified",
+    "unreviewedApprovalBlocked": true,
+    "rangeRequest206Verified": true
+  }
+}
