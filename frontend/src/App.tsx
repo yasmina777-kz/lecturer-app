@@ -14,7 +14,6 @@ import { ErrorMessage, Loading } from "./components/UI";
 import { AuthPage } from "./pages/AuthPage";
 const GesturePreviewPage = lazy(() => import("./pages/GesturePreviewPage").then(m => ({default:m.GesturePreviewPage})));
 const MixamoPreviewPage = lazy(() => import("./pages/MixamoPreviewPage").then(m => ({default:m.MixamoPreviewPage})));
-const WomanAvatarPreviewPage = lazy(() => import("./pages/WomanAvatarPreviewPage").then(m => ({default:m.WomanAvatarPreviewPage})));
 import LandingPage from "./pages/LandingPage";
 const SignLearningPage = lazy(() => import("./pages/SignWorkspace").then(m => ({default:m.SignLearningPage})));
 const SignLessonPage = lazy(() => import("./pages/SignWorkspace").then(m => ({default:m.SignLessonPage})));
@@ -93,7 +92,7 @@ export function App() {
             <Route path="learn" element={<SignLearningPage />} />
             <Route path="learn/:id" element={<SignLessonPage />} />
             <Route path="text-to-sign" element={<SignTextPage />} />
-            <Route path="avatar-woman" element={<WomanAvatarPreviewPage />} />
+            <Route path="avatar-woman" element={<Navigate to="/text-to-sign" replace />} />
             <Route path="avatar-motion" element={<MixamoPreviewPage />} />
 
             <Route path="library" element={<LibraryPage />} />

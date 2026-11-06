@@ -234,7 +234,6 @@ export function SignDictionaryPage() {
         ]}
       />
       <div className="sign-workspace-meta">
-        <Link className="sign-help-link" to="/avatar-woman">{at("Попробовать новый аватар", "Try the new avatar", "Жаңа аватарды байқап көру")}</Link>
         <span>
           33 {at("буквы", "letters", "әріп")} · {words.length || "…"}{" "}
           {at("слов и выражений", "words and expressions", "сөз бен тіркес")}

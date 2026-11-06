@@ -49,7 +49,7 @@ export function Shell() {
       to: "/text-to-sign",
       label: at("Текст → жесты", "Text → signs", "Мәтін → ымдар"),
       icon: Type,
-      active: path === "/text-to-sign" || path === "/avatar-woman",
+      active: path === "/text-to-sign",
     },
     {
       to: "/recognition",
@@ -80,7 +80,6 @@ export function Shell() {
     path.startsWith("/learn") ||
     path === "/admin" ||
     path === "/text-to-sign" ||
-    path === "/avatar-woman" ||
     path === "/recognition" ||
     path === "/dialogues" ||
     path === "/understanding" ||

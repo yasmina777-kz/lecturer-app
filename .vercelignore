@@ -626,3 +626,6 @@ frontend/public/research/rsl/words/ffce2323-7036-46ee-af8a-82f010ce9aff.mp4
 frontend/public/research/rsl/words/forms.json
 frontend/public/research/rsl/words/license.pdf
 frontend/public/research/rsl/y-reference.mp4
+
+# Retired preview model; retain source locally, omit from deployment.
+frontend/public/avatars/woman01/
