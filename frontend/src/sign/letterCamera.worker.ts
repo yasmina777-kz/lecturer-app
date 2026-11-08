@@ -70,7 +70,12 @@ self.onmessage = async ({ data }) => {
       try {
         // Framing feedback needs fewer updates than fingers. Do not block every
         // hand frame on a second neural network; discard stale poses on gaps.
-        if (data.now - poseAt >= 250) {
+        // Pose landmarks are only used for the body guide and phrase-capture
+        // framing. Running this second CPU model four times per second competes
+        // with the hand classifier on laptops and throttled mobile browsers.
+        // Two updates per second keep the guide responsive while freeing the
+        // worker for hand tracking on every sampled frame.
+        if (data.now - poseAt >= 500) {
           lastPose = poseDetector?.detectForVideo(data.bitmap, data.now).landmarks[0] ?? [];
           poseAt = data.now;
         }

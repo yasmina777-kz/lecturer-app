@@ -176,7 +176,20 @@ if (Directory.Exists(Path.Combine(app.Environment.ContentRootPath, "wwwroot")))
     assetTypes.Mappings[".onnx"] = "application/octet-stream";
     assetTypes.Mappings[".glb"] = "model/gltf-binary";
     assetTypes.Mappings[".gltf"] = "model/gltf+json";
-    app.UseStaticFiles(new StaticFileOptions { ContentTypeProvider = assetTypes });
+    app.UseStaticFiles(new StaticFileOptions
+    {
+        ContentTypeProvider = assetTypes,
+        OnPrepareResponse = context =>
+        {
+            // Camera task files are immutable versioned models. Cache them at
+            // the edge and in the browser so each visit does not download 13 MB.
+            if (context.File.Name.EndsWith(".task", StringComparison.OrdinalIgnoreCase) &&
+                context.Context.Request.Path.StartsWithSegments("/models/rsl"))
+            {
+                context.Context.Response.Headers.CacheControl = "public,max-age=31536000,immutable";
+            }
+        }
+    });
     app.MapFallbackToFile("index.html");
     // Unknown API paths must return JSON, never the SPA document.
     app.Map("/api/{**path}", () => Results.NotFound(new { message = "API route not found." }));
