@@ -42,7 +42,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
   useEffect(() => {
     // Remove tokens from the old MVP; new sessions use an HttpOnly cookie.
-    ["token", "role", "fullName"].forEach((k) => localStorage.removeItem(k));
+    try {
+      ["token", "role", "fullName"].forEach((k) => localStorage.removeItem(k));
+    } catch {
+      /* Cookie sessions still work when browser storage is blocked. */
+    }
     void reload();
     const expired = () => setUser(null);
     window.addEventListener("session-expired", expired);

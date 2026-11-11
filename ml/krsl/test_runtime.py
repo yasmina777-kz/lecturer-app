@@ -7,11 +7,25 @@ from types import SimpleNamespace
 import numpy as np
 import torch
 from model import decode_ctc
-from runtime import vector, POSE, FACE
+from runtime import Engine, vector, POSE, FACE
 from train import distance, read_manifest, evaluate, dataset_summary, run_training
 
 
 class PipelineTests(unittest.TestCase):
+    def test_invalid_model_outputs_cannot_become_a_draft(self):
+        engine = Engine.__new__(Engine)
+        engine.vocab = {'0': '<BLANK>', '1': '<UNK>', '2': 'дом'}
+        rows = np.zeros((6, 180), dtype=np.float32)
+        engine.model = lambda *_: torch.full((1, 6, 3), float('nan'))
+        with self.assertRaisesRegex(ValueError, 'некорректный результат'):
+            engine.predict_features(rows)
+        engine.model = lambda *_: torch.zeros((1, 6, 4))
+        with self.assertRaises(ValueError): engine.predict_features(rows)
+        engine.model = lambda *_: torch.tensor([[[0., 0., 8.]] * 6])
+        self.assertEqual(engine.predict_features(rows)[0], ['дом'])
+        for invalid in [np.zeros((6, 179)), np.full((6, 180), np.inf), np.zeros((0, 180))]:
+            with self.assertRaises(ValueError): engine.predict_features(invalid)
+
     def test_ctc_repeated_sign_after_blank(self):
         logits = torch.full((6, 3), -10.)
         for frame, token in enumerate([1, 1, 0, 1, 2, 2]): logits[frame, token] = 10

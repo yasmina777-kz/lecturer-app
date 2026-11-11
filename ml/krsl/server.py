@@ -17,14 +17,18 @@ busy = asyncio.Lock()
 @asynccontextmanager
 async def lifespan(app):
     global engine, load_error
+    engine, load_error = None, None
     try:
         engine = await run_in_threadpool(Engine)
     except Exception:
         load_error = 'Не удалось загрузить модель. Запустите ml/krsl/setup.py и перезапустите сервис.'
         logging.exception('KRSL startup failed')
-    yield
-    if engine:
-        engine.close()
+    try:
+        yield
+    finally:
+        if engine:
+            engine.close()
+        engine = None
 
 
 app = FastAPI(lifespan=lifespan, docs_url=None, redoc_url=None)

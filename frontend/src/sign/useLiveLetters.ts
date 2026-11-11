@@ -19,6 +19,8 @@ export function useLiveLetters(
   const [text, setText] = useState("");
   const [status, setStatus] = useState("Загружаем модель букв…");
   const [ready, setReady] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const [retryId, setRetryId] = useState(0);
   const [progress, setProgress] = useState(0);
   const [last, setLast] = useState("");
   const worker = useRef<Worker>();
@@ -27,47 +29,71 @@ export function useLiveLetters(
   const activeRef = useRef(active);
   activeRef.current = active;
   useEffect(() => {
-    const w = new Worker("/models/rsl/letter-camera-worker.js?v=4");
-    worker.current = w;
+    setReady(false);
+    setFailed(false);
+    setStatus("Загружаем модель букв…");
+    let w: Worker;
+    let watchdog: ReturnType<typeof setTimeout>;
     const fail = () => {
+      clearTimeout(watchdog);
+      w?.terminate();
+      worker.current = undefined;
       busy.current = false;
       setReady(false);
+      setFailed(true);
       setStatus(
-        "Модель букв не загрузилась. Обновите страницу, чтобы повторить.",
+        "Модель букв недоступна. Проверьте подключение и повторите загрузку.",
       );
     };
+    try {
+      w = new Worker("/models/rsl/letter-camera-worker.js?v=5");
+    } catch {
+      fail();
+      return;
+    }
+    worker.current = w;
+    watchdog = setTimeout(fail, 60000);
     w.onerror = fail;
+    w.onmessageerror = fail;
     w.onmessage = ({ data }) => {
+      if (worker.current !== w) return;
       if (data.type === "ready") {
+        clearTimeout(watchdog);
         setReady(true);
         setStatus("Буквы готовы");
         return;
       }
       if (data.type === "body-error") {
         setBodyStatus(
-          "Ориентиры тела не загрузились. Фразы всё ещё проверяются сервером.",
+          "Ориентиры тела недоступны. Автоматическое завершение фразы может не работать; используйте кнопку завершения записи.",
         );
         return;
       }
       if (data.type === "error") {
+        if (data.fatal) {
+          fail();
+          return;
+        }
+        if (data.generation !== session.current || !activeRef.current) return;
         busy.current = false;
         setStatus(data.message);
         return;
       }
       if (data.type !== "frame") return;
-      busy.current = false;
       if (data.generation !== session.current || !activeRef.current) return;
+      busy.current = false;
       if (video.current && canvas.current) {
         drawHandOverlay(canvas.current, video.current, data.detected);
         drawBodyOverlay(canvas.current, data.pose ?? []);
       }
       const body = (data.pose ?? []) as Landmark[];
       const seen = (i: number) => body[i] && (body[i].visibility ?? 0) > 0.6;
-      setBodyStatus(
-        [11, 12, 13, 14].every(seen)
-          ? "Плечи и локти видны"
-          : "Отойдите немного: нужны плечи и локти в кадре",
-      );
+      if (data.bodyAvailable)
+        setBodyStatus(
+          [11, 12, 13, 14].every(seen)
+            ? "Плечи и локти видны"
+            : "Отойдите немного: нужны плечи и локти в кадре",
+        );
       const slots = ["Left", "Right"].map((side) => {
         const index = data.detected.handedness.findIndex(
           (h: { categoryName: string }[]) => h[0]?.categoryName === side,
@@ -99,14 +125,16 @@ export function useLiveLetters(
     };
     w.postMessage({ type: "init", origin: location.origin });
     return () => {
+      clearTimeout(watchdog);
       session.current++;
       w.terminate();
       worker.current = undefined;
       busy.current = false;
     };
-  }, []);
+  }, [retryId]);
   useEffect(() => {
     const generation = ++session.current;
+    busy.current = false;
     worker.current?.postMessage({ type: "reset" });
     setProgress(0);
     if (!active || !ready) {
@@ -138,7 +166,6 @@ export function useLiveLetters(
         .then((bitmap) => {
           if (generation !== session.current || !worker.current) {
             bitmap.close();
-            busy.current = false;
             return;
           }
           worker.current.postMessage(
@@ -147,6 +174,7 @@ export function useLiveLetters(
           );
         })
         .catch(() => {
+          if (generation !== session.current) return;
           busy.current = false;
           setStatus("Не удалось получить кадр камеры.");
         });
@@ -157,5 +185,15 @@ export function useLiveLetters(
       cancelAnimationFrame(raf);
     };
   }, [active, ready]);
-  return { text, setText, status, progress, last, ready, bodyStatus };
+  return {
+    text,
+    setText,
+    status,
+    progress,
+    last,
+    ready,
+    failed,
+    retry: () => setRetryId((value) => value + 1),
+    bodyStatus,
+  };
 }

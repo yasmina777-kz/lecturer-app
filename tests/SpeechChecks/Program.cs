@@ -37,6 +37,7 @@ if (handler.Calls != requestCount || (await db.BudgetPeriods.AsNoTracking().Sing
 await db.AutomationSettings.ExecuteUpdateAsync(s=>s.SetProperty(x=>x.MonthlySpeechCharacters,500000));
 handler.Status = HttpStatusCode.Unauthorized;
 try { await service.Speak("test","en","female",uid,CancellationToken.None); throw new Exception("Provider failure was not surfaced"); } catch(ServiceException e) when(e.Status == 502) { }
+await AiChecks.Run();
 await AutomationChecks.Run();
 Console.WriteLine("Passed: six cloud voices, SSML escaping, endpoint/headers, MP3 response, durable cache reuse, speech limits and provider error handling (mock transport).");
 class CaptureHandler : HttpMessageHandler {

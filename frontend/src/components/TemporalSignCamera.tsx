@@ -5,7 +5,7 @@ import type {
   HandLandmarker,
   HandLandmarkerResult,
 } from "@mediapipe/tasks-vision";
-import type { SignClassifier } from "../sign/recognition";
+import { validClassifier, type SignClassifier } from "../sign/recognition";
 import {
   temporalFrame,
   recognizeSequence,
@@ -124,6 +124,7 @@ function TemporalCameraSession({
       );
       if (!response.ok) throw Error("model");
       const m = await response.json();
+      if (!validClassifier(m) || m.mean.length !== 474) throw Error("model");
       const d = await HandLandmarker.createFromOptions(
         await FilesetResolver.forVisionTasks("/models/rsl/wasm"),
         {

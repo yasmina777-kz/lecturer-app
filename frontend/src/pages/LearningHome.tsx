@@ -10,10 +10,80 @@ import {
 } from "lucide-react";
 import { at } from "../i18n/automation";
 import { courseLevels } from "../sign/exercises";
+import { useSignProgress } from "../sign/useProgress";
+import { useActivityProgress } from "../sign/useActivities";
+import { reviewItems } from "../sign/activities";
 
 export function LearningHome() {
+  const { progress } = useSignProgress();
+  const { attempts } = useActivityProgress();
+  const reviewCount = reviewItems(attempts).size;
+  const hasHistory = Object.keys(progress).length > 0 || attempts.length > 0;
+  const nextLesson = !progress["getting-started"]
+    ? "/learn/getting-started"
+    : !progress["alphabet-intro"]
+      ? "/learn/alphabet-intro"
+      : "/practice?exercise=a";
   return (
     <div className="sign-workspace learning-home">
+      {hasHistory && (
+        <section
+          className="panel learning-progress"
+          aria-label={at("Ваши занятия", "Your learning", "Оқу барысыңыз")}
+        >
+          <h2>
+            {at("Продолжим обучение", "Continue learning", "Оқуды жалғастыру")}
+          </h2>
+          <p>
+            {at(
+              "Вводные материалы прочитаны:",
+              "Introductions completed:",
+              "Оқылған кіріспе материалдар:",
+            )}{" "}
+            {
+              ["getting-started", "alphabet-intro"].filter(
+                (id) => progress[id as "getting-started" | "alphabet-intro"],
+              ).length
+            }
+            /2 ·{" "}
+            {at(
+              "Попыток в упражнениях:",
+              "Exercise attempts:",
+              "Жаттығу әрекеттері:",
+            )}{" "}
+            {attempts.length}
+          </p>
+          <div className="learning-progress-actions">
+            <Link className="button primary" to={nextLesson}>
+              {at("Следующий шаг", "Next step", "Келесі қадам")}{" "}
+              <ArrowRight size={18} />
+            </Link>
+            <Link
+              className="button secondary"
+              to={reviewCount ? "/understanding#review" : "/understanding"}
+            >
+              {reviewCount
+                ? at(
+                    `Повторить сложные слова: ${reviewCount}`,
+                    `Words to review: ${reviewCount}`,
+                    `Қайталайтын сөздер: ${reviewCount}`,
+                  )
+                : at(
+                    "Тренировать понимание",
+                    "Practise understanding",
+                    "Түсінуді жаттықтыру",
+                  )}
+            </Link>
+          </div>
+          <p className="sign-save-note">
+            {at(
+              "История этого браузера. Отметки занятий не подтверждают правильность жестов.",
+              "History in this browser. Practice marks do not certify signing accuracy.",
+              "Осы браузердегі тарих. Жаттығу белгілері ымдардың дұрыстығын растамайды.",
+            )}
+          </p>
+        </section>
+      )}
       <section className="learning-intro" aria-labelledby="learning-title">
         <div className="learning-intro-copy">
           <h1 id="learning-title">
@@ -31,8 +101,14 @@ export function LearningHome() {
             )}
           </p>
           <div className="learning-intro-actions">
-            <Link className="button primary" to="/practice?exercise=a">
-              {at("Начать обучение", "Start learning", "Оқуды бастау")}
+            <Link className="button primary" to={nextLesson}>
+              {hasHistory
+                ? at(
+                    "Продолжить обучение",
+                    "Continue learning",
+                    "Оқуды жалғастыру",
+                  )
+                : at("Начать обучение", "Start learning", "Оқуды бастау")}
               <ArrowRight size={18} />
             </Link>
             <Link className="learning-demo-link" to="/learn/getting-started">
@@ -177,13 +253,7 @@ export function LearningHome() {
         <Link to="/text-to-sign?tab=dictionary">
           <Type size={21} />
           <div>
-            <h3>
-              {at(
-                "Открыть словарь · 171 слово",
-                "Open dictionary · 171 words",
-                "Сөздікті ашу · 171 сөз",
-              )}
-            </h3>
+            <h3>{at("Открыть словарь", "Open dictionary", "Сөздікті ашу")}</h3>
             <p>
               {at(
                 "Слова, выражения и все 33 буквы",

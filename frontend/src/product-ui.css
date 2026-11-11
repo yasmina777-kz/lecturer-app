@@ -468,7 +468,7 @@
   & .learning-level-copy {
     position: relative;
     z-index: 2;
-    max-width: 63%;
+    max-width: calc(100% - 112px);
   }
   & .learning-level-copy h3 {
     margin: 0 0 7px;
@@ -3253,4 +3253,31 @@
 @media (prefers-reduced-motion: reduce) {
   :root .product-ui[data-product-ui][data-product-theme] .grammar-visual-card,
   :root .product-ui[data-product-ui][data-product-theme] .grammar-visual-image img { transition: none; }
+}
+
+/* Keep lesson copy clear of decorative art at intermediate viewport widths. */
+:root .product-ui[data-product-ui][data-product-theme] {
+  & .learning-progress { margin-bottom: 24px; padding: 20px; background: var(--p-surface); color: var(--p-text); border: 1px solid var(--p-line); }
+  & .learning-progress p { color: var(--p-muted); }
+  & .learning-progress-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+}
+@media (max-width: 1100px) {
+  :root .product-ui[data-product-ui][data-product-theme] {
+    & .learning-intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .8fr); margin-right: 0; }
+    & .learning-intro-copy { width: 100%; min-width: 0; }
+    & .learning-intro-art { position: relative; inset: auto; height: 280px; }
+    & .learning-levels { grid-template-columns: 1fr; }
+    & .learning-levels::before { display: none; }
+    & .learning-level-copy { max-width: calc(100% - 112px); }
+    & .learning-level-copy p { font-size: 14px; }
+    & .learning-level-copy small { font-size: 12px; max-width: none; }
+    & .learning-level-hand { width: 100px; }
+  }
+}
+@media (max-width: 900px) {
+  :root .product-ui[data-product-ui][data-product-theme] {
+    & .learning-intro { grid-template-columns: minmax(0, 1fr); }
+    & .learning-intro-art { height: 190px; margin-top: 12px; }
+    & .learning-intro-copy > p { max-width: 520px; }
+  }
 }

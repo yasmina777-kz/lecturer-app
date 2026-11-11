@@ -3,29 +3,19 @@ import { Camera, Square, Upload, RefreshCw, Copy } from "lucide-react";
 import { PhraseCapture, type Landmark } from "../sign/phraseCapture";
 import { useLiveLetters } from "../sign/useLiveLetters";
 import { at } from "../i18n/automation";
-
-type Result = {
-  status: "draft" | "uncertain" | "no_tracking";
-  text: string;
-  message: string;
-  seconds: number;
-  tracking: {
-    hands: number;
-    leftHand?: number;
-    rightHand?: number;
-    body: number;
-    face: number;
-  };
-};
-type Health = {
-  ready: boolean;
-  vocabulary: number;
-  error?: string;
-  upstreamMetrics?: { wer?: number };
-};
+import {
+  parseRecognitionHealth,
+  parseRecognitionResult,
+  readRecognitionResponse,
+  RecognitionServiceError,
+  type RecognitionHealth as Health,
+  type RecognitionResult as Result,
+} from "../sign/recognitionApi";
 
 export function ContinuousSignCamera() {
   const [health, setHealth] = useState<Health | null>(null);
+  const [checking, setChecking] = useState(false);
+  const healthRequest = useRef<AbortController | null>(null);
   const healthRef = useRef(health);
   healthRef.current = health;
   const [phase, setPhase] = useState<
@@ -71,16 +61,23 @@ export function ContinuousSignCamera() {
   const alive = useRef(true);
 
   async function check() {
+    healthRequest.current?.abort();
+    const controller = new AbortController();
+    healthRequest.current = controller;
+    const timeout = setTimeout(() => controller.abort(), 10000);
+    setChecking(true);
     setMessage(
       at("Проверяем модель…", "Checking model…", "Модель тексерілуде…"),
     );
     try {
       const response = await fetch("/api/krsl/status", {
-        signal: AbortSignal.timeout(10000),
+        signal: controller.signal,
       });
-      if (!response.ok) throw new Error();
-      const data: Health = await response.json();
-      if (!alive.current) return;
+      const data = await readRecognitionResponse(
+        response,
+        parseRecognitionHealth,
+      );
+      if (!alive.current || healthRequest.current !== controller) return;
       healthRef.current = data;
       setHealth(data);
       if (data.ready && stream.current) record(generation.current);
@@ -90,7 +87,7 @@ export function ContinuousSignCamera() {
           : data.error || "Модель ещё загружается. Повторите проверку.",
       );
     } catch {
-      if (!alive.current) return;
+      if (!alive.current || healthRequest.current !== controller) return;
       healthRef.current = { ready: false, vocabulary: 0 };
       setHealth({ ready: false, vocabulary: 0 });
       setMessage(
@@ -100,6 +97,10 @@ export function ContinuousSignCamera() {
           "Сөйлемдерді тану қызметі қолжетімсіз. Әріптерді тануды қолдана аласыз.",
         ),
       );
+    } finally {
+      clearTimeout(timeout);
+      if (alive.current && healthRequest.current === controller)
+        setChecking(false);
     }
   }
   function release() {
@@ -134,12 +135,15 @@ export function ContinuousSignCamera() {
     void check();
     return () => {
       alive.current = false;
+      healthRequest.current?.abort();
+      healthRequest.current = null;
       release();
       if (preview.current) URL.revokeObjectURL(preview.current);
     };
   }, []);
 
   async function recognize(blob: Blob, id: number) {
+    if (!alive.current || id !== generation.current) return;
     if (inFlight.current) {
       // Recording pauses when this slot is occupied; never replace a phrase.
       pending.current = { blob, id };
@@ -168,19 +172,11 @@ export function ContinuousSignCamera() {
         body: blob,
         signal: controller.signal,
       });
-      const body = await response.json();
+      const next = await readRecognitionResponse(
+        response,
+        parseRecognitionResult,
+      );
       if (id !== generation.current || !alive.current) return;
-      if (response.status === 503) {
-        healthRef.current = { ready: false, vocabulary: 0, error: body.detail };
-        setHealth(healthRef.current);
-        pending.current = null;
-        setWaitingForSlot(false);
-        finishCapture.current?.(false);
-      }
-      if (!response.ok)
-        throw new Error(body.detail || "Не удалось распознать видео.");
-      if (id !== generation.current || !alive.current) return;
-      const next = body as Result;
       setResult(next);
       setMessage(next.message);
       if (next.status === "draft")
@@ -189,6 +185,17 @@ export function ContinuousSignCamera() {
         );
     } catch (error) {
       if (id !== generation.current || !alive.current) return;
+      if (error instanceof RecognitionServiceError && error.status === 503) {
+        healthRef.current = {
+          ready: false,
+          vocabulary: 0,
+          error: error.message,
+        };
+        setHealth(healthRef.current);
+        pending.current = null;
+        setWaitingForSlot(false);
+        finishCapture.current?.(false);
+      }
       setMessage(
         error instanceof Error && error.name !== "AbortError"
           ? error.message
@@ -222,10 +229,18 @@ export function ContinuousSignCamera() {
       (value) => MediaRecorder.isTypeSupported(value),
     );
     const parts: Blob[] = [];
-    const rec = new MediaRecorder(
-      stream.current,
-      mime ? { mimeType: mime, videoBitsPerSecond: 1500000 } : undefined,
-    );
+    let rec: MediaRecorder;
+    try {
+      rec = new MediaRecorder(
+        stream.current,
+        mime ? { mimeType: mime, videoBitsPerSecond: 1500000 } : undefined,
+      );
+    } catch {
+      setMessage(
+        "Запись фраз не поддерживается этим браузером. Буквы можно проверять отдельно.",
+      );
+      return;
+    }
     recorder.current = rec;
     let submit = false;
     finishCapture.current = (send) => {
@@ -239,8 +254,7 @@ export function ContinuousSignCamera() {
     };
     rec.onerror = () => {
       if (id === generation.current) {
-        release();
-        setPhase("idle");
+        stop();
         setMessage("Не удалось записать видео. Попробуйте загрузить файл.");
       }
     };
@@ -264,7 +278,17 @@ export function ContinuousSignCamera() {
       () => setElapsed(Math.floor((Date.now() - started) / 1000)),
       250,
     );
-    rec.start();
+    try {
+      rec.start();
+    } catch {
+      clearInterval(ticker.current);
+      recorder.current = null;
+      finishCapture.current = undefined;
+      setMessage(
+        "Не удалось начать запись фразы. Буквы можно проверять отдельно.",
+      );
+      return;
+    }
     // Bounded memory/upload duration even if tracking fails or the tab stalls.
     timer.current = setTimeout(
       () => finishCapture.current?.(hasMotion.current),
@@ -273,6 +297,7 @@ export function ContinuousSignCamera() {
   }
   async function start() {
     release();
+    setProcessing(false);
     const id = generation.current;
     setPhase("starting");
     setResult(null);
@@ -301,11 +326,12 @@ export function ContinuousSignCamera() {
         video.current.srcObject = media;
         await video.current.play();
       }
+      if (id !== generation.current || !alive.current) return;
       setWaitingForSlot(false);
       setMessage(
-        health?.ready
+        healthRef.current?.ready
           ? ""
-          : "Фразы пока недоступны; буквы работают. Проверьте подключение сервиса распознавания.",
+          : "Фразы пока недоступны. Готовность модели букв показана ниже.",
       );
       setPhase("recording");
       if (healthRef.current?.ready && window.MediaRecorder) record(id);
@@ -324,8 +350,16 @@ export function ContinuousSignCamera() {
   }
   async function upload(file?: File) {
     if (!file || !healthRef.current?.ready) return;
-    if (file.size > 25 * 1024 * 1024) {
-      setMessage("Выберите видео до 25 МБ и 20 секунд.");
+    if (
+      !file.size ||
+      file.size > 25 * 1024 * 1024 ||
+      !["video/mp4", "video/webm", "video/quicktime", "video/ogg"].includes(
+        file.type,
+      )
+    ) {
+      setMessage(
+        "Выберите непустое видео MP4, WebM, MOV или OGG до 25 МБ и 20 секунд.",
+      );
       return;
     }
     release();
@@ -352,7 +386,14 @@ export function ContinuousSignCamera() {
             {at(
               "Держите лицо, плечи, локти и обе кисти в кадре.",
               "Keep your face, shoulders and both hands visible.",
-              "Бет, иық пен қол кадрда болсын. Әріптер мен сөйлемдер бірге тексеріледі.",
+              "Бет, иық, шынтақ пен екі қол кадрда толық көрінсін.",
+            )}
+          </p>
+          <p className="recognition-privacy">
+            {at(
+              "Буквы распознаются на устройстве. Если сервис фраз подключён, видео фраз отправляется ему для обработки. Звук не записывается.",
+              "Letters are recognized on your device. When the phrase service is connected, phrase video is sent to it for processing. Audio is not recorded.",
+              "Әріптер құрылғыда танылады. Сөйлем қызметі қосылса, сөйлем бейнесі оған өңдеуге жіберіледі. Дыбыс жазылмайды.",
             )}
           </p>
           <div className="recognition-edit-tools">
@@ -441,7 +482,11 @@ export function ContinuousSignCamera() {
             </button>
           )}
           {!health?.ready && (
-            <button className="button secondary" onClick={check}>
+            <button
+              className="button secondary"
+              onClick={check}
+              disabled={checking}
+            >
               <RefreshCw size={16} />
               {at(
                 "Проверить подключение",
@@ -461,6 +506,15 @@ export function ContinuousSignCamera() {
             <div>
               <strong>{at("Буквы", "Letters", "Әріптер")}</strong>
               <span>{letters.status}</span>
+              {letters.failed && (
+                <button className="button secondary" onClick={letters.retry}>
+                  {at(
+                    "Загрузить модель букв снова",
+                    "Retry letter model",
+                    "Әріп моделін қайта жүктеу",
+                  )}
+                </button>
+              )}
               {phase === "recording" && (
                 <progress
                   value={letters.progress}
@@ -584,7 +638,11 @@ export function ContinuousSignCamera() {
           {!health?.ready && (
             <p role="status">
               {health === null
-                ? at("Проверяем доступность фраз…", "Checking phrase service…", "Сөйлемдерді тану тексерілуде…")
+                ? at(
+                    "Проверяем доступность фраз…",
+                    "Checking phrase service…",
+                    "Сөйлемдерді тану тексерілуде…",
+                  )
                 : at(
                     "Распознавание фраз недоступно: сервис не подключён. Сейчас камера распознаёт только буквы.",
                     "Phrase recognition is unavailable: the service is offline. The camera currently recognizes letters only.",
@@ -598,15 +656,19 @@ export function ContinuousSignCamera() {
             maxLength={4000}
             value={text}
             onChange={(event) => setText(event.target.value)}
-            placeholder={!health?.ready ? at(
-              "Можно добавить распознанные буквы или ввести текст вручную",
-              "Add recognized letters or enter text manually",
-              "Танылған әріптерді қосыңыз немесе мәтінді енгізіңіз",
-            ) : at(
-              "Здесь появятся слова из вашего видео…",
-              "Words from your video will appear here…",
-              "Бейнедегі сөздер осында шығады…",
-            )}
+            placeholder={
+              !health?.ready
+                ? at(
+                    "Можно добавить распознанные буквы или ввести текст вручную",
+                    "Add recognized letters or enter text manually",
+                    "Танылған әріптерді қосыңыз немесе мәтінді енгізіңіз",
+                  )
+                : at(
+                    "Здесь появятся слова из вашего видео…",
+                    "Words from your video will appear here…",
+                    "Бейнедегі сөздер осында шығады…",
+                  )
+            }
           />
           <div className="recognition-edit-tools">
             <button
@@ -657,11 +719,13 @@ export function ContinuousSignCamera() {
                 "Модель мүмкіндіктері",
               )}
             </summary>
-            <p>{at(
-              "Видео обрабатывается сервисом распознавания и удаляется после обработки. Звук не записывается. Лимит файла: 20 секунд и 25 МБ.",
-              "Video is processed by the recognition service and deleted afterwards. No audio is recorded. File limit: 20 seconds and 25 MB.",
-              "Бейне тану қызметінде өңделіп, кейін жойылады. Дыбыс жазылмайды. Файл шегі: 20 секунд және 25 МБ.",
-            )}</p>
+            <p>
+              {at(
+                "Видео обрабатывается сервисом распознавания и удаляется после обработки. Звук не записывается. Лимит файла: 20 секунд и 25 МБ.",
+                "Video is processed by the recognition service and deleted afterwards. No audio is recorded. File limit: 20 seconds and 25 MB.",
+                "Бейне тану қызметінде өңделіп, кейін жойылады. Дыбыс жазылмайды. Файл шегі: 20 секунд және 25 МБ.",
+              )}
+            </p>
             <p>
               {at(
                 "Фразы читает сервер по ориентирам обеих рук, плеч, локтей, бровей и рта. Буквы проверяются одновременно отдельными моделями. Пауза завершает запись; длинный показ ограничен 12 секундами. Для более длинной фразы загрузите видео до 20 секунд. Голубые точки тела помогают расположиться в кадре; они не означают, что фраза распознана.",

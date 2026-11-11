@@ -838,6 +838,7 @@ export function SignUnderstandingPage() {
               </button>
               <button
                 className="button secondary"
+                id="review"
                 disabled={!pool.some((e) => review.has(e.id))}
                 onClick={() => start(true)}
               >

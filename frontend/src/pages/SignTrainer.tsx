@@ -180,11 +180,7 @@ export function SignCourseCatalog() {
         className="button secondary sign-catalog-dictionary"
         to="/text-to-sign?tab=dictionary"
       >
-        {at(
-          "Открыть словарь · 171 слово",
-          "Open dictionary · 171 words",
-          "Сөздікті ашу · 171 сөз",
-        )}
+        {at("Открыть словарь", "Open dictionary", "Сөздікті ашу")}
       </Link>
 
       <div className="sign-shortcuts">
@@ -655,11 +651,7 @@ function AnimatedExercisePlayer({
             className="button primary sign-catalog-dictionary"
             to="/text-to-sign?tab=dictionary"
           >
-            {at(
-              "Открыть словарь · 171 слово",
-              "Open dictionary · 171 words",
-              "Сөздікті ашу · 171 сөз",
-            )}
+            {at("Открыть словарь", "Open dictionary", "Сөздікті ашу")}
           </Link>
           <p className="sign-catalog-note">
             {at(

@@ -3,6 +3,7 @@ import { Camera, Square, Upload } from "lucide-react";
 import { at } from "../i18n/automation";
 import {
   classifyFeatures,
+  validClassifier,
   handFeatures,
   type SignClassifier,
 } from "../sign/recognition";
@@ -62,6 +63,8 @@ export function SignCamera({ expected }: { expected: string }) {
     ]);
     if (!response.ok) throw new Error("model");
     const model = await response.json();
+    if (!validClassifier(model) || model.mean.length !== 210)
+      throw new Error("model");
     const vision = await FilesetResolver.forVisionTasks("/models/rsl/wasm");
     const d = await HandLandmarker.createFromOptions(vision, {
       baseOptions: {

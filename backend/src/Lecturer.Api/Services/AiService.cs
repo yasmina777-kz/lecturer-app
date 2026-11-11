@@ -39,7 +39,8 @@ public class AiService(HttpClient client, IConfiguration config, AppDbContext db
                 usage.CachedTokens = Math.Clamp(usage.CachedTokens ?? 0, 0, usage.InputTokens ?? 0);
                 usage.EstimatedUsd = AiPricing.Cost(usage.Model, usage.InputTokens, usage.CachedTokens, usage.OutputTokens, config);
             }
-            var choice = root.GetProperty("choices")[0];
+            if (!root.TryGetProperty("choices", out var choices) || choices.ValueKind != JsonValueKind.Array || choices.GetArrayLength() == 0) throw new JsonException();
+            var choice = choices[0];
             if (choice.TryGetProperty("finish_reason", out var finish) && finish.GetString() is "length" or "content_filter") throw new JsonException();
             var text = choice.GetProperty("message").GetProperty("content").GetString();
             if (string.IsNullOrWhiteSpace(text)) throw new JsonException();

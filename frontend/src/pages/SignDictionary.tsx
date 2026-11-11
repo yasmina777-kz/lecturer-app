@@ -4,6 +4,8 @@ import { Search, BookOpen, Play, ArrowRight } from "lucide-react";
 import { at } from "../i18n/automation";
 import {
   alphabetEntries,
+  learningDictionary,
+  matchesDictionary,
   type DictionaryEntry,
   type DictionaryForms,
 } from "../sign/dictionary";
@@ -19,6 +21,7 @@ import { SignActionCards } from "../components/SignActionCards";
 const categoryTranslations: Record<string, [string, string]> = {
   Алфавит: ["Alphabet", "Әліпби"],
   Общение: ["Communication", "Қарым-қатынас"],
+  Фразы: ["Phrases", "Сөйлемдер"],
   "Семья и люди": ["Family and people", "Отбасы және адамдар"],
   Учёба: ["Learning", "Оқу"],
   "Каждый день": ["Daily life", "Күнделікті өмір"],
@@ -102,7 +105,14 @@ export function SignDictionaryPage() {
       });
     return () => abort.abort();
   }, []);
-  const entries = useMemo(() => [...alphabetEntries(), ...words], [words]);
+  const entries = useMemo(
+    () => learningDictionary(words, motions),
+    [words, motions],
+  );
+  const previewPlan = useMemo(
+    () => planMotion(text, entries, forms, motions, spelling),
+    [text, entries, forms, motions, spelling],
+  );
   const motionPlan = useMemo(
     () => planMotion(submitted, entries, forms, motions, spelling),
     [submitted, entries, forms, motions, spelling],
@@ -123,7 +133,7 @@ export function SignDictionaryPage() {
   const visible = entries.filter(
     (e) =>
       (category === "Все" || e.category === category) &&
-      e.label.toLocaleLowerCase("ru").includes(search.toLocaleLowerCase("ru")),
+      matchesDictionary(e, search, forms),
   );
   const categories = ["Все", ...new Set(entries.map((e) => e.category))];
   function choose(entry: DictionaryEntry) {
@@ -235,8 +245,15 @@ export function SignDictionaryPage() {
       />
       <div className="sign-workspace-meta">
         <span>
-          33 {at("буквы", "letters", "әріп")} · {words.length || "…"}{" "}
-          {at("слов и выражений", "words and expressions", "сөз бен тіркес")}
+          33 {at("буквы", "letters", "әріп")} ·{" "}
+          {at(
+            "Слова и выражения:",
+            "Words and expressions:",
+            "Сөздер мен тіркестер:",
+          )}{" "}
+          {loading
+            ? "…"
+            : entries.filter((entry) => entry.category !== "Алфавит").length}
         </span>
         <button
           className="sign-help-link"
@@ -329,6 +346,43 @@ export function SignDictionaryPage() {
                 )}
               </button>
             </div>
+            {!loading &&
+              !error &&
+              text.trim() &&
+              previewPlan.missing.length > 0 && (
+                <div role="status" className="sign-input-hint">
+                  <p>
+                    {at(
+                      "Пока нет движений для:",
+                      "No motion available for:",
+                      "Қимылдар әзірше жоқ:",
+                    )}{" "}
+                    {previewPlan.missing.join(", ")}.{" "}
+                    {at(
+                      "Вся фраза не будет запущена; слова не пропускаются.",
+                      "The phrase will not play; words are never skipped.",
+                      "Сөйлем көрсетілмейді; сөздер түсіп қалмайды.",
+                    )}
+                  </p>
+                  <button
+                    className="button secondary"
+                    onClick={() => setTab("phrases")}
+                  >
+                    {at(
+                      "Выбрать готовую фразу",
+                      "Choose a ready phrase",
+                      "Дайын сөйлемді таңдау",
+                    )}
+                  </button>
+                  <p>
+                    {at(
+                      "Для имени оставьте в поле только имя и включите «Имя по буквам».",
+                      "For a name, enter only the name and enable spelling.",
+                      "Есім үшін өріске тек есімді енгізіп, әріптеуді қосыңыз.",
+                    )}
+                  </p>
+                </div>
+              )}
             <button
               className="button secondary motion-reference-example"
               disabled={loading || !!error}
@@ -537,9 +591,9 @@ export function SignDictionaryPage() {
             )}
             <p>
               {at(
-                "Образец из исследовательского набора; для учебной программы нужна проверка преподавателя РЖЯ.",
-                "Research dataset reference; a teaching curriculum needs review by an RSL educator.",
-                "Зерттеу деректеріндегі үлгі; оқу бағдарламасын ым тілі мұғалімі тексеруі қажет.",
+                "Учебный показ пока экспериментальный; требуется проверка преподавателя РЖЯ.",
+                "This learning demonstration is experimental and needs review by an RSL educator.",
+                "Оқу көрсетілімі тәжірибелік; ым тілі мұғалімінің тексеруі қажет.",
               )}
             </p>
           </>

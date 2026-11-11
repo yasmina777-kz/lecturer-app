@@ -12,9 +12,9 @@ export function SignRecognitionPage() {
           <h1>{at("Жесты → текст", "Signs → text", "Ымдар → мәтін")}</h1>
           <p>
             {at(
-              "Покажите букву или короткую фразу. После фразы опустите руки и сделайте паузу.",
-              "Start the camera and show a sign. Letters and phrases are checked together. Pause after a phrase; a result appears if the model can identify it.",
-              "Камераны қосып, ымды көрсетіңіз. Әріптер мен сөйлемдер бірге тексеріледі. Сөйлемнен кейін үзіліс жасаңыз; модель анықтай алса, нәтиже шығады.",
+              "Покажите одну букву целиком. Распознавание фраз доступно только при подключённом сервисе — его статус показан ниже.",
+              "Show one complete letter. Phrase recognition requires a connected service; check its status below.",
+              "Бір әріпті толық көрсетіңіз. Сөйлемдерді тану тек қызмет қосылғанда қолжетімді — күйі төменде көрсетілген.",
             )}
           </p>
         </div>

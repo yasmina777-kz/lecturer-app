@@ -1,3 +1,5 @@
+import type { MotionAsset } from "./motion";
+
 export type DictionaryEntry = {
   id: string;
   label: string;
@@ -20,9 +22,55 @@ export const normalizeSignText = (text: string) =>
   text
     .normalize("NFKC")
     .toLocaleLowerCase("ru")
+    .trim()
     .replace(/[?!.,]+$/u, "")
     .trim()
     .replace(/\s+/gu, " ");
+
+/** Include authored lessons only when their actual animation is available.
+ * An authored animation is not a human reference video or a reviewed sign.
+ */
+export function learningDictionary(
+  words: DictionaryEntry[],
+  motions: MotionAsset[],
+): DictionaryEntry[] {
+  const entries = [...alphabetEntries(), ...words];
+  const ids = new Set(entries.map((entry) => entry.id));
+  const labels = new Set(
+    entries.map((entry) => normalizeSignText(entry.label)),
+  );
+  for (const motion of motions) {
+    if (
+      !motion.id.startsWith("prepared-") ||
+      ids.has(motion.id) ||
+      labels.has(normalizeSignText(motion.label))
+    )
+      continue;
+    entries.push({
+      id: motion.id,
+      label: motion.label,
+      category: motion.id === "prepared-name-demo" ? "Фразы" : "Общение",
+      video: motion.reference?.startsWith("/research/") ? motion.reference : "",
+      source: motion.source?.startsWith("https://") ? motion.source : "",
+      dataset: "AI Mentor · экспериментальная анимация",
+    });
+    ids.add(motion.id);
+    labels.add(normalizeSignText(motion.label));
+  }
+  return entries;
+}
+
+export function matchesDictionary(
+  entry: DictionaryEntry,
+  query: string,
+  forms: DictionaryForms,
+): boolean {
+  const normalized = normalizeSignText(query);
+  return (
+    normalizeSignText(entry.label).includes(normalized) ||
+    (forms[normalized] ?? []).includes(entry.id)
+  );
+}
 /** Dictionary decomposition in source order, explicitly NOT a grammar translator.
  * Unknown tokens and negation remain visible; never silently omit them.
  */

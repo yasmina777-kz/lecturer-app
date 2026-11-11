@@ -4,7 +4,15 @@ import type { TemporalFrame } from "./temporal";
 export type TrackingQuality = "ready" | "missing" | "clipped" | "distant";
 /** Quality checks apply to the same largest hand used by temporalFrame. */
 export function trackingQuality(result: HandLandmarkerResult): TrackingQuality {
-  if (!result.landmarks.length) return "missing";
+  if (
+    !result.landmarks.length ||
+    result.landmarks.some(
+      (points) =>
+        points.length !== 21 ||
+        points.some((p) => !Number.isFinite(p.x) || !Number.isFinite(p.y)),
+    )
+  )
+    return "missing";
   const bounds = result.landmarks
     .map((points) => ({
       minX: Math.min(...points.map((p) => p.x)),

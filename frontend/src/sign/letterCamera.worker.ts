@@ -6,7 +6,7 @@ import {
 import { LiveLetterStream, trackingQuality } from "./liveRecognition";
 import { temporalFrame, recognizeSequence } from "./temporal";
 import { agreeLetters } from "./phraseCapture";
-import type { SignClassifier } from "./recognition";
+import { validClassifier, type SignClassifier } from "./recognition";
 
 let detector: HandLandmarker;
 let model: SignClassifier;
@@ -29,6 +29,13 @@ self.onmessage = async ({ data }) => {
       if (!response.ok || !verifyResponse.ok) throw new Error("model");
       model = await response.json();
       verifier = await verifyResponse.json();
+      if (
+        !validClassifier(model) ||
+        !validClassifier(verifier) ||
+        model.mean.length !== 474 ||
+        verifier.mean.length !== 474
+      )
+        throw new Error("Invalid alphabet model");
       detector = await HandLandmarker.createFromOptions(files, {
         baseOptions: {
           modelAssetPath: `${data.origin}/models/rsl/hand_landmarker.task`,
@@ -56,6 +63,7 @@ self.onmessage = async ({ data }) => {
       console.error("Letter worker initialization:", error);
       self.postMessage({
         type: "error",
+        fatal: true,
         message: "Не удалось загрузить распознавание букв. Обновите страницу.",
       });
     }
@@ -76,11 +84,19 @@ self.onmessage = async ({ data }) => {
         // Two updates per second keep the guide responsive while freeing the
         // worker for hand tracking on every sampled frame.
         if (data.now - poseAt >= 500) {
-          lastPose = poseDetector?.detectForVideo(data.bitmap, data.now).landmarks[0] ?? [];
+          lastPose =
+            poseDetector?.detectForVideo(data.bitmap, data.now).landmarks[0] ??
+            [];
           poseAt = data.now;
         }
       } catch {
         lastPose = [];
+        try {
+          poseDetector?.close();
+        } catch {
+          /* A failed WASM graph may already be closed. */
+        }
+        poseDetector = undefined;
         self.postMessage({ type: "body-error" });
       }
       // Use the trained largest-hand rule, but reset whenever its identity
@@ -116,6 +132,7 @@ self.onmessage = async ({ data }) => {
         generation: data.generation,
         detected,
         pose: lastPose,
+        bodyAvailable: !!poseDetector,
         disagreement: !!(primary?.accepted && !prediction?.accepted),
         quality,
         progress: live.progress,
@@ -125,11 +142,12 @@ self.onmessage = async ({ data }) => {
     } catch {
       self.postMessage({
         type: "error",
+        generation: data.generation,
         message:
           "Не удалось прочитать кадр. Остановите и включите камеру снова.",
       });
     } finally {
-      data.bitmap.close();
+      data.bitmap?.close();
     }
   }
 };

@@ -25,7 +25,10 @@ def vector(result):
         for i in indices:
             values.extend((landmarks[i].x, landmarks[i].y, landmarks[i].z)
                           if landmarks and i < len(landmarks) else (0., 0., 0.))
-    return np.asarray(values, dtype=np.float32)
+    features = np.asarray(values, dtype=np.float32)
+    if not np.isfinite(features).all():
+        raise ValueError('Не удалось прочитать ориентиры видео. Попробуйте другой фрагмент.')
+    return features
 
 
 class Engine:
@@ -96,8 +99,14 @@ class Engine:
 
     @torch.inference_mode()
     def predict_features(self, rows):
-        x = torch.from_numpy(rows)[None]
+        if (not isinstance(rows, np.ndarray) or rows.ndim != 2 or rows.shape[1] != 180
+                or not 6 <= len(rows) <= 4096 or not np.isfinite(rows).all()):
+            raise ValueError('Некорректные ориентиры видео. Попробуйте другой фрагмент.')
+        x = torch.from_numpy(np.asarray(rows, dtype=np.float32))[None]
         logits = self.model(x, torch.tensor([len(rows)]))[0]
+        if (logits.ndim != 2 or logits.shape[0] != len(rows)
+                or logits.shape[1] != len(self.vocab) or not torch.isfinite(logits).all()):
+            raise ValueError('Модель вернула некорректный результат. Текст не добавлен.')
         tokens = decode_ctc(logits, self.vocab)
         probs = logits.softmax(-1)
         ids = probs.argmax(-1)
@@ -126,7 +135,7 @@ class Engine:
         # bare parentheses, brackets or markup as a recognized human utterance.
         unknown = any(t.startswith('<') or t == '[неизвестный жест]' or
                       not any(c.isalnum() for c in t) for t in tokens)
-        if not tokens or unknown or score < .4:
+        if not tokens or unknown or not np.isfinite(score) or score < .4:
             return dict(base, status='uncertain', text='', tokens=[],
                         message='Ориентиры найдены, но модель не смогла определить слова. Текст не добавлен: качество этой модели для ваших жестов пока недостаточно.',
                         seconds=round(time.monotonic() - started, 2))

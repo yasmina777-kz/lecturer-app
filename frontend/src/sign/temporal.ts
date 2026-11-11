@@ -2,7 +2,15 @@ import type { HandLandmarkerResult } from "@mediapipe/tasks-vision";
 import { classifyFeatures, type SignClassifier } from "./recognition";
 export type TemporalFrame = number[];
 export function temporalFrame(r: HandLandmarkerResult): TemporalFrame {
-  if (!r.landmarks.length) return Array(66).fill(0);
+  if (
+    !r.landmarks.length ||
+    r.landmarks.some(
+      (points) =>
+        points.length !== 21 ||
+        points.some((p) => !Number.isFinite(p.x) || !Number.isFinite(p.y)),
+    )
+  )
+    return Array(66).fill(0);
   const area = (p: (typeof r.landmarks)[number]) =>
     (Math.max(...p.map((v) => v.x)) - Math.min(...p.map((v) => v.x))) *
     (Math.max(...p.map((v) => v.y)) - Math.min(...p.map((v) => v.y)));

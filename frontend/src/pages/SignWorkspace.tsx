@@ -311,9 +311,9 @@ export function SignHelpPage() {
             "/text-to-sign",
             at("Текст → жесты", "Text → signs", "Мәтін → ымдар"),
             at(
-              "33 буквы и 171 слово с пробными движениями аватара. Введите текст — известные жесты проиграются подряд. При неизвестном слове показ остановлен до уточнения; грамматика РЖЯ автоматически не переводится.",
-              "33 letters and 171 words with experimental avatar motion. Enter text to play known signs in sequence. Unknown words block the full sequence; RSL grammar is not translated automatically.",
-              "33 әріп және 171 сөздің сынақ аватар қимылдары. Мәтін енгізсеңіз, таныс ымдар ретімен көрсетіледі. Белгісіз сөз толық көрсетілімді тоқтатады; грамматика автоматты аударылмайды.",
+              "Буквы, слова и учебные фразы с пробными движениями аватара. Введите текст — известные жесты проиграются подряд. При неизвестном слове показ остановлен до уточнения; грамматика РЖЯ автоматически не переводится.",
+              "Letters, words and learning phrases with experimental avatar motion. Enter text to play known signs in sequence. Unknown words block the full sequence; RSL grammar is not translated automatically.",
+              "Әріптер, сөздер және оқу сөйлемдерінің сынақ аватар қимылдары. Мәтін енгізсеңіз, таныс ымдар ретімен көрсетіледі. Белгісіз сөз толық көрсетілімді тоқтатады; грамматика автоматты аударылмайды.",
             ),
           ],
           [
