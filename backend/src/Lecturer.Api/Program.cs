@@ -186,8 +186,9 @@ app.MapPost("/api/krsl/recognize", async (KrslProxyService proxy, HttpContext co
     var contentType = context.Request.ContentType?.Split(';', 2)[0].Trim().ToLowerInvariant();
     if (contentType is not ("video/mp4" or "video/webm" or "video/quicktime" or "video/ogg"))
         return Results.Json(new { detail = "Поддерживается видео MP4, WebM, MOV или OGG." }, statusCode: 415);
-    if (context.Request.ContentLength is > 25 * 1024 * 1024)
-        return Results.Json(new { detail = "Максимальный размер видео — 25 МБ." }, statusCode: 413);
+    var maxClipBytes = vercelHosting ? 4L * 1024 * 1024 : 25L * 1024 * 1024;
+    if (context.Request.ContentLength is long contentLength && contentLength > maxClipBytes)
+        return Results.Json(new { detail = vercelHosting ? "Для сайта выберите видео меньше 4 МБ." : "Максимальный размер видео — 25 МБ." }, statusCode: 413);
     try
     {
         using var upstream = await proxy.RecognizeAsync(context.Request.Body, contentType, context.RequestAborted);

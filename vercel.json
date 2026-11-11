@@ -4,6 +4,19 @@
     "mentor": {
       "root": ".",
       "entrypoint": "Dockerfile.vercel",
+      "runtime": "container",
+      "bindings": [
+        {
+          "type": "service",
+          "service": "krsl",
+          "format": "url",
+          "env": "KRSL_PRIVATE_SERVICE_URL"
+        }
+      ]
+    },
+    "krsl": {
+      "root": "ml/krsl",
+      "entrypoint": "Dockerfile.vercel",
       "runtime": "container"
     }
   },

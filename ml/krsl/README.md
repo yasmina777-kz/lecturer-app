@@ -25,17 +25,17 @@ ml/krsl/.venv/bin/python ml/krsl/setup.py
 ml/krsl/.venv/bin/python ml/krsl/server.py
 ```
 
-`setup.py` verifies SHA-256 and resumes chunked weight downloads. It never executes upstream Python. After installation, `start.command` starts the service alongside the existing platform unless port 5070 is already occupied. Vite dev/preview proxy `/api/krsl` to `127.0.0.1:5070`. A hosted deployment must configure an authenticated reverse proxy and a separate Python service; the local integration does not magically run on static/Vercel hosting.
+`setup.py` verifies SHA-256 and resumes chunked weight downloads. It never executes upstream Python. After installation, `start.command` starts the service alongside the existing platform unless port 5070 is already occupied. Vite dev/preview proxy `/api/krsl` to `127.0.0.1:5070`.
 
 ## Cloud/container deployment
 
 `Dockerfile` builds this service as a separate container, downloads the pinned weights with SHA-256 validation, and listens on port 8080. Deploy the image to a Docker-compatible host that can allocate enough RAM for PyTorch/MediaPipe. Set `KRSL_SERVICE_TOKEN` to a randomly generated secret with at least 32 bytes. The service refuses network-facing startup without this token and requires `Authorization: Bearer ...` for its status and recognition endpoints. Do not put this secret in Vite variables or browser code.
 
-For Vercel, configure the backend container's server-only environment variables `Krsl__ServiceUrl=https://<authenticated-service-host>` and `Krsl__ServiceToken=<same-random-secret>`, then redeploy. The app API checks the user's session and rate limit, streams the video to the Python service, and the service verifies the bearer token. If running the provided Docker Compose stack, set the same `KRSL_SERVICE_TOKEN` in the shell and start with `docker compose --profile krsl up --build`; the API forwards to the private `krsl` container. Never expose the Python service publicly without HTTPS and the token.
+For Vercel, `vercel.json` deploys the Python container as a private service and binds its URL to the .NET backend at runtime. The private service has no public rewrite, and only the backend holds a binding to call it. `Dockerfile.vercel` enables this private-binding mode. Vercel services bill for active CPU, allocated memory, service requests and returned data; see Vercel's current service usage in the project dashboard. Container requests are limited to 4.5 MiB by Vercel, so production accepts clips up to 4 MiB. If running the provided Docker Compose stack, set a random `KRSL_SERVICE_TOKEN` in the shell and start with `docker compose --profile krsl up --build`; the API forwards to the private `krsl` container.
 
 Open `/recognition` (the unified **Жесты → текст** page). Turn on the camera once: Clips finish after 1.3 seconds without detected hand movement (minimum 2.4 seconds, maximum 12 seconds), or with the optional finish button. This pause heuristic is not a linguistic boundary detector. Recording continues during inference until the one pending slot fills; then recording pauses visibly until a slot is free. No pending clip is silently overwritten. This is chunked processing, not a frame-by-frame sentence decoder. Long phrases may be cut at chunk boundaries; upload a complete clip instead. Stop/tab changes close tracks and discard stale pending results. No microphone is requested.
 
-Uploads: MP4/WebM/MOV/OGG, ≤25 MiB, ≤20 s, ≤1920×1080. Temporary uploads are removed after processing. No webcam samples or predictions are automatically saved or used for training. Edited captions live only in the current page.
+Uploads: MP4/WebM/MOV/OGG, ≤20 s, ≤1920×1080. Local mode accepts ≤25 MiB; Vercel Production accepts ≤4 MiB to fit its request limit. Temporary uploads are removed after processing. No webcam samples or predictions are automatically saved or used for training. Edited captions live only in the current page.
 
 ## Actual pipeline
 

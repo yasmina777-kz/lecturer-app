@@ -36,13 +36,16 @@ art/lecture-portraits-v2
 frontend/public/models/mentor-e5
 art/local-ai-cache
 
-# Local RSL training data and environment
+# Local training data and Python environments; retain ml/krsl sources for its service.
 ml/rsl/data/
 ml/rsl/.venv/
+ml/krsl/data/
+ml/krsl/.venv/
+ml/krsl/__pycache__/
 
 # Only runtime application assets belong in the cloud build context.
 art
-ml
+ml/rsl
 docs
 outputs
 **/*.blend

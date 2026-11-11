@@ -8,21 +8,26 @@ public sealed class KrslProxyService
     private readonly HttpClient client;
     private readonly Uri? serviceUri;
     private readonly string? serviceToken;
+    private readonly bool privateVercelBinding;
 
     public KrslProxyService(HttpClient client, IConfiguration configuration, IWebHostEnvironment environment)
     {
         this.client = client;
-        serviceUri = BuildUri(configuration, environment);
+        var bindingUrl = configuration["KRSL_PRIVATE_SERVICE_URL"];
+        privateVercelBinding = configuration.GetValue<bool>("Hosting:Vercel") &&
+            !string.IsNullOrWhiteSpace(bindingUrl) &&
+            string.IsNullOrWhiteSpace(configuration["Krsl:ServiceUrl"]);
+        serviceUri = BuildUri(configuration, environment, bindingUrl);
         serviceToken = configuration["Krsl:ServiceToken"];
-        var hasUrl = !string.IsNullOrWhiteSpace(configuration["Krsl:ServiceUrl"]);
         var hasToken = !string.IsNullOrWhiteSpace(configuration["Krsl:ServiceToken"]);
-        if (environment.IsProduction() && hasUrl != hasToken)
-            throw new InvalidOperationException("Configure both Krsl:ServiceUrl and Krsl:ServiceToken, or leave both empty.");
+        if (environment.IsProduction() && serviceUri is not null && !hasToken && !privateVercelBinding)
+            throw new InvalidOperationException("Configure Krsl:ServiceToken for the external KRSL service.");
         if (hasToken && System.Text.Encoding.UTF8.GetByteCount(configuration["Krsl:ServiceToken"]!) < 32)
             throw new InvalidOperationException("Krsl:ServiceToken must be at least 32 UTF-8 bytes.");
     }
 
-    public bool IsConfigured => serviceUri is not null && !string.IsNullOrWhiteSpace(serviceToken);
+    public bool IsConfigured => serviceUri is not null &&
+        (!string.IsNullOrWhiteSpace(serviceToken) || privateVercelBinding);
 
     public async Task<HttpResponseMessage?> GetStatusAsync(CancellationToken cancellationToken)
     {
@@ -43,14 +48,15 @@ public sealed class KrslProxyService
     private HttpRequestMessage CreateRequest(HttpMethod method, string path)
     {
         var request = new HttpRequestMessage(method, new Uri(serviceUri!, path));
-        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", serviceToken);
+        if (!string.IsNullOrWhiteSpace(serviceToken))
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", serviceToken);
         request.Headers.Add("X-KRSL-Client", "platform");
         return request;
     }
 
-    private static Uri? BuildUri(IConfiguration configuration, IWebHostEnvironment environment)
+    private static Uri? BuildUri(IConfiguration configuration, IWebHostEnvironment environment, string? bindingUrl)
     {
-        var raw = configuration["Krsl:ServiceUrl"];
+        var raw = configuration["Krsl:ServiceUrl"] ?? bindingUrl;
         if (string.IsNullOrWhiteSpace(raw)) return null;
         if (!Uri.TryCreate(raw.TrimEnd('/') + "/", UriKind.Absolute, out var uri) ||
             uri.Scheme is not ("http" or "https"))

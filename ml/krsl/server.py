@@ -22,7 +22,8 @@ async def lifespan(app):
     engine, load_error = None, None
     network_facing = os.getenv('KRSL_HOST', '127.0.0.1') not in {'127.0.0.1', 'localhost', '::1'}
     token = os.getenv('KRSL_SERVICE_TOKEN', '')
-    if network_facing and len(token.encode('utf-8')) < 32:
+    private_binding = os.getenv('KRSL_PRIVATE_BINDING') == '1' and os.getenv('VERCEL') == '1'
+    if network_facing and not private_binding and len(token.encode('utf-8')) < 32:
         raise RuntimeError('KRSL_SERVICE_TOKEN must contain at least 32 bytes when KRSL listens on a network interface.')
     try:
         engine = await run_in_threadpool(Engine)
@@ -55,6 +56,10 @@ def authorize_service(request: Request):
         supplied = request.headers.get('authorization', '')
         if not hmac.compare_digest(supplied, f'Bearer {expected}'):
             raise HTTPException(401, 'Требуется авторизация сервиса.')
+    elif os.getenv('KRSL_PRIVATE_BINDING') == '1' and os.getenv('VERCEL') == '1':
+        # Only the Vercel service binding can reach this service; there is no
+        # public rewrite for it. The .NET API still authenticates the user.
+        return
     elif os.getenv('KRSL_HOST', '127.0.0.1') not in {'127.0.0.1', 'localhost', '::1'}:
         raise HTTPException(503, 'Не настроен секрет для доступа к сервису.')
 

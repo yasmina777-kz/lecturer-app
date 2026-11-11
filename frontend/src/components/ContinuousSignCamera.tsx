@@ -12,6 +12,11 @@ import {
   type RecognitionResult as Result,
 } from "../sign/recognitionApi";
 
+const MAX_CLIP_BYTES = import.meta.env.PROD
+  ? 4 * 1024 * 1024
+  : 25 * 1024 * 1024;
+const MAX_CLIP_MB = import.meta.env.PROD ? 4 : 25;
+
 export function ContinuousSignCamera() {
   const [health, setHealth] = useState<Health | null>(null);
   const [checking, setChecking] = useState(false);
@@ -144,6 +149,16 @@ export function ContinuousSignCamera() {
 
   async function recognize(blob: Blob, id: number) {
     if (!alive.current || id !== generation.current) return;
+    if (blob.size > MAX_CLIP_BYTES) {
+      setMessage(
+        at(
+          `Видео больше ${MAX_CLIP_MB} МБ. Сократите запись или выберите качество ниже.`,
+          `Video exceeds ${MAX_CLIP_MB} MB. Shorten it or choose lower quality.`,
+          `Бейне ${MAX_CLIP_MB} МБ-тан үлкен. Қысқартыңыз немесе сапасын төмендетіңіз.`,
+        ),
+      );
+      return;
+    }
     if (inFlight.current) {
       // Recording pauses when this slot is occupied; never replace a phrase.
       pending.current = { blob, id };
@@ -352,13 +367,13 @@ export function ContinuousSignCamera() {
     if (!file || !healthRef.current?.ready) return;
     if (
       !file.size ||
-      file.size > 25 * 1024 * 1024 ||
+      file.size > MAX_CLIP_BYTES ||
       !["video/mp4", "video/webm", "video/quicktime", "video/ogg"].includes(
         file.type,
       )
     ) {
       setMessage(
-        "Выберите непустое видео MP4, WebM, MOV или OGG до 25 МБ и 20 секунд.",
+        `Выберите непустое видео MP4, WebM, MOV или OGG до ${MAX_CLIP_MB} МБ и 20 секунд.`,
       );
       return;
     }
@@ -721,9 +736,9 @@ export function ContinuousSignCamera() {
             </summary>
             <p>
               {at(
-                "Видео обрабатывается сервисом распознавания и удаляется после обработки. Звук не записывается. Лимит файла: 20 секунд и 25 МБ.",
-                "Video is processed by the recognition service and deleted afterwards. No audio is recorded. File limit: 20 seconds and 25 MB.",
-                "Бейне тану қызметінде өңделіп, кейін жойылады. Дыбыс жазылмайды. Файл шегі: 20 секунд және 25 МБ.",
+                `Видео обрабатывается сервисом распознавания и удаляется после обработки. Звук не записывается. Лимит файла: 20 секунд и ${MAX_CLIP_MB} МБ.`,
+                `Video is processed by the recognition service and deleted afterwards. No audio is recorded. File limit: 20 seconds and ${MAX_CLIP_MB} MB.`,
+                `Бейне тану қызметінде өңделіп, кейін жойылады. Дыбыс жазылмайды. Файл шегі: 20 секунд және ${MAX_CLIP_MB} МБ.`,
               )}
             </p>
             <p>
