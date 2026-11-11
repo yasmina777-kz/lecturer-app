@@ -40,6 +40,13 @@ async def lifespan(app):
 app = FastAPI(lifespan=lifespan, docs_url=None, redoc_url=None)
 
 
+@app.get('/healthz')
+def healthz():
+    if engine is None:
+        raise HTTPException(503, load_error or 'Модель ещё загружается.')
+    return {'status': 'ready'}
+
+
 def authorize_service(request: Request):
     expected = os.getenv('KRSL_SERVICE_TOKEN', '')
     # Local development binds to loopback and does not need a shared secret.

@@ -86,13 +86,17 @@ Production deployment: `dpl_Hm1nc2hzNSVJkno73bD5HHRFr2Tw`
 
 ## Подключение отдельного сервиса KRSL
 
-Соберите `ml/krsl/Dockerfile` и разместите контейнер на Docker-хостинге с
-достаточной памятью и HTTPS-доступом. Создайте секрет (`openssl rand -hex 32`)
-и задайте его как `KRSL_SERVICE_TOKEN` для Python-контейнера. В переменных
-окружения Vercel задайте `Krsl__ServiceUrl=https://<адрес-сервиса>` и
-`Krsl__ServiceToken=<тот-же-секрет>`, затем redeploy. Секрет хранится только
-на backend и Python-сервисе; во frontend/Vite его добавлять нельзя.
-После публикации проверьте `/api/krsl/status`: `ready` должен стать `true`.
+В корне репозитория подготовлен `render.yaml`: Frankfurt, Dockerfile из
+`ml/krsl`, проверка готовности `/healthz`, автоматический секрет и план 2 GB.
+У Render бесплатный план содержит 512 MB; текущий план 1c-2g стоит $25/мес.
+Blueprint не создаёт сервис сам по себе: его создание включает платный ресурс.
+
+После создания сервиса Render покажет адрес HTTPS и секрет
+`KRSL_SERVICE_TOKEN`. В переменных окружения Vercel нужно задать
+`Krsl__ServiceUrl=https://<адрес-сервиса>` и `Krsl__ServiceToken=<тот-же-секрет>`,
+затем redeploy. Секрет хранится только на backend и Python-сервисе; во
+frontend/Vite его добавлять нельзя. После публикации проверить
+`/api/krsl/status`: `ready` должен стать `true`.
 
 Это подключит текущий экспериментальный Conformer, а не исправит точность.
 Для произвольных фраз нужна размеченная выборка с согласиями участников,
