@@ -10,7 +10,8 @@ This is a working local inference integration, **not a reliable unrestricted sig
 - Checkpoint validation WER: **0.5949908153** (33,686 edit errors / 56,616 reference tokens). This is NOT a 59% accuracy score.
 - `parity-report.json`: inference logits exactly matched the reviewed author's architecture on a padded batch. This proves compatibility, not accuracy.
 - `smoke-report.json`: four local Slovo examples (a different domain) produced three refusals and one wrong draft. **0/4 correct words**. This small check does not estimate corpus WER, but does demonstrate that merely installing these weights is insufficient.
-- The linked feature/dataset repositories were inaccessible (HTTP 401) during this integration. No corpus retraining or accuracy improvement is claimed. We do not silently substitute random examples for a held-out dataset.
+- A separate experiment covers 12 isolated expressions. Its signer-disjoint test has 63.3% top-1 on 49 known clips, but only 20.4% known-clip coverage (9 correct accepted of 49); it fails the pilot gate and is not enabled as the phrase service.
+- The linked continuous-phrase feature/dataset repositories were inaccessible (HTTP 401) during this integration. No continuous-phrase retraining or accuracy improvement is claimed. The small isolated-expression experiment is not a general phrase recognizer. We do not silently substitute random examples for a held-out dataset.
 - The repository has no model card/license declaration. Weights are downloaded locally from the author's repository; neither weights nor upstream training code are republished in Git. Confirm applicable rights before distributing a model or derivative weights.
 
 ## Install and start
@@ -25,6 +26,12 @@ ml/krsl/.venv/bin/python ml/krsl/server.py
 ```
 
 `setup.py` verifies SHA-256 and resumes chunked weight downloads. It never executes upstream Python. After installation, `start.command` starts the service alongside the existing platform unless port 5070 is already occupied. Vite dev/preview proxy `/api/krsl` to `127.0.0.1:5070`. A hosted deployment must configure an authenticated reverse proxy and a separate Python service; the local integration does not magically run on static/Vercel hosting.
+
+## Cloud/container deployment
+
+`Dockerfile` builds this service as a separate container, downloads the pinned weights with SHA-256 validation, and listens on port 8080. Deploy the image to a Docker-compatible host that can allocate enough RAM for PyTorch/MediaPipe. Set `KRSL_SERVICE_TOKEN` to a randomly generated secret with at least 32 bytes. The service refuses network-facing startup without this token and requires `Authorization: Bearer ...` for its status and recognition endpoints. Do not put this secret in Vite variables or browser code.
+
+For Vercel, configure the backend container's server-only environment variables `Krsl__ServiceUrl=https://<authenticated-service-host>` and `Krsl__ServiceToken=<same-random-secret>`, then redeploy. The app API checks the user's session and rate limit, streams the video to the Python service, and the service verifies the bearer token. If running the provided Docker Compose stack, set the same `KRSL_SERVICE_TOKEN` in the shell and start with `docker compose --profile krsl up --build`; the API forwards to the private `krsl` container. Never expose the Python service publicly without HTTPS and the token.
 
 Open `/recognition` (the unified **Жесты → текст** page). Turn on the camera once: Clips finish after 1.3 seconds without detected hand movement (minimum 2.4 seconds, maximum 12 seconds), or with the optional finish button. This pause heuristic is not a linguistic boundary detector. Recording continues during inference until the one pending slot fills; then recording pauses visibly until a slot is free. No pending clip is silently overwritten. This is chunked processing, not a frame-by-frame sentence decoder. Long phrases may be cut at chunk boundaries; upload a complete clip instead. Stop/tab changes close tracks and discard stale pending results. No microphone is requested.
 

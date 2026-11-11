@@ -46,6 +46,7 @@ builder.Services.AddScoped<SessionService>();
 builder.Services.AddScoped<UsageBudget>();
 builder.Services.AddHttpClient<SpeechService>(c => c.Timeout = TimeSpan.FromSeconds(40));
 builder.Services.AddHttpClient<AiService>(c => { c.BaseAddress = new Uri((builder.Configuration["AI:BaseUrl"] ?? "https://api.openai.com/v1/").TrimEnd('/') + "/"); c.Timeout = TimeSpan.FromSeconds(150); });
+builder.Services.AddHttpClient<KrslProxyService>(c => c.Timeout = TimeSpan.FromSeconds(100));
 builder.Services.AddControllers();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(o =>
 {
@@ -152,19 +153,61 @@ app.Use(async (ctx, next) =>
 if (app.Environment.IsDevelopment()) { app.UseSwagger(); app.UseSwaggerUI(); }
 app.UseCors(); app.UseAuthentication(); app.UseRateLimiter(); app.UseAuthorization();
 app.MapGet("/api/health", () => Results.Ok(new { status = "ok" }));
-// The local Vite proxy reaches the Python sidecar; this deployment does not.
-if (vercelHosting)
+// The Python model runs as a separate service. Vercel proxies to it using a
+// server-only token; browser requests never receive that credential.
+app.MapGet("/api/krsl/status", async (KrslProxyService proxy, HttpContext context) =>
 {
-    app.MapGet("/api/krsl/status", () => Results.Ok(new
+    try
     {
-        ready = false, vocabulary = 0, local = false, experimental = true,
-        error = "Распознавание фраз на сервере пока не подключено. Камера и распознавание букв доступны."
-    }));
-    app.MapPost("/api/krsl/recognize", () => Results.Json(new
+        using var upstream = await proxy.GetStatusAsync(context.RequestAborted);
+        if (upstream is null)
+            return Results.Json(new
+            {
+                ready = false, vocabulary = 0, local = false, experimental = true,
+                error = "Сервис распознавания фраз не настроен. Распознавание букв доступно отдельно."
+            });
+        context.Response.StatusCode = (int)upstream.StatusCode;
+        context.Response.ContentType = upstream.Content.Headers.ContentType?.ToString() ?? "application/json";
+        context.Response.Headers.CacheControl = "no-store";
+        await upstream.Content.CopyToAsync(context.Response.Body, context.RequestAborted);
+        return Results.Empty;
+    }
+    catch (HttpRequestException)
     {
-        detail = "Распознавание фраз на сервере пока не подключено."
-    }, statusCode: 503)).RequireAuthorization();
-}
+        return Results.Json(new { ready = false, vocabulary = 0, local = false, experimental = true, error = "Сервис распознавания фраз временно недоступен." }, statusCode: 503);
+    }
+    catch (OperationCanceledException) when (!context.RequestAborted.IsCancellationRequested)
+    {
+        return Results.Json(new { ready = false, vocabulary = 0, local = false, experimental = true, error = "Сервис распознавания фраз отвечает слишком долго." }, statusCode: 504);
+    }
+});
+app.MapPost("/api/krsl/recognize", async (KrslProxyService proxy, HttpContext context) =>
+{
+    var contentType = context.Request.ContentType?.Split(';', 2)[0].Trim().ToLowerInvariant();
+    if (contentType is not ("video/mp4" or "video/webm" or "video/quicktime" or "video/ogg"))
+        return Results.Json(new { detail = "Поддерживается видео MP4, WebM, MOV или OGG." }, statusCode: 415);
+    if (context.Request.ContentLength is > 25 * 1024 * 1024)
+        return Results.Json(new { detail = "Максимальный размер видео — 25 МБ." }, statusCode: 413);
+    try
+    {
+        using var upstream = await proxy.RecognizeAsync(context.Request.Body, contentType, context.RequestAborted);
+        if (upstream is null)
+            return Results.Json(new { detail = "Сервис распознавания фраз не настроен." }, statusCode: 503);
+        context.Response.StatusCode = (int)upstream.StatusCode;
+        context.Response.ContentType = upstream.Content.Headers.ContentType?.ToString() ?? "application/json";
+        context.Response.Headers.CacheControl = "no-store";
+        await upstream.Content.CopyToAsync(context.Response.Body, context.RequestAborted);
+        return Results.Empty;
+    }
+    catch (HttpRequestException)
+    {
+        return Results.Json(new { detail = "Сервис распознавания фраз временно недоступен." }, statusCode: 502);
+    }
+    catch (OperationCanceledException) when (!context.RequestAborted.IsCancellationRequested)
+    {
+        return Results.Json(new { detail = "Сервис распознавания фраз отвечает слишком долго." }, statusCode: 504);
+    }
+}).RequireAuthorization().RequireRateLimiting("speech");
 app.MapGet("/api/capabilities", (AiService ai, SpeechService speech) => Results.Ok(new { aiConfigured = ai.Available, speech = speech.Available ? "azure" : "browser", uploadFormats = new[] { "pdf", "docx", "pptx", "txt", "md" } })).RequireAuthorization();
 app.MapControllers();
 // Serve the bundled React app on the same origin as the API in the cloud image.

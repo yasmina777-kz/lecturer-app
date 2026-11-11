@@ -30,8 +30,19 @@ services:
       AI__CachedUsdPerMillion: ${AI__CachedUsdPerMillion:-}
       AI__OutputUsdPerMillion: ${AI__OutputUsdPerMillion:-}
       Cors__AllowedOrigins__0: http://localhost:5173
+      Krsl__ServiceUrl: http://krsl:8080
+      Krsl__ServiceToken: ${KRSL_SERVICE_TOKEN:-}
     volumes:
       - appdata:/app/App_Data
+  krsl:
+    profiles: ["krsl"]
+    build:
+      context: ./ml/krsl
+      dockerfile: Dockerfile
+    environment:
+      KRSL_SERVICE_TOKEN: ${KRSL_SERVICE_TOKEN:-}
+    expose:
+      - "8080"
   frontend:
     build: ./frontend
     ports:

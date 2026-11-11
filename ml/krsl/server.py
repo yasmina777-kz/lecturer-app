@@ -1,6 +1,8 @@
-"""Loopback-only sidecar. No cloud calls; temporary uploads deleted after inference."""
+"""KRSL inference API. No cloud calls; temporary uploads deleted after inference."""
 import asyncio
+import hmac
 import logging
+import os
 import tempfile
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -18,6 +20,10 @@ busy = asyncio.Lock()
 async def lifespan(app):
     global engine, load_error
     engine, load_error = None, None
+    network_facing = os.getenv('KRSL_HOST', '127.0.0.1') not in {'127.0.0.1', 'localhost', '::1'}
+    token = os.getenv('KRSL_SERVICE_TOKEN', '')
+    if network_facing and len(token.encode('utf-8')) < 32:
+        raise RuntimeError('KRSL_SERVICE_TOKEN must contain at least 32 bytes when KRSL listens on a network interface.')
     try:
         engine = await run_in_threadpool(Engine)
     except Exception:
@@ -34,19 +40,35 @@ async def lifespan(app):
 app = FastAPI(lifespan=lifespan, docs_url=None, redoc_url=None)
 
 
+def authorize_service(request: Request):
+    expected = os.getenv('KRSL_SERVICE_TOKEN', '')
+    # Local development binds to loopback and does not need a shared secret.
+    # Any network-facing deployment must configure the server-only token.
+    if expected:
+        supplied = request.headers.get('authorization', '')
+        if not hmac.compare_digest(supplied, f'Bearer {expected}'):
+            raise HTTPException(401, 'Требуется авторизация сервиса.')
+    elif os.getenv('KRSL_HOST', '127.0.0.1') not in {'127.0.0.1', 'localhost', '::1'}:
+        raise HTTPException(503, 'Не настроен секрет для доступа к сервису.')
+
+
 @app.get('/api/krsl/status')
-def status():
+def status(request: Request):
+    authorize_service(request)
     return {'ready': engine is not None, 'error': load_error,
             'model': 'dastan-issenov/krsl-cslr-checkpoints',
             'vocabulary': len(engine.vocab) - 2 if engine else 0,
             'epoch': engine.epoch if engine else None,
             'upstreamMetrics': engine.metrics if engine else {},
-            'local': True, 'experimental': True}
+            'local': os.getenv('KRSL_HOST', '127.0.0.1') in {'127.0.0.1', 'localhost', '::1'},
+            'experimental': True}
 
 
 @app.post('/api/krsl/recognize')
 async def recognize(request: Request):
-    # No CORS. The custom header prevents third-party sites from posting camera data.
+    authorize_service(request)
+    # No CORS. The client marker is an additional origin check; cloud security
+    # comes from the server-to-server bearer token, never this public header.
     if request.headers.get('x-krsl-client') != 'platform':
         raise HTTPException(403, 'Неверный клиент распознавания.')
     if not engine:
@@ -80,4 +102,6 @@ async def recognize(request: Request):
 
 if __name__ == '__main__':
     import uvicorn
-    uvicorn.run(app, host='127.0.0.1', port=5070, limit_concurrency=8)
+    host = os.getenv('KRSL_HOST', '127.0.0.1')
+    port = int(os.getenv('PORT', os.getenv('KRSL_PORT', '5070')))
+    uvicorn.run(app, host=host, port=port, limit_concurrency=8)
