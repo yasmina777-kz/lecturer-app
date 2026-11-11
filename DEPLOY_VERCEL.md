@@ -91,6 +91,12 @@ backend. Для этой доверенной внутренней связи и
 `ml/krsl/Dockerfile.vercel`; обычный `Dockerfile` сохраняет проверку токена для
 внешнего самостоятельного хостинга.
 
+В настройках Vercel у проекта должен быть выбран Framework Preset **Services**
+(Settings → Build and Deployment). GitHub API пока не показывает deployment
+для commit `7f9fe35`, значит публикация от push автоматически не запускалась.
+Когда доступ к панели будет открыт, выбери этот preset и создай Production
+deployment из `main`.
+
 При следующем успешном Production deployment оба сервиса должны собраться
 вместе. Затем проверь `/api/krsl/status`: при успешно загруженной модели там
 будет `ready: true`. Использование Vercel Services считается по вычислениям,
