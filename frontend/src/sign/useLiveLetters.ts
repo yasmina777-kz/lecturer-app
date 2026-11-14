@@ -10,6 +10,7 @@ export function useLiveLetters(
   canvas: RefObject<HTMLCanvasElement>,
   active: boolean,
   onTracking?: (now: number, hands: Landmark[][], pose: Landmark[]) => void,
+  mode: "balanced" | "strict" = "balanced",
 ) {
   const trackingCallback = useRef(onTracking);
   trackingCallback.current = onTracking;
@@ -23,6 +24,8 @@ export function useLiveLetters(
   const [retryId, setRetryId] = useState(0);
   const [progress, setProgress] = useState(0);
   const [last, setLast] = useState("");
+  const [capturing, setCapturing] = useState(false);
+  const captureTimer = useRef<ReturnType<typeof setTimeout>>();
   const worker = useRef<Worker>();
   const busy = useRef(false);
   const session = useRef(0);
@@ -46,7 +49,7 @@ export function useLiveLetters(
       );
     };
     try {
-      w = new Worker("/models/rsl/letter-camera-worker.js?v=5");
+      w = new Worker("/models/rsl/letter-camera-worker.js?v=7");
     } catch {
       fail();
       return;
@@ -67,6 +70,17 @@ export function useLiveLetters(
         setBodyStatus(
           "Ориентиры тела недоступны. Автоматическое завершение фразы может не работать; используйте кнопку завершения записи.",
         );
+        return;
+      }
+      if (data.type === "captured") {
+        if (data.generation !== session.current || !activeRef.current) return;
+        clearTimeout(captureTimer.current);
+        setCapturing(false);
+        if (data.prediction?.accepted) {
+          setLast(data.prediction.label);
+          setText(v => appendRecognizedLetter(v, data.prediction));
+          setStatus(`Добавлена буква «${data.prediction.label}»`);
+        } else setStatus("Буква неясна. Запишите один полный жест, удерживая кисть в кадре хотя бы секунду.");
         return;
       }
       if (data.type === "error") {
@@ -128,6 +142,7 @@ export function useLiveLetters(
       clearTimeout(watchdog);
       session.current++;
       w.terminate();
+      clearTimeout(captureTimer.current);
       worker.current = undefined;
       busy.current = false;
     };
@@ -135,7 +150,9 @@ export function useLiveLetters(
   useEffect(() => {
     const generation = ++session.current;
     busy.current = false;
-    worker.current?.postMessage({ type: "reset" });
+    worker.current?.postMessage({ type: "reset", mode });
+    clearTimeout(captureTimer.current);
+    setCapturing(false);
     setProgress(0);
     if (!active || !ready) {
       if (canvas.current)
@@ -184,7 +201,17 @@ export function useLiveLetters(
       session.current++;
       cancelAnimationFrame(raf);
     };
-  }, [active, ready]);
+  }, [active, ready, mode]);
+  const finishLetter = () => {
+    clearTimeout(captureTimer.current);
+    worker.current?.postMessage({type: "capture-finish", generation: session.current});
+  };
+  const startLetter = () => {
+    if (!ready || !activeRef.current || capturing) return;
+    setCapturing(true);
+    worker.current?.postMessage({type: "capture-start", generation: session.current});
+    captureTimer.current = setTimeout(finishLetter, 10000);
+  };
   return {
     text,
     setText,
@@ -195,5 +222,8 @@ export function useLiveLetters(
     failed,
     retry: () => setRetryId((value) => value + 1),
     bodyStatus,
+    capturing,
+    startLetter,
+    finishLetter,
   };
 }

@@ -8,7 +8,15 @@ const dir=await mkdtemp(join(tmpdir(),'recognition-check-'));
 try {
   for(const name of ['phraseCapture','temporal']) await build({input:fileURLToPath(new URL(`../src/sign/${name}.ts`,import.meta.url)),output:{file:join(dir,name+'.mjs'),format:'es'}});
   const {PhraseCapture,agreeLetters}=await import(pathToFileURL(join(dir,'phraseCapture.mjs')));
-  const {recognizeSequence}=await import(pathToFileURL(join(dir,'temporal.mjs')));
+  const {recognizeSequence,completedLetterFrames}=await import(pathToFileURL(join(dir,'temporal.mjs')));
+  const observed=Array.from({length:12},(_,i)=>{const f=Array(66).fill(i);f[65]=.2;return f});
+  const completed=completedLetterFrames(observed);
+  assert.equal(completed.length,16);
+  assert.deepEqual(completed[0],observed[0]);
+  assert.deepEqual(completed[15],observed[11]);
+  assert.equal(completedLetterFrames(observed.slice(0,7)),null,'resampling must not inflate insufficient real evidence');
+  assert.equal(completedLetterFrames(Array.from({length:12},()=>Array(66).fill(0))),null);
+  assert.equal(completedLetterFrames([...observed,...Array.from({length:20},()=>Array(66).fill(0))]),null,'mostly missing hands must be rejected');
   const segment=new PhraseCapture();
   const hand=x=>Array.from({length:21},(_,i)=>({x:x+i*.003,y:.4+i*.002}));
   segment.reset(0);

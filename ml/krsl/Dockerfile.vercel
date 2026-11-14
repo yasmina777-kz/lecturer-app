@@ -7,17 +7,24 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     KRSL_PRIVATE_BINDING=1 \
     PORT=8080
 
-RUN apt-get update && apt-get install -y --no-install-recommends libgomp1 libglib2.0-0 \
+RUN apt-get update && apt-get install -y --no-install-recommends libgomp1 libglib2.0-0 libgl1 libgles2 libegl1 \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app/krsl
+RUN useradd --system --uid 10001 --create-home krsl
 COPY requirements.txt setup.py model.py runtime.py server.py ./
+# Inference is CPU-only. The default Linux wheel pulls multi-GB CUDA layers
+# which exceed the registry upload limit, even though no GPU is used.
+RUN pip install --no-cache-dir 'torch==2.15.0+cpu' --index-url https://download.pytorch.org/whl/cpu
 RUN pip install --no-cache-dir -r requirements.txt \
-    && python setup.py
+    && python -c "import torch, cv2, mediapipe; assert torch.version.cuda is None"
 
-RUN useradd --system --uid 10001 --create-home krsl \
+RUN python setup.py \
+    && rm -rf data/*.parts \
     && chown -R krsl:krsl /app/krsl
 USER 10001
+# Fail the build, not the first visitor's request, if model loading is broken.
+RUN python -c "from runtime import Engine; engine = Engine(); engine.close()"
 
 EXPOSE 8080
 CMD ["sh", "-c", "uvicorn server:app --host 0.0.0.0 --port ${PORT:-8080} --limit-concurrency 8"]

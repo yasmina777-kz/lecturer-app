@@ -105,3 +105,16 @@ export function recognizeSequence(
       frames.filter((f) => f[65] > 0).length >= 8,
   };
 }
+
+/** An explicitly completed sign can be shorter than the streaming debounce.
+ * Select the same 16 uniformly spaced positions used by offline extraction.
+ * Require eight real observations before resampling; duplicated positions do
+ * not count as extra camera evidence. The user marks the utterance boundary.
+ */
+export function completedLetterFrames(frames: TemporalFrame[]): TemporalFrame[] | null {
+  if (frames.length < 8 || frames.length > 100 ||
+      frames.some(f => f.length !== 66 || f.some(v => !Number.isFinite(v))) ||
+      frames.filter(f => f[65] > 0).length < Math.max(8, Math.ceil(frames.length / 2)))
+    return null;
+  return Array.from({length: 16}, (_, i) => frames[Math.floor(i * (frames.length - 1) / 15)].slice());
+}

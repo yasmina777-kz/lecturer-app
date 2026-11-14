@@ -1,0 +1,117 @@
+{
+  "scope": "Eight preselected held-out Bukva clips replayed at camera cadence through Python MediaPipe VIDEO extraction and actual JS streaming code; not a live webcam benchmark",
+  "cases": [
+    {
+      "label": "А",
+      "id": "3a6e0307-e80c-4101-b3ed-1075070ba27a",
+      "samples": 11,
+      "completed": null,
+      "strict": {
+        "emitted": [],
+        "windows": 0
+      },
+      "balanced": {
+        "emitted": [],
+        "windows": 0
+      }
+    },
+    {
+      "label": "Б",
+      "id": "fc5c7327-7218-4609-aa43-985d21e74250",
+      "samples": 18,
+      "completed": "Б",
+      "strict": {
+        "emitted": [],
+        "windows": 1
+      },
+      "balanced": {
+        "emitted": [],
+        "windows": 1
+      }
+    },
+    {
+      "label": "Е",
+      "id": "887878e7-1ba4-4dd0-ad73-010943a3af57",
+      "samples": 14,
+      "completed": "Е",
+      "strict": {
+        "emitted": [],
+        "windows": 0
+      },
+      "balanced": {
+        "emitted": [],
+        "windows": 0
+      }
+    },
+    {
+      "label": "Ё",
+      "id": "6bc3898c-b61b-4f2c-8068-eae46c70d935",
+      "samples": 22,
+      "completed": null,
+      "strict": {
+        "emitted": [],
+        "windows": 2
+      },
+      "balanced": {
+        "emitted": [],
+        "windows": 2
+      }
+    },
+    {
+      "label": "Й",
+      "id": "80bd23cc-1fad-4670-b00c-96aae0776321",
+      "samples": 15,
+      "completed": null,
+      "strict": {
+        "emitted": [],
+        "windows": 0
+      },
+      "balanced": {
+        "emitted": [],
+        "windows": 0
+      }
+    },
+    {
+      "label": "Ш",
+      "id": "bdd51d11-6273-433d-b6a8-078d3bb3e2ce",
+      "samples": 22,
+      "completed": null,
+      "strict": {
+        "emitted": [],
+        "windows": 2
+      },
+      "balanced": {
+        "emitted": [],
+        "windows": 2
+      }
+    },
+    {
+      "label": "Щ",
+      "id": "d259aa8f-5152-441f-bfc1-580ca24665b9",
+      "samples": 22,
+      "completed": null,
+      "strict": {
+        "emitted": [],
+        "windows": 1
+      },
+      "balanced": {
+        "emitted": [],
+        "windows": 1
+      }
+    },
+    {
+      "label": "Я",
+      "id": "410e2f5f-ac6a-46a5-a70d-ec846488a45d",
+      "samples": 16,
+      "completed": "Я",
+      "strict": {
+        "emitted": [],
+        "windows": 1
+      },
+      "balanced": {
+        "emitted": [],
+        "windows": 1
+      }
+    }
+  ]
+}

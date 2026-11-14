@@ -48,6 +48,7 @@ art
 ml/rsl
 docs
 outputs
+work
 **/*.blend
 **/*.blend1
 **/*.zip

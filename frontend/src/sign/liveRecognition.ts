@@ -69,15 +69,31 @@ export class LiveLetterStream {
     }
     this.seenAt = now;
     if (quality !== "ready" || !frame[65]) {
-      this.frames = [];
-      this.sincePrediction = 0;
       this.candidate = "";
       this.votes = 0;
       if (quality === "missing") {
         this.missingSince ??= now;
         if (now - this.missingSince >= 600) this.emitted = "";
+        // Training interpolates brief landmark gaps. Preserve up to 300 ms
+        // of occlusion instead of restarting a moving letter on every miss.
+        // Never classify or emit while the hand itself is missing.
+        if (now - this.missingSince <= 300) {
+          if (now - this.sampledAt >= LETTER_SAMPLE_MS) {
+            this.sampledAt = now;
+            this.frames.push(Array(66).fill(0));
+            if (this.frames.length > 16) this.frames.shift();
+            this.sincePrediction++;
+          }
+          return null;
+        }
       } else this.missingSince = null;
+      this.frames = [];
+      this.sincePrediction = 0;
       return null;
+    }
+    if (this.missingSince !== null && now - this.missingSince > 300) {
+      this.frames = [];
+      this.sincePrediction = 0;
     }
     this.missingSince = null;
     if (now - this.sampledAt < LETTER_SAMPLE_MS) return null;
@@ -103,6 +119,11 @@ export class LiveLetterStream {
     if (this.votes < 2 || this.emitted === prediction.label) return false;
     this.emitted = prediction.label;
     return true;
+  }
+  /** Explicit capture already appended this letter; holding it is not a repeat. */
+  acknowledge(label: string) {
+    this.reset();
+    if (/^[А-ЯЁ]$/u.test(label)) this.emitted = label;
   }
   get progress() {
     return Math.min(100, Math.round((this.frames.length / 16) * 100));

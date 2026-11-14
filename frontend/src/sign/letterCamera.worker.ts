@@ -4,13 +4,28 @@ import {
   PoseLandmarker,
 } from "@mediapipe/tasks-vision";
 import { LiveLetterStream, trackingQuality } from "./liveRecognition";
-import { temporalFrame, recognizeSequence } from "./temporal";
+import { temporalFrame, recognizeSequence, completedLetterFrames, type TemporalFrame } from "./temporal";
 import { agreeLetters } from "./phraseCapture";
 import { validClassifier, type SignClassifier } from "./recognition";
 
 let detector: HandLandmarker;
 let model: SignClassifier;
 let verifier: SignClassifier;
+let balancedModel: SignClassifier;
+let mode: "balanced" | "strict" = "balanced";
+let capture: {generation: number; frames: TemporalFrame[]} | null = null;
+
+function finishLetter() {
+  if (!capture) return;
+  const {generation, frames: observed} = capture;
+  capture = null;
+  const frames = completedLetterFrames(observed);
+  const primary = frames ? recognizeSequence(frames, mode === "strict" ? model : balancedModel) : null;
+  const prediction = mode === "strict" ? agreeLetters(primary, frames ? recognizeSequence(frames, verifier) : null) : primary;
+  live.reset();
+  if (prediction?.accepted) live.acknowledge(prediction.label);
+  self.postMessage({type: "captured", generation, prediction});
+}
 let poseDetector: PoseLandmarker | undefined;
 let selectedSide = "";
 let poseAt = -Infinity;
@@ -21,19 +36,23 @@ const live = new LiveLetterStream();
 self.onmessage = async ({ data }) => {
   if (data.type === "init") {
     try {
-      const [files, response, verifyResponse] = await Promise.all([
+      const [files, response, verifyResponse, balancedResponse] = await Promise.all([
         FilesetResolver.forVisionTasks(`${data.origin}/models/rsl/wasm`),
         fetch(`${data.origin}/models/rsl/alphabet-classifier.json`),
         fetch(`${data.origin}/models/rsl/alphabet-cautious-classifier.json`),
+        fetch(`${data.origin}/models/rsl/alphabet-v4-classifier.json`),
       ]);
-      if (!response.ok || !verifyResponse.ok) throw new Error("model");
+      if (!response.ok || !verifyResponse.ok || !balancedResponse.ok) throw new Error("model");
       model = await response.json();
       verifier = await verifyResponse.json();
+      balancedModel = await balancedResponse.json();
       if (
         !validClassifier(model) ||
         !validClassifier(verifier) ||
+        !validClassifier(balancedModel) ||
         model.mean.length !== 474 ||
-        verifier.mean.length !== 474
+        verifier.mean.length !== 474 ||
+        balancedModel.mean.length !== 474
       )
         throw new Error("Invalid alphabet model");
       detector = await HandLandmarker.createFromOptions(files, {
@@ -68,10 +87,17 @@ self.onmessage = async ({ data }) => {
       });
     }
   } else if (data.type === "reset") {
+    capture = null;
+    mode = data.mode === "strict" ? "strict" : "balanced";
     live.reset();
     selectedSide = "";
     poseAt = -Infinity;
     lastPose = [];
+  } else if (data.type === "capture-start") {
+    capture = {generation: data.generation, frames: []};
+    live.reset();
+  } else if (data.type === "capture-finish") {
+    if (capture?.generation === data.generation) finishLetter();
   } else if (data.type === "frame") {
     try {
       const detected = detector.detectForVideo(data.bitmap, data.now);
@@ -112,7 +138,10 @@ self.onmessage = async ({ data }) => {
           0,
         );
         const side = detected.handedness[index]?.[0]?.categoryName ?? "";
-        if (selectedSide && side !== selectedSide) live.reset(true);
+        if (selectedSide && side !== selectedSide) {
+          live.reset(true);
+          if (capture) capture.frames = [];
+        }
         selectedSide = side;
       }
       const selected = {
@@ -122,10 +151,16 @@ self.onmessage = async ({ data }) => {
         handednesses: index < 0 ? [] : [detected.handedness[index]],
       };
       const quality = trackingQuality(selected);
-      const frames = live.sample(temporalFrame(selected), data.now, quality);
-      const primary = frames ? recognizeSequence(frames, model) : null;
-      const second = frames ? recognizeSequence(frames, verifier) : null;
-      const prediction = agreeLetters(primary, second);
+      const frame = temporalFrame(selected);
+      const capturing = capture !== null;
+      if (capture && capture.generation === data.generation) {
+        capture.frames.push(quality === "ready" ? frame : Array(66).fill(0));
+        if (capture.frames.length >= 100) finishLetter();
+      }
+      const frames = capturing ? null : live.sample(frame, data.now, quality);
+      const primary = frames ? recognizeSequence(frames, mode === "strict" ? model : balancedModel) : null;
+      const second = frames && mode === "strict" ? recognizeSequence(frames, verifier) : null;
+      const prediction = mode === "strict" ? agreeLetters(primary, second) : primary;
       const accepted = frames ? live.confirm(prediction) : false;
       self.postMessage({
         type: "frame",

@@ -1,0 +1,141 @@
+{
+  "scope": "isolated expressions and words; not continuous translation",
+  "candidates": [
+    {
+      "C": 1,
+      "gamma": "scale",
+      "validation": {
+        "samples": 58,
+        "known": 50,
+        "unknown": 8,
+        "top1": 0.42,
+        "accepted": 0,
+        "precision": 0.0,
+        "knownCoverage": 0.0,
+        "unknownRejection": 1.0,
+        "correctAccepted": 0
+      }
+    },
+    {
+      "C": 1,
+      "gamma": 0.0001,
+      "validation": {
+        "samples": 58,
+        "known": 50,
+        "unknown": 8,
+        "top1": 0.42,
+        "accepted": 0,
+        "precision": 0.0,
+        "knownCoverage": 0.0,
+        "unknownRejection": 1.0,
+        "correctAccepted": 0
+      }
+    },
+    {
+      "C": 1,
+      "gamma": 0.001,
+      "validation": {
+        "samples": 58,
+        "known": 50,
+        "unknown": 8,
+        "top1": 0.04,
+        "accepted": 0,
+        "precision": 0.0,
+        "knownCoverage": 0.0,
+        "unknownRejection": 1.0,
+        "correctAccepted": 0
+      }
+    },
+    {
+      "C": 10,
+      "gamma": "scale",
+      "validation": {
+        "samples": 58,
+        "known": 50,
+        "unknown": 8,
+        "top1": 0.52,
+        "accepted": 2,
+        "precision": 1.0,
+        "knownCoverage": 0.04,
+        "unknownRejection": 1.0,
+        "correctAccepted": 2
+      }
+    },
+    {
+      "C": 10,
+      "gamma": 0.0001,
+      "validation": {
+        "samples": 58,
+        "known": 50,
+        "unknown": 8,
+        "top1": 0.52,
+        "accepted": 3,
+        "precision": 1.0,
+        "knownCoverage": 0.06,
+        "unknownRejection": 1.0,
+        "correctAccepted": 3
+      }
+    },
+    {
+      "C": 10,
+      "gamma": 0.001,
+      "validation": {
+        "samples": 58,
+        "known": 50,
+        "unknown": 8,
+        "top1": 0.06,
+        "accepted": 0,
+        "precision": 0.0,
+        "knownCoverage": 0.0,
+        "unknownRejection": 1.0,
+        "correctAccepted": 0
+      }
+    },
+    {
+      "C": 100,
+      "gamma": "scale",
+      "validation": {
+        "samples": 58,
+        "known": 50,
+        "unknown": 8,
+        "top1": 0.52,
+        "accepted": 2,
+        "precision": 1.0,
+        "knownCoverage": 0.04,
+        "unknownRejection": 1.0,
+        "correctAccepted": 2
+      }
+    },
+    {
+      "C": 100,
+      "gamma": 0.0001,
+      "validation": {
+        "samples": 58,
+        "known": 50,
+        "unknown": 8,
+        "top1": 0.52,
+        "accepted": 3,
+        "precision": 1.0,
+        "knownCoverage": 0.06,
+        "unknownRejection": 1.0,
+        "correctAccepted": 3
+      }
+    },
+    {
+      "C": 100,
+      "gamma": 0.001,
+      "validation": {
+        "samples": 58,
+        "known": 50,
+        "unknown": 8,
+        "top1": 0.06,
+        "accepted": 0,
+        "precision": 0.0,
+        "knownCoverage": 0.0,
+        "unknownRejection": 1.0,
+        "correctAccepted": 0
+      }
+    }
+  ],
+  "ready": false
+}

@@ -51,4 +51,20 @@ assert.equal(trackingQuality(hand(points)), 'ready');
 assert.equal(trackingQuality(hand(points.map(p=>({...p,x:p.x-.4})))), 'clipped');
 assert.equal(trackingQuality(hand(points.map(p=>({...p,x:.4+(p.x-.4)/4,y:.4+(p.y-.3)/4})))), 'distant');
 assert.equal(stream.sample(frame,9200,'clipped'),null);assert.equal(stream.progress,0);
+const occluded=new LiveLetterStream();
+for(let t=0;t<1200;t+=100) occluded.sample(frame,t,'ready');
+assert.equal(occluded.sample(Array(66).fill(0),1200,'missing'),null);
+assert.equal(occluded.sample(Array(66).fill(0),1300,'missing'),null);
+let recovered=-1;
+for(let t=1400;t<=2000;t+=100){
+  const window=occluded.sample(frame,t,'ready');
+  if(window && occluded.confirm(yes('Й'))) recovered=t;
+}
+assert.equal(recovered,1900,'brief occlusion preserves the temporal window, but never emits on a missing frame');
+occluded.sample(Array(66).fill(0),2100,'missing');
+assert.equal(occluded.sample(frame,2600,'ready'),null,'long loss restarts even if no intermediate missing sample arrives');
+assert.ok(occluded.progress<100);
+occluded.acknowledge('А');
+assert.equal(occluded.confirm(yes('А')),false);
+assert.equal(occluded.confirm(yes('А')),false,'explicit capture must not be appended again by the stream');
 console.log('Continuous recognition: timed windows, consensus, rejection, duplicate suppression, deliberate repeats, stalled video and hand quality checks passed.');

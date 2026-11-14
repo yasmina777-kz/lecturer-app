@@ -1,0 +1,33 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Letter worker regression</title>
+<style>body{font:18px system-ui;max-width:900px;margin:40px auto;padding:20px}button{font:inherit;padding:12px}pre{white-space:pre-wrap}video{max-width:320px;max-height:280px}</style>
+<h1>Real video → browser worker → completed letter</h1>
+<p>This local test uses an existing Bukva test clip. It does not access the webcam.</p>
+<button id="run">Run letter Б test</button><p id="status" role="status">Ready to test</p><video id="clip" muted controls src="./fixtures/recognition-letter-b.mp4"></video><pre id="result"></pre>
+<script type="module">
+const button=document.querySelector('#run'),status=document.querySelector('#status'),result=document.querySelector('#result'),video=document.querySelector('video');
+button.onclick=async()=>{
+ button.disabled=true;let worker;
+ try{
+  status.textContent='Loading the actual production letter worker…';
+  worker=new Worker('/models/rsl/letter-camera-worker.js?v=7');
+  const next=type=>new Promise((resolve,reject)=>{
+   const timer=setTimeout(()=>{worker.removeEventListener('message',onmessage);reject(Error('Timeout: '+type))},60000);
+   const onmessage=({data})=>{if(data.type===type || data.type==='error'){clearTimeout(timer);worker.removeEventListener('message',onmessage);data.type==='error'?reject(Error(data.message)):resolve(data)}};
+   worker.addEventListener('message',onmessage);
+  });
+  let ready=next('ready');worker.postMessage({type:'init',origin:location.origin});await ready;
+  worker.postMessage({type:'reset',mode:'balanced'});worker.postMessage({type:'capture-start',generation:1});
+  if(video.readyState<1)await new Promise(r=>video.addEventListener('loadedmetadata',r,{once:true}));
+  const qualities=[];
+  for(let t=.02;t<video.duration-.02;t+=.1){
+   const seeked=new Promise(r=>video.addEventListener('seeked',r,{once:true}));video.currentTime=t;await seeked;
+   const bitmap=await createImageBitmap(video);const frame=next('frame');worker.postMessage({type:'frame',bitmap,now:t*1000,generation:1},[bitmap]);
+   const data=await frame;qualities.push(data.quality);status.textContent='Processed '+qualities.length+' real video frames';
+  }
+  const captured=next('captured');worker.postMessage({type:'capture-finish',generation:1});const answer=await captured;
+  const passed=answer.prediction?.accepted && answer.prediction.label==='Б';
+  result.textContent=JSON.stringify({passed,expected:'Б',prediction:answer.prediction?.label,accepted:answer.prediction?.accepted,frames:qualities.length,quality:qualities},null,2);
+  status.textContent=passed?'PASS — browser recognized Б':'FAIL — inspect the result';
+ }catch(e){status.textContent='FAIL — '+e.message;}finally{worker?.terminate();button.disabled=false}
+};
+</script></html>

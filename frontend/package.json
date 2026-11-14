@@ -18,6 +18,7 @@
     "test:hand-workshop": "node scripts/check-hand-workshop.mjs",
     "test:phrase-capture": "node scripts/check-phrase-capture.mjs",
     "test:live-recognition": "node scripts/check-live-recognition.mjs",
+    "test:alphabet-v4": "node scripts/check-alphabet-v4.mjs",
     "test:admin-analytics": "node scripts/check-admin-analytics.mjs",
     "test:sign-captions": "node scripts/check-sign-captions.mjs",
     "test:sign-activities": "node scripts/check-sign-activities.mjs",

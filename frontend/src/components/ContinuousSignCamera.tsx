@@ -18,6 +18,7 @@ const MAX_CLIP_BYTES = import.meta.env.PROD
 const MAX_CLIP_MB = import.meta.env.PROD ? 4 : 25;
 
 export function ContinuousSignCamera() {
+  const [letterMode, setLetterMode] = useState<"balanced" | "strict">("balanced");
   const [health, setHealth] = useState<Health | null>(null);
   const [checking, setChecking] = useState(false);
   const healthRequest = useRef<AbortController | null>(null);
@@ -55,6 +56,7 @@ export function ContinuousSignCamera() {
         finishCapture.current?.(true);
       if (decision === "empty") finishCapture.current?.(false);
     },
+    letterMode,
   );
   const stream = useRef<MediaStream | null>(null);
   const recorder = useRef<MediaRecorder | null>(null);
@@ -69,10 +71,10 @@ export function ContinuousSignCamera() {
     healthRequest.current?.abort();
     const controller = new AbortController();
     healthRequest.current = controller;
-    const timeout = setTimeout(() => controller.abort(), 10000);
+    const timeout = setTimeout(() => controller.abort(), 60000);
     setChecking(true);
     setMessage(
-      at("Проверяем модель…", "Checking model…", "Модель тексерілуде…"),
+      at("Подключаем модель фраз. Первый запуск может занять до минуты…", "Connecting to the phrase model. First startup may take up to a minute…", "Сөйлем моделіне қосылудамыз. Алғашқы іске қосылу бір минутқа дейін созылуы мүмкін…"),
     );
     try {
       const response = await fetch("/api/krsl/status", {
@@ -397,6 +399,16 @@ export function ContinuousSignCamera() {
       <div className="recognition-layout">
         <section className="panel krsl-camera">
           <h2>{at("Камера", "Camera", "Камера")}</h2>
+          <label className="recognition-letter-mode">
+            {at("Распознавание букв", "Letter recognition", "Әріптерді тану")}
+            <select value={letterMode} onChange={(event) => setLetterMode(event.target.value as "balanced" | "strict")}>
+              <option value="balanced">{at("Больше результатов · новая модель", "More results · new model", "Көбірек нәтиже · жаңа модель")}</option>
+              <option value="strict">{at("Строгая проверка · больше пропусков", "Strict checks · more skipped signs", "Қатаң тексеру · көбірек өткізу")}</option>
+            </select>
+          </label>
+          <p className="recognition-privacy">
+            {at("Показывайте по одной букве и дождитесь результата. Новая модель чаще даёт ответ, но может ошибаться; распознанный текст можно исправить ниже.", "Show one letter at a time and wait for the result. The new model responds more often but can make mistakes; edit the recognized text below.", "Әріптерді бір-бірден көрсетіп, нәтижені күтіңіз. Жаңа модель жиірек жауап береді, бірақ қателесуі мүмкін; танылған мәтінді төменде түзете аласыз.")}
+          </p>
           <p>
             {at(
               "Держите лицо, плечи, локти и обе кисти в кадре.",
@@ -487,6 +499,18 @@ export function ContinuousSignCamera() {
             )}
             {phase === "starting" && <span className="krsl-countdown">…</span>}
           </div>
+          {phase === "recording" && letters.ready && (
+            <div className="recognition-edit-tools">
+              <button className="button secondary" onClick={letters.capturing ? letters.finishLetter : letters.startLetter}>
+                {letters.capturing
+                  ? at("Буква показана — распознать", "Letter complete — recognize", "Әріп көрсетілді — тану")
+                  : at("Записать отдельную букву", "Capture one letter", "Бір әріпті жазу")}
+              </button>
+              <span role="status">{letters.capturing
+                ? at("Покажите букву целиком и нажмите ещё раз. Максимум 10 секунд.", "Show the full letter, then press again. Maximum 10 seconds.", "Әріпті толық көрсетіп, қайта басыңыз. Ең көбі 10 секунд.")
+                : at("Если быстрый жест пропускается, запишите его отдельно.", "Capture a fast sign separately if it is skipped.", "Жылдам ым танылмаса, оны бөлек жазыңыз.")}</span>
+            </div>
+          )}
           {phase === "recording" && health?.ready && (
             <button
               className="button secondary"

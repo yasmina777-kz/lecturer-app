@@ -28,6 +28,7 @@ art
 ml
 docs
 outputs
+work
 **/*.blend
 **/*.blend1
 **/*.zip
