@@ -33,9 +33,6 @@ function appendPhraseToTranscript(text: string, phrase: string) {
 }
 
 export function ContinuousSignCamera() {
-  const [letterMode, setLetterMode] = useState<"balanced" | "strict">(
-    "balanced",
-  );
   const [health, setHealth] = useState<Health | null>(null);
   const [checking, setChecking] = useState(false);
   const healthRequest = useRef<AbortController | null>(null);
@@ -73,7 +70,7 @@ export function ContinuousSignCamera() {
         finishCapture.current?.(true);
       if (decision === "empty") finishCapture.current?.(false);
     },
-    letterMode,
+    "balanced",
     (label) => setText((current) => appendLetterToTranscript(current, label)),
   );
   const stream = useRef<MediaStream | null>(null);
@@ -419,30 +416,6 @@ export function ContinuousSignCamera() {
       <div className="recognition-layout">
         <section className="panel krsl-camera">
           <h2>{at("Камера", "Camera", "Камера")}</h2>
-          <label className="recognition-letter-mode">
-            {at("Распознавание букв", "Letter recognition", "Әріптерді тану")}
-            <select
-              value={letterMode}
-              onChange={(event) =>
-                setLetterMode(event.target.value as "balanced" | "strict")
-              }
-            >
-              <option value="balanced">
-                {at(
-                  "Больше результатов · новая модель",
-                  "More results · new model",
-                  "Көбірек нәтиже · жаңа модель",
-                )}
-              </option>
-              <option value="strict">
-                {at(
-                  "Строгая проверка · больше пропусков",
-                  "Strict checks · more skipped signs",
-                  "Қатаң тексеру · көбірек өткізу",
-                )}
-              </option>
-            </select>
-          </label>
           <p className="recognition-privacy">
             {at(
               "Показывайте по одной букве и дождитесь результата. Новая модель чаще даёт ответ, но может ошибаться; распознанный текст можно исправить ниже.",

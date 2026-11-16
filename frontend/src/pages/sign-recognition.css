@@ -312,13 +312,3 @@
 .krsl-view + .button {
   margin-top: 16px;
 }
-.recognition-letter-mode {
-  display: grid;
-  gap: 8px;
-  margin-block: 12px;
-}
-.recognition-letter-mode select {
-  width: 100%;
-  min-height: 44px;
-  max-width: 100%;
-}
