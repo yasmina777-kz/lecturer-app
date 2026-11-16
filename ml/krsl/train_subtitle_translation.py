@@ -143,6 +143,7 @@ def main(args):
     device = torch.device(args.device)
     audit = json.loads(args.audit.read_text())
     mapping = json.loads(args.splits.read_text())
+    sources = audit['sources']
     samples, rejected, fingerprints = load_samples(audit, json.loads(args.segments.read_text()), mapping, args.features)
     sets = {s: [r for r in samples if r['split'] == s] for s in ['train', 'val', 'test']}
     # Neither validation nor test text can expand the learned vocabulary.
@@ -164,10 +165,10 @@ def main(args):
                   manifestSha256=digest(args.segments), splitSha256=digest(args.splits),
                   sourceIndexSha256=audit['indexSha256'], torch=torch.__version__, device=str(device),
                   sources=[{k: s.get(k) for k in ['video_id', 'url', 'channel_id', 'videoSha256', 'captionSha256', 'sourceLicense']} for s in audit['sources']],
-                  limitations=['Only four videos; not representative of live webcam use',
-                               'Validation shares a channel with training; signer identities not audited',
-                               'Test is a held-out channel and topic, not a general phrase benchmark',
-                               'Subtitle timing/translation has not been checked by an RSL annotator',
+                  limitations=[f"Only {len(sources)} source videos across {len({s.get('channel_id') for s in sources})} channels; not representative of unrestricted live webcam use",
+                               'Channels are held out between splits, but signer identities are not audited and cannot be inferred from channel IDs',
+                               'Subtitles are weak spoken-language targets, not expert-verified RSL/KRSL gloss or translation annotations',
+                               'Subtitle timing and signing correspondence have not been semantically checked by an RSL annotator',
                                'No silent/no-sign negatives; hallucination rejection not calibrated'],
                   history=[], dataset={})
     for split, rows in sets.items():
