@@ -11,9 +11,12 @@ export function useLiveLetters(
   active: boolean,
   onTracking?: (now: number, hands: Landmark[][], pose: Landmark[]) => void,
   mode: "balanced" | "strict" = "balanced",
+  onAcceptedLetter?: (label: string) => void,
 ) {
   const trackingCallback = useRef(onTracking);
   trackingCallback.current = onTracking;
+  const acceptedLetterCallback = useRef(onAcceptedLetter);
+  acceptedLetterCallback.current = onAcceptedLetter;
   const [bodyStatus, setBodyStatus] = useState(
     "Ориентиры тела появятся после включения камеры",
   );
@@ -78,9 +81,13 @@ export function useLiveLetters(
         setCapturing(false);
         if (data.prediction?.accepted) {
           setLast(data.prediction.label);
-          setText(v => appendRecognizedLetter(v, data.prediction));
+          setText((v) => appendRecognizedLetter(v, data.prediction));
+          acceptedLetterCallback.current?.(data.prediction.label);
           setStatus(`Добавлена буква «${data.prediction.label}»`);
-        } else setStatus("Буква неясна. Запишите один полный жест, удерживая кисть в кадре хотя бы секунду.");
+        } else
+          setStatus(
+            "Буква неясна. Запишите один полный жест, удерживая кисть в кадре хотя бы секунду.",
+          );
         return;
       }
       if (data.type === "error") {
@@ -128,6 +135,7 @@ export function useLiveLetters(
         setStatus(`Добавлена буква «${data.prediction.label}»`);
         setLast(data.prediction.label);
         setText((v) => appendRecognizedLetter(v, data.prediction));
+        acceptedLetterCallback.current?.(data.prediction.label);
       } else if (data.prediction?.accepted)
         setStatus(`Возможно, «${data.prediction.label}» — проверяю движение`);
       else if (data.disagreement)
@@ -204,12 +212,18 @@ export function useLiveLetters(
   }, [active, ready, mode]);
   const finishLetter = () => {
     clearTimeout(captureTimer.current);
-    worker.current?.postMessage({type: "capture-finish", generation: session.current});
+    worker.current?.postMessage({
+      type: "capture-finish",
+      generation: session.current,
+    });
   };
   const startLetter = () => {
     if (!ready || !activeRef.current || capturing) return;
     setCapturing(true);
-    worker.current?.postMessage({type: "capture-start", generation: session.current});
+    worker.current?.postMessage({
+      type: "capture-start",
+      generation: session.current,
+    });
     captureTimer.current = setTimeout(finishLetter, 10000);
   };
   return {

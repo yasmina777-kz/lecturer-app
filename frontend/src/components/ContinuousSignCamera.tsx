@@ -17,8 +17,25 @@ const MAX_CLIP_BYTES = import.meta.env.PROD
   : 25 * 1024 * 1024;
 const MAX_CLIP_MB = import.meta.env.PROD ? 4 : 25;
 
+function appendLetterToTranscript(text: string, label: string) {
+  if (!/^[А-ЯЁ]$/u.test(label)) return text;
+  const lines = text.split("\n");
+  const lastLine = lines[lines.length - 1] ?? "";
+  if (lastLine.startsWith("Буквы: ")) lines[lines.length - 1] += label;
+  else lines.push(`Буквы: ${label}`);
+  return lines.join("\n").slice(0, 4000);
+}
+
+function appendPhraseToTranscript(text: string, phrase: string) {
+  const clean = phrase.trim();
+  if (!clean) return text;
+  return `${text}${text ? "\n" : ""}Черновик фразы: ${clean}`.slice(0, 4000);
+}
+
 export function ContinuousSignCamera() {
-  const [letterMode, setLetterMode] = useState<"balanced" | "strict">("balanced");
+  const [letterMode, setLetterMode] = useState<"balanced" | "strict">(
+    "balanced",
+  );
   const [health, setHealth] = useState<Health | null>(null);
   const [checking, setChecking] = useState(false);
   const healthRequest = useRef<AbortController | null>(null);
@@ -57,6 +74,7 @@ export function ContinuousSignCamera() {
       if (decision === "empty") finishCapture.current?.(false);
     },
     letterMode,
+    (label) => setText((current) => appendLetterToTranscript(current, label)),
   );
   const stream = useRef<MediaStream | null>(null);
   const recorder = useRef<MediaRecorder | null>(null);
@@ -74,7 +92,11 @@ export function ContinuousSignCamera() {
     const timeout = setTimeout(() => controller.abort(), 60000);
     setChecking(true);
     setMessage(
-      at("Подключаем модель фраз. Первый запуск может занять до минуты…", "Connecting to the phrase model. First startup may take up to a minute…", "Сөйлем моделіне қосылудамыз. Алғашқы іске қосылу бір минутқа дейін созылуы мүмкін…"),
+      at(
+        "Подключаем модель фраз. Первый запуск может занять до минуты…",
+        "Connecting to the phrase model. First startup may take up to a minute…",
+        "Сөйлем моделіне қосылудамыз. Алғашқы іске қосылу бір минутқа дейін созылуы мүмкін…",
+      ),
     );
     try {
       const response = await fetch("/api/krsl/status", {
@@ -197,9 +219,7 @@ export function ContinuousSignCamera() {
       setResult(next);
       setMessage(next.message);
       if (next.status === "draft")
-        setText((previous) =>
-          [previous, next.text].filter(Boolean).join("\n").slice(0, 4000),
-        );
+        setText((previous) => appendPhraseToTranscript(previous, next.text));
     } catch (error) {
       if (id !== generation.current || !alive.current) return;
       if (error instanceof RecognitionServiceError && error.status === 503) {
@@ -401,13 +421,34 @@ export function ContinuousSignCamera() {
           <h2>{at("Камера", "Camera", "Камера")}</h2>
           <label className="recognition-letter-mode">
             {at("Распознавание букв", "Letter recognition", "Әріптерді тану")}
-            <select value={letterMode} onChange={(event) => setLetterMode(event.target.value as "balanced" | "strict")}>
-              <option value="balanced">{at("Больше результатов · новая модель", "More results · new model", "Көбірек нәтиже · жаңа модель")}</option>
-              <option value="strict">{at("Строгая проверка · больше пропусков", "Strict checks · more skipped signs", "Қатаң тексеру · көбірек өткізу")}</option>
+            <select
+              value={letterMode}
+              onChange={(event) =>
+                setLetterMode(event.target.value as "balanced" | "strict")
+              }
+            >
+              <option value="balanced">
+                {at(
+                  "Больше результатов · новая модель",
+                  "More results · new model",
+                  "Көбірек нәтиже · жаңа модель",
+                )}
+              </option>
+              <option value="strict">
+                {at(
+                  "Строгая проверка · больше пропусков",
+                  "Strict checks · more skipped signs",
+                  "Қатаң тексеру · көбірек өткізу",
+                )}
+              </option>
             </select>
           </label>
           <p className="recognition-privacy">
-            {at("Показывайте по одной букве и дождитесь результата. Новая модель чаще даёт ответ, но может ошибаться; распознанный текст можно исправить ниже.", "Show one letter at a time and wait for the result. The new model responds more often but can make mistakes; edit the recognized text below.", "Әріптерді бір-бірден көрсетіп, нәтижені күтіңіз. Жаңа модель жиірек жауап береді, бірақ қателесуі мүмкін; танылған мәтінді төменде түзете аласыз.")}
+            {at(
+              "Показывайте по одной букве и дождитесь результата. Новая модель чаще даёт ответ, но может ошибаться; распознанный текст можно исправить ниже.",
+              "Show one letter at a time and wait for the result. The new model responds more often but can make mistakes; edit the recognized text below.",
+              "Әріптерді бір-бірден көрсетіп, нәтижені күтіңіз. Жаңа модель жиірек жауап береді, бірақ қателесуі мүмкін; танылған мәтінді төменде түзете аласыз.",
+            )}
           </p>
           <p>
             {at(
@@ -501,14 +542,37 @@ export function ContinuousSignCamera() {
           </div>
           {phase === "recording" && letters.ready && (
             <div className="recognition-edit-tools">
-              <button className="button secondary" onClick={letters.capturing ? letters.finishLetter : letters.startLetter}>
+              <button
+                className="button secondary"
+                onClick={
+                  letters.capturing ? letters.finishLetter : letters.startLetter
+                }
+              >
                 {letters.capturing
-                  ? at("Буква показана — распознать", "Letter complete — recognize", "Әріп көрсетілді — тану")
-                  : at("Записать отдельную букву", "Capture one letter", "Бір әріпті жазу")}
+                  ? at(
+                      "Буква показана — распознать",
+                      "Letter complete — recognize",
+                      "Әріп көрсетілді — тану",
+                    )
+                  : at(
+                      "Записать отдельную букву",
+                      "Capture one letter",
+                      "Бір әріпті жазу",
+                    )}
               </button>
-              <span role="status">{letters.capturing
-                ? at("Покажите букву целиком и нажмите ещё раз. Максимум 10 секунд.", "Show the full letter, then press again. Maximum 10 seconds.", "Әріпті толық көрсетіп, қайта басыңыз. Ең көбі 10 секунд.")
-                : at("Если быстрый жест пропускается, запишите его отдельно.", "Capture a fast sign separately if it is skipped.", "Жылдам ым танылмаса, оны бөлек жазыңыз.")}</span>
+              <span role="status">
+                {letters.capturing
+                  ? at(
+                      "Покажите букву целиком и нажмите ещё раз. Максимум 10 секунд.",
+                      "Show the full letter, then press again. Maximum 10 seconds.",
+                      "Әріпті толық көрсетіп, қайта басыңыз. Ең көбі 10 секунд.",
+                    )
+                  : at(
+                      "Если быстрый жест пропускается, запишите его отдельно.",
+                      "Capture a fast sign separately if it is skipped.",
+                      "Жылдам ым танылмаса, оны бөлек жазыңыз.",
+                    )}
+              </span>
             </div>
           )}
           {phase === "recording" && health?.ready && (
@@ -629,51 +693,26 @@ export function ContinuousSignCamera() {
               "Әр көрсетілім жаңа жолға жазылады. Нәтижені тексеріп, қателерді түзетіңіз.",
             )}
           </p>
-          <label htmlFor="live-letter-text">
-            {at("Буквы", "Letters", "Әріптер")}
-            {letters.last && ` · ${letters.last}`}
-          </label>
-          <textarea
-            id="live-letter-text"
-            rows={2}
-            value={letters.text}
-            maxLength={2000}
-            onChange={(e) => letters.setText(e.target.value)}
-            placeholder={at(
-              "Покажите букву целиком…",
-              "Show a complete letter…",
-              "Әріпті толық көрсетіңіз…",
-            )}
-          />
-          <div className="recognition-edit-tools">
-            <button
-              className="button secondary"
-              disabled={!letters.text}
-              onClick={() => letters.setText((v) => (v + " ").slice(0, 2000))}
-            >
-              {at("Пробел", "Space", "Бос орын")}
-            </button>
-            <button
-              className="button secondary"
-              disabled={!letters.text}
-              onClick={() => letters.setText((v) => v.slice(0, -1))}
-            >
-              {at("Стереть букву", "Delete letter", "Әріпті өшіру")}
-            </button>
-            <button
-              className="button secondary"
-              disabled={!letters.text}
-              onClick={() => {
-                setText((v) => (v + "\n" + letters.text).trim().slice(0, 4000));
-                letters.setText("");
-              }}
-            >
-              {at("Добавить в текст ↓", "Add to text ↓", "Мәтінге қосу ↓")}
-            </button>
-          </div>
           <label htmlFor="krsl-text">
-            {at("Фразы — черновик", "Phrases — draft", "Сөйлемдер — нобай")}
+            {at(
+              "Результат камеры · буквы и фразы",
+              "Camera output · letters and phrases",
+              "Камера нәтижесі · әріптер мен сөйлемдер",
+            )}
           </label>
+          <p className="recognition-privacy">
+            {health?.ready
+              ? at(
+                  "Обе модели работают одновременно. Буквы и фразовые догадки добавляются сюда одним потоком и помечаются по типу.",
+                  "Both models run together. Letters and phrase guesses appear in this single stream, labeled by type.",
+                  "Екі модель қатар жұмыс істейді. Әріптер мен сөйлем болжамдары түрі белгіленіп, осы ортақ өріске қосылады.",
+                )
+              : at(
+                  "Сейчас работает модель букв. Фразовый сервис не подключён; когда он будет доступен, его черновики появятся здесь же.",
+                  "The letter model is active. The phrase service is offline; its drafts will appear here when connected.",
+                  "Қазір әріп моделі жұмыс істейді. Сөйлем қызметі қосылмаған; қосылғанда оның нобайлары осында шығады.",
+                )}
+          </p>
           {!health?.ready && (
             <p role="status">
               {health === null
@@ -691,25 +730,39 @@ export function ContinuousSignCamera() {
           )}
           <textarea
             id="krsl-text"
-            rows={8}
+            rows={10}
             maxLength={4000}
             value={text}
             onChange={(event) => setText(event.target.value)}
             placeholder={
               !health?.ready
                 ? at(
-                    "Можно добавить распознанные буквы или ввести текст вручную",
-                    "Add recognized letters or enter text manually",
-                    "Танылған әріптерді қосыңыз немесе мәтінді енгізіңіз",
+                    "Покажите букву или фразу; распознанные результаты будут добавляться сюда",
+                    "Show a letter or phrase; recognized results will appear here",
+                    "Әріп не сөйлем көрсетіңіз — танылған нәтиже осында қосылады",
                   )
                 : at(
-                    "Здесь появятся слова из вашего видео…",
-                    "Words from your video will appear here…",
-                    "Бейнедегі сөздер осында шығады…",
+                    "Результаты букв и фраз появятся здесь…",
+                    "Letter and phrase results will appear here…",
+                    "Әріп пен сөйлем нәтижелері осында шығады…",
                   )
             }
           />
           <div className="recognition-edit-tools">
+            <button
+              className="button secondary"
+              disabled={!text}
+              onClick={() => setText((value) => (value + " ").slice(0, 4000))}
+            >
+              {at("Пробел", "Space", "Бос орын")}
+            </button>
+            <button
+              className="button secondary"
+              disabled={!text}
+              onClick={() => setText((value) => value.slice(0, -1))}
+            >
+              {at("Стереть символ", "Delete character", "Таңбаны өшіру")}
+            </button>
             <button
               className="button secondary"
               disabled={!text}
