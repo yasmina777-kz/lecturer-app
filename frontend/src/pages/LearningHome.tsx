@@ -13,17 +13,17 @@ import { courseLevels } from "../sign/exercises";
 import { useSignProgress } from "../sign/useProgress";
 import { useActivityProgress } from "../sign/useActivities";
 import { reviewItems } from "../sign/activities";
+import { lessonIds } from "../sign/catalog";
 
 export function LearningHome() {
   const { progress } = useSignProgress();
   const { attempts } = useActivityProgress();
   const reviewCount = reviewItems(attempts).size;
   const hasHistory = Object.keys(progress).length > 0 || attempts.length > 0;
-  const nextLesson = !progress["getting-started"]
-    ? "/learn/getting-started"
-    : !progress["alphabet-intro"]
-      ? "/learn/alphabet-intro"
-      : "/practice?exercise=a";
+  const nextLessonId = lessonIds.find((id) => !progress[id]);
+  const nextLesson = nextLessonId
+    ? `/learn/${nextLessonId}`
+    : "/practice?exercise=a";
   return (
     <div className="sign-workspace learning-home">
       {hasHistory && (
@@ -36,16 +36,11 @@ export function LearningHome() {
           </h2>
           <p>
             {at(
-              "Вводные материалы прочитаны:",
-              "Introductions completed:",
-              "Оқылған кіріспе материалдар:",
+              "Уроков завершено:",
+              "Lessons completed:",
+              "Аяқталған сабақтар:",
             )}{" "}
-            {
-              ["getting-started", "alphabet-intro"].filter(
-                (id) => progress[id as "getting-started" | "alphabet-intro"],
-              ).length
-            }
-            /2 ·{" "}
+            {lessonIds.filter((id) => progress[id]).length}/{lessonIds.length} ·{" "}
             {at(
               "Попыток в упражнениях:",
               "Exercise attempts:",

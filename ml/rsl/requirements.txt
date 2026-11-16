@@ -5,5 +5,6 @@ opencv-python-headless
 remotezip
 pypdf
 requests
+ijson==3.4.0.post0
 
 pymorphy3==2.0.6

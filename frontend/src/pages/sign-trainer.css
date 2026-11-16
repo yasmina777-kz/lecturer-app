@@ -3,6 +3,12 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
 }
+.sign-reading-cards {
+  margin-bottom: 24px;
+}
+.sign-reading-cards .sign-exercise-thumb img {
+  width: 100%;
+}
 .sign-exercise-card {
   padding: 12px !important;
   overflow: hidden;

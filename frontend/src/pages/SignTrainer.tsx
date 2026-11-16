@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { at } from "../i18n/automation";
 import { exercises, courseLevels, recognitionLetters } from "../sign/exercises";
+import { lessons } from "../sign/catalog";
 import { animationTime, playbackDuration } from "../sign/playback";
 import { Loading } from "../components/UI";
 import type { GestureAngle } from "../components/GestureMentor3D";
@@ -135,38 +136,72 @@ export function SignCourseCatalog() {
           ))}
         </div>
       ) : (
-        <div className="sign-exercise-cards">
-          {exercises()
-            .filter((e) => e.level === stage.id)
-            .map((e) => (
-              <Link
-                className="panel sign-exercise-card"
-                to={`/practice?exercise=${e.id}`}
-                key={e.id}
-              >
-                <div
-                  className={`sign-exercise-thumb${e.letter && alphabetIllustration(e.letter) ? " sign-exercise-thumb--illustrated" : ""}`}
+        <>
+          <div className="sign-exercise-cards sign-reading-cards">
+            {lessons()
+              .filter(
+                (lesson) =>
+                  lesson.level === stage.id && lesson.kind === "reading",
+              )
+              .map((lesson) => (
+                <Link
+                  className="panel sign-exercise-card"
+                  to={`/learn/${lesson.id}`}
+                  key={lesson.id}
                 >
-                  {e.letter && alphabetIllustration(e.letter) ? (
-                    <AlphabetCardArt letter={e.letter} />
-                  ) : e.letter ? (
-                    <b>{e.letter}</b>
-                  ) : (
-                    <img src="/images/avatars/mira-portrait-v3.png" alt="" />
-                  )}
-                  <Play size={24} />
-                </div>
-                <div>
-                  <h2>{e.title}</h2>
-                  <p>{e.hint}</p>
-                  <span className="sign-level-link">
-                    {at("Смотреть аватара", "Watch avatar", "Аватарды көру")}
-                    <ArrowRight size={17} />
-                  </span>
-                </div>
-              </Link>
-            ))}
-        </div>
+                  <div className="sign-exercise-thumb">
+                    {lesson.image && (
+                      <img src={lesson.image} alt="" loading="lazy" />
+                    )}
+                  </div>
+                  <div>
+                    <span className="eyebrow">
+                      {at("УРОК", "LESSON", "САБАҚ")} · {lesson.minutes}{" "}
+                      {at("мин", "min", "мин")}
+                    </span>
+                    <h2>{lesson.title}</h2>
+                    <p>{lesson.description}</p>
+                    <span className="sign-level-link">
+                      {at("Открыть урок", "Open lesson", "Сабақты ашу")}
+                      <ArrowRight size={16} />
+                    </span>
+                  </div>
+                </Link>
+              ))}
+          </div>
+          <div className="sign-exercise-cards">
+            {exercises()
+              .filter((e) => e.level === stage.id)
+              .map((e) => (
+                <Link
+                  className="panel sign-exercise-card"
+                  to={`/practice?exercise=${e.id}`}
+                  key={e.id}
+                >
+                  <div
+                    className={`sign-exercise-thumb${e.letter && alphabetIllustration(e.letter) ? " sign-exercise-thumb--illustrated" : ""}`}
+                  >
+                    {e.letter && alphabetIllustration(e.letter) ? (
+                      <AlphabetCardArt letter={e.letter} />
+                    ) : e.letter ? (
+                      <b>{e.letter}</b>
+                    ) : (
+                      <img src="/images/avatars/mira-portrait-v3.png" alt="" />
+                    )}
+                    <Play size={24} />
+                  </div>
+                  <div>
+                    <h2>{e.title}</h2>
+                    <p>{e.hint}</p>
+                    <span className="sign-level-link">
+                      {at("Смотреть аватара", "Watch avatar", "Аватарды көру")}
+                      <ArrowRight size={17} />
+                    </span>
+                  </div>
+                </Link>
+              ))}
+          </div>
+        </>
       )}
       {!stage && (
         <>

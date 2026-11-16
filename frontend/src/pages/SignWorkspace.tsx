@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { at } from "../i18n/automation";
 import { Empty, ErrorMessage, Loading } from "../components/UI";
-import { lessons, reading } from "../sign/catalog";
+import { lessonIds, lessons, reading } from "../sign/catalog";
 import { useSignProgress } from "../sign/useProgress";
 
 import "./sign-workspace.css";
@@ -80,6 +80,7 @@ function LessonContent({ id }: { id?: string }) {
       />
     );
   const content = reading(lesson.id);
+  const nextLessonId = lessonIds[lessonIds.indexOf(lesson.id) + 1];
   const prototype = lesson.kind === "prototype";
   return (
     <div className="sign-workspace">
@@ -163,6 +164,14 @@ function LessonContent({ id }: { id?: string }) {
               )}
             </p>
           </aside>
+        </div>
+      )}
+      {lesson.activity && (
+        <div className="sign-lesson-activity">
+          <Link className="button primary" to={lesson.activity}>
+            {at("Перейти к практике", "Go to practice", "Жаттығуға өту")}
+            <ArrowRight size={17} />
+          </Link>
         </div>
       )}
       <section className="panel sign-check">
@@ -262,7 +271,9 @@ function LessonContent({ id }: { id?: string }) {
       <Link
         className="sign-back"
         to={
-          lesson.id === "getting-started" ? "/learn/alphabet-intro" : "/learn"
+          nextLessonId
+            ? `/learn/${nextLessonId}`
+            : `/learn?stage=${lesson.level}`
         }
       >
         {at("Дальше", "Next", "Келесі")}

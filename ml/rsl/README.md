@@ -88,11 +88,11 @@ using 615 signer-disjoint validation videos inside the training partition.
 Five candidates were compared: linear C=0.1/1/10 and a 96-unit ReLU MLP with
 alpha=1/5. The selected MLP uses alpha=5 and random_state=42.
 
-| Metric | Standard | Cautious |
-|---|---:|---:|
-| Overall test accuracy | 76.47% | 75.33% |
-| Answer coverage | 78.10% | 38.07% |
-| Correct among accepted answers | 87.45% | 100% (233/233) |
+| Metric                         | Standard |       Cautious |
+| ------------------------------ | -------: | -------------: |
+| Overall test accuracy          |   76.47% |         75.33% |
+| Answer coverage                |   78.10% |         38.07% |
+| Correct among accepted answers |   87.45% | 100% (233/233) |
 
 Overall improvement was **not** established. Zero observed errors on 233 accepted
 answers is not a guarantee on new people or webcam recordings. The cautious
@@ -115,3 +115,35 @@ parity for all 34 new-model classes, as well as no-hand rejection. In the downlo
 training archive, `baseline-manifest.json` preserves the previous training selection.
 Situational dialogues and comprehension exercises are rule-based learning activities;
 they are not represented as newly trained AI.
+
+## Slovo isolated-word experiment (2026-11-16)
+
+`train_slovo_words.py` uses the public Slovo MediaPipe landmark release to train
+an isolated-sign classifier. The train/test CSV flags contain signer overlap, so
+training clips from every signer appearing in the official test partition are
+dropped before selecting a signer-disjoint validation group. This leaves 15 fit
+signers and 5 validation signers for the full 1,000-label candidate.
+
+The full-vocabulary candidate reached 18.2% top-1 and 41.2% top-5 accuracy on
+4,998 held-out clips. A top-50 experiment reached 47.2% top-1 and 75.6% top-5,
+but those scores apply to just 250 of the 4,998 held-out clips (5.0% coverage).
+That narrow run had 11 fit signers and only 2 validation signers. Neither model
+is suitable for live feedback or deployment; the top-50 result is not a claim
+that the other 95% of signs are recognized. Generated weights and reports stay
+under ignored `ml/rsl/data/` and are intentionally not part of the frontend.
+
+Reproduce either run after preparing the ignored local data and Python environment:
+
+```sh
+ml/rsl/.venv/bin/python ml/rsl/train_slovo_words.py
+ml/rsl/.venv/bin/python ml/rsl/train_slovo_words.py --top-classes 50 \
+  --output ml/rsl/data/slovo-word-candidate-top50
+```
+
+Slovo contains isolated word clips, not aligned conversations with RSL glosses
+and sentence translations. This experiment therefore cannot train continuous
+phrase recognition, translation, or grammar. It also omits face and body cues.
+The course uses the existing Slovo dictionary videos for vocabulary exposure
+and comprehension activities, while clearly labeling the avatar animation as
+experimental. Phrase recognition needs licensed, consented, signer-diverse
+phrase recordings with verified annotations before it can be trained credibly.

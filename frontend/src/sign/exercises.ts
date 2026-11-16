@@ -173,15 +173,15 @@ export function courseLevels() {
       id: 2,
       title: at("Первые слова", "First words", "Алғашқы сөздер"),
       description: at(
-        "Переходите от формы кисти к движению. Приветствие и благодарность.",
-        "Move from hand shapes to motion. Greetings and thanks.",
-        "Қол пішінінен қимылға өтіңіз. Амандасу және алғыс айту.",
+        "Два коротких урока, 171 словарное видео по темам и упражнения на приветствие и благодарность.",
+        "Two short lessons, 171 topic-based dictionary videos, and greeting and thanks practice.",
+        "Екі қысқа сабақ, тақырып бойынша 171 сөздік бейнесі және амандасу мен алғыс жаттығулары.",
       ),
       image: "/illustrations/sign-phrases/phrase-02.jpg",
       count: at(
-        "2 пробных показа · без ИИ-проверки",
-        "2 trial demonstrations · no AI check",
-        "2 сынақ көрсетілімі · ЖИ тексеруінсіз",
+        "171 видео словарных примеров · ИИ-проверка только букв",
+        "171 dictionary video examples · AI checks letters only",
+        "171 сөздік бейнесі · ЖИ тек әріптерді тексереді",
       ),
     },
     {
@@ -192,15 +192,15 @@ export function courseLevels() {
         "Сөйлемдер және танысу",
       ),
       description: at(
-        "Посмотрите фразу «Как тебя зовут?» и разберите её по движениям.",
-        "Watch “What is your name?” and inspect its movements.",
-        "«Сенің атың кім?» сөйлемін қарап, қимылдарын талдаңыз.",
+        "Понимание видео, три жизненных диалога и одна пробная фраза на аватаре.",
+        "Video comprehension, three everyday dialogues and one trial avatar phrase.",
+        "Бейнені түсіну, үш күнделікті диалог және аватардағы бір сынақ сөйлемі.",
       ),
       image: "/illustrations/sign-phrases/phrase-01.jpg",
       count: at(
-        "1 пробная фраза · без ИИ-проверки",
-        "1 trial phrase · no AI check",
-        "1 сынақ сөйлемі · ЖИ тексеруінсіз",
+        "2 учебных урока · фраза не проверяется ИИ",
+        "2 learning lessons · phrases are not AI-checked",
+        "2 оқу сабағы · сөйлемді ЖИ тексермейді",
       ),
     },
   ];
