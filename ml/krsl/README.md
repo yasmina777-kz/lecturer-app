@@ -49,9 +49,24 @@ Low landmark coverage, unknown labels, annotation-only symbols and low token pos
 
 ```json
 [
-  {"video":"clips/person1.mp4","tokens":["я","хотеть","книга"],"group":"signer-1","split":"train"},
-  {"video":"clips/person2.mp4","tokens":["книга"],"group":"signer-2","split":"val"},
-  {"video":"clips/person3.mp4","tokens":["книга"],"group":"signer-3","split":"test"}
+  {
+    "video": "clips/person1.mp4",
+    "tokens": ["я", "хотеть", "книга"],
+    "group": "signer-1",
+    "split": "train"
+  },
+  {
+    "video": "clips/person2.mp4",
+    "tokens": ["книга"],
+    "group": "signer-2",
+    "split": "val"
+  },
+  {
+    "video": "clips/person3.mp4",
+    "tokens": ["книга"],
+    "group": "signer-3",
+    "split": "test"
+  }
 ]
 ```
 
@@ -70,6 +85,64 @@ Reports contain baseline validation/test WER, per-example predictions and candid
 Each run writes to its own `data/training/<UTC-time>-<run-id>/` directory, so an old candidate cannot be mistaken for the current result. Reports include corpus counts, signer/broadcast groups, labels absent from training, exact transcript match rate, and a separate false-positive rate on no-sign clips (not folded into positive-clip WER). Candidate selection requires lower validation WER without increasing validation no-sign false positives when negatives are present. `--patience 3` stops after three non-improving epochs; `--learning-rate` defaults to `1e-5`. The feature cache is keyed by extractor source, landmark asset and library versions. Reports record manifest and starting-checkpoint hashes.
 
 The initial search on 2026-11-05 found no accessible gloss-labeled continuous-phrase corpus locally. The [FluentSigners-50 record](https://zenodo.org/records/6043739) restricts file access; the project's linked Drive download returns 404. Local Bukva letters and selected Slovo isolated words cannot replace a phrase corpus. The subsequent YouTube-SL-25 acquisition below provides real signing videos with subtitle translations, still pending gloss annotation. These training fixes have been tested with unit/synthetic pipeline checks; no new phrase weights or accuracy gain are claimed. Production still reports `/api/krsl/status` as unavailable; it needs a hosted Python service as well as validated weights. The camera now avoids recording phrase clips while that service is unavailable and leaves letter recognition active.
+
+### First phrase milestone: closed intent pilot
+
+The first scope is deliberately limited to eight everyday meanings (greeting,
+asking a name, introducing oneself, thanks, asking for repetition, not
+understanding, asking for help, goodbye), listed in `phrase-intents.json`.
+These are **semantic intent labels**, not approved RSL glosses or signed
+translations. A model could only report one of these labels or abstain; it would
+not generate a sentence or claim to translate unrestricted RSL.
+
+Do not train from assembled avatar clips, Slovo word clips, or Russian subtitles.
+The pilot needs full phrase recordings from consenting RSL signers, with each
+meaning checked by a qualified RSL reviewer. Training consent and public-display
+consent are separate; public use is not implied by research/training consent.
+Keep recordings private unless the signer separately authorizes publication.
+
+For manual local collection, serve the private recorder from the repository root
+and open it only on the recording computer:
+
+```sh
+python3 -m http.server 8765 --bind 127.0.0.1 --directory ml/krsl
+```
+
+Then visit `http://localhost:8765/phrase-recorder/`. The page records silent
+WebM clips in the browser and downloads them one at a time; no video is uploaded.
+Place downloaded videos under the `videos/` folder beside the exported manifest.
+The exported `meaningReviewedBy` values are blank on purpose. Fill them only
+after independent review. This local tool is not linked from the public platform.
+
+Before training, prepare a JSON array with one row per recording:
+
+```json
+[
+  {
+    "video": "videos/signer-01/clip-001.mp4",
+    "intentId": "greeting",
+    "signerId": "signer-01",
+    "split": "train",
+    "consentForTraining": true,
+    "meaningReviewedBy": "reviewer-01"
+  }
+]
+```
+
+The manifest checker rejects missing videos, missing consent or review,
+duplicate clips and any signer overlap. It reports readiness only after each
+intent has at least 5 training signers, 2 validation signers and 2 untouched test
+signers:
+
+```sh
+ml/krsl/.venv/bin/python ml/krsl/check_phrase_manifest.py /path/to/manifest.json
+```
+
+This is the data gate, not a recognition claim. After enough reviewed recordings
+exist, train a closed-set candidate and evaluate exact intent accuracy, false
+acceptance on unrelated signs, abstention coverage and signer-disjoint results.
+Only a candidate meeting a predeclared quality gate should be offered in the
+camera; otherwise keep the existing phrase recognizer labeled experimental.
 
 ### YouTube-SL-25 source acquisition (2026-11-05)
 

@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>AI Mentor · локальная запись фраз</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font:
+          16px/1.5 system-ui,
+          sans-serif;
+        color: #172638;
+        background: #eef4fa;
+      }
+      body {
+        max-width: 920px;
+        padding: 24px;
+        margin: auto;
+      }
+      h1 {
+        line-height: 1.15;
+      }
+      .panel {
+        background: white;
+        border: 1px solid #d6e2ed;
+        border-radius: 18px;
+        padding: 20px;
+        margin: 16px 0;
+        box-shadow: 0 8px 28px #25405b0d;
+      }
+      label {
+        display: block;
+        font-weight: 600;
+        margin: 12px 0 6px;
+      }
+      input,
+      select,
+      button {
+        font: inherit;
+      }
+      input[type="text"],
+      select {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 11px;
+        border: 1px solid #aebfd0;
+        border-radius: 9px;
+      }
+      video {
+        display: block;
+        background: #142434;
+        width: 100%;
+        max-height: 58vh;
+        object-fit: contain;
+        border-radius: 12px;
+      }
+      button,
+      .download {
+        display: inline-block;
+        border: 0;
+        border-radius: 9px;
+        background: #2573c4;
+        color: white;
+        padding: 11px 16px;
+        cursor: pointer;
+        text-decoration: none;
+        margin: 8px 8px 0 0;
+      }
+      button.secondary {
+        background: #e8f1f8;
+        color: #16426b;
+      }
+      button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      .notice {
+        border-left: 4px solid #418bc9;
+        padding: 10px 14px;
+        background: #f1f8fd;
+      }
+      .consent {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        font-weight: 400;
+      }
+      .muted {
+        color: #596a7b;
+      }
+      #status {
+        min-height: 1.5em;
+      }
+      #meaning {
+        font-size: 1.5rem;
+        margin: 4px 0;
+      }
+      @media (max-width: 600px) {
+        body {
+          padding: 14px;
+        }
+        .panel {
+          padding: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Локальная запись фраз для учебного исследования</h1>
+    <p class="notice">
+      <strong>Это не часть публичной платформы.</strong> Видео остаются в этом
+      браузере до скачивания; страница не загружает их на сервер. Записи нельзя
+      использовать для обучения, пока РЖЯ-компетентный рецензент не проверит
+      значение и разметку.
+    </p>
+    <section class="panel">
+      <label for="signer">Код участника (без имени)</label>
+      <input
+        id="signer"
+        type="text"
+        autocomplete="off"
+        maxlength="48"
+        placeholder="например, signer-01"
+      />
+      <label for="split">Группа данных</label>
+      <select id="split">
+        <option value="train">Обучение</option>
+        <option value="val">Настройка</option>
+        <option value="test">Отложенная проверка</option>
+      </select>
+      <p class="muted">
+        Один и тот же участник должен записываться только в одной группе. Иначе
+        тест покажет завышенное качество.
+      </p>
+      <label class="consent"
+        ><input id="consent" type="checkbox" />
+        <span
+          >Участник прямо согласился записать видео для обучения модели.
+          Согласие на публикацию отдельно не получено и не предполагается.</span
+        ></label
+      >
+      <p class="muted">
+        Записывайте только естественное выражение смысла. Не просите дословно
+        переводить русскую фразу жест за жестом. Каждая запись перед
+        использованием должна пройти независимую проверку носителем или
+        преподавателем РЖЯ.
+      </p>
+      <button id="startCamera">Включить камеру</button>
+      <button id="stopCamera" class="secondary" disabled>
+        Выключить камеру
+      </button>
+    </section>
+    <section class="panel">
+      <video id="preview" autoplay muted playsinline></video>
+      <p class="muted" id="counter">Загрузка списка заданий…</p>
+      <h2 id="meaning">—</h2>
+      <p id="intentId" class="muted"></p>
+      <button id="record" disabled>Записать (до 12 секунд)</button>
+      <button id="stopRecord" class="secondary" disabled>
+        Остановить запись
+      </button>
+      <a id="saveVideo" class="download" hidden>Сохранить видео</a>
+      <button id="next" class="secondary" disabled>Следующее задание</button>
+      <button id="manifest" class="secondary" disabled>
+        Скачать черновик разметки
+      </button>
+      <p id="status" role="status" aria-live="polite"></p>
+    </section>
+    <p class="muted">
+      В черновике нет проверенного перевода: поля рецензента остаются пустыми.
+      Заполните их только после проверки записи. Не отправляйте эти видео в
+      репозиторий или на публичный сайт.
+    </p>
+    <script type="module">
+      const $ = (id) => document.getElementById(id);
+      const state = {
+        intents: [],
+        index: 0,
+        stream: null,
+        recorder: null,
+        blob: null,
+        rows: [],
+        take: 0,
+        currentSaved: false,
+        session: new Date().toISOString().replace(/[:.]/g, "-"),
+      };
+      const setStatus = (message) => {
+        $("status").textContent = message;
+      };
+      const safe = (value) =>
+        value
+          .trim()
+          .replace(/[^a-zA-Z0-9_-]+/g, "-")
+          .replace(/^-+|-+$/g, "")
+          .slice(0, 48);
+      function showIntent() {
+        const item = state.intents[state.index];
+        if (!item) return;
+        $("counter").textContent =
+          `Задание ${state.index + 1} из ${state.intents.length}`;
+        $("meaning").textContent = item.meaning;
+        $("intentId").textContent = `Метка: ${item.id}`;
+        $("next").disabled = !state.currentSaved;
+      }
+      function validSetup() {
+        return (
+          safe($("signer").value).length > 0 &&
+          $("consent").checked &&
+          state.stream
+        );
+      }
+      function download(blob, name) {
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = name;
+        link.click();
+        setTimeout(() => URL.revokeObjectURL(url), 30000);
+      }
+      $("startCamera").onclick = async () => {
+        if (!$("consent").checked || !safe($("signer").value)) {
+          setStatus(
+            "Введите код участника и подтвердите его согласие на запись для обучения.",
+          );
+          return;
+        }
+        try {
+          state.stream = await navigator.mediaDevices.getUserMedia({
+            video: {
+              width: { ideal: 640 },
+              height: { ideal: 480 },
+              frameRate: { ideal: 24, max: 30 },
+            },
+            audio: false,
+          });
+          $("preview").srcObject = state.stream;
+          $("record").disabled = false;
+          $("stopCamera").disabled = false;
+          $("manifest").disabled = false;
+          $("startCamera").disabled = true;
+          $("signer").disabled = true;
+          $("split").disabled = true;
+          $("consent").disabled = true;
+          setStatus(
+            "Камера включена. Перед началом убедитесь, что лицо, корпус и обе руки видны целиком.",
+          );
+        } catch (error) {
+          setStatus(
+            error instanceof Error
+              ? error.message
+              : "Не удалось открыть камеру.",
+          );
+        }
+      };
+      $("stopCamera").onclick = () => {
+        if (state.recorder?.state === "recording") state.recorder.stop();
+        state.stream?.getTracks().forEach((track) => track.stop());
+        state.stream = null;
+        $("preview").srcObject = null;
+        $("record").disabled = true;
+        $("stopCamera").disabled = true;
+        $("startCamera").disabled = false;
+        setStatus("Камера выключена. Уже скачанные файлы останутся у вас.");
+      };
+      $("record").onclick = () => {
+        if (!validSetup()) {
+          setStatus("Проверьте код участника, согласие и камеру.");
+          return;
+        }
+        if (state.blob) {
+          setStatus(
+            "Сначала сохраните предыдущую запись, затем переходите дальше.",
+          );
+          return;
+        }
+        const mime = ["video/webm;codecs=vp8", "video/webm"].find((x) =>
+          MediaRecorder.isTypeSupported(x),
+        );
+        if (!mime) {
+          setStatus("Этот браузер не поддерживает запись WebM.");
+          return;
+        }
+        const parts = [];
+        state.recorder = new MediaRecorder(state.stream, {
+          mimeType: mime,
+          videoBitsPerSecond: 1200000,
+        });
+        state.recorder.ondataavailable = (event) => {
+          if (event.data.size) parts.push(event.data);
+        };
+        state.recorder.onstop = () => {
+          state.blob = new Blob(parts, { type: mime });
+          const item = state.intents[state.index];
+          const signer = safe($("signer").value);
+          state.take++;
+          const file = `${state.session}_${item.id}_${signer}_${String(state.take).padStart(3, "0")}.webm`;
+          state.rows.push({
+            video: `videos/${file}`,
+            intentId: item.id,
+            signerId: signer,
+            split: $("split").value,
+            consentForTraining: true,
+            consentForPublicDisplay: false,
+            meaningReviewedBy: "",
+          });
+          const link = $("saveVideo");
+          link.href = URL.createObjectURL(state.blob);
+          link.download = file;
+          link.hidden = false;
+          $("record").disabled = false;
+          $("stopRecord").disabled = true;
+          $("next").disabled = true;
+          setStatus(
+            `Запись готова (${(state.blob.size / 1024 / 1024).toFixed(1)} МБ). Скачайте видео и положите его в папку videos/ рядом с manifest.json.`,
+          );
+        };
+        state.recorder.start();
+        $("record").disabled = true;
+        $("stopRecord").disabled = false;
+        setStatus("Идёт запись без звука. Покажите фразу целиком.");
+        setTimeout(() => {
+          if (state.recorder?.state === "recording") state.recorder.stop();
+        }, 12000);
+      };
+      $("stopRecord").onclick = () => {
+        if (state.recorder?.state === "recording") state.recorder.stop();
+      };
+      $("saveVideo").onclick = () => {
+        if (state.blob) {
+          state.rows[state.rows.length - 1].savedByUser = true;
+          state.currentSaved = true;
+          $("next").disabled = false;
+          setTimeout(() => URL.revokeObjectURL($("saveVideo").href), 30000);
+        }
+      };
+      $("next").onclick = () => {
+        if (!state.blob || !state.currentSaved) return;
+        state.blob = null;
+        state.currentSaved = false;
+        $("saveVideo").hidden = true;
+        state.index = (state.index + 1) % state.intents.length;
+        showIntent();
+        setStatus(
+          "Запись скачана и добавлена в список. Можно продолжить следующий круг, чтобы собрать ещё примеры.",
+        );
+      };
+      $("manifest").onclick = () => {
+        const missing = state.rows.filter((row) => !row.savedByUser).length;
+        if (!state.rows.length) {
+          setStatus("Пока нет записей.");
+          return;
+        }
+        const json = JSON.stringify(
+          state.rows.map(({ savedByUser, ...row }) => row),
+          null,
+          2,
+        );
+        download(
+          new Blob([json], { type: "application/json" }),
+          "manifest-draft.json",
+        );
+        setStatus(
+          `Скачан черновик на ${state.rows.length} записей. ${missing ? `Сначала сохраните ${missing} видео вручную.` : "Проверьте, что все видео скачаны."} Добавьте значения meaningReviewedBy только после независимой проверки.`,
+        );
+      };
+      window.addEventListener("beforeunload", () =>
+        state.stream?.getTracks().forEach((track) => track.stop()),
+      );
+      try {
+        const response = await fetch("/phrase-intents.json");
+        const catalog = await response.json();
+        state.intents = catalog.intents;
+        showIntent();
+        setStatus(
+          "Видео не отправляются автоматически. Сначала согласуйте участие и распределение людей по группам.",
+        );
+      } catch {
+        setStatus(
+          "Не удалось загрузить список заданий. Запустите локальный сервер из папки ml/krsl.",
+        );
+      }
+    </script>
+  </body>
+</html>

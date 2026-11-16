@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "language": "РЖЯ",
+  "scope": "closed-set semantic intent recognition; not free translation or grammar generation",
+  "status": "needs native signer review and consented recordings",
+  "intents": [
+    { "id": "greeting", "meaning": "Приветствие" },
+    { "id": "ask_name", "meaning": "Спросить имя собеседника" },
+    { "id": "introduce_name", "meaning": "Представиться и назвать своё имя" },
+    { "id": "thanks", "meaning": "Поблагодарить" },
+    {
+      "id": "ask_repeat",
+      "meaning": "Попросить повторить или показать медленнее"
+    },
+    { "id": "not_understand", "meaning": "Сообщить, что не понял(а)" },
+    { "id": "request_help", "meaning": "Попросить о помощи" },
+    { "id": "goodbye", "meaning": "Попрощаться" }
+  ]
+}
