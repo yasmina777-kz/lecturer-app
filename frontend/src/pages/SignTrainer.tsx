@@ -502,7 +502,7 @@ function AnimatedExercisePlayer({
           <div className="sign-avatar-stage">
             <Suspense fallback={<Loading />}>
               <Mentor
-                modelUrl="/avatars/hand-workshop/mira-rig.glb?v=denim-4"
+                modelUrl="/avatars/male/artyom.glb?v=1"
                 motionUrls={[`/avatars/mira-blender/${exercise.model}`]}
                 time={animationTime(time, isLetter)}
                 framing={isLetter ? "letter" : "sign"}

@@ -21,7 +21,7 @@ assert.deepEqual(v.parseVocab('not json'), { words: {}, lessons: {}, days: [] })
 const catalog = JSON.parse(await readFile(new URL('../public/research/rsl/words/catalog.json', import.meta.url), 'utf8'));
 const ids = new Set(catalog.map((w) => w.id));
 assert.equal(ids.size, catalog.length, 'unique word ids');
-const model = JSON.parse(await readFile(new URL('../public/models/rsl/words-v2-classifier.json', import.meta.url), 'utf8'));
+const model = JSON.parse(await readFile(new URL('../public/models/rsl/words-v3-classifier.json', import.meta.url), 'utf8'));
 for (const w of catalog) {
   await readFile(new URL('../public' + w.video, import.meta.url));
   assert.ok(model.courseLabels.includes(w.label), `camera check available for ${w.label}`);

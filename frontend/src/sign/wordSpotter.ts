@@ -5,12 +5,13 @@ import { clipFeatures, MOTION_GATE, motionExtent, resampleFrames, type HandPoint
  * Every HOP_MS the latest WINDOWS_MS of hand landmarks are classified among
  * the course vocabulary; a word is emitted after VOTES consecutive confident
  * hops, only for windows where the wrists actually moved. Twin of
- * ml/rsl/spotting_eval.py + spotting_gate_eval.py (held-out test signers).
+ * ml/rsl/spotting_eval.py + spotting_gate_eval.py + spotting_v3_eval.py
+ * (held-out test signers; v3 with a trained "no sign" class).
  */
 export const SPOT = {
   hopMs: 300,
   windowsMs: [800, 1200, 1600],
-  threshold: 0.4,
+  threshold: 0.3,
   margin: 0.2,
   votes: 2,
   restMs: 400,
@@ -43,7 +44,9 @@ export class WordSpotter {
     this.emitted = "";
     this.lastHop = -Infinity;
   }
-  push(model: SeqModel, now: number, hands: HandPoint[][], width: number, height: number): Spotted | null {
+  /** model: the fast single model scanned every hop; confirm: optional
+   * ensemble members that must agree before a word is emitted. */
+  push(model: SeqModel, now: number, hands: HandPoint[][], width: number, height: number, confirm: SeqModel[] = []): Spotted | null {
     const visible = hands.filter((h) => h.length === 21);
     if (visible.length) this.lastSeen = now;
     else if (now - this.lastSeen >= SPOT.restMs) {
@@ -62,7 +65,7 @@ export class WordSpotter {
     const recent = clipFeatures(this.frames.filter((f) => f.at > now - 1000).map((f) => f.hands), width, height);
     if (recent && motionExtent(recent) >= MOTION_GATE) this.movingUntil = now + 1000;
     const course = model.courseLabels?.length ? new Set(model.courseLabels) : null;
-    let best: { label: string; p: number; margin: number; letter: boolean } | null = null;
+    let best: { label: string; p: number; margin: number; letter: boolean; window: number[][] } | null = null;
     for (const ms of SPOT.windowsMs) {
       const win = this.frames.filter((f) => f.at > now - ms).map((f) => f.hands);
       const feats = clipFeatures(win, width, height);
@@ -71,6 +74,7 @@ export class WordSpotter {
       const p = runSeqModel(model, resampleFrames(feats, model.frames ?? 32));
       if (!p) continue;
       const top = p.indexOf(Math.max(...p));
+      if (model.labels[top] === "__none__") continue; // v3: rest, half sign or transition
       const letter = LETTER.test(model.labels[top]); // Slovo also contains alphabet signs
       const ranked = p
         .map((v, i) => ({ label: model.labels[i], v }))
@@ -78,7 +82,7 @@ export class WordSpotter {
       const sum = ranked.reduce((a, r) => a + r.v, 0) || 1;
       ranked.sort((a, b) => b.v - a.v);
       const p1 = ranked[0].v / sum, p2 = (ranked[1]?.v ?? 0) / sum;
-      if (!best || p1 > best.p) best = { label: ranked[0].label, p: p1, margin: p1 - p2, letter };
+      if (!best || p1 > best.p) best = { label: ranked[0].label, p: p1, margin: p1 - p2, letter, window: resampleFrames(feats, model.frames ?? 32) };
     }
     // The full 1,000-sign model thinks this is an alphabet sign: leave it to
     // the letter recognizer instead of forcing a course word.
@@ -90,6 +94,23 @@ export class WordSpotter {
     this.votes = best.label === this.candidate ? this.votes + 1 : 1;
     this.candidate = best.label;
     if (this.votes < SPOT.votes || best.label === this.emitted) return null;
+    if (confirm.length) {
+      // Ensemble check on the winning window: all members averaged must agree.
+      const outs = confirm.map((m) => runSeqModel(m, best!.window)).filter((o): o is number[] => !!o);
+      if (outs.length) {
+        const avg = outs[0].map((_, i) => outs.reduce((a, o) => a + o[i], 0) / outs.length);
+        const allowed = course ?? new Set(model.labels);
+        let topLabel = "", topP = -1;
+        avg.forEach((v, i) => {
+          const l = model.labels[i];
+          if (l !== "__none__" && allowed.has(l) && v > topP) { topP = v; topLabel = l; }
+        });
+        if (topLabel !== best.label) {
+          this.votes = 0;
+          return null;
+        }
+      }
+    }
     this.emitted = best.label;
     return { label: best.label, confidence: best.p, fingerspelling: best.letter };
   }

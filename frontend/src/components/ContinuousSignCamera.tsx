@@ -98,7 +98,7 @@ export function ContinuousSignCamera() {
         const points = hands.filter((h) => h.length === 21).map((h) =>
           h.map((p) => ({ x: p.x, y: p.y, z: p.z ?? 0 })),
         ) as HandPoint[][];
-        const spotted = spotter.current.push(model.members[0], now, points, v.videoWidth, v.videoHeight);
+        const spotted = spotter.current.push(model.members[0], now, points, v.videoWidth, v.videoHeight, model.members);
         if (spotted && !(spotted.fingerspelling && modeRef.current === "auto")) {
           lastWordAt.current = now;
           addToken(spotted.label, "word");

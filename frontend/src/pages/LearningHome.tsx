@@ -29,12 +29,12 @@ export function LearningMentorPreview() {
         <img
           className="learning-hero-artwork"
           src="/images/learning/hero.png"
-          alt={at("Аватар-наставница AI Mentor", "AI Mentor avatar", "AI Mentor аватары")}
+          alt={at("Аватар-наставник AI Mentor", "AI Mentor avatar", "AI Mentor аватары")}
         />
       )}
       <Suspense fallback={null}>
         <Mentor
-          modelUrl="/avatars/hand-workshop/mira-rig.glb?v=denim-4"
+          modelUrl="/avatars/male/artyom.glb?v=1"
           motionUrls={["/avatars/mira-blender/mira-hello.glb"]}
           time={2.2}
           closeup={false}
@@ -44,7 +44,7 @@ export function LearningMentorPreview() {
         />
       </Suspense>
       <span className="learning-mentor-label">
-        {at("Аватар-наставница", "Avatar mentor", "Аватар тәлімгер")}
+        {at("Аватар-наставник", "Avatar mentor", "Аватар тәлімгер")}
       </span>
     </div>
   );
@@ -61,6 +61,53 @@ export function LearningHome() {
     : "/practice?exercise=a";
   return (
     <div className="sign-workspace learning-home">
+      <section className="learning-intro" aria-labelledby="learning-title">
+        <div className="learning-intro-copy">
+          <h1 id="learning-title">
+            {at(
+              "Изучайте\nрусский жестовый\nязык",
+              "Learn\nRussian Sign\nLanguage",
+              "Орыс\nым тілін\nүйреніңіз",
+            )}
+          </h1>
+          <p>
+            {at(
+              "Пошаговые уроки, интерактивные упражнения и ваш учебный помощник",
+              "Step-by-step lessons, interactive exercises and your learning companion",
+              "Қадамдық сабақтар, интерактивті жаттығулар және оқу көмекшіңіз",
+            )}
+          </p>
+          <div className="learning-intro-actions">
+            <Link className="button primary" to={nextLesson}>
+              {hasHistory
+                ? at(
+                    "Продолжить обучение",
+                    "Continue learning",
+                    "Оқуды жалғастыру",
+                  )
+                : at("Начать обучение", "Start learning", "Оқуды бастау")}
+              <ArrowRight size={18} />
+            </Link>
+            <Link className="learning-demo-link" to="/learn/getting-started">
+              <span>
+                <Play size={16} fill="currentColor" />
+              </span>
+              {at(
+                "Как это работает?",
+                "How does it work?",
+                "Бұл қалай жұмыс істейді?",
+              )}
+            </Link>
+          </div>
+        </div>
+        <div className="learning-intro-art">
+          <img
+            className="learning-hero-artwork"
+            src="/images/learning/hero.png"
+            alt={at("Изучайте русский жестовый язык", "Learn Russian Sign Language", "Орыс ым тілін үйреніңіз")}
+          />
+        </div>
+      </section>
       {hasHistory && (
         <section
           className="panel learning-progress"
@@ -114,53 +161,6 @@ export function LearningHome() {
           </p>
         </section>
       )}
-      <section className="learning-intro" aria-labelledby="learning-title">
-        <div className="learning-intro-copy">
-          <h1 id="learning-title">
-            {at(
-              "Изучайте\nрусский жестовый\nязык",
-              "Learn\nRussian Sign\nLanguage",
-              "Орыс\nым тілін\nүйреніңіз",
-            )}
-          </h1>
-          <p>
-            {at(
-              "Пошаговые уроки, интерактивные упражнения и ваш учебный помощник",
-              "Step-by-step lessons, interactive exercises and your learning companion",
-              "Қадамдық сабақтар, интерактивті жаттығулар және оқу көмекшіңіз",
-            )}
-          </p>
-          <div className="learning-intro-actions">
-            <Link className="button primary" to={nextLesson}>
-              {hasHistory
-                ? at(
-                    "Продолжить обучение",
-                    "Continue learning",
-                    "Оқуды жалғастыру",
-                  )
-                : at("Начать обучение", "Start learning", "Оқуды бастау")}
-              <ArrowRight size={18} />
-            </Link>
-            <Link className="learning-demo-link" to="/learn/getting-started">
-              <span>
-                <Play size={16} fill="currentColor" />
-              </span>
-              {at(
-                "Как это работает?",
-                "How does it work?",
-                "Бұл қалай жұмыс істейді?",
-              )}
-            </Link>
-          </div>
-        </div>
-        <div className="learning-intro-art">
-          <img
-            className="learning-hero-artwork"
-            src="/images/learning/hero.png"
-            alt={at("Изучайте русский жестовый язык", "Learn Russian Sign Language", "Орыс ым тілін үйреніңіз")}
-          />
-        </div>
-      </section>
       <section className="learning-path" aria-labelledby="learning-path-title">
         <div className="section-heading">
           <div>

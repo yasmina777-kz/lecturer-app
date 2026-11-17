@@ -150,7 +150,7 @@ export function GesturePreviewPage({
             {phrase}
           </div>
           <GestureMentor3D
-            modelUrl="/avatars/hand-workshop/mira-rig.glb?v=denim-4"
+            modelUrl="/avatars/male/artyom.glb?v=1"
             motionUrls={["/avatars/mira-blender/mira-signing-soft.glb"]}
             time={time}
             closeup={closeup}

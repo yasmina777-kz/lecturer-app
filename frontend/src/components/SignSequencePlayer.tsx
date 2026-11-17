@@ -22,7 +22,7 @@ const Mentor = lazy(() =>
 );
 export function SignSequencePlayer({
   plan,
-  modelUrl = "/avatars/hand-workshop/mira-rig.glb?v=denim-4",
+  modelUrl = "/avatars/male/artyom.glb?v=1",
   autoPlay = false,
   framing = "sign",
   note,

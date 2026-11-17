@@ -1,0 +1,37 @@
+{
+  "seeds": [
+    {
+      "top1All": 0.5204163330664532,
+      "top5All": 0.8150520416333067,
+      "courseTop1": 0.5941898772087452,
+      "courseTop3": 0.7921533393231507,
+      "noneOnRealSigns": 0.23765679210034693
+    },
+    {
+      "top1All": 0.5248198558847078,
+      "top5All": 0.8225246864157993,
+      "courseTop1": 0.5956873315363881,
+      "courseTop3": 0.8059299191374663,
+      "noneOnRealSigns": 0.27155057379236724
+    },
+    {
+      "top1All": 0.5252201761409128,
+      "top5All": 0.8275954096610622,
+      "courseTop1": 0.5992812219227314,
+      "courseTop3": 0.7987421383647799,
+      "noneOnRealSigns": 0.23258606885508407
+    }
+  ],
+  "spotting": [
+    "V3_DONE",
+    "",
+    "{\"model\": \"v2\", \"members\": 1, \"th\": 0.3, \"precision\": 0.667, \"recall\": 0.19, \"f1\": 0.296, \"restFalseWordsPer4s\": 0.0}",
+    "{\"model\": \"v2\", \"members\": 1, \"th\": 0.4, \"precision\": 0.744, \"recall\": 0.145, \"f1\": 0.243, \"restFalseWordsPer4s\": 0.0}",
+    "{\"model\": \"v2\", \"members\": 1, \"th\": 0.5, \"precision\": 0.838, \"recall\": 0.129, \"f1\": 0.224, \"restFalseWordsPer4s\": 0.0}",
+    "{\"model\": \"v3\", \"members\": 1, \"th\": 0.3, \"precision\": 0.908, \"recall\": 0.224, \"f1\": 0.36, \"restFalseWordsPer4s\": 0.0}",
+    "{\"model\": \"v3\", \"members\": 1, \"th\": 0.4, \"precision\": 0.9, \"recall\": 0.163, \"f1\": 0.276, \"restFalseWordsPer4s\": 0.0}",
+    "{\"model\": \"v3\", \"members\": 1, \"th\": 0.5, \"precision\": 0.927, \"recall\": 0.116, \"f1\": 0.206, \"restFalseWordsPer4s\": 0.0}",
+    "",
+    "[exited with code 0]"
+  ]
+}
