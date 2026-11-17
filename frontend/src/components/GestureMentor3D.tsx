@@ -13,6 +13,7 @@ import { at } from "../i18n/automation";
 import { loadAvatar } from "../sign/avatarModel";
 import { createMotionCache } from "../sign/motionCache";
 import { softenArmMotion } from "../sign/softenArmMotion";
+import { smoothSignMotion } from "../sign/smoothSignMotion";
 
 // Animation-only GLBs contain no character meshes. Each playback gets a clone
 // so its mixer cannot alter the saved clip used by another word or component.
@@ -331,7 +332,7 @@ export function GestureMentor3D({
             if (!alive) return;
             clips = [
               composeMotion(
-                urls.map((url) => studio ? softenArmMotion(sources.get(url)!) : sources.get(url)!),
+                urls.map((url) => studio ? softenArmMotion(sources.get(url)!) : smoothSignMotion(sources.get(url)!)),
                 undefined,
                 JSON.parse(trimKey),
               ),

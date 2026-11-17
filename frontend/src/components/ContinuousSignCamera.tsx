@@ -6,6 +6,7 @@ import { at } from "../i18n/automation";
 import type { HandPoint } from "../sign/wordFeatures";
 import { loadWordModel, recognizeWord, WordSegmenter, type WordModel } from "../sign/wordRecognizer";
 import { appendTranslation, WordSpotter } from "../sign/wordSpotter";
+import { composePhrase, replaceTail } from "../sign/phraseComposer";
 import {
   parseRecognitionHealth,
   parseRecognitionResult,
@@ -69,11 +70,22 @@ export function ContinuousSignCamera() {
       () => setWordStatus("Модель слов не загрузилась — распознаются только буквы."),
     );
   }, []);
+  const recentWords = useRef<{ label: string; at: number }[]>([]);
   const addToken = (token: string, kind: "word" | "letter") => {
     const now = performance.now();
     const join = kind === "letter" && lastToken.current.kind === "letter" && now - lastToken.current.at < 4000;
     lastToken.current = { kind, at: now };
-    setText((current) => appendTranslation(current, token, kind, join));
+    if (kind === "letter") recentWords.current = [];
+    else recentWords.current = [...recentWords.current, { label: token, at: now }].slice(-4);
+    const phrase = kind === "word" ? composePhrase(recentWords.current, now) : null;
+    setText((current) => {
+      const next = appendTranslation(current, token, kind, join);
+      return phrase ? replaceTail(next, phrase.words, phrase.text) : next;
+    });
+    if (phrase) {
+      recentWords.current = [];
+      setWordStatus(`Фраза: «${phrase.text}» (из жестов ${phrase.words.join(" + ")})`);
+    }
   };
   const letters = useLiveLetters(
     video,
@@ -119,7 +131,7 @@ export function ContinuousSignCamera() {
     "balanced",
     (label) => {
       if (modeRef.current === "words") return;
-      if (modeRef.current === "auto" && (spotter.current.busy || performance.now() - lastWordAt.current < 1200)) return;
+      if (modeRef.current === "auto" && (spotter.current.busy || spotter.current.moving(performance.now()) || performance.now() - lastWordAt.current < 1200)) return;
       if (/^[А-ЯЁ]$/u.test(label)) addToken(label, "letter");
     },
     50,
@@ -141,7 +153,7 @@ export function ContinuousSignCamera() {
     setChecking(true);
     setMessage(
       at(
-        "Подключаем модель фраз. Первый запуск может занять до минуты…",
+        "",
         "Connecting to the phrase model. First startup may take up to a minute…",
         "Сөйлем моделіне қосылудамыз. Алғашқы іске қосылу бір минутқа дейін созылуы мүмкін…",
       ),
@@ -168,11 +180,7 @@ export function ContinuousSignCamera() {
       healthRef.current = { ready: false, vocabulary: 0 };
       setHealth({ ready: false, vocabulary: 0 });
       setMessage(
-        at(
-          "Сервис фраз недоступен. Распознавание букв можно использовать отдельно.",
-          "Phrase service is unavailable. Letter recognition is still available.",
-          "Сөйлемдерді тану қызметі қолжетімсіз. Әріптерді тануды қолдана аласыз.",
-        ),
+        "",
       );
     } finally {
       clearTimeout(timeout);
@@ -634,9 +642,9 @@ export function ContinuousSignCamera() {
                       )
                     : wordStatus ||
                       at(
-                        "425 слов курса распознаются в браузере",
-                        "425 course words are recognized in the browser",
-                        "Курстың 425 сөзі браузерде танылады",
+                        "412 слов курса распознаются в браузере",
+                        "412 course words are recognized in the browser",
+                        "Курстың 412 сөзі браузерде танылады",
                       )}
               </span>
             </div>
@@ -644,60 +652,22 @@ export function ContinuousSignCamera() {
           <p role="status" aria-live="polite" className="krsl-status">
             {message}
           </p>
-          {result && (
-            <p className="recognition-privacy">
-              {at(
-                "Ориентиры найдены в кадрах:",
-                "Frames with landmarks:",
-                "Бағдарлар анықталған кадрлар:",
-              )}{" "}
-              левая кисть{" "}
-              {Math.round(
-                (result.tracking.leftHand ?? result.tracking.hands) * 100,
-              )}
-              % · правая кисть{" "}
-              {Math.round(
-                (result.tracking.rightHand ?? result.tracking.hands) * 100,
-              )}
-              % · {at("тело", "body", "дене")}{" "}
-              {Math.round(result.tracking.body * 100)}% ·{" "}
-              {at("лицо", "face", "бет")}{" "}
-              {Math.round(result.tracking.face * 100)}%.{" "}
-              {at(
-                "Это качество видимости, не точность перевода.",
-                "This measures visibility, not translation accuracy.",
-                "Бұл аударма дәлдігі емес, көріну сапасы.",
-              )}
-            </p>
-          )}
         </section>
         <aside className="panel recognition-captions">
           <div className="recognition-caption-heading">
             <h2>{at("Субтитры", "Captions", "Субтитрлер")}</h2>
             <span>{at("Черновик ИИ", "AI draft", "ЖИ нобайы")}</span>
           </div>
-          <p>
-            {at(
-              "Это черновик ИИ — исправьте его при необходимости.",
-              "Review the draft. Uncertain letters are not added; phrase recognition is experimental.",
-              "Әр көрсетілім жаңа жолға жазылады. Нәтижені тексеріп, қателерді түзетіңіз.",
-            )}
-          </p>
-          <label htmlFor="krsl-text">
+          <label htmlFor="krsl-text" className="sr-only">
             {at(
               "Результат камеры · буквы и фразы",
               "Camera output · letters and phrases",
               "Камера нәтижесі · әріптер мен сөйлемдер",
             )}
           </label>
-          {health?.ready && (
-            <p className="recognition-privacy">
-              {at("Серверная модель фраз тоже подключена.", "The server phrase model is connected too.", "Сервердегі сөйлем моделі де қосулы.")}
-            </p>
-          )}
-          <p className="recognition-privacy">
+          <p className="translator-tip">
             {at(
-              "Показывайте жесты подряд — короткая пауза повышает точность. Букву удерживайте около 2 секунд.",
+              "Показывайте жесты подряд. Букву держите 2 секунды.",
               "Sign continuously — a short pause improves accuracy. Hold a letter for about 2 seconds.",
               "Ымдарды қатарынан көрсетіңіз — қысқа үзіліс дәлдікті арттырады. Әріпті 2 секундтай ұстаңыз.",
             )}

@@ -109,9 +109,9 @@ export function WordPracticeCamera({ target }: { target: string }) {
         <h3>{at("Проверить себя", "Check yourself", "Өзіңізді тексеру")}: «{target}»</h3>
         <p>
           {at(
-            "Покажите жест целиком, затем опустите руки или замрите на секунду — ИИ сравнит его с образцом.",
-            "Sign the whole word, then lower your hands or hold still for a second — the AI compares it with the reference.",
-            "Ымды толық көрсетіп, қолды түсіріңіз немесе бір секунд тоқтаңыз — ЖИ үлгімен салыстырады.",
+            "Покажите жест и опустите руки.",
+            "Sign, then lower your hands.",
+            "Ымды көрсетіп, қолды түсіріңіз.",
           )}
         </p>
       </header>
@@ -168,13 +168,6 @@ export function WordPracticeCamera({ target }: { target: string }) {
           {at("Удачных попыток", "Successful attempts", "Сәтті әрекеттер")}: {correct} / {attempts.length}
         </p>
       )}
-      <p className="word-practice-note">
-        {at(
-          "Экспериментальная проверка по рукам (без мимики). Ответ ИИ — подсказка, а не оценка преподавателя.",
-          "Experimental hands-only check (no facial expression). The AI answer is a hint, not a teacher's assessment.",
-          "Тек қол бойынша тәжірибелік тексеру. ЖИ жауабы — кеңес қана.",
-        )}
-      </p>
     </section>
   );
 }

@@ -1,5 +1,5 @@
 import { loadSeqModel, runSeqModel, type SeqModel } from "./seqModel";
-import { clipFeatures, resampleFrames, type HandPoint } from "./wordFeatures";
+import { ATTEMPT_GATE, clipFeatures, motionExtent, resampleFrames, type HandPoint } from "./wordFeatures";
 import { normalizeSignText } from "./dictionary";
 
 /** Ensemble members (same architecture, different training seeds); the
@@ -69,6 +69,7 @@ export function recognizeWord(
 ): WordGuess | null {
   const features = clipFeatures(frames, width, height);
   if (!features || features.filter((f) => f[65] || f[131]).length < 5) return null;
+  if (motionExtent(features) < ATTEMPT_GATE) return null; // no real sign movement
   const window = resampleFrames(features, model.frames ?? 32);
   const members = "members" in model ? model.members : [model];
   const outputs = members.map((m) => runSeqModel(m, window));

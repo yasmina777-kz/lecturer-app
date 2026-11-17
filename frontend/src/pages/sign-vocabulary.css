@@ -305,3 +305,78 @@
 .vocab-card {
   grid-template-columns: 260px minmax(0, 1fr);
 }
+
+/* Compact layout */
+.vocab .page-heading h1 {
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+}
+.vocab-learn,
+.vocab-card {
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 20px;
+}
+.vocab-learn .vocab-video,
+.vocab-card .vocab-video {
+  max-height: 340px;
+}
+.vocab-card-side {
+  gap: 10px;
+}
+.vocab-card-side h2 {
+  font-size: 1.5rem;
+}
+.vocab-tips li {
+  padding: 7px 10px;
+  font-size: 0.9rem;
+}
+.vocab .vocab-chips button {
+  padding: 5px 10px;
+  font-size: 0.88rem;
+}
+.vocab-steps li {
+  padding: 4px 10px;
+  font-size: 0.85rem;
+}
+.vocab .vocab-nav .button {
+  min-height: 38px;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+}
+.vocab-choices button {
+  padding: 10px 12px;
+  font-size: 0.98rem;
+}
+.vocab-video-choices {
+  grid-template-columns: repeat(auto-fit, minmax(130px, 170px));
+}
+.vocab-video.small {
+  max-height: 220px;
+}
+@media (max-width: 720px) {
+  .vocab-learn,
+  .vocab-card {
+    grid-template-columns: 1fr;
+  }
+  .vocab-learn .vocab-video,
+  .vocab-card .vocab-video {
+    max-height: 300px;
+  }
+}
+.vocab-learn,
+.vocab-card {
+  grid-template-columns: 240px minmax(0, 1fr);
+}
+.vocab-learn-media,
+.vocab-card > .vocab-video {
+  min-width: 0;
+  max-width: 240px;
+}
+.vocab-controls {
+  flex-wrap: wrap;
+}
+.vocab-controls button {
+  min-width: 36px;
+  height: 30px;
+  padding: 0 8px;
+  font-size: 0.8rem;
+}

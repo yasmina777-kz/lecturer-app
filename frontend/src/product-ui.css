@@ -1968,6 +1968,12 @@
   & .dialogues-workspace .activity-avatar .sign-avatar-stage {
     background: var(--p-subtle);
     border-radius: 16px;
+    height: clamp(280px, 26vw, 380px);
+    min-height: 0;
+    max-width: 560px;
+  }
+  & .dialogues-workspace .activity-avatar .gesture-3d-stage {
+    min-height: 0;
   }
 }
 @media (max-width: 1050px) {

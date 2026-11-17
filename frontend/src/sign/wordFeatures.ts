@@ -88,3 +88,27 @@ export function resampleFrames(features: number[][], frames = 32): number[][] {
   const n = features.length;
   return Array.from({ length: frames }, (_, i) => features[Math.floor((i * (n - 1)) / (frames - 1))]);
 }
+
+/** Smoothed wrist extent in palm lengths (max over both hands): twin of
+ * motion() in ml/rsl/spotting_gate_eval.py. Resting/jittering hands stay
+ * near 0; real signs move well above MOTION_GATE. */
+export const MOTION_GATE = 0.6;
+/** Lower gate for a single deliberate attempt (drops <1% of real signs). */
+export const ATTEMPT_GATE = 0.3;
+export function motionExtent(features: number[][]): number {
+  let best = 0;
+  for (const b of [0, 66]) {
+    const pts = features.filter((f) => f[b + 65] > 0).map((f) => [f[b + 63], f[b + 64]]);
+    if (pts.length < 3) continue;
+    for (let axis = 0; axis < 2; axis++) {
+      let lo = Infinity, hi = -Infinity;
+      for (let i = 1; i < pts.length - 1; i++) {
+        const v = (pts[i - 1][axis] + pts[i][axis] + pts[i + 1][axis]) / 3;
+        lo = Math.min(lo, v);
+        hi = Math.max(hi, v);
+      }
+      best = Math.max(best, hi - lo);
+    }
+  }
+  return best;
+}

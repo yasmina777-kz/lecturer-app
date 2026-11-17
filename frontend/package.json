@@ -27,7 +27,8 @@
     "test:avatar-model": "node scripts/check-avatar-model.mjs",
     "test:platform-audit": "node scripts/check-platform-audit.mjs",
     "test:seq-models": "node scripts/check-seq-models.mjs",
-    "test:vocab": "node scripts/check-vocab.mjs"
+    "test:vocab": "node scripts/check-vocab.mjs",
+    "test:smooth-motion": "node scripts/check-smooth-motion.mjs"
   },
   "dependencies": {
     "@huggingface/transformers": "^4.3.2",

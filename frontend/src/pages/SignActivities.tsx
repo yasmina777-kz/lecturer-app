@@ -732,7 +732,6 @@ function DialogueSession({
         </>
       )}
       {error && <p role="alert">{error}</p>}
-      <p className="sign-save-note">{localNote()}</p>
     </>
   );
 }
@@ -873,7 +872,6 @@ export function SignUnderstandingPage() {
         </>
       )}
       {progress.error && <p role="alert">{progress.error}</p>}
-      <p className="sign-save-note">{localNote()}</p>
     </div>
   );
 }

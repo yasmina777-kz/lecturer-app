@@ -1925,28 +1925,6 @@
     "signerId": "0211b488644476dd0fec656ccb9b74fc"
   },
   {
-    "id": "word-f145d0b3",
-    "label": "хорошо",
-    "category": "Общение",
-    "video": "/research/rsl/words/f145d0b3-9cb3-4289-862d-7711a3b8522d.mp4",
-    "poster": "/research/rsl/words/f145d0b3-9cb3-4289-862d-7711a3b8522d.jpg",
-    "source": "https://github.com/ai-forever/slovo",
-    "dataset": "Slovo",
-    "attachmentId": "f145d0b3-9cb3-4289-862d-7711a3b8522d",
-    "signerId": "185bd3a81d9d618518d10abebf0d17a8"
-  },
-  {
-    "id": "word-27560a7e",
-    "label": "Плохо",
-    "category": "Общение",
-    "video": "/research/rsl/words/27560a7e-93ce-4bb1-9c52-02c37e5617ce.mp4",
-    "poster": "/research/rsl/words/27560a7e-93ce-4bb1-9c52-02c37e5617ce.jpg",
-    "source": "https://github.com/ai-forever/slovo",
-    "dataset": "Slovo",
-    "attachmentId": "27560a7e-93ce-4bb1-9c52-02c37e5617ce",
-    "signerId": "95af8e702c909eee7145c6dc1a3d756b"
-  },
-  {
     "id": "word-96de1ed6",
     "label": "конечно",
     "category": "Общение",
@@ -2112,50 +2090,6 @@
     "signerId": "185bd3a81d9d618518d10abebf0d17a8"
   },
   {
-    "id": "word-757017e6",
-    "label": "мне",
-    "category": "Общение",
-    "video": "/research/rsl/words/757017e6-9d2c-496a-8662-5360abc75b48.mp4",
-    "poster": "/research/rsl/words/757017e6-9d2c-496a-8662-5360abc75b48.jpg",
-    "source": "https://github.com/ai-forever/slovo",
-    "dataset": "Slovo",
-    "attachmentId": "757017e6-9d2c-496a-8662-5360abc75b48",
-    "signerId": "46dd04a1caa75ed3082b573cb5a3ad26"
-  },
-  {
-    "id": "word-7081a42b",
-    "label": "тебе",
-    "category": "Общение",
-    "video": "/research/rsl/words/7081a42b-ecee-4af1-aaa3-594239bcded6.mp4",
-    "poster": "/research/rsl/words/7081a42b-ecee-4af1-aaa3-594239bcded6.jpg",
-    "source": "https://github.com/ai-forever/slovo",
-    "dataset": "Slovo",
-    "attachmentId": "7081a42b-ecee-4af1-aaa3-594239bcded6",
-    "signerId": "46dd04a1caa75ed3082b573cb5a3ad26"
-  },
-  {
-    "id": "word-8cdbc7b2",
-    "label": "нас",
-    "category": "Общение",
-    "video": "/research/rsl/words/8cdbc7b2-7438-4d39-aabf-e861b1afec28.mp4",
-    "poster": "/research/rsl/words/8cdbc7b2-7438-4d39-aabf-e861b1afec28.jpg",
-    "source": "https://github.com/ai-forever/slovo",
-    "dataset": "Slovo",
-    "attachmentId": "8cdbc7b2-7438-4d39-aabf-e861b1afec28",
-    "signerId": "46dd04a1caa75ed3082b573cb5a3ad26"
-  },
-  {
-    "id": "word-d53777a7",
-    "label": "вас",
-    "category": "Общение",
-    "video": "/research/rsl/words/d53777a7-6d9d-4990-85a0-6349f85a5c0a.mp4",
-    "poster": "/research/rsl/words/d53777a7-6d9d-4990-85a0-6349f85a5c0a.jpg",
-    "source": "https://github.com/ai-forever/slovo",
-    "dataset": "Slovo",
-    "attachmentId": "d53777a7-6d9d-4990-85a0-6349f85a5c0a",
-    "signerId": "6fefb7617d77222efd121f4a2d6a79d6"
-  },
-  {
     "id": "word-0f5f98dc",
     "label": "ваш",
     "category": "Общение",
@@ -2167,17 +2101,6 @@
     "signerId": "c05c242d2524d1de48c68f1667cd7b6b"
   },
   {
-    "id": "word-14047337",
-    "label": "их",
-    "category": "Общение",
-    "video": "/research/rsl/words/14047337-8e88-4f5a-9eab-21af5aa18912.mp4",
-    "poster": "/research/rsl/words/14047337-8e88-4f5a-9eab-21af5aa18912.jpg",
-    "source": "https://github.com/ai-forever/slovo",
-    "dataset": "Slovo",
-    "attachmentId": "14047337-8e88-4f5a-9eab-21af5aa18912",
-    "signerId": "0211b488644476dd0fec656ccb9b74fc"
-  },
-  {
     "id": "word-74f5354f",
     "label": "все",
     "category": "Общение",
@@ -2187,28 +2110,6 @@
     "dataset": "Slovo",
     "attachmentId": "74f5354f-e5d1-4290-980e-fc2efb59221a",
     "signerId": "185bd3a81d9d618518d10abebf0d17a8"
-  },
-  {
-    "id": "word-db27a5e7",
-    "label": "этот",
-    "category": "Общение",
-    "video": "/research/rsl/words/db27a5e7-8ee0-4fd5-ac42-23f8383d1304.mp4",
-    "poster": "/research/rsl/words/db27a5e7-8ee0-4fd5-ac42-23f8383d1304.jpg",
-    "source": "https://github.com/ai-forever/slovo",
-    "dataset": "Slovo",
-    "attachmentId": "db27a5e7-8ee0-4fd5-ac42-23f8383d1304",
-    "signerId": "b07a773bcb10b4f14f33d2b0e8ec58ba"
-  },
-  {
-    "id": "word-392233b9",
-    "label": "другой",
-    "category": "Общение",
-    "video": "/research/rsl/words/392233b9-9a8e-4dfc-a45a-4d09a0f71fab.mp4",
-    "poster": "/research/rsl/words/392233b9-9a8e-4dfc-a45a-4d09a0f71fab.jpg",
-    "source": "https://github.com/ai-forever/slovo",
-    "dataset": "Slovo",
-    "attachmentId": "392233b9-9a8e-4dfc-a45a-4d09a0f71fab",
-    "signerId": "0211b488644476dd0fec656ccb9b74fc"
   },
   {
     "id": "word-0487fc78",
@@ -2605,17 +2506,6 @@
     "dataset": "Slovo",
     "attachmentId": "ec294f54-c755-483c-a8e2-317760e4c263",
     "signerId": "db573f94204e56e0cf3fc2ea000e5bdc"
-  },
-  {
-    "id": "word-ec9706ad",
-    "label": "мыть",
-    "category": "Каждый день",
-    "video": "/research/rsl/words/ec9706ad-26e1-413d-a380-a4c281d59114.mp4",
-    "poster": "/research/rsl/words/ec9706ad-26e1-413d-a380-a4c281d59114.jpg",
-    "source": "https://github.com/ai-forever/slovo",
-    "dataset": "Slovo",
-    "attachmentId": "ec9706ad-26e1-413d-a380-a4c281d59114",
-    "signerId": "95af8e702c909eee7145c6dc1a3d756b"
   },
   {
     "id": "word-951d91ec",
@@ -3564,17 +3454,6 @@
     "signerId": "0211b488644476dd0fec656ccb9b74fc"
   },
   {
-    "id": "word-20aa075b",
-    "label": "часы",
-    "category": "Время",
-    "video": "/research/rsl/words/20aa075b-c1e2-41c0-9109-060ab8775d0d.mp4",
-    "poster": "/research/rsl/words/20aa075b-c1e2-41c0-9109-060ab8775d0d.jpg",
-    "source": "https://github.com/ai-forever/slovo",
-    "dataset": "Slovo",
-    "attachmentId": "20aa075b-c1e2-41c0-9109-060ab8775d0d",
-    "signerId": "db573f94204e56e0cf3fc2ea000e5bdc"
-  },
-  {
     "id": "word-8c43dff8",
     "label": "выходные",
     "category": "Время",
@@ -4068,28 +3947,6 @@
     "dataset": "Slovo",
     "attachmentId": "c754b69c-b39d-4e3f-90fb-2b1ff088a547",
     "signerId": "2d84da20c251acaeb3186642fcb04f2e"
-  },
-  {
-    "id": "word-de1c2edd",
-    "label": "лучше",
-    "category": "Описание",
-    "video": "/research/rsl/words/de1c2edd-8c3d-4f5d-9ad5-9371652fe159.mp4",
-    "poster": "/research/rsl/words/de1c2edd-8c3d-4f5d-9ad5-9371652fe159.jpg",
-    "source": "https://github.com/ai-forever/slovo",
-    "dataset": "Slovo",
-    "attachmentId": "de1c2edd-8c3d-4f5d-9ad5-9371652fe159",
-    "signerId": "46dd04a1caa75ed3082b573cb5a3ad26"
-  },
-  {
-    "id": "word-7d8fa928",
-    "label": "лучший",
-    "category": "Описание",
-    "video": "/research/rsl/words/7d8fa928-db2c-46bb-ab15-d5e9b86aa1c6.mp4",
-    "poster": "/research/rsl/words/7d8fa928-db2c-46bb-ab15-d5e9b86aa1c6.jpg",
-    "source": "https://github.com/ai-forever/slovo",
-    "dataset": "Slovo",
-    "attachmentId": "7d8fa928-db2c-46bb-ab15-d5e9b86aa1c6",
-    "signerId": "0211b488644476dd0fec656ccb9b74fc"
   },
   {
     "id": "word-e7add06c",

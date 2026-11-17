@@ -107,9 +107,9 @@ export function SignCourseCatalog() {
             </Link>{" "}
             <Link className="button secondary" to="/vocab">
               {at(
-                "Учить слова по темам (425 жестов)",
-                "Learn words by topic (425 signs)",
-                "Тақырып бойынша сөздер (425 ым)",
+                "Учить слова по темам (412 жестов)",
+                "Learn words by topic (412 signs)",
+                "Тақырып бойынша сөздер (412 ым)",
               )}{" "}
               <ArrowRight size={18} />
             </Link>

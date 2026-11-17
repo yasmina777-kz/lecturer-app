@@ -154,7 +154,11 @@ export function LearningHome() {
           </div>
         </div>
         <div className="learning-intro-art">
-          <LearningMentorPreview />
+          <img
+            className="learning-hero-artwork"
+            src="/images/learning/hero.png"
+            alt={at("Изучайте русский жестовый язык", "Learn Russian Sign Language", "Орыс ым тілін үйреніңіз")}
+          />
         </div>
       </section>
       <section className="learning-path" aria-labelledby="learning-path-title">
