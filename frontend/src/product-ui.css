@@ -347,6 +347,36 @@
     height: 100%;
     pointer-events: none;
   }
+  & .learning-mentor-preview {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: auto;
+  }
+  & .learning-mentor-preview > .learning-hero-artwork {
+    position: absolute;
+    inset: 0;
+    transition: opacity 180ms ease;
+  }
+  & .learning-mentor-preview > .gesture-3d {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  & .learning-mentor-label {
+    position: absolute;
+    right: 20px;
+    bottom: 16px;
+    border-radius: 999px;
+    padding: 8px 12px;
+    color: var(--p-text);
+    background: color-mix(in srgb, var(--p-surface) 86%, transparent);
+    border: 1px solid var(--p-line);
+    font-size: 12px;
+    font-weight: 650;
+    pointer-events: none;
+  }
   & .learning-hero-artwork,
   & .learning-level-hand {
     overflow: hidden;
@@ -357,6 +387,14 @@
     height: 100%;
     object-fit: contain;
     object-position: right bottom;
+  }
+  & .gesture-3d-error img {
+    display: block;
+    width: min(180px, 55%);
+    height: auto;
+    max-height: 190px;
+    object-fit: contain;
+    margin: 0 auto 8px;
   }
   & .learning-intro-actions {
     display: flex;

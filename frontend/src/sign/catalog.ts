@@ -4,8 +4,14 @@ export type LessonId =
   | "alphabet-intro"
   | "dictionary-words"
   | "watch-sign"
+  | "numbers-time"
+  | "topic-vocabulary"
+  | "questions-negation"
+  | "face-body-space"
+  | "phrase-building"
   | "context-in-video"
   | "dialogue-practice"
+  | "review-and-recall"
   | "name-demo";
 export type Lesson = {
   id: LessonId;
@@ -22,8 +28,14 @@ export const lessonIds: LessonId[] = [
   "alphabet-intro",
   "dictionary-words",
   "watch-sign",
+  "numbers-time",
+  "topic-vocabulary",
+  "questions-negation",
+  "face-body-space",
+  "phrase-building",
   "context-in-video",
   "dialogue-practice",
+  "review-and-recall",
   "name-demo",
 ];
 export function lessons(): Lesson[] {
@@ -97,6 +109,56 @@ export function lessons(): Lesson[] {
       activity: "/text-to-sign?tab=dictionary",
     },
     {
+      id: "numbers-time",
+      level: 2,
+      kind: "reading",
+      title: at("Числа, время и даты", "Numbers, time and dates", "Сандар, уақыт және күндер"),
+      description: at("Учитесь замечать числовые жесты и закрепляйте их по видео в словаре.", "Learn to notice number signs and practise them with dictionary videos.", "Сан ымдарын байқап, сөздік бейнелерімен бекітіңіз."),
+      minutes: 7,
+      image: "/illustrations/sign-phrases/phrase-02.jpg",
+      activity: "/text-to-sign?tab=dictionary",
+    },
+    {
+      id: "topic-vocabulary",
+      level: 2,
+      kind: "reading",
+      title: at("Слова по темам", "Vocabulary by topic", "Тақырыптық сөздік"),
+      description: at("Собирайте лексику небольшими группами: люди, повседневные дела, учёба и город.", "Build vocabulary in small groups: people, daily life, study and the city.", "Сөздерді шағын топтармен үйреніңіз: адамдар, күнделікті өмір, оқу және қала."),
+      minutes: 8,
+      image: "/illustrations/sign-phrases/phrase-03.jpg",
+      activity: "/text-to-sign?tab=dictionary",
+    },
+    {
+      id: "questions-negation",
+      level: 3,
+      kind: "reading",
+      title: at("Вопросы и отрицание", "Questions and negation", "Сұрақтар мен болымсыздық"),
+      description: at("Учитесь замечать смысл вопроса и отрицания в целом высказывании, включая движения лица и головы.", "Learn to notice questions and negation across a whole utterance, including facial and head movement.", "Сұрақ пен болымсыздық мағынасын тұтас айтылымнан, соның ішінде бет пен бас қимылынан байқаңыз."),
+      minutes: 7,
+      image: "/illustrations/sign-phrases/phrase-04.jpg",
+      activity: "/understanding",
+    },
+    {
+      id: "face-body-space",
+      level: 3,
+      kind: "reading",
+      title: at("Мимика, тело и пространство", "Face, body and signing space", "Бет әлпеті, дене және кеңістік"),
+      description: at("Наблюдайте за выражением лица, корпусом, направлением и местом жеста.", "Observe facial expression, torso, direction and signing location.", "Бет әлпетін, денені, бағыт пен ымның кеңістіктегі орнын бақылаңыз."),
+      minutes: 7,
+      image: "/illustrations/sign-phrases/phrase-05.jpg",
+      activity: "/understanding",
+    },
+    {
+      id: "phrase-building",
+      level: 3,
+      kind: "reading",
+      title: at("Смысл и построение высказывания", "Meaning and building an utterance", "Мағына және айтылым құрау"),
+      description: at("Переходите от отдельных жестов к пониманию короткого сообщения в контексте.", "Move from individual signs to understanding a short message in context.", "Жеке ымдардан контекстегі қысқа хабарламаны түсінуге өтіңіз."),
+      minutes: 8,
+      image: "/illustrations/sign-phrases/phrase-01.jpg",
+      activity: "/understanding",
+    },
+    {
       id: "context-in-video" as LessonId,
       level: 3,
       kind: "reading",
@@ -131,6 +193,16 @@ export function lessons(): Lesson[] {
       minutes: 8,
       image: "/illustrations/sign-phrases/phrase-05.jpg",
       activity: "/dialogues",
+    },
+    {
+      id: "review-and-recall",
+      level: 3,
+      kind: "reading",
+      title: at("Повторение и проверка понимания", "Review and comprehension check", "Қайталау және түсінуді тексеру"),
+      description: at("Повторяйте знакомые слова, проверяйте понимание видео и возвращайтесь к трудным примерам.", "Review familiar signs, check video comprehension and revisit difficult examples.", "Таныс ымдарды қайталап, бейнені түсінуді тексеріп, қиын мысалдарға қайта оралыңыз."),
+      minutes: 6,
+      image: "/illustrations/sign-phrases/phrase-03.jpg",
+      activity: "/understanding#review",
     },
     {
       id: "name-demo" as LessonId,
@@ -464,6 +536,75 @@ export function reading(id: LessonId) {
         "Дұрыс. Нақтылау болжамсыз сөйлесуді жалғастыруға көмектеседі.",
       ),
     };
+  const addedModules: Partial<Record<LessonId, ReturnType<typeof buildReading>>> = {
+    "numbers-time": buildReading(
+      [
+        [at("Сначала распознавайте", "Recognize first", "Алдымен таныңыз"), at("Начните с различения числовых жестов на видео. Смотрите весь пример, затем повторяйте его и сверяйте значение со словарём.", "Start by distinguishing number signs in video. Watch the full example, practise it, then check its meaning in the dictionary.", "Алдымен бейнеден сан ымдарын ажыратыңыз. Мысалды толық көріп, қайталап, мағынасын сөздіктен тексеріңіз.")],
+        [at("Связывайте с ситуацией", "Use the situation", "Жағдаймен байланыстырыңыз"), at("Для времени и дат важен контекст: одна и та же тема может встречаться в разных сообщениях. Не угадывайте значение только по одному движению.", "Time and dates depend on context: the same topic can appear in different messages. Do not guess from one movement alone.", "Уақыт пен күндер контекстке байланысты: бір тақырып әртүрлі хабарламада кездесуі мүмкін. Бір қимылға қарап қана болжамаңыз.")],
+        [at("Закрепляйте небольшими наборами", "Review in small sets", "Шағын топпен бекітіңіз"), at("Выберите несколько примеров, проверьте себя в видеоупражнении и вернитесь к ним позже.", "Choose a few examples, check yourself in the video activity and return to them later.", "Бірнеше мысал таңдап, бейне жаттығуда өзіңізді тексеріп, кейін қайта оралыңыз.")],
+      ],
+      at("Что помогает понять числовой жест?", "What helps you understand a number sign?", "Сан ымын түсінуге не көмектеседі?"),
+      [at("Посмотреть полный пример и учесть контекст", "Watch the full example and use context", "Толық мысалды көріп, контексті ескеру"), at("Угадать только по одному кадру", "Guess from one frame", "Бір кадрға қарап болжау")],
+      0,
+      at("Верно: смотрите весь пример и соотносите его с ситуацией.", "Correct: watch the whole example and relate it to the situation.", "Дұрыс: мысалды толық көріп, жағдаймен байланыстырыңыз."),
+    ),
+    "topic-vocabulary": buildReading(
+      [
+        [at("Выберите одну тему", "Choose one topic", "Бір тақырып таңдаңыз"), at("Учите лексику небольшими группами и переходите к следующей теме после повторения. Так проще замечать значения и возвращаться к забытым словам.", "Study vocabulary in small groups and move to the next topic after reviewing. This makes meanings easier to notice and forgotten words easier to revisit.", "Сөздерді шағын топпен үйреніп, қайталаған соң келесі тақырыпқа өтіңіз. Осылай мағынаны байқап, ұмытқан сөзге қайта оралу оңай.")],
+        [at("Сверяйтесь с видео", "Use video references", "Бейне үлгілерін қараңыз"), at("Откройте словарь, посмотрите жест целиком и проверьте подпись. Видео человека — основной образец для наблюдения; пробную анимацию аватара сравнивайте с ним.", "Open the dictionary, watch the whole sign and check its label. Use the human video as your primary reference; compare the trial avatar animation with it.", "Сөздікті ашып, ымды толық көріп, атауын тексеріңіз. Негізгі үлгі ретінде адам бейнесін қолданыңыз; аватар анимациясын сонымен салыстырыңыз.")],
+        [at("Активно вспоминайте", "Recall actively", "Белсенді еске түсіріңіз"), at("Закройте подпись, назовите значение, затем откройте её и проверьте себя. Отметьте сложные слова для повторения.", "Hide the label, recall the meaning, then reveal it and check yourself. Save difficult words for review.", "Атауын жауып, мағынасын еске түсіріңіз, кейін ашып тексеріңіз. Қиын сөздерді қайталауға белгілеңіз.")],
+      ],
+      at("Как лучше учить тематические слова?", "How should you learn themed vocabulary?", "Тақырыптық сөздерді қалай үйренген дұрыс?"),
+      [at("Маленькими группами, с просмотром видео и повторением", "In small groups with video and review", "Бейне көріп, шағын топтармен қайталау"), at("Только читать подписи без видео", "Read labels without watching", "Бейнені көрмей, тек атауларды оқу")],
+      0,
+      at("Верно: сочетайте видео, вспоминание значения и повторение.", "Correct: combine video, recall and review.", "Дұрыс: бейне, мағынаны еске түсіру және қайталауды біріктіріңіз."),
+    ),
+    "questions-negation": buildReading(
+      [
+        [at("Смотрите на всё высказывание", "Watch the whole utterance", "Айтылымды тұтас бақылаңыз"), at("Вопрос или отрицание могут передаваться не одним знаком. Следите за последовательностью жестов, лицом и движениями головы.", "A question or negation may involve more than one sign. Follow the sequence, facial expression and head movement.", "Сұрақ немесе болымсыздық бір ыммен ғана берілмеуі мүмкін. Ымдар тізбегін, бет әлпеті мен бас қимылын бақылаңыз.")],
+        [at("Сравнивайте примеры", "Compare examples", "Мысалдарды салыстырыңыз"), at("При просмотре видео сначала определите общий смысл и ситуацию. Затем пересмотрите фрагмент и отметьте, какие сигналы помогли понять вопрос или отрицание.", "When watching a clip, first identify its general meaning and situation. Replay it and notice what helped you identify a question or negation.", "Бейнені көргенде алдымен жалпы мағынасы мен жағдайын анықтаңыз. Кейін қайта көріп, сұрақ не болымсыздықты түсінуге не көмектескенін байқаңыз.")],
+        [at("Не переносите правила русского письма напрямую", "Do not map written Russian directly", "Орысша жазу ережесін тікелей көшірмеңіз"), at("РЖЯ имеет собственные способы выражения смысла. Для конкретных форм и примеров сверяйтесь с видео и материалами преподавателя.", "RSL has its own ways of expressing meaning. Use video and teacher materials for specific forms and examples.", "Орыс ым тілінің мағынаны берудің өз тәсілдері бар. Нақты үлгілер үшін бейне мен оқытушы материалдарын қолданыңыз.")],
+      ],
+      at("На что обращать внимание, распознавая вопрос?", "What should you observe when identifying a question?", "Сұрақты анықтағанда нені бақылау керек?"),
+      [at("На всё сообщение, включая лицо и движения головы", "The whole message, including face and head", "Бет пен бас қимылын қоса, тұтас хабарламаға"), at("Только на форму пальцев", "Only finger shape", "Тек саусақ пішініне")],
+      0,
+      at("Верно: учитывайте последовательность и невербальные сигналы.", "Correct: consider the sequence and non-manual signals.", "Дұрыс: тізбек пен қол емес сигналдарды ескеріңіз."),
+    ),
+    "face-body-space": buildReading(
+      [
+        [at("Лицо — часть сообщения", "The face is part of the message", "Бет әлпеті хабарламаның бөлігі"), at("При просмотре отмечайте выражение лица и движения головы вместе с руками. Они могут менять или уточнять смысл высказывания.", "Notice facial expression and head movement alongside the hands. They can shape or clarify an utterance.", "Қолмен бірге бет әлпеті мен бас қимылын байқаңыз. Олар айтылым мағынасын нақтылауы мүмкін.")],
+        [at("Следите за корпусом", "Watch the torso", "Денені бақылаңыз"), at("Положение и движение корпуса также участвуют в визуальной речи. Сравнивайте начало и конец фрагмента, не обрезая жест.", "Torso position and movement also contribute to visual communication. Compare the start and end of a clip without cropping the sign.", "Дене қалпы мен қимылы да визуалды қарым-қатынасқа қатысады. Ымды қиып алмай, бейненің басы мен соңын салыстырыңыз.")],
+        [at("Замечайте пространство", "Notice signing space", "Ым кеңістігін байқаңыз"), at("Запоминайте, где и в каком направлении выполняется движение. В упражнениях смотрите видео целиком и не сводите наблюдение к пальцам.", "Notice where a movement happens and which direction it takes. Watch the whole clip rather than focusing only on fingers.", "Қимылдың қай жерде және қай бағытта орындалатынын есте сақтаңыз. Жаттығуда бейнені толық көріп, тек саусаққа назар аудармаңыз.")],
+      ],
+      at("Что важно наблюдать кроме кистей?", "What should you observe besides the hands?", "Қолдан басқа нені бақылау маңызды?"),
+      [at("Лицо, корпус, направление и место движения", "Face, torso, direction and movement location", "Бет, дене, бағыт және қимыл орны"), at("Только кончики пальцев", "Only fingertips", "Тек саусақ ұштары")],
+      0,
+      at("Верно: смысл передаётся всем визуальным высказыванием.", "Correct: meaning is carried by the full visual utterance.", "Дұрыс: мағына тұтас визуалды айтылым арқылы беріледі."),
+    ),
+    "phrase-building": buildReading(
+      [
+        [at("От слов к сообщению", "From signs to a message", "Ымдардан хабарламаға"), at("Отдельные словарные жесты помогают учить лексику. Чтобы понять фразу, смотрите на последовательность, ситуацию и то, как участники взаимодействуют.", "Individual dictionary signs build vocabulary. To understand a phrase, consider sequence, situation and how participants interact.", "Жеке сөздік ымдары сөздік қорды үйретеді. Фразаны түсіну үшін тізбекке, жағдайға және қатысушылардың байланысына қараңыз.")],
+        [at("Не переводите слово за словом", "Avoid word-for-word mapping", "Сөзбе-сөз аударма жасамаңыз"), at("Сопоставляйте общий смысл сообщения, а не только порядок русских слов. Изучайте готовые примеры и сверяйтесь с преподавательскими материалами.", "Match the overall meaning, not just the order of Russian words. Study complete examples and use teacher materials for reference.", "Орыс сөздерінің ретіне ғана емес, хабарламаның жалпы мағынасына назар аударыңыз. Дайын мысалдар мен оқытушы материалдарын пайдаланыңыз.")],
+        [at("Проверяйте понимание", "Check comprehension", "Түсінуді тексеріңіз"), at("Посмотрите видео без подсказки, сформулируйте общий смысл и затем ответьте на вопрос по фрагменту.", "Watch a clip without a hint, describe its general meaning, then answer a question about it.", "Бейнені кеңессіз көріп, жалпы мағынасын айтып, кейін үзінді туралы сұраққа жауап беріңіз.")],
+      ],
+      at("Что помогает перейти от слов к пониманию фразы?", "What helps you move from signs to understanding a phrase?", "Ымдардан фразаны түсінуге не көмектеседі?"),
+      [at("Смотреть на последовательность и ситуацию целиком", "Consider the sequence and situation as a whole", "Тізбек пен жағдайды тұтас қарастыру"), at("Переводить каждое русское слово отдельно", "Translate each Russian word separately", "Әр орыс сөзін бөлек аудару")],
+      0,
+      at("Верно: понимание строится по целому сообщению и контексту.", "Correct: comprehension uses the whole message and context.", "Дұрыс: түсіну тұтас хабарлама мен контекстке сүйенеді."),
+    ),
+    "review-and-recall": buildReading(
+      [
+        [at("Вспоминайте до подсказки", "Recall before the hint", "Кеңеске дейін еске түсіріңіз"), at("Сначала попробуйте назвать значение сами, потом откройте подпись или повторно посмотрите видео.", "Try to recall the meaning first, then reveal the label or replay the video.", "Алдымен мағынасын еске түсіріп, кейін атауын ашыңыз немесе бейнені қайта көріңіз.")],
+        [at("Возвращайтесь к трудному", "Return to difficult items", "Қиын материалға қайта оралыңыз"), at("Повторяйте сложные примеры через время и чередуйте знакомые слова с новыми. Проверка фиксирует учебный прогресс, а не уровень владения языком.", "Review difficult examples later and alternate familiar signs with new ones. Progress marks track study activity, not language proficiency.", "Қиын мысалдарға кейін қайта оралып, таныс және жаңа ымдарды алмастырыңыз. Прогресс белгісі оқу барысын тіркейді, тіл деңгейін емес.")],
+        [at("Используйте разные упражнения", "Use varied activities", "Әртүрлі жаттығу қолданыңыз"), at("Сочетайте просмотр словарного видео, выбор значения и диалоговые ситуации. После каждого блока отметьте, что стоит повторить.", "Combine dictionary videos, meaning checks and dialogue scenarios. After each set, note what you want to review.", "Сөздік бейнесін, мағына тексеруді және диалог жағдайларын біріктіріңіз. Әр бөлімнен кейін нені қайталау керегін белгілеңіз.")],
+      ],
+      at("Как лучше повторять изученное?", "What is a good way to review?", "Үйренгенді қалай қайталаған дұрыс?"),
+      [at("Сначала вспоминать, затем проверять и возвращаться позже", "Recall first, check, then revisit later", "Алдымен еске түсіріп, тексеріп, кейін қайта оралу"), at("Один раз посмотреть и больше не повторять", "Watch once and never review", "Бір рет көріп, қайталамау")],
+      0,
+      at("Верно: активное вспоминание и возврат к примерам помогают повторению.", "Correct: active recall and revisiting examples support review.", "Дұрыс: белсенді еске түсіру мен мысалдарға қайта оралу қайталауға көмектеседі."),
+    ),
+  };
+  if (addedModules[id]) return addedModules[id]!;
   return {
     blocks: [
       [
@@ -519,4 +660,14 @@ export function reading(id: LessonId) {
       "Дұрыс. Кідіріс, қарқын және ракурс қимылды көруге көмектеседі.",
     ),
   };
+}
+
+function buildReading(
+  blocks: [string, string][],
+  question: string,
+  options: string[],
+  correct: number,
+  explanation: string,
+) {
+  return { blocks, question, options, correct, explanation };
 }

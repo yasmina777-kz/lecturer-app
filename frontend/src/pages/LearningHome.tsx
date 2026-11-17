@@ -1,3 +1,4 @@
+import { lazy, Suspense, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
@@ -14,6 +15,40 @@ import { useSignProgress } from "../sign/useProgress";
 import { useActivityProgress } from "../sign/useActivities";
 import { reviewItems } from "../sign/activities";
 import { lessonIds } from "../sign/catalog";
+import type { GestureAngle } from "../components/GestureMentor3D";
+const Mentor = lazy(() =>
+  import("../components/GestureMentor3D").then((m) => ({ default: m.GestureMentor3D })),
+);
+
+function LearningMentorPreview() {
+  const [ready, setReady] = useState(false);
+  const [angle] = useState<GestureAngle>("front");
+  return (
+    <div className="learning-mentor-preview">
+      {!ready && (
+        <img
+          className="learning-hero-artwork"
+          src="/images/learning/hero.png"
+          alt={at("Аватар-наставница AI Mentor", "AI Mentor avatar", "AI Mentor аватары")}
+        />
+      )}
+      <Suspense fallback={null}>
+        <Mentor
+          modelUrl="/avatars/hand-workshop/mira-rig.glb?v=denim-4"
+          motionUrls={["/avatars/mira-blender/mira-hello.glb"]}
+          time={2.2}
+          closeup={false}
+          angle={angle}
+          resetToken={0}
+          onReadyChange={setReady}
+        />
+      </Suspense>
+      <span className="learning-mentor-label">
+        {at("Аватар-наставница", "Avatar mentor", "Аватар тәлімгер")}
+      </span>
+    </div>
+  );
+}
 
 export function LearningHome() {
   const { progress } = useSignProgress();
@@ -118,12 +153,8 @@ export function LearningHome() {
             </Link>
           </div>
         </div>
-        <div className="learning-intro-art" aria-hidden="true">
-          <img
-            className="learning-hero-artwork"
-            src="/images/learning/hero.png"
-            alt=""
-          />
+        <div className="learning-intro-art">
+          <LearningMentorPreview />
         </div>
       </section>
       <section className="learning-path" aria-labelledby="learning-path-title">

@@ -340,10 +340,11 @@ export function GestureMentor3D({
         } catch {
           if (alive) {
             setLoading(false);
-            setError(true);
-            readyCallback.current?.(false);
+            // Keep the rig visible if an optional animation file is offline.
+            // A missing motion should not make the whole avatar disappear.
+            setError(false);
+            readyCallback.current?.(true);
           }
-          return;
         }
         if (!alive) return;
         clipDuration = Math.max(0, ...clips.map((clip) => clip.duration));
@@ -433,6 +434,7 @@ export function GestureMentor3D({
       )}
       {error && (
         <div className="gesture-3d-error" role="alert">
+          <img src="/images/avatars/mira-portrait-v3.png" alt="" />
           {at(
             "Не удалось загрузить 3D-модель. Обновите страницу и проверьте поддержку WebGL.",
             "The 3D model could not load. Refresh and check WebGL support.",
