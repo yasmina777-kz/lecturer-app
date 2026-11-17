@@ -1918,6 +1918,15 @@
     box-shadow: none;
     color: var(--p-text);
   }
+  & .vocab .vocab-tips li {
+    background: var(--p-subtle);
+    color: var(--p-text);
+  }
+  & .vocab .vocab-controls button[aria-pressed="true"],
+  & .vocab .vocab-chips button[aria-pressed="true"] {
+    border-color: var(--p-blue);
+    color: var(--p-blue);
+  }
   & .vocab .panel :is(h2, button:not(.button)) {
     color: var(--p-text);
   }

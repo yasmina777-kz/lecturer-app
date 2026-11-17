@@ -3,9 +3,9 @@ import { Camera, Square, Upload, RefreshCw, Copy } from "lucide-react";
 import { PhraseCapture, type Landmark } from "../sign/phraseCapture";
 import { useLiveLetters } from "../sign/useLiveLetters";
 import { at } from "../i18n/automation";
-import type { SeqModel } from "../sign/seqModel";
 import type { HandPoint } from "../sign/wordFeatures";
-import { loadWordModel, recognizeWord, WordSegmenter } from "../sign/wordRecognizer";
+import { loadWordModel, recognizeWord, WordSegmenter, type WordModel } from "../sign/wordRecognizer";
+import { appendTranslation, WordSpotter } from "../sign/wordSpotter";
 import {
   parseRecognitionHealth,
   parseRecognitionResult,
@@ -19,19 +19,6 @@ const MAX_CLIP_BYTES = import.meta.env.PROD
   ? 4 * 1024 * 1024
   : 25 * 1024 * 1024;
 const MAX_CLIP_MB = import.meta.env.PROD ? 4 : 25;
-
-function appendLetterToTranscript(text: string, label: string) {
-  if (!/^[А-ЯЁ]$/u.test(label)) return text;
-  const lines = text.split("\n");
-  const lastLine = lines[lines.length - 1] ?? "";
-  if (lastLine.startsWith("Буквы: ")) lines[lines.length - 1] += label;
-  else lines.push(`Буквы: ${label}`);
-  return lines.join("\n").slice(0, 4000);
-}
-
-function appendWordToTranscript(text: string, word: string) {
-  return `${text}${text ? "\n" : ""}Жест: ${word}`.slice(0, 4000);
-}
 
 function appendPhraseToTranscript(text: string, phrase: string) {
   const clean = phrase.trim();
@@ -64,37 +51,61 @@ export function ContinuousSignCamera() {
   const [hasPreview, setHasPreview] = useState(false);
   const video = useRef<HTMLVideoElement>(null);
   const overlay = useRef<HTMLCanvasElement>(null);
-  const wordModel = useRef<SeqModel | null>(null);
-  const words = useRef(new WordSegmenter());
+  const wordModel = useRef<WordModel | null>(null);
+  const spotter = useRef(new WordSpotter());
+  const segmenter = useRef(new WordSegmenter(600));
+  const lastSpotted = useRef({ label: "", at: -Infinity });
   const [wordStatus, setWordStatus] = useState("");
+  const [mode, setMode] = useState<"auto" | "words" | "letters">("auto");
+  const modeRef = useRef(mode);
+  modeRef.current = mode;
+  // Translator bookkeeping: join consecutive fingerspelled letters into one
+  // word; mute letters right after/while a word sign is being recognized.
+  const lastToken = useRef<{ kind: "word" | "letter"; at: number }>({ kind: "word", at: 0 });
+  const lastWordAt = useRef(-Infinity);
   useEffect(() => {
     loadWordModel().then(
       (m) => (wordModel.current = m),
       () => setWordStatus("Модель слов не загрузилась — распознаются только буквы."),
     );
   }, []);
+  const addToken = (token: string, kind: "word" | "letter") => {
+    const now = performance.now();
+    const join = kind === "letter" && lastToken.current.kind === "letter" && now - lastToken.current.at < 4000;
+    lastToken.current = { kind, at: now };
+    setText((current) => appendTranslation(current, token, kind, join));
+  };
   const letters = useLiveLetters(
     video,
     overlay,
     phase === "recording",
     (now: number, hands: Landmark[][], pose: Landmark[]) => {
-      // Local isolated-word model: runs in the browser, independent of the
-      // phrase server. One pause-bounded clip = one sign guess.
+      // Continuous local word spotting (browser only, no pauses needed).
       const model = wordModel.current, v = video.current;
-      if (model && v && !hasPreview) {
+      if (model && v && !hasPreview && modeRef.current !== "letters") {
         const points = hands.filter((h) => h.length === 21).map((h) =>
           h.map((p) => ({ x: p.x, y: p.y, z: p.z ?? 0 })),
         ) as HandPoint[][];
-        const clip = words.current.push(now, points);
+        const spotted = spotter.current.push(model.members[0], now, points, v.videoWidth, v.videoHeight);
+        if (spotted && !(spotted.fingerspelling && modeRef.current === "auto")) {
+          lastWordAt.current = now;
+          addToken(spotted.label, "word");
+          setWordStatus(`Жест «${spotted.label}» · ${Math.round(spotted.confidence * 100)}%`);
+        }
+        // A short pause closes the sign: classify the whole clip with the
+        // 3-model ensemble (more accurate) unless the spotter already added it.
+        const clip = segmenter.current.push(now, points);
+        if (spotted) lastSpotted.current = { label: spotted.label, at: now };
         if (clip) {
           const guess = recognizeWord(model, clip, v.videoWidth, v.videoHeight);
-          if (guess?.accepted) {
-            setText((current) => appendWordToTranscript(current, guess.label));
+          const duplicate = guess && lastSpotted.current.label === guess.label && now - lastSpotted.current.at < 4000;
+          if (guess?.accepted && !duplicate) {
+            lastWordAt.current = now;
+            lastSpotted.current = { label: guess.label, at: now };
+            addToken(guess.label, "word");
             setWordStatus(`Жест «${guess.label}» · ${Math.round(guess.confidence * 100)}%`);
-          } else if (guess)
-            setWordStatus(
-              `Жест неясен. Возможно: ${guess.top.slice(0, 3).map((t) => t.label).join(", ")}`,
-            );
+          } else if (guess && !guess.accepted && !duplicate)
+            setWordStatus(`Жест неясен. Возможно: ${guess.top.slice(0, 3).map((t) => t.label).join(", ")}`);
         }
       }
       if (recorder.current?.state !== "recording") return;
@@ -106,7 +117,11 @@ export function ContinuousSignCamera() {
       if (decision === "empty") finishCapture.current?.(false);
     },
     "balanced",
-    (label) => setText((current) => appendLetterToTranscript(current, label)),
+    (label) => {
+      if (modeRef.current === "words") return;
+      if (modeRef.current === "auto" && (spotter.current.busy || performance.now() - lastWordAt.current < 1200)) return;
+      if (/^[А-ЯЁ]$/u.test(label)) addToken(label, "letter");
+    },
     50,
   );
   const stream = useRef<MediaStream | null>(null);
@@ -401,7 +416,7 @@ export function ContinuousSignCamera() {
       setMessage(
         healthRef.current?.ready
           ? ""
-          : "Фразы пока недоступны. Готовность модели букв показана ниже.",
+          : "",
       );
       setPhase("recording");
       if (healthRef.current?.ready && window.MediaRecorder) record(id);
@@ -572,20 +587,6 @@ export function ContinuousSignCamera() {
               Фраза закончена — распознать
             </button>
           )}
-          {!health?.ready && (
-            <button
-              className="button secondary"
-              onClick={check}
-              disabled={checking}
-            >
-              <RefreshCw size={16} />
-              {at(
-                "Проверить подключение",
-                "Retry connection",
-                "Қосылымды тексеру",
-              )}
-            </button>
-          )}
           <div className="recognition-live-status">
             <div>
               <strong>Тело и руки</strong>
@@ -615,7 +616,7 @@ export function ContinuousSignCamera() {
               )}
             </div>
             <div>
-              <strong>{at("Фразы", "Phrases", "Сөйлемдер")}</strong>
+              <strong>{at("Слова", "Words", "Сөздер")}</strong>
               <span>
                 {processing
                   ? at(
@@ -631,10 +632,11 @@ export function ContinuousSignCamera() {
                         "Finish after a pause · maximum 12 seconds",
                         "Үзілістен кейін аяқталады · ең көбі 12 секунд",
                       )
-                    : at(
-                        "Сервис не подключён",
-                        "Service offline",
-                        "Қызмет қосылмаған",
+                    : wordStatus ||
+                      at(
+                        "425 слов курса распознаются в браузере",
+                        "425 course words are recognized in the browser",
+                        "Курстың 425 сөзі браузерде танылады",
                       )}
               </span>
             </div>
@@ -676,7 +678,7 @@ export function ContinuousSignCamera() {
           </div>
           <p>
             {at(
-              "Проверьте черновик. Неясные буквы не добавляются; распознавание фраз пока экспериментальное.",
+              "Это черновик ИИ — исправьте его при необходимости.",
               "Review the draft. Uncertain letters are not added; phrase recognition is experimental.",
               "Әр көрсетілім жаңа жолға жазылады. Нәтижені тексеріп, қателерді түзетіңіз.",
             )}
@@ -688,39 +690,29 @@ export function ContinuousSignCamera() {
               "Камера нәтижесі · әріптер мен сөйлемдер",
             )}
           </label>
+          {health?.ready && (
+            <p className="recognition-privacy">
+              {at("Серверная модель фраз тоже подключена.", "The server phrase model is connected too.", "Сервердегі сөйлем моделі де қосулы.")}
+            </p>
+          )}
           <p className="recognition-privacy">
-            {health?.ready
-              ? at(
-                  "Обе модели работают одновременно. Буквы и фразовые догадки добавляются сюда одним потоком и помечаются по типу.",
-                  "Both models run together. Letters and phrase guesses appear in this single stream, labeled by type.",
-                  "Екі модель қатар жұмыс істейді. Әріптер мен сөйлем болжамдары түрі белгіленіп, осы ортақ өріске қосылады.",
-                )
-              : at(
-                  "Работают локальные модели букв и отдельных жестов-слов (в браузере). Покажите жест и сделайте паузу — слово появится здесь. Серверный сервис фраз не подключён.",
-                  "Local letter and single-sign word models run in the browser. Sign, then pause — the word appears here. The phrase server is offline.",
-                  "Қазір әріп моделі жұмыс істейді. Сөйлем қызметі қосылмаған; қосылғанда оның нобайлары осында шығады.",
-                )}
+            {at(
+              "Показывайте жесты подряд — короткая пауза повышает точность. Букву удерживайте около 2 секунд.",
+              "Sign continuously — a short pause improves accuracy. Hold a letter for about 2 seconds.",
+              "Ымдарды қатарынан көрсетіңіз — қысқа үзіліс дәлдікті арттырады. Әріпті 2 секундтай ұстаңыз.",
+            )}
           </p>
-          {!health?.ready && (
-            <p role="status">
-              {health === null
-                ? at(
-                    "Проверяем доступность фраз…",
-                    "Checking phrase service…",
-                    "Сөйлемдерді тану тексерілуде…",
-                  )
-                : at(
-                    "Серверное распознавание связных фраз недоступно. Слова распознаются по одному: жест → пауза → жест.",
-                    "Server phrase recognition is unavailable. Words are recognized one at a time: sign → pause → sign.",
-                    "Сөйлемдерді тану қолжетімсіз: қызмет қосылмаған. Камера қазір тек әріптерді таниды.",
-                  )}
-            </p>
-          )}
-          {wordStatus && (
-            <p className="recognition-privacy" role="status">
-              {wordStatus}
-            </p>
-          )}
+          <div className="translator-mode" role="group" aria-label={at("Что распознавать", "What to recognize", "Не тану керек")}>
+            {([
+              ["auto", at("Авто", "Auto", "Авто")],
+              ["words", at("Слова", "Words", "Сөздер")],
+              ["letters", at("Буквы", "Letters", "Әріптер")],
+            ] as const).map(([id, label]) => (
+              <button key={id} type="button" aria-pressed={mode === id} onClick={() => setMode(id)}>
+                {label}
+              </button>
+            ))}
+          </div>
           <textarea
             id="krsl-text"
             rows={10}

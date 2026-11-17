@@ -234,3 +234,74 @@
 .vocab .panel button:not(.button) {
   color: var(--sw-ink);
 }
+.vocab-learn {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 720px) {
+  .vocab-learn {
+    grid-template-columns: 1fr;
+  }
+}
+.vocab-learn-media {
+  display: grid;
+  gap: 8px;
+}
+.vocab-learn .vocab-video {
+  max-height: 400px;
+}
+.vocab-video.mirrored {
+  transform: scaleX(-1);
+}
+.vocab-controls {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+.vocab-controls button {
+  font: inherit;
+  font-size: 0.85rem;
+  min-width: 40px;
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 99px;
+  border: 1px solid var(--sw-border, var(--line));
+  background: transparent;
+  color: inherit;
+  display: inline-grid;
+  place-items: center;
+  cursor: pointer;
+}
+.vocab-controls button[aria-pressed="true"] {
+  border-color: currentColor;
+  font-weight: 700;
+}
+.vocab-tips {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+.vocab-tips li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--sw-soft, var(--cream));
+}
+.vocab-chips button.seen {
+  opacity: 0.65;
+}
+.vocab-learn-camera {
+  grid-column: 1 / -1;
+}
+.vocab-card .vocab-video {
+  max-height: 400px;
+}
+.vocab-card {
+  grid-template-columns: 260px minmax(0, 1fr);
+}

@@ -1,0 +1,33 @@
+{
+  "selectedOnTuneSigners": {
+    "windows": [
+      16,
+      24,
+      32
+    ],
+    "hop": 6,
+    "threshold": 0.3,
+    "margin": 0.2,
+    "votes_needed": 2
+  },
+  "tune": {
+    "precision": 0.721,
+    "recall": 0.305,
+    "f1": 0.428,
+    "emitted": 247,
+    "words": 584
+  },
+  "test": {
+    "precision": 0.676,
+    "recall": 0.247,
+    "f1": 0.362,
+    "emitted": 272,
+    "words": 744
+  },
+  "note": "validation signers were in final training, so tuning uses half of the test signers; the other half is scored",
+  "streams": {
+    "validation": 150,
+    "test": 200
+  },
+  "scope": "concatenated isolated Slovo clips of one signer (course vocabulary), 20 fps; not natural continuous signing"
+}

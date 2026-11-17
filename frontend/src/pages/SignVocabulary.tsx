@@ -6,9 +6,12 @@ import {
   Check,
   Flame,
   GraduationCap,
+  Camera,
+  FlipHorizontal2,
+  Hand,
+  Move,
   RotateCcw,
   Repeat,
-  Turtle,
   X,
 } from "lucide-react";
 import { at } from "../i18n/automation";
@@ -45,22 +48,32 @@ function options(target: Word, pool: Word[], all: Word[]) {
   return shuffle([target, ...shuffle(same).slice(0, 3), ...shuffle(other)].slice(0, 4));
 }
 
-function SignVideo({ word, slow = false, small = false }: { word: Word; slow?: boolean; small?: boolean }) {
+function SignVideo({
+  word, rate = 1, mirror = false, small = false, replay = 0,
+}: { word: Word; rate?: number; mirror?: boolean; small?: boolean; replay?: number }) {
   const ref = useRef<HTMLVideoElement>(null);
   useEffect(() => {
-    if (ref.current) ref.current.playbackRate = slow ? 0.5 : 1;
-  }, [slow, word.video]);
+    if (ref.current) ref.current.playbackRate = rate;
+  }, [rate, word.video]);
+  useEffect(() => {
+    const v = ref.current;
+    if (v && replay) {
+      v.currentTime = 0;
+      void v.play().catch(() => {});
+    }
+  }, [replay]);
   return (
     <video
       ref={ref}
       key={word.video}
-      className={small ? "vocab-video small" : "vocab-video"}
+      className={`vocab-video${small ? " small" : ""}${mirror ? " mirrored" : ""}`}
       src={word.video}
       poster={word.poster}
       autoPlay
       loop
       muted
       playsInline
+      onLoadedMetadata={(e) => (e.currentTarget.playbackRate = rate)}
       aria-label={at("Видеообразец жеста", "Sign reference video", "Ым бейнеүлгісі")}
     />
   );
@@ -211,7 +224,10 @@ function Session({
 }) {
   const [step, setStep] = useState<Step>(review ? "recognize" : "learn");
   const [index, setIndex] = useState(0);
-  const [slow, setSlow] = useState(false);
+  const [rate, setRate] = useState(1);
+  const [mirror, setMirror] = useState(false);
+  const [replay, setReplay] = useState(0);
+  const [tryCamera, setTryCamera] = useState(false);
   const [picked, setPicked] = useState<string | null>(null);
   const [score, setScore] = useState({ right: 0, total: 0, missed: [] as Word[] });
   const [cameraWord, setCameraWord] = useState<Word | null>(null);
@@ -266,28 +282,59 @@ function Session({
         ))}
       </ol>
       {step === "learn" && current && (
-        <section className="panel vocab-card">
-          <SignVideo word={current} slow={slow} />
-          <div className="vocab-card-side">
-            <span className="eyebrow">{index + 1} / {words.length}</span>
-            <h2>{current.label}</h2>
-            <p>{at("Посмотрите жест несколько раз и повторите его руками перед собой.", "Watch the sign several times and copy it with your hands.", "Ымды бірнеше рет қарап, қолыңызбен қайталаңыз.")}</p>
-            <button className="button secondary" aria-pressed={slow} onClick={() => setSlow(!slow)}>
-              <Turtle size={18} />{slow ? at("Обычная скорость", "Normal speed", "Қалыпты жылдамдық") : at("Медленно ×0.5", "Slow ×0.5", "Баяу ×0.5")}
-            </button>
-            <div className="vocab-nav">
-              <button className="button secondary" disabled={!index} onClick={() => setIndex(index - 1)}><ArrowLeft size={18} /></button>
-              <button className="button primary" onClick={next}>
-                {index + 1 < words.length ? at("Следующий жест", "Next sign", "Келесі ым") : at("К проверке", "Start the quiz", "Тексеруге")}
-                <ArrowRight size={18} />
+        <section className="panel vocab-learn">
+          <div className="vocab-learn-media">
+            <SignVideo word={current} rate={rate} mirror={mirror} replay={replay} />
+            <div className="vocab-controls" role="group" aria-label={at("Управление видео", "Video controls", "Бейне басқару")}>
+              {[0.5, 0.75, 1].map((r) => (
+                <button key={r} aria-pressed={rate === r} onClick={() => setRate(r)}>{r === 1 ? "1×" : `${r}×`}</button>
+              ))}
+              <button aria-pressed={mirror} onClick={() => setMirror(!mirror)} title={at("Как в зеркале", "Mirror", "Айна")}>
+                <FlipHorizontal2 size={16} />
+              </button>
+              <button onClick={() => setReplay(replay + 1)} title={at("Сначала", "Replay", "Басынан")}>
+                <RotateCcw size={16} />
               </button>
             </div>
           </div>
+          <div className="vocab-card-side">
+            <span className="eyebrow">{current.category} · {index + 1} / {words.length}</span>
+            <h2>{current.label}</h2>
+            <ul className="vocab-tips">
+              <li><Hand size={16} />{at("Форма кисти: какие пальцы согнуты?", "Handshape: which fingers bend?", "Қол пішіні: қай саусақтар бүгілген?")}</li>
+              <li><Move size={16} />{at("Движение: куда и сколько раз?", "Movement: where and how many times?", "Қозғалыс: қайда және неше рет?")}</li>
+              <li><Repeat size={16} />{at("Повторите 3 раза вместе с видео", "Repeat 3 times with the video", "Бейнемен бірге 3 рет қайталаңыз")}</li>
+            </ul>
+            <div className="vocab-chips" aria-label={at("Слова урока", "Lesson words", "Сабақ сөздері")}>
+              {words.map((w, i) => (
+                <button key={w.id} aria-pressed={i === index} className={i < index ? "seen" : ""} onClick={() => { setIndex(i); setTryCamera(false); }}>
+                  {w.label}
+                </button>
+              ))}
+            </div>
+            <div className="vocab-nav">
+              <button className="button secondary" disabled={!index} onClick={() => { setIndex(index - 1); setTryCamera(false); }} aria-label={at("Назад", "Back", "Артқа")}><ArrowLeft size={18} /></button>
+              <button className="button primary" onClick={() => { setTryCamera(false); next(); }}>
+                {index + 1 < words.length ? at("Следующий жест", "Next sign", "Келесі ым") : at("К проверке", "Start the quiz", "Тексеруге")}
+                <ArrowRight size={18} />
+              </button>
+              <button className="button secondary" aria-pressed={tryCamera} onClick={() => setTryCamera(!tryCamera)}>
+                <Camera size={18} />{at("Попробовать с камерой", "Try with camera", "Камерамен көру")}
+              </button>
+            </div>
+          </div>
+          {tryCamera && (
+            <div className="vocab-learn-camera">
+              <Suspense fallback={<Loading />}>
+                <WordPracticeCamera key={current.id} target={current.label} />
+              </Suspense>
+            </div>
+          )}
         </section>
       )}
       {step === "recognize" && current && (
         <section className="panel vocab-card">
-          <SignVideo word={current} slow={slow} />
+          <SignVideo word={current} rate={rate} mirror={mirror} />
           <div className="vocab-card-side">
             <span className="eyebrow">{index + 1} / {quizList.length}</span>
             <h2>{at("Что означает этот жест?", "What does this sign mean?", "Бұл ым нені білдіреді?")}</h2>

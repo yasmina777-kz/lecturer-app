@@ -312,3 +312,26 @@
 .krsl-view + .button {
   margin-top: 16px;
 }
+
+.translator-mode {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 999px;
+  border: 1px solid var(--sw-border, var(--line));
+  margin: 4px 0 10px;
+}
+.translator-mode button {
+  font: inherit;
+  font-size: 0.88rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.translator-mode button[aria-pressed="true"] {
+  background: var(--p-blue, #2563eb);
+  color: #fff;
+}

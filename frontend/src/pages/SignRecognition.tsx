@@ -12,9 +12,9 @@ export function SignRecognitionPage() {
           <h1>{at("Жесты → текст", "Signs → text", "Ымдар → мәтін")}</h1>
           <p>
             {at(
-              "Включите одну камеру: распознавание букв и подключённая модель фраз работают параллельно, результат выводится в одном поле. Фразовый текст пока экспериментальный.",
-              "Use one camera: letter recognition and the connected phrase model run in parallel, with results in one field. Phrase text is still experimental.",
-              "Бір камераны қосыңыз: әріптер мен қосылған сөйлем моделі қатар жұмыс істеп, нәтиже бір өріске түседі. Сөйлем нәтижесі әзірге тәжірибелік.",
+              "Покажите жесты в камеру — ИИ переведёт их в текст. Слова и буквы распознаются автоматически, прямо в браузере.",
+              "Sign to the camera — the AI turns it into text. Words and letters are recognized automatically, right in the browser.",
+              "Камераға ым көрсетіңіз — ЖИ оны мәтінге аударады. Сөздер мен әріптер браузерде автоматты танылады.",
             )}
           </p>
         </div>
