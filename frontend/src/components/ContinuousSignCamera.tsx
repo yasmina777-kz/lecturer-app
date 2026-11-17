@@ -416,27 +416,6 @@ export function ContinuousSignCamera() {
       <div className="recognition-layout">
         <section className="panel krsl-camera">
           <h2>{at("Камера", "Camera", "Камера")}</h2>
-          <p className="recognition-privacy">
-            {at(
-              "Показывайте по одной букве и дождитесь результата. Новая модель чаще даёт ответ, но может ошибаться; распознанный текст можно исправить ниже.",
-              "Show one letter at a time and wait for the result. The new model responds more often but can make mistakes; edit the recognized text below.",
-              "Әріптерді бір-бірден көрсетіп, нәтижені күтіңіз. Жаңа модель жиірек жауап береді, бірақ қателесуі мүмкін; танылған мәтінді төменде түзете аласыз.",
-            )}
-          </p>
-          <p>
-            {at(
-              "Держите лицо, плечи, локти и обе кисти в кадре.",
-              "Keep your face, shoulders and both hands visible.",
-              "Бет, иық, шынтақ пен екі қол кадрда толық көрінсін.",
-            )}
-          </p>
-          <p className="recognition-privacy">
-            {at(
-              "Буквы распознаются на устройстве. Если сервис фраз подключён, видео фраз отправляется ему для обработки. Звук не записывается.",
-              "Letters are recognized on your device. When the phrase service is connected, phrase video is sent to it for processing. Audio is not recorded.",
-              "Әріптер құрылғыда танылады. Сөйлем қызметі қосылса, сөйлем бейнесі оған өңдеуге жіберіледі. Дыбыс жазылмайды.",
-            )}
-          </p>
           <div className="recognition-edit-tools">
             <button
               className="button primary"

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
+import type { HandLandmarkerResult } from "@mediapipe/tasks-vision";
 import { drawBodyOverlay } from "./bodyOverlay";
 import type { Landmark } from "./phraseCapture";
 import { drawHandOverlay } from "./handOverlay";
@@ -30,6 +31,10 @@ export function useLiveLetters(
   const [capturing, setCapturing] = useState(false);
   const captureTimer = useRef<ReturnType<typeof setTimeout>>();
   const worker = useRef<Worker>();
+  const lastOverlayHands = useRef<{
+    at: number;
+    result: HandLandmarkerResult;
+  } | null>(null);
   const busy = useRef(false);
   const session = useRef(0);
   const activeRef = useRef(active);
@@ -52,7 +57,7 @@ export function useLiveLetters(
       );
     };
     try {
-      w = new Worker("/models/rsl/letter-camera-worker.js?v=7");
+      w = new Worker("/models/rsl/letter-camera-worker.js?v=8");
     } catch {
       fail();
       return;
@@ -104,7 +109,21 @@ export function useLiveLetters(
       if (data.generation !== session.current || !activeRef.current) return;
       busy.current = false;
       if (video.current && canvas.current) {
-        drawHandOverlay(canvas.current, video.current, data.detected);
+        const now = performance.now();
+        let handOverlay = data.detected as HandLandmarkerResult;
+        if (handOverlay.landmarks.length) {
+          lastOverlayHands.current = { at: now, result: handOverlay };
+        } else if (
+          lastOverlayHands.current &&
+          now - lastOverlayHands.current.at <= 220
+        ) {
+          // Keep the visual guide steady across a single missed detector frame.
+          // Classification still uses only the current, unmodified landmarks.
+          handOverlay = lastOverlayHands.current.result;
+        } else {
+          lastOverlayHands.current = null;
+        }
+        drawHandOverlay(canvas.current, video.current, handOverlay);
         drawBodyOverlay(canvas.current, data.pose ?? []);
       }
       const body = (data.pose ?? []) as Landmark[];
@@ -163,6 +182,7 @@ export function useLiveLetters(
     setCapturing(false);
     setProgress(0);
     if (!active || !ready) {
+      lastOverlayHands.current = null;
       if (canvas.current)
         canvas.current
           .getContext("2d")

@@ -27,11 +27,42 @@ function finishLetter() {
   self.postMessage({type: "captured", generation, prediction});
 }
 let poseDetector: PoseLandmarker | undefined;
+let visionFiles: Awaited<ReturnType<typeof FilesetResolver.forVisionTasks>> | undefined;
+let poseRestarting = false;
+let poseRetryAt = -Infinity;
 let selectedSide = "";
 let poseAt = -Infinity;
 let lastPose: import("@mediapipe/tasks-vision").NormalizedLandmark[] = [];
 
 const live = new LiveLetterStream();
+
+function recoverPoseDetector(now: number) {
+  if (!visionFiles || poseRestarting || now < poseRetryAt) return;
+  poseRestarting = true;
+  poseRetryAt = now + 2000;
+  void PoseLandmarker.createFromOptions(visionFiles, {
+    baseOptions: {
+      modelAssetPath: `${self.location.origin}/models/rsl/pose_landmarker_lite.task`,
+      delegate: "CPU",
+    },
+    runningMode: "VIDEO",
+    numPoses: 1,
+    outputSegmentationMasks: false,
+  })
+    .then((next) => {
+      poseDetector = next;
+      poseAt = -Infinity;
+      lastPose = [];
+      self.postMessage({ type: "body-ready" });
+    })
+    .catch(() => {
+      self.postMessage({ type: "body-error" });
+    })
+    .finally(() => {
+      poseRestarting = false;
+    });
+}
+
 // Detection and classification run off the UI thread. Only one bitmap is in flight.
 self.onmessage = async ({ data }) => {
   if (data.type === "init") {
@@ -42,6 +73,7 @@ self.onmessage = async ({ data }) => {
         fetch(`${data.origin}/models/rsl/alphabet-cautious-classifier.json`),
         fetch(`${data.origin}/models/rsl/alphabet-v4-classifier.json`),
       ]);
+      visionFiles = files;
       if (!response.ok || !verifyResponse.ok || !balancedResponse.ok) throw new Error("model");
       model = await response.json();
       verifier = await verifyResponse.json();
@@ -101,6 +133,7 @@ self.onmessage = async ({ data }) => {
   } else if (data.type === "frame") {
     try {
       const detected = detector.detectForVideo(data.bitmap, data.now);
+      if (!poseDetector) recoverPoseDetector(data.now);
       try {
         // Framing feedback needs fewer updates than fingers. Do not block every
         // hand frame on a second neural network; discard stale poses on gaps.
@@ -117,13 +150,15 @@ self.onmessage = async ({ data }) => {
         }
       } catch {
         lastPose = [];
+        const failedPoseDetector = poseDetector;
+        poseDetector = undefined;
         try {
-          poseDetector?.close();
+          failedPoseDetector?.close();
         } catch {
           /* A failed WASM graph may already be closed. */
         }
-        poseDetector = undefined;
         self.postMessage({ type: "body-error" });
+        recoverPoseDetector(data.now);
       }
       // Use the trained largest-hand rule, but reset whenever its identity
       // changes: one sequence must never splice left and right hands.
