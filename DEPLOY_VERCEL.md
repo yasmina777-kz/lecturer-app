@@ -1,5 +1,20 @@
 # AI Mentor на Vercel
 
+## Модели v5/v2, словарь 425 жестов и тренажёр слов — 17 ноября 2026
+
+Код из ветки `claude/rsl-models-vocab` (`b8dc878`). Production:
+`dpl_6auJSDa6Yzsn4tSukYV3MQo7E1Po` (`ai-mentor-2efl47yth-yasmina11.vercel.app`),
+собран `npx vercel deploy --prod --skip-domain`, затем promote.
+Откат: `ai-mentor-1cnxt1205-yasmina11.vercel.app`.
+
+До promote проверены HTTP 200 для health, `/vocab`, моделей букв v5 и слов v2
+(размеры совпали с локальными), каталога 425 слов, нового и старого видео.
+После promote на публичном домене повторно: health, `/vocab`, модель, каталог.
+Новые видео и модели (~20 МБ) загружаются вместе с исходниками, а не через
+`cloud-assets.json`. GitHub-интеграция теперь создаёт Preview для веток, но
+переменные базы заданы только для Production, поэтому Preview отвечает 500
+при обращении к API — это не ошибка сборки.
+
 ## Woman 01 убран с платформы — 6 ноября 2026
 
 По просьбе пользователя опубликован `b88acd4`:
