@@ -24,6 +24,7 @@ import {
   ShieldCheck,
   X,
   ArrowUpRight,
+  Layers,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { Brand, ErrorMessage, messageOf } from "./UI";
@@ -44,6 +45,12 @@ export function Shell() {
       label: at("Обучение", "Learning", "Оқу"),
       icon: BookOpen,
       active: path.startsWith("/learn"),
+    },
+    {
+      to: "/vocab",
+      label: at("Тренажёр слов", "Word trainer", "Сөз жаттықтырғышы"),
+      icon: Layers,
+      active: path === "/vocab",
     },
     {
       to: "/text-to-sign",
@@ -80,6 +87,7 @@ export function Shell() {
     path.startsWith("/learn") ||
     path === "/admin" ||
     path === "/text-to-sign" ||
+    path === "/vocab" ||
     path === "/recognition" ||
     path === "/dialogues" ||
     path === "/understanding" ||

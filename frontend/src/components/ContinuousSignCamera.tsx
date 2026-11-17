@@ -3,6 +3,9 @@ import { Camera, Square, Upload, RefreshCw, Copy } from "lucide-react";
 import { PhraseCapture, type Landmark } from "../sign/phraseCapture";
 import { useLiveLetters } from "../sign/useLiveLetters";
 import { at } from "../i18n/automation";
+import type { SeqModel } from "../sign/seqModel";
+import type { HandPoint } from "../sign/wordFeatures";
+import { loadWordModel, recognizeWord, WordSegmenter } from "../sign/wordRecognizer";
 import {
   parseRecognitionHealth,
   parseRecognitionResult,
@@ -24,6 +27,10 @@ function appendLetterToTranscript(text: string, label: string) {
   if (lastLine.startsWith("Буквы: ")) lines[lines.length - 1] += label;
   else lines.push(`Буквы: ${label}`);
   return lines.join("\n").slice(0, 4000);
+}
+
+function appendWordToTranscript(text: string, word: string) {
+  return `${text}${text ? "\n" : ""}Жест: ${word}`.slice(0, 4000);
 }
 
 function appendPhraseToTranscript(text: string, phrase: string) {
@@ -57,11 +64,39 @@ export function ContinuousSignCamera() {
   const [hasPreview, setHasPreview] = useState(false);
   const video = useRef<HTMLVideoElement>(null);
   const overlay = useRef<HTMLCanvasElement>(null);
+  const wordModel = useRef<SeqModel | null>(null);
+  const words = useRef(new WordSegmenter());
+  const [wordStatus, setWordStatus] = useState("");
+  useEffect(() => {
+    loadWordModel().then(
+      (m) => (wordModel.current = m),
+      () => setWordStatus("Модель слов не загрузилась — распознаются только буквы."),
+    );
+  }, []);
   const letters = useLiveLetters(
     video,
     overlay,
     phase === "recording",
     (now: number, hands: Landmark[][], pose: Landmark[]) => {
+      // Local isolated-word model: runs in the browser, independent of the
+      // phrase server. One pause-bounded clip = one sign guess.
+      const model = wordModel.current, v = video.current;
+      if (model && v && !hasPreview) {
+        const points = hands.filter((h) => h.length === 21).map((h) =>
+          h.map((p) => ({ x: p.x, y: p.y, z: p.z ?? 0 })),
+        ) as HandPoint[][];
+        const clip = words.current.push(now, points);
+        if (clip) {
+          const guess = recognizeWord(model, clip, v.videoWidth, v.videoHeight);
+          if (guess?.accepted) {
+            setText((current) => appendWordToTranscript(current, guess.label));
+            setWordStatus(`Жест «${guess.label}» · ${Math.round(guess.confidence * 100)}%`);
+          } else if (guess)
+            setWordStatus(
+              `Жест неясен. Возможно: ${guess.top.slice(0, 3).map((t) => t.label).join(", ")}`,
+            );
+        }
+      }
       if (recorder.current?.state !== "recording") return;
       const decision = segment.current.sample(now, hands, pose);
       setCaptureStatus(decision);
@@ -72,6 +107,7 @@ export function ContinuousSignCamera() {
     },
     "balanced",
     (label) => setText((current) => appendLetterToTranscript(current, label)),
+    50,
   );
   const stream = useRef<MediaStream | null>(null);
   const recorder = useRef<MediaRecorder | null>(null);
@@ -660,8 +696,8 @@ export function ContinuousSignCamera() {
                   "Екі модель қатар жұмыс істейді. Әріптер мен сөйлем болжамдары түрі белгіленіп, осы ортақ өріске қосылады.",
                 )
               : at(
-                  "Сейчас работает модель букв. Фразовый сервис не подключён; когда он будет доступен, его черновики появятся здесь же.",
-                  "The letter model is active. The phrase service is offline; its drafts will appear here when connected.",
+                  "Работают локальные модели букв и отдельных жестов-слов (в браузере). Покажите жест и сделайте паузу — слово появится здесь. Серверный сервис фраз не подключён.",
+                  "Local letter and single-sign word models run in the browser. Sign, then pause — the word appears here. The phrase server is offline.",
                   "Қазір әріп моделі жұмыс істейді. Сөйлем қызметі қосылмаған; қосылғанда оның нобайлары осында шығады.",
                 )}
           </p>
@@ -674,10 +710,15 @@ export function ContinuousSignCamera() {
                     "Сөйлемдерді тану тексерілуде…",
                   )
                 : at(
-                    "Распознавание фраз недоступно: сервис не подключён. Сейчас камера распознаёт только буквы.",
-                    "Phrase recognition is unavailable: the service is offline. The camera currently recognizes letters only.",
+                    "Серверное распознавание связных фраз недоступно. Слова распознаются по одному: жест → пауза → жест.",
+                    "Server phrase recognition is unavailable. Words are recognized one at a time: sign → pause → sign.",
                     "Сөйлемдерді тану қолжетімсіз: қызмет қосылмаған. Камера қазір тек әріптерді таниды.",
                   )}
+            </p>
+          )}
+          {wordStatus && (
+            <p className="recognition-privacy" role="status">
+              {wordStatus}
             </p>
           )}
           <textarea

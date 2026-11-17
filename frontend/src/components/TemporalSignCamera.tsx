@@ -6,6 +6,7 @@ import type {
   HandLandmarkerResult,
 } from "@mediapipe/tasks-vision";
 import { validClassifier, type SignClassifier } from "../sign/recognition";
+import { loadSeqModel, type SeqModel } from "../sign/seqModel";
 import {
   temporalFrame,
   recognizeSequence,
@@ -51,7 +52,7 @@ function TemporalCameraSession({
     overlay = useRef<HTMLCanvasElement>(null),
     loading = useRef<Promise<void>>(),
     detector = useRef<HandLandmarker>(),
-    model = useRef<SignClassifier>(),
+    model = useRef<SignClassifier | SeqModel>(),
     stream = useRef<MediaStream>(),
     alive = useRef(true),
     generation = useRef(0),
@@ -118,13 +119,16 @@ function TemporalCameraSession({
         [
           import("@mediapipe/tasks-vision"),
           fetch(
-            `/models/rsl/alphabet${cautious ? "-cautious" : ""}-classifier.json`,
+            `/models/rsl/alphabet${cautious ? "-cautious" : "-v5"}-classifier.json`,
           ),
         ],
       );
       if (!response.ok) throw Error("model");
-      const m = await response.json();
-      if (!validClassifier(m) || m.mean.length !== 474) throw Error("model");
+      const raw = await response.json();
+      const m: SignClassifier | SeqModel | null = cautious
+        ? validClassifier(raw) && raw.mean.length === 474 ? raw : null
+        : loadSeqModel(raw);
+      if (!m) throw Error("model");
       const d = await HandLandmarker.createFromOptions(
         await FilesetResolver.forVisionTasks("/models/rsl/wasm"),
         {

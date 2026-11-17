@@ -1,0 +1,172 @@
+import { loadSeqModel, runSeqModel, type SeqModel } from "./seqModel";
+import { clipFeatures, resampleFrames, type HandPoint } from "./wordFeatures";
+import { normalizeSignText } from "./dictionary";
+
+/** Ensemble members (same architecture, different training seeds); the
+ * browser averages their probabilities. */
+export const WORD_MODEL_URLS = [
+  "/models/rsl/words-v2-classifier.json",
+  "/models/rsl/words-v2-seed7-classifier.json",
+  "/models/rsl/words-v2-seed1234-classifier.json",
+];
+export type WordModel = SeqModel & { members: SeqModel[] };
+let loading: Promise<WordModel> | null = null;
+
+/** Load once per page; a failed download can be retried. Missing extra
+ * ensemble members are tolerated; the first model is required. */
+export function loadWordModel(): Promise<WordModel> {
+  loading ??= Promise.all(
+    WORD_MODEL_URLS.map((url, i) =>
+      fetch(url)
+        .then((r) => {
+          if (!r.ok) throw new Error("word model");
+          return r.json();
+        })
+        .then((json) => {
+          const m = loadSeqModel(json);
+          if (!m) throw new Error("invalid word model");
+          return m;
+        })
+        .catch((error) => {
+          if (i === 0) throw error;
+          return null;
+        }),
+    ),
+  )
+    .then((list) => {
+      const members = list.filter((m): m is SeqModel => !!m);
+      const first = members[0];
+      if (members.some((m) => m.labels.join("\n") !== first.labels.join("\n")))
+        throw new Error("ensemble label mismatch");
+      return { ...first, members };
+    })
+    .catch((error) => {
+      loading = null;
+      throw error;
+    });
+  return loading;
+}
+
+export type WordGuess = {
+  label: string;
+  confidence: number;
+  accepted: boolean;
+  top: { label: string; p: number }[];
+};
+
+/** Course mode renormalizes over the course vocabulary (171 taught signs).
+ * Acceptance gate fixed before test evaluation; see ml/rsl/course_mode_eval.py. */
+export const COURSE_THRESHOLD = 0.5;
+export const COURSE_MARGIN = 0.2;
+
+/** frames: hand landmarks per sampled camera frame (any number of hands). */
+export function recognizeWord(
+  model: SeqModel | WordModel,
+  frames: HandPoint[][][],
+  width: number,
+  height: number,
+  courseOnly = true,
+): WordGuess | null {
+  const features = clipFeatures(frames, width, height);
+  if (!features || features.filter((f) => f[65] || f[131]).length < 5) return null;
+  const window = resampleFrames(features, model.frames ?? 32);
+  const members = "members" in model ? model.members : [model];
+  const outputs = members.map((m) => runSeqModel(m, window));
+  if (outputs.some((o) => !o)) return null;
+  const p = outputs[0]!.map((_, i) => outputs.reduce((a, o) => a + o![i], 0) / outputs.length);
+  let ranked = p.map((v, i) => ({ label: model.labels[i], p: v }));
+  let threshold = model.threshold, margin = model.margin;
+  if (courseOnly && model.courseLabels?.length) {
+    const allowed = new Set(model.courseLabels);
+    ranked = ranked.filter((r) => allowed.has(r.label));
+    const sum = ranked.reduce((a, r) => a + r.p, 0);
+    ranked = ranked.map((r) => ({ ...r, p: r.p / sum }));
+    threshold = COURSE_THRESHOLD;
+    margin = COURSE_MARGIN;
+  }
+  ranked.sort((a, b) => b.p - a.p);
+  const [first, second] = ranked;
+  return {
+    label: first.label,
+    confidence: first.p,
+    accepted: first.p >= threshold && first.p - (second?.p ?? 0) >= margin,
+    top: ranked.slice(0, 5),
+  };
+}
+
+/** Exercise check against a known target: top-1 among course signs = correct,
+ * top-3 = close. The target is never fed to the model. */
+export function judgeWord(guess: WordGuess | null, target: string) {
+  if (!guess) return { verdict: "unclear" as const, rank: -1 };
+  const key = normalizeSignText(target);
+  const rank = guess.top.findIndex((t) => normalizeSignText(t.label) === key);
+  if (rank === 0) return { verdict: "correct" as const, rank };
+  if (rank > 0 && rank < 3) return { verdict: "close" as const, rank };
+  return { verdict: "different" as const, rank };
+}
+
+export function knowsWord(model: SeqModel, label: string) {
+  const key = normalizeSignText(label);
+  return model.labels.some((l) => normalizeSignText(l) === key);
+}
+
+/** Splits a camera stream into single-sign clips. A clip starts when a hand
+ * appears and ends after the hands rest/leave, or at a hard length limit.
+ * This is a pause heuristic, not a linguistic sign-boundary detector.
+ */
+export class WordSegmenter {
+  private frames: HandPoint[][][] = [];
+  private lastMotion = 0;
+  private started = 0;
+  private lastSeen = 0;
+  private previous: HandPoint[] = [];
+  private moving = 0;
+  private lastMotionIndex = 0;
+  constructor(
+    private pauseMs = 900,
+    private goneMs = 500,
+    private maxMs = 5000,
+  ) {}
+  reset() {
+    this.frames = [];
+    this.previous = [];
+    this.moving = 0;
+    this.lastMotionIndex = 0;
+    this.started = 0;
+  }
+  get recording() {
+    return this.frames.length > 0;
+  }
+  /** Returns a finished clip, or null while waiting/recording. */
+  push(now: number, hands: HandPoint[][]): HandPoint[][][] | null {
+    const visible = hands.filter((h) => h.length === 21);
+    const wrists = visible.map((h) => h[0]);
+    if (visible.length) {
+      const motion = wrists.length && this.previous.length
+        ? Math.max(...wrists.map((w) => Math.min(...this.previous.map((p) => Math.hypot(w.x - p.x, w.y - p.y)))))
+        : 0;
+      this.previous = wrists;
+      this.lastSeen = now;
+      if (!this.frames.length) {
+        this.started = now;
+        this.lastMotion = now;
+      }
+      this.frames.push(visible);
+      if (motion > 0.012) {
+        this.lastMotion = now;
+        this.lastMotionIndex = this.frames.length - 1;
+        this.moving++;
+      }
+    } else if (this.frames.length) this.frames.push([]);
+    if (!this.frames.length) return null;
+    const ended =
+      now - this.started >= this.maxMs ||
+      (!visible.length && now - this.lastSeen >= this.goneMs) ||
+      (now - this.started >= 800 && now - this.lastMotion >= this.pauseMs);
+    if (!ended) return null;
+    const clip = this.frames.slice(0, this.lastMotionIndex + 3), moving = this.moving;
+    this.reset();
+    // A hand held still the whole time is not a sign attempt.
+    return moving >= 2 ? clip : null;
+  }
+}

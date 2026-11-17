@@ -141,6 +141,9 @@ export function LearningHome() {
                 : at("Начать обучение", "Start learning", "Оқуды бастау")}
               <ArrowRight size={18} />
             </Link>
+            <Link className="button secondary" to="/vocab">
+              {at("Учить слова по темам", "Learn words by topic", "Тақырып бойынша сөздер")}
+            </Link>
             <Link className="learning-demo-link" to="/learn/getting-started">
               <span>
                 <Play size={16} fill="currentColor" />

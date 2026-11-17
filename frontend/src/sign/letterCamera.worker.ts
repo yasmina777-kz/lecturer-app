@@ -3,17 +3,18 @@ import {
   HandLandmarker,
   PoseLandmarker,
 } from "@mediapipe/tasks-vision";
-import { LiveLetterStream, trackingQuality } from "./liveRecognition";
+import { LETTER_SAMPLE_MS, LiveLetterStream, trackingQuality } from "./liveRecognition";
 import { temporalFrame, recognizeSequence, completedLetterFrames, type TemporalFrame } from "./temporal";
 import { agreeLetters } from "./phraseCapture";
 import { validClassifier, type SignClassifier } from "./recognition";
+import { loadSeqModel, type SeqModel } from "./seqModel";
 
 let detector: HandLandmarker;
 let model: SignClassifier;
 let verifier: SignClassifier;
-let balancedModel: SignClassifier;
+let balancedModel: SeqModel;
 let mode: "balanced" | "strict" = "balanced";
-let capture: {generation: number; frames: TemporalFrame[]} | null = null;
+let capture: {generation: number; frames: TemporalFrame[]; sampledAt: number} | null = null;
 
 function finishLetter() {
   if (!capture) return;
@@ -71,20 +72,21 @@ self.onmessage = async ({ data }) => {
         FilesetResolver.forVisionTasks(`${data.origin}/models/rsl/wasm`),
         fetch(`${data.origin}/models/rsl/alphabet-classifier.json`),
         fetch(`${data.origin}/models/rsl/alphabet-cautious-classifier.json`),
-        fetch(`${data.origin}/models/rsl/alphabet-v4-classifier.json`),
+        fetch(`${data.origin}/models/rsl/alphabet-v5-classifier.json`),
       ]);
       visionFiles = files;
       if (!response.ok || !verifyResponse.ok || !balancedResponse.ok) throw new Error("model");
       model = await response.json();
       verifier = await verifyResponse.json();
-      balancedModel = await balancedResponse.json();
+      const balanced = loadSeqModel(await balancedResponse.json());
+      if (!balanced) throw new Error("Invalid v5 alphabet model");
+      balancedModel = balanced;
       if (
         !validClassifier(model) ||
         !validClassifier(verifier) ||
-        !validClassifier(balancedModel) ||
         model.mean.length !== 474 ||
         verifier.mean.length !== 474 ||
-        balancedModel.mean.length !== 474
+        balancedModel.labels.length !== 34
       )
         throw new Error("Invalid alphabet model");
       detector = await HandLandmarker.createFromOptions(files, {
@@ -126,7 +128,7 @@ self.onmessage = async ({ data }) => {
     poseAt = -Infinity;
     lastPose = [];
   } else if (data.type === "capture-start") {
-    capture = {generation: data.generation, frames: []};
+    capture = {generation: data.generation, frames: [], sampledAt: -Infinity};
     live.reset();
   } else if (data.type === "capture-finish") {
     if (capture?.generation === data.generation) finishLetter();
@@ -188,7 +190,10 @@ self.onmessage = async ({ data }) => {
       const quality = trackingQuality(selected);
       const frame = temporalFrame(selected);
       const capturing = capture !== null;
-      if (capture && capture.generation === data.generation) {
+      // Keep explicit captures at the trained 100 ms cadence even when the
+      // page polls the camera faster for word recognition.
+      if (capture && capture.generation === data.generation && data.now - capture.sampledAt >= LETTER_SAMPLE_MS - 5) {
+        capture.sampledAt = data.now;
         capture.frames.push(quality === "ready" ? frame : Array(66).fill(0));
         if (capture.frames.length >= 100) finishLetter();
       }

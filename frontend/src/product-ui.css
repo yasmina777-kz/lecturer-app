@@ -1893,6 +1893,29 @@
     box-shadow: none;
     color: var(--p-text);
   }
+  & .vocab .panel {
+    background: var(--p-surface);
+    border: 1px solid var(--p-line);
+    border-radius: 20px;
+    box-shadow: none;
+    color: var(--p-text);
+  }
+  & .vocab .panel :is(h2, button:not(.button)) {
+    color: var(--p-text);
+  }
+  & .vocab :is(.vocab-choices, .vocab-video-choices) button.right {
+    border-color: #2e9d6a;
+    background: color-mix(in srgb, #2e9d6a 16%, var(--p-surface));
+  }
+  & .vocab :is(.vocab-choices, .vocab-video-choices) button.wrong {
+    border-color: #c0573f;
+    background: color-mix(in srgb, #c0573f 14%, var(--p-surface));
+  }
+  & .vocab .button.primary {
+    background: var(--p-blue);
+    color: #fff;
+    border-color: transparent;
+  }
   & .dialogues-workspace .button.primary {
     background: var(--p-blue);
     color: #fff;

@@ -1,0 +1,779 @@
+{
+  "protocol": "signer-hash",
+  "scope": "Slovo clips, signer-disjoint; isolated signs, not continuous phrases",
+  "split": {
+    "fit": 8869,
+    "validation": 3613,
+    "test": 7494,
+    "fitSigners": 132,
+    "validationSigners": 21,
+    "testSigners": 41
+  },
+  "model": {
+    "channels": 134,
+    "classes": 1000,
+    "width": 192,
+    "hidden": 384,
+    "blocks": [
+      [
+        5,
+        1
+      ],
+      [
+        5,
+        2
+      ],
+      [
+        5,
+        4
+      ]
+    ],
+    "dropout": 0.3,
+    "epochs": 70,
+    "frames": 32,
+    "refit": true
+  },
+  "validationThresholds": [
+    {
+      "threshold": 0.2,
+      "coverage": 0.3522975929978118,
+      "precision": 0.5838509316770186
+    },
+    {
+      "threshold": 0.3,
+      "coverage": 0.23194748358862144,
+      "precision": 0.660377358490566
+    },
+    {
+      "threshold": 0.4,
+      "coverage": 0.12472647702407003,
+      "precision": 0.7192982456140351
+    },
+    {
+      "threshold": 0.5,
+      "coverage": 0.06345733041575492,
+      "precision": 0.7931034482758621
+    },
+    {
+      "threshold": 0.6,
+      "coverage": 0.030634573304157548,
+      "precision": 0.7857142857142857
+    },
+    {
+      "threshold": 0.7,
+      "coverage": 0.02188183807439825,
+      "precision": 0.9
+    },
+    {
+      "threshold": 0.8,
+      "coverage": 0.01312910284463895,
+      "precision": 1.0
+    }
+  ],
+  "threshold": 0.7,
+  "testAll1000": {
+    "clips": 7494,
+    "top1": 0.488791032826261,
+    "top5": 0.79677074993328,
+    "macroTop1": 0.5057233044733045,
+    "acceptedCoverage": 0.04029890579129971,
+    "acceptedPrecision": 0.8708609271523179
+  },
+  "testCourseWords": {
+    "clips": 1457,
+    "top1": 0.3829787234042553,
+    "top5": 0.727522306108442,
+    "macroTop1": 0.39605831140918857,
+    "acceptedCoverage": 0.030199039121482498,
+    "acceptedPrecision": 0.6590909090909091,
+    "top1AmongCourseOnly": 0.6424159231297186,
+    "top3AmongCourseOnly": 0.8208647906657516
+  },
+  "perCourseWord": {
+    "Память": {
+      "clips": 5,
+      "correct": 4
+    },
+    "Привет!": {
+      "clips": 4,
+      "correct": 3
+    },
+    "белый": {
+      "clips": 8,
+      "correct": 0
+    },
+    "большой": {
+      "clips": 8,
+      "correct": 7
+    },
+    "брат": {
+      "clips": 9,
+      "correct": 7
+    },
+    "бумага": {
+      "clips": 13,
+      "correct": 3
+    },
+    "быстрый": {
+      "clips": 7,
+      "correct": 0
+    },
+    "в прошлом году": {
+      "clips": 5,
+      "correct": 4
+    },
+    "в этом году": {
+      "clips": 6,
+      "correct": 4
+    },
+    "вам": {
+      "clips": 8,
+      "correct": 2
+    },
+    "весна": {
+      "clips": 8,
+      "correct": 3
+    },
+    "вечер": {
+      "clips": 8,
+      "correct": 3
+    },
+    "взять": {
+      "clips": 7,
+      "correct": 0
+    },
+    "вода": {
+      "clips": 8,
+      "correct": 1
+    },
+    "вопрос": {
+      "clips": 8,
+      "correct": 2
+    },
+    "восемь": {
+      "clips": 10,
+      "correct": 1
+    },
+    "воскресенье": {
+      "clips": 10,
+      "correct": 3
+    },
+    "всегда": {
+      "clips": 10,
+      "correct": 5
+    },
+    "вспомнить": {
+      "clips": 5,
+      "correct": 0
+    },
+    "вторник": {
+      "clips": 8,
+      "correct": 3
+    },
+    "вчера": {
+      "clips": 10,
+      "correct": 3
+    },
+    "вы": {
+      "clips": 8,
+      "correct": 1
+    },
+    "говорить": {
+      "clips": 8,
+      "correct": 3
+    },
+    "год": {
+      "clips": 11,
+      "correct": 0
+    },
+    "город": {
+      "clips": 11,
+      "correct": 5
+    },
+    "грустный": {
+      "clips": 10,
+      "correct": 0
+    },
+    "да": {
+      "clips": 6,
+      "correct": 2
+    },
+    "дать": {
+      "clips": 6,
+      "correct": 5
+    },
+    "два": {
+      "clips": 8,
+      "correct": 0
+    },
+    "двадцать": {
+      "clips": 10,
+      "correct": 6
+    },
+    "двенадцать": {
+      "clips": 7,
+      "correct": 4
+    },
+    "девочка": {
+      "clips": 10,
+      "correct": 9
+    },
+    "девять": {
+      "clips": 5,
+      "correct": 3
+    },
+    "день": {
+      "clips": 8,
+      "correct": 8
+    },
+    "день и ночь": {
+      "clips": 5,
+      "correct": 4
+    },
+    "десять": {
+      "clips": 9,
+      "correct": 9
+    },
+    "дом": {
+      "clips": 9,
+      "correct": 7
+    },
+    "дочь": {
+      "clips": 6,
+      "correct": 4
+    },
+    "друг": {
+      "clips": 11,
+      "correct": 6
+    },
+    "думать": {
+      "clips": 7,
+      "correct": 1
+    },
+    "еда": {
+      "clips": 8,
+      "correct": 2
+    },
+    "есть": {
+      "clips": 11,
+      "correct": 0
+    },
+    "ехать": {
+      "clips": 7,
+      "correct": 5
+    },
+    "еще нет": {
+      "clips": 7,
+      "correct": 6
+    },
+    "ждать": {
+      "clips": 11,
+      "correct": 1
+    },
+    "желтый": {
+      "clips": 7,
+      "correct": 6
+    },
+    "жена": {
+      "clips": 10,
+      "correct": 2
+    },
+    "женщина": {
+      "clips": 9,
+      "correct": 4
+    },
+    "животное": {
+      "clips": 7,
+      "correct": 0
+    },
+    "жить": {
+      "clips": 6,
+      "correct": 5
+    },
+    "забыть": {
+      "clips": 7,
+      "correct": 2
+    },
+    "завтра": {
+      "clips": 11,
+      "correct": 0
+    },
+    "закончить": {
+      "clips": 4,
+      "correct": 3
+    },
+    "закрыть": {
+      "clips": 10,
+      "correct": 4
+    },
+    "зелёный": {
+      "clips": 10,
+      "correct": 0
+    },
+    "зима": {
+      "clips": 11,
+      "correct": 5
+    },
+    "знать": {
+      "clips": 7,
+      "correct": 2
+    },
+    "играть": {
+      "clips": 7,
+      "correct": 6
+    },
+    "идти": {
+      "clips": 9,
+      "correct": 2
+    },
+    "изучить": {
+      "clips": 7,
+      "correct": 4
+    },
+    "имя": {
+      "clips": 11,
+      "correct": 8
+    },
+    "иногда": {
+      "clips": 9,
+      "correct": 5
+    },
+    "интересный": {
+      "clips": 10,
+      "correct": 1
+    },
+    "карандаш": {
+      "clips": 10,
+      "correct": 10
+    },
+    "книга": {
+      "clips": 9,
+      "correct": 9
+    },
+    "когда": {
+      "clips": 9,
+      "correct": 2
+    },
+    "комната": {
+      "clips": 8,
+      "correct": 1
+    },
+    "кошка": {
+      "clips": 7,
+      "correct": 6
+    },
+    "красивый": {
+      "clips": 8,
+      "correct": 2
+    },
+    "красный": {
+      "clips": 10,
+      "correct": 0
+    },
+    "кто?": {
+      "clips": 6,
+      "correct": 1
+    },
+    "купить": {
+      "clips": 7,
+      "correct": 1
+    },
+    "легкий": {
+      "clips": 11,
+      "correct": 1
+    },
+    "лето": {
+      "clips": 9,
+      "correct": 4
+    },
+    "лошадь": {
+      "clips": 9,
+      "correct": 5
+    },
+    "любить": {
+      "clips": 9,
+      "correct": 2
+    },
+    "любовь": {
+      "clips": 6,
+      "correct": 2
+    },
+    "люди": {
+      "clips": 10,
+      "correct": 3
+    },
+    "магазин": {
+      "clips": 9,
+      "correct": 7
+    },
+    "маленький": {
+      "clips": 12,
+      "correct": 7
+    },
+    "мальчик": {
+      "clips": 9,
+      "correct": 4
+    },
+    "мать": {
+      "clips": 5,
+      "correct": 1
+    },
+    "медленный": {
+      "clips": 12,
+      "correct": 3
+    },
+    "меня": {
+      "clips": 6,
+      "correct": 0
+    },
+    "месяц": {
+      "clips": 9,
+      "correct": 1
+    },
+    "минута": {
+      "clips": 9,
+      "correct": 6
+    },
+    "мой": {
+      "clips": 9,
+      "correct": 3
+    },
+    "муж": {
+      "clips": 10,
+      "correct": 1
+    },
+    "мужчина": {
+      "clips": 9,
+      "correct": 4
+    },
+    "мы": {
+      "clips": 8,
+      "correct": 3
+    },
+    "найти": {
+      "clips": 11,
+      "correct": 2
+    },
+    "нам": {
+      "clips": 5,
+      "correct": 2
+    },
+    "начать": {
+      "clips": 6,
+      "correct": 2
+    },
+    "наш": {
+      "clips": 10,
+      "correct": 1
+    },
+    "не": {
+      "clips": 9,
+      "correct": 4
+    },
+    "неделя": {
+      "clips": 11,
+      "correct": 10
+    },
+    "никогда": {
+      "clips": 11,
+      "correct": 2
+    },
+    "новый": {
+      "clips": 9,
+      "correct": 4
+    },
+    "ноль": {
+      "clips": 8,
+      "correct": 3
+    },
+    "ночь": {
+      "clips": 9,
+      "correct": 7
+    },
+    "обучать": {
+      "clips": 12,
+      "correct": 5
+    },
+    "один": {
+      "clips": 10,
+      "correct": 3
+    },
+    "одиннадцать": {
+      "clips": 8,
+      "correct": 2
+    },
+    "осень": {
+      "clips": 8,
+      "correct": 0
+    },
+    "ответить": {
+      "clips": 7,
+      "correct": 3
+    },
+    "отец": {
+      "clips": 10,
+      "correct": 7
+    },
+    "открыть": {
+      "clips": 7,
+      "correct": 7
+    },
+    "ошибка": {
+      "clips": 10,
+      "correct": 2
+    },
+    "писать": {
+      "clips": 12,
+      "correct": 1
+    },
+    "плохой": {
+      "clips": 8,
+      "correct": 2
+    },
+    "подруга": {
+      "clips": 4,
+      "correct": 2
+    },
+    "показать": {
+      "clips": 7,
+      "correct": 4
+    },
+    "помочь": {
+      "clips": 6,
+      "correct": 3
+    },
+    "понедельник": {
+      "clips": 8,
+      "correct": 6
+    },
+    "понять": {
+      "clips": 8,
+      "correct": 5
+    },
+    "потом": {
+      "clips": 10,
+      "correct": 2
+    },
+    "почему": {
+      "clips": 8,
+      "correct": 3
+    },
+    "проверить": {
+      "clips": 7,
+      "correct": 4
+    },
+    "птица": {
+      "clips": 9,
+      "correct": 8
+    },
+    "пятница": {
+      "clips": 12,
+      "correct": 4
+    },
+    "пять": {
+      "clips": 8,
+      "correct": 5
+    },
+    "работать": {
+      "clips": 7,
+      "correct": 3
+    },
+    "радость": {
+      "clips": 7,
+      "correct": 3
+    },
+    "ребёнок": {
+      "clips": 9,
+      "correct": 0
+    },
+    "ручка": {
+      "clips": 9,
+      "correct": 5
+    },
+    "рыба": {
+      "clips": 6,
+      "correct": 1
+    },
+    "сегодня": {
+      "clips": 11,
+      "correct": 0
+    },
+    "семь": {
+      "clips": 9,
+      "correct": 3
+    },
+    "семья": {
+      "clips": 9,
+      "correct": 6
+    },
+    "сестра": {
+      "clips": 8,
+      "correct": 5
+    },
+    "синий": {
+      "clips": 9,
+      "correct": 2
+    },
+    "сказать": {
+      "clips": 7,
+      "correct": 3
+    },
+    "сколько": {
+      "clips": 8,
+      "correct": 6
+    },
+    "скоро": {
+      "clips": 9,
+      "correct": 6
+    },
+    "слушать": {
+      "clips": 11,
+      "correct": 1
+    },
+    "слышать": {
+      "clips": 9,
+      "correct": 0
+    },
+    "смотреть": {
+      "clips": 11,
+      "correct": 2
+    },
+    "собака": {
+      "clips": 8,
+      "correct": 3
+    },
+    "спать": {
+      "clips": 7,
+      "correct": 5
+    },
+    "спокойный": {
+      "clips": 9,
+      "correct": 4
+    },
+    "спросить": {
+      "clips": 8,
+      "correct": 0
+    },
+    "среда": {
+      "clips": 9,
+      "correct": 1
+    },
+    "старый": {
+      "clips": 8,
+      "correct": 4
+    },
+    "сто": {
+      "clips": 10,
+      "correct": 2
+    },
+    "страх": {
+      "clips": 6,
+      "correct": 1
+    },
+    "суббота": {
+      "clips": 9,
+      "correct": 4
+    },
+    "счастливый": {
+      "clips": 8,
+      "correct": 2
+    },
+    "сын": {
+      "clips": 7,
+      "correct": 2
+    },
+    "твой": {
+      "clips": 10,
+      "correct": 3
+    },
+    "тебя": {
+      "clips": 5,
+      "correct": 3
+    },
+    "три": {
+      "clips": 9,
+      "correct": 0
+    },
+    "трудный": {
+      "clips": 8,
+      "correct": 1
+    },
+    "ты": {
+      "clips": 13,
+      "correct": 0
+    },
+    "улица": {
+      "clips": 12,
+      "correct": 11
+    },
+    "утро": {
+      "clips": 11,
+      "correct": 2
+    },
+    "хлеб": {
+      "clips": 9,
+      "correct": 2
+    },
+    "хороший": {
+      "clips": 7,
+      "correct": 6
+    },
+    "хотеть": {
+      "clips": 7,
+      "correct": 1
+    },
+    "цвет": {
+      "clips": 10,
+      "correct": 4
+    },
+    "час": {
+      "clips": 9,
+      "correct": 0
+    },
+    "человек": {
+      "clips": 10,
+      "correct": 7
+    },
+    "черный": {
+      "clips": 11,
+      "correct": 8
+    },
+    "четверг": {
+      "clips": 10,
+      "correct": 5
+    },
+    "четыре": {
+      "clips": 9,
+      "correct": 1
+    },
+    "читать": {
+      "clips": 8,
+      "correct": 2
+    },
+    "что": {
+      "clips": 11,
+      "correct": 1
+    },
+    "шесть": {
+      "clips": 8,
+      "correct": 0
+    },
+    "школа": {
+      "clips": 8,
+      "correct": 6
+    },
+    "это": {
+      "clips": 9,
+      "correct": 4
+    },
+    "я": {
+      "clips": 8,
+      "correct": 3
+    },
+    "язык": {
+      "clips": 8,
+      "correct": 2
+    }
+  },
+  "seconds": 981
+}

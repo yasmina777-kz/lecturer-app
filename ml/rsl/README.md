@@ -147,3 +147,68 @@ The course uses the existing Slovo dictionary videos for vocabulary exposure
 and comprehension activities, while clearly labeling the avatar animation as
 experimental. Phrase recognition needs licensed, consented, signer-diverse
 phrase recordings with verified annotations before it can be trained credibly.
+
+## v5 letters and v2 words (2026-11-17)
+
+Both models are small temporal CNNs (`seqnet.py`) whose browser runtime
+(`frontend/src/sign/seqModel.ts`) has no dependencies; float16 weights.
+`npm run test:seq-models --prefix frontend` checks Python/browser parity for
+both models and for the two-hand word features.
+
+**Letters v5** (`extract_alphabet_v5.py`, `train_alphabet_v5.py`): every frame
+of all 3,794 selected Bukva clips is tracked with the browser's
+HandLandmarker in VIDEO mode. Training windows are cut at a jittered ~100 ms
+cadence with random offsets (like `LiveLetterStream`) plus whole-clip windows,
+with rotation/scale/noise/dropped-frame augmentation. Same 612-clip test set
+(20 signers never used for training or selection); threshold 0.6 chosen on
+validation signers. Report: `docs/alphabet-v5-report.json`.
+
+| Same inputs, same test | v4 | v5 |
+| --- | ---: | ---: |
+| Accuracy (all clips) | 77.8% | **85.1%** |
+| Precision of accepted answers | 97.0% | **98.5%** |
+| Coverage | 60.5% | **67.0%** |
+| Camera-like replay: correct / wrong letters | 350 / 12 | **408 / 7** |
+
+The unified camera's balanced mode and the `/practice` letter camera use v5.
+Weakest letters remain Щ, А, Я (motion/handshape confusions).
+
+**Words v2** (`train_slovo_v2.py`): the official Slovo train/test flags share 92
+of 112 train signers with test, so v1 kept only 15 fit signers. v2 assigns
+every clip by a hash of its signer: 132 fit / 21 validation / 41 test signers,
+all 1,000 signs. Features (`word_features.py` = `wordFeatures.ts`): both hands,
+no handedness needed (dominant hand found by motion, left-handers mirrored),
+palm-normalized shapes and wrist trajectories. Training simulates 10–30 fps.
+Three seeds are averaged in the browser. Report: `docs/words-v2-report.json`.
+
+| Signer-disjoint test (7,494 clips) | v1 | v2 single | v2 ensemble |
+| --- | ---: | ---: | ---: |
+| Top-1 / top-5 of 1,000 signs | 18.2% / 41.2% | 48.9% / 79.7% | — |
+| 171 course words, ranked among course words: top-1 / top-3 | — | 64.2% / 82.1% | **67.9% / 85.1%** |
+| Course mode, gate 0.5/0.2 fixed before testing: coverage / precision | — | 40.4% / 84.4% | **41.5% / 86.4%** |
+
+(v1 numbers used a different, signer-starved split, so they are not a
+same-split comparison.) Course mode: `course_mode_eval.py`.
+
+Re-extracting four dictionary videos with the browser detector gave the same
+top answers as the published Slovo keypoints at 30 fps, but 10 fps sampling
+lost accuracy, so word pages poll the camera every 50 ms (letters are still
+sampled every 100 ms). Browser checks with a fake camera recognized
+«карандаш» 2/2, «книга» 1/2 and letter Б via upload.
+
+Limits: isolated signs only (one sign, then a pause); no face/mouth, so signs
+that differ mainly by mouthing or location relative to the face (colours,
+some numbers) are weak; dataset results are not live-webcam accuracy with
+new learners; the AI answer is a hint, not a teacher's assessment.
+
+Reproduce (after `prepare_alphabet.py --train-per-class 200` and downloading
+`slovo_mediapipe.json` + `slovo-annotations.csv` into `ml/rsl/data/`):
+
+```sh
+ml/rsl/.venv/bin/python ml/rsl/extract_alphabet_v5.py
+ml/rsl/.venv/bin/python ml/rsl/train_alphabet_v5.py
+ml/rsl/.venv/bin/python ml/rsl/train_slovo_v2.py --epochs 70 --refit
+ml/rsl/.venv/bin/python ml/rsl/train_slovo_v2.py --epochs 70 --final-only --seed 7 --output ml/rsl/data/slovo-word-v2-seed7
+ml/rsl/.venv/bin/python ml/rsl/train_slovo_v2.py --epochs 70 --final-only --seed 1234 --output ml/rsl/data/slovo-word-v2-seed1234
+ml/rsl/.venv/bin/python ml/rsl/export_word_fixtures.py
+```

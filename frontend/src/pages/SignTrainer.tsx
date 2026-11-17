@@ -104,6 +104,14 @@ export function SignCourseCatalog() {
                 "А әрпінен бастау",
               )}{" "}
               <ArrowRight size={18} />
+            </Link>{" "}
+            <Link className="button secondary" to="/vocab">
+              {at(
+                "Учить слова по темам (425 жестов)",
+                "Learn words by topic (425 signs)",
+                "Тақырып бойынша сөздер (425 ым)",
+              )}{" "}
+              <ArrowRight size={18} />
             </Link>
           </div>
           <AlphabetCardArt letter="А" />

@@ -13,6 +13,9 @@ export function useLiveLetters(
   onTracking?: (now: number, hands: Landmark[][], pose: Landmark[]) => void,
   mode: "balanced" | "strict" = "balanced",
   onAcceptedLetter?: (label: string) => void,
+  /** Camera polling period. Letters are still sampled every 100 ms inside the
+   * worker; faster polling only gives word recognition more frames. */
+  frameMs = LETTER_SAMPLE_MS,
 ) {
   const trackingCallback = useRef(onTracking);
   trackingCallback.current = onTracking;
@@ -57,7 +60,7 @@ export function useLiveLetters(
       );
     };
     try {
-      w = new Worker("/models/rsl/letter-camera-worker.js?v=8");
+      w = new Worker("/models/rsl/letter-camera-worker.js?v=10");
     } catch {
       fail();
       return;
@@ -201,7 +204,7 @@ export function useLiveLetters(
         !v ||
         v.readyState < 2 ||
         v.currentTime === lastTime ||
-        now - lastRun < LETTER_SAMPLE_MS
+        now - lastRun < frameMs
       )
         return;
       lastTime = v.currentTime;
@@ -229,7 +232,7 @@ export function useLiveLetters(
       session.current++;
       cancelAnimationFrame(raf);
     };
-  }, [active, ready, mode]);
+  }, [active, ready, mode, frameMs]);
   const finishLetter = () => {
     clearTimeout(captureTimer.current);
     worker.current?.postMessage({

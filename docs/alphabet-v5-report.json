@@ -1,0 +1,397 @@
+{
+  "scope": "Bukva official test signers (same clip selection as v4); real camera accuracy may differ",
+  "manifestSha256": "71af73ea4f30004559f884361cd48cb78d41e554731271a2686b9a7da9a88cd1",
+  "splitCounts": {
+    "fit": 2538,
+    "validation": 644,
+    "test": 612
+  },
+  "signers": {
+    "fit": 108,
+    "validation": 27,
+    "test": 20
+  },
+  "model": {
+    "arch": "temporal CNN",
+    "channels": 66,
+    "classes": 34,
+    "width": 128,
+    "hidden": 256,
+    "blocks": [
+      [
+        5,
+        1
+      ],
+      [
+        5,
+        2
+      ],
+      [
+        5,
+        4
+      ]
+    ],
+    "dropout": 0.25,
+    "epochs": 90
+  },
+  "validationThresholds": [
+    {
+      "threshold": 0.5,
+      "samples": 644,
+      "accuracy": 0.8478260869565217,
+      "accepted": 511,
+      "correctAccepted": 490,
+      "wrongAccepted": 21,
+      "precision": 0.958904109589041,
+      "coverage": 0.7934782608695652,
+      "negativeFalsePositiveRate": 0.0
+    },
+    {
+      "threshold": 0.6,
+      "samples": 644,
+      "accuracy": 0.8478260869565217,
+      "accepted": 456,
+      "correctAccepted": 445,
+      "wrongAccepted": 11,
+      "precision": 0.9758771929824561,
+      "coverage": 0.7080745341614907,
+      "negativeFalsePositiveRate": 0.0
+    },
+    {
+      "threshold": 0.7,
+      "samples": 644,
+      "accuracy": 0.8478260869565217,
+      "accepted": 305,
+      "correctAccepted": 299,
+      "wrongAccepted": 6,
+      "precision": 0.980327868852459,
+      "coverage": 0.47360248447204967,
+      "negativeFalsePositiveRate": 0.0
+    },
+    {
+      "threshold": 0.8,
+      "samples": 644,
+      "accuracy": 0.8478260869565217,
+      "accepted": 92,
+      "correctAccepted": 89,
+      "wrongAccepted": 3,
+      "precision": 0.967391304347826,
+      "coverage": 0.14285714285714285,
+      "negativeFalsePositiveRate": 0.0
+    },
+    {
+      "threshold": 0.85,
+      "samples": 644,
+      "accuracy": 0.8478260869565217,
+      "accepted": 31,
+      "correctAccepted": 29,
+      "wrongAccepted": 2,
+      "precision": 0.9354838709677419,
+      "coverage": 0.04813664596273292,
+      "negativeFalsePositiveRate": 0.0
+    },
+    {
+      "threshold": 0.9,
+      "samples": 644,
+      "accuracy": 0.8478260869565217,
+      "accepted": 10,
+      "correctAccepted": 9,
+      "wrongAccepted": 1,
+      "precision": 0.9,
+      "coverage": 0.015527950310559006,
+      "negativeFalsePositiveRate": 0.0
+    },
+    {
+      "threshold": 0.95,
+      "samples": 644,
+      "accuracy": 0.8478260869565217,
+      "accepted": 0,
+      "correctAccepted": 0,
+      "wrongAccepted": 0,
+      "precision": 0.0,
+      "coverage": 0.0,
+      "negativeFalsePositiveRate": 0.0
+    }
+  ],
+  "threshold": 0.6,
+  "test": {
+    "v5": {
+      "samples": 612,
+      "accuracy": 0.8513071895424836,
+      "accepted": 410,
+      "correctAccepted": 404,
+      "wrongAccepted": 6,
+      "precision": 0.9853658536585366,
+      "coverage": 0.6699346405228758,
+      "negativeFalsePositiveRate": 0.0
+    },
+    "v4": {
+      "samples": 612,
+      "accuracy": 0.7777777777777778,
+      "accepted": 370,
+      "correctAccepted": 359,
+      "wrongAccepted": 11,
+      "precision": 0.9702702702702702,
+      "coverage": 0.6045751633986928,
+      "negativeFalsePositiveRate": 0.0
+    }
+  },
+  "perClass": [
+    {
+      "label": "А",
+      "samples": 18,
+      "correct": 12,
+      "accepted": 11,
+      "correctAccepted": 11
+    },
+    {
+      "label": "Б",
+      "samples": 18,
+      "correct": 15,
+      "accepted": 15,
+      "correctAccepted": 14
+    },
+    {
+      "label": "В",
+      "samples": 18,
+      "correct": 16,
+      "accepted": 15,
+      "correctAccepted": 15
+    },
+    {
+      "label": "Г",
+      "samples": 18,
+      "correct": 17,
+      "accepted": 16,
+      "correctAccepted": 16
+    },
+    {
+      "label": "Д",
+      "samples": 18,
+      "correct": 17,
+      "accepted": 11,
+      "correctAccepted": 11
+    },
+    {
+      "label": "Е",
+      "samples": 18,
+      "correct": 14,
+      "accepted": 13,
+      "correctAccepted": 13
+    },
+    {
+      "label": "Ё",
+      "samples": 18,
+      "correct": 16,
+      "accepted": 14,
+      "correctAccepted": 14
+    },
+    {
+      "label": "Ж",
+      "samples": 18,
+      "correct": 14,
+      "accepted": 13,
+      "correctAccepted": 13
+    },
+    {
+      "label": "З",
+      "samples": 18,
+      "correct": 15,
+      "accepted": 14,
+      "correctAccepted": 14
+    },
+    {
+      "label": "И",
+      "samples": 18,
+      "correct": 14,
+      "accepted": 9,
+      "correctAccepted": 9
+    },
+    {
+      "label": "Й",
+      "samples": 18,
+      "correct": 16,
+      "accepted": 12,
+      "correctAccepted": 12
+    },
+    {
+      "label": "К",
+      "samples": 18,
+      "correct": 14,
+      "accepted": 10,
+      "correctAccepted": 10
+    },
+    {
+      "label": "Л",
+      "samples": 18,
+      "correct": 16,
+      "accepted": 12,
+      "correctAccepted": 12
+    },
+    {
+      "label": "М",
+      "samples": 18,
+      "correct": 15,
+      "accepted": 10,
+      "correctAccepted": 10
+    },
+    {
+      "label": "Н",
+      "samples": 18,
+      "correct": 17,
+      "accepted": 7,
+      "correctAccepted": 7
+    },
+    {
+      "label": "О",
+      "samples": 18,
+      "correct": 18,
+      "accepted": 17,
+      "correctAccepted": 17
+    },
+    {
+      "label": "П",
+      "samples": 18,
+      "correct": 16,
+      "accepted": 14,
+      "correctAccepted": 13
+    },
+    {
+      "label": "Р",
+      "samples": 18,
+      "correct": 18,
+      "accepted": 10,
+      "correctAccepted": 10
+    },
+    {
+      "label": "С",
+      "samples": 18,
+      "correct": 16,
+      "accepted": 15,
+      "correctAccepted": 14
+    },
+    {
+      "label": "Т",
+      "samples": 18,
+      "correct": 14,
+      "accepted": 13,
+      "correctAccepted": 12
+    },
+    {
+      "label": "У",
+      "samples": 18,
+      "correct": 17,
+      "accepted": 15,
+      "correctAccepted": 15
+    },
+    {
+      "label": "Ф",
+      "samples": 18,
+      "correct": 15,
+      "accepted": 14,
+      "correctAccepted": 14
+    },
+    {
+      "label": "Х",
+      "samples": 18,
+      "correct": 15,
+      "accepted": 14,
+      "correctAccepted": 14
+    },
+    {
+      "label": "Ц",
+      "samples": 18,
+      "correct": 15,
+      "accepted": 13,
+      "correctAccepted": 13
+    },
+    {
+      "label": "Ч",
+      "samples": 18,
+      "correct": 15,
+      "accepted": 15,
+      "correctAccepted": 15
+    },
+    {
+      "label": "Ш",
+      "samples": 18,
+      "correct": 16,
+      "accepted": 10,
+      "correctAccepted": 10
+    },
+    {
+      "label": "Щ",
+      "samples": 18,
+      "correct": 7,
+      "accepted": 3,
+      "correctAccepted": 2
+    },
+    {
+      "label": "Ъ",
+      "samples": 18,
+      "correct": 18,
+      "accepted": 16,
+      "correctAccepted": 16
+    },
+    {
+      "label": "Ы",
+      "samples": 18,
+      "correct": 17,
+      "accepted": 3,
+      "correctAccepted": 3
+    },
+    {
+      "label": "Ь",
+      "samples": 18,
+      "correct": 16,
+      "accepted": 16,
+      "correctAccepted": 15
+    },
+    {
+      "label": "Э",
+      "samples": 18,
+      "correct": 17,
+      "accepted": 14,
+      "correctAccepted": 14
+    },
+    {
+      "label": "Ю",
+      "samples": 18,
+      "correct": 16,
+      "accepted": 16,
+      "correctAccepted": 16
+    },
+    {
+      "label": "Я",
+      "samples": 18,
+      "correct": 13,
+      "accepted": 10,
+      "correctAccepted": 10
+    },
+    {
+      "label": "no_event",
+      "samples": 18,
+      "correct": 14,
+      "accepted": 0,
+      "correctAccepted": 0
+    }
+  ],
+  "streaming": {
+    "note": "100 ms cadence, 400 ms stride, two agreeing accepted windows",
+    "v5": {
+      "clips": 594,
+      "emitted": 415,
+      "correct": 408,
+      "wrong": 7,
+      "noEventFalseEmits": 0
+    },
+    "v4": {
+      "clips": 594,
+      "emitted": 362,
+      "correct": 350,
+      "wrong": 12,
+      "noEventFalseEmits": 0
+    }
+  },
+  "seconds": 1248.9
+}

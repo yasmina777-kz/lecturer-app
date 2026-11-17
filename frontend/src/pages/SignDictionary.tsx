@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Search, BookOpen, Play, ArrowRight } from "lucide-react";
 import { at } from "../i18n/automation";
@@ -18,6 +18,11 @@ import { phraseGroups } from "../sign/phraseExamples";
 import { alphabetIllustration } from "../sign/alphabetIllustrations";
 import { AlphabetCardArt } from "../components/AlphabetCardArt";
 import { SignActionCards } from "../components/SignActionCards";
+const WordPracticeCamera = lazy(() =>
+  import("../components/WordPracticeCamera").then((m) => ({
+    default: m.WordPracticeCamera,
+  })),
+);
 const categoryTranslations: Record<string, [string, string]> = {
   Алфавит: ["Alphabet", "Әліпби"],
   Общение: ["Communication", "Қарым-қатынас"],
@@ -29,6 +34,10 @@ const categoryTranslations: Record<string, [string, string]> = {
   Числа: ["Numbers", "Сандар"],
   Описание: ["Descriptions", "Сипаттау"],
   "Цвета и животные": ["Colours and animals", "Түстер мен жануарлар"],
+  "Еда и места": ["Food and places", "Тамақ және орындар"],
+  "Тело и здоровье": ["Body and health", "Дене және денсаулық"],
+  Чувства: ["Feelings", "Сезімдер"],
+  "Природа и погода": ["Nature and weather", "Табиғат және ауа райы"],
 };
 const categoryName = (c: string) =>
   at(c, categoryTranslations[c]?.[0] ?? c, categoryTranslations[c]?.[1] ?? c);
@@ -588,6 +597,32 @@ export function SignDictionaryPage() {
                   "ЖИ арқылы жаттығу",
                 )}
               </Link>
+            )}
+            {selected.video && (selectedPlan?.missing.length ?? 0) > 0 && (
+              <figure className="sign-dictionary-human">
+                <video
+                  key={selected.video}
+                  src={selected.video}
+                  poster={selected.poster}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  controls
+                />
+                <figcaption>
+                  {at(
+                    "3D-показа для этого слова пока нет — смотрите видео носителя РЖЯ (набор Slovo).",
+                    "No 3D demonstration yet — watch the RSL signer video (Slovo dataset).",
+                    "Бұл сөздің 3D көрсетілімі әзірге жоқ — ым тілі иесінің бейнесін қараңыз.",
+                  )}
+                </figcaption>
+              </figure>
+            )}
+            {selected.dataset === "Slovo" && (
+              <Suspense fallback={null}>
+                <WordPracticeCamera key={selected.id} target={selected.label} />
+              </Suspense>
             )}
             <p>
               {at(

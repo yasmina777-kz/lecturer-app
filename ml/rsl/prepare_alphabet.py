@@ -7,6 +7,7 @@ URL='https://rndml-team-cv.obs.ru-moscow-1.hc.sbercloud.ru/datasets/bukva/bukva.
 rows=list(csv.DictReader((DATA/'annotations.tsv').read_text().splitlines(),delimiter='\t'))
 parser=argparse.ArgumentParser()
 parser.add_argument('--train-per-class',type=int,default=45)
+parser.add_argument('--workers',type=int,default=4)
 args=parser.parse_args()
 assert args.train_per_class>0
 labels=list('АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ')+['no_event'];chosen=[]
@@ -29,7 +30,7 @@ def fetch(r):
    if getattr(local,'zip',None):local.zip.close();local.zip=None
    if attempt==3:raise
    time.sleep(attempt+1)
-with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+with concurrent.futures.ThreadPoolExecutor(max_workers=args.workers) as pool:
  for i,_ in enumerate(pool.map(fetch,chosen)):
   if i%50==0:print(i+1,len(chosen),flush=True)
 print('DOWNLOAD_COMPLETE',len(chosen),flush=True)

@@ -1,5 +1,6 @@
 import type { HandLandmarkerResult } from "@mediapipe/tasks-vision";
 import { classifyFeatures, type SignClassifier } from "./recognition";
+import { classifySeq, type SeqModel } from "./seqModel";
 export type TemporalFrame = number[];
 export function temporalFrame(r: HandLandmarkerResult): TemporalFrame {
   if (
@@ -36,7 +37,9 @@ export function temporalFrame(r: HandLandmarkerResult): TemporalFrame {
     Math.max(Math.hypot(im[0].x - im[9].x, im[0].y - im[9].y), 0.02),
   ];
 }
-export function temporalFeatures(frames: TemporalFrame[]): number[] | null {
+/** Gap-interpolated, wrist-normalized 16x66 window (v5 model input; also
+ * the first stage of the v1-v4 aggregated features). */
+export function temporalWindow(frames: TemporalFrame[]): number[][] | null {
   if (
     frames.length !== 16 ||
     frames.some((f) => f.length !== 66 || f.some((v) => !Number.isFinite(v)))
@@ -67,6 +70,11 @@ export function temporalFeatures(frames: TemporalFrame[]): number[] | null {
     }
   } else for (const f of a) f.fill(0);
   a.forEach((f, i) => (f[65] = valid.includes(i) ? 1 : 0));
+  return a;
+}
+export function temporalFeatures(frames: TemporalFrame[]): number[] | null {
+  const a = temporalWindow(frames);
+  if (!a) return null;
   const result: number[] = [];
   for (let bin = 0; bin < 4; bin++)
     for (let c = 0; c < 66; c++)
@@ -91,11 +99,16 @@ export function temporalFeatures(frames: TemporalFrame[]): number[] | null {
 }
 export function recognizeSequence(
   frames: TemporalFrame[],
-  model: SignClassifier,
+  model: SignClassifier | SeqModel,
 ) {
-  const f = temporalFeatures(frames);
-  if (!f) return null;
-  const r = classifyFeatures(f, model);
+  let r: { label: string; confidence: number; probabilities: number[]; accepted: boolean } | null;
+  if ("layers" in model && model.layers?.[0] && "type" in model.layers[0]) {
+    const w = temporalWindow(frames);
+    r = w && classifySeq(model as SeqModel, w);
+  } else {
+    const f = temporalFeatures(frames);
+    r = f && classifyFeatures(f, model as SignClassifier);
+  }
   if (!r) return null;
   return {
     ...r,
