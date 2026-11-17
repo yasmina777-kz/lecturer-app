@@ -1893,6 +1893,24 @@
     box-shadow: none;
     color: var(--p-text);
   }
+  & .lesson-page .panel {
+    background: var(--p-surface);
+    border: 1px solid var(--p-line);
+    border-radius: 20px;
+    box-shadow: none;
+    color: var(--p-text);
+  }
+  & .lesson-page .panel :is(h2, legend, label) {
+    color: var(--p-text);
+  }
+  & .lesson-page .panel p {
+    color: var(--p-muted);
+  }
+  & .lesson-page .button.primary {
+    background: var(--p-blue);
+    color: #fff;
+    border-color: transparent;
+  }
   & .vocab .panel {
     background: var(--p-surface);
     border: 1px solid var(--p-line);
@@ -3217,9 +3235,9 @@
   & .brand-link { padding-inline: 8px; margin-bottom: 24px; }
   & .brand { font-size: 19px; gap: 8px; }
   & .brand-symbol { width: 29px; height: 29px; }
-  & .sidebar nav { gap: 3px; }
-  & .sidebar nav a, & .sidebar-bottom > a { min-height: 40px; padding: 9px 10px; gap: 10px; font-size: 13px; line-height: 1.35; border-radius: 10px; }
-  & .sidebar nav svg, & .sidebar-bottom > a svg { width: 18px; height: 18px; flex-shrink: 0; }
+  & .sidebar nav { gap: 2px; }
+  & .sidebar nav a, & .sidebar-bottom > a { min-height: 34px; padding: 6px 10px; gap: 9px; font-size: 13px; line-height: 1.3; border-radius: 9px; }
+  & .sidebar nav svg, & .sidebar-bottom > a svg { width: 16px; height: 16px; flex-shrink: 0; }
   & .sidebar-bottom { padding-top: 12px; }
   & .user-row { margin-top: 12px; padding-top: 12px; }
   & .topbar { height: 56px; padding-inline: 24px; }

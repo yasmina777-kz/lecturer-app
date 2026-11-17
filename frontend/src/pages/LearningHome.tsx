@@ -20,7 +20,7 @@ const Mentor = lazy(() =>
   import("../components/GestureMentor3D").then((m) => ({ default: m.GestureMentor3D })),
 );
 
-function LearningMentorPreview() {
+export function LearningMentorPreview() {
   const [ready, setReady] = useState(false);
   const [angle] = useState<GestureAngle>("front");
   return (
@@ -140,9 +140,6 @@ export function LearningHome() {
                   )
                 : at("Начать обучение", "Start learning", "Оқуды бастау")}
               <ArrowRight size={18} />
-            </Link>
-            <Link className="button secondary" to="/vocab">
-              {at("Учить слова по темам", "Learn words by topic", "Тақырып бойынша сөздер")}
             </Link>
             <Link className="learning-demo-link" to="/learn/getting-started">
               <span>

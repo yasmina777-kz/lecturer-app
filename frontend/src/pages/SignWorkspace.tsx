@@ -21,6 +21,8 @@ import { useSignProgress } from "../sign/useProgress";
 import "./sign-workspace.css";
 import { SignDictionaryPage } from "./SignDictionary";
 import { SignCourseCatalog, SignTrainingRoom } from "./SignTrainer";
+import { LearningMentorPreview } from "./LearningHome";
+import "./lesson-simple.css";
 const GesturePreview = lazy(() =>
   import("./GesturePreviewPage").then((m) => ({
     default: m.GesturePreviewPage,
@@ -83,7 +85,7 @@ function LessonContent({ id }: { id?: string }) {
   const nextLessonId = lessonIds[lessonIds.indexOf(lesson.id) + 1];
   const prototype = lesson.kind === "prototype";
   return (
-    <div className="sign-workspace">
+    <div className="sign-workspace lesson-page">
       <Link to={`/learn?stage=${lesson.level}`} className="sign-back">
         <ArrowLeft size={16} />
         {at(
@@ -109,61 +111,30 @@ function LessonContent({ id }: { id?: string }) {
           <GesturePreview embedded />
         </Suspense>
       ) : (
-        <div className="sign-reading-layout">
-          <article className="panel sign-reading">
-            {content.blocks.map(([title, text], i) => (
-              <section key={title}>
-                <span className="eyebrow">0{i + 1}</span>
-                <h2>{title}</h2>
-                <p>{text}</p>
-              </section>
-            ))}
-            <a
-              href="https://voginfo.ru/wp-content/uploads/2025/02/0102.pdf"
-              target="_blank"
-              rel="noreferrer"
-            >
-              {at(
-                "Материал ВОГ о русском жестовом языке ↗",
-                "VOG material on Russian Sign Language ↗",
-                "Орыс ым тілі туралы ВОГ материалы ↗",
-              )}
-            </a>
-          </article>
-          <aside className="panel sign-lesson-guide">
-            <BookOpen size={28} />
-            <h2>{at("В этом уроке", "In this lesson", "Бұл сабақта")}</h2>
-            <ol>
-              <li>
-                {at(
-                  "Прочитайте три коротких раздела",
-                  "Read three short sections",
-                  "Үш қысқа бөлімді оқыңыз",
-                )}
-              </li>
-              <li>
-                {at(
-                  "Ответьте на вопрос ниже",
-                  "Answer the question below",
-                  "Төмендегі сұраққа жауап беріңіз",
-                )}
-              </li>
-              <li>
-                {at(
-                  "Сохраните отметку занятия",
-                  "Save your lesson mark",
-                  "Сабақ белгісін сақтаңыз",
-                )}
-              </li>
-            </ol>
-            <p>
-              {at(
-                "Этот вопрос проверяет прочитанное, а не исполнение жеста.",
-                "This question checks the reading, not your signing performance.",
-                "Бұл сұрақ ым орындауды емес, оқығаныңызды тексереді.",
-              )}
-            </p>
-          </aside>
+        <div className="lesson-simple">
+          <ol className="lesson-steps">
+            {content.blocks.map(([title, text], i) => {
+              const [first, ...rest] = text.split(/(?<=[.!?])\s+/);
+              return (
+                <li key={title} className="lesson-step">
+                  <span className="lesson-step-number">{i + 1}</span>
+                  <div>
+                    <h2>{title}</h2>
+                    <p>{first}</p>
+                    {rest.length > 0 && (
+                      <details>
+                        <summary>{at("Подробнее", "More", "Толығырақ")}</summary>
+                        <p>{rest.join(" ")}</p>
+                      </details>
+                    )}
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+          <div className="lesson-avatar">
+            <LearningMentorPreview />
+          </div>
         </div>
       )}
       {lesson.activity && (
