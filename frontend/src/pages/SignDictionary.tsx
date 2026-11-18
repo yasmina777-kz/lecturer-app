@@ -10,7 +10,8 @@ import {
   type DictionaryForms,
 } from "../sign/dictionary";
 import { planMotion, type MotionAsset } from "../sign/motion";
-import { SignSequencePlayer } from "../components/SignSequencePlayer";
+import { SignSequencePlayer, SHOW_HUMAN_VIDEOS } from "../components/SignSequencePlayer";
+import { withVideoAssets } from "../sign/videoAssets";
 import { exercises } from "../sign/exercises";
 import "./sign-dictionary.css";
 import { phraseArt } from "../sign/phraseArt";
@@ -118,13 +119,17 @@ export function SignDictionaryPage() {
     () => learningDictionary(words, motions),
     [words, motions],
   );
+  const playable = useMemo(
+    () => (SHOW_HUMAN_VIDEOS ? withVideoAssets(motions, entries) : motions),
+    [motions, entries],
+  );
   const previewPlan = useMemo(
-    () => planMotion(text, entries, forms, motions, spelling),
-    [text, entries, forms, motions, spelling],
+    () => planMotion(text, entries, forms, playable, spelling),
+    [text, entries, forms, playable, spelling],
   );
   const motionPlan = useMemo(
-    () => planMotion(submitted, entries, forms, motions, spelling),
-    [submitted, entries, forms, motions, spelling],
+    () => planMotion(submitted, entries, forms, playable, spelling),
+    [submitted, entries, forms, playable, spelling],
   );
   const selectedPlan = useMemo(
     () =>
@@ -133,11 +138,11 @@ export function SignDictionaryPage() {
             selected.label,
             entries,
             forms,
-            motions,
+            playable,
             selected.category === "Алфавит",
           )
         : null,
-    [selected, entries, forms, motions],
+    [selected, entries, forms, playable],
   );
   const visible = entries.filter(
     (e) =>
@@ -200,9 +205,9 @@ export function SignDictionaryPage() {
           <h1>{at("Текст → жесты", "Text → signs", "Мәтін → ым")}</h1>
           <p>
             {at(
-              "Введите фразу — аватар покажет доступные жесты подряд. Или выберите слово в словаре.",
+              "Введите фразу — видео покажут жесты подряд. Или выберите слово в словаре.",
               "Enter a phrase to play available signs in sequence, or choose a dictionary entry.",
-              "Сөйлем енгізіңіз — аватар қолжетімді ымдарды ретімен көрсетеді. Немесе сөздіктен сөз таңдаңыз.",
+              "Сөйлем енгізіңіз — бейнелер ымдарды ретімен көрсетеді. Немесе сөздіктен сөз таңдаңыз.",
             )}
           </p>
         </div>
@@ -224,9 +229,9 @@ export function SignDictionaryPage() {
             id: "text",
             title: at("Написать текст", "Write text", "Мәтін жазу"),
             description: at(
-              "Слово или имя → показ аватара",
+              "Слово или имя → видео жестов",
               "A word or name → avatar demonstration",
-              "Сөз не есім → аватар көрсетілімі",
+              "Сөз не есім → ым бейнесі",
             ),
             tag: at("Ваш вариант", "Your choice", "Өз нұсқаңыз"),
           },
@@ -287,14 +292,14 @@ export function SignDictionaryPage() {
               <div>
                 <h2>
                   {at(
-                    "Что покажет аватар?",
+                    "Что показать жестами?",
                     "What should the avatar show?",
                     "Аватар нені көрсетеді?",
                   )}
                 </h2>
                 <p>
                   {at(
-                    "Введите текст, затем нажмите «Показать аватаром».",
+                    "Введите текст — видео жестов появятся справа.",
                     "Enter text, then select Show with avatar.",
                     "Мәтінді енгізіп, «Аватармен көрсету» түймесін басыңыз.",
                   )}
@@ -349,7 +354,7 @@ export function SignDictionaryPage() {
               >
                 <Search size={17} />
                 {at(
-                  "Показать аватаром",
+                  "Показать жестами",
                   "Show with avatar",
                   "Аватармен көрсету",
                 )}
@@ -453,7 +458,7 @@ export function SignDictionaryPage() {
               <span>
                 02 ·{" "}
                 {at(
-                  "Показ аватара",
+                  "Видео жестов",
                   "Avatar demonstration",
                   "Аватар көрсетілімі",
                 )}
@@ -549,7 +554,7 @@ export function SignDictionaryPage() {
         >
           <SignSequencePlayer
             key={`${run}-${spelling}-${selected?.id ?? submitted}`}
-            plan={selectedPlan ?? motionPlan}
+            plan={selectedPlan ?? (submitted ? motionPlan : previewPlan)}
             autoPlay={!!(selected || submitted)}
             onLetterChange={(letter) => {
               const entry = entries.find(
@@ -598,7 +603,7 @@ export function SignDictionaryPage() {
                 )}
               </Link>
             )}
-            {selected.video && (selectedPlan?.missing.length ?? 0) > 0 && (
+            {!SHOW_HUMAN_VIDEOS && selected.video && (selectedPlan?.missing.length ?? 0) > 0 && (
               <figure className="sign-dictionary-human">
                 <video
                   key={selected.video}
@@ -706,7 +711,7 @@ export function SignDictionaryPage() {
                   <Play size={14} />
                   {motions.some((m) => m.id === e.id)
                     ? at(
-                        "Показать аватаром",
+                        "Показать жестами",
                         "Show with avatar",
                         "Аватармен көрсету",
                       )

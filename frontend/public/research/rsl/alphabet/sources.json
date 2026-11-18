@@ -2,199 +2,232 @@
   {
     "letter": "А",
     "file": "0410.mp4",
-    "attachment_id": "fbe2c596-75a9-43d4-b9a9-4ac608270200",
-    "visibility": 1.0
+    "attachment_id": "cb872cac7fcdbe188412fc69804ff6e2",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.95; played at 0.8x"
   },
   {
     "letter": "Б",
     "file": "0411.mp4",
-    "attachment_id": "2b234e4f-593d-4ec6-b2dc-0f346a81ee96",
-    "visibility": 1.0
+    "attachment_id": "993bb481-e37d-4864-a473-37ffcb0167f4",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.96; played at 0.8x"
   },
   {
     "letter": "В",
     "file": "0412.mp4",
-    "attachment_id": "637c386b-e34b-4eed-86b9-ae6290a2df44",
-    "visibility": 1.0
+    "attachment_id": "54457c986647cc801dffd6bec1429413",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.9; played at 0.8x"
   },
   {
     "letter": "Г",
     "file": "0413.mp4",
-    "attachment_id": "85d5c1cb41c35127080754a3846c6480",
-    "visibility": 1.0
+    "attachment_id": "20bc9e39-d731-45d6-b2d1-42933f4fa4b7",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.8; played at 0.8x"
   },
   {
     "letter": "Д",
     "file": "0414.mp4",
-    "attachment_id": "46e73481-dd59-4474-9188-7f49e06999c8",
-    "visibility": 1.0
+    "attachment_id": "397d80c9-bffe-4074-af59-3ef0055054f0",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.81; played at 0.8x"
   },
   {
     "letter": "Е",
     "file": "0415.mp4",
-    "attachment_id": "0cc4f3c6c7d5334dbbe89eb0c74df533",
-    "visibility": 1.0
+    "attachment_id": "b46c6845a36033a93264df41a304af27",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.94; played at 0.8x"
   },
   {
     "letter": "Ё",
     "file": "0401.mp4",
-    "attachment_id": "5fc2438e127e4ea1721f5b9f31e92054",
-    "visibility": 1.0
+    "attachment_id": "b3901dcd-48fc-412d-b0fd-a6c3aaaff131",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.88; played at 0.8x"
   },
   {
     "letter": "Ж",
     "file": "0416.mp4",
-    "attachment_id": "0db7e083-7b1b-47d6-acbb-088eb7b08139",
-    "visibility": 1.0
+    "attachment_id": "2c8908433d6e90c1827def0bbf69a2fd",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.85; played at 0.8x"
   },
   {
     "letter": "З",
     "file": "0417.mp4",
-    "attachment_id": "19bd50d78570d2620ee951edbd011c63",
-    "visibility": 1.0
+    "attachment_id": "bdcdfc5d-fc8b-40fe-b13e-41d0be42dcdb",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.92; played at 0.8x"
   },
   {
     "letter": "И",
     "file": "0418.mp4",
     "attachment_id": "08193e79-0152-41f8-8dfc-6a082dd9776e",
-    "visibility": 1.0
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.94; played at 0.8x"
   },
   {
     "letter": "Й",
     "file": "0419.mp4",
-    "attachment_id": "fdb9078a-63f3-4ec5-8cb3-b6423ab17587",
-    "visibility": 1.0
+    "attachment_id": "461f7f95afd5fb61c23c4c9eb21b6891",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.84; played at 0.8x"
   },
   {
     "letter": "К",
     "file": "041a.mp4",
-    "attachment_id": "42420530495fcb590c2bb0ee34b39728",
-    "visibility": 1.0
+    "attachment_id": "6c1ea977ed6f42ca83a664019d791c04",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.84; played at 0.8x"
   },
   {
     "letter": "Л",
     "file": "041b.mp4",
-    "attachment_id": "201a9070-5b23-4103-8ad3-2ab3b48c46d8",
-    "visibility": 1.0
+    "attachment_id": "1aa792b5-96ef-48aa-bd53-cbf2d581f3c7",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.89; played at 0.8x"
   },
   {
     "letter": "М",
     "file": "041c.mp4",
-    "attachment_id": "1f39a7b9a2d1b2836b5ed2eed8b3e0c1",
-    "visibility": 1.0
+    "attachment_id": "f6cb7bfa00048191dbb1ede4b734d086",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.87; played at 0.8x"
   },
   {
     "letter": "Н",
     "file": "041d.mp4",
-    "attachment_id": "8494540c-7b77-4d6a-8876-6443b1b79702",
-    "visibility": 1.0
+    "attachment_id": "2cfce421-46f4-44dd-af8a-fe7fddb928b8",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.81; played at 0.8x"
   },
   {
     "letter": "О",
     "file": "041e.mp4",
-    "attachment_id": "7530676f-87c5-4583-b334-715ea4b121b3",
-    "visibility": 1.0
+    "attachment_id": "1ce261d0a37b5ef6a526fe71771718a4",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.97; played at 0.8x"
   },
   {
     "letter": "П",
     "file": "041f.mp4",
-    "attachment_id": "5c0302eb-9b74-4ee6-bb86-20dd5d62d084",
-    "visibility": 1.0
+    "attachment_id": "95da4a0d-c496-4353-9551-97743b46c99d",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.81; played at 0.8x"
   },
   {
     "letter": "Р",
     "file": "0420.mp4",
-    "attachment_id": "1c078cbb2473eb343d7d203ae0b0d497",
-    "visibility": 1.0
+    "attachment_id": "c2b4dc0c30767003ceea901f53776c27",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.76; played at 0.8x"
   },
   {
     "letter": "С",
     "file": "0421.mp4",
-    "attachment_id": "7d951d9a-94bf-4653-967e-bfaf975c5a36",
-    "visibility": 1.0
+    "attachment_id": "6109bc37-dd8d-404c-bafd-0bd45212f610",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.77; played at 0.8x"
   },
   {
     "letter": "Т",
     "file": "0422.mp4",
-    "attachment_id": "d78708ad-8f6f-4d03-9fd8-93cc85a2d6ba",
-    "visibility": 1.0
+    "attachment_id": "126b5f2a4a4afa5fbc525bf08d0af136",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.92; played at 0.8x"
   },
   {
     "letter": "У",
     "file": "0423.mp4",
-    "attachment_id": "abdf0fcab47b2c54d646eecfe26af376",
-    "visibility": 1.0
+    "attachment_id": "cbc29d66-73dd-4030-b876-cec991afb5d4",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.75; played at 0.8x"
   },
   {
     "letter": "Ф",
     "file": "0424.mp4",
-    "attachment_id": "34692964-b3cb-4b38-8aa0-882869d4153f",
-    "visibility": 1.0
+    "attachment_id": "f1a58049-c38f-40f8-9ef9-c4b26629dd31",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.94; played at 0.8x"
   },
   {
     "letter": "Х",
     "file": "0425.mp4",
-    "attachment_id": "74f03104-d519-4018-b37f-c32e0d347063",
-    "visibility": 1.0
+    "attachment_id": "4c0b7493-9d55-46d0-8bb0-53dbab7d2503",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.91; played at 0.8x"
   },
   {
     "letter": "Ц",
     "file": "0426.mp4",
-    "attachment_id": "ef40aa7e-18e2-4b80-a444-3b0611268688",
-    "visibility": 1.0
+    "attachment_id": "30c4386c0035c0ef6004e253417e72d4",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.89; played at 0.8x"
   },
   {
     "letter": "Ч",
     "file": "0427.mp4",
-    "attachment_id": "5b8d40dedb51a95237758b1296b45321",
-    "visibility": 1.0
+    "attachment_id": "20b98509-7526-496f-b20e-dba3b907bbf7",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.9; played at 0.8x"
   },
   {
     "letter": "Ш",
     "file": "0428.mp4",
-    "attachment_id": "05c0883daaa0f47f80011fff1c2c1498",
-    "visibility": 1.0
+    "attachment_id": "bb652c6cc72ad5ca399886d951456138",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.94; played at 0.8x"
   },
   {
     "letter": "Щ",
     "file": "0429.mp4",
-    "attachment_id": "7a8a412f-6efa-4e4a-9a8c-a9eb057f5d27",
-    "visibility": 1.0
+    "attachment_id": "919c7cdb-1565-4d60-ab08-fc4246c51417",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.86; played at 0.8x"
   },
   {
     "letter": "Ъ",
     "file": "042a.mp4",
-    "attachment_id": "7ac7c1f7-a685-42e0-ad1e-50bc7c11f9af",
-    "visibility": 1.0
+    "attachment_id": "38960de5-ed3c-485f-a08c-9fe9652699ef",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.79; played at 0.8x"
   },
   {
     "letter": "Ы",
     "file": "042b.mp4",
-    "attachment_id": "0f310d94-3b92-4ec1-9ed6-877b7f9ec04a",
-    "visibility": 1.0
+    "attachment_id": "265c8b01-4e24-42bd-baa8-9974d5b20188",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.97; played at 0.8x"
   },
   {
     "letter": "Ь",
     "file": "042c.mp4",
-    "attachment_id": "38861073-425e-4676-8be0-fc3e7e0ced43",
-    "visibility": 1.0
+    "attachment_id": "ec649451-3b6f-4800-a84c-e5f4d0c6b913",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.8; played at 0.8x"
   },
   {
     "letter": "Э",
     "file": "042d.mp4",
-    "attachment_id": "6fdfe64235171bce43a9d000fa3e2fb8",
-    "visibility": 1.0
+    "attachment_id": "d152e6a2-4fd5-408c-b423-ecf2a9980bae",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.9; played at 0.8x"
   },
   {
     "letter": "Ю",
     "file": "042e.mp4",
-    "attachment_id": "2dcdd7cd-ffb4-4dc3-9dd4-86ff1a20ec0d",
-    "visibility": 1.0
+    "attachment_id": "4e741a85-db72-49ff-bd03-4e7347b531ff",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.92; played at 0.8x"
   },
   {
     "letter": "Я",
     "file": "042f.mp4",
-    "attachment_id": "433c0733-a933-49a9-abda-da9d3b685ac0",
-    "visibility": 1.0
+    "attachment_id": "83866f3a-4a12-4a1e-8e13-6079d18d3620",
+    "visibility": 1.0,
+    "selection": "auto-ranked + framing check; model conf 0.88; played at 0.8x"
   }
 ]

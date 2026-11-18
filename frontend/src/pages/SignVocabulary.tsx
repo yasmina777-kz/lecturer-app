@@ -67,8 +67,8 @@ function SignVideo({
       ref={ref}
       key={word.video}
       className={`vocab-video${small ? " small" : ""}${mirror ? " mirrored" : ""}`}
-      src={word.video}
-      poster={word.poster}
+      src={word.displayVideo ?? word.video}
+      poster={word.displayPoster ?? word.poster}
       autoPlay
       loop
       muted
@@ -237,7 +237,7 @@ function Session({
   // the next sign starts instantly instead of waiting for the network.
   useEffect(() => {
     const controller = new AbortController();
-    for (const w of words) void fetch(w.video, { signal: controller.signal }).catch(() => {});
+    for (const w of words) void fetch(w.displayVideo ?? w.video, { signal: controller.signal }).catch(() => {});
     return () => controller.abort();
   }, [words]);
   const quizList = step === "find" ? order.find : order.recognize;

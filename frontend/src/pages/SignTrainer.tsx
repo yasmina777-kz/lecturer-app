@@ -25,6 +25,7 @@ import "./sign-trainer.css";
 import "./sign-dictionary.css";
 import { SignSequencePlayer, SHOW_HUMAN_VIDEOS } from "../components/SignSequencePlayer";
 import { PhraseVideos } from "../components/HumanSequencePlayer";
+import { withVideoAssets } from "../sign/videoAssets";
 import { planMotion, type MotionAsset } from "../sign/motion";
 import { alphabetEntries } from "../sign/dictionary";
 import { alphabetIllustration } from "../sign/alphabetIllustrations";
@@ -385,7 +386,7 @@ function CapturedLetterPlayer({ letter }: { letter: string }) {
   }, []);
   const references = useMemo(() => alphabetEntries(), []);
   const plan = useMemo(
-    () => planMotion(letter, references, {}, motions, true),
+    () => planMotion(letter, references, {}, SHOW_HUMAN_VIDEOS ? withVideoAssets(motions, references) : motions, true),
     [letter, references, motions],
   );
   return (

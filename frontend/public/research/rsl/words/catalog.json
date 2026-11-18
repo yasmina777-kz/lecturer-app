@@ -899,7 +899,9 @@
     "source": "https://github.com/ai-forever/slovo",
     "dataset": "Slovo",
     "attachmentId": "26022416-930c-49e0-b1f3-0c0da57a8d2c",
-    "signerId": "b07a773bcb10b4f14f33d2b0e8ec58ba"
+    "signerId": "b07a773bcb10b4f14f33d2b0e8ec58ba",
+    "displayVideo": "/research/rsl/words/57c6880e-9d4f-4e03-a1d9-4169d18f4f43.mp4",
+    "displayPoster": "/research/rsl/words/57c6880e-9d4f-4e03-a1d9-4169d18f4f43.jpg"
   },
   {
     "id": "word-2ad51148",
@@ -965,7 +967,9 @@
     "source": "https://github.com/ai-forever/slovo",
     "dataset": "Slovo",
     "attachmentId": "2c57ef13-e81c-4ea8-bf6e-c0cb597adfca",
-    "signerId": "20f1589682a8e64769ae2ebc21b5fb6b"
+    "signerId": "20f1589682a8e64769ae2ebc21b5fb6b",
+    "displayVideo": "/research/rsl/words/6114ddd7-4765-46a2-b0c9-4f0215cea5f9.mp4",
+    "displayPoster": "/research/rsl/words/6114ddd7-4765-46a2-b0c9-4f0215cea5f9.jpg"
   },
   {
     "id": "word-00af7ae9",
@@ -1884,12 +1888,12 @@
     "id": "word-c9e4054a",
     "label": "Пока",
     "category": "Общение",
-    "video": "/research/rsl/words/c9e4054a-bdcf-4b51-9d41-f9682533852f.mp4",
-    "poster": "/research/rsl/words/c9e4054a-bdcf-4b51-9d41-f9682533852f.jpg",
+    "video": "/research/rsl/words/271d3905-10af-424d-a5c2-c8183874a06a.mp4",
+    "poster": "/research/rsl/words/271d3905-10af-424d-a5c2-c8183874a06a.jpg",
     "source": "https://github.com/ai-forever/slovo",
     "dataset": "Slovo",
-    "attachmentId": "c9e4054a-bdcf-4b51-9d41-f9682533852f",
-    "signerId": "d85b2b2303d2fe48bc5177a0a3759190"
+    "attachmentId": "271d3905-10af-424d-a5c2-c8183874a06a",
+    "signerId": "2d84da20c251acaeb3186642fcb04f2e"
   },
   {
     "id": "word-79e2cc12",
@@ -2225,12 +2229,12 @@
     "id": "word-97ac2009",
     "label": "официант",
     "category": "Семья и люди",
-    "video": "/research/rsl/words/97ac2009-ebe6-4e9c-adbb-661cfe085ea4.mp4",
-    "poster": "/research/rsl/words/97ac2009-ebe6-4e9c-adbb-661cfe085ea4.jpg",
+    "video": "/research/rsl/words/0e162772-dfe8-43fa-b07a-a963c1b657e0.mp4",
+    "poster": "/research/rsl/words/0e162772-dfe8-43fa-b07a-a963c1b657e0.jpg",
     "source": "https://github.com/ai-forever/slovo",
     "dataset": "Slovo",
-    "attachmentId": "97ac2009-ebe6-4e9c-adbb-661cfe085ea4",
-    "signerId": "b07a773bcb10b4f14f33d2b0e8ec58ba"
+    "attachmentId": "0e162772-dfe8-43fa-b07a-a963c1b657e0",
+    "signerId": "0df9d6e419cb18069e696edaa170ba87"
   },
   {
     "id": "word-e48b19e2",
@@ -2467,12 +2471,12 @@
     "id": "word-6708aae9",
     "label": "следующий",
     "category": "Учёба",
-    "video": "/research/rsl/words/6708aae9-d2ca-4797-84fa-32772afce966.mp4",
-    "poster": "/research/rsl/words/6708aae9-d2ca-4797-84fa-32772afce966.jpg",
+    "video": "/research/rsl/words/8c65e8fd-539e-413b-a814-324ed93a5d2d.mp4",
+    "poster": "/research/rsl/words/8c65e8fd-539e-413b-a814-324ed93a5d2d.jpg",
     "source": "https://github.com/ai-forever/slovo",
     "dataset": "Slovo",
-    "attachmentId": "6708aae9-d2ca-4797-84fa-32772afce966",
-    "signerId": "b07a773bcb10b4f14f33d2b0e8ec58ba"
+    "attachmentId": "8c65e8fd-539e-413b-a814-324ed93a5d2d",
+    "signerId": "185bd3a81d9d618518d10abebf0d17a8"
   },
   {
     "id": "word-8d2d9c47",
@@ -2907,23 +2911,23 @@
     "id": "word-5842f1bf",
     "label": "Чашка",
     "category": "Еда и места",
-    "video": "/research/rsl/words/5842f1bf-f2fc-4259-b24f-beb282170bb3.mp4",
-    "poster": "/research/rsl/words/5842f1bf-f2fc-4259-b24f-beb282170bb3.jpg",
+    "video": "/research/rsl/words/44438990-04cd-44a6-a876-a20a4c148215.mp4",
+    "poster": "/research/rsl/words/44438990-04cd-44a6-a876-a20a4c148215.jpg",
     "source": "https://github.com/ai-forever/slovo",
     "dataset": "Slovo",
-    "attachmentId": "5842f1bf-f2fc-4259-b24f-beb282170bb3",
-    "signerId": "b407f95b926cc6499fa09e8445c77a10"
+    "attachmentId": "44438990-04cd-44a6-a876-a20a4c148215",
+    "signerId": "0211b488644476dd0fec656ccb9b74fc"
   },
   {
     "id": "word-221c2632",
     "label": "кружка",
     "category": "Еда и места",
-    "video": "/research/rsl/words/221c2632-c892-40ba-9a85-547cb17953fe.mp4",
-    "poster": "/research/rsl/words/221c2632-c892-40ba-9a85-547cb17953fe.jpg",
+    "video": "/research/rsl/words/bcd35f2b-b7cd-4ee2-9b83-eff1f2b34d8d.mp4",
+    "poster": "/research/rsl/words/bcd35f2b-b7cd-4ee2-9b83-eff1f2b34d8d.jpg",
     "source": "https://github.com/ai-forever/slovo",
     "dataset": "Slovo",
-    "attachmentId": "221c2632-c892-40ba-9a85-547cb17953fe",
-    "signerId": "8fe40f6fd9510b901edd9e64641d8618"
+    "attachmentId": "bcd35f2b-b7cd-4ee2-9b83-eff1f2b34d8d",
+    "signerId": "2d84da20c251acaeb3186642fcb04f2e"
   },
   {
     "id": "word-fd201828",
@@ -3017,12 +3021,12 @@
     "id": "word-70e1b667",
     "label": "Футбол",
     "category": "Еда и места",
-    "video": "/research/rsl/words/70e1b667-6d01-4b59-a036-b518802a020d.mp4",
-    "poster": "/research/rsl/words/70e1b667-6d01-4b59-a036-b518802a020d.jpg",
+    "video": "/research/rsl/words/afddd5ab-2422-43b4-8970-72a8253aa275.mp4",
+    "poster": "/research/rsl/words/afddd5ab-2422-43b4-8970-72a8253aa275.jpg",
     "source": "https://github.com/ai-forever/slovo",
     "dataset": "Slovo",
-    "attachmentId": "70e1b667-6d01-4b59-a036-b518802a020d",
-    "signerId": "b6bc47e76a066769495f3a22455713b5"
+    "attachmentId": "afddd5ab-2422-43b4-8970-72a8253aa275",
+    "signerId": "656ebd01cf7323d8c1cb8a0ca72aa1a5"
   },
   {
     "id": "word-36e1eda6",
@@ -3039,12 +3043,12 @@
     "id": "word-412f8c50",
     "label": "Лицо",
     "category": "Тело и здоровье",
-    "video": "/research/rsl/words/412f8c50-2359-4c7e-a4d7-1ea4a82541d8.mp4",
-    "poster": "/research/rsl/words/412f8c50-2359-4c7e-a4d7-1ea4a82541d8.jpg",
+    "video": "/research/rsl/words/c6178bc2-79f3-4cd8-89a0-4b7224930de3.mp4",
+    "poster": "/research/rsl/words/c6178bc2-79f3-4cd8-89a0-4b7224930de3.jpg",
     "source": "https://github.com/ai-forever/slovo",
     "dataset": "Slovo",
-    "attachmentId": "412f8c50-2359-4c7e-a4d7-1ea4a82541d8",
-    "signerId": "ae7548712ebba39f87c993e4eb8c98f4"
+    "attachmentId": "c6178bc2-79f3-4cd8-89a0-4b7224930de3",
+    "signerId": "a356848cf0a72f961b81ebb6716f6131"
   },
   {
     "id": "word-c996aa27",
@@ -3501,12 +3505,12 @@
     "id": "word-83120dd8",
     "label": "редко",
     "category": "Время",
-    "video": "/research/rsl/words/83120dd8-a0fc-485a-8031-7572a3ecc3d4.mp4",
-    "poster": "/research/rsl/words/83120dd8-a0fc-485a-8031-7572a3ecc3d4.jpg",
+    "video": "/research/rsl/words/53220416-0d0f-4d8f-b843-ba57d32c6a06.mp4",
+    "poster": "/research/rsl/words/53220416-0d0f-4d8f-b843-ba57d32c6a06.jpg",
     "source": "https://github.com/ai-forever/slovo",
     "dataset": "Slovo",
-    "attachmentId": "83120dd8-a0fc-485a-8031-7572a3ecc3d4",
-    "signerId": "b07a773bcb10b4f14f33d2b0e8ec58ba"
+    "attachmentId": "53220416-0d0f-4d8f-b843-ba57d32c6a06",
+    "signerId": "db573f94204e56e0cf3fc2ea000e5bdc"
   },
   {
     "id": "word-c9dd5252",
@@ -3985,12 +3989,12 @@
     "id": "word-d0d1841c",
     "label": "тёмный",
     "category": "Описание",
-    "video": "/research/rsl/words/d0d1841c-500d-4ee8-9bd5-3bd2e005ee90.mp4",
-    "poster": "/research/rsl/words/d0d1841c-500d-4ee8-9bd5-3bd2e005ee90.jpg",
+    "video": "/research/rsl/words/ee7a38ca-ab10-42ee-a458-8979a72c751e.mp4",
+    "poster": "/research/rsl/words/ee7a38ca-ab10-42ee-a458-8979a72c751e.jpg",
     "source": "https://github.com/ai-forever/slovo",
     "dataset": "Slovo",
-    "attachmentId": "d0d1841c-500d-4ee8-9bd5-3bd2e005ee90",
-    "signerId": "b07a773bcb10b4f14f33d2b0e8ec58ba"
+    "attachmentId": "ee7a38ca-ab10-42ee-a458-8979a72c751e",
+    "signerId": "46dd04a1caa75ed3082b573cb5a3ad26"
   },
   {
     "id": "word-51ea2918",
@@ -4128,22 +4132,22 @@
     "id": "word-f4979187",
     "label": "коричневый",
     "category": "Цвета и животные",
-    "video": "/research/rsl/words/f4979187-7145-4432-968a-b9ce4a64a497.mp4",
-    "poster": "/research/rsl/words/f4979187-7145-4432-968a-b9ce4a64a497.jpg",
+    "video": "/research/rsl/words/46feb68a-bcf8-40a9-94ae-ed9d08928809.mp4",
+    "poster": "/research/rsl/words/46feb68a-bcf8-40a9-94ae-ed9d08928809.jpg",
     "source": "https://github.com/ai-forever/slovo",
     "dataset": "Slovo",
-    "attachmentId": "f4979187-7145-4432-968a-b9ce4a64a497",
-    "signerId": "b07a773bcb10b4f14f33d2b0e8ec58ba"
+    "attachmentId": "46feb68a-bcf8-40a9-94ae-ed9d08928809",
+    "signerId": "46dd04a1caa75ed3082b573cb5a3ad26"
   },
   {
     "id": "word-86ef5d42",
     "label": "фиолетовый",
     "category": "Цвета и животные",
-    "video": "/research/rsl/words/86ef5d42-8fc2-4de7-9794-3caa827e9937.mp4",
-    "poster": "/research/rsl/words/86ef5d42-8fc2-4de7-9794-3caa827e9937.jpg",
+    "video": "/research/rsl/words/a3e417e3-63aa-4706-8216-03fc10fb682c.mp4",
+    "poster": "/research/rsl/words/a3e417e3-63aa-4706-8216-03fc10fb682c.jpg",
     "source": "https://github.com/ai-forever/slovo",
     "dataset": "Slovo",
-    "attachmentId": "86ef5d42-8fc2-4de7-9794-3caa827e9937",
+    "attachmentId": "a3e417e3-63aa-4706-8216-03fc10fb682c",
     "signerId": "b07a773bcb10b4f14f33d2b0e8ec58ba"
   },
   {
@@ -4172,12 +4176,12 @@
     "id": "word-8fd385f3",
     "label": "лиса",
     "category": "Цвета и животные",
-    "video": "/research/rsl/words/8fd385f3-7b7e-4693-beef-21f130eb0f7f.mp4",
-    "poster": "/research/rsl/words/8fd385f3-7b7e-4693-beef-21f130eb0f7f.jpg",
+    "video": "/research/rsl/words/ddaca8e4-81b8-42a7-8304-57ce196239b1.mp4",
+    "poster": "/research/rsl/words/ddaca8e4-81b8-42a7-8304-57ce196239b1.jpg",
     "source": "https://github.com/ai-forever/slovo",
     "dataset": "Slovo",
-    "attachmentId": "8fd385f3-7b7e-4693-beef-21f130eb0f7f",
-    "signerId": "0211b488644476dd0fec656ccb9b74fc"
+    "attachmentId": "ddaca8e4-81b8-42a7-8304-57ce196239b1",
+    "signerId": "46dd04a1caa75ed3082b573cb5a3ad26"
   },
   {
     "id": "word-2b5025f6",
@@ -4238,12 +4242,12 @@
     "id": "word-cd8d6747",
     "label": "обезьяна",
     "category": "Цвета и животные",
-    "video": "/research/rsl/words/cd8d6747-3f1d-4509-af57-9c960d8200ef.mp4",
-    "poster": "/research/rsl/words/cd8d6747-3f1d-4509-af57-9c960d8200ef.jpg",
+    "video": "/research/rsl/words/ee179029-90de-4c2d-99c4-b032ad6c6441.mp4",
+    "poster": "/research/rsl/words/ee179029-90de-4c2d-99c4-b032ad6c6441.jpg",
     "source": "https://github.com/ai-forever/slovo",
     "dataset": "Slovo",
-    "attachmentId": "cd8d6747-3f1d-4509-af57-9c960d8200ef",
-    "signerId": "b07a773bcb10b4f14f33d2b0e8ec58ba"
+    "attachmentId": "ee179029-90de-4c2d-99c4-b032ad6c6441",
+    "signerId": "46dd04a1caa75ed3082b573cb5a3ad26"
   },
   {
     "id": "word-132b8f1d",

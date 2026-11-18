@@ -12,7 +12,8 @@ import {
 import { phraseArt } from "../sign/phraseArt";
 import { at } from "../i18n/automation";
 import { Loading } from "../components/UI";
-import { SignSequencePlayer } from "../components/SignSequencePlayer";
+import { SignSequencePlayer, SHOW_HUMAN_VIDEOS } from "../components/SignSequencePlayer";
+import { withVideoAssets } from "../sign/videoAssets";
 import { planMotion } from "../sign/motion";
 import type { DictionaryEntry } from "../sign/dictionary";
 import {
@@ -95,7 +96,7 @@ export function ActivityLinks() {
 }
 function AvatarStudy({ text, data }: { text: string; data: Catalog }) {
   const plan = useMemo(
-    () => planMotion(text, data.entries, data.forms, data.motions),
+    () => planMotion(text, data.entries, data.forms, SHOW_HUMAN_VIDEOS ? withVideoAssets(data.motions, data.entries) : data.motions),
     [text, data],
   );
   return (

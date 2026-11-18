@@ -9,6 +9,10 @@ export type DictionaryEntry = {
   source: string;
   dataset: string;
   attachmentId?: string;
+  /** Better-framed take shown to learners when it differs from `video`
+   * (which stays the source of the 3D motion). */
+  displayVideo?: string;
+  displayPoster?: string;
 };
 export type DictionaryForms = Record<string, string[]>;
 export type TextPiece = {
