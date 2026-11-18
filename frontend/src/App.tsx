@@ -20,6 +20,7 @@ const SignLessonPage = lazy(() => import("./pages/SignWorkspace").then(m => ({de
 const SignTextPage = lazy(() => import("./pages/SignWorkspace").then(m => ({default:m.SignTextPage})));
 const SignRecognitionPage = lazy(() => import("./pages/SignRecognition").then(m => ({default:m.SignRecognitionPage})));
 const SignVocabularyPage = lazy(() => import("./pages/SignVocabulary").then(m => ({default:m.SignVocabularyPage})));
+const NativeCheckPage = lazy(() => import("./pages/NativeCheck").then(m => ({default:m.NativeCheckPage})));
 const SignPracticePage = lazy(() => import("./pages/SignWorkspace").then(m => ({default:m.SignPracticePage})));
 const SignDialoguesPage = lazy(() => import("./pages/SignActivities").then(m => ({default:m.SignDialoguesPage})));
 const SignUnderstandingPage = lazy(() => import("./pages/SignActivities").then(m => ({default:m.SignUnderstandingPage})));
@@ -102,6 +103,7 @@ export function App() {
             <Route path="practice" element={<SignPracticePage />} />
             <Route path="recognition" element={<SignRecognitionPage />} />
             <Route path="vocab" element={<SignVocabularyPage />} />
+            <Route path="native-check" element={<NativeCheckPage />} />
             <Route path="dialogues" element={<SignDialoguesPage />} />
             <Route path="understanding" element={<SignUnderstandingPage />} />
             <Route path="knowledge" element={<KnowledgePage />} />

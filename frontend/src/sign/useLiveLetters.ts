@@ -16,7 +16,11 @@ export function useLiveLetters(
   /** Camera polling period. Letters are still sampled every 100 ms inside the
    * worker; faster polling only gives word recognition more frames. */
   frameMs = LETTER_SAMPLE_MS,
+  /** Result of an explicit "record one letter" attempt, accepted or not. */
+  onCaptured?: (prediction: { label: string; confidence: number; accepted: boolean } | null) => void,
 ) {
+  const capturedCallback = useRef(onCaptured);
+  capturedCallback.current = onCaptured;
   const trackingCallback = useRef(onTracking);
   trackingCallback.current = onTracking;
   const acceptedLetterCallback = useRef(onAcceptedLetter);
@@ -60,7 +64,7 @@ export function useLiveLetters(
       );
     };
     try {
-      w = new Worker("/models/rsl/letter-camera-worker.js?v=10");
+      w = new Worker("/models/rsl/letter-camera-worker.js?v=11");
     } catch {
       fail();
       return;
@@ -87,6 +91,7 @@ export function useLiveLetters(
         if (data.generation !== session.current || !activeRef.current) return;
         clearTimeout(captureTimer.current);
         setCapturing(false);
+        capturedCallback.current?.(data.prediction ?? null);
         if (data.prediction?.accepted) {
           setLast(data.prediction.label);
           setText((v) => appendRecognizedLetter(v, data.prediction));

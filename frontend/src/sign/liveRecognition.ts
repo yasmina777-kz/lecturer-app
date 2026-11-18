@@ -31,8 +31,12 @@ export function trackingQuality(result: HandLandmarkerResult): TrackingQuality {
   if (Math.max(b.maxX - b.minX, b.maxY - b.minY) < 0.13) return "distant";
   return "ready";
 }
-type Prediction = { accepted: boolean; label: string } | null;
-// 16 samples plus a four-sample confirmation stride: 1.9 s at target cadence.
+type Prediction = { accepted: boolean; label: string; confidence?: number } | null;
+/** A single window this confident is emitted without waiting for a second
+ * one (v5 replay: <1% wrong among such emissions). */
+export const LETTER_FAST_CONFIDENCE = 0.85;
+// 16 samples plus a two-sample confirmation stride: 1.7 s at target cadence
+// (a very confident first window is emitted at 1.5 s).
 export const LETTER_SAMPLE_MS = 100;
 /** Streaming windows preserve the trained 16-frame feature format.
  * Two agreeing windows are a debounce, not a calibrated accuracy estimate.
@@ -101,7 +105,7 @@ export class LiveLetterStream {
     this.frames.push(frame);
     if (this.frames.length > 16) this.frames.shift();
     this.sincePrediction++;
-    if (this.frames.length < 16 || this.sincePrediction < 4) return null;
+    if (this.frames.length < 16 || this.sincePrediction < 2) return null;
     this.sincePrediction = 0;
     return this.frames.slice();
   }
@@ -116,7 +120,8 @@ export class LiveLetterStream {
       this.candidate = prediction.label;
       this.votes = 1;
     }
-    if (this.votes < 2 || this.emitted === prediction.label) return false;
+    const fast = (prediction.confidence ?? 0) >= LETTER_FAST_CONFIDENCE;
+    if ((this.votes < 2 && !fast) || this.emitted === prediction.label) return false;
     this.emitted = prediction.label;
     return true;
   }

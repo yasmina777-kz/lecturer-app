@@ -23,7 +23,7 @@ from word_features import clip_features, resample
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / 'ml/rsl/data'
-MODEL = json.loads((ROOT / 'frontend/public/models/rsl/words-v2-classifier.json').read_text())
+MODEL = json.loads((ROOT / 'ml/rsl/data/slovo-word-v2/classifier.json').read_text())
 LABELS = MODEL['labels']
 COURSE = MODEL['courseLabels']
 COURSE_IDX = np.array([LABELS.index(t) for t in COURSE])

@@ -8,9 +8,9 @@ from spotting_eval import load_streams, make_streams, lcs
 from spotting_gate_eval import motion
 from word_features import clip_features, resample
 ROOT = Path(__file__).resolve().parents[2]
-V2 = [json.loads((ROOT / f'frontend/public/models/rsl/{n}').read_text()) for n in ('words-v2-classifier.json',)]
+V2 = [json.loads((ROOT / 'ml/rsl/data/slovo-word-v2/classifier.json').read_text())]
 V3 = [json.loads(Path(p).read_text()) for p in sys.argv[1:]]
-COURSE = V2[0]['courseLabels']
+COURSE = [l for l in V3[0]['courseLabels']]
 
 def classify(models, frames, w, h):
     f = clip_features([[np.array(x) for x in fr] for fr in frames], w, h)

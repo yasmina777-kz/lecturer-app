@@ -15,7 +15,7 @@ import {
   ScanSearch,
 } from "lucide-react";
 import { at } from "../i18n/automation";
-import { exercises, courseLevels, recognitionLetters } from "../sign/exercises";
+import { exercises, courseLevels, recognitionLetters, alphabet } from "../sign/exercises";
 import { lessons } from "../sign/catalog";
 import { animationTime, playbackDuration } from "../sign/playback";
 import { Loading } from "../components/UI";
@@ -389,8 +389,20 @@ function CapturedLetterPlayer({ letter }: { letter: string }) {
     () => planMotion(letter, references, {}, SHOW_HUMAN_VIDEOS ? withVideoAssets(motions, references) : motions, true),
     [letter, references, motions],
   );
+  const goLetter = (next: string) => {
+    const target = exercises().find((e) => e.letter === next);
+    if (target)
+      navigate(`/practice?exercise=${target.id}${mode === "camera" ? "#sign-camera-check" : ""}`, { preventScrollReset: true });
+  };
   return (
     <>
+      <div className="letter-picker" role="group" aria-label={at("Выберите букву", "Choose a letter", "Әріпті таңдаңыз")}>
+        {alphabet.map((l) => (
+          <button key={l} aria-pressed={l === letter} onClick={() => goLetter(l)}>
+            {l}
+          </button>
+        ))}
+      </div>
       <SignActionCards
         label={at("Способ практики", "Practice mode", "Жаттығу тәсілі")}
         value={mode}

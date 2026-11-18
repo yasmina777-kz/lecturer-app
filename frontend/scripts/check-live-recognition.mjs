@@ -12,17 +12,20 @@ for(let now=0;now<=2200;now+=10){
   if(fast.sample(fastFrame,now,'ready') && fast.confirm({accepted:true,label:'А'})) firstAccepted=now;
 }
 assert.equal(LETTER_SAMPLE_MS,100);
-assert.equal(firstAccepted,1900,'two agreeing windows should confirm after 1.9 seconds at target cadence');
+assert.equal(firstAccepted,1700,'two agreeing windows should confirm after 1.7 seconds at target cadence');
+const sure=new LiveLetterStream();let sureAt=-1;
+for(let now=0;now<=2200;now+=10){ if(sure.sample(fastFrame,now,'ready') && sure.confirm({accepted:true,label:'Б',confidence:.9}) && sureAt<0) sureAt=now; }
+assert.equal(sureAt,1500,'a very confident first window is emitted at 1.5 seconds');
 const slower=new LiveLetterStream();let slowAccepted=-1;
 for(let now=0;now<=4000;now+=200){
   if(slower.sample(fastFrame,now,'ready') && slower.confirm({accepted:true,label:'А'})) slowAccepted=now;
 }
-assert.equal(slowAccepted,3800,'slow hardware must still provide all samples, never fake early acceptance');
+assert.equal(slowAccepted,3400,'slow hardware must still provide all samples, never fake early acceptance');
 const stream=new LiveLetterStream();
 const frame=Array(66).fill(0);frame[65]=0.2;
 let windows=0;
 for(let i=0;i<20;i++){if(stream.sample(frame,i*150,'ready')) windows++;}
-assert.equal(windows,2,'first 16-frame window then four-frame stride');
+assert.equal(windows,3,'first 16-frame window then two-frame stride');
 const yes=label=>({accepted:true,label});
 assert.equal(stream.confirm(yes('А')),false);
 assert.equal(stream.confirm(yes('А')),true);
@@ -60,7 +63,7 @@ for(let t=1400;t<=2000;t+=100){
   const window=occluded.sample(frame,t,'ready');
   if(window && occluded.confirm(yes('Й'))) recovered=t;
 }
-assert.equal(recovered,1900,'brief occlusion preserves the temporal window, but never emits on a missing frame');
+assert.equal(recovered,1700,'brief occlusion preserves the temporal window, but never emits on a missing frame');
 occluded.sample(Array(66).fill(0),2100,'missing');
 assert.equal(occluded.sample(frame,2600,'ready'),null,'long loss restarts even if no intermediate missing sample arrives');
 assert.ok(occluded.progress<100);

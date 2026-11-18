@@ -534,3 +534,26 @@
     display: none;
   }
 }
+
+.letter-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 16px;
+}
+.letter-picker button {
+  font: inherit;
+  font-weight: 600;
+  min-width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid var(--p-line, #dfe3ea);
+  background: var(--p-surface, #fff);
+  color: var(--p-text, #14171f);
+  cursor: pointer;
+}
+.letter-picker button[aria-pressed="true"] {
+  background: var(--p-blue, #2563eb);
+  border-color: var(--p-blue, #2563eb);
+  color: #fff;
+}
