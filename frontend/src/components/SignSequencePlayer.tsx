@@ -13,6 +13,7 @@ import { letterPreviewTime, letterEndTime } from "../sign/letterPreview";
 import { alphabet } from "../sign/exercises";
 import type { GestureAngle } from "./GestureMentor3D";
 import { AlphabetCardArt } from "./AlphabetCardArt";
+import { HumanSequencePlayer } from "./HumanSequencePlayer";
 import { alphabetIllustration } from "../sign/alphabetIllustrations";
 import "../pages/gesture-preview.css";
 import "../pages/sign-trainer.css";
@@ -20,7 +21,18 @@ import "../pages/sign-dictionary.css";
 const Mentor = lazy(() =>
   import("./GestureMentor3D").then((m) => ({ default: m.GestureMentor3D })),
 );
-export function SignSequencePlayer({
+/** The 3D avatar is paused for now: every sign is shown with the real signer
+ * videos the recognizers were trained on. Flip to false to restore 3D. */
+export const SHOW_HUMAN_VIDEOS = true;
+type PlayerProps = Parameters<typeof AvatarSequencePlayer>[0];
+export function SignSequencePlayer(props: PlayerProps) {
+  return SHOW_HUMAN_VIDEOS ? (
+    <HumanSequencePlayer plan={props.plan} autoPlay={props.autoPlay} onLetterChange={props.onLetterChange} />
+  ) : (
+    <AvatarSequencePlayer {...props} />
+  );
+}
+function AvatarSequencePlayer({
   plan,
   modelUrl = "/avatars/male/artyom.glb?v=1",
   autoPlay = false,

@@ -1412,7 +1412,7 @@
   }
   & .sign-recognition .recognition-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.6fr) minmax(300px, 1fr);
     align-items: start;
     gap: 24px;
   }
@@ -1475,7 +1475,8 @@
     background: #edf2ff;
     border: 1px solid #dbe3f7;
     border-radius: 18px;
-    aspect-ratio: 1.7;
+    aspect-ratio: 4 / 3;
+    max-height: 72vh;
     margin: 16px 0;
   }
   & .sign-recognition .krsl-placeholder {

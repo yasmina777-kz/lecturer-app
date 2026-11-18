@@ -22,6 +22,8 @@ import "./sign-workspace.css";
 import { SignDictionaryPage } from "./SignDictionary";
 import { SignCourseCatalog, SignTrainingRoom } from "./SignTrainer";
 import { LearningMentorPreview } from "./LearningHome";
+import { SHOW_HUMAN_VIDEOS } from "../components/SignSequencePlayer";
+import { PhraseVideos } from "../components/HumanSequencePlayer";
 import "./lesson-simple.css";
 const GesturePreview = lazy(() =>
   import("./GesturePreviewPage").then((m) => ({
@@ -107,9 +109,15 @@ function LessonContent({ id }: { id?: string }) {
         }
       />
       {prototype ? (
-        <Suspense fallback={<Loading />}>
-          <GesturePreview embedded />
-        </Suspense>
+        SHOW_HUMAN_VIDEOS ? (
+          <div className="panel">
+            <PhraseVideos labels={["ты", "имя", "кто?"]} />
+          </div>
+        ) : (
+          <Suspense fallback={<Loading />}>
+            <GesturePreview embedded />
+          </Suspense>
+        )
       ) : (
         <div className="lesson-simple">
           <ol className="lesson-steps">

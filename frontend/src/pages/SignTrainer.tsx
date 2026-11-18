@@ -23,7 +23,8 @@ import type { GestureAngle } from "../components/GestureMentor3D";
 import "./gesture-preview.css";
 import "./sign-trainer.css";
 import "./sign-dictionary.css";
-import { SignSequencePlayer } from "../components/SignSequencePlayer";
+import { SignSequencePlayer, SHOW_HUMAN_VIDEOS } from "../components/SignSequencePlayer";
+import { PhraseVideos } from "../components/HumanSequencePlayer";
 import { planMotion, type MotionAsset } from "../sign/motion";
 import { alphabetEntries } from "../sign/dictionary";
 import { alphabetIllustration } from "../sign/alphabetIllustrations";
@@ -335,6 +336,13 @@ export function SignTrainingRoom() {
     </div>
   );
 }
+/** Real-signer videos standing in for the authored 3D phrases. «Спасибо» has no
+ * recording in the open datasets, so it is listed as missing. */
+const EXERCISE_SIGNS: Record<string, string[]> = {
+  hello: ["Привет!"],
+  thanks: ["Спасибо"],
+  name: ["ты", "имя", "кто?"],
+};
 export function ExercisePlayer({
   exercise,
 }: {
@@ -342,6 +350,14 @@ export function ExercisePlayer({
 }) {
   if (exercise.letter)
     return <CapturedLetterPlayer key={exercise.id} letter={exercise.letter} />;
+  if (SHOW_HUMAN_VIDEOS)
+    return (
+      <div className="panel" data-workspace-enter>
+        <h2>{exercise.title}</h2>
+        <p>{exercise.hint}</p>
+        <PhraseVideos labels={EXERCISE_SIGNS[exercise.id] ?? []} />
+      </div>
+    );
   return <AnimatedExercisePlayer key={exercise.id} exercise={exercise} />;
 }
 function CapturedLetterPlayer({ letter }: { letter: string }) {

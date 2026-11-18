@@ -597,13 +597,6 @@ export function ContinuousSignCamera() {
           )}
           <div className="recognition-live-status">
             <div>
-              <strong>Тело и руки</strong>
-              <span>
-                {letters.bodyStatus}. Кисти — зелёные и жёлтые точки, тело —
-                голубые.
-              </span>
-            </div>
-            <div>
               <strong>{at("Буквы", "Letters", "Әріптер")}</strong>
               <span>{letters.status}</span>
               {letters.failed && (
@@ -640,12 +633,7 @@ export function ContinuousSignCamera() {
                         "Finish after a pause · maximum 12 seconds",
                         "Үзілістен кейін аяқталады · ең көбі 12 секунд",
                       )
-                    : wordStatus ||
-                      at(
-                        "412 слов курса распознаются в браузере",
-                        "412 course words are recognized in the browser",
-                        "Курстың 412 сөзі браузерде танылады",
-                      )}
+                    : wordStatus || "—"}
               </span>
             </div>
           </div>
@@ -758,47 +746,6 @@ export function ContinuousSignCamera() {
               )}
             </p>
           )}
-          <details>
-            <summary>
-              {at(
-                "Что умеет эта модель",
-                "Model capabilities",
-                "Модель мүмкіндіктері",
-              )}
-            </summary>
-            <p>
-              {at(
-                `Видео обрабатывается сервисом распознавания и удаляется после обработки. Звук не записывается. Лимит файла: 20 секунд и ${MAX_CLIP_MB} МБ.`,
-                `Video is processed by the recognition service and deleted afterwards. No audio is recorded. File limit: 20 seconds and ${MAX_CLIP_MB} MB.`,
-                `Бейне тану қызметінде өңделіп, кейін жойылады. Дыбыс жазылмайды. Файл шегі: 20 секунд және ${MAX_CLIP_MB} МБ.`,
-              )}
-            </p>
-            <p>
-              {at(
-                "Фразы читает сервер по ориентирам обеих рук, плеч, локтей, бровей и рта. Буквы проверяются одновременно отдельными моделями. Пауза завершает запись; длинный показ ограничен 12 секундами. Для более длинной фразы загрузите видео до 20 секунд. Голубые точки тела помогают расположиться в кадре; они не означают, что фраза распознана.",
-                "The server reads both hands, shoulders, elbows, brows and mouth. Letters are checked concurrently. A pause ends capture, with a 12-second maximum. Upload a video up to 20 seconds for a longer phrase. Blue body landmarks are framing feedback, not a recognized phrase.",
-                "Сервер екі қол, иық, шынтақ, қас пен ауыз бағдарларын оқиды. Әріптер қатар тексеріледі. Үзіліс жазбаны аяқтайды, шегі 12 секунд. Ұзақ сөйлем үшін 20 секундқа дейінгі бейнені жүктеңіз.",
-              )}
-            </p>
-            <p>
-              {at(
-                "В отчёте автора WER около 60%: ошибок много. Это исследовательский режим, а не точный переводчик.",
-                "The author reports about 60% WER: errors are frequent. This is a research mode, not an accurate translator.",
-                "Автор есебінде WER шамамен 60%: қате көп. Бұл дәл аудармашы емес, зерттеу режимі.",
-              )}
-            </p>
-            <a
-              href="https://huggingface.co/dastan-issenov/krsl-cslr-checkpoints"
-              target="_blank"
-              rel="noreferrer"
-            >
-              {at(
-                "Модель и отчёт автора",
-                "Model and author report",
-                "Модель және автор есебі",
-              )}
-            </a>
-          </details>
         </aside>
       </div>
     </>

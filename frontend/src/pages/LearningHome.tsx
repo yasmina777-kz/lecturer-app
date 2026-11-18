@@ -1,4 +1,3 @@
-import { lazy, Suspense, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
@@ -15,37 +14,16 @@ import { useSignProgress } from "../sign/useProgress";
 import { useActivityProgress } from "../sign/useActivities";
 import { reviewItems } from "../sign/activities";
 import { lessonIds } from "../sign/catalog";
-import type { GestureAngle } from "../components/GestureMentor3D";
-const Mentor = lazy(() =>
-  import("../components/GestureMentor3D").then((m) => ({ default: m.GestureMentor3D })),
-);
 
+/** Static mentor portrait (same person as the home page hero). */
 export function LearningMentorPreview() {
-  const [ready, setReady] = useState(false);
-  const [angle] = useState<GestureAngle>("front");
   return (
     <div className="learning-mentor-preview">
-      {!ready && (
-        <img
-          className="learning-hero-artwork"
-          src="/images/learning/hero.png"
-          alt={at("Аватар-наставник AI Mentor", "AI Mentor avatar", "AI Mentor аватары")}
-        />
-      )}
-      <Suspense fallback={null}>
-        <Mentor
-          modelUrl="/avatars/male/artyom.glb?v=1"
-          motionUrls={["/avatars/mira-blender/mira-hello.glb"]}
-          time={2.2}
-          closeup={false}
-          angle={angle}
-          resetToken={0}
-          onReadyChange={setReady}
-        />
-      </Suspense>
-      <span className="learning-mentor-label">
-        {at("Аватар-наставник", "Avatar mentor", "Аватар тәлімгер")}
-      </span>
+      <img
+        className="learning-hero-artwork"
+        src="/images/learning/hero.png"
+        alt={at("Наставница AI Mentor", "AI Mentor mentor", "AI Mentor тәлімгері")}
+      />
     </div>
   );
 }
@@ -108,59 +86,6 @@ export function LearningHome() {
           />
         </div>
       </section>
-      {hasHistory && (
-        <section
-          className="panel learning-progress"
-          aria-label={at("Ваши занятия", "Your learning", "Оқу барысыңыз")}
-        >
-          <h2>
-            {at("Продолжим обучение", "Continue learning", "Оқуды жалғастыру")}
-          </h2>
-          <p>
-            {at(
-              "Уроков завершено:",
-              "Lessons completed:",
-              "Аяқталған сабақтар:",
-            )}{" "}
-            {lessonIds.filter((id) => progress[id]).length}/{lessonIds.length} ·{" "}
-            {at(
-              "Попыток в упражнениях:",
-              "Exercise attempts:",
-              "Жаттығу әрекеттері:",
-            )}{" "}
-            {attempts.length}
-          </p>
-          <div className="learning-progress-actions">
-            <Link className="button primary" to={nextLesson}>
-              {at("Следующий шаг", "Next step", "Келесі қадам")}{" "}
-              <ArrowRight size={18} />
-            </Link>
-            <Link
-              className="button secondary"
-              to={reviewCount ? "/understanding#review" : "/understanding"}
-            >
-              {reviewCount
-                ? at(
-                    `Повторить сложные слова: ${reviewCount}`,
-                    `Words to review: ${reviewCount}`,
-                    `Қайталайтын сөздер: ${reviewCount}`,
-                  )
-                : at(
-                    "Тренировать понимание",
-                    "Practise understanding",
-                    "Түсінуді жаттықтыру",
-                  )}
-            </Link>
-          </div>
-          <p className="sign-save-note">
-            {at(
-              "История этого браузера. Отметки занятий не подтверждают правильность жестов.",
-              "History in this browser. Practice marks do not certify signing accuracy.",
-              "Осы браузердегі тарих. Жаттығу белгілері ымдардың дұрыстығын растамайды.",
-            )}
-          </p>
-        </section>
-      )}
       <section className="learning-path" aria-labelledby="learning-path-title">
         <div className="section-heading">
           <div>
