@@ -9,6 +9,8 @@
   background: var(--p-subtle, #eef1f6);
   color: var(--p-muted, #667085);
 }
+/* Recordings are portrait phone videos: keep the stage vertical (9:16) so
+ * the whole signer and both hands stay visible. */
 .human-stage {
   position: relative;
   display: grid;
@@ -16,12 +18,15 @@
   background: #0f1115;
   border-radius: 18px;
   overflow: hidden;
-  height: clamp(300px, 46vh, 460px);
+  aspect-ratio: 9 / 16;
+  height: clamp(380px, 62vh, 600px);
+  max-width: 100%;
+  margin-inline: auto;
 }
 .human-stage video {
-  height: 100%;
-  max-width: 100%;
-  object-fit: contain;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
   display: block;
 }
 .human-caption {
@@ -59,6 +64,7 @@
   right: 12px;
 }
 .human-controls {
+  justify-content: center;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -98,6 +104,7 @@
   color: var(--p-blue, #2563eb);
 }
 .human-steps {
+  justify-content: center;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;

@@ -162,6 +162,6 @@ export function alphabetEntries(): DictionaryEntry[] {
     category: "Алфавит",
     dataset: "Bukva",
     source: "https://github.com/ai-forever/bukva",
-    video: `/research/rsl/alphabet/${letter.codePointAt(0)!.toString(16).padStart(4, "0")}.mp4`,
+    video: `/research/rsl/alphabet/${letter.codePointAt(0)!.toString(16).padStart(4, "0")}.mp4?v=2`,
   }));
 }
