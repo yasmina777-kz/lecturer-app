@@ -21,6 +21,7 @@ with (DATA / 'slovo_mediapipe.json').open('rb') as f:
 tmp = DATA / 'word-candidates'; tmp.mkdir(exist_ok=True)
 ff = imageio_ffmpeg.get_ffmpeg_exe()
 cat = json.loads((DEST / 'catalog.json').read_text())
+MOTION_IDS = {m['id'] for m in json.loads((ROOT / 'frontend/public/avatars/sign-motion/catalog.json').read_text()) if m.get('reference')}
 report = []
 with RemoteZip(URL, timeout=90) as z:
     for b in bad:
@@ -41,7 +42,11 @@ with RemoteZip(URL, timeout=90) as z:
         if ok: cv2.imwrite(str(poster), img, [cv2.IMWRITE_JPEG_QUALITY, 80])
         for e in cat:
             if e['id'] == b['id']:
-                e.update(video='/research/rsl/words/' + out.name, poster='/research/rsl/words/' + poster.name, attachmentId=cid, signerId=chosen['user_id'])
+                # keep `video` when it is the source of a 3D motion clip; show the better take
+                key = 'displayVideo' if e.get('displayVideo') or e['id'] in MOTION_IDS else 'video'
+                e[key] = '/research/rsl/words/' + out.name
+                e['displayPoster' if key == 'displayVideo' else 'poster'] = '/research/rsl/words/' + poster.name
+                if key == 'video': e.update(attachmentId=cid, signerId=chosen['user_id'])
         report.append(dict(label=b['label'], replaced=True, why_old=b['why'], new=cid))
 (DEST / 'catalog.json').write_text(json.dumps(cat, ensure_ascii=False, indent=2))
 (DATA / 'word-video-replacements.json').write_text(json.dumps(report, ensure_ascii=False, indent=1))

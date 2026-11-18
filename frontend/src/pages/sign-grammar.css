@@ -1,0 +1,128 @@
+.grammar .page-heading {
+  margin-bottom: 8px;
+}
+.grammar .page-heading h1 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+.grammar .grammar-rule .human-steps {
+  display: none;
+}
+.grammar-layout {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1.4fr) minmax(300px, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+.grammar-list {
+  display: grid;
+  gap: 4px;
+}
+.grammar-list button {
+  font: inherit;
+  font-size: 0.92rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-align: left;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.grammar-list button span {
+  width: 22px;
+  height: 22px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 0.78rem;
+  background: var(--sw-border, var(--p-line, #dfe3ea));
+}
+.grammar-list button[aria-current="page"] {
+  border-color: var(--p-blue, #2563eb);
+  background: var(--sw-soft, var(--p-subtle, #f4f6fa));
+  font-weight: 600;
+}
+.grammar-done {
+  margin-left: auto;
+  color: #1f8a5b;
+}
+.grammar .grammar-rule {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.grammar-text {
+  display: grid;
+  gap: 8px;
+}
+.grammar .grammar-rule .human-stage {
+  height: clamp(200px, calc(100vh - 505px), 380px);
+}
+.grammar .grammar-tasks {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  grid-template-rows: none;
+  height: auto;
+  max-height: calc(100vh - 130px);
+  overflow-y: auto;
+}
+.grammar-rule ul {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+}
+.grammar-example {
+  margin: 0;
+  display: grid;
+  gap: 2px;
+}
+.grammar-example span {
+  color: var(--p-blue, #2563eb);
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+.grammar-tasks h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.grammar-task {
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--sw-border, var(--p-line, #dfe3ea));
+}
+.grammar-task:last-of-type {
+  border-bottom: 0;
+}
+.grammar-choice {
+  display: grid;
+  gap: 8px;
+}
+.grammar .grammar-choice .vocab-choices {
+  grid-template-columns: 1fr;
+}
+@media (max-width: 1100px) {
+  .grammar-layout {
+    grid-template-columns: 190px minmax(0, 1fr);
+  }
+  .grammar-tasks {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 700px) {
+  .grammar-layout {
+    grid-template-columns: 1fr;
+  }
+  .grammar-list {
+    grid-auto-flow: column;
+    overflow-x: auto;
+  }
+  .grammar-list button {
+    white-space: nowrap;
+  }
+}

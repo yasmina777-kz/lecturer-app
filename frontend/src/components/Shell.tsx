@@ -25,7 +25,7 @@ import {
   X,
   ArrowUpRight,
   Layers,
-  ClipboardCheck,
+  GraduationCap,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { Brand, ErrorMessage, messageOf } from "./UI";
@@ -54,6 +54,12 @@ export function Shell() {
       active: path === "/vocab",
     },
     {
+      to: "/grammar",
+      label: at("Грамматика", "Grammar", "Грамматика"),
+      icon: GraduationCap,
+      active: path === "/grammar",
+    },
+    {
       to: "/text-to-sign",
       label: at("Текст → жесты", "Text → signs", "Мәтін → ымдар"),
       icon: Type,
@@ -78,12 +84,6 @@ export function Shell() {
       active: path === "/understanding",
     },
     {
-      to: "/native-check",
-      label: at("Проверка", "Signer check", "Тексеру"),
-      icon: ClipboardCheck,
-      active: path === "/native-check",
-    },
-    {
       to: "/settings",
       label: t("Настройки"),
       icon: Settings2,
@@ -95,7 +95,7 @@ export function Shell() {
     path === "/admin" ||
     path === "/text-to-sign" ||
     path === "/vocab" ||
-    path === "/native-check" ||
+    path === "/grammar" ||
     path === "/recognition" ||
     path === "/dialogues" ||
     path === "/understanding" ||

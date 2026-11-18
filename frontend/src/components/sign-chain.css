@@ -1,0 +1,68 @@
+.sign-chain .human-stage {
+  height: clamp(260px, calc(100vh - 330px), 480px);
+}
+.sign-chain.sign-chain-small .human-stage {
+  height: clamp(220px, 40vh, 360px);
+}
+.sign-chain .human-player {
+  gap: 8px;
+}
+.order-task {
+  display: grid;
+  gap: 10px;
+}
+.order-ru {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+.order-line {
+  min-height: 46px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  padding: 6px 8px;
+  border-radius: 12px;
+  border: 1px dashed var(--sw-border, var(--p-line, #dfe3ea));
+}
+.order-line span {
+  color: var(--sw-muted, var(--p-muted, #667085));
+  font-size: 0.9rem;
+}
+.order-line button,
+.order-tiles button {
+  font: inherit;
+  font-weight: 600;
+  padding: 7px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--sw-border, var(--p-line, #dfe3ea));
+  background: var(--sw-soft, var(--p-subtle, #f4f6fa));
+  color: inherit;
+  cursor: pointer;
+}
+.order-line button {
+  border-color: var(--p-blue, #2563eb);
+}
+.order-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.order-tiles button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.order-result {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+.order-result.ok {
+  color: #1f8a5b;
+}
+.order-result.no {
+  color: #c2410c;
+}

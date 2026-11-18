@@ -28,7 +28,8 @@
     "test:platform-audit": "node scripts/check-platform-audit.mjs",
     "test:seq-models": "node scripts/check-seq-models.mjs",
     "test:vocab": "node scripts/check-vocab.mjs",
-    "test:smooth-motion": "node scripts/check-smooth-motion.mjs"
+    "test:smooth-motion": "node scripts/check-smooth-motion.mjs",
+    "test:course": "node scripts/check-course.mjs"
   },
   "dependencies": {
     "@huggingface/transformers": "^4.3.2",

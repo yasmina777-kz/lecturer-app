@@ -18,6 +18,7 @@ import { at } from "../i18n/automation";
 import { Loading } from "../components/UI";
 import type { DictionaryEntry } from "../sign/dictionary";
 import { dueIds, LEARNED_BOX, streak, useVocabProgress } from "../sign/vocabProgress";
+import { PHRASE_LESSONS, PhraseSession } from "./PhraseLessons";
 import "./sign-workspace.css";
 import "./sign-vocabulary.css";
 
@@ -115,6 +116,16 @@ export function SignVocabularyPage() {
     const list = ids.map((id) => words.find((w) => w.id === id)).filter((w): w is Word => !!w);
     return <Session key="review" title={at("Повторение", "Review", "Қайталау")} words={list} all={words} review onExit={back} progress={progress} />;
   }
+  if (mode === "phrases" && PHRASE_LESSONS[lessonIndex])
+    return (
+      <PhraseSession
+        key={`phrases:${lessonIndex}`}
+        lesson={lessonIndex}
+        onExit={back}
+        onFinish={(score) => progress.finishLesson(`phrases:${lessonIndex}`, score)}
+        onNext={PHRASE_LESSONS[lessonIndex + 1] ? () => setParams({ mode: "phrases", lesson: String(lessonIndex + 1) }) : undefined}
+      />
+    );
   const t = topics.find((x) => x.name === topic);
   if (t && Number.isInteger(lessonIndex) && t.lessons[lessonIndex])
     return (
@@ -129,17 +140,18 @@ export function SignVocabularyPage() {
         progress={progress}
       />
     );
-  return <Overview words={words} topics={topics} progress={progress} open={(name, i) => setParams({ topic: name, lesson: String(i) })} review={() => setParams({ mode: "review" })} />;
+  return <Overview words={words} topics={topics} progress={progress} open={(name, i) => setParams({ topic: name, lesson: String(i) })} openPhrases={(i) => setParams({ mode: "phrases", lesson: String(i) })} review={() => setParams({ mode: "review" })} />;
 }
 
 type ProgressApi = ReturnType<typeof useVocabProgress>;
 function Overview({
-  words, topics, progress, open, review,
+  words, topics, progress, open, openPhrases, review,
 }: {
   words: Word[];
   topics: { name: string; lessons: Word[][] }[];
   progress: ProgressApi;
   open: (topic: string, lesson: number) => void;
+  openPhrases: (lesson: number) => void;
   review: () => void;
 }) {
   const s = progress.state;
@@ -175,6 +187,23 @@ function Overview({
         </button>
       )}
       <div className="vocab-topics">
+        <section className="panel vocab-topic vocab-phrases">
+          <header>
+            <h2>{at("Фразы", "Phrases", "Сөйлемдер")}</h2>
+            <Link to="/grammar">{at("Грамматика →", "Grammar →", "Грамматика →")}</Link>
+          </header>
+          <div className="vocab-lessons">
+            {PHRASE_LESSONS.map((ps, i) => {
+              const score = s.lessons[`phrases:${i}`];
+              return (
+                <button key={i} onClick={() => openPhrases(i)} className={score !== undefined ? "done" : ""} title={ps.map((p) => p.ru).join(" · ")}>
+                  <span>{at("Урок", "Lesson", "Сабақ")} {i + 1}</span>
+                  <small>{score !== undefined ? `${Math.round(score * 100)}%` : ps.slice(0, 2).map((p) => p.ru).join(" ") + "…"}</small>
+                </button>
+              );
+            })}
+          </div>
+        </section>
         {topics.map((t) => {
           const total = t.lessons.flat().length;
           const done = t.lessons.flat().filter((w) => (s.words[w.id]?.box ?? 0) >= LEARNED_BOX).length;

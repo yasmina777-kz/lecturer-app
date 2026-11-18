@@ -28,7 +28,7 @@ if __name__ == '__main__':
     cat = json.loads((ROOT / 'frontend/public/research/rsl/words/catalog.json').read_text())
     bad = []
     for e in cat:
-        ok, why = framing(ROOT / 'frontend/public' / e['video'].lstrip('/'))
+        ok, why = framing(ROOT / 'frontend/public' / e.get('displayVideo', e['video']).lstrip('/'))
         if not ok: bad.append(dict(label=e['label'], id=e['id'], attachmentId=e['attachmentId'], why=why))
     (ROOT / 'ml/rsl/data/word-video-audit.json').write_text(json.dumps(bad, ensure_ascii=False, indent=1))
     from collections import Counter

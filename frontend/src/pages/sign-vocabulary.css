@@ -380,3 +380,54 @@
   padding: 0 8px;
   font-size: 0.8rem;
 }
+.vocab-phrases header a {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--p-blue, #2563eb);
+  text-decoration: none;
+}
+.vocab .phrase-card {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(260px, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+.phrase-side {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+.phrase-side h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+.phrase-gloss {
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--p-blue, #2563eb);
+}
+.phrase-tip {
+  margin: 0;
+  color: var(--sw-muted, var(--muted));
+}
+.vocab .phrase-order {
+  display: grid;
+  gap: 12px;
+  max-width: 720px;
+}
+.phrase-order h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+@media (max-width: 760px) {
+  .vocab .phrase-card {
+    grid-template-columns: 1fr;
+  }
+}
+.vocab .phrase-card .human-stage {
+  height: clamp(240px, calc(100vh - 390px), 480px);
+}
+.vocab .phrase-card .human-steps {
+  display: none;
+}

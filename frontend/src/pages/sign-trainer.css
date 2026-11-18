@@ -535,18 +535,45 @@
   }
 }
 
+/* Practice: everything on one screen (letters + mode on the left, video right). */
+.practice-workspace .page-heading {
+  margin-bottom: 10px;
+}
+.practice-workspace .page-heading p {
+  display: none;
+}
+.practice-workspace .page-heading h1 {
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  margin: 0;
+}
+.practice-workspace .sign-training-levels {
+  margin-bottom: 12px;
+}
+.practice-letter-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 380px) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .practice-letter-layout {
+    grid-template-columns: 1fr;
+  }
+}
+.practice-letter-side {
+  display: grid;
+  gap: 12px;
+}
 .letter-picker {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin: 0 0 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(38px, 1fr));
+  gap: 5px;
 }
 .letter-picker button {
   font: inherit;
   font-weight: 600;
-  min-width: 40px;
-  height: 40px;
-  border-radius: 10px;
+  height: 38px;
+  border-radius: 9px;
   border: 1px solid var(--p-line, #dfe3ea);
   background: var(--p-surface, #fff);
   color: var(--p-text, #14171f);
@@ -556,4 +583,38 @@
   background: var(--p-blue, #2563eb);
   border-color: var(--p-blue, #2563eb);
   color: #fff;
+}
+.practice-mode {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 4px;
+  border-radius: 14px;
+  background: var(--p-subtle, #eef1f6);
+}
+.practice-mode button {
+  font: inherit;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 40px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--p-text, #14171f);
+  cursor: pointer;
+}
+.practice-mode button[aria-pressed="true"] {
+  background: var(--p-surface, #fff);
+  box-shadow: 0 1px 4px rgba(16, 24, 40, 0.12);
+}
+.practice-hint {
+  margin: 0;
+  color: var(--p-muted, #667085);
+  font-size: 0.92rem;
+}
+.practice-letter-main .human-stage {
+  height: clamp(260px, calc(100vh - 290px), 560px);
 }

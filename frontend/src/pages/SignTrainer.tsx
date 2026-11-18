@@ -279,9 +279,9 @@ export function SignTrainingRoom() {
         <div>
           <h1>
             {at(
-              "Практика с аватаром",
-              "Practice with the avatar",
-              "Аватармен жаттығу",
+              "Практика",
+              "Practice",
+              "Жаттығу",
             )}
           </h1>
           <p>
@@ -314,7 +314,7 @@ export function SignTrainingRoom() {
           </button>
         ))}
       </nav>
-      {!exercise.letter && (
+      {!exercise.letter && options.filter((e) => e.level === exercise.level).length > 1 && (
         <div
           className="sign-exercise-picker"
           role="group"
@@ -395,79 +395,45 @@ function CapturedLetterPlayer({ letter }: { letter: string }) {
       navigate(`/practice?exercise=${target.id}${mode === "camera" ? "#sign-camera-check" : ""}`, { preventScrollReset: true });
   };
   return (
-    <>
-      <div className="letter-picker" role="group" aria-label={at("Выберите букву", "Choose a letter", "Әріпті таңдаңыз")}>
-        {alphabet.map((l) => (
-          <button key={l} aria-pressed={l === letter} onClick={() => goLetter(l)}>
-            {l}
+    <div className="practice-letter-layout">
+      <aside className="practice-letter-side">
+        <div className="letter-picker" role="group" aria-label={at("Выберите букву", "Choose a letter", "Әріпті таңдаңыз")}>
+          {alphabet.map((l) => (
+            <button key={l} aria-pressed={l === letter} onClick={() => goLetter(l)}>
+              {l}
+            </button>
+          ))}
+        </div>
+        <div className="practice-mode" role="group" aria-label={at("Способ практики", "Practice mode", "Жаттығу тәсілі")}>
+          <button aria-pressed={mode === "watch"} onClick={() => setMode("watch")}>
+            <Play size={16} />
+            {at("Изучить жест", "Study the sign", "Ымды үйрену")}
           </button>
-        ))}
-      </div>
-      <SignActionCards
-        label={at("Способ практики", "Practice mode", "Жаттығу тәсілі")}
-        value={mode}
-        onChange={setMode}
-        items={[
-          {
-            id: "watch",
-            title: at("Изучить жест", "Study the sign", "Ымды үйрену"),
-            description: at(
-              "Смотрите, замедляйте и повторяйте",
-              "Watch, slow down and repeat",
-              "Қараңыз, баяулатыңыз, қайталаңыз",
-            ),
-            tag: at(`Буква ${letter}`, `Letter ${letter}`, `${letter} әрпі`),
-          },
-          {
-            id: "camera",
-            title: at("Проверить себя", "Check yourself", "Өзіңізді тексеру"),
-            description: at(
-              "Покажите букву камере → ответ ИИ",
-              "Show a letter to the camera → AI feedback",
-              "Камераға әріпті көрсетіңіз → ЖИ жауабы",
-            ),
-            tag: at("Камера", "Camera", "Камера"),
-          },
-        ]}
-      />
-      {mode === "watch" ? (
-        <div data-workspace-enter>
-          {!loaded ? (
-            <Loading />
-          ) : (
-            <SignSequencePlayer
-              key={letter}
-              plan={plan}
-              onLetterChange={(next) => {
-                const target = exercises().find((e) => e.letter === next);
-                if (target)
-                  navigate(`/practice?exercise=${target.id}`, {
-                    preventScrollReset: true,
-                  });
-              }}
-            />
-          )}
-          <button
-            className="button primary sign-next-practice"
-            onClick={() => setMode("camera")}
-          >
-            <ScanSearch size={18} />
-            {at(
-              "Теперь попробовать с камерой",
-              "Now try with the camera",
-              "Енді камерамен көріңіз",
-            )}
-            <ArrowRight size={18} />
+          <button aria-pressed={mode === "camera"} onClick={() => setMode("camera")}>
+            <ScanSearch size={16} />
+            {at("Проверить себя", "Check yourself", "Өзіңізді тексеру")}
           </button>
         </div>
-      ) : (
-        <div data-workspace-enter>
+        <p className="practice-hint">
+          {mode === "watch"
+            ? at("Посмотрите видео, замедлите и повторите букву сами.", "Watch, slow down and repeat.", "Қарап, баяулатып, қайталаңыз.")
+            : at("Покажите букву в камеру и держите её около 2 секунд.", "Show the letter to the camera for about 2 seconds.", "Әріпті камераға 2 секундтай көрсетіңіз.")}
+        </p>
+      </aside>
+      <div className="practice-letter-main" data-workspace-enter>
+        {mode === "watch" ? (
+          !loaded ? (
+            <Loading />
+          ) : (
+            <SignSequencePlayer key={letter} plan={plan} onLetterChange={goLetter} />
+          )
+        ) : (
           <Suspense fallback={<Loading />}>
             <Camera expected={letter} />
           </Suspense>
-        </div>
-      )}
-    </>
+        )}
+      </div>
+    </div>
   );
 }
 

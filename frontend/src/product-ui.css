@@ -1912,35 +1912,6 @@
     color: #fff;
     border-color: transparent;
   }
-  & .native-check .panel {
-    background: var(--p-surface);
-    border: 1px solid var(--p-line);
-    border-radius: 20px;
-    box-shadow: none;
-    color: var(--p-text);
-  }
-  & .native-check .panel :is(h2, label, p, span) {
-    color: inherit;
-  }
-  & .native-check .native-muted {
-    color: var(--p-muted);
-  }
-  & .native-check :is(.native-input, select) {
-    background: var(--p-surface);
-    color: var(--p-text);
-    border: 1px solid var(--p-line);
-  }
-  & .native-check .native-camera :is(.native-placeholder, .native-count) {
-    color: #e5e9f0;
-  }
-  & .native-check .native-camera .native-rec {
-    color: #fff;
-  }
-  & .native-check .button.primary {
-    background: var(--p-blue);
-    color: #fff;
-    border-color: transparent;
-  }
   & .vocab .panel {
     background: var(--p-surface);
     border: 1px solid var(--p-line);
