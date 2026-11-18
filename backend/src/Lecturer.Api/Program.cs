@@ -232,6 +232,14 @@ if (Directory.Exists(Path.Combine(app.Environment.ContentRootPath, "wwwroot")))
             {
                 context.Context.Response.Headers.CacheControl = "public,max-age=31536000,immutable";
             }
+            // Sign reference videos and posters: cache in the browser and at the
+            // Vercel edge so lessons do not re-download them through the container.
+            else if (context.Context.Request.Path.StartsWithSegments("/research/rsl") &&
+                     (context.File.Name.EndsWith(".mp4", StringComparison.OrdinalIgnoreCase) ||
+                      context.File.Name.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase)))
+            {
+                context.Context.Response.Headers.CacheControl = "public,max-age=86400,s-maxage=604800,stale-while-revalidate=604800";
+            }
         }
     });
     app.MapFallbackToFile("index.html");

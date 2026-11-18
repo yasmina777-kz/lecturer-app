@@ -73,6 +73,7 @@ function SignVideo({
       loop
       muted
       playsInline
+      preload="auto"
       onLoadedMetadata={(e) => (e.currentTarget.playbackRate = rate)}
       aria-label={at("Видеообразец жеста", "Sign reference video", "Ым бейнеүлгісі")}
     />
@@ -232,6 +233,13 @@ function Session({
   const [score, setScore] = useState({ right: 0, total: 0, missed: [] as Word[] });
   const [cameraWord, setCameraWord] = useState<Word | null>(null);
   const order = useMemo(() => ({ recognize: shuffle(words), find: shuffle(words) }), [words]);
+  // Warm the browser cache with every video of this lesson (each ~35 KB), so
+  // the next sign starts instantly instead of waiting for the network.
+  useEffect(() => {
+    const controller = new AbortController();
+    for (const w of words) void fetch(w.video, { signal: controller.signal }).catch(() => {});
+    return () => controller.abort();
+  }, [words]);
   const quizList = step === "find" ? order.find : order.recognize;
   const current = step === "learn" ? words[index] : quizList[index];
   const choices = useMemo(
