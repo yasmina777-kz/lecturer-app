@@ -16,13 +16,22 @@ export function HumanSequencePlayer({
   autoPlay?: boolean;
   onLetterChange?: (letter: string) => void;
 }) {
+  // A step may carry a chain of videos (an authored phrase shown sign by sign).
   const steps = useMemo(
-    () => plan.steps.filter((s) => s.reference?.startsWith("/")),
+    () =>
+      plan.steps.flatMap((s) => {
+        const seq = (s as typeof s & { sequence?: { text: string; reference: string }[] }).sequence;
+        return seq?.length
+          ? seq.map((q, i) => ({ ...s, id: `${s.id}-${i}`, text: q.text, reference: q.reference }))
+          : s.reference?.startsWith("/") ? [s] : [];
+      }),
     [plan.steps],
   );
   const noVideo = [
     ...plan.missing,
-    ...plan.steps.filter((s) => !s.reference?.startsWith("/")).map((s) => s.text),
+    ...plan.steps
+      .filter((s) => !s.reference?.startsWith("/") && !(s as { sequence?: unknown[] }).sequence?.length)
+      .map((s) => s.text),
   ];
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(autoPlay);

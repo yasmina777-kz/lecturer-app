@@ -1210,7 +1210,7 @@
   }
   & .text-sign-page > .text-sign-player {
     grid-column: 2;
-    grid-row: 2 / span 4;
+    grid-row: 4 / span 4;
     margin: 0;
     scroll-margin-top: 22px;
   }
