@@ -1,0 +1,7 @@
+"Алекс" — realistic signing avatar (AI Mentor).
+Body, skin, eyes, eyebrows, eyelashes, hair, shirt/trousers and shoes: MakeHuman system assets, CC0
+(http://files.makehumancommunity.org/asset_packs/makehuman_system_assets/), generated with MPFB 2.0.18
+(https://extensions.blender.org/add-ons/mpfb/). Recoloured textures, shirt front, tie and the build/retarget
+scripts are project-authored (art/realistic-male). The look is an original character, not a portrait of a real person.
+Sign motions: the project's motion library retargeted from Bukva/Slovo recordings (see /avatars/sign-motion/ATTRIBUTION.txt).
+Retargeting is not linguistic review; facial grammar and mouthing are not animated.

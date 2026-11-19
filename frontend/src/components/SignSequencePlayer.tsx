@@ -14,6 +14,7 @@ import { alphabet } from "../sign/exercises";
 import type { GestureAngle } from "./GestureMentor3D";
 import { AlphabetCardArt } from "./AlphabetCardArt";
 import { HumanSequencePlayer } from "./HumanSequencePlayer";
+import { AVATAR_MODEL, avatarPlan, setPlayerMode, useAvatarLibrary, usePlayerMode } from "../sign/avatarLibrary";
 import { alphabetIllustration } from "../sign/alphabetIllustrations";
 import "../pages/gesture-preview.css";
 import "../pages/sign-trainer.css";
@@ -26,10 +27,33 @@ const Mentor = lazy(() =>
 export const SHOW_HUMAN_VIDEOS = true;
 type PlayerProps = Parameters<typeof AvatarSequencePlayer>[0];
 export function SignSequencePlayer(props: PlayerProps) {
-  return SHOW_HUMAN_VIDEOS ? (
-    <HumanSequencePlayer plan={props.plan} autoPlay={props.autoPlay} onLetterChange={props.onLetterChange} />
-  ) : (
-    <AvatarSequencePlayer {...props} />
+  const mode = usePlayerMode();
+  const lib = useAvatarLibrary();
+  const forAvatar = useMemo(() => (lib ? avatarPlan(props.plan, lib) : null), [props.plan, lib]);
+  const avatarReady = !!forAvatar && forAvatar.steps.length > 0 && forAvatar.missing.length === 0;
+  if (!SHOW_HUMAN_VIDEOS) return <AvatarSequencePlayer {...props} />;
+  const showAvatar = mode === "avatar" && avatarReady;
+  return (
+    <div className="player-mode-wrap">
+      <div className="player-mode" role="tablist" aria-label={at("Кто показывает", "Who signs", "Кім көрсетеді")}>
+        <button role="tab" aria-selected={mode === "video"} onClick={() => setPlayerMode("video")}>
+          {at("Видео", "Video", "Бейне")}
+        </button>
+        <button role="tab" aria-selected={mode === "avatar"} onClick={() => setPlayerMode("avatar")}>
+          {at("Аватар", "Avatar", "Аватар")}
+        </button>
+      </div>
+      {showAvatar ? (
+        <AvatarSequencePlayer {...props} plan={forAvatar!} modelUrl={`${AVATAR_MODEL}?v=1`} framing="sign" studio />
+      ) : (
+        <HumanSequencePlayer plan={props.plan} autoPlay={props.autoPlay} onLetterChange={props.onLetterChange} />
+      )}
+      {mode === "avatar" && !avatarReady && lib && props.plan.steps.length > 0 && (
+        <p className="player-mode-note">
+          {at("Для этих слов аватара пока нет — показано видео.", "No avatar motion for these signs yet — showing video.", "Бұл сөздерге аватар әлі жоқ — бейне көрсетілді.")}
+        </p>
+      )}
+    </div>
   );
 }
 function AvatarSequencePlayer({

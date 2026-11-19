@@ -125,3 +125,38 @@
   color: var(--p-muted, #667085);
   font-size: 0.9rem;
 }
+
+.player-mode-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.player-mode {
+  align-self: flex-start;
+  display: inline-flex;
+  gap: 3px;
+  padding: 3px;
+  border-radius: 10px;
+  background: var(--p-subtle, #f0f1f5);
+}
+.player-mode button {
+  font: inherit;
+  font-weight: 600;
+  padding: 5px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--p-muted, #667085);
+  cursor: pointer;
+}
+.player-mode button[aria-selected="true"] {
+  background: var(--p-surface, #fff);
+  color: var(--p-text, #14171f);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.08);
+}
+.player-mode-note {
+  margin: 0;
+  color: var(--p-muted, #667085);
+  font-size: 0.85rem;
+}
