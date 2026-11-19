@@ -306,5 +306,59 @@ bmesh.ops.delete(bm, geom=faces, context="FACES_ONLY")
 bm.to_mesh(body.data)
 bm.free()
 print("hidden skin faces", len(faces), flush=True)
+
+# --- web-ready shape keys: bake the phenotype into the base shape, keep only
+# the 52 ARKit face units (as morph targets the player drives from video).
+from bl_ext.user_default.mpfb.services.faceservice import ARKIT_FACEUNITS
+FACE = set(ARKIT_FACEUNITS)
+def bake_keys(obj):
+    keys = obj.data.shape_keys
+    if not keys:
+        return 0
+    blocks = keys.key_blocks
+    basis = blocks[0]
+    n = len(obj.data.vertices)
+    co = lambda kb: np.array([v.co for v in kb.data]).reshape(n, 3)
+    b0 = co(basis)
+    final = b0.copy()
+    for kb in blocks[1:]:
+        if kb.name not in FACE and kb.value:
+            final += kb.value * (co(kb) - b0)
+    deltas = {kb.name: co(kb) - b0 for kb in blocks[1:] if kb.name in FACE and np.abs(co(kb) - b0).max() > 1e-5}
+    obj.shape_key_clear()
+    for i, v in enumerate(obj.data.vertices):
+        v.co = final[i]
+    if not deltas:
+        return 0
+    obj.shape_key_add(name="Basis", from_mix=False)
+    for name in ARKIT_FACEUNITS:
+        if name in deltas:
+            kb = obj.shape_key_add(name=name, from_mix=False)
+            kb.data.foreach_set("co", (final + deltas[name]).ravel())
+    return len(deltas)
+for o in [o for o in bpy.data.objects if o.type == "MESH"]:
+    print("face units", o.name, bake_keys(o), flush=True)
+
+# Remove the helper geometry the Mask modifiers hid, then drop the masks
+# (shape keys cannot be exported through modifiers).
+grp = body.vertex_groups.get("body")
+bm = bmesh.new(); bm.from_mesh(body.data)
+dl = bm.verts.layers.deform.active
+keep = set()
+for v in bm.verts:
+    if dl and grp.index in v[dl] and v[dl][grp.index] > 0.5:
+        keep.add(v.index)
+bmesh.ops.delete(bm, geom=[v for v in bm.verts if v.index not in keep], context="VERTS")
+bm.to_mesh(body.data); bm.free()
+for o in bpy.data.objects:
+    if o.type != "MESH":
+        continue
+    for m in list(o.modifiers):
+        if m.type == "MASK":
+            o.modifiers.remove(m)
+        elif m.type == "SOLIDIFY":
+            with bpy.context.temp_override(object=o, active_object=o):
+                bpy.ops.object.modifier_apply(modifier=m.name)
+print("body vertices", len(body.data.vertices), flush=True)
 bpy.ops.wm.save_as_mainfile(filepath=str(BUILD / "avatar.blend"))
 print("OUTFIT_DONE", "waist", round(waist, 3), "neck", round(neck_z, 3), flush=True)

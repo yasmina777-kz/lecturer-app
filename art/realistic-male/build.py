@@ -43,6 +43,13 @@ settings = HumanService.get_default_deserialization_settings()
 settings.update(subdiv_levels=0, override_skin_model="PRESET", override_rig="PRESET")
 basemesh = HumanService.deserialize_from_dict(info, settings)
 
+# 52 ARKit face units (MakeHuman faceunits01, CC0) for facial expression and mouth.
+from bl_ext.user_default.mpfb.services.faceservice import FaceService
+assert FaceService.is_faceunits01_installed(force_recheck=True), "faceunits01 pack missing"
+FaceService.load_targets(basemesh, load_microsoft_visemes=False, load_meta_visemes=False, load_arkit_faceunits=True)
+FaceService.interpolate_targets(basemesh)
+print("SHAPEKEYS", {o.name: len(o.data.shape_keys.key_blocks) for o in bpy.data.objects if o.type == "MESH" and o.data.shape_keys}, flush=True)
+print("FACEKEYS", [k.name for k in basemesh.data.shape_keys.key_blocks][-6:], flush=True)
 rig = next(o for o in bpy.data.objects if o.type == "ARMATURE")
 meshes = [o for o in bpy.data.objects if o.type == "MESH"]
 print("OBJECTS", [(o.name, o.type, len(o.data.vertices) if o.type == "MESH" else 0) for o in bpy.data.objects], flush=True)

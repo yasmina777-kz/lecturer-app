@@ -17,6 +17,14 @@ python3 art/realistic-male/build_catalog.py
 $B -b art/realistic-male/build/<clip>.blend --python art/realistic-male/render.py -- <out> <frame> bust,side,sign
 ```
 
+## Face
+
+`build.py` loads MPFB's 52 ARKit face units (faceunits01 pack, CC0); `outfit.py` bakes the phenotype into the
+base shape and keeps only those units as morph targets on body, brows, lashes, eyes and hair.
+`ml/rsl/capture_face.py` records MediaPipe Face Landmarker blendshapes at the motion timestamps and
+`face_curves.py` writes `<id>.face.json` (signer's resting face subtracted, smoothed, same timing as the body).
+The player binds them to every mesh with that shape and adds a natural blink every few seconds.
+
 ## Motion from video (main path)
 
 `ml/rsl/capture_motion.py` runs MediaPipe Pose (full) + Hand Landmarker on every dictionary video (578 words +

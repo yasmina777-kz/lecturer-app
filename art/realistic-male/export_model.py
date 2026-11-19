@@ -28,9 +28,9 @@ for o in bpy.data.objects:
         o.select_set(True)
 bpy.context.view_layer.objects.active = rig
 bpy.ops.export_scene.gltf(
-    filepath=str(OUT / "alex.glb"), export_format="GLB", use_selection=True, export_apply=True,
+    filepath=str(OUT / "alex.glb"), export_format="GLB", use_selection=True, export_apply=False,
     export_animations=False, export_yup=True, export_image_format="AUTO", export_jpeg_quality=85,
-    export_skins=True, export_morph=False,
+    export_skins=True, export_morph=True, export_morph_normal=False,
 )
 # Alpha modes: Blender exports every MPFB material as BLEND, which breaks depth
 # sorting in three.js (see-through skin, vanishing hair). Patch the GLB JSON.
@@ -43,6 +43,8 @@ for m in doc["materials"]:
     m.pop("extensions", None)
     if any(k in name for k in ("short02", "eyebrow", "eyelashes")):
         m["alphaMode"], m["alphaCutoff"] = "MASK", 0.35
+    elif "high-poly" in name:
+        m["alphaMode"] = "BLEND"  # eyeball with a clear cornea over the iris
     else:
         m.pop("alphaMode", None)
         m.pop("alphaCutoff", None)
