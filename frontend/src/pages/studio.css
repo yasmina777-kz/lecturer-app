@@ -366,3 +366,28 @@
     max-height: none;
   }
 }
+
+.studio-voice {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+.studio-voice .button {
+  flex: 1 1 auto;
+}
+.studio-voice .button.recording {
+  border-color: #dc2626;
+  color: #dc2626;
+}
+.studio-voice select {
+  font: inherit;
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid var(--p-line);
+  background: var(--p-surface);
+  color: inherit;
+}
+.studio-error {
+  color: #b91c1c;
+}

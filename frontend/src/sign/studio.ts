@@ -109,6 +109,34 @@ export function timeCues(cues: Cue[], duration: number): Cue[] {
   });
 }
 
+const ONES = "ноль один два три четыре пять шесть семь восемь девять десять одиннадцать двенадцать тринадцать четырнадцать пятнадцать шестнадцать семнадцать восемнадцать девятнадцать".split(" ");
+const TENS = ["", "", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят", "семьдесят", "восемьдесят", "девяносто"];
+const HUNDREDS = ["", "сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот"];
+function under1000(n: number): string[] {
+  const out: string[] = [];
+  if (n >= 100) out.push(HUNDREDS[Math.floor(n / 100)]);
+  n %= 100;
+  if (n >= 20) {
+    out.push(TENS[Math.floor(n / 10)]);
+    if (n % 10) out.push(ONES[n % 10]);
+  } else if (n || !out.length) out.push(ONES[n]);
+  return out;
+}
+/** 2024 → "две тысячи двадцать четыре" (spoken numbers are signed as words). */
+export function numberWords(n: number): string {
+  if (!Number.isInteger(n) || n < 0 || n > 999_999) return String(n);
+  if (n < 1000) return under1000(n).join(" ");
+  const k = Math.floor(n / 1000);
+  const rest = n % 1000;
+  const kw = under1000(k);
+  const last = k % 10, teen = k % 100 >= 11 && k % 100 <= 19;
+  if (!teen && last === 1) kw[kw.length - 1] = "одна";
+  if (!teen && last === 2) kw[kw.length - 1] = "две";
+  const word = teen || last === 0 || last >= 5 ? "тысяч" : last === 1 ? "тысяча" : "тысячи";
+  const head = k === 1 ? ["тысяча"] : [...kw, word];
+  return [...head, ...(rest ? under1000(rest) : [])].join(" ");
+}
+
 const clipOf = (e: DictionaryEntry, letter = false): Clip => ({
   src: e.displayVideo ?? e.video,
   label: e.label.replace(/[!?]$/u, ""),
@@ -126,7 +154,8 @@ export function translateCue(
   const byId = new Map(words.map((w) => [w.id, w]));
   const letter = new Map(letters.map((l) => [l.label, l]));
   const out: StudioWord[] = [];
-  for (const p of decomposeText(text, words, forms)) {
+  const spoken = text.replace(/\d+/g, (d) => (d.length <= 6 ? numberWords(+d) : d));
+  for (const p of decomposeText(spoken, words, forms)) {
     if (p.punctuation) continue;
     const lower = p.text.toLocaleLowerCase("ru");
     if (p.entry?.video) {

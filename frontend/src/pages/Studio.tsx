@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type ChangeEvent } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Download, FileText, FileVideo, Pause, Play, RotateCcw, Square, X } from "lucide-react";
+import { ArrowLeft, AudioLines, Download, FileText, FileVideo, Mic, Pause, Play, RotateCcw, Square, X } from "lucide-react";
+import { SPEECH_MODELS, transcribe, type SpeechProgress } from "../local-ai/speech";
 import { ProductSurface } from "../components/ProductSurface";
 import { ThemeSwitcher } from "../components/ThemeSwitcher";
 import { at } from "../i18n/automation";
@@ -75,6 +76,11 @@ export function StudioPage() {
   const frames = useRef([0, 1].map(() => ({ cv: document.createElement("canvas"), src: "" })));
   const audio = useRef<{ ctx: AudioContext; dest: MediaStreamAudioDestinationNode } | null>(null);
   const recorder = useRef<MediaRecorder | null>(null);
+  const media = useRef<Blob | null>(null);
+  const mic = useRef<{ rec: MediaRecorder; started: number } | null>(null);
+  const [recording, setRecording] = useState(0);
+  const [speechModel, setSpeechModel] = useState(SPEECH_MODELS[1].id);
+  const [speech, setSpeech] = useState<SpeechProgress | { stage: "error"; message: string } | null>(null);
 
   useEffect(() => {
     void loadWordCatalog().then(setWords);
@@ -104,7 +110,8 @@ export function StudioPage() {
     };
   }, [translated, timed, words]);
 
-  const total = video ? videoDur : (schedule[schedule.length - 1]?.end ?? 0) + 1;
+  const signsEnd = (schedule[schedule.length - 1]?.end ?? 0) + (video ? 0.5 : 1);
+  const total = video ? Math.max(videoDur, signsEnd) : signsEnd;
 
   const stats = useMemo(() => {
     const all = translated.flat().filter((w) => w.kind !== "skip");
@@ -118,30 +125,45 @@ export function StudioPage() {
   }, [translated]);
 
   // --- clock -------------------------------------------------------------
+  // With media the media is the clock. If the signs run past its end (a short
+  // voice note), a virtual "tail" clock carries on until the last sign.
+  const tail = useRef(false);
+  const onMedia = () => !!state.current.video && !!main.current && !tail.current;
   const now = () => {
-    if (state.current.video && main.current) return main.current.currentTime;
+    if (onMedia()) return main.current!.currentTime;
     const c = clock.current;
     return c.running ? c.base + (performance.now() - c.since) / 1000 : c.base;
   };
   const play = () => {
-    if (state.current.video && main.current) void main.current.play().catch(() => {});
-    else {
-      if (clock.current.base >= total) clock.current.base = 0;
-      clock.current = { base: clock.current.base, since: performance.now(), running: true };
-    }
+    if (now() >= state.current.total - 0.05) seek(0);
+    if (onMedia()) void main.current!.play().catch(() => {});
+    else clock.current = { base: clock.current.base, since: performance.now(), running: true };
     void audio.current?.ctx.resume();
     setPlaying(true);
   };
   const pause = () => {
-    if (state.current.video && main.current) main.current.pause();
+    if (onMedia()) main.current!.pause();
     else clock.current = { base: now(), since: 0, running: false };
     setPlaying(false);
   };
   const seek = (t: number) => {
-    if (state.current.video && main.current) main.current.currentTime = t;
-    else clock.current = { base: t, since: performance.now(), running: clock.current.running };
+    const m = state.current.video ? main.current : null;
+    const inMedia = !!m && t < (m.duration || 0) - 0.02;
+    tail.current = !!m && !inMedia;
+    if (m) {
+      if (inMedia) m.currentTime = t;
+      else m.pause();
+    }
+    clock.current = { base: t, since: performance.now(), running: !inMedia && clock.current.running };
     overlay.current.item = -1;
     setTime(t);
+  };
+  const onEnded = () => {
+    const m = main.current!;
+    if (state.current.total > m.duration + 0.1) {
+      tail.current = true;
+      clock.current = { base: m.duration, since: performance.now(), running: true };
+    } else setPlaying(false);
   };
 
   // --- overlay sync + drawing (one loop renders both preview and export) ---
@@ -249,14 +271,14 @@ export function StudioPage() {
       if (!cv) return;
       const s = state.current;
       const t = now();
-      const running = s.video ? !!main.current && !main.current.paused : clock.current.running;
-      if (!s.video && running && t >= s.total) {
+      const running = onMedia() ? !main.current!.paused : clock.current.running;
+      if (!onMedia() && running && t >= s.total) {
         clock.current = { base: s.total, since: 0, running: false };
         setPlaying(false);
       }
       const ov = sync(t, running);
       draw(cv, t, ov);
-      if (s.exporting && (t >= s.total - 0.05 || (s.video && main.current?.ended))) stopExport();
+      if (s.exporting && t >= s.total - 0.05) stopExport();
       if (performance.now() - lastUi > 120) {
         lastUi = performance.now();
         setTime(t);
@@ -281,7 +303,7 @@ export function StudioPage() {
     const item = s.schedule[itemAt(s.schedule, t)];
     const text = cue?.text ?? (item && t < item.end + 0.6 ? s.timed[item.cue]?.text : "");
     const pad = Math.round(H * 0.035);
-    if (s.video && m && m.readyState >= 2) {
+    if (s.video && m && m.readyState >= 2 && m.videoWidth) {
       ctx.fillStyle = "#000";
       ctx.fillRect(0, 0, W, H);
       ctx.drawImage(m, 0, 0, W, H);
@@ -375,8 +397,55 @@ export function StudioPage() {
     if (video) URL.revokeObjectURL(video.url);
     pause();
     setVideo({ url: URL.createObjectURL(f), name: f.name });
+    media.current = f;
     setResult(null);
   }
+  async function recognize(blob = media.current) {
+    if (!blob || (speech && speech.stage !== "error")) return;
+    try {
+      const found = await transcribe(blob, speechModel, setSpeech);
+      setSpeech(null);
+      if (!found.length) return setSpeech({ stage: "error", message: at("Речь не найдена", "No speech found", "Сөйлеу табылмады") });
+      setCues(found);
+      setSubsName(at("Распознанная речь", "Recognized speech", "Танылған сөйлеу"));
+      setStep(2);
+    } catch (e) {
+      setSpeech({ stage: "error", message: e instanceof Error ? e.message : String(e) });
+    }
+  }
+  async function toggleMic() {
+    if (mic.current) {
+      mic.current.rec.stop();
+      return;
+    }
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const rec = new MediaRecorder(stream);
+      const parts: Blob[] = [];
+      rec.ondataavailable = (e) => e.data.size && parts.push(e.data);
+      rec.onstop = () => {
+        stream.getTracks().forEach((t) => t.stop());
+        mic.current = null;
+        setRecording(0);
+        const blob = new Blob(parts, { type: rec.mimeType || "audio/webm" });
+        if (video) URL.revokeObjectURL(video.url);
+        setVideo({ url: URL.createObjectURL(blob), name: at("Запись голоса", "Voice recording", "Дауыс жазбасы") });
+        media.current = blob;
+        setResult(null);
+        void recognize(blob);
+      };
+      rec.start(250);
+      mic.current = { rec, started: Date.now() };
+      setRecording(1);
+    } catch {
+      setSpeech({ stage: "error", message: at("Нет доступа к микрофону", "Microphone not available", "Микрофонға рұқсат жоқ") });
+    }
+  }
+  useEffect(() => {
+    if (!recording) return;
+    const id = setInterval(() => mic.current && setRecording(1 + Math.floor((Date.now() - mic.current.started) / 1000)), 500);
+    return () => clearInterval(id);
+  }, [recording > 0]);
   async function onSubs(e: ChangeEvent<HTMLInputElement>) {
     const f = e.target.files?.[0];
     e.target.value = "";
@@ -395,6 +464,7 @@ export function StudioPage() {
     if (video) URL.revokeObjectURL(video.url);
     pause();
     setVideo(null);
+    media.current = null;
     setVideoDur(0);
     setResult(null);
     seek(0);
@@ -423,7 +493,8 @@ export function StudioPage() {
                 src={video.url}
                 playsInline
                 onLoadedMetadata={(e) => setVideoDur(e.currentTarget.duration || 0)}
-                onPause={() => setPlaying(false)}
+                onPause={() => !tail.current && setPlaying(false)}
+                onEnded={onEnded}
                 onPlay={() => setPlaying(true)}
               />
             )}
@@ -477,8 +548,8 @@ export function StudioPage() {
               <div className="studio-files">
                 <label className="studio-file">
                   <FileVideo size={18} />
-                  <span>{video ? video.name : at("Видео (необязательно)", "Video (optional)", "Бейне (міндетті емес)")}</span>
-                  <input type="file" accept="video/*" onChange={onVideo} />
+                  <span>{video ? video.name : at("Видео или аудио", "Video or audio", "Бейне не аудио")}</span>
+                  <input type="file" accept="video/*,audio/*" onChange={onVideo} />
                 </label>
                 {video && (
                   <button className="icon-button" onClick={removeVideo} aria-label={at("Убрать видео", "Remove video", "Бейнені алып тастау")}>
@@ -491,6 +562,36 @@ export function StudioPage() {
                   <input type="file" accept=".srt,.vtt,text/vtt" onChange={onSubs} />
                 </label>
               </div>
+              <div className="studio-voice">
+                <button className={`button secondary${recording ? " recording" : ""}`} onClick={toggleMic} disabled={!!speech && speech.stage !== "error"}>
+                  {recording ? <Square size={16} /> : <Mic size={16} />}
+                  {recording ? `${at("Стоп", "Stop", "Тоқтату")} · ${recording - 1} c` : at("Сказать голосом", "Speak", "Дауыспен айту")}
+                </button>
+                {video && !recording && (
+                  <button className="button secondary" onClick={() => void recognize()} disabled={!!speech && speech.stage !== "error"}>
+                    <AudioLines size={16} />
+                    {at("Речь из файла → текст", "Speech in file → text", "Файлдағы сөйлеу → мәтін")}
+                  </button>
+                )}
+                <select value={speechModel} onChange={(e) => setSpeechModel(e.target.value)} aria-label={at("Качество распознавания речи", "Speech recognition quality", "Сөйлеуді тану сапасы")}>
+                  {SPEECH_MODELS.map((m) => (
+                    <option key={m.id} value={m.id}>
+                      {m.label} · {m.size}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              {speech && (
+                <p className={`studio-hint${speech.stage === "error" ? " studio-error" : ""}`} role="status">
+                  {speech.stage === "decoding"
+                    ? at("Читаем звук…", "Reading audio…", "Дыбыс оқылуда…")
+                    : speech.stage === "download"
+                      ? `${at("Загружаем модель речи (один раз)", "Downloading speech model (once)", "Сөйлеу моделі жүктелуде (бір рет)")}: ${speech.percent}%`
+                      : speech.stage === "transcribing"
+                        ? at("Распознаём речь… звук не покидает компьютер", "Recognizing speech… audio stays on this device", "Сөйлеу танылуда… дыбыс компьютерде қалады")
+                        : speech.message}
+                </p>
+              )}
               <label className="studio-label" htmlFor="studio-script">
                 {at("Текст — одна строка = одна фраза", "Text — one line per phrase", "Мәтін — бір жол = бір сөйлем")}
               </label>

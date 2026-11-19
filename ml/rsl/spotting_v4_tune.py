@@ -6,7 +6,7 @@ signs). Usage: HALF=tune python spotting_v4_tune.py model.json [more members]"""
 import json, os, random, sys
 from pathlib import Path
 import numpy as np
-from seqnet import reference_forward
+from fast_forward import forward as reference_forward
 from spotting_eval import load_streams, make_streams, lcs
 from spotting_gate_eval import motion
 from word_features import clip_features, resample

@@ -41,17 +41,17 @@ const empty = recognizeSequence(Array.from({ length: 16 }, () => Array(66).fill(
 assert.ok(!empty?.accepted, 'no hands must never be accepted');
 
 // Words v2
-const words = loadSeqModel(await json('../public/models/rsl/words-v3-classifier.json'));
+const words = loadSeqModel(await json('../public/models/rsl/words-v4-classifier.json'));
 assert.ok(words, 'word model must validate');
-for (const f of await json('../public/models/rsl/words-v3-feature-fixtures.json')) {
+for (const f of await json('../public/models/rsl/words-v4-feature-fixtures.json')) {
   const features = clipFeatures(f.hands.map((fr) => fr.map((h) => h.map(([x, y, z]) => ({ x, y, z })))), f.width, f.height);
   assert.equal(features.length, f.features.length, 'cropped length');
   features.forEach((row, t) => close(row, f.features[t], 2e-3, `word features t=${t}`));
   close(runSeqModel(words, resampleFrames(features, 32)), f.probabilities, 5e-3, 'end-to-end word parity');
 }
 assert.equal(clipFeatures([[], []], 640, 480), null, 'no hands -> null');
-const corrupt = await json('../public/models/rsl/words-v3-classifier.json');
-assert.equal(words.labels[words.labels.length - 1], '__none__', 'v3 has a no-sign class');
+const corrupt = await json('../public/models/rsl/words-v4-classifier.json');
+assert.equal(words.labels[words.labels.length - 1], '__none__', 'v4 has a no-sign class');
 corrupt.layers[0].outputs += 1;
 assert.equal(loadSeqModel(corrupt), null, 'shape mismatch must be rejected');
 const { appendTranslation, WordSpotter } = await mod('../src/sign/wordSpotter.ts');
@@ -69,4 +69,4 @@ const ph = composePhrase([{ label: 'Привет!', at: 0 }, { label: 'имя', 
 assert.equal(ph.text, 'Как тебя зовут?');
 assert.equal(replaceTail('Привет имя ты', ph.words, ph.text), 'Привет Как тебя зовут?');
 assert.equal(composePhrase([{ label: 'ты', at: 0 }, { label: 'имя', at: 9000 }], 9000), null, 'too far apart');
-console.log('PASS: v5 letters and v3 words match Python inference; word features match; invalid inputs rejected.');
+console.log('PASS: v5 letters and v4 words match Python inference; word features match; invalid inputs rejected.');

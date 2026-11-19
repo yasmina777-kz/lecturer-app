@@ -1,0 +1,90 @@
+{
+ "model": "words-v4 (3-seed ensemble, 256/512, 4 blocks, 200 epochs, 134 hand channels)",
+ "evaluatedOn": "Slovo held-out test signers (hash buckets 0-1), never seen in training",
+ "isolatedCourseWords": {
+  "v3": {
+   "top1Among1000": 0.43412908930150307,
+   "clips": 4524,
+   "top1": 0.6038903625110522,
+   "top3": 0.8112290008841733,
+   "accept@0.3/0.1": {
+    "coverage": 0.41114058355437666,
+    "precision": 0.8021505376344086
+   },
+   "accept@0.4/0.15": {
+    "coverage": 0.28713527851458887,
+    "precision": 0.8598922247882987
+   },
+   "accept@0.5/0.2": {
+    "coverage": 0.1845711759504863,
+    "precision": 0.9005988023952096
+   },
+   "accept@0.6/0.2": {
+    "coverage": 0.10985853227232538,
+    "precision": 0.937625754527163
+   }
+  },
+  "v4": {
+   "top1Among1000": 0.3605216622458002,
+   "clips": 4524,
+   "top1": 0.6396993810786914,
+   "top3": 0.8393015030946065,
+   "accept@0.3/0.1": {
+    "coverage": 0.4109195402298851,
+    "precision": 0.8047337278106509
+   },
+   "accept@0.4/0.15": {
+    "coverage": 0.2988505747126437,
+    "precision": 0.8313609467455622
+   },
+   "accept@0.5/0.2": {
+    "coverage": 0.20579133510167993,
+    "precision": 0.8506981740064447
+   },
+   "accept@0.6/0.2": {
+    "coverage": 0.1282051282051282,
+    "precision": 0.8775862068965518
+   }
+  }
+ },
+ "continuousSpotting": {
+  "note": "settings picked on the tune half, reported on the eval half of test signers",
+  "v3_current": {
+   "threshold": 0.3,
+   "none": "argmax",
+   "precision": 0.891,
+   "recall": 0.204,
+   "restFalseWordsPer4s": 0.0
+  },
+  "v4_shipped": {
+   "threshold": 0.2,
+   "noneMax": 0.7,
+   "precision": 0.896,
+   "recall": 0.254,
+   "restFalseWordsPer4s": 0.0
+  }
+ },
+ "perSeedTest": {
+  "42": {
+   "top1All": 0.5572457966373099,
+   "top5All": 0.8402722177742193,
+   "courseTop1": 0.5981432360742706,
+   "courseTop3": 0.8079133510167993,
+   "noneOnRealSigns": 0.41566586602615424
+  },
+  "7": {
+   "top1All": 0.5711235655190819,
+   "top5All": 0.8506805444355484,
+   "courseTop1": 0.611184792219275,
+   "courseTop3": 0.8160919540229885,
+   "noneOnRealSigns": 0.45569789164665064
+  },
+  "1234": {
+   "top1All": 0.5681878836402455,
+   "top5All": 0.8434747798238591,
+   "courseTop1": 0.6076480990274093,
+   "courseTop3": 0.8105658709106985,
+   "noneOnRealSigns": 0.4440886042167067
+  }
+ }
+}

@@ -33,21 +33,26 @@ def spot(s, windows, th, m, votes, gate, cache):
         if v >= votes and cand != last: out.append(cand); last = cand
     return out
 
-clips = load_streams()
-streams = make_streams(clips, 'eval', 120, 2)
-rng = random.Random(3)
-# Resting hands: one frame from the start of a clip held 4 s with landmark jitter.
-rest = []
-for c in rng.sample([c for c in clips.values() if c['split'] == 'test'], 120):
-    base = next((fr for fr in c['hands'] if fr), None)
-    if not base: continue
-    frames = [[(np.array(hd) + np.random.default_rng(i).normal(0, .003, (21, 3))).tolist() for hd in base] for i in range(80)]
-    rest.append(dict(frames=frames, labels=[], w=c['w'], h=c['h']))
-caches = [dict() for _ in streams]; rcaches = [dict() for _ in rest]
-for gate in (0, .3, .6, 1.0):
-    for th, votes in ((.3, 2), (.4, 2), (.5, 2)):
-        c = e = tot = 0
-        for s, ca in zip(streams, caches):
-            o = spot(s, (16, 24, 32), th, .2, votes, gate, ca); c += lcs(o, s['labels']); e += len(o); tot += len(s['labels'])
-        fp = sum(len(spot(s, (16, 24, 32), th, .2, votes, gate, ca)) for s, ca in zip(rest, rcaches))
-        print(json.dumps(dict(gate=gate, th=th, votes=votes, precision=round(c / max(1, e), 3), recall=round(c / tot, 3), restFalseWordsPer4s=round(fp / len(rest), 3))), flush=True)
+def main():
+    clips = load_streams()
+    streams = make_streams(clips, 'eval', 120, 2)
+    rng = random.Random(3)
+    # Resting hands: one frame from the start of a clip held 4 s with landmark jitter.
+    rest = []
+    for c in rng.sample([c for c in clips.values() if c['split'] == 'test'], 120):
+        base = next((fr for fr in c['hands'] if fr), None)
+        if not base: continue
+        frames = [[(np.array(hd) + np.random.default_rng(i).normal(0, .003, (21, 3))).tolist() for hd in base] for i in range(80)]
+        rest.append(dict(frames=frames, labels=[], w=c['w'], h=c['h']))
+    caches = [dict() for _ in streams]; rcaches = [dict() for _ in rest]
+    for gate in (0, .3, .6, 1.0):
+        for th, votes in ((.3, 2), (.4, 2), (.5, 2)):
+            c = e = tot = 0
+            for s, ca in zip(streams, caches):
+                o = spot(s, (16, 24, 32), th, .2, votes, gate, ca); c += lcs(o, s['labels']); e += len(o); tot += len(s['labels'])
+            fp = sum(len(spot(s, (16, 24, 32), th, .2, votes, gate, ca)) for s, ca in zip(rest, rcaches))
+            print(json.dumps(dict(gate=gate, th=th, votes=votes, precision=round(c / max(1, e), 3), recall=round(c / tot, 3), restFalseWordsPer4s=round(fp / len(rest), 3))), flush=True)
+
+
+if __name__ == "__main__":
+    main()

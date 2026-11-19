@@ -11,10 +11,14 @@ import { clipFeatures, MOTION_GATE, motionExtent, resampleFrames, type HandPoint
 export const SPOT = {
   hopMs: 300,
   windowsMs: [800, 1200, 1600],
-  threshold: 0.3,
+  threshold: 0.2,
   margin: 0.2,
   votes: 2,
   restMs: 400,
+  /** Skip a window only when the model is this sure it is not a sign. The
+   * v4 "no sign" class also fires on half-finished real signs, so a plain
+   * argmax test throws away too many words. */
+  noneMax: 0.7,
 };
 type Frame = { at: number; hands: HandPoint[][] };
 export type Spotted = { label: string; confidence: number; fingerspelling: boolean; alternatives: string[] };
@@ -73,12 +77,13 @@ export class WordSpotter {
       if (motionExtent(feats) < MOTION_GATE) continue; // hands resting, not signing
       const p = runSeqModel(model, resampleFrames(feats, model.frames ?? 32));
       if (!p) continue;
-      const top = p.indexOf(Math.max(...p));
-      if (model.labels[top] === "__none__") continue; // v3: rest, half sign or transition
+      const none = model.labels.indexOf("__none__");
+      if (none >= 0 && p[none] >= SPOT.noneMax) continue; // rest, half sign or transition
+      const top = p.reduce((b, v, i) => (i !== none && v > p[b] ? i : b), none === 0 ? 1 : 0);
       const letter = LETTER.test(model.labels[top]); // Slovo also contains alphabet signs
       const ranked = p
         .map((v, i) => ({ label: model.labels[i], v }))
-        .filter((r) => !course || course.has(r.label));
+        .filter((r) => r.label !== "__none__" && (!course || course.has(r.label)));
       const sum = ranked.reduce((a, r) => a + r.v, 0) || 1;
       ranked.sort((a, b) => b.v - a.v);
       const p1 = ranked[0].v / sum, p2 = (ranked[1]?.v ?? 0) / sum;

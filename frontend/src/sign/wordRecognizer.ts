@@ -5,9 +5,9 @@ import { normalizeSignText } from "./dictionary";
 /** Ensemble members (same architecture, different training seeds); the
  * browser averages their probabilities. */
 export const WORD_MODEL_URLS = [
-  "/models/rsl/words-v3-classifier.json",
-  "/models/rsl/words-v3-seed7-classifier.json",
-  "/models/rsl/words-v3-seed1234-classifier.json",
+  "/models/rsl/words-v4-classifier.json",
+  "/models/rsl/words-v4-seed7-classifier.json",
+  "/models/rsl/words-v4-seed1234-classifier.json",
 ];
 export type WordModel = SeqModel & { members: SeqModel[] };
 let loading: Promise<WordModel> | null = null;

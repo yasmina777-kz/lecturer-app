@@ -3,7 +3,7 @@ Threshold/margin (0.5 / 0.2) were fixed before this evaluation was run."""
 import csv, hashlib, json, sys
 from pathlib import Path
 import numpy as np
-from seqnet import reference_forward
+from fast_forward import forward as reference_forward
 from word_features import resample
 ROOT = Path(__file__).resolve().parents[2]; DATA = ROOT / 'ml/rsl/data'
 models = [json.loads(Path(a).read_text()) for a in sys.argv[1:]]; model = models[0]
