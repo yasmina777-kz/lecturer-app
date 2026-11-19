@@ -1,4 +1,5 @@
-import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { lazyPage } from "../lazyPage";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import {
   ArrowLeft,
@@ -22,7 +23,7 @@ import { PHRASE_LESSONS, PhraseSession } from "./PhraseLessons";
 import "./sign-workspace.css";
 import "./sign-vocabulary.css";
 
-const WordPracticeCamera = lazy(() =>
+const WordPracticeCamera = lazyPage(() =>
   import("../components/WordPracticeCamera").then((m) => ({ default: m.WordPracticeCamera })),
 );
 const LESSON_SIZE = 8;

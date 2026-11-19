@@ -1,5 +1,6 @@
+import { lazyPage } from "../lazyPage";
 import { LearningHome } from "./LearningHome";
-import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import {
   Link,
   useSearchParams,
@@ -30,12 +31,12 @@ import { planMotion, type MotionAsset } from "../sign/motion";
 import { alphabetEntries } from "../sign/dictionary";
 import { alphabetIllustration } from "../sign/alphabetIllustrations";
 import { AlphabetCardArt } from "../components/AlphabetCardArt";
-const Mentor = lazy(() =>
+const Mentor = lazyPage(() =>
   import("../components/GestureMentor3D").then((m) => ({
     default: m.GestureMentor3D,
   })),
 );
-const Camera = lazy(() =>
+const Camera = lazyPage(() =>
   import("../components/TemporalSignCamera").then((m) => ({
     default: m.TemporalSignCamera,
   })),

@@ -1,4 +1,5 @@
-import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { lazyPage } from "../lazyPage";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Search, BookOpen, Play, ArrowRight } from "lucide-react";
 import { at } from "../i18n/automation";
@@ -19,7 +20,7 @@ import { phraseGroups } from "../sign/phraseExamples";
 import { alphabetIllustration } from "../sign/alphabetIllustrations";
 import { AlphabetCardArt } from "../components/AlphabetCardArt";
 import { SignActionCards } from "../components/SignActionCards";
-const WordPracticeCamera = lazy(() =>
+const WordPracticeCamera = lazyPage(() =>
   import("../components/WordPracticeCamera").then((m) => ({
     default: m.WordPracticeCamera,
   })),

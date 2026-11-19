@@ -1,4 +1,5 @@
-import { lazy, Suspense, useState } from "react";
+import { lazyPage } from "../lazyPage";
+import { Suspense, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   ArrowLeft,
@@ -25,7 +26,7 @@ import { LearningMentorPreview } from "./LearningHome";
 import { SHOW_HUMAN_VIDEOS } from "../components/SignSequencePlayer";
 import { PhraseVideos } from "../components/HumanSequencePlayer";
 import "./lesson-simple.css";
-const GesturePreview = lazy(() =>
+const GesturePreview = lazyPage(() =>
   import("./GesturePreviewPage").then((m) => ({
     default: m.GesturePreviewPage,
   })),

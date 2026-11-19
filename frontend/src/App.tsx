@@ -7,35 +7,36 @@ import {
   Outlet,
   useLocation,
 } from "react-router-dom";
-import { useEffect, lazy, Suspense } from "react";
+import { useEffect, Suspense } from "react";
+import { lazyPage } from "./lazyPage";
 import { useAuth } from "./context/AuthContext";
 import { Shell } from "./components/Shell";
 import { ErrorMessage, Loading } from "./components/UI";
 import { AuthPage } from "./pages/AuthPage";
-const GesturePreviewPage = lazy(() => import("./pages/GesturePreviewPage").then(m => ({default:m.GesturePreviewPage})));
-const MixamoPreviewPage = lazy(() => import("./pages/MixamoPreviewPage").then(m => ({default:m.MixamoPreviewPage})));
+const GesturePreviewPage = lazyPage(() => import("./pages/GesturePreviewPage").then(m => ({default:m.GesturePreviewPage})));
+const MixamoPreviewPage = lazyPage(() => import("./pages/MixamoPreviewPage").then(m => ({default:m.MixamoPreviewPage})));
 import LandingPage from "./pages/LandingPage";
-const SignLearningPage = lazy(() => import("./pages/SignWorkspace").then(m => ({default:m.SignLearningPage})));
-const SignLessonPage = lazy(() => import("./pages/SignWorkspace").then(m => ({default:m.SignLessonPage})));
-const SignTextPage = lazy(() => import("./pages/SignWorkspace").then(m => ({default:m.SignTextPage})));
-const SignRecognitionPage = lazy(() => import("./pages/SignRecognition").then(m => ({default:m.SignRecognitionPage})));
-const StudioPage = lazy(() => import("./pages/Studio").then(m => ({default:m.StudioPage})));
-const SignGrammarPage = lazy(() => import("./pages/SignGrammar").then(m => ({default:m.SignGrammarPage})));
-const SignVocabularyPage = lazy(() => import("./pages/SignVocabulary").then(m => ({default:m.SignVocabularyPage})));
-const SignPracticePage = lazy(() => import("./pages/SignWorkspace").then(m => ({default:m.SignPracticePage})));
-const SignDialoguesPage = lazy(() => import("./pages/SignActivities").then(m => ({default:m.SignDialoguesPage})));
-const SignUnderstandingPage = lazy(() => import("./pages/SignActivities").then(m => ({default:m.SignUnderstandingPage})));
-const SignHelpPage = lazy(() => import("./pages/SignWorkspace").then(m => ({default:m.SignHelpPage})));
+const SignLearningPage = lazyPage(() => import("./pages/SignWorkspace").then(m => ({default:m.SignLearningPage})));
+const SignLessonPage = lazyPage(() => import("./pages/SignWorkspace").then(m => ({default:m.SignLessonPage})));
+const SignTextPage = lazyPage(() => import("./pages/SignWorkspace").then(m => ({default:m.SignTextPage})));
+const SignRecognitionPage = lazyPage(() => import("./pages/SignRecognition").then(m => ({default:m.SignRecognitionPage})));
+const StudioPage = lazyPage(() => import("./pages/Studio").then(m => ({default:m.StudioPage})));
+const SignGrammarPage = lazyPage(() => import("./pages/SignGrammar").then(m => ({default:m.SignGrammarPage})));
+const SignVocabularyPage = lazyPage(() => import("./pages/SignVocabulary").then(m => ({default:m.SignVocabularyPage})));
+const SignPracticePage = lazyPage(() => import("./pages/SignWorkspace").then(m => ({default:m.SignPracticePage})));
+const SignDialoguesPage = lazyPage(() => import("./pages/SignActivities").then(m => ({default:m.SignDialoguesPage})));
+const SignUnderstandingPage = lazyPage(() => import("./pages/SignActivities").then(m => ({default:m.SignUnderstandingPage})));
+const SignHelpPage = lazyPage(() => import("./pages/SignWorkspace").then(m => ({default:m.SignHelpPage})));
 import { LibraryPage } from "./pages/LibraryPage";
 import { CreatePage } from "./pages/CreatePage";
 import { LecturePlayerPage } from "./pages/LecturePlayerPage";
 import { GroupsPage } from "./pages/GroupsPage";
 import { KnowledgePage } from "./pages/KnowledgePage";
-const LocalMentorPage = lazy(() => import("./pages/LocalMentorPage").then(m => ({default:m.LocalMentorPage})));
-const CoursesPage = lazy(() => import("./pages/CoursesPage").then(m => ({default:m.CoursesPage})));
-const ReportsPage = lazy(() => import("./pages/ReportsPage").then(m => ({default:m.ReportsPage})));
+const LocalMentorPage = lazyPage(() => import("./pages/LocalMentorPage").then(m => ({default:m.LocalMentorPage})));
+const CoursesPage = lazyPage(() => import("./pages/CoursesPage").then(m => ({default:m.CoursesPage})));
+const ReportsPage = lazyPage(() => import("./pages/ReportsPage").then(m => ({default:m.ReportsPage})));
 import { SettingsPage } from "./pages/SettingsPage";
-const AdminPage = lazy(() => import("./pages/AdminPage").then(m => ({default:m.AdminPage})));
+const AdminPage = lazyPage(() => import("./pages/AdminPage").then(m => ({default:m.AdminPage})));
 function ProtectedRoute({ admin = false, teacher = false }: { admin?: boolean; teacher?: boolean }) {
   const { user } = useAuth();
   return !user ? (

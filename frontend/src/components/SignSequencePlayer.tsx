@@ -1,4 +1,5 @@
-import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { lazyPage } from "../lazyPage";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import {
   Play,
   Pause,
@@ -19,7 +20,7 @@ import { alphabetIllustration } from "../sign/alphabetIllustrations";
 import "../pages/gesture-preview.css";
 import "../pages/sign-trainer.css";
 import "../pages/sign-dictionary.css";
-const Mentor = lazy(() =>
+const Mentor = lazyPage(() =>
   import("./GestureMentor3D").then((m) => ({ default: m.GestureMentor3D })),
 );
 /** The 3D avatar is paused for now: every sign is shown with the real signer
@@ -44,7 +45,7 @@ export function SignSequencePlayer(props: PlayerProps) {
         </button>
       </div>
       {showAvatar ? (
-        <AvatarSequencePlayer {...props} plan={forAvatar!} modelUrl={`${AVATAR_MODEL}?v=1`} framing="sign" studio />
+        <AvatarSequencePlayer {...props} plan={forAvatar!} modelUrl={`${AVATAR_MODEL}?v=3`} framing="sign" studio />
       ) : (
         <HumanSequencePlayer plan={props.plan} autoPlay={props.autoPlay} onLetterChange={props.onLetterChange} />
       )}

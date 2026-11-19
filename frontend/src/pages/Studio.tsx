@@ -139,7 +139,7 @@ export function StudioPage() {
     void (async () => {
       if (!stage.current) {
         const { AvatarStage } = await import("../sign/avatarStage");
-        stage.current ??= new AvatarStage(`${AVATAR_MODEL}?v=2`, "/avatars/alex/ready-idle.glb");
+        stage.current ??= new AvatarStage(`${AVATAR_MODEL}?v=3`, "/avatars/alex/ready-idle.glb");
       }
       setStageReady(false);
       await stage.current.prepare(schedule.map((i) => i.src).filter((u) => u.endsWith(".glb")));
@@ -306,6 +306,10 @@ export function StudioPage() {
       }
       return frame;
     };
+    let lastState: unknown = null;
+    let settle = 0;
+    let lastAvatar: HTMLCanvasElement | null = null;
+    let lastAvatarAt = 0;
     const tick = () => {
       raf = requestAnimationFrame(tick);
       const cv = canvas.current;
@@ -317,12 +321,24 @@ export function StudioPage() {
         clock.current = { base: s.total, since: 0, running: false };
         setPlaying(false);
       }
+      // Paused and nothing changed: skip the frame (keeps the page light).
+      if (s !== lastState) {
+        lastState = s;
+        settle = 30;
+      }
+      if (!running && !s.exporting && settle-- <= 0) return;
       let ov: HTMLCanvasElement | null;
       if (s.signer === "avatar" && stage.current) {
         const k = itemAt(s.schedule, t);
         const it = s.schedule[k];
         const on = it && t < it.end && it.src.endsWith(".glb");
-        ov = stage.current.draw(on ? it.src : null, on ? (t - it.start) * it.rate : 0, t);
+        // The 3D avatar renders at most 30 times a second.
+        const nowMs = performance.now();
+        if (!lastAvatar || nowMs - lastAvatarAt > 32 || !running) {
+          lastAvatar = stage.current.draw(on ? it.src : null, on ? (t - it.start) * it.rate : 0, t);
+          lastAvatarAt = nowMs;
+        }
+        ov = lastAvatar;
       } else ov = sync(t, running);
       draw(cv, t, ov);
       if (s.exporting && t >= s.total - 0.05) stopExport();
@@ -549,6 +565,9 @@ export function StudioPage() {
             <video ref={ovB} muted playsInline preload="auto" />
           </div>
             {!words && <div className="studio-loading">{at("Загружаем словарь…", "Loading dictionary…", "Сөздік жүктелуде…")}</div>}
+            {words && signer === "avatar" && !stageReady && (
+              <div className="studio-loading">{at("Загружаем аватара…", "Loading the avatar…", "Аватар жүктелуде…")}</div>
+            )}
           </div>
           <div className="studio-transport">
             <button className="icon-button" onClick={() => (playing ? pause() : play())} disabled={exporting} aria-label={playing ? "Пауза" : "Играть"}>

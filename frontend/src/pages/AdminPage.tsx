@@ -1,5 +1,6 @@
-import { lazy, Suspense } from "react";
-const AutomationPanel = lazy(() => import("../components/AutomationPanel").then(m => ({default:m.AutomationPanel})));
+import { lazyPage } from "../lazyPage";
+import { Suspense } from "react";
+const AutomationPanel = lazyPage(() => import("../components/AutomationPanel").then(m => ({default:m.AutomationPanel})));
 import { at } from "../i18n/automation";
 import { useNavigate } from "react-router-dom";
 import { AdminAudience } from "../components/AdminAudience";

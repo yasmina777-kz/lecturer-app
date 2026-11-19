@@ -1,7 +1,8 @@
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { lazyPage } from "../lazyPage";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { Play, Pause } from "lucide-react";
 import { at } from "../i18n/automation";
-const LiveMentorAvatar = lazy(() => import("./LiveMentorAvatar"));
+const LiveMentorAvatar = lazyPage(() => import("./LiveMentorAvatar"));
 
 export function LectureAvatarDemo() {
   const section = useRef<HTMLElement>(null);

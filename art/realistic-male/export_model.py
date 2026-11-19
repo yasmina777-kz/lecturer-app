@@ -29,7 +29,7 @@ for o in bpy.data.objects:
 bpy.context.view_layer.objects.active = rig
 bpy.ops.export_scene.gltf(
     filepath=str(OUT / "alex.glb"), export_format="GLB", use_selection=True, export_apply=False,
-    export_animations=False, export_yup=True, export_image_format="AUTO", export_jpeg_quality=85,
+    export_animations=False, export_yup=True, export_image_format="WEBP", export_image_quality=85,
     export_skins=True, export_morph=True, export_morph_normal=False,
 )
 # Alpha modes: Blender exports every MPFB material as BLEND, which breaks depth
@@ -49,7 +49,11 @@ for m in doc["materials"]:
         m.pop("alphaMode", None)
         m.pop("alphaCutoff", None)
         m["doubleSided"] = name in ("Shirt", "Trousers", "Tie")
-doc.pop("extensionsUsed", None)
+for k in ("extensionsUsed", "extensionsRequired"):
+    if k in doc:
+        doc[k] = [e for e in doc[k] if e not in ("KHR_materials_clearcoat", "KHR_materials_specular")]
+        if not doc[k]:
+            doc.pop(k)
 body = json.dumps(doc, separators=(",", ":")).encode()
 body += b" " * (-len(body) % 4)
 rest = glb[20 + jlen:]
