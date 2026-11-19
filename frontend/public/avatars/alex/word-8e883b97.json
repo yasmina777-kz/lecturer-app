@@ -1,7 +1,1 @@
-{
-  "duration": 3.3,
-  "source": "frontend/public/avatars/sign-motion/word-8e883b97.glb",
-  "frames": 100,
-  "maxLocalStepDegrees": 20.0950568684122,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.3333333333333333, "label": "четверг", "source": "/research/rsl/words/8e883b97-6b67-4404-8d9a-c17117421c18.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

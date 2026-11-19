@@ -1,7 +1,1 @@
-{
-  "duration": 3.2,
-  "source": "frontend/public/avatars/sign-motion/word-b08629fc.glb",
-  "frames": 97,
-  "maxLocalStepDegrees": 21.56835257804605,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.5666666666666667, "label": "трудный", "source": "/research/rsl/words/b08629fc-4f47-4fb6-a288-028b56256f4b.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

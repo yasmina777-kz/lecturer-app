@@ -1,7 +1,1 @@
-{
-  "duration": 4.9,
-  "source": "frontend/public/avatars/sign-motion/word-ceedcb88.glb",
-  "frames": 148,
-  "maxLocalStepDegrees": 16.811993255156757,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.7333333333333334, "label": "идти", "source": "/research/rsl/words/ceedcb88-163e-49e4-b11d-172c52a97b2b.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

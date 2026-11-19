@@ -1,7 +1,1 @@
-{
-  "duration": 3.4,
-  "source": "frontend/public/avatars/sign-motion/word-c2304594.glb",
-  "frames": 103,
-  "maxLocalStepDegrees": 9.88988681438856,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.3666666666666667, "label": "Память", "source": "/research/rsl/words/8b39dda1-b863-438a-b85c-659b9345d1d6.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

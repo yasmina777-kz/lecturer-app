@@ -1,7 +1,1 @@
-{
-  "duration": 2.533333333333333,
-  "source": "frontend/public/avatars/sign-motion/letter-41d.glb",
-  "frames": 77,
-  "maxLocalStepDegrees": 11.05580181325703,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 2.2, "label": "Н", "source": "/research/rsl/alphabet/041d.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

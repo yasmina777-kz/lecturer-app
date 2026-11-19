@@ -1,7 +1,1 @@
-{
-  "duration": 5.0,
-  "source": "frontend/public/avatars/sign-motion/word-2a7729d7.glb",
-  "frames": 151,
-  "maxLocalStepDegrees": 12.606138641634034,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 2.466666666666667, "label": "потом", "source": "/research/rsl/words/2a7729d7-507e-4748-8588-6954d0d52c18.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

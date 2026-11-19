@@ -1,7 +1,1 @@
-{
-  "duration": 4.833333333333333,
-  "source": "frontend/public/avatars/sign-motion/word-d388f4c7.glb",
-  "frames": 146,
-  "maxLocalStepDegrees": 26.893886932398132,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.4666666666666666, "label": "лошадь", "source": "/research/rsl/words/d388f4c7-842f-406e-9c34-862b9c7cad2f.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

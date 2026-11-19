@@ -1,7 +1,1 @@
-{
-  "duration": 3.1,
-  "source": "frontend/public/avatars/sign-motion/word-2c1fd7ff.glb",
-  "frames": 94,
-  "maxLocalStepDegrees": 9.88750905478375,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.8333333333333333, "label": "карандаш", "source": "/research/rsl/words/2c1fd7ff-e6c7-442d-bb43-d86eb04fb5c8.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

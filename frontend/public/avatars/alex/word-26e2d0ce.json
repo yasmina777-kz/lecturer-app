@@ -1,7 +1,1 @@
-{
-  "duration": 3.966666666666667,
-  "source": "frontend/public/avatars/sign-motion/word-26e2d0ce.glb",
-  "frames": 120,
-  "maxLocalStepDegrees": 20.522570361394347,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.2333333333333334, "label": "сколько", "source": "/research/rsl/words/26e2d0ce-9425-4a44-88b3-5373a109e49f.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

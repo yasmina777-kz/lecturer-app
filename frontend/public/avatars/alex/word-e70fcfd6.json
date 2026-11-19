@@ -1,7 +1,1 @@
-{
-  "duration": 6.733333333333333,
-  "source": "frontend/public/avatars/sign-motion/word-e70fcfd6.glb",
-  "frames": 203,
-  "maxLocalStepDegrees": 12.709610884917849,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.4666666666666666, "label": "красный", "source": "/research/rsl/words/e70fcfd6-52db-4656-ac39-c4dfbf73939e.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

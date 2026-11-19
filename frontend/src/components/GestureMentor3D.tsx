@@ -287,8 +287,10 @@ export function GestureMentor3D({
         async (url) => [url, await loadSavedMotion(url)] as const,
       ),
     );
+    // Each avatar has its own idle clip (bones and rest pose differ).
+    const idleBase = modelUrl.includes("/avatars/alex/") ? "/avatars/alex" : "/avatars/sign-motion";
     const idlePromise = naturalIdle
-      ? fetch("/avatars/sign-motion/ready-idle.json", {
+      ? fetch(`${idleBase}/ready-idle.json`, {
           cache: "no-cache",
         }).then(async (response) => {
           if (!response.ok) throw new Error("Missing idle motion metadata");
@@ -296,7 +298,7 @@ export function GestureMentor3D({
           if (typeof meta.revision !== "string")
             throw new Error("Missing idle revision");
           return loadSavedMotion(
-            `/avatars/sign-motion/ready-idle.glb?v=${encodeURIComponent(meta.revision)}`,
+            `${idleBase}/ready-idle.glb?v=${encodeURIComponent(meta.revision)}`,
           );
         })
       : Promise.resolve(undefined);

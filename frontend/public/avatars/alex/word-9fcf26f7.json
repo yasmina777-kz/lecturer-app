@@ -1,7 +1,1 @@
-{
-  "duration": 2.6666666666666665,
-  "source": "frontend/public/avatars/sign-motion/word-9fcf26f7.glb",
-  "frames": 81,
-  "maxLocalStepDegrees": 14.671924233462512,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.8666666666666667, "label": "хотеть", "source": "/research/rsl/words/9fcf26f7-f7db-45b2-8334-083a30751af0.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

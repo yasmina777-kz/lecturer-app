@@ -1,7 +1,1 @@
-{
-  "duration": 2.6666666666666665,
-  "source": "frontend/public/avatars/sign-motion/word-b45703d1.glb",
-  "frames": 81,
-  "maxLocalStepDegrees": 9.890995866355041,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.4333333333333333, "label": "спать", "source": "/research/rsl/words/b45703d1-bc4e-4ec7-87cb-ecf59c7d49b5.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

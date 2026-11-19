@@ -1,7 +1,1 @@
-{
-  "duration": 5.333333333333333,
-  "source": "frontend/public/avatars/sign-motion/word-9543d766.glb",
-  "frames": 161,
-  "maxLocalStepDegrees": 16.607753523500453,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 2.433333333333333, "label": "радость", "source": "/research/rsl/words/9543d766-c852-4d5b-8638-3987a05d901f.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

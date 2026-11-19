@@ -1,7 +1,1 @@
-{
-  "duration": 4.966666666666667,
-  "source": "frontend/public/avatars/sign-motion/word-0bf7a453.glb",
-  "frames": 150,
-  "maxLocalStepDegrees": 12.52957222103819,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 2.2666666666666666, "label": "животное", "source": "/research/rsl/words/0bf7a453-36e6-45f4-91ab-6468427ca16e.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

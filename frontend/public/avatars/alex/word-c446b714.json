@@ -1,7 +1,1 @@
-{
-  "duration": 3.0,
-  "source": "frontend/public/avatars/sign-motion/word-c446b714.glb",
-  "frames": 91,
-  "maxLocalStepDegrees": 14.1366568223606,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.9333333333333333, "label": "вторник", "source": "/research/rsl/words/4a6b4832-a665-4eb3-8701-d3dcc31a327f.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

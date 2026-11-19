@@ -1,7 +1,1 @@
-{
-  "duration": 4.233333333333333,
-  "source": "frontend/public/avatars/sign-motion/word-620a9fc5.glb",
-  "frames": 128,
-  "maxLocalStepDegrees": 16.10757535548583,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.2666666666666666, "label": "знать", "source": "/research/rsl/words/620a9fc5-4b35-4cfc-864a-8385dd8b74c3.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

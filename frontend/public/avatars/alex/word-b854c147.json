@@ -1,7 +1,1 @@
-{
-  "duration": 4.433333333333334,
-  "source": "frontend/public/avatars/sign-motion/word-b854c147.glb",
-  "frames": 134,
-  "maxLocalStepDegrees": 15.043139892210828,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 2.1666666666666665, "label": "весна", "source": "/research/rsl/words/30b8b721-5c62-4ddc-856b-3f328af48ebc.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

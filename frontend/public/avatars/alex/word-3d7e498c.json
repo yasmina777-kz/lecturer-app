@@ -1,7 +1,1 @@
-{
-  "duration": 2.7333333333333334,
-  "source": "frontend/public/avatars/sign-motion/word-3d7e498c.glb",
-  "frames": 83,
-  "maxLocalStepDegrees": 23.87539069664313,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.1666666666666667, "label": "писать", "source": "/research/rsl/words/3d7e498c-feed-4cfb-bcb9-624ef427fda8.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

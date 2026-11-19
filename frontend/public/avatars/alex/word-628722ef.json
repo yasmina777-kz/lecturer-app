@@ -1,7 +1,1 @@
-{
-  "duration": 2.433333333333333,
-  "source": "frontend/public/avatars/sign-motion/word-628722ef.glb",
-  "frames": 74,
-  "maxLocalStepDegrees": 10.414359111507268,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.4666666666666666, "label": "год", "source": "/research/rsl/words/628722ef-4a4c-4715-8728-4d3675c326fe.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

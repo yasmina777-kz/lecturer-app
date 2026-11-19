@@ -1,7 +1,1 @@
-{
-  "duration": 3.1,
-  "source": "frontend/public/avatars/sign-motion/word-317890bf.glb",
-  "frames": 94,
-  "maxLocalStepDegrees": 11.982976087424165,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.9666666666666666, "label": "закончить", "source": "/research/rsl/words/c7e53269-b327-40ce-8ee9-6b73b105b165.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

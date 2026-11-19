@@ -1,7 +1,1 @@
-{
-  "duration": 7.7,
-  "source": "frontend/public/avatars/sign-motion/word-23b3909e.glb",
-  "frames": 232,
-  "maxLocalStepDegrees": 11.12041967167358,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.9333333333333333, "label": "комната", "source": "/research/rsl/words/23b3909e-a63a-44dd-b5be-56182b039e3b.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

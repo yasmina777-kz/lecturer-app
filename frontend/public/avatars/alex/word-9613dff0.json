@@ -1,7 +1,1 @@
-{
-  "duration": 3.3666666666666667,
-  "source": "frontend/public/avatars/sign-motion/word-9613dff0.glb",
-  "frames": 102,
-  "maxLocalStepDegrees": 17.21654365214932,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.6666666666666667, "label": "зима", "source": "/research/rsl/words/9613dff0-6050-4f02-86d4-04a49ab40a60.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

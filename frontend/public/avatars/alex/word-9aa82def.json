@@ -1,7 +1,1 @@
-{
-  "duration": 4.733333333333333,
-  "source": "frontend/public/avatars/sign-motion/word-9aa82def.glb",
-  "frames": 143,
-  "maxLocalStepDegrees": 16.756443326637044,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.5666666666666667, "label": "есть", "source": "/research/rsl/words/9aa82def-81ea-49c7-af40-2db2ad366921.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

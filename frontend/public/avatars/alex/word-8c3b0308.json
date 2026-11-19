@@ -1,7 +1,1 @@
-{
-  "duration": 3.6666666666666665,
-  "source": "frontend/public/avatars/sign-motion/word-8c3b0308.glb",
-  "frames": 111,
-  "maxLocalStepDegrees": 10.17762390110098,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.5666666666666667, "label": "вспомнить", "source": "/research/rsl/words/8c3b0308-8f51-4847-bc97-8dccdc15e900.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

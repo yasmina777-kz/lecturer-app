@@ -1,7 +1,1 @@
-{
-  "duration": 3.4,
-  "source": "frontend/public/avatars/sign-motion/word-44de272e.glb",
-  "frames": 103,
-  "maxLocalStepDegrees": 14.628692551110918,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.6333333333333333, "label": "понедельник", "source": "/research/rsl/words/44de272e-c50b-4663-b113-eb50505d58db.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

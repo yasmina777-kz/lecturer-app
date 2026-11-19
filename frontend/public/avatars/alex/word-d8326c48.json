@@ -1,7 +1,1 @@
-{
-  "duration": 4.533333333333333,
-  "source": "frontend/public/avatars/sign-motion/word-d8326c48.glb",
-  "frames": 137,
-  "maxLocalStepDegrees": 11.024488811007107,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.6666666666666667, "label": "думать", "source": "/research/rsl/words/d8326c48-f788-4e5c-bff2-838e61630061.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

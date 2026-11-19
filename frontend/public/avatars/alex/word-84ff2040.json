@@ -1,7 +1,1 @@
-{
-  "duration": 4.666666666666667,
-  "source": "frontend/public/avatars/sign-motion/word-84ff2040.glb",
-  "frames": 141,
-  "maxLocalStepDegrees": 9.85965042070656,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.4666666666666666, "label": "новый", "source": "/research/rsl/words/84ff2040-2ace-4600-bdf2-d613883c459a.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

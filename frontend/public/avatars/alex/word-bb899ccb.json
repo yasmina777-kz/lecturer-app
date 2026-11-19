@@ -1,7 +1,1 @@
-{
-  "duration": 2.933333333333333,
-  "source": "frontend/public/avatars/sign-motion/word-bb899ccb.glb",
-  "frames": 89,
-  "maxLocalStepDegrees": 11.715378667253175,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.7333333333333334, "label": "пятница", "source": "/research/rsl/words/bb899ccb-e512-4521-bbf3-7718a3923e72.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

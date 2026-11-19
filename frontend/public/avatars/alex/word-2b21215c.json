@@ -1,7 +1,1 @@
-{
-  "duration": 3.566666666666667,
-  "source": "frontend/public/avatars/sign-motion/word-2b21215c.glb",
-  "frames": 108,
-  "maxLocalStepDegrees": 20.448206676805835,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.5333333333333334, "label": "шесть", "source": "/research/rsl/words/2b21215c-6693-4faa-998a-8cccaa00707f.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

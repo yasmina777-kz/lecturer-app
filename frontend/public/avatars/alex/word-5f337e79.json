@@ -1,7 +1,1 @@
-{
-  "duration": 5.333333333333333,
-  "source": "frontend/public/avatars/sign-motion/word-5f337e79.glb",
-  "frames": 161,
-  "maxLocalStepDegrees": 16.47656778765931,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 2.566666666666667, "label": "найти", "source": "/research/rsl/words/c709009f-b7a0-40bb-93ef-82677c013336.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

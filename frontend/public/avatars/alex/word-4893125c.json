@@ -1,7 +1,1 @@
-{
-  "duration": 3.3333333333333335,
-  "source": "frontend/public/avatars/sign-motion/word-4893125c.glb",
-  "frames": 101,
-  "maxLocalStepDegrees": 19.405229960355715,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.5666666666666667, "label": "интересный", "source": "/research/rsl/words/4893125c-dccf-4a97-8b67-861fd3ada825.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

@@ -1,7 +1,1 @@
-{
-  "duration": 7.3,
-  "source": "frontend/public/avatars/sign-motion/word-594f0e3d.glb",
-  "frames": 220,
-  "maxLocalStepDegrees": 20.62011400047859,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 2.1666666666666665, "label": "скоро", "source": "/research/rsl/words/594f0e3d-531f-44a9-bded-fb18c9cd8a24.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

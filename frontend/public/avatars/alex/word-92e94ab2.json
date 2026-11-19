@@ -1,7 +1,1 @@
-{
-  "duration": 3.2333333333333334,
-  "source": "frontend/public/avatars/sign-motion/word-92e94ab2.glb",
-  "frames": 98,
-  "maxLocalStepDegrees": 12.786637489509022,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 2.066666666666667, "label": "ответить", "source": "/research/rsl/words/92e94ab2-b1ae-453a-8288-2bdfc052a71e.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

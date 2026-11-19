@@ -1,7 +1,1 @@
-{
-  "duration": 4.4,
-  "source": "frontend/public/avatars/sign-motion/word-2c57ef13.glb",
-  "frames": 133,
-  "maxLocalStepDegrees": 18.10191033840681,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 2.3666666666666667, "label": "закрыть", "source": "/research/rsl/words/2c57ef13-e81c-4ea8-bf6e-c0cb597adfca.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

@@ -1,7 +1,1 @@
-{
-  "duration": 3.6,
-  "source": "frontend/public/avatars/sign-motion/word-50b48f58.glb",
-  "frames": 109,
-  "maxLocalStepDegrees": 13.761249135009189,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.2666666666666666, "label": "никогда", "source": "/research/rsl/words/50b48f58-5b8c-41f2-8438-d7d07c4e86bc.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

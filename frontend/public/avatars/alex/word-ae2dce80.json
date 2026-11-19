@@ -1,7 +1,1 @@
-{
-  "duration": 3.3,
-  "source": "frontend/public/avatars/sign-motion/word-ae2dce80.glb",
-  "frames": 100,
-  "maxLocalStepDegrees": 12.428708256243674,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.7333333333333334, "label": "воскресенье", "source": "/research/rsl/words/417459bb-df1d-4bb9-89ae-f13d359e18d1.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

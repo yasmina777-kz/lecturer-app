@@ -1,7 +1,1 @@
-{
-  "duration": 4.833333333333333,
-  "source": "frontend/public/avatars/sign-motion/ready-idle.glb",
-  "frames": 146,
-  "maxLocalStepDegrees": 0.6078048738610947,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"id": "ready-idle", "label": "Поза ожидания", "duration": 5.966666666666667, "revision": "68400a04c7c0", "review": "procedural-idle", "method": "idle-v1"}

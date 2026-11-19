@@ -1,7 +1,1 @@
-{
-  "duration": 3.466666666666667,
-  "source": "frontend/public/avatars/sign-motion/word-542b93a5.glb",
-  "frames": 105,
-  "maxLocalStepDegrees": 9.893451319361661,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.5666666666666667, "label": "читать", "source": "/research/rsl/words/542b93a5-b251-4899-92ba-e836da1e6ec4.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

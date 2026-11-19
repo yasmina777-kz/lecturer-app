@@ -1,7 +1,1 @@
-{
-  "duration": 2.9,
-  "source": "frontend/public/avatars/sign-motion/word-44bc9933.glb",
-  "frames": 88,
-  "maxLocalStepDegrees": 12.881605293502526,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.5666666666666667, "label": "ты", "source": "/research/rsl/words/44bc9933-192e-478f-9ac3-d398cb022076.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

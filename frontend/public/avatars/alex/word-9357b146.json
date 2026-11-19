@@ -1,7 +1,1 @@
-{
-  "duration": 5.233333333333333,
-  "source": "frontend/public/avatars/sign-motion/word-9357b146.glb",
-  "frames": 158,
-  "maxLocalStepDegrees": 13.94582219072409,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.5666666666666667, "label": "сегодня", "source": "/research/rsl/words/9357b146-2273-48a9-8f27-65e8bd13de76.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

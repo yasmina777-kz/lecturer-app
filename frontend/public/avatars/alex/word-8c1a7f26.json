@@ -1,7 +1,1 @@
-{
-  "duration": 2.2333333333333334,
-  "source": "frontend/public/avatars/sign-motion/word-8c1a7f26.glb",
-  "frames": 68,
-  "maxLocalStepDegrees": 12.895541440730291,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.0666666666666667, "label": "меня", "source": "/research/rsl/words/8c1a7f26-480c-4108-90ed-221586015d7b.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

@@ -1,7 +1,1 @@
-{
-  "duration": 2.9,
-  "source": "frontend/public/avatars/sign-motion/word-338e93e8.glb",
-  "frames": 88,
-  "maxLocalStepDegrees": 9.882832082749584,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.6333333333333333, "label": "девять", "source": "/research/rsl/words/338e93e8-4033-4af6-8a62-12573c53bfcc.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

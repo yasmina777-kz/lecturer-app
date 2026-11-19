@@ -1,7 +1,1 @@
-{
-  "duration": 4.5,
-  "source": "frontend/public/avatars/sign-motion/word-f00a8a7f.glb",
-  "frames": 136,
-  "maxLocalStepDegrees": 18.533844671329245,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 2.066666666666667, "label": "в этом году", "source": "/research/rsl/words/506d755c-400e-479a-ac78-e402cd8287be.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

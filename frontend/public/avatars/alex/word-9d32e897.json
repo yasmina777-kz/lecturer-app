@@ -1,7 +1,1 @@
-{
-  "duration": 8.6,
-  "source": "frontend/public/avatars/sign-motion/word-9d32e897.glb",
-  "frames": 259,
-  "maxLocalStepDegrees": 12.798041344102005,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.5333333333333334, "label": "ехать", "source": "/research/rsl/words/9d32e897-7fae-48fc-8936-8abd9a81eb7c.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

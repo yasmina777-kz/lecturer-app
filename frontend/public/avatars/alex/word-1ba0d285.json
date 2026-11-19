@@ -1,7 +1,1 @@
-{
-  "duration": 3.966666666666667,
-  "source": "frontend/public/avatars/sign-motion/word-1ba0d285.glb",
-  "frames": 120,
-  "maxLocalStepDegrees": 20.142803305805177,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.8666666666666667, "label": "спокойный", "source": "/research/rsl/words/1ba0d285-5260-40a6-b13e-1b68b4c5dcee.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

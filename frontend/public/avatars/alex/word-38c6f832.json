@@ -1,7 +1,1 @@
-{
-  "duration": 2.6333333333333333,
-  "source": "frontend/public/avatars/sign-motion/word-38c6f832.glb",
-  "frames": 80,
-  "maxLocalStepDegrees": 18.660363680419977,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.4666666666666666, "label": "язык", "source": "/research/rsl/words/38c6f832-9af4-4db8-a211-16313de1ef9c.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

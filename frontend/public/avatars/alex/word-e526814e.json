@@ -1,7 +1,1 @@
-{
-  "duration": 6.366666666666666,
-  "source": "frontend/public/avatars/sign-motion/word-e526814e.glb",
-  "frames": 192,
-  "maxLocalStepDegrees": 9.880690818444785,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.8666666666666667, "label": "люди", "source": "/research/rsl/words/5ea53ce1-5cdf-461c-a814-b8f678f7a7b8.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

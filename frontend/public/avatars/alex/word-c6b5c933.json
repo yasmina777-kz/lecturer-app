@@ -1,7 +1,1 @@
-{
-  "duration": 3.8333333333333335,
-  "source": "frontend/public/avatars/sign-motion/word-c6b5c933.glb",
-  "frames": 116,
-  "maxLocalStepDegrees": 10.382854010186938,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 2.1666666666666665, "label": "месяц", "source": "/research/rsl/words/c6b5c933-f993-45fb-9875-59f87fc4aeda.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

@@ -22,7 +22,7 @@ bpy.ops.wm.read_factory_settings(use_empty=True)
 
 info = HumanService._create_default_human_info_dict()
 info["phenotype"] = {
-    "gender": 1.0, "age": 0.5, "muscle": 0.68, "weight": 0.42, "proportions": 0.8,
+    "gender": 1.0, "age": 0.5, "muscle": 0.5, "weight": 0.45, "proportions": 0.6,
     "height": 0.55, "cupsize": 0.5, "firmness": 0.5,
     "race": {"asian": 0.0, "caucasian": 1.0, "african": 0.0},
 }

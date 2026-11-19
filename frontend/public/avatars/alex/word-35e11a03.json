@@ -1,7 +1,1 @@
-{
-  "duration": 4.4,
-  "source": "frontend/public/avatars/sign-motion/word-35e11a03.glb",
-  "frames": 133,
-  "maxLocalStepDegrees": 14.8321177827087,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 2.6666666666666665, "label": "хороший", "source": "/research/rsl/words/35e11a03-37fa-4be9-83e9-ee1afd137710.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

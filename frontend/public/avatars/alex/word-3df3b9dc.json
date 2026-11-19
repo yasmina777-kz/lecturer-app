@@ -1,7 +1,1 @@
-{
-  "duration": 5.133333333333334,
-  "source": "frontend/public/avatars/sign-motion/word-3df3b9dc.glb",
-  "frames": 155,
-  "maxLocalStepDegrees": 22.450037792340897,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 2.1666666666666665, "label": "почему", "source": "/research/rsl/words/3df3b9dc-c35e-493b-b942-82d06357d686.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

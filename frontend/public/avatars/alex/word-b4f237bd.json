@@ -1,7 +1,1 @@
-{
-  "duration": 4.366666666666666,
-  "source": "frontend/public/avatars/sign-motion/word-b4f237bd.glb",
-  "frames": 132,
-  "maxLocalStepDegrees": 12.46330060306885,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 2.2666666666666666, "label": "муж", "source": "/research/rsl/words/b4f237bd-f7cd-4d03-9a0e-0d07ef3b7aa0.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

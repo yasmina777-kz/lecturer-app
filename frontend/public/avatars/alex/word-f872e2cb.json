@@ -1,7 +1,1 @@
-{
-  "duration": 3.033333333333333,
-  "source": "frontend/public/avatars/sign-motion/word-f872e2cb.glb",
-  "frames": 92,
-  "maxLocalStepDegrees": 14.42970523492635,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.3666666666666667, "label": "пять", "source": "/research/rsl/words/f872e2cb-9fd7-4d62-914c-d469883e2215.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

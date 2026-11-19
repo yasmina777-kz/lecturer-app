@@ -1,7 +1,1 @@
-{
-  "duration": 3.033333333333333,
-  "source": "frontend/public/avatars/sign-motion/word-b0df4010.glb",
-  "frames": 92,
-  "maxLocalStepDegrees": 17.86839129332595,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.5666666666666667, "label": "среда", "source": "/research/rsl/words/506fbeb3-1282-4bb8-bd48-0afedad64d63.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

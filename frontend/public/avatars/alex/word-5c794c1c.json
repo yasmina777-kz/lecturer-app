@@ -1,7 +1,1 @@
-{
-  "duration": 3.566666666666667,
-  "source": "frontend/public/avatars/sign-motion/word-5c794c1c.glb",
-  "frames": 108,
-  "maxLocalStepDegrees": 9.891788168298763,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.4666666666666666, "label": "черный", "source": "/research/rsl/words/5c794c1c-fd02-43d7-9938-4804fe6b8877.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

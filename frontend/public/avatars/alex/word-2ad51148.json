@@ -1,7 +1,1 @@
-{
-  "duration": 2.7,
-  "source": "frontend/public/avatars/sign-motion/word-2ad51148.glb",
-  "frames": 82,
-  "maxLocalStepDegrees": 12.860643442939756,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.6333333333333333, "label": "любить", "source": "/research/rsl/words/cc14b58e-ac2c-4484-a1d5-c2f387d361a7.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

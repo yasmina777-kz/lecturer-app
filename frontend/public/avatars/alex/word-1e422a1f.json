@@ -1,7 +1,1 @@
-{
-  "duration": 3.566666666666667,
-  "source": "frontend/public/avatars/sign-motion/word-1e422a1f.glb",
-  "frames": 108,
-  "maxLocalStepDegrees": 16.552138708183623,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.8666666666666667, "label": "неделя", "source": "/research/rsl/words/1e422a1f-65e7-4125-865d-d15f244d6b2b.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

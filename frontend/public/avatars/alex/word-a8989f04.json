@@ -1,7 +1,1 @@
-{
-  "duration": 4.133333333333334,
-  "source": "frontend/public/avatars/sign-motion/word-a8989f04.glb",
-  "frames": 125,
-  "maxLocalStepDegrees": 9.897727871555736,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.9666666666666666, "label": "книга", "source": "/research/rsl/words/a8989f04-a615-4a0d-bb49-583d3c0e94ab.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

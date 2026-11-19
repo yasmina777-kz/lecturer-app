@@ -1,7 +1,1 @@
-{
-  "duration": 2.566666666666667,
-  "source": "frontend/public/avatars/sign-motion/word-8cf533fa.glb",
-  "frames": 78,
-  "maxLocalStepDegrees": 10.864122799484377,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.4666666666666666, "label": "страх", "source": "/research/rsl/words/8cf533fa-b177-4ceb-80ff-18d130192300.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

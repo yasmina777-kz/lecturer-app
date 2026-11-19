@@ -1,7 +1,1 @@
-{
-  "duration": 3.5,
-  "source": "frontend/public/avatars/sign-motion/word-803b0a5e.glb",
-  "frames": 106,
-  "maxLocalStepDegrees": 18.683521436800905,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.7666666666666666, "label": "еще нет", "source": "/research/rsl/words/803b0a5e-7415-4723-af3d-ecccddd1faf5.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

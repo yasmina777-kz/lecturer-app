@@ -1,7 +1,1 @@
-{
-  "duration": 4.366666666666666,
-  "source": "frontend/public/avatars/sign-motion/word-ea7aa6fc.glb",
-  "frames": 132,
-  "maxLocalStepDegrees": 14.6009312472294,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 2.2666666666666666, "label": "медленный", "source": "/research/rsl/words/ea7aa6fc-bd78-477e-9fe4-d97f5402570a.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

@@ -1,7 +1,1 @@
-{
-  "duration": 2.8666666666666667,
-  "source": "frontend/public/avatars/sign-motion/word-ddc2e7ed.glb",
-  "frames": 87,
-  "maxLocalStepDegrees": 15.208529507868102,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.6333333333333333, "label": "цвет", "source": "/research/rsl/words/ddc2e7ed-5d21-48f0-bfb7-dd668c754fcc.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

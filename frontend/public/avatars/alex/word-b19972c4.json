@@ -1,7 +1,1 @@
-{
-  "duration": 2.9,
-  "source": "frontend/public/avatars/sign-motion/word-b19972c4.glb",
-  "frames": 88,
-  "maxLocalStepDegrees": 12.897973841848462,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.5333333333333334, "label": "слышать", "source": "/research/rsl/words/b19972c4-75f9-492c-a6c1-0dbbdd154f92.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

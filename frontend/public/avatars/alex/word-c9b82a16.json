@@ -1,7 +1,1 @@
-{
-  "duration": 4.033333333333333,
-  "source": "frontend/public/avatars/sign-motion/word-c9b82a16.glb",
-  "frames": 122,
-  "maxLocalStepDegrees": 16.090697958046732,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.8666666666666667, "label": "осень", "source": "/research/rsl/words/c9b82a16-dba8-4012-98b3-29be7978a8ca.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

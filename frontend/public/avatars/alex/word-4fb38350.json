@@ -1,7 +1,1 @@
-{
-  "duration": 3.566666666666667,
-  "source": "frontend/public/avatars/sign-motion/word-4fb38350.glb",
-  "frames": 108,
-  "maxLocalStepDegrees": 16.700145492403216,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.8666666666666667, "label": "ночь", "source": "/research/rsl/words/43720683-c4e2-4f43-83f7-0aefffa411b6.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

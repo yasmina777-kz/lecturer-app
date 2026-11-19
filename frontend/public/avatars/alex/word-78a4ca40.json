@@ -1,7 +1,1 @@
-{
-  "duration": 3.1333333333333333,
-  "source": "frontend/public/avatars/sign-motion/word-78a4ca40.glb",
-  "frames": 95,
-  "maxLocalStepDegrees": 11.375989982489825,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.9666666666666666, "label": "отец", "source": "/research/rsl/words/78a4ca40-8a78-437e-8024-13935bd3abdb.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

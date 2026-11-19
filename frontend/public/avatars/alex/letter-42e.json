@@ -1,7 +1,1 @@
-{
-  "duration": 3.9,
-  "source": "frontend/public/avatars/sign-motion/letter-42e.glb",
-  "frames": 118,
-  "maxLocalStepDegrees": 10.396884926289436,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 2.3333333333333335, "label": "Ю", "source": "/research/rsl/alphabet/042e.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

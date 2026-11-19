@@ -1,7 +1,1 @@
-{
-  "duration": 3.1666666666666665,
-  "source": "frontend/public/avatars/sign-motion/word-cd151b2a.glb",
-  "frames": 96,
-  "maxLocalStepDegrees": 12.63757885615725,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.5666666666666667, "label": "двадцать", "source": "/research/rsl/words/cd151b2a-4bdb-4446-b8fb-fe2a11841690.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

@@ -1,7 +1,1 @@
-{
-  "duration": 3.033333333333333,
-  "source": "frontend/public/avatars/sign-motion/word-71b45022.glb",
-  "frames": 92,
-  "maxLocalStepDegrees": 9.8947977204018,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.8333333333333333, "label": "любовь", "source": "/research/rsl/words/71b45022-d29a-45c3-837d-5496333083af.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

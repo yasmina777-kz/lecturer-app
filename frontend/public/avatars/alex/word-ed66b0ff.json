@@ -1,7 +1,1 @@
-{
-  "duration": 3.066666666666667,
-  "source": "frontend/public/avatars/sign-motion/word-ed66b0ff.glb",
-  "frames": 93,
-  "maxLocalStepDegrees": 9.891153814479598,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.7666666666666666, "label": "показать", "source": "/research/rsl/words/ed66b0ff-fd37-4050-ab98-6114d72d9826.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

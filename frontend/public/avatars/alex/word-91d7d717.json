@@ -1,7 +1,1 @@
-{
-  "duration": 3.2333333333333334,
-  "source": "frontend/public/avatars/sign-motion/word-91d7d717.glb",
-  "frames": 98,
-  "maxLocalStepDegrees": 10.775958717677852,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.6666666666666667, "label": "ноль", "source": "/research/rsl/words/91d7d717-b06e-4eb7-85dd-2981b9dd7cfc.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

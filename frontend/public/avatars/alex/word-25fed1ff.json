@@ -1,7 +1,1 @@
-{
-  "duration": 4.7,
-  "source": "frontend/public/avatars/sign-motion/word-25fed1ff.glb",
-  "frames": 142,
-  "maxLocalStepDegrees": 16.40314154653438,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.7333333333333334, "label": "купить", "source": "/research/rsl/words/25fed1ff-0407-4848-aa57-25bf1159ff08.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

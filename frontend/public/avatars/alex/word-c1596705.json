@@ -1,7 +1,1 @@
-{
-  "duration": 4.633333333333334,
-  "source": "frontend/public/avatars/sign-motion/word-c1596705.glb",
-  "frames": 140,
-  "maxLocalStepDegrees": 16.406206593924423,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.7333333333333334, "label": "мы", "source": "/research/rsl/words/c1596705-39b0-4295-8942-d3cb5cf62444.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

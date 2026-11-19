@@ -1,7 +1,1 @@
-{
-  "duration": 3.3,
-  "source": "frontend/public/avatars/sign-motion/word-54dee110.glb",
-  "frames": 100,
-  "maxLocalStepDegrees": 14.092015559719043,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.9333333333333333, "label": "бумага", "source": "/research/rsl/words/54dee110-03b2-4417-9edc-c98843a4a125.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

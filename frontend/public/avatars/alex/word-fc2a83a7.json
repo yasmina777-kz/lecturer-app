@@ -1,7 +1,1 @@
-{
-  "duration": 3.6666666666666665,
-  "source": "frontend/public/avatars/sign-motion/word-fc2a83a7.glb",
-  "frames": 111,
-  "maxLocalStepDegrees": 12.760480426308812,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 2.1666666666666665, "label": "что", "source": "/research/rsl/words/fc2a83a7-c69c-4d53-83dd-c2357d50cf1f.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

@@ -1,7 +1,1 @@
-{
-  "duration": 2.7,
-  "source": "frontend/public/avatars/sign-motion/word-9e551d12.glb",
-  "frames": 82,
-  "maxLocalStepDegrees": 21.022063802944672,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.2666666666666666, "label": "говорить", "source": "/research/rsl/words/9e551d12-7bb8-40f1-b910-0d7b464b6a60.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

@@ -1,7 +1,1 @@
-{
-  "duration": 12.933333333333334,
-  "source": "frontend/public/avatars/sign-motion/word-506f5596.glb",
-  "frames": 389,
-  "maxLocalStepDegrees": 48.01248350642989,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 2.8666666666666667, "label": "птица", "source": "/research/rsl/words/506f5596-ace8-426e-b97c-f5d5953abd65.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

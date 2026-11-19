@@ -1,7 +1,1 @@
-{
-  "duration": 5.666666666666667,
-  "source": "frontend/public/avatars/sign-motion/word-e3b0e3b1.glb",
-  "frames": 171,
-  "maxLocalStepDegrees": 16.184420106290354,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.7333333333333334, "label": "вечер", "source": "/research/rsl/words/e3b0e3b1-ee70-4eb3-8559-2c0f84cc066f.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

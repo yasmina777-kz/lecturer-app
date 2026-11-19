@@ -1,7 +1,1 @@
-{
-  "duration": 3.8333333333333335,
-  "source": "frontend/public/avatars/sign-motion/word-aba2f273.glb",
-  "frames": 116,
-  "maxLocalStepDegrees": 16.694594256155288,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.6666666666666667, "label": "минута", "source": "/research/rsl/words/aba2f273-425d-4fd1-892b-1dd9d21e615c.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

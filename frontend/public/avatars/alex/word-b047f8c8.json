@@ -1,7 +1,1 @@
-{
-  "duration": 2.3666666666666667,
-  "source": "frontend/public/avatars/sign-motion/word-b047f8c8.glb",
-  "frames": 72,
-  "maxLocalStepDegrees": 9.8947977204018,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.1666666666666667, "label": "дом", "source": "/research/rsl/words/b047f8c8-9b3e-4873-851e-2738517ef94e.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

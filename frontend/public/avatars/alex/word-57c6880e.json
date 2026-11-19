@@ -1,7 +1,1 @@
-{
-  "duration": 3.066666666666667,
-  "source": "frontend/public/avatars/sign-motion/word-57c6880e.glb",
-  "frames": 93,
-  "maxLocalStepDegrees": 10.36623359861536,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.7666666666666666, "label": "играть", "source": "/research/rsl/words/26022416-930c-49e0-b1f3-0c0da57a8d2c.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

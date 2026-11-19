@@ -1,7 +1,1 @@
-{
-  "duration": 3.8666666666666667,
-  "source": "frontend/public/avatars/sign-motion/word-83b8a1b6.glb",
-  "frames": 117,
-  "maxLocalStepDegrees": 15.893607726904136,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.7333333333333334, "label": "вопрос", "source": "/research/rsl/words/83b8a1b6-5f62-4003-93aa-cf121cd0f8e1.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

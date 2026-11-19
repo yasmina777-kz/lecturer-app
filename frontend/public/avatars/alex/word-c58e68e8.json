@@ -1,7 +1,1 @@
-{
-  "duration": 2.6333333333333333,
-  "source": "frontend/public/avatars/sign-motion/word-c58e68e8.glb",
-  "frames": 80,
-  "maxLocalStepDegrees": 10.52291813817545,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.7333333333333334, "label": "сказать", "source": "/research/rsl/words/c58e68e8-cac4-4676-9699-ff06de3061bd.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

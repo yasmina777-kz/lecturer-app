@@ -1,7 +1,1 @@
-{
-  "duration": 4.2,
-  "source": "frontend/public/avatars/sign-motion/word-151a37ef.glb",
-  "frames": 127,
-  "maxLocalStepDegrees": 16.637804648301216,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.7333333333333334, "label": "быстрый", "source": "/research/rsl/words/151a37ef-302b-4fb8-91b4-505c935e207c.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

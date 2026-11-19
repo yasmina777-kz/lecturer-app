@@ -1,7 +1,1 @@
-{
-  "duration": 3.566666666666667,
-  "source": "frontend/public/avatars/sign-motion/word-6a2d01fd.glb",
-  "frames": 108,
-  "maxLocalStepDegrees": 28.418984504244648,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.6666666666666667, "label": "школа", "source": "/research/rsl/words/6a2d01fd-1428-48a3-a218-252b79b21426.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

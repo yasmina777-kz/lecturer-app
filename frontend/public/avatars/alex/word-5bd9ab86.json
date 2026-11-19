@@ -1,7 +1,1 @@
-{
-  "duration": 2.2333333333333334,
-  "source": "frontend/public/avatars/sign-motion/word-5bd9ab86.glb",
-  "frames": 68,
-  "maxLocalStepDegrees": 9.257270424593749,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.5666666666666667, "label": "вчера", "source": "/research/rsl/words/5bd9ab86-fe3b-4cf8-8b7b-5098424ff789.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

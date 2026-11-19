@@ -1,7 +1,1 @@
-{
-  "duration": 3.6333333333333333,
-  "source": "frontend/public/avatars/sign-motion/letter-42a.glb",
-  "frames": 110,
-  "maxLocalStepDegrees": 9.885765648998104,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.6, "label": "Ъ", "source": "/research/rsl/alphabet/042a.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

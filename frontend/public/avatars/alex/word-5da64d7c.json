@@ -1,7 +1,1 @@
-{
-  "duration": 3.2333333333333334,
-  "source": "frontend/public/avatars/sign-motion/word-5da64d7c.glb",
-  "frames": 98,
-  "maxLocalStepDegrees": 12.050512144163605,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.6666666666666667, "label": "вода", "source": "/research/rsl/words/5da64d7c-2131-4b7a-ae00-728d8b8dda5d.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

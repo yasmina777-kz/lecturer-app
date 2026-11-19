@@ -1,7 +1,1 @@
-{
-  "duration": 7.466666666666667,
-  "source": "frontend/public/avatars/sign-motion/word-32e530d7.glb",
-  "frames": 225,
-  "maxLocalStepDegrees": 21.85117534365064,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 2.466666666666667, "label": "легкий", "source": "/research/rsl/words/32e530d7-3598-47d3-b344-ceb36bb6fe58.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

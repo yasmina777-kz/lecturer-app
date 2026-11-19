@@ -1,7 +1,1 @@
-{
-  "duration": 2.933333333333333,
-  "source": "frontend/public/avatars/sign-motion/letter-42f.glb",
-  "frames": 89,
-  "maxLocalStepDegrees": 13.695699809544577,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 2.3, "label": "Я", "source": "/research/rsl/alphabet/042f.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

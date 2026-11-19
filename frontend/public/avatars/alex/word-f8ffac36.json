@@ -1,7 +1,1 @@
-{
-  "duration": 2.3666666666666667,
-  "source": "frontend/public/avatars/sign-motion/word-f8ffac36.glb",
-  "frames": 72,
-  "maxLocalStepDegrees": 9.872518497102865,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.4666666666666666, "label": "четыре", "source": "/research/rsl/words/f8ffac36-0b54-4b30-897c-ce34d8ef62bf.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

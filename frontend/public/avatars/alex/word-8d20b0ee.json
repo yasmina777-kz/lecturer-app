@@ -1,7 +1,1 @@
-{
-  "duration": 6.4,
-  "source": "frontend/public/avatars/sign-motion/word-8d20b0ee.glb",
-  "frames": 193,
-  "maxLocalStepDegrees": 17.408733222562432,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 2.066666666666667, "label": "день и ночь", "source": "/research/rsl/words/191d0ce8-7e6a-4ca0-893c-4eeb9af27e2b.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

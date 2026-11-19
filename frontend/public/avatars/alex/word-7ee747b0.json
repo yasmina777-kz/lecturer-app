@@ -1,7 +1,1 @@
-{
-  "duration": 3.966666666666667,
-  "source": "frontend/public/avatars/sign-motion/word-7ee747b0.glb",
-  "frames": 120,
-  "maxLocalStepDegrees": 9.896381470515596,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.9666666666666666, "label": "сто", "source": "/research/rsl/words/7ee747b0-05fa-4481-955d-429b641b719f.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

@@ -1,7 +1,1 @@
-{
-  "duration": 3.433333333333333,
-  "source": "frontend/public/avatars/sign-motion/word-b7dfae4f.glb",
-  "frames": 104,
-  "maxLocalStepDegrees": 11.459826285683501,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.5666666666666667, "label": "тебя", "source": "/research/rsl/words/85b61dde-f57e-418c-b84a-a0ea3ebc661f.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

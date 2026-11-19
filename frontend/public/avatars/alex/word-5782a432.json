@@ -1,7 +1,1 @@
-{
-  "duration": 2.066666666666667,
-  "source": "frontend/public/avatars/sign-motion/word-5782a432.glb",
-  "frames": 63,
-  "maxLocalStepDegrees": 10.611036969978723,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 0.9333333333333333, "label": "три", "source": "/research/rsl/words/5782a432-ef90-4cbc-b315-9995ad70acea.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

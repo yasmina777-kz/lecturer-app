@@ -1,7 +1,1 @@
-{
-  "duration": 3.3,
-  "source": "frontend/public/avatars/sign-motion/word-40af2c54.glb",
-  "frames": 100,
-  "maxLocalStepDegrees": 14.054715896661603,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.9666666666666666, "label": "друг", "source": "/research/rsl/words/40af2c54-a282-47de-b505-b93c647f13d2.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

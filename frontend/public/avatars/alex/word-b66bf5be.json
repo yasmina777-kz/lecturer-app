@@ -1,7 +1,1 @@
-{
-  "duration": 3.466666666666667,
-  "source": "frontend/public/avatars/sign-motion/word-b66bf5be.glb",
-  "frames": 105,
-  "maxLocalStepDegrees": 15.232460783172534,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.8666666666666667, "label": "ждать", "source": "/research/rsl/words/21053e46-3985-42da-9b8c-3c9fbc414ae7.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

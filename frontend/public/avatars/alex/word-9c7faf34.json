@@ -1,7 +1,1 @@
-{
-  "duration": 2.966666666666667,
-  "source": "frontend/public/avatars/sign-motion/word-9c7faf34.glb",
-  "frames": 90,
-  "maxLocalStepDegrees": 13.58434723550586,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.7333333333333334, "label": "белый", "source": "/research/rsl/words/69376af6-13c9-42ca-9ff3-0880d106a0c3.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

@@ -49,6 +49,13 @@ spec = {
     "sign": ((0, -2.5, hz - 0.33), (0, 0, hz - 0.36), 50, (900, 1100)),
     "side": ((2.2, -1.3, hz - 0.33), (0, 0, hz - 0.36), 50, (900, 1100)),
 }
+bpy.context.view_layer.update()
+for side in ("Right", "Left"):
+    for o in bpy.data.objects:
+        if o.type == "ARMATURE" and "mixamorig:" + side + "Hand" in o.pose.bones:
+            pb = o.pose.bones["mixamorig:" + side + "HandMiddle1"]
+            c = o.matrix_world @ pb.head
+            spec["hand" + side[0]] = ((c.x, c.y - 0.55, c.z + 0.02), tuple(c), 60, (800, 800))
 for v in views:
     loc, target, lens, res = spec[v]
     cam.location = loc

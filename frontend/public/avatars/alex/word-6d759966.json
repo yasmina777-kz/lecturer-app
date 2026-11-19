@@ -1,7 +1,1 @@
-{
-  "duration": 3.3333333333333335,
-  "source": "frontend/public/avatars/sign-motion/word-6d759966.glb",
-  "frames": 101,
-  "maxLocalStepDegrees": 15.256610624530406,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.7666666666666666, "label": "желтый", "source": "/research/rsl/words/6d759966-0116-477e-b4da-5f61fddd5f0c.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

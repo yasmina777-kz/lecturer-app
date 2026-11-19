@@ -1,7 +1,1 @@
-{
-  "duration": 4.0,
-  "source": "frontend/public/avatars/sign-motion/letter-425.glb",
-  "frames": 121,
-  "maxLocalStepDegrees": 9.889094512444839,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 2.1, "label": "Х", "source": "/research/rsl/alphabet/0425.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}

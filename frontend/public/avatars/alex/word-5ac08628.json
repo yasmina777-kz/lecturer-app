@@ -1,7 +1,1 @@
-{
-  "duration": 6.266666666666667,
-  "source": "frontend/public/avatars/sign-motion/word-5ac08628.glb",
-  "frames": 189,
-  "maxLocalStepDegrees": 15.142787229559437,
-  "review": "Retargeted motion; not a teacher-validated sign."
-}
+{"duration": 1.8666666666666667, "label": "ошибка", "source": "/research/rsl/words/5ac08628-5d6a-43a7-a99d-625d26e43977.mp4", "method": "video-solve-v1", "poseCoverage": 1.0, "review": "Solved from video landmarks; not teacher-validated."}
