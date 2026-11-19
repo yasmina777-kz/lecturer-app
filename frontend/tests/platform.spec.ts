@@ -393,7 +393,7 @@ test("UI: registration, dashboard, player, pause/question/resume, notes, quiz, s
     path: "test-results/player-desktop.png",
     fullPage: true,
   });
-  await page.getByRole("link", { name: "Настройки", exact: true }).click();
+  await page.getByRole("link", { name: "Профиль", exact: true }).click();
   await expect(
     page.getByRole("heading", { name: "Оформление аватара" }),
   ).toHaveCount(0);

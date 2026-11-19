@@ -3376,3 +3376,68 @@
     & .learning-intro-copy > p { max-width: 520px; }
   }
 }
+
+/* Shell: back link for course sub-pages and translate tabs */
+:root .product-ui[data-product-ui][data-product-theme] {
+  & .shell-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--p-muted);
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-decoration: none;
+  }
+  & .shell-back:hover {
+    color: var(--p-text);
+  }
+  & .translate-tabs {
+    display: inline-flex;
+    gap: 4px;
+    padding: 4px;
+    border-radius: 12px;
+    background: var(--p-subtle);
+    margin-bottom: 12px;
+  }
+  & .translate-tabs a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 9px;
+    color: var(--p-muted);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  & .translate-tabs a[aria-selected="true"] {
+    background: var(--p-surface);
+    color: var(--p-text);
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.08);
+  }
+  & .learning-goal {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 12px;
+    background: var(--p-surface);
+    border: 1px solid var(--p-line);
+    font-weight: 600;
+  }
+  & .learning-goal .goal-bar {
+    width: 90px;
+    height: 7px;
+    border-radius: 99px;
+    background: var(--p-subtle);
+    overflow: hidden;
+  }
+  & .learning-goal .goal-bar i {
+    display: block;
+    height: 100%;
+    background: #16a34a;
+  }
+  & .learning-goal small {
+    color: var(--p-muted);
+    font-weight: 500;
+  }
+}

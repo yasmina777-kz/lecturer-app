@@ -12,21 +12,22 @@ import {
   useNavigate,
 } from "react-router-dom";
 import {
+  ArrowLeft,
   BookOpen,
-  MessageCircle,
-  Eye,
-  Type,
   CircleHelp,
+  Clapperboard,
+  Languages,
   ScanLine,
+  Type,
+  UserRound,
   LogOut,
   Menu,
-  Settings2,
   ShieldCheck,
   X,
   ArrowUpRight,
   Layers,
-  GraduationCap,
 } from "lucide-react";
+import { useStudyTimer } from "../sign/dailyGoal";
 import { useAuth } from "../context/AuthContext";
 import { Brand, ErrorMessage, messageOf } from "./UI";
 import { ThemeSwitcher } from "./ThemeSwitcher";
@@ -40,53 +41,33 @@ export function Shell() {
   const path = location.pathname;
   const workspace = useRef<HTMLElement>(null);
   useWorkspaceMotion(workspace, location.pathname + location.search);
+  const learnPaths = ["/grammar", "/dialogues", "/understanding", "/practice"];
+  const studying = path.startsWith("/learn") || path === "/vocab" || learnPaths.includes(path);
+  useStudyTimer(studying);
+  const translate = path === "/text-to-sign" || path === "/recognition";
   const nav = [
     {
       to: "/learn",
-      label: at("Обучение", "Learning", "Оқу"),
+      label: at("Учиться", "Learn", "Оқу"),
       icon: BookOpen,
-      active: path.startsWith("/learn"),
+      active: path.startsWith("/learn") || learnPaths.includes(path),
     },
     {
       to: "/vocab",
-      label: at("Тренажёр слов", "Word trainer", "Сөз жаттықтырғышы"),
+      label: at("Тренажёр", "Trainer", "Жаттықтырғыш"),
       icon: Layers,
       active: path === "/vocab",
     },
     {
-      to: "/grammar",
-      label: at("Грамматика", "Grammar", "Грамматика"),
-      icon: GraduationCap,
-      active: path === "/grammar",
-    },
-    {
       to: "/text-to-sign",
-      label: at("Текст → жесты", "Text → signs", "Мәтін → ымдар"),
-      icon: Type,
-      active: path === "/text-to-sign",
-    },
-    {
-      to: "/recognition",
-      label: at("Жесты → текст", "Signs → text", "Ымдар → мәтін"),
-      icon: ScanLine,
-      active: path === "/recognition",
-    },
-    {
-      to: "/dialogues",
-      label: at("Диалоги", "Dialogues", "Диалогтар"),
-      icon: MessageCircle,
-      active: path === "/dialogues",
-    },
-    {
-      to: "/understanding",
-      label: at("Понимание жестов", "Understand signs", "Ымдарды түсіну"),
-      icon: Eye,
-      active: path === "/understanding",
+      label: at("Перевод", "Translate", "Аударма"),
+      icon: Languages,
+      active: translate,
     },
     {
       to: "/settings",
-      label: t("Настройки"),
-      icon: Settings2,
+      label: at("Профиль", "Profile", "Профиль"),
+      icon: UserRound,
       active: path === "/settings",
     },
   ];
@@ -147,6 +128,10 @@ export function Shell() {
           )}
         </nav>
         <div className="sidebar-bottom">
+          <Link to="/studio" onClick={() => setMenu(false)}>
+            <Clapperboard size={18} />
+            {at("Студия для ТВ", "Studio for TV", "ТВ студиясы")}
+          </Link>
           <NavLink to="/help" onClick={() => setMenu(false)}>
             <CircleHelp size={18} />
             {at(
@@ -208,6 +193,24 @@ export function Shell() {
         </header>
         <main className="main-content" ref={workspace}>
           <ErrorMessage message={error} />
+          {learnPaths.includes(path) && (
+            <Link to="/learn" className="shell-back">
+              <ArrowLeft size={16} />
+              {at("Учиться", "Learn", "Оқу")}
+            </Link>
+          )}
+          {translate && (
+            <div className="translate-tabs" role="tablist">
+              <Link to="/text-to-sign" role="tab" aria-selected={path === "/text-to-sign"}>
+                <Type size={16} />
+                {at("Текст → жесты", "Text → signs", "Мәтін → ымдар")}
+              </Link>
+              <Link to="/recognition" role="tab" aria-selected={path === "/recognition"}>
+                <ScanLine size={16} />
+                {at("Жесты → текст", "Signs → text", "Ымдар → мәтін")}
+              </Link>
+            </div>
+          )}
           <Outlet />
         </main>
       </div>

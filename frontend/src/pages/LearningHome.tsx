@@ -4,6 +4,7 @@ import {
   ArrowUpRight,
   BookOpen,
   Eye,
+  GraduationCap,
   MessageCircle,
   Play,
   Type,
@@ -14,6 +15,7 @@ import { useSignProgress } from "../sign/useProgress";
 import { useActivityProgress } from "../sign/useActivities";
 import { reviewItems } from "../sign/activities";
 import { lessonIds } from "../sign/catalog";
+import { useDailyGoal } from "../sign/dailyGoal";
 
 /** Static mentor portrait (same person as the home page hero). */
 export function LearningMentorPreview() {
@@ -33,6 +35,7 @@ export function LearningHome() {
   const { attempts } = useActivityProgress();
   const reviewCount = reviewItems(attempts).size;
   const hasHistory = Object.keys(progress).length > 0 || attempts.length > 0;
+  const goal = useDailyGoal();
   const nextLessonId = lessonIds.find((id) => !progress[id]);
   const nextLesson = nextLessonId
     ? `/learn/${nextLessonId}`
@@ -66,6 +69,14 @@ export function LearningHome() {
                 : at("Начать обучение", "Start learning", "Оқуды бастау")}
               <ArrowRight size={18} />
             </Link>
+            <span className="learning-goal" title={at("Цель на день", "Daily goal", "Күндік мақсат")}>
+              <span className="goal-bar">
+                <i style={{ width: `${Math.min(100, (goal.minutes / goal.goal) * 100)}%` }} />
+              </span>
+              {goal.done ? "✓ " : ""}
+              {Math.min(goal.minutes, goal.goal)}/{goal.goal} {at("мин", "min", "мин")}
+              {goal.streak > 0 && <small>· {goal.streak} {at("дн. подряд", "day streak", "күн қатарынан")}</small>}
+            </span>
             <Link className="learning-demo-link" to="/learn/getting-started">
               <span>
                 <Play size={16} fill="currentColor" />
@@ -163,8 +174,22 @@ export function LearningHome() {
           aria-labelledby="learning-activities-title"
         >
           <h2 id="learning-activities-title">
-            {at("Больше практики", "More ways to practise", "Көбірек жаттығу")}
+            {at("Следующие этапы", "Next stages", "Келесі кезеңдер")}
           </h2>
+          <Link to="/grammar">
+            <GraduationCap size={21} />
+            <div>
+              <strong>{at("Грамматика", "Grammar", "Грамматика")}</strong>
+              <span>
+                {at(
+                  "Порядок слов, вопросы, отрицание",
+                  "Word order, questions, negation",
+                  "Сөз тәртібі, сұрақ, болымсыздық",
+                )}
+              </span>
+            </div>
+            <ArrowUpRight size={18} />
+          </Link>
           <Link to="/dialogues">
             <MessageCircle size={21} />
             <div>
