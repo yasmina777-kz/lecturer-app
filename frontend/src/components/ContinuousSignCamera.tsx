@@ -5,7 +5,7 @@ import { useLiveLetters } from "../sign/useLiveLetters";
 import { at } from "../i18n/automation";
 import type { HandPoint } from "../sign/wordFeatures";
 import { loadWordModel, recognizeWord, WordSegmenter, type WordModel } from "../sign/wordRecognizer";
-import { appendTranslation, WordSpotter } from "../sign/wordSpotter";
+import { appendTranslation, replaceLastWord, WordSpotter } from "../sign/wordSpotter";
 import { composePhrase, replaceTail } from "../sign/phraseComposer";
 import {
   parseRecognitionHealth,
@@ -71,6 +71,8 @@ export function ContinuousSignCamera() {
     );
   }, []);
   const recentWords = useRef<{ label: string; at: number }[]>([]);
+  // Last recognized word and the model's next guesses, offered as one-tap fixes.
+  const [fix, setFix] = useState<{ label: string; alternatives: string[] } | null>(null);
   const addToken = (token: string, kind: "word" | "letter") => {
     const now = performance.now();
     const join = kind === "letter" && lastToken.current.kind === "letter" && now - lastToken.current.at < 4000;
@@ -102,6 +104,7 @@ export function ContinuousSignCamera() {
         if (spotted && !(spotted.fingerspelling && modeRef.current === "auto")) {
           lastWordAt.current = now;
           addToken(spotted.label, "word");
+          setFix({ label: spotted.label, alternatives: spotted.alternatives });
           setWordStatus(`Жест «${spotted.label}» · ${Math.round(spotted.confidence * 100)}%`);
         }
         // A short pause closes the sign: classify the whole clip with the
@@ -115,6 +118,7 @@ export function ContinuousSignCamera() {
             lastWordAt.current = now;
             lastSpotted.current = { label: guess.label, at: now };
             addToken(guess.label, "word");
+            setFix({ label: guess.label, alternatives: guess.top.slice(1, 4).map((t) => t.label) });
             setWordStatus(`Жест «${guess.label}» · ${Math.round(guess.confidence * 100)}%`);
           } else if (guess && !guess.accepted && !duplicate)
             setWordStatus(`Жест неясен. Возможно: ${guess.top.slice(0, 3).map((t) => t.label).join(", ")}`);
@@ -691,6 +695,23 @@ export function ContinuousSignCamera() {
                   )
             }
           />
+          {fix && fix.alternatives.length > 0 && text && (
+            <div className="translator-fix" role="group" aria-label={at("Исправить последнее слово", "Fix the last word", "Соңғы сөзді түзету")}>
+              <span>{at("Не то?", "Wrong?", "Қате ме?")}</span>
+              {fix.alternatives.map((alt) => (
+                <button
+                  key={alt}
+                  type="button"
+                  onClick={() => {
+                    setText((t) => replaceLastWord(t, fix.label, alt));
+                    setFix(null);
+                  }}
+                >
+                  {alt.replace(/[!?.]$/u, "")}
+                </button>
+              ))}
+            </div>
+          )}
           <div className="recognition-edit-tools">
             <button
               className="button secondary"

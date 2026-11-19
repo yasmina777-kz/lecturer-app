@@ -17,7 +17,7 @@ export const SPOT = {
   restMs: 400,
 };
 type Frame = { at: number; hands: HandPoint[][] };
-export type Spotted = { label: string; confidence: number; fingerspelling: boolean };
+export type Spotted = { label: string; confidence: number; fingerspelling: boolean; alternatives: string[] };
 
 const LETTER = /^[А-ЯЁ]$/u;
 
@@ -65,7 +65,7 @@ export class WordSpotter {
     const recent = clipFeatures(this.frames.filter((f) => f.at > now - 1000).map((f) => f.hands), width, height);
     if (recent && motionExtent(recent) >= MOTION_GATE) this.movingUntil = now + 1000;
     const course = model.courseLabels?.length ? new Set(model.courseLabels) : null;
-    let best: { label: string; p: number; margin: number; letter: boolean; window: number[][] } | null = null;
+    let best: { label: string; p: number; margin: number; letter: boolean; window: number[][]; alts: string[] } | null = null;
     for (const ms of SPOT.windowsMs) {
       const win = this.frames.filter((f) => f.at > now - ms).map((f) => f.hands);
       const feats = clipFeatures(win, width, height);
@@ -82,7 +82,7 @@ export class WordSpotter {
       const sum = ranked.reduce((a, r) => a + r.v, 0) || 1;
       ranked.sort((a, b) => b.v - a.v);
       const p1 = ranked[0].v / sum, p2 = (ranked[1]?.v ?? 0) / sum;
-      if (!best || p1 > best.p) best = { label: ranked[0].label, p: p1, margin: p1 - p2, letter, window: resampleFrames(feats, model.frames ?? 32) };
+      if (!best || p1 > best.p) best = { label: ranked[0].label, p: p1, margin: p1 - p2, letter, window: resampleFrames(feats, model.frames ?? 32), alts: ranked.slice(1, 4).map((r) => r.label) };
     }
     // The full 1,000-sign model thinks this is an alphabet sign: leave it to
     // the letter recognizer instead of forcing a course word.
@@ -112,7 +112,7 @@ export class WordSpotter {
       }
     }
     this.emitted = best.label;
-    return { label: best.label, confidence: best.p, fingerspelling: best.letter };
+    return { label: best.label, confidence: best.p, fingerspelling: best.letter, alternatives: best.alts };
   }
 }
 
@@ -124,4 +124,15 @@ export function appendTranslation(text: string, token: string, kind: "word" | "l
   else next = (text ? text.replace(/\s+$/u, "") + " " : "") + (kind === "word" ? token.replace(/[!?.]$/u, "") : token);
   next = next.charAt(0).toLocaleUpperCase("ru") + next.slice(1);
   return next.slice(-4000);
+}
+
+/** Replace the last occurrence of a recognized word in the transcript (the
+ * user tapped one of the alternatives). */
+export function replaceLastWord(text: string, from: string, to: string) {
+  const clean = (w: string) => w.replace(/[!?.]$/u, "");
+  const a = clean(from), b = clean(to);
+  const i = text.toLocaleLowerCase("ru").lastIndexOf(a.toLocaleLowerCase("ru"));
+  if (i < 0) return text;
+  const next = text.slice(0, i) + b + text.slice(i + a.length);
+  return next.charAt(0).toLocaleUpperCase("ru") + next.slice(1);
 }
