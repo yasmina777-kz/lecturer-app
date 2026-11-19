@@ -391,3 +391,33 @@
 .studio-error {
   color: #b91c1c;
 }
+
+.studio-signer {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 12px;
+  background: var(--p-subtle);
+}
+.studio-signer span {
+  padding: 0 8px;
+  color: var(--p-muted);
+  font-weight: 600;
+}
+.studio-signer button {
+  flex: 1;
+  font: inherit;
+  font-weight: 600;
+  padding: 7px 8px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--p-muted);
+  cursor: pointer;
+}
+.studio-signer button[aria-checked="true"] {
+  background: var(--p-surface);
+  color: var(--p-text);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.08);
+}

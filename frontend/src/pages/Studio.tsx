@@ -19,6 +19,8 @@ import {
   type Position,
   type ScheduleItem,
 } from "../sign/studio";
+import { AVATAR_MODEL, useAvatarLibrary } from "../sign/avatarLibrary";
+import type { AvatarStage } from "../sign/avatarStage";
 import "./studio.css";
 
 const durations = new Map<string, number>();
@@ -80,6 +82,10 @@ export function StudioPage() {
   const mic = useRef<{ rec: MediaRecorder; started: number } | null>(null);
   const [recording, setRecording] = useState(0);
   const [speechModel, setSpeechModel] = useState(SPEECH_MODELS[1].id);
+  const [signer, setSigner] = useState<"avatar" | "video">("avatar");
+  const avatarLib = useAvatarLibrary();
+  const stage = useRef<AvatarStage | null>(null);
+  const [stageReady, setStageReady] = useState(false);
   const [speech, setSpeech] = useState<SpeechProgress | { stage: "error"; message: string } | null>(null);
 
   useEffect(() => {
@@ -97,18 +103,53 @@ export function StudioPage() {
     [timed, words, forms, letters],
   );
 
+  // The avatar shows the same signs from its own clips (same dictionary ids).
+  const useAvatar = signer === "avatar" && !!avatarLib;
+  const shown = useMemo(
+    () =>
+      useAvatar
+        ? translated.map((ws) =>
+            ws.map((w) => ({ ...w, clips: w.clips.map((c) => {
+              const e = avatarLib!.get(c.id);
+              if (e) durations.set(e.url, e.duration);
+              return e ? { ...c, src: e.url } : c;
+            }) })),
+          )
+        : translated,
+    [translated, useAvatar, avatarLib],
+  );
+
   // Clip lengths are needed to place clips on the timeline.
   useEffect(() => {
     if (!words) return;
     let alive = true;
-    const srcs = [...new Set(translated.flat().flatMap((w) => w.clips.map((c) => c.src)))];
+    const srcs = [...new Set(shown.flat().flatMap((w) => w.clips.map((c) => c.src)))];
     void Promise.all(srcs.map((s) => (durations.has(s) ? durations.get(s)! : loadDuration(s)))).then(() => {
-      if (alive) setSchedule(buildSchedule(timed, translated, (s) => durations.get(s) ?? 1.6));
+      if (alive) setSchedule(buildSchedule(timed, shown, (s) => durations.get(s) ?? 1.6));
     });
     return () => {
       alive = false;
     };
-  }, [translated, timed, words]);
+  }, [shown, timed, words]);
+
+  // Off-screen 3D avatar, created on first use; clips are loaded before playing.
+  useEffect(() => {
+    if (signer !== "avatar") return;
+    let alive = true;
+    void (async () => {
+      if (!stage.current) {
+        const { AvatarStage } = await import("../sign/avatarStage");
+        stage.current ??= new AvatarStage(`${AVATAR_MODEL}?v=2`, "/avatars/alex/ready-idle.glb");
+      }
+      setStageReady(false);
+      await stage.current.prepare(schedule.map((i) => i.src).filter((u) => u.endsWith(".glb")));
+      if (alive) setStageReady(true);
+    })();
+    return () => {
+      alive = false;
+    };
+  }, [signer, schedule]);
+  useEffect(() => () => stage.current?.dispose(), []);
 
   const signsEnd = (schedule[schedule.length - 1]?.end ?? 0) + (video ? 0.5 : 1);
   const total = video ? Math.max(videoDur, signsEnd) : signsEnd;
@@ -167,8 +208,8 @@ export function StudioPage() {
   };
 
   // --- overlay sync + drawing (one loop renders both preview and export) ---
-  const state = useRef({ schedule, timed, captions, position, size, template, video, total, exporting });
-  state.current = { schedule, timed, captions, position, size, template, video, total, exporting };
+  const state = useRef({ schedule, timed, captions, position, size, template, video, total, exporting, signer });
+  state.current = { schedule, timed, captions, position, size, template, video, total, exporting, signer };
 
   useEffect(() => {
     const els = [ovA.current, ovB.current];
@@ -276,7 +317,13 @@ export function StudioPage() {
         clock.current = { base: s.total, since: 0, running: false };
         setPlaying(false);
       }
-      const ov = sync(t, running);
+      let ov: HTMLCanvasElement | null;
+      if (s.signer === "avatar" && stage.current) {
+        const k = itemAt(s.schedule, t);
+        const it = s.schedule[k];
+        const on = it && t < it.end && it.src.endsWith(".glb");
+        ov = stage.current.draw(on ? it.src : null, on ? (t - it.start) * it.rate : 0, t);
+      } else ov = sync(t, running);
       draw(cv, t, ov);
       if (s.exporting && t >= s.total - 0.05) stopExport();
       if (performance.now() - lastUi > 120) {
@@ -545,6 +592,15 @@ export function StudioPage() {
                   </button>
                 ))}
               </div>
+              <div className="studio-signer" role="radiogroup" aria-label={at("Кто показывает жесты", "Who signs", "Ымды кім көрсетеді")}>
+                <span>{at("Переводчик", "Interpreter", "Аудармашы")}</span>
+                <button role="radio" aria-checked={signer === "avatar"} onClick={() => setSigner("avatar")}>
+                  {at("Аватар Алекс", "Avatar Alex", "Алекс аватары")}
+                </button>
+                <button role="radio" aria-checked={signer === "video"} onClick={() => setSigner("video")}>
+                  {at("Видео людей", "Signer videos", "Адамдар бейнесі")}
+                </button>
+              </div>
               <div className="studio-files">
                 <label className="studio-file">
                   <FileVideo size={18} />
@@ -671,7 +727,7 @@ export function StudioPage() {
                   </button>
                 </div>
               ) : (
-                <button className="button primary" onClick={startExport} disabled={!schedule.length}>
+                <button className="button primary" onClick={startExport} disabled={!schedule.length || (signer === "avatar" && !stageReady)}>
                   <RotateCcw size={16} />
                   {at("Записать видео", "Render video", "Бейнені жазу")} · {formatTime(total)}
                 </button>
@@ -702,7 +758,10 @@ function drawSigner(ctx: CanvasRenderingContext2D, ov: HTMLCanvasElement | null,
   ctx.save();
   ctx.beginPath();
   ctx.roundRect(x, y, w, h, r);
-  ctx.fillStyle = "#e5e7eb";
+  const bg = ctx.createLinearGradient(0, y, 0, y + h);
+  bg.addColorStop(0, "#eef1f5");
+  bg.addColorStop(1, "#d3d9e2");
+  ctx.fillStyle = bg;
   ctx.fill();
   ctx.clip();
   if (ov && ov.width > 1) {

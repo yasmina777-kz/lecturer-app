@@ -6,7 +6,7 @@ export type Cue = { text: string; start?: number; end?: number };
  * spell = shown letter by letter, skip = function word RSL usually drops,
  * none = no way to show it (numbers, latin). */
 export type WordKind = "sign" | "form" | "spell" | "skip" | "none";
-export type Clip = { src: string; label: string; letter: boolean };
+export type Clip = { id: string; src: string; label: string; letter: boolean };
 export type StudioWord = { text: string; kind: WordKind; clips: Clip[] };
 export type ScheduleItem = Clip & { start: number; end: number; rate: number; cue: number };
 export type Position = "br" | "bl" | "tr" | "tl";
@@ -138,6 +138,7 @@ export function numberWords(n: number): string {
 }
 
 const clipOf = (e: DictionaryEntry, letter = false): Clip => ({
+  id: e.id,
   src: e.displayVideo ?? e.video,
   label: e.label.replace(/[!?]$/u, ""),
   letter,
