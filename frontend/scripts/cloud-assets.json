@@ -2,81 +2,6 @@
   "revision": "89b84a4fd8b8d2ba58c3132c0acdca8ff22cf178",
   "files": [
     {
-      "path": "frontend/public/avatars/hand-workshop/fist.glb",
-      "sha256": "bf3c87018eb4191f2b74b26cdb1cccfddb2db789c1f8485673cc16fae7cb64a3",
-      "size": 205760
-    },
-    {
-      "path": "frontend/public/avatars/hand-workshop/grasp-scene.glb",
-      "sha256": "fca90bc069b18395ec4fed8d0f11c2e2de9fdb14fbbcdf5aa4a95499a17e35df",
-      "size": 10854380
-    },
-    {
-      "path": "frontend/public/avatars/hand-workshop/grasp.glb",
-      "sha256": "0b462713d647e3b086125d545d8dedcc72f8caf9ddc1c0f4b79ab15c6f016ad6",
-      "size": 215060
-    },
-    {
-      "path": "frontend/public/avatars/hand-workshop/mira-rig.glb",
-      "sha256": "28746234d175f180848f281ad5c48863ed01a10c50b4edc29d487a9b07a4040d",
-      "size": 19734588
-    },
-    {
-      "path": "frontend/public/avatars/hand-workshop/pinch.glb",
-      "sha256": "be849ff27ce34b4ede0c28652b7a64ca4c490ad3c15eab88832301d4e1c04763",
-      "size": 205760
-    },
-    {
-      "path": "frontend/public/avatars/hand-workshop/point.glb",
-      "sha256": "09976bc7aad82dc42f42a3892ffb0ad9934ab48912e0496330fe41dfd65f1fc6",
-      "size": 186708
-    },
-    {
-      "path": "frontend/public/avatars/hand-workshop/wave.glb",
-      "sha256": "17a9f07da206a2267e38767de0e65e4e5813bc8ef60870bdcbabf941e03e12ee",
-      "size": 202584
-    },
-    {
-      "path": "frontend/public/avatars/lecture-demo/female-demo.mp4",
-      "sha256": "655e2208e511e968a8760ee9c3d35861ef63c2ed4c139cadddd6b2b8a48a16eb",
-      "size": 6509593
-    },
-    {
-      "path": "frontend/public/avatars/lecture-demo/female-kim-v2.mp4",
-      "sha256": "655e2208e511e968a8760ee9c3d35861ef63c2ed4c139cadddd6b2b8a48a16eb",
-      "size": 6509593
-    },
-    {
-      "path": "frontend/public/avatars/lecture-demo/female-portrait.png",
-      "sha256": "cbc0898f6c3445a8ca0d032db28fa04afdad02c718a26dfb3b0e00ad8d2975e6",
-      "size": 2370879
-    },
-    {
-      "path": "frontend/public/avatars/lecture-demo/male-demo.mp4",
-      "sha256": "a92ebab520150588ec5b1354f1a729647e770bbaa1ad872f10e22c68b2bba934",
-      "size": 965161
-    },
-    {
-      "path": "frontend/public/avatars/lecture-demo/male-portrait.png",
-      "sha256": "5cb04d0b9485d26d5e98e6d82106b4a078aca176fa7224c9d7088b2202ddad02",
-      "size": 2359644
-    },
-    {
-      "path": "frontend/public/avatars/live/kim.m4a",
-      "sha256": "f78eabf1caf17c0becc268b010623565daee4ecb6da5ffa627d1dca9a49511ef",
-      "size": 545593
-    },
-    {
-      "path": "frontend/public/avatars/live/mentor-female.glb",
-      "sha256": "3be9508679455b9fb5f099f645a8d2fd5f30368d8c1e4a674ca900c65309f370",
-      "size": 12970928
-    },
-    {
-      "path": "frontend/public/avatars/live/reference-woman.glb",
-      "sha256": "4deb38929dfd25347b5c8008767e2eb3f80dbd2e52517ea88031529651f38c2e",
-      "size": 35221012
-    },
-    {
       "path": "frontend/public/avatars/mira-blender/letter-a.glb",
       "sha256": "67f3dd848f91f7c549cc80864904f9cabd0a4eac7c99005f8a43214cc5a5780a",
       "size": 10775652
@@ -130,31 +55,6 @@
       "path": "frontend/public/avatars/mira-blender/mira-thanks.glb",
       "sha256": "3757c2c1873f2909aa0a2b7702a9251b6c276b104a6f1878ec848e19f616d611",
       "size": 10774656
-    },
-    {
-      "path": "frontend/public/avatars/mixamo-trial/standing-idle.glb",
-      "sha256": "e146b3ad23bbd85273bae04804b55515cf541b646775dcae6ba9310d79017e7d",
-      "size": 184360
-    },
-    {
-      "path": "frontend/public/avatars/mixamo-trial/talking.glb",
-      "sha256": "756ad2cf338e4cf869c752734fc3f98ed67465e027742b033e9e971714989071",
-      "size": 147520
-    },
-    {
-      "path": "frontend/public/avatars/portrait-study/kim-preview.wav",
-      "sha256": "3f27a79c673b4432f8086267dd958445a69fde4964c41f62da36cc38f5cdf911",
-      "size": 384044
-    },
-    {
-      "path": "frontend/public/avatars/portrait-study/portrait-final.png",
-      "sha256": "dc9fc39120bfbb6d285a77f4985ff09891e0b7889ed3736928fd5a4157c396a8",
-      "size": 772489
-    },
-    {
-      "path": "frontend/public/avatars/portrait-study/portrait-study.glb",
-      "sha256": "34c00e8231bebabfc7c15e00e0b9f872416201e7b89058a3ed23bc36f255c508",
-      "size": 11393436
     },
     {
       "path": "frontend/public/avatars/sign-motion/body-clearance-report.json",
