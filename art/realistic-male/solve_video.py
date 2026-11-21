@@ -461,29 +461,33 @@ def solve_fingers(q, s, hp):
     f_c = rot @ (head[P + s + "HandMiddle1"] - head[hand])
     f_c = (f_c - n_c * f_c.dot(n_c)).normalized()
     sign = 1 if n_c.cross(f_c).dot(a_c) >= 0 else -1
+    # One fixed hinge axis per finger (perpendicular to the palm normal and the
+    # finger's straight direction): every joint bends about it, so a curled
+    # finger stays in its plane instead of twisting sideways.
     for f in FINGERS:
         chain = [P + s + "Hand" + f + str(k) for k in (1, 2, 3)]
         d = Quaternion(n_c, sign * spreads[f]) @ f_c
-        prev = q[hand]
-        prev_name = hand
+        h = d.cross(n_c).normalized()
+        if h.cross(d).dot(n_c) < 0:  # +θ about h must move d toward the palm
+            h = -h
+        prev, prev_name, cum = q[hand], hand, 0.0
         for k, bname in enumerate(chain):
             base = prev @ restq[prev_name].inverted() @ restq[bname]
-            ref = d if k == 0 else (prev @ Y)
-            h = ref.cross(n_c).normalized()
-            # rotation about h by +θ moves toward h × ref = palm side
-            if h.cross(ref).dot(n_c) < 0:
-                h = -h
-            dirk = Quaternion(h, flexes[f][k]) @ ref
-            q[bname] = look(base, dirk)
+            cum += flexes[f][k]
+            q[bname] = look(base, Quaternion(h, cum) @ d)
             prev, prev_name = q[bname], bname
-    # Thumb: follow the tracked directions, limited around its rest direction.
+    # Thumb: the tracked directions, taken relative to the tracked palm and put
+    # on Alex's palm (so a clamped wrist does not swing the thumb across it).
     chain = [P + s + "HandThumb" + str(k) for k in (1, 2, 3)]
+    if hp is not None:
+        av_palm = (rot.to_matrix() @ RP[s])
+        to_av = av_palm @ B.inverted()
     prev, prev_name = q[hand], hand
     for k, bname in enumerate(chain):
         base = prev @ restq[prev_name].inverted() @ restq[bname]
         if hp is not None:
-            dirk = hp[THUMB[k + 1]] - hp[THUMB[k]]
-            q[bname] = limit(look(base, dirk), base, (55, 60, 75)[k])
+            dirk = to_av @ (hp[THUMB[k + 1]] - hp[THUMB[k]])
+            q[bname] = limit(look(base, dirk), base, (45, 55, 70)[k])
         else:
             q[bname] = base
         prev, prev_name = q[bname], bname

@@ -16,7 +16,7 @@ const create = pipeline as unknown as (task: string, model: string, options: Rec
 let asr: Promise<Asr> | null = null;
 let loaded = "";
 
-self.onmessage = async (event: MessageEvent<{ id: number; audio: Float32Array; model: string }>) => {
+self.onmessage = async (event: MessageEvent<{ id: number; audio: Float32Array | null; model: string }>) => {
   const { id, audio, model } = event.data;
   const send = (type: string, data: unknown) => self.postMessage({ id, type, data });
   try {
@@ -35,6 +35,12 @@ self.onmessage = async (event: MessageEvent<{ id: number; audio: Float32Array; m
       });
     }
     const run = await asr;
+    if (!audio) {
+      // Warm-up only: one tiny pass compiles the model so the first real phrase is fast.
+      await run(new Float32Array(16000), { language: "russian", task: "transcribe" });
+      send("done", []);
+      return;
+    }
     send("stage", "transcribing");
     const out = await run(audio, {
       language: "russian",

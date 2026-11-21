@@ -14,7 +14,9 @@ export type SpeechProgress =
 export async function decodeAudio(blob: Blob): Promise<{ samples: Float32Array; duration: number }> {
   const ctx = new AudioContext({ sampleRate: 16000 });
   try {
-    const audio = await ctx.decodeAudioData(await blob.arrayBuffer());
+    const audio = await ctx.decodeAudioData(await blob.arrayBuffer()).catch(() => {
+      throw new Error("Не удалось прочитать звук в этом файле. Подойдут MP3, WAV, M4A, OGG, WEBM или видео MP4.");
+    });
     const samples = new Float32Array(audio.length);
     for (let c = 0; c < audio.numberOfChannels; c++) {
       const ch = audio.getChannelData(c);
@@ -28,17 +30,15 @@ export async function decodeAudio(blob: Blob): Promise<{ samples: Float32Array; 
 
 let worker: Worker | null = null;
 let nextId = 1;
+type Chunk = { text: string; timestamp: [number, number | null] };
 
-/** Speech in a file → subtitle lines with times, computed on this device. */
-export async function transcribe(blob: Blob, model: string, onProgress: (p: SpeechProgress) => void): Promise<Cue[]> {
-  onProgress({ stage: "decoding" });
-  const { samples, duration } = await decodeAudio(blob);
-  if (!samples.length) return [];
+/** One request to the speech worker: load `model` (and transcribe `audio` if given). */
+function call(model: string, audio: Float32Array | null, onProgress: (p: SpeechProgress) => void): Promise<Chunk[]> {
   worker ??= new Worker(new URL("./speech.worker.ts", import.meta.url), { type: "module" });
+  const w = worker;
   const id = nextId++;
   const files = new Map<string, [number, number]>();
-  const chunks = await new Promise<{ text: string; timestamp: [number, number | null] }[]>((resolve, reject) => {
-    const w = worker!;
+  return new Promise((resolve, reject) => {
     const onMessage = (e: MessageEvent<{ id: number; type: string; data: unknown }>) => {
       if (e.data.id !== id) return;
       const { type, data } = e.data;
@@ -52,13 +52,54 @@ export async function transcribe(blob: Blob, model: string, onProgress: (p: Spee
       } else if (type === "stage") onProgress({ stage: "transcribing" });
       else {
         w.removeEventListener("message", onMessage);
-        if (type === "done") resolve(data as never);
+        if (type === "done") resolve(data as Chunk[]);
         else reject(new Error(String(data)));
       }
     };
     w.addEventListener("message", onMessage);
-    w.postMessage({ id, audio: samples, model }, [samples.buffer]);
+    if (audio) w.postMessage({ id, audio, model }, [audio.buffer]);
+    else w.postMessage({ id, audio: null, model });
   });
+}
+
+const READY_KEY = "rsl-speech-ready-v1";
+/** Model already downloaded on this device once (so warming it up is cheap). */
+export function speechCached(model: string): boolean {
+  try {
+    return localStorage.getItem(READY_KEY)?.split(",").includes(model) ?? false;
+  } catch {
+    return false;
+  }
+}
+function markCached(model: string) {
+  try {
+    const have = new Set((localStorage.getItem(READY_KEY) ?? "").split(",").filter(Boolean));
+    have.add(model);
+    localStorage.setItem(READY_KEY, [...have].join(","));
+  } catch {
+    /* storage unavailable: no warm start next time */
+  }
+}
+
+const warming = new Map<string, Promise<void>>();
+/** Download / load the model ahead of time (e.g. while the person is still speaking). */
+export function preloadSpeech(model: string, onProgress: (p: SpeechProgress) => void = () => {}): Promise<void> {
+  let p = warming.get(model);
+  if (!p) {
+    p = call(model, null, onProgress).then(() => markCached(model));
+    p.catch(() => warming.delete(model));
+    warming.set(model, p);
+  }
+  return p;
+}
+
+/** Speech in a file → subtitle lines with times, computed on this device. */
+export async function transcribe(blob: Blob, model: string, onProgress: (p: SpeechProgress) => void): Promise<Cue[]> {
+  onProgress({ stage: "decoding" });
+  const { samples, duration } = await decodeAudio(blob);
+  if (!samples.length) return [];
+  await preloadSpeech(model, onProgress);
+  const chunks = await call(model, samples, onProgress);
   return chunks
     .map((c, i) => ({
       text: c.text.replace(/\s+/g, " ").trim(),

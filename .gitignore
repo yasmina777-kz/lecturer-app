@@ -94,3 +94,4 @@ art/**/*
 !art/sign-motion/mixamo-hand-calibration.json
 !art/sign-motion/mixamo-body-calibration.json
 art/realistic-male/build/
+local-test-account.txt

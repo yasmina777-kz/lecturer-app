@@ -2,7 +2,7 @@ import { lazyPage } from "../lazyPage";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Search, BookOpen, Play, ArrowRight, Mic, Square, Paperclip } from "lucide-react";
-import { SPEECH_MODELS, transcribe, type SpeechProgress } from "../local-ai/speech";
+import { SPEECH_MODELS, preloadSpeech, speechCached, transcribe, type SpeechProgress } from "../local-ai/speech";
 import { numberWords, parseSubtitles } from "../sign/studio";
 import { at } from "../i18n/automation";
 import {
@@ -79,7 +79,28 @@ export function SignDictionaryPage() {
     [message, setMessage] = useState("");
   // Voice or a file → text → signs. Speech is recognised in the browser (Whisper).
   const [speech, setSpeech] = useState<SpeechProgress | { stage: "error"; message: string } | null>(null);
-  const [speechModel, setSpeechModel] = useState(SPEECH_MODELS[1].id);
+  const [speechModel, setSpeechModelState] = useState(() => {
+    try {
+      const v = localStorage.getItem("rsl-speech-model-v1");
+      if (v && SPEECH_MODELS.some((m) => m.id === v)) return v;
+    } catch {
+      /* default below */
+    }
+    return SPEECH_MODELS[0].id;
+  });
+  const setSpeechModel = (v: string) => {
+    setSpeechModelState(v);
+    try {
+      localStorage.setItem("rsl-speech-model-v1", v);
+    } catch {
+      /* not remembered */
+    }
+  };
+  // Already downloaded once on this device → load it into memory right away, so
+  // the first phrase is recognised without waiting.
+  useEffect(() => {
+    if (speechCached(speechModel)) void preloadSpeech(speechModel).catch(() => {});
+  }, [speechModel]);
   const [recording, setRecording] = useState(0);
   const mic = useRef<{ rec: MediaRecorder; started: number } | null>(null);
   const busy = !!speech && speech.stage !== "error";
@@ -132,6 +153,10 @@ export function SignDictionaryPage() {
       };
       rec.start(250);
       mic.current = { rec, started: Date.now() };
+      // Fetch / load the model while the person is speaking.
+      void preloadSpeech(speechModel, (p) => mic.current && setSpeech(p))
+        .then(() => mic.current && setSpeech(null))
+        .catch(() => {});
       setRecording(1);
     } catch {
       setSpeech({
@@ -408,7 +433,7 @@ export function SignDictionaryPage() {
               )}
             />
             <div className="translate-inputs">
-              <button className={`button secondary${recording ? " recording" : ""}`} onClick={toggleMic} disabled={busy || loading}>
+              <button className={`button secondary${recording ? " recording" : ""}`} onClick={toggleMic} disabled={(busy && !recording) || loading}>
                 {recording ? <Square size={16} /> : <Mic size={16} />}
                 {recording ? `${at("Стоп", "Stop", "Тоқтату")} · ${recording - 1} c` : at("Сказать голосом", "Speak", "Дауыспен айту")}
               </button>
