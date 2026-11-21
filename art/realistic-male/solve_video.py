@@ -27,6 +27,8 @@ OUT = ROOT / "frontend/public/avatars/alex"
 OUT.mkdir(parents=True, exist_ok=True)
 P = "mixamorig:"
 FPS = 30
+HOLD = int(0.1 * FPS)   # relaxed pose held at both ends
+TRANS = int(0.3 * FPS)  # move into / out of the sign
 rig = bpy.data.objects["Avatar"]
 W = rig.matrix_world.copy()
 bones = rig.data.bones
@@ -111,6 +113,22 @@ def rig_palm_normal(side):
     return n.normalized()
 
 
+# Alex's own face landmarks, measured on the mesh: nose tip and ear span.
+def _face_geometry():
+    body = bpy.data.objects.get("Avatar.body")
+    if not body:
+        return head[P + "Head"] + Vector((0, -0.16, 0.055)), 0.166
+    vs = [body.matrix_world @ v.co for v in body.data.vertices]
+    hz = head[P + "Head"].z
+    face = [v for v in vs if hz + 0.02 < v.z < hz + 0.12 and abs(v.x) < 0.03]
+    nose = min(face, key=lambda v: v.y) if face else head[P + "Head"] + Vector((0, -0.16, 0.055))
+    band = [v for v in vs if abs(v.z - nose.z) < 0.03 and v.y > nose.y + 0.08]
+    ear = (max(v.x for v in band) - min(v.x for v in band)) if band else 0.166
+    return nose, ear
+
+
+NOSE_AV, EARS_AV = _face_geometry()
+print("face geometry", [round(c, 3) for c in NOSE_AV], round(EARS_AV, 3), flush=True)
 RP = {s: rig_palm(s) for s in ("Left", "Right")}
 RN = {s: rig_palm_normal(s) for s in ("Left", "Right")}
 # Rig palm normal must agree in sign with frame z for the solver below.
@@ -211,6 +229,8 @@ def solve_clip(cap):
         raise ValueError("too few pose frames")
     t_src = np.array([f["t"] for f in frames])
     pose, _ = fill_smooth(series(frames, lambda f: f["world"], 33), max_gap=10**6, sigma=1.2)
+    img, _ = fill_smooth(series(frames, lambda f: f.get("pose"), 33), max_gap=10**6, sigma=1.0)
+    aspect = float(cap.get("aspect") or 1.0)
     hands = {}
     for s in ("Left", "Right"):
         a, present = fill_smooth(series(frames, lambda f, s=s: assign_hands(f)[s], 21), max_gap=6, sigma=1.0)
@@ -218,6 +238,7 @@ def solve_clip(cap):
     dur = float(t_src[-1] - t_src[0])
     t_dst = t_src[0] + np.arange(0, dur + 1e-6, 1 / FPS)
     pose = resample(pose, t_src, t_dst)
+    img = resample(img, t_src, t_dst)
     for s in hands:
         a, present = hands[s]
         idx = np.clip(np.searchsorted(t_src, t_dst), 0, len(t_src) - 1)
@@ -240,10 +261,32 @@ def solve_clip(cap):
     relax = relaxed_pose()
     out = []
     prev_twist = {}
+    # Hands are placed where the signer's hands are relative to the shoulders,
+    # in the avatar's own proportions (scale = shoulder span ratio), then reached
+    # with two-bone IK; the elbow points where the signer's elbow points.
+    span_avatar = (head[P + "LeftArm"] - head[P + "RightArm"]).length
+    span_signer = float(np.median([np.linalg.norm(pose[i, 11] - pose[i, 12]) for i in range(T)]))
+    scale = span_avatar / max(span_signer, 1e-3)
+    # Where things are ACROSS and UP comes from the image (exact as seen);
+    # only the depth comes from the 3D estimate, which wanders, and is clamped.
+    gi = lambda i_, j: Vector(((img[i_, j, 0] - 0.5) * aspect, 0.0, -(img[i_, j, 1] - 0.5)))
+    span_img = float(np.median([abs(img[i, 11, 0] - img[i, 12, 0]) * aspect for i in range(T)]))
+    scale_img = span_avatar / max(span_img, 1e-3)
+    ears_img = float(np.median([np.hypot((img[i, 7, 0] - img[i, 8, 0]) * aspect, img[i, 7, 1] - img[i, 8, 1]) for i in range(T)]))
+    face_img = EARS_AV / max(ears_img, 1e-3)
+    ears = float(np.median([np.linalg.norm(pose[i, 7] - pose[i, 8]) for i in range(T)]))
+    face_scale = EARS_AV / max(ears, 1e-3)
+    head_c = Vector((NOSE_AV.x, NOSE_AV.y + 0.1, NOSE_AV.z + 0.02))  # avatar skull centre
+    nose_av = NOSE_AV
+    reach = {s_: ((head[P + s_ + "ForeArm"] - head[P + s_ + "Arm"]).length, (head[P + s_ + "Hand"] - head[P + s_ + "ForeArm"]).length) for s_ in ("Left", "Right")}
     for i in range(T):
         inv = T0.inverted()
         g = lambda j: inv @ cv(pose[i, j])
         q = {}
+        pos = {}
+        arm_dirs = {}
+        sig_mid = (g(11) + g(12)) / 2
+        img_mid = (gi(i, 11) + gi(i, 12)) / 2
         D = limit(inv @ torso(i), Quaternion(), 12)
         Hd = limit(H0.inverted() @ D.inverted() @ inv @ headq(i), Quaternion(), 30)
         for n in order:
@@ -258,9 +301,54 @@ def solve_clip(cap):
             elif short == "Head":
                 base = D @ Hd @ restq[n]
             q[n] = base
+            pos[n] = head[n].copy() if p is None else pos[p] + (q[p] @ restq[p].inverted()) @ (head[n] - head[p])
             for s, (js, je, jw) in (("Left", (11, 13, 15)), ("Right", (12, 14, 16))):
                 if short == s + "Arm":
-                    d1, d2 = g(je) - g(js), g(jw) - g(je)
+                    S = pos[n]
+                    av_mid = (pos[n] + (pos.get(P + ("Right" if s == "Left" else "Left") + "Arm") or (head[P + ("Right" if s == "Left" else "Left") + "Arm"]))) / 2
+                    rel = gi(i, jw) - img_mid
+                    nose_rel = gi(i, 0) - img_mid
+                    # Two vertical anchors: shoulders and nose. Above the shoulders the
+                    # scale makes the signer's nose land on Alex's nose (selfie videos
+                    # enlarge the head), below it is the shoulder-span scale.
+                    k_up = (nose_av.z - av_mid.z) / max(nose_rel.z, 0.02)
+                    k_up = max(0.6 * scale_img, min(2.2 * scale_img, k_up))
+                    zr = rel.z * (k_up if rel.z > 0 else scale_img)
+                    xr = (rel.x - nose_rel.x * max(0.0, min(1.0, rel.z / max(nose_rel.z, 0.02)))) * scale_img + nose_av.x * 0
+                    depth = max(-0.5, min(0.0, (g(jw) - sig_mid).y * scale))
+                    T_ = av_mid + Vector((xr + (nose_av.x - av_mid.x) * max(0.0, min(1.0, rel.z / max(nose_rel.z, 0.02))), depth, zr))
+                    # Near the face the hand stays close in depth too.
+                    relf = gi(i, jw) - gi(i, 0)
+                    to_nose = relf.length / max(ears_img, 1e-3)
+                    wf = max(0.0, min(1.0, 2.2 - to_nose / 1.6))
+                    if wf > 0:
+                        T_.y = T_.y + (max(-0.22, min(0.0, (g(jw) - g(0)).y * face_scale)) + nose_av.y - 0.02 - T_.y) * wf
+                    # never inside the head
+                    off = T_ - head_c
+                    if off.length < 0.13:
+                        T_ = head_c + (off.normalized() if off.length > 1e-4 else Vector((0, -1, 0))) * 0.13
+                    # keep the hand in front of the chest, never inside the body
+                    chest = pos.get(P + "Spine2", head[P + "Spine2"])
+                    if abs(T_.x - chest.x) < 0.17 and head[P + "Hips"].z < T_.z < pos.get(P + "Neck", head[P + "Neck"]).z + 0.02:
+                        T_.y = min(T_.y, chest.y - 0.13)
+                    if os.environ.get("DEBUG_IK") and i == T // 2:
+                        print("IK", s, "signer wrist-mid", [round(v, 3) for v in (g(jw) - sig_mid)], "nose-mid", [round(v, 3) for v in (g(0) - sig_mid)],
+                              "shoulder", [round(v, 3) for v in S], "avmid", [round(v, 3) for v in av_mid], "target", [round(v, 3) for v in T_],
+                              "head", [round(v, 3) for v in head[P + "Head"]], "scale", round(scale, 3), flush=True)
+                    a_len, b_len = reach[s]
+                    dv = T_ - S
+                    d = min(max(dv.length, abs(a_len - b_len) + 1e-3), (a_len + b_len) * 0.995)
+                    u = dv.normalized()
+                    pole = (gi(i, je) - gi(i, js)) * scale_img + Vector((0, (g(je) - g(js)).y * scale, 0))
+                    pole = pole - u * pole.dot(u)
+                    if pole.length < 1e-4:
+                        pole = Vector((0, 0, -1)) - u * u.z
+                    pole.normalize()
+                    cosA = max(-1.0, min(1.0, (a_len * a_len + d * d - b_len * b_len) / (2 * a_len * d)))
+                    E_ = S + u * (a_len * cosA) + pole * (a_len * math.sqrt(max(0.0, 1 - cosA * cosA)))
+                    W_ = S + u * d
+                    d1, d2 = E_ - S, W_ - E_
+                    arm_dirs[s] = (d1, d2)
                     qa = look(base, d1)
                     hinge_rest = (restq[n].inverted() @ (restq[n] @ Y).cross(Vector((0, -1, 0)))).normalized()
                     normal = d1.cross(d2)
@@ -271,10 +359,9 @@ def solve_clip(cap):
                         ang = prev_twist.get(s, 0.0)
                     q[n] = Quaternion(d1.normalized(), ang) @ qa
                 elif short == s + "ForeArm":
-                    d1, d2 = g(je) - g(js), g(jw) - g(je)
-                    if d1.angle(d2, 0) > math.radians(150):
-                        d2 = d1.normalized().slerp(d2.normalized(), 150 / math.degrees(d1.angle(d2)))
+                    d1, d2 = arm_dirs.get(s, (g(je) - g(js), g(jw) - g(je)))
                     q[n] = look(base, d2)
+                    pos[n] = pos[p] + (q[p] @ restq[p].inverted()) @ (head[n] - head[p])
                 elif short == s + "Hand":
                     h, present = hands[s]
                     if h is not None and present[i]:
@@ -295,22 +382,37 @@ def solve_clip(cap):
         for s in ("Left", "Right"):
             hp = q.pop("_hand_" + s, None)
             solve_fingers(q, s, hp)
-        out.append(q)
-    # Ease in/out from the shared relaxed pose (0.35 s), so words chain smoothly.
-    ease = min(int(0.35 * FPS), T // 3)
-    for i in range(T):
-        w = 1.0
-        if i < ease:
-            w = (i / ease)
-        if i >= T - ease:
-            w = min(w, (T - 1 - i) / ease)
-        w = w * w * (3 - 2 * w)
-        if w < 1:
+        # A hand resting low (on the lap of a seated signer, on a table) is not
+        # part of the sign: the standing avatar lets that arm hang relaxed.
+        sh_y = (img[i, 11, 1] + img[i, 12, 1]) / 2
+        hip_y = (img[i, 23, 1] + img[i, 24, 1]) / 2
+        span_y = max(hip_y - sh_y, 0.05)
+        for s, jw in (("Left", 15), ("Right", 16)):
+            down = (img[i, jw, 1] - sh_y) / span_y
+            w = max(0.0, min(1.0, (down - 0.45) / 0.2))
+            w = w * w * (3 - 2 * w)
+            if w <= 0:
+                continue
             for n in order:
-                out[i][n] = relax[n].slerp(out[i][n], w) if relax[n].dot(out[i][n]) >= 0 else relax[n].slerp(-out[i][n], w)
-    # Hold the relaxed pose for a moment at both ends.
-    hold = [dict(relax) for _ in range(int(0.15 * FPS))]
-    return hold + out + hold
+                short = n.removeprefix(P)
+                if short.startswith(s) and ("Arm" in short or "Hand" in short):
+                    a = q[n]
+                    b = relax[n] if relax[n].dot(a) >= 0 else -relax[n]
+                    q[n] = a.slerp(b, w)
+        out.append(q)
+    # The sign itself plays in full, frame for frame as on the video; the move
+    # from and back to the shared relaxed pose is added OUTSIDE it.
+    def blend(a, b, w):
+        r = {}
+        for n in order:
+            qb = b[n] if a[n].dot(b[n]) >= 0 else -b[n]
+            r[n] = a[n].slerp(qb, w)
+        return r
+    smooth = lambda x: x * x * (3 - 2 * x)
+    lead = [blend(relax, out[0], smooth((k + 1) / (TRANS + 1))) for k in range(TRANS)]
+    tail = [blend(out[-1], relax, smooth((k + 1) / (TRANS + 1))) for k in range(TRANS)]
+    hold = [dict(relax) for _ in range(HOLD)]
+    return hold + lead + out + tail + hold
 
 
 def solve_fingers(q, s, hp):

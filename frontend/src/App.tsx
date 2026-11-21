@@ -19,7 +19,6 @@ const SignLearningPage = lazyPage(() => import("./pages/SignWorkspace").then(m =
 const SignLessonPage = lazyPage(() => import("./pages/SignWorkspace").then(m => ({default:m.SignLessonPage})));
 const SignTextPage = lazyPage(() => import("./pages/SignWorkspace").then(m => ({default:m.SignTextPage})));
 const SignRecognitionPage = lazyPage(() => import("./pages/SignRecognition").then(m => ({default:m.SignRecognitionPage})));
-const StudioPage = lazyPage(() => import("./pages/Studio").then(m => ({default:m.StudioPage})));
 const SignGrammarPage = lazyPage(() => import("./pages/SignGrammar").then(m => ({default:m.SignGrammarPage})));
 const SignVocabularyPage = lazyPage(() => import("./pages/SignVocabulary").then(m => ({default:m.SignVocabularyPage})));
 const SignPracticePage = lazyPage(() => import("./pages/SignWorkspace").then(m => ({default:m.SignPracticePage})));
@@ -90,7 +89,6 @@ export function App() {
         <Route path="/login" element={<AuthPage key="login" />} />
         <Route path="/register" element={<AuthPage key="register" signup />} />
         <Route element={<ProtectedRoute />}>
-          <Route path="studio" element={<StudioPage />} />
           <Route element={<Shell />}>
             <Route path="dashboard" element={<Navigate to="/learn" replace />} />
             <Route path="learn" element={<SignLearningPage />} />

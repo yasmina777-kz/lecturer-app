@@ -5,7 +5,7 @@ import type { MotionPlan } from "./motion";
  * saved motion. Clips are the shared library retargeted to his own rig
  * (art/realistic-male/retarget.py). */
 export const AVATAR_MODEL = "/avatars/alex/alex.glb";
-type Entry = { id: string; url: string; originalUrl: string; revision: string; duration: number };
+type Entry = { id: string; url: string; originalUrl: string; revision: string; duration: number; core?: [number, number] | null };
 let library: Promise<Map<string, Entry>> | null = null;
 export function loadAvatarLibrary() {
   library ??= fetch("/avatars/alex/catalog.json")
@@ -52,6 +52,23 @@ export function avatarPlan(plan: MotionPlan, lib: Map<string, Entry>): MotionPla
     }
     else missing.push(s.text);
   }
+  // Inside a phrase an interpreter does not drop the hands between signs: play
+  // only the sign itself (the raised-hand part measured on the video) and blend
+  // straight into the next one. Letters inside a fingerspelled word are shorter
+  // still: ~0.6 s from the middle of each letter.
+  const isLetter = (i: number) => !!steps[i]?.id?.startsWith("letter-");
+  steps.forEach((st, i) => {
+    const c = lib.get(st.id)?.core;
+    if (!c) return;
+    const s = st as typeof st & { clipStart?: number; clipEnd?: number; joinGap?: number };
+    const letterRun = isLetter(i);
+    const mid = (c[0] + c[1]) / 2;
+    if (i > 0) s.clipStart = Math.max(0, letterRun && isLetter(i - 1) ? mid - 0.3 : c[0] - 0.12);
+    if (i < steps.length - 1) {
+      s.clipEnd = Math.min(st.duration, letterRun && isLetter(i + 1) ? mid + 0.3 : c[1] + 0.12);
+      s.joinGap = letterRun && isLetter(i + 1) ? 0.18 : 0.3;
+    }
+  });
   return { ...plan, steps, missing };
 }
 

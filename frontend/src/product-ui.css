@@ -3441,3 +3441,57 @@
     font-weight: 500;
   }
 }
+
+/* Translate page: one screen — the player sits beside the input, top-aligned
+   and sticky; no decorative ribbon; the stage height follows the window. */
+:root .product-ui[data-product-ui][data-product-theme] {
+  & .text-sign-page {
+    padding-top: 0;
+    gap: 12px 24px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  & .text-sign-page > .page-heading { display: none; }
+  & .text-sign-page--text > .sign-action-cards,
+  & .text-sign-page--phrases > .sign-action-cards { grid-column: 1; grid-row: 1; }
+  & .text-sign-page--text > .sign-workspace-meta,
+  & .text-sign-page--phrases > .sign-workspace-meta { grid-column: 1; grid-row: 2; }
+  & .text-sign-page--text > .sign-text-editor,
+  & .text-sign-page--phrases > .sign-phrase-workspace { grid-column: 1; grid-row: 3; }
+  & .text-sign-page--text > .text-sign-player,
+  & .text-sign-page--phrases > .text-sign-player {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+    position: sticky;
+    top: 12px;
+  }
+  & .text-sign-page > .text-sign-player::before { content: none; }
+  & .text-sign-page .sign-avatar-stage,
+  & .text-sign-page .human-stage { height: clamp(280px, calc(100vh - 380px), 540px); }
+  & .text-sign-page .sign-editor-title,
+  & .text-sign-page .sign-workflow-hint,
+  & .text-sign-page .sign-text-editor > p.sign-input-hint { display: none; }
+  & .text-sign-page textarea { min-height: 88px; font-size: 20px; }
+  & .text-sign-page .sign-text-editor { padding: 20px; gap: 12px; }
+  & .translate-inputs { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  & .translate-inputs .button { min-height: 40px; padding: 8px 14px; }
+  & .translate-inputs .button.recording { border-color: #dc2626; color: #dc2626; }
+  & .translate-inputs select {
+    font: inherit; padding: 8px 10px; border-radius: 10px;
+    border: 1px solid var(--p-line); background: var(--p-surface); color: var(--p-text);
+  }
+  & .translate-inputs .translate-file {
+    display: inline-flex; flex-direction: row; align-items: center; gap: 8px;
+    margin: 0; cursor: pointer; font-weight: 600;
+  }
+  & .translate-inputs select { width: auto; flex: 0 0 auto; }
+  & .translate-file input { display: none; }
+  & .translate-status { margin: 0; font-size: 13px; color: var(--p-muted); }
+  & .translate-status.error { color: #b91c1c; }
+}
+@media (max-width: 900px) {
+  :root .product-ui[data-product-ui][data-product-theme] .text-sign-page--text > .text-sign-player,
+  :root .product-ui[data-product-ui][data-product-theme] .text-sign-page--phrases > .text-sign-player {
+    grid-column: 1; grid-row: auto; position: static; margin-top: 0;
+  }
+  :root .product-ui[data-product-ui][data-product-theme] .text-sign-page { grid-template-columns: 1fr; }
+}

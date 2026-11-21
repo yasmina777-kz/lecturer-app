@@ -1,7 +1,9 @@
 import { lazyPage } from "../lazyPage";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { Search, BookOpen, Play, ArrowRight } from "lucide-react";
+import { Search, BookOpen, Play, ArrowRight, Mic, Square, Paperclip } from "lucide-react";
+import { SPEECH_MODELS, transcribe, type SpeechProgress } from "../local-ai/speech";
+import { numberWords, parseSubtitles } from "../sign/studio";
 import { at } from "../i18n/automation";
 import {
   alphabetEntries,
@@ -73,6 +75,71 @@ export function SignDictionaryPage() {
     [selected, setSelected] = useState<DictionaryEntry | null>(null),
     [page, setPage] = useState(1),
     [message, setMessage] = useState("");
+  // Voice or a file → text → signs. Speech is recognised in the browser (Whisper).
+  const [speech, setSpeech] = useState<SpeechProgress | { stage: "error"; message: string } | null>(null);
+  const [speechModel, setSpeechModel] = useState(SPEECH_MODELS[1].id);
+  const [recording, setRecording] = useState(0);
+  const mic = useRef<{ rec: MediaRecorder; started: number } | null>(null);
+  const busy = !!speech && speech.stage !== "error";
+  const spoken = (v: string) => v.replace(/\d+/g, (d) => (d.length <= 6 ? numberWords(+d) : d));
+  function showText(v: string) {
+    const clean = v.replace(/\s+/g, " ").trim().slice(0, 500);
+    if (!clean) {
+      setSpeech({ stage: "error", message: at("Речь не найдена", "No speech found", "Сөйлеу табылмады") });
+      return;
+    }
+    setText(clean);
+    setSubmitted(spoken(clean));
+    setSpelling(false);
+    setSelected(null);
+    setMessage("");
+    setRun((n) => n + 1);
+  }
+  async function fromAudio(blob: Blob) {
+    try {
+      const cues = await transcribe(blob, speechModel, setSpeech);
+      setSpeech(null);
+      showText(cues.map((c) => c.text).join(" "));
+    } catch (e) {
+      setSpeech({ stage: "error", message: e instanceof Error ? e.message : String(e) });
+    }
+  }
+  async function onFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const f = e.target.files?.[0];
+    e.target.value = "";
+    if (!f || busy) return;
+    if (/\.(srt|vtt)$/i.test(f.name)) return showText(parseSubtitles(await f.text()).map((c) => c.text).join(" "));
+    if (/\.txt$/i.test(f.name) || f.type === "text/plain") return showText(await f.text());
+    void fromAudio(f);
+  }
+  async function toggleMic() {
+    if (mic.current) {
+      mic.current.rec.stop();
+      return;
+    }
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const rec = new MediaRecorder(stream);
+      const parts: Blob[] = [];
+      rec.ondataavailable = (ev) => ev.data.size && parts.push(ev.data);
+      rec.onstop = () => {
+        stream.getTracks().forEach((t) => t.stop());
+        mic.current = null;
+        setRecording(0);
+        void fromAudio(new Blob(parts, { type: rec.mimeType || "audio/webm" }));
+      };
+      rec.start(250);
+      mic.current = { rec, started: Date.now() };
+      setRecording(1);
+    } catch {
+      setSpeech({ stage: "error", message: at("Нет доступа к микрофону", "Microphone not available", "Микрофонға рұқсат жоқ") });
+    }
+  }
+  useEffect(() => {
+    if (!recording) return;
+    const id = setInterval(() => mic.current && setRecording(1 + Math.floor((Date.now() - mic.current.started) / 1000)), 500);
+    return () => clearInterval(id);
+  }, [recording > 0]);
 
   useEffect(() => {
     const abort = new AbortController();
@@ -125,11 +192,11 @@ export function SignDictionaryPage() {
     [motions, entries],
   );
   const previewPlan = useMemo(
-    () => planMotion(text, entries, forms, playable, spelling),
+    () => planMotion(spoken(text), entries, forms, playable, spelling, true),
     [text, entries, forms, playable, spelling],
   );
   const motionPlan = useMemo(
-    () => planMotion(submitted, entries, forms, playable, spelling),
+    () => planMotion(submitted, entries, forms, playable, spelling, true),
     [submitted, entries, forms, playable, spelling],
   );
   const selectedPlan = useMemo(
@@ -185,7 +252,7 @@ export function SignDictionaryPage() {
       return;
     }
     setMessage("");
-    setSubmitted(text);
+    setSubmitted(spoken(text));
     setRun((v) => v + 1);
     setSelected(null);
     requestAnimationFrame(() =>
@@ -331,6 +398,35 @@ export function SignDictionaryPage() {
                 "Мысалы: Я хочу читать книгу",
               )}
             />
+            <div className="translate-inputs">
+              <button className={`button secondary${recording ? " recording" : ""}`} onClick={toggleMic} disabled={busy || loading}>
+                {recording ? <Square size={16} /> : <Mic size={16} />}
+                {recording ? `${at("Стоп", "Stop", "Тоқтату")} · ${recording - 1} c` : at("Сказать голосом", "Speak", "Дауыспен айту")}
+              </button>
+              <label className="button secondary translate-file">
+                <Paperclip size={16} />
+                {at("Файл: аудио, видео, текст", "File: audio, video, text", "Файл: аудио, бейне, мәтін")}
+                <input type="file" accept="audio/*,video/*,.txt,.srt,.vtt,text/plain" onChange={onFile} disabled={busy || loading} />
+              </label>
+              <select value={speechModel} onChange={(e) => setSpeechModel(e.target.value)} aria-label={at("Качество распознавания речи", "Speech recognition quality", "Сөйлеуді тану сапасы")}>
+                {SPEECH_MODELS.map((m) => (
+                  <option key={m.id} value={m.id}>
+                    {m.label} · {m.size}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {speech && (
+              <p className={`translate-status${speech.stage === "error" ? " error" : ""}`} role="status">
+                {speech.stage === "decoding"
+                  ? at("Читаем звук…", "Reading audio…", "Дыбыс оқылуда…")
+                  : speech.stage === "download"
+                    ? `${at("Загружаем модель речи (один раз)", "Downloading speech model (once)", "Сөйлеу моделі жүктелуде (бір рет)")}: ${speech.percent}%`
+                    : speech.stage === "transcribing"
+                      ? at("Распознаём речь… звук не покидает компьютер", "Recognizing speech… audio stays on this device", "Сөйлеу танылуда… дыбыс компьютерде қалады")
+                      : speech.message}
+              </p>
+            )}
             <div className="sign-reference-controls">
               <label>
                 <input
@@ -361,6 +457,12 @@ export function SignDictionaryPage() {
                 )}
               </button>
             </div>
+            {!loading && !error && text.trim() && (previewPlan.spelledWords?.length ?? 0) > 0 && previewPlan.missing.length === 0 && (
+              <p role="status" className="translate-status">
+                {at("Без отдельного жеста, покажутся по буквам:", "No sign yet, fingerspelled:", "Жеке ымы жоқ, әріппен көрсетіледі:")}{" "}
+                {previewPlan.spelledWords!.join(", ")}
+              </p>
+            )}
             {!loading &&
               !error &&
               text.trim() &&

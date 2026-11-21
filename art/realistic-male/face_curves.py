@@ -16,7 +16,8 @@ MOTION = ROOT / "ml/rsl/data/motion"
 FACE = ROOT / "ml/rsl/data/face"
 OUT = ROOT / "frontend/public/avatars/alex"
 FPS = 30
-HOLD = int(0.15 * FPS)
+HOLD = int(0.1 * FPS)
+TRANS = int(0.3 * FPS)
 GAIN = {"jawOpen": 1.3, "mouthFunnel": 1.3, "mouthPucker": 1.2, "browInnerUp": 1.4, "browOuterUpLeft": 1.3,
         "browOuterUpRight": 1.3, "browDownLeft": 1.3, "browDownRight": 1.3}
 SKIP = {"_neutral", "eyeLookDownLeft", "eyeLookDownRight", "eyeLookInLeft", "eyeLookInRight", "eyeLookOutLeft",
@@ -77,15 +78,10 @@ for mpath in sorted(MOTION.glob("*.json")):
         vals = smooth([interp(ts, raw, t) for t in tdst])
         g = GAIN.get(u, 1.15)
         vals = [min(1.0, max(0.0, (v - base) * g)) for v in vals]
-        for i in range(n):
-            w = 1.0
-            if i < ease:
-                w = i / ease
-            if i >= n - ease:
-                w = min(w, (n - 1 - i) / ease)
-            vals[i] *= w * w * (3 - 2 * w)
         if max(vals) >= 0.08:
-            curves[u] = [0.0] * HOLD + [round(v, 2) for v in vals] + [0.0] * HOLD
-    (OUT / (mpath.stem + ".face.json")).write_text(json.dumps({"fps": FPS, "frames": n + 2 * HOLD, "curves": curves}, separators=(",", ":")))
+            ramp_in = [vals[0] * ((k + 1) / (TRANS + 1)) for k in range(TRANS)]
+            ramp_out = [vals[-1] * (1 - (k + 1) / (TRANS + 1)) for k in range(TRANS)]
+            curves[u] = [0.0] * HOLD + [round(v, 2) for v in ramp_in + vals + ramp_out] + [0.0] * HOLD
+    (OUT / (mpath.stem + ".face.json")).write_text(json.dumps({"fps": FPS, "frames": n + 2 * HOLD + 2 * TRANS, "curves": curves}, separators=(",", ":")))
     done += 1
 print("FACE_CURVES", done)

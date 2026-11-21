@@ -15,7 +15,6 @@ import {
   ArrowLeft,
   BookOpen,
   CircleHelp,
-  Clapperboard,
   Languages,
   ScanLine,
   Type,
@@ -128,10 +127,6 @@ export function Shell() {
           )}
         </nav>
         <div className="sidebar-bottom">
-          <Link to="/studio" onClick={() => setMenu(false)}>
-            <Clapperboard size={18} />
-            {at("Студия для ТВ", "Studio for TV", "ТВ студиясы")}
-          </Link>
           <NavLink to="/help" onClick={() => setMenu(false)}>
             <CircleHelp size={18} />
             {at(

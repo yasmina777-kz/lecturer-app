@@ -33,7 +33,14 @@ export type MotionAsset = {
     end: Record<string, number[]>;
   };
 };
-export type MotionStep = MotionAsset & { text: string };
+export type MotionStep = MotionAsset & {
+  text: string;
+  /** Play only this part of the clip (seconds), e.g. a letter inside a fingerspelled word. */
+  clipStart?: number;
+  clipEnd?: number;
+  /** Seconds to blend into the next step, overriding the computed transition. */
+  joinGap?: number;
+};
 /** Interpolate the recorded source clock, including frozen preparation/release. */
 export function referenceTime(points: [number, number][], time: number): number {
   if (!points.length) return 0;
@@ -51,6 +58,8 @@ export type MotionPlan = {
   steps: MotionStep[];
   missing: string[];
   spelling: boolean;
+  /** Words with no sign, shown letter by letter. */
+  spelledWords?: string[];
 };
 export function planMotion(
   text: string,
@@ -58,7 +67,9 @@ export function planMotion(
   forms: DictionaryForms,
   assets: MotionAsset[],
   spelling = false,
+  spellUnknown = false,
 ): MotionPlan {
+  const spelledWords: string[] = [];
   spelling = spelling || /^[а-яё]$/iu.test(text.trim());
   const legacy = preparedSigns
     .filter((p) => p.phrase.length > 1)
@@ -75,15 +86,28 @@ export function planMotion(
   const byId = new Map(assets.map((a) => [a.id, a]));
   const steps: MotionStep[] = [],
     missing: string[] = [];
+  const letterAsset = (c: string) => {
+    const e = entries.find((x) => x.category === "Алфавит" && x.label === c.toLocaleUpperCase("ru"));
+    return e ? byId.get(e.id) : undefined;
+  };
   for (const p of pieces) {
     if (p.punctuation) continue;
     // Every entry, including the three authored phrases, must resolve to the
     // rebuilt catalog. Never silently fall back to the old finger animations.
     const asset = p.entry ? byId.get(p.entry.id) : undefined;
-    if (asset) steps.push({ ...asset, text: p.text });
-    else missing.push(p.text);
+    if (asset) {
+      steps.push({ ...asset, text: p.text });
+      continue;
+    }
+    // A word with no sign is fingerspelled, as signers do with names and new words.
+    const letters = spellUnknown ? Array.from(p.text).filter((c) => /\p{L}/u.test(c)) : [];
+    const spelled = letters.map(letterAsset);
+    if (letters.length && spelled.every(Boolean)) {
+      spelled.forEach((a, k) => steps.push({ ...a!, text: k === 0 ? p.text : letters[k].toLocaleUpperCase("ru") }));
+      spelledWords.push(p.text);
+    } else missing.push(p.text);
   }
-  return { steps, missing, spelling };
+  return { steps, missing, spelling, spelledWords };
 }
 // Shared relaxed boundaries need only one frame, not a visible quarter-second stop.
 export const MOTION_GAP = 1 / 60;
@@ -116,11 +140,11 @@ export function motionTimeline(steps: MotionStep[]) {
     // Keep Blender's coordinated release and preparation. Slerping local joints
     // directly between two sign handshapes breaks the arm chain and finger pose,
     // even when angular speed is bounded. Only join relaxed endpoints.
-    const trimStart = 0;
-    const trimEnd = 0;
+    const trimStart = Math.max(0, step.clipStart ?? 0);
+    const trimEnd = step.clipEnd != null ? Math.max(0, step.duration - step.clipEnd) : 0;
     const duration = step.duration - trimStart - trimEnd;
     const gapAfter =
-      index < steps.length - 1 ? transitionDuration(step, steps[index + 1]) : 0;
+      index < steps.length - 1 ? (step.joinGap ?? transitionDuration(step, steps[index + 1])) : 0;
     cursor += duration + gapAfter;
     return {
       ...step,
