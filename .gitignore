@@ -95,3 +95,7 @@ art/**/*
 !art/sign-motion/mixamo-body-calibration.json
 art/realistic-male/build/
 local-test-account.txt
+.elevenlabs-key
+promo-video/build/*
+!promo-video/build/scenes.html
+promo-video/*.mp4

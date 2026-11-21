@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<title>AI Mentor promo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f3ec;--ink:#1b2130;--muted:#8a8f99;--blue:#2f5bea;--line:#1b2130}
+*{box-sizing:border-box;margin:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);font-family:Manrope,-apple-system,sans-serif;color:var(--ink)}
+.layer{position:absolute;inset:0;opacity:0}
+.sky{background:radial-gradient(1200px 500px at 30% 85%,#dfe8d6 0,transparent 70%),radial-gradient(900px 420px at 80% 90%,#e7d8e3 0,transparent 70%),linear-gradient(180deg,#e9e3f0 0%,#f2e8e3 50%,#e9eee2 100%)}
+.center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px}
+h1{font-size:64px;font-weight:600;letter-spacing:-.02em}
+h2{font-size:54px;font-weight:600;letter-spacing:-.02em;line-height:1.1}
+.sub{font-size:34px;color:var(--muted);font-weight:500}
+.small{font-size:22px;color:var(--muted);font-weight:500}
+svg.wave{position:absolute;left:0;width:1920px;height:120px;overflow:visible}
+svg.wave path{fill:none;stroke:var(--line);stroke-width:2.2;stroke-linecap:round;opacity:.55}
+.card{position:absolute;background:#fff;border-radius:22px;box-shadow:0 30px 80px rgba(27,33,48,.14),0 2px 8px rgba(27,33,48,.06);overflow:hidden}
+.card img{display:block;width:100%;height:100%;object-fit:cover}
+.left{position:absolute;left:150px;top:0;bottom:0;width:640px;display:flex;flex-direction:column;justify-content:center;gap:22px}
+.bubble{position:absolute;background:#fff;border-radius:28px;padding:30px 40px;font-size:44px;font-weight:600;box-shadow:0 20px 60px rgba(27,33,48,.12)}
+.tag{display:inline-block;font-size:20px;font-weight:700;letter-spacing:.12em;color:var(--blue);text-transform:uppercase}
+.brand{display:flex;align-items:center;gap:22px;font-size:84px;font-weight:700;letter-spacing:-.03em}
+.brand img{width:96px;height:96px;border-radius:24px}
+.glass{position:absolute;left:460px;top:250px;width:1000px;height:560px;border-radius:36px;background:rgba(255,255,255,.32);border:1.5px solid rgba(255,255,255,.75);backdrop-filter:blur(14px);box-shadow:0 30px 90px rgba(60,50,90,.15)}
+.typed{font-size:46px;font-weight:700;min-height:60px}
+.typed .cursor{display:inline-block;width:3px;height:46px;background:var(--blue);margin-left:6px;vertical-align:-6px}
+.mic{display:inline-flex;align-items:center;gap:12px;font-size:22px;color:var(--muted);font-weight:600}
+.dot{width:12px;height:12px;border-radius:50%;background:#e5484d}
+.credit{position:absolute;bottom:26px;right:40px;font-size:15px;color:var(--muted)}
+</style></head>
+<body>
+<!-- S1 -->
+<div class="layer" id="s1">
+  <svg class="wave" style="top:600px" viewBox="0 0 1920 120"><path id="w1" d=""/></svg>
+  <div class="center" style="top:-60px"><h1 id="s1a">Тишина — тоже язык.</h1><div class="sub" id="s1b">Но понимают его немногие.</div></div>
+</div>
+<!-- S2 pharmacy -->
+<div class="layer sky" id="s2">
+  <div class="center" style="top:-250px"><div class="tag" id="s2t">Сценка · Аптека</div><h2 id="s2a">Айгерим не слышит.</h2></div>
+  <div class="bubble" id="s2b" style="left:560px;top:565px">«Здравствуйте! Вам помочь?»</div>
+  <svg class="wave" style="top:720px" viewBox="0 0 1920 120"><path id="w2" d=""/></svg>
+  <div class="mic" id="s2m" style="position:absolute;left:560px;top:515px"><span class="dot"></span>Фармацевт говорит</div>
+</div>
+<!-- S3 avatar -->
+<div class="layer" id="s3">
+  <div class="left"><div class="tag">Голос → жесты</div><h2 id="s3a">AI Mentor слышит вопрос — и&nbsp;аватар показывает его жестами.</h2><div class="sub" style="font-size:28px" id="s3b">«Здравствуйте! Вам помочь?»</div></div>
+  <div class="card" id="s3c" style="left:960px;top:150px;width:816px;height:672px"><img id="avimg" src="seq/avatar/0001.jpg"></div>
+</div>
+<!-- S4 answer -->
+<div class="layer" id="s4">
+  <div class="left"><div class="tag">Жесты → текст</div><h2 id="s4a">Айгерим отвечает жестами. Камера переводит их в&nbsp;текст.</h2><div class="typed" id="typed"></div></div>
+  <div class="card" id="s4c" style="left:1130px;top:90px;width:506px;height:900px;border-radius:40px;border:10px solid #1b2130"><img id="ansimg" src="seq/answer/0001.jpg"></div>
+</div>
+<!-- S5 logo -->
+<div class="layer sky" id="s5">
+  <div class="glass" id="s5g"></div>
+  <div class="center"><div class="brand" id="s5a"><img src="logo.png">AI Mentor</div><div class="sub" id="s5b" style="color:#555b66">Переводит и учит русскому жестовому языку</div></div>
+</div>
+<!-- S6-S8 features -->
+<div class="layer" id="s6"><div class="left" style="width:520px"><h2>Уроки с видео носителей и&nbsp;азбука.</h2></div><div class="card" id="s6c" style="left:760px;top:170px;width:1080px;height:675px"><img src="shots/learn.png"></div></div>
+<div class="layer" id="s7"><div class="left" style="width:520px"><h2>Тренажёр с&nbsp;камерой.</h2><div class="sub" style="font-size:28px">Покажите жест — ИИ&nbsp;проверит.</div></div><div class="card" id="s7c" style="left:760px;top:170px;width:1080px;height:675px"><img src="shots/practice.png"></div></div>
+<div class="layer" id="s8"><div class="left" style="width:520px"><h2>Грамматика РЖЯ и&nbsp;КЖР.</h2><div class="sub" style="font-size:28px">Разговорный язык и&nbsp;официальная форма.</div></div><div class="card" id="s8c" style="left:760px;top:170px;width:1080px;height:675px"><img src="shots/grammar.png"></div></div>
+<!-- S9 privacy -->
+<div class="layer" id="s9">
+  <svg class="wave" style="top:640px" viewBox="0 0 1920 120"><path id="w9" d=""/></svg>
+  <div class="center" style="top:-40px"><h2 id="s9a">Видео и голос остаются<br>на вашем устройстве.</h2></div>
+</div>
+<!-- S10 end -->
+<div class="layer" id="s10">
+  <div class="center"><div class="brand" id="s10a"><img src="logo.png">AI Mentor</div><div class="sub" id="s10b" style="color:#3a404d;font-size:38px">Жесты, которые понимают.</div><div class="small" id="s10c">Учиться. Переводить. Понимать.</div></div>
+  <div class="credit" id="s10d">Видео жестов: датасеты Slovo и Bukva (ai-forever)</div>
+</div>
+<script>
+// Scene start times (seconds); refit to the narration later.
+window.T = {s1:0,s2:5,s3:10,s4:18,s5:25,s6:29.5,s7:34,s8:38.5,s9:43.5,s10:47.5,end:53};
+const order=['s1','s2','s3','s4','s5','s6','s7','s8','s9','s10'];
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), ease=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const $=id=>document.getElementById(id);
+function wave(id,t,amp=10,draw=1,phase=0){const p=$(id);if(!p)return;let d='';const n=160,len=1920*clamp(draw);for(let i=0;i<=n;i++){const x=i/n*1920;if(x>len)break;const env=Math.sin(Math.PI*i/n);const y=60+Math.sin(x/38+t*6+phase)*amp*env*Math.sin(x/170+t*2)+Math.sin(x/90-t*3)*amp*.4*env;d+=(i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)}p.setAttribute('d',d)}
+function show(el,a,dy=0,s=1){if(typeof el==='string')el=$(el);if(!el)return;el.style.opacity=a;el.style.transform=`translateY(${dy}px) scale(${s})`}
+const pad=n=>String(n).padStart(4,'0');
+window.render=function(t){
+  const T=window.T;
+  order.forEach((k,i)=>{const a=T[k],b=T[order[i+1]]??T.end;const fade=.45;let o=0;if(t>=a-fade&&t<=b+fade){o=Math.min(clamp((t-a+fade)/fade),clamp((b+fade-t)/fade));if(k==='s1'&&t<a+.01)o=1}$(k).style.opacity=o});
+  const L=k=>t-T[k];
+  // S1
+  wave('w1',t,9,ease(L('s1')/2.2));show('s1a',ease((L('s1')-.6)/.8),(1-ease((L('s1')-.6)/.8))*20);show('s1b',ease((L('s1')-2.2)/.8),(1-ease((L('s1')-2.2)/.8))*16);
+  // S2
+  show('s2t',ease(L('s2')/.6));show('s2a',ease((L('s2')-.2)/.7),(1-ease((L('s2')-.2)/.7))*18);const sb=ease((L('s2')-1.6)/.6);show('s2b',sb,(1-sb)*30,.96+.04*sb);show('s2m',sb);
+  wave('w2',t,16*sb,1,1);
+  // S3 avatar: 342 frames at 1.4x
+  const s3=L('s3');show('s3c',ease(s3/.7),(1-ease(s3/.7))*40);const fa=clamp(Math.floor(Math.max(0,s3-.4)*30*1.4)+1,1,342);$('avimg').src='seq/avatar/'+pad(fa)+'.jpg';
+  // S4 answer: 111 frames at .8x, words typed with the signs
+  const s4=L('s4');show('s4c',ease(s4/.7),(1-ease(s4/.7))*40);const fb=clamp(Math.floor(Math.max(0,s4-.6)*30*.8)+1,1,111);$('ansimg').src='seq/answer/'+pad(fb)+'.jpg';
+  const tt=Math.max(0,s4-.6)*.8;const words=[[0.7,'У меня'],[1.9,' болит'],[3.0,' голова']];let txt='';words.forEach(([at,w])=>{if(tt>=at)txt+=w});$('typed').innerHTML=txt+'<span class="cursor" style="opacity:'+((Math.floor(t*2)%2)?0:1)+'"></span>';
+  // S5
+  const s5=L('s5');show('s5g',ease(s5/.9),(1-ease(s5/.9))*30);show('s5a',ease((s5-.5)/.8),0,.94+.06*ease((s5-.5)/.8));show('s5b',ease((s5-1.2)/.8));
+  // S6-8 cards slide up
+  ['s6','s7','s8'].forEach(k=>{const x=L(k);show(k+'c',ease(x/.8),(1-ease(x/.8))*60+(-x*6))});
+  // S9
+  wave('w9',t,8,ease(L('s9')/1.8),2);show('s9a',ease((L('s9')-.3)/.8),(1-ease((L('s9')-.3)/.8))*18);
+  // S10
+  const s10=L('s10');show('s10a',ease(s10/.9),0,.92+.08*ease(s10/.9));show('s10b',ease((s10-.8)/.8));show('s10c',ease((s10-1.5)/.8));show('s10d',ease((s10-2)/.8));
+};
+window.render(0);
+</script></body></html>
