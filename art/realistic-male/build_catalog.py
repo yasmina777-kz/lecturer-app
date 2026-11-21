@@ -27,6 +27,14 @@ def core(stem):
         if min(p[15][1], p[16][1]) < line:
             up.append(f["t"] - t0)
     if not up:
+        # Signs made low (at the waist): the sign is where a hand is clearly
+        # higher than at the clip's start and end.
+        ys = [min(f["pose"][15][1], f["pose"][16][1]) for f in frames]
+        p0 = frames[0]["pose"]
+        span = max(((p0[23][1] + p0[24][1]) - (p0[11][1] + p0[12][1])) / 2, 0.05)
+        rest = (sum(ys[:3]) / 3 + sum(ys[-3:]) / 3) / 2
+        up = [f["t"] - t0 for f, y in zip(frames, ys) if y < rest - 0.08 * span]
+    if not up:
         return None
     off = (HOLD + TRANS) / FPS
     return [round(off + max(0.0, up[0] - 0.08), 3), round(off + up[-1] + 0.08, 3)]

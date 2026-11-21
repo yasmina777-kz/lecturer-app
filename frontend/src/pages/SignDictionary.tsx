@@ -42,6 +42,8 @@ const categoryTranslations: Record<string, [string, string]> = {
   "Тело и здоровье": ["Body and health", "Дене және денсаулық"],
   Чувства: ["Feelings", "Сезімдер"],
   "Природа и погода": ["Nature and weather", "Табиғат және ауа райы"],
+  Действия: ["Actions", "Әрекеттер"],
+  "Понятия и предметы": ["Ideas and things", "Ұғымдар мен заттар"],
 };
 const categoryName = (c: string) =>
   at(c, categoryTranslations[c]?.[0] ?? c, categoryTranslations[c]?.[1] ?? c);
