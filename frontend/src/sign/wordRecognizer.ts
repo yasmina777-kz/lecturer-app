@@ -1,5 +1,5 @@
 import { loadSeqModel, runSeqModel, type SeqModel } from "./seqModel";
-import { ATTEMPT_GATE, clipFeatures, motionExtent, resampleFrames, type HandPoint } from "./wordFeatures";
+import { ATTEMPT_GATE, modelFeatures, motionExtent, resampleFrames, type HandPoint, type PosePoint } from "./wordFeatures";
 import { normalizeSignText } from "./dictionary";
 
 /** Ensemble members (same architecture, different training seeds); the
@@ -66,8 +66,9 @@ export function recognizeWord(
   width: number,
   height: number,
   courseOnly = true,
+  poses?: PosePoint[][],
 ): WordGuess | null {
-  const features = clipFeatures(frames, width, height);
+  const features = modelFeatures(model, frames, width, height, poses);
   if (!features || features.filter((f) => f[65] || f[131]).length < 5) return null;
   if (motionExtent(features) < ATTEMPT_GATE) return null; // no real sign movement
   const window = resampleFrames(features, model.frames ?? 32);
@@ -117,6 +118,9 @@ export function knowsWord(model: SeqModel, label: string) {
  */
 export class WordSegmenter {
   private frames: HandPoint[][][] = [];
+  private poses: PosePoint[][] = [];
+  /** Body poses of the clip last returned by push (same length). */
+  clipPoses: PosePoint[][] = [];
   private lastMotion = 0;
   private started = 0;
   private lastSeen = 0;
@@ -130,6 +134,7 @@ export class WordSegmenter {
   ) {}
   reset() {
     this.frames = [];
+    this.poses = [];
     this.previous = [];
     this.moving = 0;
     this.lastMotionIndex = 0;
@@ -139,7 +144,7 @@ export class WordSegmenter {
     return this.frames.length > 0;
   }
   /** Returns a finished clip, or null while waiting/recording. */
-  push(now: number, hands: HandPoint[][]): HandPoint[][][] | null {
+  push(now: number, hands: HandPoint[][], pose: PosePoint[] = []): HandPoint[][][] | null {
     const visible = hands.filter((h) => h.length === 21);
     const wrists = visible.map((h) => h[0]);
     if (visible.length) {
@@ -153,12 +158,16 @@ export class WordSegmenter {
         this.lastMotion = now;
       }
       this.frames.push(visible);
+      this.poses.push(pose);
       if (motion > 0.012) {
         this.lastMotion = now;
         this.lastMotionIndex = this.frames.length - 1;
         this.moving++;
       }
-    } else if (this.frames.length) this.frames.push([]);
+    } else if (this.frames.length) {
+      this.frames.push([]);
+      this.poses.push(pose);
+    }
     if (!this.frames.length) return null;
     const ended =
       now - this.started >= this.maxMs ||
@@ -166,6 +175,7 @@ export class WordSegmenter {
       (now - this.started >= 800 && now - this.lastMotion >= this.pauseMs);
     if (!ended) return null;
     const clip = this.frames.slice(0, this.lastMotionIndex + 3), moving = this.moving;
+    this.clipPoses = this.poses.slice(0, clip.length);
     this.reset();
     // A hand held still the whole time is not a sign attempt.
     return moving >= 2 ? clip : null;

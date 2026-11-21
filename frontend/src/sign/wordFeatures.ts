@@ -5,6 +5,9 @@
  */
 export type HandPoint = { x: number; y: number; z: number };
 export const WORD_CHANNELS = 134;
+/** v5 body channels (twin of body_row in ml/rsl/word_features.py). */
+export const WORD_BODY = 13;
+export type PosePoint = { x: number; y: number; visibility?: number };
 
 type Hand = number[][]; // 21 x [X, Y, Z]
 const palm = (h: Hand) => Math.hypot(h[9][0] - h[0][0], h[9][1] - h[0][1], h[9][2] - h[0][2]);
@@ -13,7 +16,9 @@ const median = (values: number[]) => {
   return n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2;
 };
 
-export function clipFeatures(frames: HandPoint[][][], width: number, height: number): number[][] | null {
+/** `poses` (optional, one per frame, MediaPipe Pose landmarks; [] = not found)
+ * adds WORD_BODY channels: where each hand is relative to shoulders, nose, mouth. */
+export function clipFeatures(frames: HandPoint[][][], width: number, height: number, poses?: PosePoint[][]): number[][] | null {
   const m = Math.max(width, height);
   if (!(m > 0)) return null;
   const sx = width / m, sy = height / m;
@@ -51,6 +56,8 @@ export function clipFeatures(frames: HandPoint[][][], width: number, height: num
   const withHand = tracks.map((r, i) => (r[0] || r[1] ? i : -1)).filter((i) => i >= 0);
   if (!withHand.length) return null;
   let clip = tracks.slice(withHand[0], withHand[withHand.length - 1] + 1);
+  const pose = poses?.slice(withHand[0], withHand[withHand.length - 1] + 1);
+  let mirror = 1;
   const path = (k: number) => {
     const w = clip.map((r) => r[k]).filter((h): h is Hand => !!h).map((h) => h[0]);
     if (!w.length) return -1;
@@ -58,14 +65,16 @@ export function clipFeatures(frames: HandPoint[][][], width: number, height: num
     for (let i = 1; i < w.length; i++) sum += Math.hypot(w[i][0] - w[i - 1][0], w[i][1] - w[i - 1][1]);
     return sum;
   };
-  if (path(1) > path(0))
+  if (path(1) > path(0)) {
     clip = clip.map((r) => [r[1], r[0]].map((h) => (h ? h.map((p) => [-p[0], p[1], p[2]]) : null)));
+    mirror = -1;
+  }
   const dom = clip.map((r) => r[0]).filter((h): h is Hand => !!h);
   if (!dom.length) return null;
   const scale = Math.max(median(dom.map(palm)), 1e-3);
   const origin = [median(dom.map((h) => h[0][0])), median(dom.map((h) => h[0][1]))];
-  return clip.map((r) => {
-    const out = new Array<number>(WORD_CHANNELS).fill(0);
+  return clip.map((r, t) => {
+    const out = new Array<number>(WORD_CHANNELS + (poses ? WORD_BODY : 0)).fill(0);
     r.forEach((h, k) => {
       if (!h) return;
       const p = Math.max(palm(h), 1e-3), base = k * 66;
@@ -80,8 +89,35 @@ export function clipFeatures(frames: HandPoint[][][], width: number, height: num
       out[132] = (r[1][0][0] - r[0][0][0]) / scale;
       out[133] = (r[1][0][1] - r[0][0][1]) / scale;
     }
+    if (poses) bodyRow(pose?.[t] ?? [], r, sx * mirror, sy).forEach((v, i) => (out[WORD_CHANNELS + i] = v));
     return out;
   });
+}
+
+function bodyRow(p: PosePoint[], hands: (Hand | null)[], kx: number, ky: number): number[] {
+  const row = new Array<number>(WORD_BODY).fill(0);
+  if (p.length < 17 || (p[11].visibility ?? 1) < 0.5 || (p[12].visibility ?? 1) < 0.5) return row;
+  const P = (i: number) => [p[i].x * kx, p[i].y * ky];
+  const l = P(11), r = P(12), nose = P(0), m1 = P(9), m2 = P(10);
+  const sm = [(l[0] + r[0]) / 2, (l[1] + r[1]) / 2], sw = Math.hypot(l[0] - r[0], l[1] - r[1]);
+  if (sw < 1e-3) return row;
+  const mouth = [(m1[0] + m2[0]) / 2, (m1[1] + m2[1]) / 2];
+  hands.forEach((h, k) => {
+    if (!h) return;
+    const w = h[0];
+    [sm, nose, mouth].forEach((o, j) => {
+      row[k * 6 + j * 2] = (w[0] - o[0]) / sw;
+      row[k * 6 + j * 2 + 1] = (w[1] - o[1]) / sw;
+    });
+  });
+  row[12] = 1;
+  return row;
+}
+
+/** Features in the layout `model` expects: hands only (v4) or hands + body
+ * (v5; frames without a pose get the "body not found" row). */
+export function modelFeatures(model: { channels: number }, frames: HandPoint[][][], width: number, height: number, poses?: PosePoint[][]) {
+  return clipFeatures(frames, width, height, model.channels > WORD_CHANNELS ? (poses ?? frames.map(() => [])) : undefined);
 }
 
 export function resampleFrames(features: number[][], frames = 32): number[][] {

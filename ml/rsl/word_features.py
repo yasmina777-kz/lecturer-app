@@ -23,13 +23,19 @@ from __future__ import annotations
 import numpy as np
 
 CHANNELS = 134
+# v5: + where each hand is on the body (MediaPipe Pose). Per hand track: wrist
+# relative to shoulder centre, nose and mouth in shoulder widths (6), then a
+# body-found flag. Mirrored together with the hands for left-handed signers.
+BODY = 13
 
 
 def _palm(hand: np.ndarray) -> float:
     return float(np.linalg.norm(hand[9] - hand[0]))
 
 
-def clip_features(frames: list[list[np.ndarray]], width: float, height: float) -> np.ndarray | None:
+def clip_features(frames: list[list[np.ndarray]], width: float, height: float, poses: np.ndarray | None = None) -> np.ndarray | None:
+    """poses: optional [len(frames), 9, 3] pose points (nose, mouth L/R, shoulders,
+    elbows, wrists; x, y, visibility) → 134 + BODY channels."""
     m = max(width, height)
     sx, sy = width / m, height / m
     tracks = np.zeros((len(frames), 2, 21, 3), dtype=np.float64)
@@ -66,6 +72,8 @@ def clip_features(frames: list[list[np.ndarray]], width: float, height: float) -
         return None
     tracks = tracks[any_hand[0]:any_hand[-1] + 1]
     present = present[any_hand[0]:any_hand[-1] + 1]
+    pose = None if poses is None else np.asarray(poses, np.float64)[any_hand[0]:any_hand[-1] + 1]
+    mirror = 1.
 
     def path(k):
         idx = np.flatnonzero(present[:, k])
@@ -78,12 +86,13 @@ def clip_features(frames: list[list[np.ndarray]], width: float, height: float) -
         tracks = tracks[:, ::-1].copy()
         present = present[:, ::-1].copy()
         tracks[..., 0] *= -1
+        mirror = -1.
     dom = np.flatnonzero(present[:, 0])
     if not len(dom):
         return None
     scale = max(float(np.median([_palm(tracks[t, 0]) for t in dom])), 1e-3)
     origin = np.median(tracks[dom, 0, 0, :2], axis=0)
-    out = np.zeros((len(tracks), CHANNELS), dtype=np.float32)
+    out = np.zeros((len(tracks), CHANNELS + (BODY if pose is not None else 0)), dtype=np.float32)
     for t in range(len(tracks)):
         for k in range(2):
             if not present[t, k]:
@@ -96,7 +105,26 @@ def clip_features(frames: list[list[np.ndarray]], width: float, height: float) -
             out[t, base + 65] = 1
         if present[t].all():
             out[t, 132:134] = (tracks[t, 1, 0, :2] - tracks[t, 0, 0, :2]) / scale
+        if pose is not None and t < len(pose):
+            out[t, CHANNELS:] = body_row(pose[t], tracks[t], present[t], sx, sy, mirror)
     return out
+
+
+def body_row(p: np.ndarray, hands: np.ndarray, present: np.ndarray, sx: float, sy: float, mirror: float) -> np.ndarray:
+    row = np.zeros(BODY, np.float32)
+    if p[3, 2] < .5 or p[4, 2] < .5:
+        return row
+    P = p[:, :2] * np.array([sx * mirror, sy])
+    sm, sw = (P[3] + P[4]) / 2, float(np.linalg.norm(P[3] - P[4]))
+    if sw < 1e-3:
+        return row
+    mouth = (P[1] + P[2]) / 2
+    for k in range(2):
+        if present[k]:
+            w = hands[k, 0, :2]
+            row[k * 6:k * 6 + 6] = np.r_[(w - sm) / sw, (w - P[0]) / sw, (w - mouth) / sw]
+    row[12] = 1
+    return row
 
 
 def resample(features: np.ndarray, frames: int = 32) -> np.ndarray:

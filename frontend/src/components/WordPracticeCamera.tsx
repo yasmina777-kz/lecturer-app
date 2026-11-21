@@ -46,15 +46,15 @@ export function WordPracticeCamera({ target }: { target: string }) {
     segmenter.current.reset();
   }, [target]);
 
-  const letters = useLiveLetters(video, overlay, active, (now: number, hands: Landmark[][]) => {
+  const letters = useLiveLetters(video, overlay, active, (now: number, hands: Landmark[][], pose: Landmark[]) => {
     if (!model || !video.current) return;
     const points = hands.filter((h) => h.length === 21).map((h) =>
       h.map((p) => ({ x: p.x, y: p.y, z: p.z ?? 0 })),
     ) as HandPoint[][];
-    const clip = segmenter.current.push(now, points);
+    const clip = segmenter.current.push(now, points, pose);
     setRecording(segmenter.current.recording);
     if (!clip) return;
-    const guess = recognizeWord(model, clip, video.current.videoWidth, video.current.videoHeight);
+    const guess = recognizeWord(model, clip, video.current.videoWidth, video.current.videoHeight, true, segmenter.current.clipPoses);
     const { verdict } = judgeWord(guess, target);
     setAttempts((list) => [{ guess, verdict }, ...list].slice(0, 5));
   }, "balanced", undefined, 50);

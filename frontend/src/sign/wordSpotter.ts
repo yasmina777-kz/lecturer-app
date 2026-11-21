@@ -1,5 +1,5 @@
 import { runSeqModel, type SeqModel } from "./seqModel";
-import { clipFeatures, MOTION_GATE, motionExtent, resampleFrames, type HandPoint } from "./wordFeatures";
+import { clipFeatures, modelFeatures, MOTION_GATE, motionExtent, resampleFrames, type HandPoint, type PosePoint } from "./wordFeatures";
 
 /** Continuous ("translator") word spotting without pauses between signs.
  * Every HOP_MS the latest WINDOWS_MS of hand landmarks are classified among
@@ -20,7 +20,7 @@ export const SPOT = {
    * argmax test throws away too many words. */
   noneMax: 0.7,
 };
-type Frame = { at: number; hands: HandPoint[][] };
+type Frame = { at: number; hands: HandPoint[][]; pose: PosePoint[] };
 export type Spotted = { label: string; confidence: number; fingerspelling: boolean; alternatives: string[] };
 
 const LETTER = /^[А-ЯЁ]$/u;
@@ -50,7 +50,7 @@ export class WordSpotter {
   }
   /** model: the fast single model scanned every hop; confirm: optional
    * ensemble members that must agree before a word is emitted. */
-  push(model: SeqModel, now: number, hands: HandPoint[][], width: number, height: number, confirm: SeqModel[] = []): Spotted | null {
+  push(model: SeqModel, now: number, hands: HandPoint[][], width: number, height: number, confirm: SeqModel[] = [], pose: PosePoint[] = []): Spotted | null {
     const visible = hands.filter((h) => h.length === 21);
     if (visible.length) this.lastSeen = now;
     else if (now - this.lastSeen >= SPOT.restMs) {
@@ -61,7 +61,7 @@ export class WordSpotter {
       this.emitted = "";
       return null;
     }
-    this.frames.push({ at: now, hands: visible });
+    this.frames.push({ at: now, hands: visible, pose });
     const keep = now - Math.max(...SPOT.windowsMs) - 100;
     while (this.frames.length && this.frames[0].at < keep) this.frames.shift();
     if (now - this.lastHop < SPOT.hopMs) return null;
@@ -71,8 +71,8 @@ export class WordSpotter {
     const course = model.courseLabels?.length ? new Set(model.courseLabels) : null;
     let best: { label: string; p: number; margin: number; letter: boolean; window: number[][]; alts: string[] } | null = null;
     for (const ms of SPOT.windowsMs) {
-      const win = this.frames.filter((f) => f.at > now - ms).map((f) => f.hands);
-      const feats = clipFeatures(win, width, height);
+      const recentFrames = this.frames.filter((f) => f.at > now - ms);
+      const feats = modelFeatures(model, recentFrames.map((f) => f.hands), width, height, recentFrames.map((f) => f.pose));
       if (!feats || feats.filter((f) => f[65] || f[131]).length < 5) continue;
       if (motionExtent(feats) < MOTION_GATE) continue; // hands resting, not signing
       const p = runSeqModel(model, resampleFrames(feats, model.frames ?? 32));
