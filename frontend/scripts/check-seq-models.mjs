@@ -40,6 +40,26 @@ for (const f of await json('../public/models/rsl/alphabet-v5-fixtures.json')) {
 const empty = recognizeSequence(Array.from({ length: 16 }, () => Array(66).fill(0)), letters);
 assert.ok(!empty?.accepted, 'no hands must never be accepted');
 
+// Letters v6: hand + body channels (fixtures from ml/rsl/train_alphabet_v6.py)
+{
+  const { existsSync } = await import('node:fs');
+  const { bodyFrame } = await mod('../src/sign/temporal.ts');
+  if (existsSync(new URL('../public/models/rsl/alphabet-v6-classifier.json', import.meta.url))) {
+    const v6 = loadSeqModel(await json('../public/models/rsl/alphabet-v6-classifier.json'));
+    assert.ok(v6 && v6.channels === 75, 'v6 letter model must validate with 75 channels');
+    for (const f of await json('../public/models/rsl/alphabet-v6-fixtures.json')) {
+      const r = recognizeSequence(f.frames, v6);
+      assert.ok(r, 'v6 prediction');
+      close(r.probabilities, f.probabilities, 2e-4, 'letter v6 parity');
+    }
+    for (const b of await json('../public/models/rsl/alphabet-v6-body-fixtures.json')) {
+      const pose = Array.from({ length: 17 }, () => ({ x: 0, y: 0, visibility: 0 }));
+      [0, 9, 10, 11, 12, 13, 14, 15, 16].forEach((k, i) => (pose[k] = { x: b.pose[i][0], y: b.pose[i][1], visibility: b.pose[i][2] }));
+      close(bodyFrame(b.hand, pose, b.aspect), b.body, 1e-4, 'bodyFrame parity');
+    }
+  }
+}
+
 // Words v2
 const words = loadSeqModel(await json('../public/models/rsl/words-v4-classifier.json'));
 assert.ok(words, 'word model must validate');

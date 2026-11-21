@@ -4,7 +4,7 @@ import {
   PoseLandmarker,
 } from "@mediapipe/tasks-vision";
 import { LETTER_SAMPLE_MS, LiveLetterStream, trackingQuality } from "./liveRecognition";
-import { temporalFrame, recognizeSequence, completedLetterFrames, type TemporalFrame } from "./temporal";
+import { BODY_CHANNELS, bodyFrame, temporalFrame, recognizeSequence, completedLetterFrames, type TemporalFrame } from "./temporal";
 import { agreeLetters } from "./phraseCapture";
 import { validClassifier, type SignClassifier } from "./recognition";
 import { loadSeqModel, type SeqModel } from "./seqModel";
@@ -36,6 +36,7 @@ let poseAt = -Infinity;
 let lastPose: import("@mediapipe/tasks-vision").NormalizedLandmark[] = [];
 
 const live = new LiveLetterStream();
+let withBody = false;
 
 function recoverPoseDetector(now: number) {
   if (!visionFiles || poseRestarting || now < poseRetryAt) return;
@@ -72,15 +73,19 @@ self.onmessage = async ({ data }) => {
         FilesetResolver.forVisionTasks(`${data.origin}/models/rsl/wasm`),
         fetch(`${data.origin}/models/rsl/alphabet-classifier.json`),
         fetch(`${data.origin}/models/rsl/alphabet-cautious-classifier.json`),
-        fetch(`${data.origin}/models/rsl/alphabet-v5-classifier.json`),
+        fetch(`${data.origin}/models/rsl/alphabet-v6-classifier.json`).then((r) => (r.ok ? r : fetch(`${data.origin}/models/rsl/alphabet-v5-classifier.json`))),
       ]);
       visionFiles = files;
       if (!response.ok || !verifyResponse.ok || !balancedResponse.ok) throw new Error("model");
       model = await response.json();
       verifier = await verifyResponse.json();
-      const balanced = loadSeqModel(await balancedResponse.json());
-      if (!balanced) throw new Error("Invalid v5 alphabet model");
+      const balancedFile = await balancedResponse.json();
+      const balanced = loadSeqModel(balancedFile);
+      if (!balanced) throw new Error("Invalid alphabet model");
       balancedModel = balanced;
+      // v6 also reads the body (pose) channels and may show a letter after one window.
+      withBody = balanced.channels === 66 + BODY_CHANNELS;
+      live.agree = Number(balancedFile.agree) >= 1 ? Number(balancedFile.agree) : 2;
       if (
         !validClassifier(model) ||
         !validClassifier(verifier) ||
@@ -188,13 +193,16 @@ self.onmessage = async ({ data }) => {
         handednesses: index < 0 ? [] : [detected.handedness[index]],
       };
       const quality = trackingQuality(selected);
-      const frame = temporalFrame(selected);
+      const hand = temporalFrame(selected);
+      const frame = withBody
+        ? [...hand, ...bodyFrame(hand, lastPose, (data.bitmap?.width ?? 1) / Math.max(1, data.bitmap?.height ?? 1))]
+        : hand;
       const capturing = capture !== null;
       // Keep explicit captures at the trained 100 ms cadence even when the
       // page polls the camera faster for word recognition.
       if (capture && capture.generation === data.generation && data.now - capture.sampledAt >= LETTER_SAMPLE_MS - 5) {
         capture.sampledAt = data.now;
-        capture.frames.push(quality === "ready" ? frame : Array(66).fill(0));
+        capture.frames.push(quality === "ready" ? frame : Array(frame.length).fill(0));
         if (capture.frames.length >= 100) finishLetter();
       }
       const frames = capturing ? null : live.sample(frame, data.now, quality);

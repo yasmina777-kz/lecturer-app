@@ -50,6 +50,8 @@ export class LiveLetterStream {
   private candidate = "";
   private votes = 0;
   private emitted = "";
+  /** Agreeing windows needed before a letter is shown (set by the model). */
+  agree = 2;
   reset(preserveEmitted = false) {
     this.frames = [];
     this.sampledAt = -Infinity;
@@ -84,7 +86,7 @@ export class LiveLetterStream {
         if (now - this.missingSince <= 300) {
           if (now - this.sampledAt >= LETTER_SAMPLE_MS) {
             this.sampledAt = now;
-            this.frames.push(Array(66).fill(0));
+            this.frames.push(Array(frame.length).fill(0));
             if (this.frames.length > 16) this.frames.shift();
             this.sincePrediction++;
           }
@@ -121,7 +123,7 @@ export class LiveLetterStream {
       this.votes = 1;
     }
     const fast = (prediction.confidence ?? 0) >= LETTER_FAST_CONFIDENCE;
-    if ((this.votes < 2 && !fast) || this.emitted === prediction.label) return false;
+    if ((this.votes < this.agree && !fast) || this.emitted === prediction.label) return false;
     this.emitted = prediction.label;
     return true;
   }

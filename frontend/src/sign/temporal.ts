@@ -37,12 +37,39 @@ export function temporalFrame(r: HandLandmarkerResult): TemporalFrame {
     Math.max(Math.hypot(im[0].x - im[9].x, im[0].y - im[9].y), 0.02),
   ];
 }
+/** Where the hand is on the body (v6 letters): the wrist relative to the
+ * shoulders, nose and mouth, the elbow on that side, in shoulder widths,
+ * mirrored for a left hand like temporalFrame; last value = body found.
+ * Twin of ml/rsl/train_alphabet_v6.py body_features. `pose` = MediaPipe Pose
+ * landmarks (image coords), `aspect` = frame width / height. */
+export const BODY_CHANNELS = 9;
+export function bodyFrame(hand: TemporalFrame, pose: { x: number; y: number; visibility?: number }[], aspect: number): number[] {
+  const zero = Array(BODY_CHANNELS).fill(0);
+  const at = (i: number) => pose[i];
+  if (!(hand[65] > 0) || pose.length < 17 || (at(11).visibility ?? 1) < 0.5 || (at(12).visibility ?? 1) < 0.5) return zero;
+  const flip = hand[63] < 0 ? -1 : 1;
+  const P = (i: number): [number, number] => [at(i).x * aspect, at(i).y];
+  const w: [number, number] = [hand[63] * flip * aspect, hand[64]];
+  const [l, r] = [P(11), P(12)];
+  const sm: [number, number] = [(l[0] + r[0]) / 2, (l[1] + r[1]) / 2];
+  const sw = Math.hypot(l[0] - r[0], l[1] - r[1]);
+  if (sw < 1e-3) return zero;
+  const d = (a: [number, number], b: [number, number]) => Math.hypot(a[0] - b[0], a[1] - b[1]);
+  const elbow = d(P(15), w) <= d(P(16), w) ? P(13) : P(14);
+  const rel = (a: [number, number], o: [number, number]) => [((a[0] - o[0]) * flip) / sw, (a[1] - o[1]) / sw];
+  const m1 = P(9), m2 = P(10);
+  const mouth: [number, number] = [(m1[0] + m2[0]) / 2, (m1[1] + m2[1]) / 2];
+  return [...rel(w, sm), ...rel(w, P(0)), ...rel(w, mouth), ...rel(elbow, sm), 1];
+}
+
 /** Gap-interpolated, wrist-normalized 16x66 window (v5 model input; also
  * the first stage of the v1-v4 aggregated features). */
 export function temporalWindow(frames: TemporalFrame[]): number[][] | null {
+  const width = frames[0]?.length;
   if (
     frames.length !== 16 ||
-    frames.some((f) => f.length !== 66 || f.some((v) => !Number.isFinite(v)))
+    (width !== 66 && width !== 66 + BODY_CHANNELS) ||
+    frames.some((f) => f.length !== width || f.some((v) => !Number.isFinite(v)))
   )
     return null;
   const valid = frames
@@ -70,10 +97,26 @@ export function temporalWindow(frames: TemporalFrame[]): number[][] | null {
     }
   } else for (const f of a) f.fill(0);
   a.forEach((f, i) => (f[65] = valid.includes(i) ? 1 : 0));
+  if (width > 66) {
+    // Body: interpolated over the frames where it was found (from the raw input).
+    const last = width - 1;
+    const ok = frames.map((f, i) => (f[last] > 0 ? i : -1)).filter((i) => i >= 0);
+    for (let i = 0; i < 16; i++)
+      for (let c = 66; c < width; c++) {
+        if (!ok.length) a[i][c] = 0;
+        else if (c === last) a[i][c] = frames[i][last] > 0 ? 1 : 0;
+        else {
+          const lo = [...ok].reverse().find((j) => j <= i) ?? ok[0],
+            hi = ok.find((j) => j >= i) ?? ok[ok.length - 1];
+          const u = hi === lo ? 0 : (i - lo) / (hi - lo);
+          a[i][c] = frames[lo][c] + (frames[hi][c] - frames[lo][c]) * u;
+        }
+      }
+  }
   return a;
 }
 export function temporalFeatures(frames: TemporalFrame[]): number[] | null {
-  const a = temporalWindow(frames);
+  const a = temporalWindow(frames.map((f) => f.slice(0, 66)));
   if (!a) return null;
   const result: number[] = [];
   for (let bin = 0; bin < 4; bin++)
@@ -126,7 +169,7 @@ export function recognizeSequence(
  */
 export function completedLetterFrames(frames: TemporalFrame[]): TemporalFrame[] | null {
   if (frames.length < 8 || frames.length > 100 ||
-      frames.some(f => f.length !== 66 || f.some(v => !Number.isFinite(v))) ||
+      frames.some(f => f.length !== frames[0].length || (f.length !== 66 && f.length !== 66 + BODY_CHANNELS) || f.some(v => !Number.isFinite(v))) ||
       frames.filter(f => f[65] > 0).length < Math.max(8, Math.ceil(frames.length / 2)))
     return null;
   return Array.from({length: 16}, (_, i) => frames[Math.floor(i * (frames.length - 1) / 15)].slice());
