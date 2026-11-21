@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { ArrowRight, Check, X } from "lucide-react";
 import { at } from "../i18n/automation";
 import { OrderTask, SignChain } from "../components/SignChain";
-import { GRAMMAR, type GrammarTask } from "../sign/course";
+import { GRAMMAR, type GrammarTask, type GrammarTrack } from "../sign/course";
 import "./sign-workspace.css";
 import "./sign-vocabulary.css";
 import "./sign-grammar.css";
@@ -20,9 +20,12 @@ function readDone(): Record<string, number> {
 export function SignGrammarPage() {
   const [params, setParams] = useSearchParams();
   const [done, setDone] = useState(readDone);
-  const id = params.get("lesson") ?? GRAMMAR[0].id;
-  const index = Math.max(0, GRAMMAR.findIndex((l) => l.id === id));
-  const lesson = GRAMMAR[index];
+  const track: Exclude<GrammarTrack, "both"> = params.get("track") === "kzhr" ? "kzhr" : "rsl";
+  const lessons = GRAMMAR.filter((l) => l.track === "both" || l.track === track);
+  const id = params.get("lesson") ?? lessons[0].id;
+  const index = Math.max(0, lessons.findIndex((l) => l.id === id));
+  const lesson = lessons[index];
+  const open = (lessonId: string, t = track) => setParams({ track: t, lesson: lessonId });
   const [example, setExample] = useState(0);
   const [results, setResults] = useState<Record<number, boolean>>({});
   useEffect(() => {
@@ -46,14 +49,26 @@ export function SignGrammarPage() {
     <div className="sign-workspace vocab grammar">
       <div className="page-heading">
         <div>
-          <span className="eyebrow">{at("ГРАММАТИКА РЖЯ", "RSL GRAMMAR", "РЖЯ ГРАММАТИКАСЫ")}</span>
+          <span className="eyebrow">
+            {track === "kzhr"
+              ? at("ГРАММАТИКА · КАЛЬКИРУЮЩАЯ ЖЕСТОВАЯ РЕЧЬ", "GRAMMAR · SIGNED RUSSIAN", "ГРАММАТИКА · КАЛЬКАЛАУШЫ ЫМ ТІЛІ")
+              : at("ГРАММАТИКА · РАЗГОВОРНЫЙ РЖЯ", "GRAMMAR · RUSSIAN SIGN LANGUAGE", "ГРАММАТИКА · СӨЙЛЕУ РЖЯ")}
+          </span>
           <h1>{lesson.title}</h1>
+        </div>
+        <div className="grammar-tracks" role="tablist" aria-label={at("Форма жестового языка", "Form of sign language", "Ым тілінің түрі")}>
+          <button role="tab" aria-selected={track === "rsl"} onClick={() => open(lesson.track === "both" ? lesson.id : "two-forms", "rsl")}>
+            {at("Разговорный РЖЯ", "Russian Sign Language", "Сөйлеу РЖЯ")}
+          </button>
+          <button role="tab" aria-selected={track === "kzhr"} onClick={() => open(lesson.track === "both" ? lesson.id : "two-forms", "kzhr")}>
+            {at("КЖР (официальная)", "Signed Russian (official)", "КЖР (ресми)")}
+          </button>
         </div>
       </div>
       <div className="grammar-layout">
         <nav className="grammar-list" aria-label={at("Уроки грамматики", "Grammar lessons", "Грамматика сабақтары")}>
-          {GRAMMAR.map((l, i) => (
-            <button key={l.id} aria-current={l.id === lesson.id ? "page" : undefined} onClick={() => setParams({ lesson: l.id })}>
+          {lessons.map((l, i) => (
+            <button key={l.id} aria-current={l.id === lesson.id ? "page" : undefined} onClick={() => open(l.id)}>
               <span>{i + 1}</span>
               {l.title}
               {done[l.id] !== undefined && <Check size={15} className="grammar-done" />}
@@ -74,7 +89,8 @@ export function SignGrammarPage() {
           )}
           <p className="grammar-example">
             <strong>{ex.ru}</strong>
-            <span>{ex.signs.map((s) => s.replace(/[!?]$/, "").toLocaleUpperCase("ru")).join(" + ")}</span>
+            <span>{ex.gloss ?? ex.signs.map((s) => s.replace(/[!?]$/, "").toLocaleUpperCase("ru")).join(" + ")}</span>
+            {ex.tip && <em>{ex.tip}</em>}
           </p>
           </div>
           <SignChain key={ex.ru} signs={ex.signs} compact />
@@ -92,8 +108,8 @@ export function SignGrammarPage() {
           ))}
           {allAnswered && (
             <div className="grammar-next">
-              {GRAMMAR[index + 1] ? (
-                <button className="button primary" onClick={() => setParams({ lesson: GRAMMAR[index + 1].id })}>
+              {lessons[index + 1] ? (
+                <button className="button primary" onClick={() => open(lessons[index + 1].id)}>
                   {at("Следующая тема", "Next topic", "Келесі тақырып")}
                   <ArrowRight size={18} />
                 </button>
@@ -104,17 +120,51 @@ export function SignGrammarPage() {
           )}
         </section>
       </div>
+      <details className="panel grammar-sources">
+        <summary>{at("Источники и оговорка", "Sources and disclaimer", "Дереккөздер")}</summary>
+        <p>
+          {at(
+            "Правила составлены по учебной и научной литературе о русском жестовом языке:",
+            "Rules are based on textbooks and research on Russian Sign Language:",
+            "Ережелер оқулықтар мен зерттеулер бойынша жасалған:",
+          )}
+        </p>
+        <ul>
+          <li>Зайцева Г. Л. Жестовая речь. Дактилология: учебник для вузов. — М.: ВЛАДОС, 2000.</li>
+          <li>Прозорова Е. В. Русский жестовый язык как лингвистический объект // Вопросы языкознания. — 2007. — № 1.</li>
+          <li>Kimmelman V. Information Structure in Russian Sign Language and Sign Language of the Netherlands. — PhD thesis, University of Amsterdam, 2014.</li>
+        </ul>
+        <p>
+          {at(
+            "Это упрощённое введение. Жесты и грамматика различаются по регионам и между носителями; уроки не проверены сертифицированным переводчиком РЖЯ — уточняйте у преподавателя.",
+            "This is a simplified introduction. Signs and grammar vary by region and signer; lessons are not reviewed by a certified RSL interpreter.",
+            "Бұл жеңілдетілген кіріспе; ымдар аймаққа қарай өзгереді.",
+          )}
+        </p>
+      </details>
     </div>
   );
 }
 
 function Choice({ task, onResult }: { task: Extract<GrammarTask, { kind: "choice" }>; onResult: (ok: boolean) => void }) {
   const [picked, setPicked] = useState<number | null>(null);
+  // Stable shuffle per question, so the right answer is not always first.
+  const order = useMemo(() => {
+    let h = 0;
+    for (const c of task.question) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+    const idx = task.options.map((_, i) => i);
+    for (let i = idx.length - 1; i > 0; i--) {
+      h = (h * 1103515245 + 12345) >>> 0;
+      const j = h % (i + 1);
+      [idx[i], idx[j]] = [idx[j], idx[i]];
+    }
+    return idx;
+  }, [task.question, task.options.length]);
   return (
     <div className="grammar-choice">
       <p className="order-ru">{task.question}</p>
       <div className="vocab-choices">
-        {task.options.map((o, i) => (
+        {order.map((i) => [task.options[i], i] as const).map(([o, i]) => (
           <button
             key={o}
             className={picked === null ? "" : i === task.correct ? "right" : i === picked ? "wrong" : ""}

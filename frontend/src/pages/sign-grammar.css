@@ -126,3 +126,55 @@
     white-space: nowrap;
   }
 }
+.grammar .page-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.grammar-tracks {
+  display: inline-flex;
+  padding: 3px;
+  gap: 2px;
+  border-radius: 12px;
+  background: var(--sw-soft, var(--p-subtle, #f4f6fa));
+  border: 1px solid var(--sw-border, var(--p-line, #dfe3ea));
+}
+.grammar-tracks button {
+  font: inherit;
+  font-size: 0.9rem;
+  padding: 7px 12px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.grammar-tracks button[aria-selected="true"] {
+  background: var(--p-surface, #fff);
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+.grammar-example em {
+  font-style: normal;
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+.grammar-sources {
+  margin-top: 14px;
+  font-size: 0.88rem;
+}
+.grammar-sources summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.grammar-sources ul {
+  margin: 6px 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 4px;
+}
+.grammar-sources p {
+  margin: 6px 0;
+}

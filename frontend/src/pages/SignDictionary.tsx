@@ -704,6 +704,16 @@ export function SignDictionaryPage() {
               setRun((v) => v + 1);
             }}
           />
+          {!!submitted && !selected && submitted.trim().includes(" ") && (
+            <p className="translate-status">
+              {at(
+                "Пословный перевод: жесты в порядке русской фразы (калькирующая жестовая речь). Как сказать это на разговорном РЖЯ — ",
+                "Word-by-word (Signed Russian order). For Russian Sign Language grammar see ",
+                "Сөзбе-сөз аударма (КЖР). Сөйлеу РЖЯ грамматикасы — ",
+              )}
+              <Link to="/grammar?track=rsl&lesson=two-forms">{at("Грамматика", "Grammar", "Грамматика")}</Link>
+            </p>
+          )}
           {!!(submitted || selected) && (
             <details className="sign-dictionary-reference">
               <summary>
