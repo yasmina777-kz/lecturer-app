@@ -132,7 +132,14 @@ export function SignDictionaryPage() {
       mic.current = { rec, started: Date.now() };
       setRecording(1);
     } catch {
-      setSpeech({ stage: "error", message: at("Нет доступа к микрофону", "Microphone not available", "Микрофонға рұқсат жоқ") });
+      setSpeech({
+        stage: "error",
+        message: at(
+          "Микрофон заблокирован. Откройте сайт в Chrome или Safari и разрешите микрофон (значок слева от адреса) — или загрузите аудиофайл.",
+          "Microphone blocked. Open the site in Chrome or Safari and allow the microphone (icon left of the address), or upload an audio file.",
+          "Микрофон бұғатталған. Сайтты Chrome не Safari-де ашып, микрофонға рұқсат беріңіз немесе аудиофайл жүктеңіз.",
+        ),
+      });
     }
   }
   useEffect(() => {
