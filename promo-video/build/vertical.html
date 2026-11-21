@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<title>AI Mentor vertical</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#eef1f8;font-family:Manrope,sans-serif}
+#pres{position:absolute;inset:0;overflow:hidden}
+#pres img{position:absolute;left:0;top:0;width:1080px;height:1920px;object-fit:cover;transform-origin:50% 30%}
+#top{position:absolute;left:0;right:0;top:0;height:260px;background:linear-gradient(180deg,rgba(20,22,51,.55),transparent)}
+#brand{position:absolute;left:54px;top:64px;display:flex;align-items:center;gap:18px;color:#fff;font-family:Unbounded,sans-serif;font-weight:800;font-size:46px;text-shadow:0 4px 20px rgba(0,0,0,.25)}
+#brand img{width:72px;height:72px;border-radius:20px;background:#fff;padding:6px}
+#tag{position:absolute;right:54px;top:78px;padding:12px 22px;border-radius:999px;background:#ffcf3f;color:#141633;font-weight:800;font-size:26px}
+#win{position:absolute;right:40px;top:1070px;width:470px;height:520px;border-radius:34px;overflow:hidden;background:#141633;border:6px solid #fff;box-shadow:0 30px 80px rgba(20,22,51,.35)}
+#win img{width:100%;height:458px;object-fit:cover;display:block}
+#win .lab{position:absolute;left:0;right:0;bottom:0;height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;color:#fff;font-weight:800;font-size:22px;letter-spacing:.08em}
+#gl{font-family:Unbounded,sans-serif;font-size:30px;letter-spacing:0;color:#ffcf3f}
+#winTag{position:absolute;right:40px;top:1012px;padding:10px 20px;border-radius:14px;background:#3b5bff;color:#fff;font-weight:800;font-size:24px}
+#sub{position:absolute;left:40px;right:40px;bottom:70px;padding:26px 34px;border-radius:30px;background:rgba(20,22,51,.82);color:#fff;font-size:44px;font-weight:800;line-height:1.25;text-align:center}
+#sub b{color:#ffcf3f}
+#end{position:absolute;inset:0;background:linear-gradient(160deg,#3b5bff,#7b5cff 55%,#ff5c8a);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px;color:#fff;opacity:0}
+#end .logo{display:flex;align-items:center;gap:26px;font-family:Unbounded,sans-serif;font-weight:800;font-size:96px}
+#end .logo img{width:130px;height:130px;border-radius:34px;background:#fff;padding:12px}
+#end p{font-family:Unbounded,sans-serif;font-weight:600;font-size:50px;text-align:center;line-height:1.2}
+#end small{font-size:24px;opacity:.85;text-align:center;padding:0 80px;line-height:1.4}
+</style></head>
+<body>
+<div id="pres"><img id="presImg"></div>
+<div id="top"></div>
+<div id="brand"><img src="logo.png">AI Mentor</div>
+<div id="tag">русский жестовый язык</div>
+<div id="winTag">Жестами</div>
+<div id="win"><img id="winImg"><div class="lab"><span>РЖЯ</span><span id="gl"></span></div></div>
+<div id="sub"></div>
+<div id="end"><div class="logo"><img src="logo.png">AI Mentor</div><p>Учите жесты.<br>Понимайте друг друга.</p><small>Жесты в окне — видео носителей РЖЯ из датасета Slovo (ai-forever). Ведущая — персонаж, созданный ИИ.</small></div>
+<script>
+// window.LINES: [{id,start,end,vo,voDur,text,pose,insetFrames,signs:[[t,label]],presFrames(optional)}]
+const L = window.LINES, END = window.END;
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), ease=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2}, back=x=>{x=clamp(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const $=id=>document.getElementById(id), pad=n=>String(n).padStart(5,'0');
+window.render=function(t){
+  const endT=L[L.length-1].end; const e=$('end');
+  if(t>=endT){e.style.opacity=ease((t-endT)/.5);return} e.style.opacity=0;
+  const s=L.find(x=>t<x.end)||L[L.length-1], u=t-s.start, D=s.end-s.start;
+  // presenter: her own video when present, else the still with a slow push-in
+  if(s.presFrames){$('presImg').src=`pres/${s.id}/${pad(clamp(Math.floor(u*30),0,s.presFrames-1)+1)}.jpg`;$('presImg').style.transform='scale(1)'}
+  else{$('presImg').src=`../kit/${s.pose}-vertical.png`;$('presImg').style.transform=`scale(${1.02+.05*u/D}) translateY(${-u*3}px)`}
+  // interpreter window
+  const wi=back((u-.15)/.5), wo=1-ease((u-(D-.3))/.3);
+  $('win').style.transform=`scale(${.85+.15*clamp(wi)})`;$('win').style.opacity=Math.min(clamp(wi),wo);$('winTag').style.opacity=Math.min(clamp(wi),wo);
+  const fi=clamp(Math.floor(Math.max(0,u-.2)*30),0,s.insetFrames-1);$('winImg').src=`vseq/${s.id}/${pad(fi+1)}.jpg`;
+  let g='';s.signs.forEach(([at,lab])=>{if(Math.max(0,u-.2)>=at)g=lab});$('gl').textContent=g;
+  // subtitles with spoken words lit
+  const words=s.text.split(' '), sp=clamp((u-s.vo)/s.voDur), lit=Math.floor(sp*words.length+.2);
+  $('sub').innerHTML=words.map((w,k)=>k<lit?`<b>${w}</b>`:w).join(' ');$('sub').style.opacity=Math.min(ease(u/.3),wo+.0);
+};
+window.render(0);
+</script></body></html>

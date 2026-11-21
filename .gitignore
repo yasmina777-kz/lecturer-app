@@ -99,5 +99,7 @@ local-test-account.txt
 promo-video/build/*
 !promo-video/build/scenes.html
 !promo-video/build/review.html
+!promo-video/build/ad.html
+!promo-video/build/vertical.html
 promo-video/*.mp4
 promo-video/.venv/

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<title>AI Mentor ad</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#2f5bea;--ink:#0f1626;--muted:#7a8296}
+*{box-sizing:border-box;margin:0}
+html,body{width:1080px;height:1920px;overflow:hidden;font-family:Manrope,sans-serif;color:var(--ink);background:#f3f6fb}
+#light{position:absolute;inset:0;background:radial-gradient(900px 700px at 80% 8%,rgba(47,91,234,.13),transparent 70%),radial-gradient(800px 700px at 10% 95%,rgba(47,91,234,.08),transparent 70%),linear-gradient(180deg,#f7f9fc,#eef2f9)}
+#dark{position:absolute;inset:0;background:radial-gradient(900px 900px at 50% 45%,#1c2a3f,#0b111b 70%);opacity:0}
+.layer{position:absolute;inset:0;opacity:0}
+.brand{position:absolute;left:60px;top:70px;display:flex;align-items:center;gap:14px;font-weight:800;font-size:34px}
+.brand img{width:52px;height:52px;border-radius:14px}
+.head{position:absolute;left:60px;right:60px;top:560px}
+.head h1,.head h2{font-size:72px;font-weight:800;letter-spacing:-.02em;line-height:1.08}
+.head h2{color:var(--blue)}
+.head p{margin-top:26px;font-size:32px;color:var(--muted);font-weight:600;line-height:1.35;max-width:900px}
+.card{position:absolute;left:40px;width:1000px;height:625px;top:930px;border-radius:30px;overflow:hidden;background:#fff;box-shadow:0 40px 90px rgba(15,22,38,.16),0 2px 6px rgba(15,22,38,.06)}
+.card img{position:absolute;left:0;top:0;width:100%;transform-origin:0 0}
+.float{position:absolute;width:420px;padding:22px 26px;border-radius:22px;background:#fff;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.float b{display:block;font-size:26px;font-weight:800;margin-bottom:8px}
+.float span{font-size:21px;color:#6b7385;line-height:1.35}
+.float i{position:absolute;right:-10px;top:-10px;width:34px;height:34px;border-radius:50%;background:#ff4d5e;color:#fff;font-style:normal;font-weight:800;font-size:19px;display:grid;place-items:center}
+.ptext{position:absolute;left:0;right:0;text-align:center;color:#fff;font-size:64px;font-weight:800;line-height:1.2}
+.ptext em{font-style:normal;color:#6f95ff}
+#search{position:absolute;left:150px;width:780px;top:1060px;height:92px;border-radius:46px;background:#fff;display:flex;align-items:center;padding:0 40px;font-size:32px;font-weight:600;color:#30384a}
+#search .cur{width:3px;height:40px;background:var(--blue);margin-left:4px}
+.chips{display:flex;gap:16px;justify-content:center;margin-top:46px}
+.chip{padding:18px 30px;border-radius:20px;background:#fff;box-shadow:0 12px 30px rgba(15,22,38,.1);font-size:30px;font-weight:800}
+.chip span{color:var(--blue);margin-right:10px}
+#sub{position:absolute;left:70px;right:70px;bottom:80px;text-align:center;font-size:30px;font-weight:700;line-height:1.35;color:#fff;background:rgba(15,22,38,.72);padding:18px 26px;border-radius:22px}
+svg.hands{overflow:visible}svg.hands line{stroke:rgba(255,255,255,.8);stroke-width:4;stroke-linecap:round}svg.hands circle{fill:#6f95ff}svg.hands circle.tip{fill:#ffd166}
+.credits{position:absolute;left:80px;right:80px;bottom:200px;text-align:center;font-size:21px;color:var(--muted);line-height:1.5}
+</style></head>
+<body>
+<div id="light"></div><div id="dark"></div>
+
+<div class="layer" id="problem">
+  <div class="float" id="f1" style="left:60px;top:170px"><i>3</i><b>Жесты: видео</b><span>подборка с YouTube, без объяснений</span></div>
+  <div class="float" id="f2" style="left:600px;top:330px"><i>1</i><b>Азбука.pdf</b><span>картинки 33 букв, без движения</span></div>
+  <div class="float" id="f3" style="left:80px;top:1330px"><i>5</i><b>Чат «Учим РЖЯ»</b><span>кто знает, как показать «спасибо»?</span></div>
+  <div class="float" id="f4" style="left:580px;top:1530px"><i>!</i><b>Переводчик</b><span>нет свободных на этой неделе</span></div>
+  <div class="ptext" id="pt1" style="top:700px">Видео — на сайте.<br>Азбука — в PDF.</div>
+  <div class="ptext" id="pt2" style="top:860px">А переводчик — <em>где?</em></div>
+  <div id="search"><span id="stext"></span><span class="cur" id="scur"></span></div>
+</div>
+
+<div class="layer" id="logo">
+  <div style="position:absolute;left:0;right:0;top:600px;display:flex;flex-direction:column;align-items:center">
+    <img id="lgImg" src="logo.png" style="width:200px;height:200px;border-radius:52px;box-shadow:0 30px 70px rgba(47,91,234,.25)">
+    <div id="lgT" style="margin-top:60px;text-align:center;font-size:66px;font-weight:800;line-height:1.12;letter-spacing:-.02em">Платформа для изучения<br><span style="color:var(--blue)">русского жестового языка с ИИ</span></div>
+    <div id="lgP" style="margin-top:24px;font-size:30px;color:var(--muted);font-weight:600">для тех, кто учит РЖЯ, и тех, кому нужен перевод</div>
+    <div class="chips" id="lgC"><div class="chip"><span>●</span>Уроки</div><div class="chip"><span>●</span>Тренажёр</div><div class="chip"><span>●</span>Перевод</div></div>
+  </div>
+</div>
+
+<div class="layer" id="sec">
+  <div class="brand"><img src="logo.png">AI Mentor</div>
+  <div class="head"><h1 id="h1"></h1><h2 id="h2"></h2><p id="p"></p></div>
+  <div class="card" id="card"><img id="recImg">
+    <div id="camUI" style="position:absolute;inset:0;background:#101826;display:none">
+      <div style="position:absolute;left:30px;top:24px;color:#ff6b6b;font-weight:800;font-size:22px;letter-spacing:.1em" id="camRec">● КАМЕРА</div>
+      <svg class="hands" id="ch" style="position:absolute;left:330px;top:60px" width="340" height="500"></svg>
+      <div id="camChip" style="position:absolute;right:30px;bottom:30px;padding:16px 24px;border-radius:16px;background:#fff;font-weight:800;font-size:28px">Распознано: <span style="color:var(--blue)">ПРИВЕТ</span> ✓</div>
+    </div>
+    <div id="lockUI" style="position:absolute;inset:0;background:#fff;display:none">
+      <div style="position:absolute;left:0;right:0;top:0;height:64px;background:#f1f3f8;display:flex;align-items:center;gap:10px;padding:0 24px"><i style="width:14px;height:14px;border-radius:50%;background:#ff5f57;display:block"></i><i style="width:14px;height:14px;border-radius:50%;background:#febc2e;display:block"></i><i style="width:14px;height:14px;border-radius:50%;background:#28c840;display:block"></i><span style="margin-left:20px;padding:6px 18px;border-radius:14px;background:#fff;font-size:20px;font-weight:700;color:#5d6578">🔒 AI Mentor · в браузере</span></div>
+      <svg style="position:absolute;left:380px;top:120px" width="240" height="260" viewBox="0 0 400 420"><rect x="40" y="170" width="320" height="230" rx="44" fill="#2f5bea"/><path id="shackle" d="M110 170 V120 a90 90 0 0 1 180 0 V170" fill="none" stroke="#2f5bea" stroke-width="28"/><circle cx="200" cy="270" r="26" fill="#fff"/><rect x="190" y="280" width="20" height="56" rx="8" fill="#fff"/></svg>
+      <div style="position:absolute;left:0;right:0;top:420px;display:flex;justify-content:center;gap:16px"><div class="chip">🎥 видео</div><div class="chip">🎙 голос</div><div class="chip" style="color:#1f9d6a">✓ не отправляются</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="layer" id="outro">
+  <div style="position:absolute;left:0;right:0;top:620px;display:flex;flex-direction:column;align-items:center">
+    <div id="ouL" style="display:flex;align-items:center;gap:26px;font-size:90px;font-weight:800;letter-spacing:-.03em"><img src="logo.png" style="width:130px;height:130px;border-radius:34px">AI Mentor</div>
+    <div id="ouT" style="margin-top:50px;text-align:center;font-size:64px;font-weight:800;line-height:1.15">Учите жесты.<br><span style="color:var(--blue)">Понимайте друг друга.</span></div>
+  </div>
+  <div class="credits" id="ouC">Видео жестов — датасеты Slovo и Bukva (ai-forever). Распознавание — Google MediaPipe. Голос — Silero TTS (CC BY-NC-SA 4.0).</div>
+</div>
+
+<div id="sub"></div>
+<script>
+const S = window.SCENES, REC = window.RECFRAMES, HD = window.HANDS;
+HD.privet.frames = HD.privet.frames.map(fr => fr && fr.length > 1 ? [fr.reduce((a, b) => a[0][1] < b[0][1] ? a : b)] : fr).filter(fr => fr && fr.length);
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), ease=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2}, back=x=>{x=clamp(x);const c=1.6;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const $=id=>document.getElementById(id), pad=n=>String(n).padStart(5,'0');
+const BONES=[[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[5,9],[9,10],[10,11],[11,12],[9,13],[13,14],[14,15],[15,16],[13,17],[17,18],[18,19],[19,20],[0,17]],TIPS=new Set([4,8,12,16,20]);
+function fit(d,W,H){if(d._fit)return d._fit;const r=d.w/d.h,xs=[],ys=[];d.frames.forEach(fr=>fr.forEach(h=>h.forEach(p=>{xs.push(p[0]*r);ys.push(p[1])})));const q=(v,k)=>{v=[...v].sort((a,b)=>a-b);return v[Math.floor(k*(v.length-1))]};const x0=q(xs,.04),x1=q(xs,.96),y0=q(ys,.04),y1=q(ys,.9),cw=Math.max(x1-x0,(y1-y0)*W/H)*1.15,ch=cw*H/W;return d._fit=[(x0+x1)/2-cw/2,(y0+y1)/2-ch/2,cw,ch]}
+function hands(svg,d,f,W,H){const c=fit(d,W,H),n=d.frames.length,lo=n*.12,hi=n*.78,sp=hi-lo,ph=f%(2*sp);f=lo+(ph<sp?ph:2*sp-ph);const a=Math.floor(f),u=f-a,A=d.frames[a],B=d.frames[Math.min(n-1,a+1)]||A;let s='';A.forEach((h,k)=>{const g=B[k]&&B[k].length===21?B[k]:h;const P=h.map((p,i)=>[((p[0]+(g[i][0]-p[0])*u)*d.w/d.h-c[0])/c[2]*W,((p[1]+(g[i][1]-p[1])*u)-c[1])/c[3]*H]);BONES.forEach(([i,j])=>s+=`<line x1="${P[i][0]}" y1="${P[i][1]}" x2="${P[j][0]}" y2="${P[j][1]}"/>`);P.forEach((p,i)=>s+=`<circle class="${TIPS.has(i)?'tip':''}" cx="${p[0]}" cy="${p[1]}" r="${TIPS.has(i)?11:8}"/>`)});svg.innerHTML=s}
+// where to zoom inside each recording (fractions of the card image), start → end
+const ZOOM={home:[[0,0,1],[0,.12,1.2]],letters:[[0,0,1],[.0,.15,1.35]],words:[[0,0,1],[0,.15,1.25]],grammar:[[0,0,1],[.15,.08,1.35]],translate:[[0,0,1],[.36,.06,1.5]]};
+window.render=function(t){
+  const i=Math.max(0,S.findIndex(s=>t<s.end)), sc=S[i]||S[S.length-1], L=t-sc.start, D=sc.end-sc.start;
+  const vis=Math.min(ease(L/.35),1-ease((L-(D-.3))/.3));
+  ['problem','logo','sec','outro'].forEach(k=>$(k).style.opacity=0);
+  $('dark').style.opacity=sc.id==='problem'?1:(i===1?1-ease(L/.6):0);
+  const lay=sc.id==='problem'||sc.id==='logo'||sc.id==='outro'?sc.id:'sec'; $(lay).style.opacity=vis;
+  if(sc.id==='problem'){
+    ['f1','f2','f3','f4'].forEach((f,k)=>{const p=back((L-.1-k*.18)/.5);$(f).style.opacity=clamp(p);$(f).style.transform=`translateY(${Math.sin(t*1.3+k)*10+(1-p)*40}px) rotate(${(k%2?2:-2)+Math.sin(t*.8+k)}deg)`});
+    $('pt1').style.opacity=ease((L-.3)/.5)*(1-ease((L-2.8)/.4));$('pt2').style.opacity=ease((L-3.0)/.5);
+    const q='найти сурдопереводчика рядом',n=Math.floor(clamp((L-3.6)/1.6)*q.length);$('stext').textContent=q.slice(0,n);$('search').style.opacity=ease((L-3.3)/.4);$('scur').style.opacity=(Math.floor(t*2.5)%2)?0:1;
+  }
+  if(sc.id==='logo'){const p=back(L/.7);$('lgImg').style.transform=`scale(${.4+.6*p}) rotate(${(1-clamp(p))*-25}deg)`;$('lgImg').style.opacity=clamp(p);
+    $('lgT').style.opacity=ease((L-.7)/.6);$('lgT').style.transform=`translateY(${(1-ease((L-.7)/.6))*30}px)`;$('lgP').style.opacity=ease((L-1.3)/.6);
+    [...$('lgC').children].forEach((c,k)=>{const q=back((L-3.4-k*.5)/.45);c.style.opacity=clamp(q);c.style.transform=`translateY(${(1-q)*30}px)`});}
+  if(lay==='sec'){
+    $('h1').textContent=sc.h1;$('h2').textContent=sc.h2;$('p').textContent=sc.p||'';
+    const hp=ease((L-.05)/.5);$('h1').style.opacity=hp;$('h1').style.transform=`translateY(${(1-hp)*24}px)`;const hq=ease((L-.25)/.5);$('h2').style.opacity=hq;$('h2').style.transform=`translateY(${(1-hq)*24}px)`;$('p').style.opacity=ease((L-.5)/.5);
+    const cp=back((L-.4)/.6);$('card').style.opacity=clamp(cp);$('card').style.transform=`translateY(${(1-cp)*80}px) scale(${.94+.06*clamp(cp)})`;
+    $('camUI').style.display=sc.graphic==='camera'?'block':'none';$('lockUI').style.display=sc.graphic==='lock'?'block':'none';$('recImg').style.display=sc.rec?'block':'none';
+    if(sc.rec){const n=REC[sc.rec],f=clamp(Math.floor(Math.max(0,L-.3)*30),0,n-1);$('recImg').src=`rec/${sc.rec}/${pad(f)}.jpg`;const z=ease((L-D*.45)/(D*.45)),[a,b]=ZOOM[sc.rec],s=a[2]+(b[2]-a[2])*z;$('recImg').style.transform=`scale(${s}) translate(${-(a[0]+(b[0]-a[0])*z)*100}%,${-(a[1]+(b[1]-a[1])*z)*100}%)`}
+    if(sc.graphic==='camera'){hands($('ch'),HD.privet,Math.max(0,L-.4)*30*.6,340,500);$('camChip').style.opacity=ease((L-2.4)/.4);$('camChip').style.transform=`scale(${.8+.2*back((L-2.4)/.4)})`;$('camRec').style.opacity=(Math.floor(t*2)%2)?.4:1}
+    if(sc.graphic==='lock')$('shackle').style.transform=`translateY(${(1-ease((L-.9)/.5))*-36}px)`;
+  }
+  if(sc.id==='outro'){const p=back(L/.7);$('ouL').style.opacity=clamp(p);$('ouL').style.transform=`scale(${.7+.3*p})`;$('ouT').style.opacity=ease((L-.6)/.6);$('ouC').style.opacity=ease((L-1.4)/.6)}
+  // subtitles (the narration, for viewers who do not hear it)
+  const words=sc.sub.split(' '),sp=clamp((L-sc.vo)/sc.voDur),lit=Math.floor(sp*words.length+.2);
+  $('sub').innerHTML=words.map((w,k)=>k<lit?`<b style="color:#ffd166">${w}</b>`:w).join(' ');$('sub').style.opacity=L<sc.vo-.1?0:vis;
+};
+window.render(0);
+</script></body></html>
