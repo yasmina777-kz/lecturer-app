@@ -98,4 +98,6 @@ local-test-account.txt
 .elevenlabs-key
 promo-video/build/*
 !promo-video/build/scenes.html
+!promo-video/build/review.html
 promo-video/*.mp4
+promo-video/.venv/

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<title>AI Mentor review</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+html,body{width:1920px;height:1080px;overflow:hidden;font-family:Manrope,sans-serif;color:#fff;background:#3b5bff}
+#bg{position:absolute;inset:0}
+.blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.55}
+.layer{position:absolute;inset:0;opacity:0}
+.display{font-family:Unbounded,sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1.02}
+.word{display:inline-block;margin-right:.24em}
+.browser{position:absolute;border-radius:26px;background:#fff;box-shadow:0 50px 120px rgba(20,10,60,.35);overflow:hidden}
+.browser .bar{height:46px;background:#f1f2f6;display:flex;align-items:center;gap:10px;padding:0 20px}
+.browser .bar i{width:14px;height:14px;border-radius:50%;display:block}
+.browser .bar span{margin-left:18px;flex:0 0 420px;height:26px;border-radius:13px;background:#fff;color:#7a8094;font-size:15px;line-height:26px;padding-left:16px;font-weight:600}
+.browser .view{position:absolute;left:0;right:0;top:46px;bottom:0;overflow:hidden}
+.browser .view img{position:absolute;left:0;top:0;width:100%;transform-origin:0 0}
+.sticker{position:absolute;padding:16px 28px;border-radius:20px;font-family:Unbounded,sans-serif;font-weight:700;font-size:34px;color:#141633;background:#ffcf3f;box-shadow:0 14px 40px rgba(0,0,0,.18)}
+.num{position:absolute;font-family:Unbounded,sans-serif;font-weight:800;font-size:150px;opacity:.22}
+#sub{position:absolute;left:50%;bottom:44px;transform:translateX(-50%);max-width:1500px;padding:18px 34px;border-radius:22px;background:rgba(10,12,40,.72);font-size:36px;font-weight:700;line-height:1.3;text-align:center;color:#fff;backdrop-filter:blur(8px)}
+#sub b{color:#ffcf3f;font-weight:800}
+.chip{display:inline-block;padding:14px 26px;border-radius:999px;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.5);font-size:30px;font-weight:700;margin:0 8px}
+svg.hands{overflow:visible}
+svg.hands line{stroke:rgba(255,255,255,.85);stroke-width:4;stroke-linecap:round}
+svg.hands circle{fill:#141633}
+svg.hands circle.tip{fill:#ffcf3f}
+.logo{display:flex;align-items:center;gap:30px}
+.logo img{width:150px;height:150px;border-radius:38px;background:#fff;padding:14px;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+</style></head>
+<body>
+<div id="bg"><div class="blob" id="b1" style="width:900px;height:900px;background:#ff5c8a"></div><div class="blob" id="b2" style="width:800px;height:800px;background:#ffcf3f"></div><div class="blob" id="b3" style="width:1000px;height:1000px;background:#2ed3a5"></div></div>
+
+<div class="layer" id="hook">
+  <div class="display" id="hookT" style="position:absolute;left:150px;top:250px;width:1150px;font-size:110px"></div>
+  <svg class="hands" id="hk" style="position:absolute;left:1350px;top:160px" width="420" height="700"></svg>
+</div>
+
+<div class="layer" id="intro">
+  <div style="position:absolute;left:0;right:0;top:250px;display:flex;flex-direction:column;align-items:center;gap:46px">
+    <div class="logo display" id="inL" style="font-size:120px"><img src="logo.png">AI Mentor</div>
+    <div id="inC"><span class="chip">русский жестовый язык</span><span class="chip">в браузере</span><span class="chip">без установки</span></div>
+  </div>
+</div>
+
+<div class="layer" id="rec"><div class="num" id="rNum" style="left:90px;top:40px"></div>
+  <div class="browser" id="rB" style="left:360px;top:92px;width:1200px;height:752px"><div class="bar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span id="rUrl"></span></div><div class="view"><img id="rImg"></div></div>
+  <div class="sticker" id="rSt"></div>
+</div>
+
+<div class="layer" id="camera">
+  <div class="display" style="position:absolute;left:150px;top:230px;width:900px;font-size:76px">Жесты → текст</div>
+  <div style="position:absolute;left:150px;top:420px;font-size:38px;font-weight:700;opacity:.9">ИИ находит 21 точку на каждой руке</div>
+  <div class="display" id="camTxt" style="position:absolute;left:150px;top:540px;font-size:140px;color:#ffcf3f"></div>
+  <div style="position:absolute;left:1180px;top:90px;width:560px;height:820px;border-radius:40px;border:6px solid rgba(255,255,255,.9)">
+    <div style="position:absolute;left:30px;top:26px;font-size:22px;font-weight:800;letter-spacing:.12em" id="camRec">● КАМЕРА</div>
+    <svg class="hands" id="ch" style="position:absolute;left:40px;top:70px" width="480" height="700"></svg>
+  </div>
+</div>
+
+<div class="layer" id="privacy">
+  <svg style="position:absolute;left:810px;top:150px" width="300" height="320" viewBox="0 0 400 420"><rect x="40" y="170" width="320" height="230" rx="44" fill="#fff"/><path id="shackle" d="M110 170 V120 a90 90 0 0 1 180 0 V170" fill="none" stroke="#fff" stroke-width="26"/><circle cx="200" cy="270" r="26" fill="#141633"/><rect x="190" y="280" width="20" height="56" rx="8" fill="#141633"/></svg>
+  <div class="display" id="pvT" style="position:absolute;left:0;right:0;top:530px;text-align:center;font-size:72px">Всё остаётся<br>на вашем устройстве</div>
+</div>
+
+<div class="layer" id="outro">
+  <div style="position:absolute;left:0;right:0;top:230px;display:flex;flex-direction:column;align-items:center;gap:40px">
+    <div class="logo display" id="ouL" style="font-size:120px"><img src="logo.png">AI Mentor</div>
+    <div class="display" id="ouT" style="font-size:54px;font-weight:700;text-align:center">Учите жесты.<br>Переводите. Понимайте друг друга.</div>
+  </div>
+</div>
+
+<div id="sub"></div>
+<script>
+// Filled by render-review.mjs: scenes [{id,kind,start,end,text,vo}], recording frame counts.
+const S = window.SCENES, REC = window.RECFRAMES, HD = window.HANDS;
+HD.privet.frames = HD.privet.frames.map(fr => fr && fr.length > 1 ? [fr.reduce((a, b) => a[0][1] < b[0][1] ? a : b)] : fr).filter(fr => fr && fr.length);
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), ease=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2}, back=x=>{x=clamp(x);const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const $=id=>document.getElementById(id);
+const COL={hook:['#ff5c8a','#ffcf3f','#7b5cff'],intro:['#3b5bff','#ff5c8a','#2ed3a5'],home:['#7b5cff','#ff5c8a','#3b5bff'],letters:['#ff7a45','#ffcf3f','#ff5c8a'],words:['#14b88a','#3b5bff','#ffcf3f'],grammar:['#3b5bff','#7b5cff','#2ed3a5'],translate:['#ff5c8a','#7b5cff','#ffcf3f'],camera:['#7b5cff','#3b5bff','#ff5c8a'],privacy:['#14b88a','#3b5bff','#2ed3a5'],outro:['#3b5bff','#ff5c8a','#ffcf3f']};
+const REC_META={home:['01','Главная','ai-mentor · /learn',[[0,0,1],[0,.1,1.25]]],letters:['02','Азбука','ai-mentor · /practice',[[0,0,1],[.0,.18,1.35]]],words:['03','Слова','ai-mentor · /vocab',[[0,0,1],[.02,.2,1.3]]],grammar:['04','Грамматика','ai-mentor · /grammar',[[0,0,1],[.12,.1,1.3]]],translate:['05','Переводчик','ai-mentor · /text-to-sign',[[0,0,1],[.38,.08,1.45]]]};
+const mix=(a,b,u)=>a+(b-a)*u, hex=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)), lerpC=(a,b,u)=>{const A=hex(a),B=hex(b);return`rgb(${A.map((v,i)=>Math.round(mix(v,B[i],u))).join(',')})`};
+const BONES=[[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[5,9],[9,10],[10,11],[11,12],[9,13],[13,14],[14,15],[15,16],[13,17],[17,18],[18,19],[19,20],[0,17]],TIPS=new Set([4,8,12,16,20]);
+function fit(d,W,H){if(d._fit)return d._fit;const r=d.w/d.h,xs=[],ys=[];d.frames.forEach(fr=>(fr||[]).forEach(h=>h.forEach(p=>{xs.push(p[0]*r);ys.push(p[1])})));const q=(v,k)=>{v=[...v].sort((a,b)=>a-b);return v[Math.floor(k*(v.length-1))]};const x0=q(xs,.04),x1=q(xs,.96),y0=q(ys,.04),y1=q(ys,.9),cw=Math.max(x1-x0,(y1-y0)*W/H)*1.1,ch=cw*H/W;return d._fit=[(x0+x1)/2-cw/2,(y0+y1)/2-ch/2,cw,ch]}
+function hands(svg,d,f,W,H){const c=fit(d,W,H),n=d.frames.length,lo=n*.12,hi=n*.78,span=hi-lo,ph=f%(2*span);f=lo+(ph<span?ph:2*span-ph);const a=Math.floor(f),u=f-a,A=d.frames[a]||[],B=d.frames[Math.min(n-1,a+1)]||A;let s='';A.forEach((h,k)=>{const g=B[k]&&B[k].length===21?B[k]:h;const P=h.map((p,i)=>[((p[0]+(g[i][0]-p[0])*u)*d.w/d.h-c[0])/c[2]*W,((p[1]+(g[i][1]-p[1])*u)-c[1])/c[3]*H]);BONES.forEach(([i,j])=>s+=`<line x1="${P[i][0]}" y1="${P[i][1]}" x2="${P[j][0]}" y2="${P[j][1]}"/>`);P.forEach((p,i)=>s+=`<circle class="${TIPS.has(i)?'tip':''}" cx="${p[0]}" cy="${p[1]}" r="${TIPS.has(i)?13:9}"/>`)});svg.innerHTML=s}
+const pad=n=>String(n).padStart(5,'0');
+window.render=function(t){
+  const i=Math.max(0,S.findIndex(s=>t<s.end)); const sc=S[i<0?S.length-1:i]; const L=t-sc.start, D=sc.end-sc.start;
+  // background colour cross-fade between scenes
+  const prev=S[Math.max(0,i-1)], u=i>0?ease(L/.6):1, cA=COL[prev.id],cB=COL[sc.id];
+  document.body.style.background=lerpC(cA[0],cB[0],u);[$('b1'),$('b2'),$('b3')].forEach((b,k)=>{b.style.background=lerpC(cA[k],cB[k],u);const a=t*.3+k*2.1;b.style.left=(960+Math.cos(a)*(520+k*90)-450)+'px';b.style.top=(540+Math.sin(a*1.3)*(300+k*40)-450)+'px'});
+  ['hook','intro','rec','camera','privacy','outro'].forEach(k=>$(k).style.opacity=0);
+  const fadeIn=ease(L/.35), fadeOut=1-ease((L-(D-.3))/.3), vis=Math.min(fadeIn,fadeOut);
+  const lay=sc.kind==='rec'?'rec':sc.id; $(lay).style.opacity=vis;
+  if(sc.id==='hook'){const words='Хотите заговорить на языке жестов?'.split(' ');$('hookT').innerHTML=words.map((w,k)=>{const p=back((L-.2-k*.16)/.45);return`<span class="word" style="opacity:${clamp(p)};transform:translateY(${(1-p)*80}px) rotate(${(1-p)*-8}deg)">${w}</span>`}).join('');hands($('hk'),HD.privet,L*30*.7,420,700)}
+  if(sc.id==='intro'){const p=back((L-.1)/.6);$('inL').style.transform=`scale(${.6+.4*p})`;$('inL').style.opacity=clamp(p);$('inC').style.opacity=ease((L-.8)/.5);$('inC').style.transform=`translateY(${(1-ease((L-.8)/.5))*30}px)`}
+  if(sc.kind==='rec'){const m=REC_META[sc.id];$('rNum').textContent=m[0];$('rUrl').textContent=m[2];$('rSt').textContent=m[1];
+    const n=REC[sc.id],f=clamp(Math.floor(L*30)+1,1,n);$('rImg').src=`rec/${sc.id}/${pad(f-1)}.jpg`;
+    const z=ease((L-D*.45)/(D*.4)),[a,b]=m[3],ox=mix(a[0],b[0],z),oy=mix(a[1],b[1],z),s=mix(a[2],b[2],z);$('rImg').style.transform=`scale(${s}) translate(${-ox*100}%,${-oy*100}%)`;
+    const bin=back(L/.6);$('rB').style.transform=`perspective(1800px) rotateX(${(1-ease(L/.8))*12}deg) translateY(${(1-bin)*120}px) scale(${.92+.08*clamp(bin)})`;
+    const sp=back((L-.4)/.5);$('rSt').style.left='170px';$('rSt').style.top='690px';$('rSt').style.transform=`rotate(${-6+(1-sp)*-20}deg) scale(${clamp(sp)})`}
+  if(sc.id==='camera'){const fp=Math.max(0,L-.3)*30*.6;hands($('ch'),HD.privet,fp,480,700);const n=HD.privet.frames.length,ph=fp%(n+14);$('camTxt').textContent=L>2.4?'Привет!'.slice(0,Math.floor(clamp((L-2.4)/.6)*7+.999)):'';$('camRec').style.opacity=(Math.floor(t*2)%2)?.4:1}
+  if(sc.id==='privacy'){$('shackle').style.transform=`translateY(${(1-ease((L-.5)/.5))*-40}px)`;$('pvT').style.opacity=ease((L-.2)/.5)}
+  if(sc.id==='outro'){const p=back(L/.7);$('ouL').style.transform=`scale(${.6+.4*p})`;$('ouL').style.opacity=clamp(p);$('ouT').style.opacity=ease((L-.9)/.6)}
+  // subtitles: the spoken line, words light up as they are said
+  const words=sc.text.split(' '), sp=clamp((L-sc.vo)/(sc.voDur||1)), lit=Math.floor(sp*words.length+.2);
+  $('sub').style.opacity=L<sc.vo-.2||!sc.text?0:Math.min(1,fadeOut+.0);
+  $('sub').innerHTML=words.map((w,k)=>k<lit?`<b>${w}</b>`:w).join(' ');
+};
+window.render(0);
+</script></body></html>
