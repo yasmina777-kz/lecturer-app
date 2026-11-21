@@ -8,7 +8,22 @@ for e in entries:
  parsed=morph.parse(word)[0]
  for form in parsed.lexeme:
   forms.setdefault(form.word,set()).add(e['id'])
-# Keep ambiguities explicit; the client will not silently choose one meaning.
+# Ambiguities stay explicit (the client will not silently choose a meaning),
+# except two principled cases: the form IS a dictionary headword («мой» → МОЙ,
+# not the imperative of «мыть»), or one reading is at least twice as probable
+# as every other candidate by pymorphy's frequency scores («моя» → МОЙ).
+label = {e['id']: e['label'].lower().rstrip('!?') for e in entries}
+for form, ids in forms.items():
+ if len(ids) < 2: continue
+ exact = [i for i in ids if label[i] == form]
+ if len(exact) == 1:
+  forms[form] = {exact[0]}; continue
+ score = {}
+ for p in morph.parse(form):
+  score[p.normal_form] = score.get(p.normal_form, 0) + p.score
+ ranked = sorted(((score.get(label[i], 0), i) for i in ids), reverse=True)
+ if ranked[0][0] > 0 and ranked[0][0] >= 2 * ranked[1][0]:
+  forms[form] = {ranked[0][1]}
 (dest/'forms.json').write_text(json.dumps({f:sorted(ids) for f,ids in forms.items()},ensure_ascii=False))
 print(len(entries),'entries',len(forms),'forms')
 

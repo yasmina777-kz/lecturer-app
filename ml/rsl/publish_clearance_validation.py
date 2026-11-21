@@ -33,7 +33,6 @@ sources = [
     'frontend/src/sign/composeMotion.ts', 'frontend/src/sign/motion.ts',
     'frontend/src/sign/avatarPlayback.ts', 'frontend/src/sign/phraseExamples.ts',
     'frontend/src/components/volumeSkinning.ts',
-    'frontend/public/avatars/hand-workshop/mira-rig.glb',
     'art/hand-rig/Mira-Hand-Workshop.blend',
     'art/sign-motion/arm_anatomy.py', 'art/sign-motion/bake_arm_anatomy.py',
     'art/sign-motion/body_clearance.py', 'art/sign-motion/verify_body_clearance.py',

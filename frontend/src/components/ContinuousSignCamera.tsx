@@ -174,11 +174,9 @@ export function ContinuousSignCamera() {
       healthRef.current = data;
       setHealth(data);
       if (data.ready && stream.current) record(generation.current);
-      setMessage(
-        data.ready
-          ? ""
-          : data.error || "Модель ещё загружается. Повторите проверку.",
-      );
+      // The server phrase model is optional: letters and words are recognised in
+      // the browser, so an absent server is not an error for the user.
+      setMessage("");
     } catch {
       if (!alive.current || healthRequest.current !== controller) return;
       healthRef.current = { ready: false, vocabulary: 0 };

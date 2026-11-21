@@ -167,13 +167,11 @@ export function SignDialoguesPage() {
           </p>
           <div className="activity-scenarios">
             {scenarios.map((s, i) => {
-              const cover = phraseArt(
-                [
-                  "Как тебя зовут?",
-                  "Я хочу читать книгу",
-                  "Я хочу купить хлеб",
-                ][i],
-              );
+              // Decorative scene per situation (illustrations, not sign diagrams).
+              const art: Record<string, string> = { cafe: "workshop", family: "mentor-wave", plans: "study-desk", health: "hands-detail" };
+              const cover = art[s.id]
+                ? `/images/landing-v2/${art[s.id]}.webp`
+                : phraseArt(({ meeting: "Как тебя зовут?", study: "Я хочу читать книгу", shop: "Я хочу купить хлеб" } as Record<string, string>)[s.id] ?? "");
               return (
                 <button
                   className="panel activity-scenario"

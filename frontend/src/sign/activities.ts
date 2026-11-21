@@ -583,6 +583,102 @@ export function dialogueScenarios(): DialogueScenario[] {
         },
       ],
     },
+    {
+      id: "cafe",
+      title: at("В кафе", "At a café", "Кафеде"),
+      description: at("Закажите напиток, узнайте цену и скажите, понравилось ли.", "Order a drink, ask the price and say whether you liked it.", "Сусын тапсырып, бағасын біліп, ұнағанын айтыңыз."),
+      image: "кафе",
+      start: "drink",
+      steps: [
+        { id: "drink", prompt: at("Что ты хочешь пить?", "What would you like to drink?", "Не ішкің келеді?"), context: at("Вы в кафе с глухим другом. Он спрашивает, что заказать.", "You are at a café with a Deaf friend. He asks what to order.", "Сіз керең досыңызбен кафедесіз."), signs: ["ты", "пить", "хотеть", "что"], avatar: "Ты хочешь пить", choices: [
+            { id: "water", text: at("Хочу пить воду", "I want to drink water", "Су ішкім келеді"), accepted: true, next: "price", example: "Я хочу пить воду", feedback: at("Отличный ответ: вы назвали напиток.", "Good: you named a drink.", "Жақсы: сусынды атадыңыз.") },
+            { id: "bread", text: at("Хочу есть хлеб", "I want to eat bread", "Нан жегім келеді"), accepted: false, feedback: at("Вопрос был про напиток. Хлеб можно заказать потом.", "The question was about a drink.", "Сұрақ сусын туралы болды.") },
+            { id: "yesterday", text: at("Вчера", "Yesterday", "Кеше"), accepted: false, feedback: at("«Вчера» отвечает на вопрос «когда?», а не «что?».", "“Yesterday” answers “when?”, not “what?”.", "«Кеше» — «қашан?» сұрағына жауап.") },
+          ] },
+        { id: "price", prompt: at("Сколько стоит?", "How much is it?", "Қанша тұрады?"), context: at("Друг показывает на меню. Нужно узнать цену.", "Your friend points at the menu. Find out the price.", "Досыңыз мәзірді көрсетеді."), signs: ["цена", "сколько"], avatar: "Сколько стоит", choices: [
+            { id: "ask", text: at("Спрошу цену и достану деньги", "Ask the price and get the money", "Бағасын сұрап, ақша аламын"), accepted: true, next: "taste", example: "Сколько стоит", feedback: at("Вы поняли вопрос о цене.", "You understood the price question.", "Баға туралы сұрақты түсіндіңіз.") },
+            { id: "brother", text: at("Скажу «мой брат»", "Say “my brother”", "«Менің ағам» деймін"), accepted: false, feedback: at("Это не ответ на вопрос. Попробуйте ещё раз.", "That does not answer the question. Try again.", "Бұл сұраққа жауап емес. Қайталап көріңіз.") },
+            { id: "repeat", text: at("Попрошу показать ещё раз", "Ask to show it again", "Қайта көрсетуді сұраймын"), accepted: true, next: "taste", example: "Покажи мне", feedback: at("Попросить повторить — нормально, особенно если жест быстрый.", "Asking for a repeat is fine.", "Қайталауды сұрау — қалыпты.") },
+          ] },
+        { id: "taste", prompt: at("Вкусно?", "Is it tasty?", "Дәмді ме?"), context: at("Вы попробовали заказ. Друг спрашивает, понравилось ли.", "You tried your order. Your friend asks if you liked it.", "Тапсырысты татып көрдіңіз."), signs: ["вкусный"], avatar: "Вкусный", choices: [
+            { id: "tasty", text: at("Да, вкусно", "Yes, it is tasty", "Иә, дәмді"), accepted: true, example: "Вкусный", feedback: at("Вы ответили на вопрос. Мимика тоже важна: улыбка подтверждает «вкусно».", "Your face matters too: a smile confirms “tasty”.", "Бет-әлпет те маңызды.") },
+            { id: "cold", text: at("Вода холодная", "The water is cold", "Су суық"), accepted: true, example: "Вода холодный", feedback: at("Тоже подходящий ответ: вы описали напиток.", "Also relevant: you described the drink.", "Бұл да орынды жауап.") },
+            { id: "work", text: at("Сегодня работаю", "I work today", "Бүгін жұмыс істеймін"), accepted: false, feedback: at("Это не ответ на вопрос. Попробуйте ещё раз.", "That does not answer the question. Try again.", "Бұл сұраққа жауап емес. Қайталап көріңіз.") },
+          ] },
+      ],
+    },
+    {
+      id: "family",
+      title: at("Семья", "Family", "Отбасы"),
+      description: at("Расскажите о своей семье: кто в ней есть и где вы живёте.", "Talk about your family and where you live.", "Отбасыңыз туралы айтыңыз."),
+      image: "семья",
+      start: "size",
+      steps: [
+        { id: "size", prompt: at("У тебя большая семья?", "Is your family big?", "Отбасың үлкен бе?"), context: at("Новый знакомый спрашивает о вашей семье.", "A new acquaintance asks about your family.", "Жаңа танысыңыз отбасыңыз туралы сұрайды."), signs: ["ты", "семья", "большой"], avatar: "Ты семья большой", choices: [
+            { id: "big", text: at("Да: мама, папа, брат и сестра", "Yes: mum, dad, brother and sister", "Иә: анам, әкем, ағам және әпкем"), accepted: true, next: "where", example: "Мать отец брат сестра", feedback: at("Вы ответили и назвали членов семьи.", "You answered and named family members.", "Отбасы мүшелерін атадыңыз.") },
+            { id: "small", text: at("Нет, семья маленькая", "No, my family is small", "Жоқ, отбасым шағын"), accepted: true, next: "where", example: "Семья маленький", feedback: at("Тоже верный ответ на вопрос.", "Also a correct answer.", "Бұл да дұрыс жауап.") },
+            { id: "price", text: at("Спрошу, сколько стоит хлеб", "Ask the price of bread", "Нанның бағасын сұраймын"), accepted: false, feedback: at("Это не ответ на вопрос. Попробуйте ещё раз.", "That does not answer the question. Try again.", "Бұл сұраққа жауап емес. Қайталап көріңіз.") },
+          ] },
+        { id: "where", prompt: at("Твоя семья живёт в городе?", "Does your family live in the city?", "Отбасың қалада тұра ма?"), context: at("Разговор продолжается.", "The conversation continues.", "Әңгіме жалғасады."), signs: ["твой", "семья", "город", "жить"], avatar: "Твой семья город жить", choices: [
+            { id: "city", text: at("Да, мы живём в городе", "Yes, we live in the city", "Иә, қалада тұрамыз"), accepted: true, next: "love", example: "Мы город жить", feedback: at("Вы ответили, где живёт семья.", "You said where your family lives.", "Отбасыңыз қайда тұратынын айттыңыз.") },
+            { id: "house", text: at("Мы живём в своём доме", "We live in our own house", "Өз үйімізде тұрамыз"), accepted: true, next: "love", example: "Мы дом жить", feedback: at("Подходящий ответ.", "A relevant answer.", "Орынды жауап.") },
+            { id: "tasty", text: at("Вкусно!", "Tasty!", "Дәмді!"), accepted: false, feedback: at("Это не ответ на вопрос. Попробуйте ещё раз.", "That does not answer the question. Try again.", "Бұл сұраққа жауап емес. Қайталап көріңіз.") },
+          ] },
+        { id: "love", prompt: at("Ты любишь свою семью?", "Do you love your family?", "Отбасыңды жақсы көресің бе?"), context: at("Последний вопрос — тёплый.", "A warm last question.", "Соңғы сұрақ."), signs: ["ты", "семья", "любить"], avatar: "Ты семья любить", choices: [
+            { id: "yes", text: at("Да, очень люблю", "Yes, very much", "Иә, қатты жақсы көремін"), accepted: true, example: "Я семья любить", feedback: at("Отлично! Вы поддержали разговор о семье.", "Great, you kept the conversation going.", "Тамаша!") },
+            { id: "siblings", text: at("Расскажу про брата и сестру", "Tell about my brother and sister", "Ағам мен әпкем туралы айтамын"), accepted: true, example: "Мой брат сестра", feedback: at("Тоже хорошо: разговор становится подробнее.", "Good: the conversation gets more detailed.", "Жақсы.") },
+            { id: "head", text: at("Покажу жест «болит»", "Sign “hurts”", "«Ауырады» ымын көрсетемін"), accepted: false, feedback: at("Это не ответ на вопрос. Попробуйте ещё раз.", "That does not answer the question. Try again.", "Бұл сұраққа жауап емес. Қайталап көріңіз.") },
+          ] },
+      ],
+    },
+    {
+      id: "plans",
+      title: at("Планы", "Plans", "Жоспарлар"),
+      description: at("Договоритесь о времени: когда вы работаете и что делаете завтра.", "Arrange a time: when you work and what you do tomorrow.", "Уақыт туралы келісіңіз."),
+      image: "завтра",
+      start: "when",
+      steps: [
+        { id: "when", prompt: at("Когда ты работаешь?", "When do you work?", "Қашан жұмыс істейсің?"), context: at("Коллега хочет договориться о встрече.", "A colleague wants to arrange a meeting.", "Әріптесіңіз кездесуге келіскісі келеді."), signs: ["ты", "работать", "когда"], avatar: "Ты работать когда", choices: [
+            { id: "morning", text: at("Сегодня утром", "This morning", "Бүгін таңертең"), accepted: true, next: "tomorrow", example: "Сегодня утро работать", feedback: at("Вы назвали время — это ответ на «когда?».", "You named a time — that answers “when?”.", "Уақытты атадыңыз.") },
+            { id: "evening", text: at("Вечером", "In the evening", "Кешке"), accepted: true, next: "tomorrow", example: "Вечер работать", feedback: at("Тоже ответ на вопрос о времени.", "Also a time answer.", "Бұл да уақыт туралы жауап.") },
+            { id: "family", text: at("Мою семью", "My family", "Менің отбасым"), accepted: false, feedback: at("Вопрос «когда?» — ответ должен быть про время.", "“When?” needs a time.", "«Қашан?» — уақыт керек.") },
+          ] },
+        { id: "tomorrow", prompt: at("Что ты делаешь завтра?", "What are you doing tomorrow?", "Ертең не істейсің?"), context: at("Время в РЖЯ обычно показывают в начале фразы.", "In RSL the time usually comes first.", "РЖЯ-да уақыт әдетте басында."), signs: ["завтра", "ты", "что"], avatar: "Завтра ты что", choices: [
+            { id: "city", text: at("Завтра еду в город", "Tomorrow I am going to the city", "Ертең қалаға барамын"), accepted: true, next: "together", example: "Завтра я город ехать", feedback: at("Хорошо: «завтра» в начале, действие в конце.", "Good: time first, action last.", "Жақсы: уақыт басында.") },
+            { id: "sleep", text: at("Завтра буду спать", "Tomorrow I will sleep", "Ертең ұйықтаймын"), accepted: true, next: "together", example: "Завтра я спать", feedback: at("Тоже ответ на вопрос.", "Also an answer.", "Бұл да жауап.") },
+            { id: "price", text: at("Сколько стоит?", "How much is it?", "Қанша тұрады?"), accepted: false, feedback: at("Это не ответ на вопрос. Попробуйте ещё раз.", "That does not answer the question. Try again.", "Бұл сұраққа жауап емес. Қайталап көріңіз.") },
+          ] },
+        { id: "together", prompt: at("Пойдём вечером вместе?", "Shall we go together in the evening?", "Кешке бірге барайық па?"), context: at("Коллега предлагает встретиться.", "Your colleague suggests meeting.", "Әріптесіңіз кездесуді ұсынады."), signs: ["вечер", "мы", "идти"], avatar: "Вечер мы идти", choices: [
+            { id: "yes", text: at("Да, вечером пойдём", "Yes, let’s go in the evening", "Иә, кешке барайық"), accepted: true, example: "Вечер мы идти", feedback: at("Договорились!", "Agreed!", "Келістік!") },
+            { id: "unsure", text: at("Ещё не знаю, скажу завтра", "Not sure yet, I’ll say tomorrow", "Әлі білмеймін, ертең айтамын"), accepted: true, example: "Я знать завтра", feedback: at("Честный ответ — тоже нормальный ответ.", "An honest answer is fine too.", "Шынайы жауап та қалыпты.") },
+            { id: "head", text: at("Голова", "Head", "Бас"), accepted: false, feedback: at("Это не ответ на вопрос. Попробуйте ещё раз.", "That does not answer the question. Try again.", "Бұл сұраққа жауап емес. Қайталап көріңіз.") },
+          ] },
+      ],
+    },
+    {
+      id: "health",
+      title: at("Самочувствие", "How you feel", "Көңіл-күй"),
+      description: at("Объясните, что болит, и попросите помощи.", "Explain what hurts and ask for help.", "Не ауыратынын айтып, көмек сұраңыз."),
+      image: "голова",
+      start: "what",
+      steps: [
+        { id: "what", prompt: at("Что случилось?", "What happened?", "Не болды?"), context: at("Коллега видит, что вам нехорошо.", "A colleague sees you are unwell.", "Әріптесіңіз сізге жайсыз екенін көреді."), signs: ["что"], avatar: "Что", choices: [
+            { id: "head", text: at("У меня болит голова", "I have a headache", "Басым ауырады"), accepted: true, next: "help", example: "Я голова болит", feedback: at("Вы объяснили, что случилось.", "You explained what happened.", "Не болғанын түсіндірдіңіз.") },
+            { id: "bread", text: at("Хочу купить хлеб", "I want to buy bread", "Нан сатып алғым келеді"), accepted: false, feedback: at("Это не ответ на вопрос. Попробуйте ещё раз.", "That does not answer the question. Try again.", "Бұл сұраққа жауап емес. Қайталап көріңіз.") },
+            { id: "tasty", text: at("Скажу «вкусно»", "Say “tasty”", "«Дәмді» деймін"), accepted: false, feedback: at("Это не ответ на вопрос. Попробуйте ещё раз.", "That does not answer the question. Try again.", "Бұл сұраққа жауап емес. Қайталап көріңіз.") },
+          ] },
+        { id: "help", prompt: at("Тебе помочь?", "Do you need help?", "Саған көмектесейін бе?"), context: at("Коллега предлагает помощь.", "Your colleague offers help.", "Әріптесіңіз көмек ұсынады."), signs: ["ты", "помочь"], avatar: "Ты помочь", choices: [
+            { id: "yes", text: at("Да, помоги мне", "Yes, please help me", "Иә, маған көмектес"), accepted: true, next: "home", example: "Помоги мне", feedback: at("Вы приняли помощь.", "You accepted help.", "Көмекті қабылдадыңыз.") },
+            { id: "again", text: at("Попрошу показать ещё раз", "Ask to show it again", "Қайта көрсетуді сұраймын"), accepted: true, next: "home", example: "Покажи мне", feedback: at("Если не поняли — попросить повторить правильно.", "If unsure, ask for a repeat.", "Түсінбесеңіз, қайталауды сұраңыз.") },
+            { id: "red", text: at("Скажу «красный»", "Say “red”", "«Қызыл» деймін"), accepted: false, feedback: at("Это не ответ на вопрос. Попробуйте ещё раз.", "That does not answer the question. Try again.", "Бұл сұраққа жауап емес. Қайталап көріңіз.") },
+          ] },
+        { id: "home", prompt: at("Ты пойдёшь домой?", "Will you go home?", "Үйге барасың ба?"), context: at("Нужно решить, что делать дальше.", "Decide what to do next.", "Әрі қарай не істеу керегін шешіңіз."), signs: ["ты", "дом", "идти"], avatar: "Ты дом идти", choices: [
+            { id: "home", text: at("Да, пойду домой", "Yes, I’ll go home", "Иә, үйге барамын"), accepted: true, example: "Я дом идти", feedback: at("Понятный ответ. Берегите себя!", "Clear answer. Take care!", "Түсінікті жауап.") },
+            { id: "work", text: at("Нет, поработаю до вечера", "No, I’ll work until the evening", "Жоқ, кешке дейін жұмыс істеймін"), accepted: true, example: "Я работать вечер", feedback: at("Тоже ответ на вопрос.", "Also an answer.", "Бұл да жауап.") },
+            { id: "price", text: at("Сколько стоит?", "How much is it?", "Қанша тұрады?"), accepted: false, feedback: at("Это не ответ на вопрос. Попробуйте ещё раз.", "That does not answer the question. Try again.", "Бұл сұраққа жауап емес. Қайталап көріңіз.") },
+          ] },
+      ],
+    },
   ] satisfies {
     id: string;
     title: string;

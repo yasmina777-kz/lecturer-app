@@ -5,7 +5,7 @@ const source=await readFile(new URL('../src/sign/activities.ts',import.meta.url)
 const js=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2020}}).outputText.replace(/import \{ at \} from [^;]+;/,'const at=(ru)=>ru;');
 const {dialogueScenarios,questionOptions,reviewItems,shuffle}=await import('data:text/javascript;base64,'+Buffer.from(js).toString('base64'));
 const entries=JSON.parse(await readFile(new URL('../public/research/rsl/words/catalog.json',import.meta.url),'utf8'));
-const scenarios=dialogueScenarios();assert.equal(scenarios.length,3);
+const scenarios=dialogueScenarios();assert.equal(scenarios.length,7);
 for(const s of scenarios){
  const ids=s.steps.map(x=>x.id);assert.equal(new Set(ids).size,ids.length);assert.ok(ids.includes(s.start));
  const reached=new Set();function visit(id,path=[]){assert.ok(!path.includes(id),'cycle');const step=s.steps.find(x=>x.id===id);assert.ok(step);reached.add(id);assert.ok(step.choices.some(c=>c.accepted));assert.equal(new Set(step.choices.map(c=>c.id)).size,step.choices.length);for(const label of step.signs)assert.ok(entries.some(e=>e.label===label),label);for(const choice of step.choices){assert.ok(choice.feedback);if(choice.next){assert.ok(choice.accepted);visit(choice.next,[...path,id]);}else if(choice.accepted)assert.equal(path.length+1,3);}}
