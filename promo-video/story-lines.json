@@ -1,0 +1,107 @@
+[
+ {
+  "id": "s1",
+  "voice": "narrator",
+  "text": "Каждое утро Айгерим заходит в одну и ту же пекарню.",
+  "shot": {
+   "img": "shop-signing-v1",
+   "blur": true,
+   "chapter": "Утро. Пекарня напротив"
+  }
+ },
+ {
+  "id": "s2",
+  "voice": "narrator",
+  "text": "Пекарь Арман не слышит. Их разговор — палец на витрину, кивок и «спасибо» одними губами.",
+  "shot": {
+   "img": "shop-signing-v1",
+   "mood": "muted",
+   "focus": "arman"
+  }
+ },
+ {
+  "id": "s3",
+  "voice": "aigerim",
+  "text": "Я хочу поговорить с ним по-настоящему.",
+  "shot": {
+   "img": "practice",
+   "chapter": "Вечер"
+  }
+ },
+ {
+  "id": "s4",
+  "voice": "narrator",
+  "text": "Вечером она открывает AI Mentor. Всё начинается с азбуки…",
+  "shot": {
+   "laptop": "home"
+  }
+ },
+ {
+  "id": "s5",
+  "voice": "narrator",
+  "text": "…буква за буквой, с видео носителей языка.",
+  "shot": {
+   "laptop": "letters"
+  }
+ },
+ {
+  "id": "s6",
+  "voice": "narrator",
+  "text": "Потом — первые слова.",
+  "shot": {
+   "laptop": "words"
+  }
+ },
+ {
+  "id": "s7",
+  "voice": "narrator",
+  "text": "Камера подсказывает, получается ли жест.",
+  "shot": {
+   "camera": true
+  }
+ },
+ {
+  "id": "s8",
+  "voice": "aigerim",
+  "text": "А как сказать «привет»?",
+  "shot": {
+   "laptop": "translate"
+  }
+ },
+ {
+  "id": "s9",
+  "voice": "narrator",
+  "text": "Неделя. Каждый вечер — по пятнадцать минут.",
+  "shot": {
+   "img": "study-desk",
+   "badge": "7 дней подряд",
+   "chapter": "Неделю спустя"
+  }
+ },
+ {
+  "id": "s10",
+  "voice": "narrator",
+  "text": "Утро. Та же пекарня. Айгерим поднимает руку: «Привет».",
+  "shot": {
+   "img": "shop-signing-v1",
+   "reply": "Привет! Ты учишь жесты?"
+  }
+ },
+ {
+  "id": "s11",
+  "voice": "narrator",
+  "text": "И у них начинается настоящий разговор.",
+  "shot": {
+   "img": "shop-signing-v1",
+   "zoom": "close"
+  }
+ },
+ {
+  "id": "s12",
+  "voice": "narrator",
+  "text": "AI Mentor. Первый шаг к разговору.",
+  "shot": {
+   "logo": true
+  }
+ }
+]

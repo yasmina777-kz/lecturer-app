@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<title>AI Mentor story</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#14110f;font-family:Manrope,sans-serif;color:#fff}
+.scene{position:absolute;inset:0;opacity:0;overflow:hidden}
+.scene .photo{position:absolute;inset:-4%;width:108%;height:108%;object-fit:cover}
+.warm{position:absolute;inset:0;background:radial-gradient(1200px 800px at 30% 20%,rgba(255,190,120,.10),transparent 70%)}
+#vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.55) 100%)}
+#grain{position:absolute;inset:0;pointer-events:none;opacity:.07;mix-blend-mode:overlay}
+.chapter{position:absolute;left:110px;top:90px;font-family:Lora,serif;font-style:italic;font-size:46px;letter-spacing:.01em;text-shadow:0 2px 20px rgba(0,0,0,.5)}
+.chapter:before{content:"";display:block;width:70px;height:2px;background:#ffd9a8;margin-bottom:18px}
+#sub{position:absolute;left:220px;right:220px;bottom:80px;text-align:center;font-family:Lora,serif;font-size:44px;line-height:1.35;text-shadow:0 2px 14px rgba(0,0,0,.85),0 0 2px rgba(0,0,0,.9)}
+#sub .who{display:block;font-family:Manrope,sans-serif;font-size:22px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#ffd9a8;margin-bottom:8px}
+/* laptop */
+.desk{position:absolute;inset:0;background:#2a2420}
+.desk .blur{position:absolute;inset:-60px;width:calc(100% + 120px);height:calc(100% + 120px);object-fit:cover;filter:blur(28px) brightness(.45) saturate(.8)}
+.lap{position:absolute;left:330px;top:70px;width:1260px}
+.lid{position:relative;width:1260px;height:808px;border-radius:30px 30px 10px 10px;background:#0d0f14;padding:26px 26px 30px;box-shadow:0 40px 100px rgba(0,0,0,.6)}
+.screen{position:relative;width:100%;height:100%;border-radius:8px;overflow:hidden;background:#fff}
+.screen img{position:absolute;left:0;top:0;width:100%;transform-origin:0 0}
+.base{width:1420px;height:34px;margin-left:-80px;border-radius:0 0 40px 40px;background:linear-gradient(#cfd3da,#9ea4ae);box-shadow:0 20px 40px rgba(0,0,0,.5)}
+.cam{position:absolute;inset:0;background:#111827;display:none}
+svg.hands{overflow:visible}svg.hands line{stroke:rgba(255,255,255,.85);stroke-width:4;stroke-linecap:round}svg.hands circle{fill:#6f95ff}svg.hands circle.tip{fill:#ffd166}
+.badge{position:absolute;right:110px;top:90px;padding:16px 28px;border-radius:999px;background:rgba(255,255,255,.92);color:#1b1d27;font-weight:800;font-size:32px;box-shadow:0 14px 40px rgba(0,0,0,.3)}
+.reply{position:absolute;right:250px;top:170px;max-width:560px;padding:26px 32px;border-radius:30px 30px 30px 8px;background:#fff;color:#1b1d27;font-family:Lora,serif;font-size:40px;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.reply small{display:block;font-family:Manrope,sans-serif;font-size:19px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#2f5bea;margin-bottom:8px}
+.end{position:absolute;inset:0;background:radial-gradient(1200px 900px at 50% 40%,#2a2522,#14110f);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px}
+.end .logo{display:flex;align-items:center;gap:28px;font-size:96px;font-weight:800;letter-spacing:-.02em}
+.end .logo img{width:128px;height:128px;border-radius:32px;background:#fff;padding:10px}
+.end p{font-family:Lora,serif;font-style:italic;font-size:54px;color:#ffd9a8}
+.end small{position:absolute;bottom:50px;font-size:19px;color:rgba(255,255,255,.55);text-align:center;line-height:1.5}
+</style></head>
+<body>
+<div id="stage"></div>
+<div id="vig"></div>
+<svg id="grain" width="1920" height="1080"><filter id="n"><feTurbulence id="turb" type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="1"/></filter><rect width="1920" height="1080" filter="url(#n)"/></svg>
+<div id="sub"></div>
+<script>
+const S = window.SCENES, REC = window.RECFRAMES, HD = window.HANDS;
+HD.privet.frames = HD.privet.frames.map(fr => fr && fr.length > 1 ? [fr.reduce((a, b) => a[0][1] < b[0][1] ? a : b)] : fr).filter(fr => fr && fr.length);
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), ease=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const $=id=>document.getElementById(id), pad=n=>String(n).padStart(5,'0');
+const BONES=[[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[5,9],[9,10],[10,11],[11,12],[9,13],[13,14],[14,15],[15,16],[13,17],[17,18],[18,19],[19,20],[0,17]],TIPS=new Set([4,8,12,16,20]);
+function fit(d,W,H){if(d._fit)return d._fit;const r=d.w/d.h,xs=[],ys=[];d.frames.forEach(fr=>fr.forEach(h=>h.forEach(p=>{xs.push(p[0]*r);ys.push(p[1])})));const q=(v,k)=>{v=[...v].sort((a,b)=>a-b);return v[Math.floor(k*(v.length-1))]};const x0=q(xs,.04),x1=q(xs,.96),y0=q(ys,.04),y1=q(ys,.9),cw=Math.max(x1-x0,(y1-y0)*W/H)*1.15,ch=cw*H/W;return d._fit=[(x0+x1)/2-cw/2,(y0+y1)/2-ch/2,cw,ch]}
+function hands(svg,d,f,W,H){const c=fit(d,W,H),n=d.frames.length,lo=n*.12,hi=n*.78,sp=hi-lo,ph=f%(2*sp);f=lo+(ph<sp?ph:2*sp-ph);const a=Math.floor(f),u=f-a,A=d.frames[a],B=d.frames[Math.min(n-1,a+1)]||A;let s='';A.forEach((h,k)=>{const g=B[k]&&B[k].length===21?B[k]:h;const P=h.map((p,i)=>[((p[0]+(g[i][0]-p[0])*u)*d.w/d.h-c[0])/c[2]*W,((p[1]+(g[i][1]-p[1])*u)-c[1])/c[3]*H]);BONES.forEach(([i,j])=>s+=`<line x1="${P[i][0]}" y1="${P[i][1]}" x2="${P[j][0]}" y2="${P[j][1]}"/>`);P.forEach((p,i)=>s+=`<circle class="${TIPS.has(i)?'tip':''}" cx="${p[0]}" cy="${p[1]}" r="${TIPS.has(i)?12:9}"/>`)});svg.innerHTML=s}
+// build one layer per scene
+const ZOOM={home:[[0,0,1],[0,.1,1.15]],letters:[[0,0,1],[0,.12,1.3]],words:[[0,0,1],[0,.12,1.25]],translate:[[0,0,1],[.36,.05,1.5]]};
+S.forEach(s=>{const el=document.createElement('div');el.className='scene';el.id='sc_'+s.id;const sh=s.shot;let h='';
+  if(sh.img)h+=`<img class="photo" src="story/${sh.img}.webp" style="${sh.mood==='muted'?'filter:grayscale(.7) brightness(.78) contrast(.95);':''}${sh.blur?'filter:blur(14px) brightness(.85) saturate(.9);':''}${sh.focus==='arman'?'object-position:88% 0%;':''}"><div class="warm"></div>`;
+  if(sh.laptop||sh.camera)h+=`<div class="desk"><img class="blur" src="story/practice.webp"></div><div class="lap"><div class="lid"><div class="screen"><img class="rec"><div class="cam"><div style="position:absolute;left:30px;top:24px;color:#ff6b6b;font-weight:800;font-size:22px;letter-spacing:.1em">● КАМЕРА</div><svg class="hands" width="420" height="560" style="position:absolute;left:400px;top:90px"></svg><div class="chipok" style="position:absolute;right:36px;bottom:36px;padding:16px 24px;border-radius:16px;background:#fff;color:#1b1d27;font-weight:800;font-size:30px">ПРИВЕТ ✓</div></div></div></div><div class="base"></div></div>`;
+  if(sh.badge)h+=`<div class="badge">🔥 ${sh.badge}</div>`;
+  if(sh.reply)h+=`<div class="reply"><small>Арман · жестами</small>${sh.reply}</div>`;
+  if(sh.logo)h+=`<div class="end"><div class="logo"><img src="logo.png">AI Mentor</div><p>Первый шаг к разговору</p><small>История и герои придуманы; иллюстрации созданы ИИ.<br>Жесты — видео носителей РЖЯ (Slovo, Bukva · ai-forever). Голос — Microsoft Azure Neural TTS.</small></div>`;
+  if(sh.chapter)h+=`<div class="chapter">${sh.chapter}</div>`;
+  el.innerHTML=h;$('stage').appendChild(el);s.el=el});
+window.render=function(t){
+  $('turb').setAttribute('seed',Math.floor(t*24)%97);
+  let subOn=null;
+  S.forEach((s,i)=>{const fade=.6,a=s.start,b=s.end;let o=0;if(t>=a-fade/2&&t<=b+fade/2)o=Math.min(clamp((t-a+fade/2)/fade),clamp((b+fade/2-t)/fade));if(i===0&&t<a+.3)o=1;if(i===S.length-1&&t>=a)o=1;s.el.style.opacity=o;if(o<=0)return;
+    const L=t-a,D=b-a,u=clamp(L/D),sh=s.shot,ph=s.el.querySelector('.photo');
+    if(ph){let sc,dx,dy;if(sh.zoom==='close'){sc=1.05+.28*ease(u);dx=-3*ease(u);dy=-4*ease(u)}else if(sh.focus==='arman'){sc=1.28+.06*u;dx=-11-2*u;dy=5}else if(sh.blur){sc=1.12-.04*u;dx=0;dy=0}else{sc=1.02+.08*u;dx=(i%2?-1:1)*2*u;dy=-1.5*u}ph.style.transform=`translate(${dx}%,${dy}%) scale(${sc})`}
+    const ch=s.el.querySelector('.chapter');if(ch)ch.style.opacity=ease((L-.3)/.7)*(1-ease((L-(D-.5))/.5));
+    const bd=s.el.querySelector('.badge');if(bd){const p=ease((L-1)/.5);bd.style.opacity=p;bd.style.transform=`scale(${.8+.2*p})`}
+    const rp=s.el.querySelector('.reply');if(rp){const p=ease((L-D*.55)/.5);rp.style.opacity=p;rp.style.transform=`translateY(${(1-p)*30}px)`}
+    const lap=s.el.querySelector('.lap');if(lap){lap.style.transform=`translateY(${(1-ease(L/.8))*40}px) scale(${1-.02*(1-u)})`;
+      const img=s.el.querySelector('.rec'),cam=s.el.querySelector('.cam');
+      if(sh.camera){img.style.display='none';cam.style.display='block';hands(cam.querySelector('svg'),HD.privet,Math.max(0,L-.2)*30*.6,420,560);const c=cam.querySelector('.chipok');c.style.opacity=ease((L-1.8)/.4)}
+      else{const n=REC[sh.laptop],f=clamp(Math.floor(Math.max(0,L-.2)*30),0,n-1);img.src=`rec/${sh.laptop}/${pad(f)}.jpg`;const z=ease((L-D*.4)/(D*.5)),[A,B]=ZOOM[sh.laptop],k=A[2]+(B[2]-A[2])*z;img.style.transform=`scale(${k}) translate(${-(A[0]+(B[0]-A[0])*z)*100}%,${-(A[1]+(B[1]-A[1])*z)*100}%)`}}
+    const end=s.el.querySelector('.end');if(end){[...end.children].forEach((c,k)=>{c.style.opacity=ease((L-.2-k*.5)/.7)})}
+    if(t>=a+s.vo-.05&&t<=a+s.vo+s.voDur+.35)subOn=s});
+  const sub=$('sub');if(subOn&&!subOn.shot.logo){sub.style.opacity=1;sub.innerHTML=(subOn.voice==='aigerim'?'<span class="who">Айгерим</span>':'')+subOn.text}else sub.style.opacity=0;
+};
+window.render(0);
+</script></body></html>

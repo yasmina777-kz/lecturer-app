@@ -101,5 +101,6 @@ promo-video/build/*
 !promo-video/build/review.html
 !promo-video/build/ad.html
 !promo-video/build/vertical.html
+!promo-video/build/story.html
 promo-video/*.mp4
 promo-video/.venv/
