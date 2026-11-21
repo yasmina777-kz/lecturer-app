@@ -1,11 +1,13 @@
 // Render promo-video/build/scenes.html frame by frame (30 fps) → build/frames/*.jpg
 //   node promo-video/render.mjs [preview t1,t2,...]
 import { chromium } from "../frontend/node_modules/playwright/index.mjs";
-import { mkdirSync, rmSync } from "node:fs";
+import { mkdirSync, readFileSync, rmSync } from "node:fs";
 const BUILD = new URL("./build/", import.meta.url).pathname;
 const preview = process.argv[2] === "preview" ? process.argv[3].split(",").map(Number) : null;
 const browser = await chromium.launch({ channel: "chrome", headless: true });
 const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
+const hands = Object.fromEntries(["dom", "privet"].map((n) => [n, JSON.parse(readFileSync(`${BUILD}hands/${n}.json`, "utf8"))]));
+await page.addInitScript((h) => { window.HANDS = h; }, hands);
 await page.goto("file://" + BUILD + "scenes.html");
 await page.waitForLoadState("networkidle");
 await page.evaluate(() => document.fonts.ready);

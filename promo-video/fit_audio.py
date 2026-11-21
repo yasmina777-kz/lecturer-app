@@ -1,6 +1,6 @@
 """Fit the scene timings to the narration, render, and mux.
   python3 promo-video/fit_audio.py path/to/voice.mp3
-Finds the 9 longest pauses (the blank lines between the 10 paragraphs of
+Finds the longest pauses (the blank lines between the paragraphs of
 narration.txt), starts each scene on its paragraph, renders and writes
 promo-video/AI-Mentor-promo.mp4."""
 import re, subprocess, sys
@@ -16,12 +16,13 @@ dur = int(h) * 3600 + int(m) * 60 + float(sec)
 starts = [float(x) for x in re.findall(r'silence_start: ([\d.]+)', log)]
 ends = [float(x) for x in re.findall(r'silence_end: ([\d.]+)', log)]
 pauses = [(e - s, s, e) for s, e in zip(starts, ends) if s > 0.3 and e < dur - 0.3]
-pauses = sorted(sorted(pauses, reverse=True)[:9], key=lambda p: p[1])
-if len(pauses) < 9:
+names = re.findall(r'(s\d+):', re.search(r'window\.T = \{([^}]*)\}', (ROOT / 'promo-video/build/scenes.html').read_text()).group(1))
+need = len(names) - 1
+pauses = sorted(sorted(pauses, reverse=True)[:need], key=lambda p: p[1])
+if len(pauses) < need:
     sys.exit(f'found only {len(pauses)} pauses; make the blank-line pauses longer')
 lead = 0.6  # first words start after the opening line draws a little
 cuts = [0.0] + [lead + (s + e) / 2 for _, s, e in pauses]
-names = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10']
 T = {n: round(c, 2) for n, c in zip(names, cuts)}
 T['end'] = round(lead + dur + 2.0, 2)
 print('timing', T)
