@@ -66,6 +66,8 @@ import {
 } from "lucide-react";
 import { at } from "../i18n/automation";
 import "../components/topic-art.css";
+import { ProgressRing } from "../components/ProgressRing";
+import "./course.css";
 
 import { Loading } from "../components/UI";
 import type { DictionaryEntry } from "../sign/dictionary";
@@ -262,20 +264,32 @@ function Overview({
     return null;
   })();
   return (
-    <div className="sign-workspace vocab bento-page">
-      <div className="page-heading vocab-heading">
-        <div>
-          <span className="eyebrow">{at("СЛОВАРНЫЙ ЗАПАС", "VOCABULARY", "СӨЗДІК ҚОР")}</span>
+    <div className="sign-workspace vocab bento-page course" data-level="A1">
+      <section className="course-hero course-anim vocab-hero3">
+        <div className="course-hero-text">
+          <span className="eyebrow">{at("СЛОВАРНЫЙ ЗАПАС", "VOCABULARY", "СӨЗДІК ҚОР")} · {words.length} {at("жестов", "signs", "ым")} · {topics.length} {at("тем", "topics", "тақырып")}</span>
           <h1>{at("Тренажёр слов РЖЯ", "RSL word trainer", "Ым сөздерінің жаттықтырғышы")}</h1>
-          <p>{at(`${words.length} жестов по ${topics.length} темам, по 8 слов в уроке. Выученные слова вернутся на повторение через 1, 2, 4, 8… дней.`, `${words.length} signs in ${topics.length} topics, 8 words a lesson. Learned words come back after 1, 2, 4, 8… days.`, `${words.length} ым, ${topics.length} тақырып.`)}</p>
+          <p>{at("Уроки по 8 слов: смотрите жест, узнаёте его, находите среди других и показываете сами. Выученное вернётся на повторение.", "8-word lessons: watch, recognize, find and sign. Learned words come back for review.", "8 сөзден тұратын сабақтар.")}</p>
+          <div className="course-hero-actions">
+            {nextUp && (
+              <button className="button primary course-cta" onClick={() => open(nextUp.topic, nextUp.lesson)}>
+                <Play size={18} /> {started ? at("Продолжить", "Continue", "Жалғастыру") : at("Начать", "Start", "Бастау")}: {nextUp.topic} · {nextUp.lesson + 1}
+              </button>
+            )}
+            <ProgressRing done={learned} total={words.length} />
+            {due > 0 ? (
+              <button className="text-link" onClick={review}><Repeat size={16} /> {at(`Повторить ${Math.min(due, 20)}`, `Review ${Math.min(due, 20)}`, `${Math.min(due, 20)} қайталау`)}</button>
+            ) : (
+              <span className="vocab-hero3-note"><GraduationCap size={16} /> {at("выучено слов", "words learned", "үйренілген сөз")}</span>
+            )}
+          </div>
         </div>
-      </div>
-      {due > 0 && (
-        <button className="button primary vocab-review" onClick={review}>
-          <Repeat size={18} />
-          {at(`Повторить ${Math.min(due, 20)} слов`, `Review ${Math.min(due, 20)} words`, `${Math.min(due, 20)} сөзді қайталау`)}
-        </button>
-      )}
+        <div className="course-hero-art" aria-hidden="true">
+          <div className="course-blob" />
+          <img src="/images/landing-v2/mentor-pointing.webp" alt="" />
+          <span className="course-bubble">{at("8 слов за урок ✌️", "8 words a lesson ✌️", "Сабақта 8 сөз ✌️")}</span>
+        </div>
+      </section>
       <h2 className="vocab-section-title">{at("Темы", "Topics", "Тақырыптар")}</h2>
       <div className="vocab-topics vocab-topics-grid">
         {topics.map((t, k) => {

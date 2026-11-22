@@ -119,6 +119,7 @@ import {
 } from "lucide-react";
 import { at } from "../i18n/automation";
 import "../components/topic-art.css";
+import { ProgressRing } from "../components/ProgressRing";
 import { SignChain } from "../components/SignChain";
 import { WordPracticeCamera } from "../components/WordPracticeCamera";
 import { courseUnits, levelOf, type CefrLevel, type CourseUnit } from "../sign/courseUnits";
@@ -213,18 +214,6 @@ const LEVELS: { id: CefrLevel; title: string; name: string; desc: string; icon: 
   { id: "B2", title: "B2+", name: "Свобода", desc: "Нужен материал носителей языка", icon: Mountain },
 ];
 
-function Ring({ done, total }: { done: number; total: number }) {
-  const r = 34, c = 2 * Math.PI * r, part = total ? done / total : 0;
-  return (
-    <div className="course-ring" aria-label={`${done} / ${total}`}>
-      <svg viewBox="0 0 80 80" width="80" height="80">
-        <circle cx="40" cy="40" r={r} className="track" />
-        <circle cx="40" cy="40" r={r} className="bar" strokeDasharray={c} strokeDashoffset={c * (1 - part)} />
-      </svg>
-      <span><strong>{done}</strong>/{total}</span>
-    </div>
-  );
-}
 
 const B2_SKILLS = () => [
   { icon: Video, title: at("Живая речь", "Natural speech", "Тірі сөйлеу"), text: at("Понимать длинные рассказы носителей в обычном темпе.", "Follow long stories at natural speed.", "Ұзын әңгімелерді түсіну.") },
@@ -339,7 +328,7 @@ export function CoursePage() {
                 <Play size={18} /> {doneCount ? at("Продолжить", "Continue", "Жалғастыру") : at("Начать", "Start", "Бастау")}: {next.title}
               </Link>
             )}
-            {level !== "B2" && <Ring done={doneCount} total={units.length} />}
+            {level !== "B2" && <ProgressRing done={doneCount} total={units.length} />}
             {level !== "B2" && (
               <Link className="text-link" to={`/learn-test?cefr=${level}`}>
                 <Award size={16} /> {at(`Итоговый тест ${level}`, `${level} test`, `${level} тесті`)}

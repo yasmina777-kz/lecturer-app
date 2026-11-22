@@ -3696,9 +3696,19 @@
 :root .product-ui[data-product-ui][data-product-theme] .main-content .search-field input { background: transparent; color: var(--p-text); }
 
 /* no stray black cards: highlight cards use the platform blue */
-:root .product-ui[data-product-ui][data-product-theme] .learning-practice-banner { background: #2f6bff; }
-:root .product-ui[data-product-ui][data-product-theme] .learning-practice-banner p { color: rgba(255, 255, 255, .85); }
-:root .product-ui[data-product-ui][data-product-theme] .learning-practice-banner .button { background: #fff; color: #2f6bff; }
-:root .product-ui[data-product-ui][data-product-theme] .learning-practice-art { mix-blend-mode: luminosity; opacity: .9; }
 :root .product-ui[data-product-ui][data-product-theme] .help-overview .sign-help-grid > a:first-child { background: #2f6bff; color: #fff; }
 :root .product-ui[data-product-ui][data-product-theme] .help-overview .sign-help-grid > a:first-child .help-section-icon { color: #fff; background: rgba(255, 255, 255, .16); }
+
+/* practice banner: calm at rest, turns blue and the hands light up on hover */
+:root .product-ui[data-product-ui][data-product-theme] .learning-practice-banner {
+  background: var(--p-subtle); border: 1px solid var(--p-line);
+  transition: background-color 280ms ease, border-color 280ms ease, transform 280ms cubic-bezier(.2, .9, .3, 1.2);
+}
+:root .product-ui[data-product-ui][data-product-theme] .learning-practice-banner h2 { color: var(--p-text); transition: color 280ms; }
+:root .product-ui[data-product-ui][data-product-theme] .learning-practice-banner p { color: var(--p-muted); transition: color 280ms; }
+:root .product-ui[data-product-ui][data-product-theme] .learning-practice-banner .button { background: var(--p-text); color: var(--p-surface); }
+:root .product-ui[data-product-ui][data-product-theme] .learning-practice-art { filter: grayscale(1); opacity: .55; transition: filter 320ms ease, opacity 320ms ease, transform 500ms cubic-bezier(.2, .8, .2, 1); }
+:root .product-ui[data-product-ui][data-product-theme] .learning-practice-banner:is(:hover, :focus-within) { background: #2f6bff; border-color: transparent; transform: translateY(-3px); }
+:root .product-ui[data-product-ui][data-product-theme] .learning-practice-banner:is(:hover, :focus-within) :is(h2, p) { color: #fff; }
+:root .product-ui[data-product-ui][data-product-theme] .learning-practice-banner:is(:hover, :focus-within) .button { background: #fff; color: #2f6bff; }
+:root .product-ui[data-product-ui][data-product-theme] .learning-practice-banner:is(:hover, :focus-within) .learning-practice-art { filter: grayscale(0); opacity: 1; transform: translateX(-6px) scale(1.03); }
