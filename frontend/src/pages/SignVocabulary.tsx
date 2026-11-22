@@ -250,7 +250,7 @@ function Overview({
       )}
       <h2 className="vocab-section-title">{at("Темы", "Topics", "Тақырыптар")}</h2>
       <div className="vocab-topics vocab-topics-grid">
-        {topics.map((t, k) => {
+        {topics.map((t) => {
           const all = t.lessons.flat();
           const total = all.length;
           const done = all.filter((w) => (s.words[w.id]?.box ?? 0) >= LEARNED_BOX).length;
@@ -258,7 +258,7 @@ function Overview({
           const first = t.lessons.findIndex((_, i) => s.lessons[`${t.name}:${i}`] === undefined);
           const go = first < 0 ? 0 : first;
           return (
-            <section key={t.name} className="panel vocab-card" style={{ "--hue": `${(k * 47) % 360}` } as React.CSSProperties}>
+            <section key={t.name} className="panel vocab-card">
               <header>
                 <span className="vocab-card-icon"><Icon size={22} /></span>
                 <div>
@@ -266,9 +266,9 @@ function Overview({
                   <small>{t.lessons.length} {at("уроков", "lessons", "сабақ")} · {total} {at("слов", "words", "сөз")}</small>
                 </div>
               </header>
-              <div className="vocab-card-words">
-                {all.slice(0, 5).map((w) => <i key={w.id}>{w.label.replace(/[!?]$/, "")}</i>)}
-              </div>
+              <p className="vocab-card-words">
+                {all.slice(0, 6).map((w) => w.label.replace(/[!?]$/, "")).join(", ")}…
+              </p>
               <div className="vocab-card-progress">
                 <div className="vocab-bar"><span style={{ width: `${(100 * done) / total}%` }} /></div>
                 <small>{done}/{total}</small>

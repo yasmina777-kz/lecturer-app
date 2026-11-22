@@ -562,3 +562,43 @@
 .vocab .vocab-card-lessons button.more { width: auto; padding: 0 9px; color: var(--c); border-style: dashed; }
 .vocab .vocab-card .vocab-card-progress { width: 100%; }
 .vocab .vocab-card .vocab-card-progress .vocab-bar { flex: 1 1 auto; width: 100%; min-width: 60px; }
+
+/* calmer look: same black/white language as the rest of the platform */
+.vocab .vocab-how { gap: 0; margin: 4px 0 18px; display: flex; flex-wrap: wrap; column-gap: 22px; row-gap: 6px; }
+.vocab .vocab-how li { background: none; padding: 0; border-radius: 0; gap: 8px; }
+.vocab .vocab-how li:not(:last-child)::after { right: -15px; }
+.vocab .vocab-how-icon { width: auto; height: auto; background: none; color: inherit; opacity: 0.6; }
+.vocab .vocab-how li > span:last-child { display: flex; gap: 6px; align-items: baseline; }
+
+:root .product-ui[data-product-ui][data-product-theme] .vocab .vocab-continue {
+  background: var(--p-surface, #fff);
+  color: inherit;
+  border: 1px solid var(--p-line, #dfe3ea);
+  box-shadow: none;
+}
+.vocab .vocab-continue:hover { transform: none; box-shadow: none; border-color: currentColor; }
+:root .product-ui[data-product-ui][data-product-theme] .vocab .vocab-continue-icon {
+  background: var(--p-text, #14171f); color: var(--p-surface, #fff);
+}
+.vocab .vocab-continue small { text-transform: none; letter-spacing: 0; opacity: 0.6; }
+.vocab .vocab-continue em { opacity: 0.6; }
+
+.vocab .vocab-card { --c: var(--p-text, #14171f); border-top: 1px solid var(--p-line, #dfe3ea); gap: 10px; }
+.vocab .vocab-card:hover { transform: none; box-shadow: none; border-color: var(--p-muted, #98a2b3); }
+.vocab .vocab-card-icon { width: auto; height: auto; background: none; color: var(--p-muted, #667085); }
+.vocab .vocab-card-words {
+  margin: 0; max-height: none; font-size: 0.88rem; color: var(--p-muted, #667085);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.vocab .vocab-card .vocab-card-progress .vocab-bar { background: var(--p-line, #e4e7ec); height: 4px; }
+.vocab .vocab-card-progress .vocab-bar span { background: #1f9d6a; }
+.vocab .vocab-card-lessons button { border-radius: 8px; width: 30px; height: 30px; }
+.vocab .vocab-card-lessons button.next { box-shadow: none; border: 1.5px solid var(--p-text, #14171f); color: inherit; }
+.vocab .vocab-card-lessons button.more { color: inherit; }
+.vocab .vocab-card .vocab-card-go {
+  width: auto; align-self: flex-start; height: auto; padding: 4px 0; background: none;
+  color: inherit; justify-content: flex-start;
+}
+.vocab .vocab-card .vocab-card-go:hover { background: none; text-decoration: underline; }
+.vocab .vocab-card { min-width: 0; overflow: hidden; }
+.vocab .vocab-card .vocab-card-words { width: 100%; min-width: 0; }
