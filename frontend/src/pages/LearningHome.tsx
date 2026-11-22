@@ -59,7 +59,7 @@ export function LearningHome() {
             )}
           </p>
           <div className="learning-intro-actions">
-            <Link className="button primary" to={nextLesson}>
+            <Link className="button primary" to="/course">
               {hasHistory
                 ? at(
                     "Продолжить обучение",

@@ -26,6 +26,8 @@ const SignDialoguesPage = lazyPage(() => import("./pages/SignActivities").then(m
 const FingerspellReadingPage = lazyPage(() => import("./pages/FingerspellReading").then(m => ({default:m.FingerspellReadingPage})));
 const PhraseUnderstandingPage = lazyPage(() => import("./pages/PhraseUnderstanding").then(m => ({default:m.PhraseUnderstandingPage})));
 const LevelTestPage = lazyPage(() => import("./pages/LevelTest").then(m => ({default:m.LevelTestPage})));
+const CoursePage = lazyPage(() => import("./pages/Course").then(m => ({default:m.CoursePage})));
+const CourseUnitPage = lazyPage(() => import("./pages/Course").then(m => ({default:m.CourseUnitPage})));
 const SignUnderstandingPage = lazyPage(() => import("./pages/SignActivities").then(m => ({default:m.SignUnderstandingPage})));
 const SignHelpPage = lazyPage(() => import("./pages/SignWorkspace").then(m => ({default:m.SignHelpPage})));
 import { LibraryPage } from "./pages/LibraryPage";
@@ -111,6 +113,8 @@ export function App() {
             <Route path="fingerspell" element={<FingerspellReadingPage />} />
             <Route path="understanding/phrases" element={<PhraseUnderstandingPage />} />
             <Route path="learn-test" element={<LevelTestPage />} />
+            <Route path="course" element={<CoursePage />} />
+            <Route path="course/:id" element={<CourseUnitPage />} />
             <Route path="knowledge" element={<KnowledgePage />} />
             <Route path="groups" element={<GroupsPage />} />
             <Route path="courses" element={<CoursesRoute />} />
