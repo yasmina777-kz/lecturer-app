@@ -767,3 +767,46 @@
   .vocab .vocab-hero, .vocab .vocab-hero-blob, .vocab .vocab-hero-art img, .vocab .vocab-hero-bubble, .vocab .vocab-stat { animation: none; }
 }
 .vocab .vocab-how2 li { align-content: start; }
+
+/* stricter, muted version of the top: neutral surfaces, one dark accent */
+.vocab .vocab-hero {
+  background: var(--p-surface, #fff);
+  border-color: var(--p-line, #dfe3ea);
+}
+.vocab .vocab-hero .eyebrow { color: var(--p-muted, #667085); }
+.vocab .vocab-hero-blob {
+  background: var(--p-subtle, #eef1f6);
+  animation: none;
+}
+:root .product-ui[data-product-ui][data-product-theme] .vocab .vocab-hero-cta {
+  background: var(--p-text, #14171f);
+  color: var(--p-surface, #fff);
+  box-shadow: none;
+}
+.vocab .vocab-hero-cta:hover { box-shadow: none; }
+.vocab .vocab-hero-bubble { box-shadow: 0 4px 14px rgba(17, 24, 39, .08); border: 1px solid var(--p-line, #dfe3ea); }
+.vocab .vocab-hero-bubble strong,
+.vocab .vocab-hero-bubble.b2 strong { color: inherit; }
+
+.vocab .vocab-stat:hover { border-color: var(--p-muted, #98a2b3); box-shadow: none; transform: translateY(-2px); }
+.vocab .vocab-stat-icon {
+  width: 42px; height: 42px; border-radius: 12px;
+  color: var(--p-text, #14171f); background: var(--p-subtle, #eef1f6); box-shadow: none;
+}
+.vocab .vocab-stat:hover .vocab-stat-icon { transform: none; }
+.vocab .vocab-stat-bar { height: 3px; background: var(--p-line, #e4e7ec); }
+.vocab .vocab-stat-bar i { background: var(--p-text, #14171f); }
+
+.vocab .vocab-how2 li:hover { border-color: var(--p-muted, #98a2b3); transform: translateY(-2px); }
+.vocab .vocab-how2-num { color: var(--p-muted, #667085); background: var(--p-subtle, #eef1f6); }
+.vocab .vocab-how2-icon {
+  width: 52px; height: 52px; border-radius: 16px; transform: none;
+  color: var(--p-text, #14171f); background: var(--p-subtle, #eef1f6); box-shadow: none;
+}
+.vocab .vocab-how2 li:hover .vocab-how2-icon { transform: none; }
+:root .product-ui[data-product-ui][data-product-theme] .vocab .vocab-hero .button.primary.vocab-hero-cta {
+  background: var(--p-text, #14171f);
+  border-color: transparent;
+  color: var(--p-surface, #fff);
+  box-shadow: none;
+}
