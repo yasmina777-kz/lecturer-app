@@ -24,6 +24,15 @@ for form, ids in forms.items():
  ranked = sorted(((score.get(label[i], 0), i) for i in ids), reverse=True)
  if ranked[0][0] > 0 and ranked[0][0] >= 2 * ranked[1][0]:
   forms[form] = {ranked[0][1]}
+# Everyday words whose sign is a headword under another name (same sign in RSL):
+# «мама» is signed МАТЬ, «спасибо» is БЛАГОДАРНОСТЬ. Only fills forms that have
+# no sign of their own.
+SYNONYMS={'мама':'мать','папа':'отец','спасибо':'благодарность','благодарю':'благодарность'}
+by_label={e['label'].lower().rstrip('!?'):e['id'] for e in entries}
+for word,target in SYNONYMS.items():
+ if target not in by_label:continue
+ for form in {f.word for f in morph.parse(word)[0].lexeme}|{word}:
+  if form not in forms:forms[form]={by_label[target]}
 (dest/'forms.json').write_text(json.dumps({f:sorted(ids) for f,ids in forms.items()},ensure_ascii=False))
 print(len(entries),'entries',len(forms),'forms')
 

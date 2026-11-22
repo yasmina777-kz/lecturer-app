@@ -755,3 +755,4 @@
 
 :root .product-ui[data-product-ui][data-product-theme] .text-sign-page .tts-tool,
 :root .product-ui[data-product-ui][data-product-theme] .text-sign-page .tts-toggle { flex-direction: row; width: auto; }
+.player-mode-beta { font-size: .68rem; font-weight: 700; padding: 1px 6px; border-radius: 99px; background: rgba(229, 72, 77, .12); color: #c4373c; margin-left: 4px; vertical-align: middle; }

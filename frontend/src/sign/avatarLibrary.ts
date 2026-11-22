@@ -72,11 +72,14 @@ export function avatarPlan(plan: MotionPlan, lib: Map<string, Entry>): MotionPla
   return { ...plan, steps, missing };
 }
 
-const KEY = "rsl-player-mode-v1";
+// v2: the real signer video is the default everywhere. Every avatar clip is an
+// automatic solve from video that no signer has reviewed yet, so it can show
+// a wrong handshape or place; the avatar stays an opt-in preview.
+const KEY = "rsl-player-mode-v2";
 export type PlayerMode = "video" | "avatar";
-let mode: PlayerMode = "avatar";
+let mode: PlayerMode = "video";
 try {
-  if (localStorage.getItem(KEY) === "video") mode = "video";
+  if (localStorage.getItem(KEY) === "avatar") mode = "avatar";
 } catch {
   /* default */
 }

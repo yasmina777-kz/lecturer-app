@@ -41,9 +41,18 @@ export function SignSequencePlayer(props: PlayerProps) {
           {at("Видео", "Video", "Бейне")}
         </button>
         <button role="tab" aria-selected={mode === "avatar"} onClick={() => setPlayerMode("avatar")}>
-          {at("Аватар", "Avatar", "Аватар")}
+          {at("Аватар", "Avatar", "Аватар")} <small className="player-mode-beta">{at("бета", "beta", "бета")}</small>
         </button>
       </div>
+      {mode === "avatar" && (
+        <p className="player-mode-note">
+          {at(
+            "Движения аватара собраны автоматически по видео и ещё не проверены носителем — форма пальцев или место жеста могут быть неточными. Сверяйтесь с вкладкой «Видео».",
+            "Avatar motions are solved automatically from video and not yet reviewed by a signer; handshape or location may be off. Check against the Video tab.",
+            "Аватар қимылдары автоматты түрде жасалған, дәл болмауы мүмкін. «Бейне» қойындысымен салыстырыңыз.",
+          )}
+        </p>
+      )}
       {showAvatar ? (
         <AvatarSequencePlayer {...props} plan={forAvatar!} modelUrl={`${AVATAR_MODEL}?v=3`} framing="sign" studio />
       ) : (
