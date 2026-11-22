@@ -915,3 +915,58 @@
   .vocab .vocab-stat3, .vocab .vocab-path li, .vocab .vocab-path-runner, .vocab .vocab-week i,
   .vocab .vocab-ring .fg, .vocab .vocab-stat3-icon svg, .vocab .vocab-path::before { animation: none; }
 }
+
+/* ---- v4: editorial — type and thin rules, colour only as accents ---- */
+.vocab .vocab-ledger {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 6px 0 34px;
+  border-top: 1px solid var(--p-line, #dfe3ea); border-bottom: 1px solid var(--p-line, #dfe3ea);
+}
+.vocab .vocab-ledger > div {
+  position: relative; padding: 16px 20px 18px; margin: 0;
+  animation: ledger-in 600ms cubic-bezier(.2, .8, .2, 1) backwards; animation-delay: calc(var(--i) * 90ms + 100ms);
+}
+.vocab .vocab-ledger > div + div { border-left: 1px solid var(--p-line, #dfe3ea); }
+.vocab .vocab-ledger > div::before {
+  content: ""; position: absolute; left: 20px; top: -1px; width: 28px; height: 3px; background: var(--t);
+  transform-origin: left; animation: bar-grow 700ms cubic-bezier(.2, .8, .2, 1) backwards; animation-delay: calc(var(--i) * 90ms + 300ms);
+  transition: width 300ms cubic-bezier(.2, .8, .2, 1);
+}
+.vocab .vocab-ledger > div:hover::before { width: calc(100% - 40px); }
+.vocab .vocab-ledger dt { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; opacity: .55; }
+.vocab .vocab-ledger dd { margin: 0; }
+.vocab .vocab-ledger dd:not(.note) {
+  font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.05;
+  font-variant-numeric: tabular-nums; margin-top: 4px;
+}
+.vocab .vocab-ledger dd.note { font-size: .84rem; opacity: .6; }
+.vocab .vocab-ledger > div:hover dd.note { color: var(--t); opacity: 1; }
+
+.vocab .vocab-method { margin: 0 0 30px; }
+.vocab .vocab-method h2 { margin: 0 0 14px; font-size: 1.2rem; }
+.vocab .vocab-method ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
+.vocab .vocab-method li {
+  position: relative; padding-top: 14px; border-top: 1px solid var(--p-line, #dfe3ea);
+  animation: ledger-in 600ms cubic-bezier(.2, .8, .2, 1) backwards; animation-delay: calc(var(--i) * 110ms + 250ms);
+}
+.vocab .vocab-method li::before {
+  content: ""; position: absolute; left: 0; top: -1px; height: 2px; width: 100%; background: var(--t);
+  transform: scaleX(0); transform-origin: left; transition: transform 450ms cubic-bezier(.2, .8, .2, 1);
+}
+.vocab .vocab-method li:hover::before { transform: scaleX(1); }
+.vocab .vocab-method-num {
+  display: block; font-size: 2.6rem; font-weight: 800; line-height: 1; letter-spacing: -0.04em;
+  color: transparent; -webkit-text-stroke: 1.5px var(--t); transition: color 300ms;
+}
+.vocab .vocab-method li:hover .vocab-method-num { color: var(--t); }
+.vocab .vocab-method strong { display: block; margin-top: 10px; font-size: 1.05rem; }
+.vocab .vocab-method p { margin: 4px 0 0; font-size: .88rem; line-height: 1.45; opacity: .65; }
+@keyframes ledger-in { from { opacity: 0; transform: translateY(12px); } }
+@media (max-width: 900px) {
+  .vocab .vocab-ledger, .vocab .vocab-method ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .vocab .vocab-ledger > div:nth-child(3) { border-left: 0; }
+  .vocab .vocab-ledger > div:nth-child(n + 3) { border-top: 1px solid var(--p-line, #dfe3ea); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vocab .vocab-ledger > div, .vocab .vocab-ledger > div::before, .vocab .vocab-method li { animation: none; }
+}
+.vocab .vocab-ledger { margin-top: 22px; }
