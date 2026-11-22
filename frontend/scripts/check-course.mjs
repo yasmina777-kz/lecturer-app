@@ -3,7 +3,7 @@
 import { readFileSync, existsSync } from "node:fs";
 const cat = JSON.parse(readFileSync("public/research/rsl/words/catalog.json", "utf8"));
 const byLabel = new Map(cat.map((e) => [e.label, e]));
-const src = readFileSync("src/sign/course.ts", "utf8");
+const src = readFileSync("src/sign/course.ts", "utf8") + readFileSync("src/sign/courseUnits.ts", "utf8").replace(/words: \[/g, "signs: [");
 const signs = new Set();
 for (const m of src.matchAll(/(?:signs|answer): \[([^\]]*)\]/g)) for (const q of m[1].matchAll(/"([^"]+)"/g)) signs.add(q[1]);
 for (const m of src.matchAll(/also: \[\[([^\]]*)\]/g)) for (const q of m[1].matchAll(/"([^"]+)"/g)) signs.add(q[1]);

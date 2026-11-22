@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight, Check, CheckCircle2, Circle, Play, X } from "lucide-react";
 import { at } from "../i18n/automation";
 import { SignChain } from "../components/SignChain";
 import { WordPracticeCamera } from "../components/WordPracticeCamera";
-import { courseUnits, type CourseUnit } from "../sign/courseUnits";
+import { courseUnits, levelOf, type CefrLevel, type CourseUnit } from "../sign/courseUnits";
 import { shuffle } from "../sign/activities";
 import { useActivityCatalog } from "../sign/useActivities";
 import type { DictionaryEntry } from "../sign/dictionary";
@@ -41,49 +41,82 @@ const STEPS = () => [
   at("Готово", "Done", "Дайын"),
 ];
 
+const LEVELS: { id: CefrLevel; title: string; desc: string }[] = [
+  { id: "A1", title: "A1", desc: "Выживание: знакомство, семья, числа, время, покупки, еда" },
+  { id: "A2", title: "A2", desc: "Быт: люди, город, путешествия, неделя, ресторан, мнения" },
+  { id: "B1", title: "B1", desc: "Связная речь: пространство, классификаторы, рассказ, мнение" },
+  { id: "B2", title: "B2+", desc: "Свободное общение — нужен материал носителей" },
+];
+
 export function CoursePage() {
-  const units = courseUnits();
+  const [params, setParams] = useSearchParams();
+  const level = (LEVELS.find((l) => l.id === params.get("level"))?.id ?? "A1") as CefrLevel;
+  const units = level === "B2" ? [] : courseUnits(level);
   const progress = readProgress();
   const next = units.find((u) => !progress[u.id]?.done) ?? units[units.length - 1];
+  const levelDone = (l: CefrLevel) => l !== "B2" && courseUnits(l).every((u) => progress[u.id]?.done);
   const doneCount = units.filter((u) => progress[u.id]?.done).length;
   return (
     <div className="sign-workspace vocab course">
       <div className="page-heading">
         <div>
-          <span className="eyebrow">{at("КУРС ПО ШАГАМ · УРОВЕНЬ A1", "STEP-BY-STEP COURSE · A1", "ҚАДАМДЫҚ КУРС · A1")}</span>
+          <span className="eyebrow">{at("КУРС ПО ШАГАМ", "STEP-BY-STEP COURSE", "ҚАДАМДЫҚ КУРС")} · {level}</span>
           <h1>{at("Русский жестовый язык с нуля", "Russian Sign Language from zero", "Нөлден бастап РЖЯ")}</h1>
           <p>
             {at(
-              "12 уроков по порядку. В каждом: новые жесты на видео носителей, проверка, фразы, показ в камеру, грамматика и диалог.",
+              "Уровни A1 → A2 → B1 по шкале CEFR. В каждом уроке: новые жесты на видео носителей, проверка, фразы, показ в камеру или рассказ, грамматика и диалог.",
               "12 lessons in order: new signs, a check, phrases, the camera, grammar and a dialogue.",
               "12 сабақ ретімен.",
             )}
           </p>
         </div>
-        <Link className="button primary" to={`/course/${next.id}`}>
-          <Play size={18} /> {doneCount ? at("Продолжить", "Continue", "Жалғастыру") : at("Начать", "Start", "Бастау")}: {next.id}. {next.title}
-        </Link>
+        {next && <Link className="button primary" to={`/course/${next.id}`}>
+          <Play size={18} /> {doneCount ? at("Продолжить", "Continue", "Жалғастыру") : at("Начать", "Start", "Бастау")}: {next.title}
+        </Link>}
       </div>
+      <div className="course-levels" role="tablist">
+        {LEVELS.map((l) => (
+          <button key={l.id} role="tab" aria-selected={l.id === level} onClick={() => setParams({ level: l.id })}>
+            <strong>{levelDone(l.id) ? "✓ " : ""}{l.title}</strong>
+            <span>{l.desc}</span>
+          </button>
+        ))}
+      </div>
+      {level === "B2" ? (
+        <section className="panel fs-answer">
+          <h2>{at("B2 и выше: что нужно, чтобы сделать честно", "B2 and above", "B2 және жоғары")}</h2>
+          <ul className="params-list">
+            <li>Длинные живые рассказы и диалоги носителей в обычном темпе — их нет в открытых наборах данных.</li>
+            <li>Классификаторы, ролевой сдвиг, юмор и региональные варианты — на видео, с разбором преподавателя.</li>
+            <li>Профессиональная и абстрактная лексика (наука, право, медицина) — свыше 1000 жестов словаря.</li>
+            <li>Проверка курса преподавателем РЖЯ и живая практика с носителями.</li>
+          </ul>
+          <p className="fs-tip">Пока лучший путь к B2 — пройти B1, а затем регулярно общаться с носителями: смотрите страницу «Самопроверка и практика».</p>
+          <Link className="button primary" to="/live-practice">{at("Самопроверка и практика", "Self-check and practice", "Тәжірибе")}</Link>
+        </section>
+      ) : (<>
       <div className="course-progress">
         <div style={{ width: `${(doneCount / units.length) * 100}%` }} />
       </div>
       <p className="fs-tip">
         {at(`Пройдено уроков: ${doneCount} из ${units.length}`, `Lessons done: ${doneCount} of ${units.length}`, `${doneCount} / ${units.length}`)}
+        {" · "}
+        <Link to={`/learn-test?cefr=${level}`}>{at(`Итоговый тест ${level}`, `${level} test`, `${level} тесті`)}</Link>
       </p>
-      <section className="course-before">
+      {level === "A1" && <section className="course-before">
         <h2>{at("Перед стартом", "Before you start", "Бастамас бұрын")}</h2>
         <div className="course-before-grid">
           <Link className="panel" to="/culture"><strong>{at("Культура и этикет глухих", "Deaf culture and etiquette", "Керең мәдениеті")}</strong><span>{at("Как привлечь внимание, куда смотреть, как говорить о глухих", "How to get attention, eye contact, respectful words", "Назар аудару, көзге қарау")}</span></Link>
           <Link className="panel" to="/practice"><strong>{at("Азбука (дактиль)", "Alphabet", "Әліпби")}</strong><span>{at("33 буквы — чтобы показать своё имя", "33 letters to spell your name", "33 әріп")}</span></Link>
           <Link className="panel" to="/fingerspell"><strong>{at("Чтение дактиля", "Reading fingerspelling", "Дактильді оқу")}</strong><span>{at("Понимать имена по буквам", "Understand spelled names", "Есімдерді түсіну")}</span></Link>
         </div>
-      </section>
+      </section>}
       <div className="course-units">
         {units.map((u) => {
           const p = progress[u.id];
           return (
             <Link key={u.id} className={`panel course-unit${p?.done ? " done" : ""}`} to={`/course/${u.id}`}>
-              <span className="course-unit-num">{p?.done ? <CheckCircle2 size={22} /> : u.id}</span>
+              <span className="course-unit-num">{p?.done ? <CheckCircle2 size={22} /> : (u.id % 100)}</span>
               <div>
                 <strong>{u.title}</strong>
                 <span>{u.goal}</span>
@@ -94,6 +127,7 @@ export function CoursePage() {
           );
         })}
       </div>
+      </>)}
       <p className="fs-credit">
         {at(
           "Жесты — видео носителей РЖЯ (Slovo, Bukva · ai-forever). Порядок и правила — по учебной литературе; курс не проверен сертифицированным переводчиком.",
@@ -107,8 +141,10 @@ export function CoursePage() {
 
 export function CourseUnitPage() {
   const { id } = useParams();
-  const units = courseUnits();
-  const unit = units.find((u) => u.id === Number(id)) ?? units[0];
+  const all = courseUnits("all");
+  const unit = all.find((u) => u.id === Number(id)) ?? all[0];
+  const level = levelOf(unit.id);
+  const units = courseUnits(level);
   const { data, error } = useActivityCatalog();
   const [step, setStep] = useState(() => Math.min(readProgress()[unit.id]?.step ?? 0, 5));
   const go = (s: number) => {
@@ -121,21 +157,21 @@ export function CourseUnitPage() {
     return unit.words.map((w) => byLabel.get(w)).filter((e): e is DictionaryEntry => !!e);
   }, [data, unit]);
   if (error) return <p className="translate-status error">{error}</p>;
-  const next = units.find((u) => u.id === unit.id + 1);
+  const next = units[units.indexOf(unit) + 1];
   return (
     <div className="sign-workspace vocab fingerspell course">
-      <Link className="text-link back-link" to="/course">
-        <ArrowLeft size={16} /> {at("Все уроки", "All lessons", "Барлық сабақ")}
+      <Link className="text-link back-link" to={`/course?level=${level}`}>
+        <ArrowLeft size={16} /> {at("Все уроки", "All lessons", "Барлық сабақ")} {level}
       </Link>
       <div className="page-heading">
         <div>
-          <span className="eyebrow">{at("УРОК", "LESSON", "САБАҚ")} {unit.id} / {units.length}</span>
+          <span className="eyebrow">{level} · {at("УРОК", "LESSON", "САБАҚ")} {units.indexOf(unit) + 1} / {units.length}</span>
           <h1>{unit.title}</h1>
           <p>{unit.goal}</p>
         </div>
       </div>
       <ol className="course-steps">
-        {STEPS().map((s, k) => (
+        {STEPS().map((s, k) => [k === 3 && unit.speak ? at("Расскажи сам", "Tell it yourself", "Өзің айт") : s, k] as const).map(([s, k]) => (
           <li key={k}>
             <button aria-current={k === step ? "step" : undefined} className={k < step ? "past" : ""} onClick={() => go(k)}>
               <span>{k < step ? <Check size={14} /> : k + 1}</span>
@@ -153,7 +189,7 @@ export function CourseUnitPage() {
       ) : step === 2 ? (
         <PhrasesStep unit={unit} onNext={() => go(3)} />
       ) : step === 3 ? (
-        <CameraStep entries={entries} onNext={() => go(4)} />
+        unit.speak ? <SpeakStep task={unit.speak} onNext={() => go(4)} /> : <CameraStep entries={entries} onNext={() => go(4)} />
       ) : step === 4 ? (
         <PracticeStep unit={unit} onNext={() => { save(unit.id, { done: true }); go(5); }} />
       ) : (
@@ -174,7 +210,7 @@ export function CourseUnitPage() {
                 {at("Следующий урок", "Next lesson", "Келесі сабақ")}: {next.title} <ArrowRight size={16} />
               </Link>
             ) : (
-              <Link className="button primary" to="/learn-test?level=3">{at("Итоговый тест", "Final test", "Қорытынды тест")}</Link>
+              <Link className="button primary" to={`/learn-test?cefr=${level}`}>{at(`Итоговый тест ${level}`, `${level} test`, `${level} тесті`)}</Link>
             )}
             <Link className="button secondary" to="/vocab">{at("Повторение", "Review", "Қайталау")}</Link>
           </div>
@@ -338,6 +374,25 @@ function PracticeStep({ unit, onNext }: { unit: CourseUnit; onNext: () => void }
       <button className="button primary" onClick={onNext}>
         <Circle size={14} /> {at("Завершить урок", "Finish the lesson", "Сабақты аяқтау")}
       </button>
+    </section>
+  );
+}
+
+function SpeakStep({ task, onNext }: { task: string; onNext: () => void }) {
+  return (
+    <section className="panel fs-answer">
+      <h2>{at("Расскажите сами", "Tell it yourself", "Өзіңіз айтыңыз")}</h2>
+      <p className="grammar-example"><strong>{task}</strong></p>
+      <ol className="params-list">
+        <li>{at("Продумайте 3–5 фраз и нужные жесты (найдите их в словаре).", "Plan 3–5 phrases and look up the signs.", "3–5 сөйлем ойлаңыз.")}</li>
+        <li>{at("Запишите себя в «Зеркале» и пересмотрите: время в начале? пространство? мимика?", "Record yourself in the Mirror and review.", "Айнада жазыңыз.")}</li>
+        <li>{at("Сохраните запись у себя и через неделю сравните — так виден прогресс.", "Keep the recording and compare in a week.", "Бір аптадан кейін салыстырыңыз.")}</li>
+      </ol>
+      <div className="fs-actions">
+        <Link className="button secondary" to="/live-practice" target="_blank">{at("Открыть «Зеркало»", "Open the Mirror", "Айнаны ашу")}</Link>
+        <button className="button primary" onClick={onNext}>{at("Дальше", "Next", "Келесі")} <ArrowRight size={16} /></button>
+      </div>
+      <p className="fs-tip">{at("Это задание без автоматической проверки: связный рассказ пока может оценить только человек — носитель или преподаватель.", "No automatic check: only a person can judge a story.", "Автоматты тексеру жоқ.")}</p>
     </section>
   );
 }

@@ -8,6 +8,7 @@ import { GRAMMAR, PHRASES, type GrammarTask, type PhraseItem } from "../sign/cou
 import { questionOptions, shuffle } from "../sign/activities";
 import { useActivityCatalog } from "../sign/useActivities";
 import { optionsFor } from "./PhraseUnderstanding";
+import { courseUnits, type CefrLevel } from "../sign/courseUnits";
 import { readTests, TEST_KEY } from "../sign/levelTests";
 import "./sign-workspace.css";
 import "./sign-vocabulary.css";
@@ -24,6 +25,27 @@ const SKILL: Record<Task["kind"], { name: string; to: string; tip: string }> = {
   phrase: { name: "Фразы", to: "/understanding/phrases", tip: "Потренируйтесь в «Понимании фраз»." },
   grammar: { name: "Грамматика", to: "/grammar", tip: "Перечитайте уроки грамматики и сделайте упражнения ещё раз." },
 };
+/** CEFR test: words, phrases and grammar of that level's course units. */
+function buildCefrTasks(cefr: CefrLevel, words: DictionaryEntry[]): Task[] {
+  const units = courseUnits(cefr);
+  const byLabel = new Map(words.map((w) => [w.label, w]));
+  const pool = [...new Set(units.flatMap((u) => u.words))].map((l) => byLabel.get(l)).filter((e): e is DictionaryEntry => !!e);
+  const wordTasks = shuffle(pool).slice(0, 6).map((entry) => {
+    const others = shuffle(pool.filter((e) => e.id !== entry.id)).slice(0, 3);
+    return { kind: "word" as const, entry, options: shuffle([entry, ...others]) };
+  });
+  const phrases = units.flatMap((u) => u.phrases).filter((p) => p.signs.length >= 2);
+  const phraseTasks = shuffle(phrases).slice(0, 2).map((item) => ({ kind: "phrase" as const, item, options: optionsFor(item, phrases) }));
+  const ids = new Set(units.map((u) => u.grammar).filter(Boolean));
+  const grammar = shuffle(GRAMMAR.filter((l) => ids.has(l.id)).flatMap((l) => l.tasks.filter((t): t is Extract<GrammarTask, { kind: "choice" }> => t.kind === "choice")))
+    .slice(0, 10 - wordTasks.length - phraseTasks.length)
+    .map((task) => {
+      const order = shuffle(task.options.map((_, k) => k));
+      return { kind: "grammar" as const, task: { ...task, options: order.map((k) => task.options[k]), correct: order.indexOf(task.correct) } };
+    });
+  return shuffle([...wordTasks, ...phraseTasks, ...grammar]);
+}
+
 function buildTasks(level: number, words: DictionaryEntry[]): Task[] {
   const letters = alphabetEntries();
   const letterTasks = (n: number) =>
@@ -47,11 +69,13 @@ function buildTasks(level: number, words: DictionaryEntry[]): Task[] {
 
 export function LevelTestPage() {
   const [params] = useSearchParams();
+  const cefr = (["A1", "A2", "B1"] as const).find((c) => c === params.get("cefr"));
   const level = Math.min(3, Math.max(1, Number(params.get("level")) || 1));
+  const key = cefr ? `cefr-${cefr}` : String(level);
   const { data, error } = useActivityCatalog();
   const words = useMemo(() => (data?.entries ?? []).filter((e) => e.category !== "Алфавит" && (e.displayVideo || e.video)), [data]);
   const [seed, setSeed] = useState(0);
-  const tasks = useMemo(() => (words.length ? buildTasks(level, words) : []), [level, words, seed]);
+  const tasks = useMemo(() => (words.length ? (cefr ? buildCefrTasks(cefr, words) : buildTasks(level, words)) : []), [level, cefr, words, seed]);
   const [i, setI] = useState(0);
   const [answers, setAnswers] = useState<{ kind: Task["kind"]; ok: boolean }[]>([]);
   const [picked, setPicked] = useState<number | null>(null);
@@ -75,7 +99,7 @@ export function LevelTestPage() {
       const final = answers.filter((a) => a.ok).length;
       const best = readTests();
       try {
-        localStorage.setItem(TEST_KEY, JSON.stringify({ ...best, [level]: Math.max(best[level] ?? 0, final) }));
+        localStorage.setItem(TEST_KEY, JSON.stringify({ ...best, [key]: Math.max(best[key] ?? 0, final) }));
       } catch {
         /* private mode */
       }
@@ -83,20 +107,20 @@ export function LevelTestPage() {
   }
   const header = (
     <>
-      <Link className="text-link back-link" to={`/learn?stage=${level}`}>
-        <ArrowLeft size={16} /> {titles[level]}
+      <Link className="text-link back-link" to={cefr ? `/course?level=${cefr}` : `/learn?stage=${level}`}>
+        <ArrowLeft size={16} /> {cefr ? `${at("Курс", "Course", "Курс")} ${cefr}` : titles[level]}
       </Link>
       <div className="page-heading">
         <div>
-          <span className="eyebrow">{at("ИТОГОВЫЙ ТЕСТ", "LEVEL TEST", "ҚОРЫТЫНДЫ ТЕСТ")} · {at("уровень", "level", "деңгей")} {level}</span>
-          <h1>{titles[level]}</h1>
+          <span className="eyebrow">{at("ИТОГОВЫЙ ТЕСТ", "LEVEL TEST", "ҚОРЫТЫНДЫ ТЕСТ")} · {cefr ?? `${at("уровень", "level", "деңгей")} ${level}`}</span>
+          <h1>{cefr ? `${at("Уровень", "Level", "Деңгей")} ${cefr}` : titles[level]}</h1>
           <p>{at("10 заданий на видео носителей языка. Тест пройден, если 8 и больше верных ответов.", "10 tasks on native-signer videos. Pass with 8 or more.", "10 тапсырма. 8 және одан көп — өтті.")}</p>
         </div>
       </div>
     </>
   );
   if (done) {
-    const passed = score >= 8;
+    const passed = score >= Math.ceil(tasks.length * 0.8);
     const weak = (Object.keys(SKILL) as Task["kind"][])
       .map((k) => ({ k, total: answers.filter((a) => a.kind === k).length, ok: answers.filter((a) => a.kind === k && a.ok).length }))
       .filter((s) => s.total);
@@ -105,7 +129,7 @@ export function LevelTestPage() {
         {header}
         <section className="panel fs-done">
           {passed && <Award size={40} />}
-          <h2>{passed ? at("Уровень пройден!", "Level passed!", "Деңгей өтті!") : at("Почти! Нужно 8 из 10", "Almost! You need 8 of 10", "Аз қалды! 10-нан 8 керек")}</h2>
+          <h2>{passed ? at("Уровень пройден!", "Level passed!", "Деңгей өтті!") : at(`Почти! Нужно ${Math.ceil(tasks.length * 0.8)} из ${tasks.length}`, `Almost! You need ${Math.ceil(tasks.length * 0.8)} of ${tasks.length}`, `Аз қалды!`)}</h2>
           <p className="fs-score">{score} / {tasks.length}</p>
           <ul className="test-skills">
             {weak.map((s) => (
@@ -121,7 +145,11 @@ export function LevelTestPage() {
             ))}
           </ul>
           <div className="fs-actions">
-            {passed && level < 3 ? (
+            {passed && cefr ? (
+              <Link className="button primary" to={`/course?level=${cefr === "A1" ? "A2" : cefr === "A2" ? "B1" : "B2"}`}>
+                {at("Следующий уровень", "Next level", "Келесі деңгей")} <ArrowRight size={16} />
+              </Link>
+            ) : passed && level < 3 ? (
               <Link className="button primary" to={`/learn?stage=${level + 1}`}>
                 {at("Следующий уровень", "Next level", "Келесі деңгей")} <ArrowRight size={16} />
               </Link>

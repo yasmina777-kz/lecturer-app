@@ -226,3 +226,38 @@
   display: grid;
   gap: 6px;
 }
+
+.course-levels {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin: 10px 0 14px;
+}
+.course-levels button {
+  display: grid;
+  gap: 4px;
+  text-align: left;
+  font: inherit;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1.5px solid var(--p-line, #dfe3ea);
+  background: var(--p-surface, #fff);
+  color: inherit;
+  cursor: pointer;
+}
+.course-levels button strong {
+  font-size: 1.3rem;
+}
+.course-levels button span {
+  font-size: 0.82rem;
+  opacity: 0.7;
+}
+.course-levels button[aria-selected="true"] {
+  border-color: var(--p-blue, #2563eb);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--p-blue, #2563eb) 18%, transparent);
+}
+@media (max-width: 800px) {
+  .course-levels {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
