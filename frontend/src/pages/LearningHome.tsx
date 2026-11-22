@@ -12,6 +12,7 @@ import {
   Smile,
   Users,
   Video,
+  ChevronDown,
 } from "lucide-react";
 import { at } from "../i18n/automation";
 import { courseLevels } from "../sign/exercises";
@@ -19,7 +20,6 @@ import { useSignProgress } from "../sign/useProgress";
 import { useActivityProgress } from "../sign/useActivities";
 import { reviewItems } from "../sign/activities";
 import { lessonIds } from "../sign/catalog";
-import { useDailyGoal } from "../sign/dailyGoal";
 
 /** Static mentor portrait (same person as the home page hero). */
 export function LearningMentorPreview() {
@@ -39,7 +39,6 @@ export function LearningHome() {
   const { attempts } = useActivityProgress();
   const reviewCount = reviewItems(attempts).size;
   const hasHistory = Object.keys(progress).length > 0 || attempts.length > 0;
-  const goal = useDailyGoal();
   const nextLessonId = lessonIds.find((id) => !progress[id]);
   const nextLesson = nextLessonId
     ? `/learn/${nextLessonId}`
@@ -73,14 +72,6 @@ export function LearningHome() {
                 : at("Начать обучение", "Start learning", "Оқуды бастау")}
               <ArrowRight size={18} />
             </Link>
-            <span className="learning-goal" title={at("Цель на день", "Daily goal", "Күндік мақсат")}>
-              <span className="goal-bar">
-                <i style={{ width: `${Math.min(100, (goal.minutes / goal.goal) * 100)}%` }} />
-              </span>
-              {goal.done ? "✓ " : ""}
-              {Math.min(goal.minutes, goal.goal)}/{goal.goal} {at("мин", "min", "мин")}
-              {goal.streak > 0 && <small>· {goal.streak} {at("дн. подряд", "day streak", "күн қатарынан")}</small>}
-            </span>
             <Link className="learning-demo-link" to="/learn/getting-started">
               <span>
                 <Play size={16} fill="currentColor" />
@@ -93,6 +84,13 @@ export function LearningHome() {
             </Link>
           </div>
         </div>
+        <button
+          className="learning-scroll-cue"
+          onClick={() => document.getElementById("learning-path-title")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+        >
+          {at("Ниже: ваш путь и все упражнения", "Below: your path and all exercises", "Төменде: жолыңыз бен жаттығулар")}
+          <ChevronDown size={16} />
+        </button>
         <div className="learning-intro-art">
           <img
             className="learning-hero-artwork"

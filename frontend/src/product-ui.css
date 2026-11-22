@@ -3543,3 +3543,56 @@
     }
   }
 }
+
+/* Learn home hero: shorter, one clean action row, a cue that the page goes on. */
+:root .product-ui[data-product-ui][data-product-theme] {
+  & .learning-intro {
+    min-height: clamp(330px, 30vw, 440px);
+    margin-bottom: 18px;
+  }
+  & .learning-intro-actions {
+    flex-wrap: nowrap;
+    gap: 18px;
+  }
+  & .learning-intro-actions .button {
+    white-space: nowrap;
+  }
+  & .learning-scroll-cue {
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--p-line);
+    background: color-mix(in srgb, var(--p-surface) 88%, transparent);
+    color: var(--p-text);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 650;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(17, 24, 39, 0.06);
+  }
+  & .learning-scroll-cue svg {
+    animation: learn-bounce 1.6s ease-in-out infinite;
+  }
+  @media (max-width: 700px) {
+    & .learning-intro-actions {
+      flex-wrap: wrap;
+    }
+    & .learning-scroll-cue {
+      position: static;
+      margin-top: 14px;
+    }
+  }
+}
+@keyframes learn-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .learning-scroll-cue svg { animation: none; }
+}

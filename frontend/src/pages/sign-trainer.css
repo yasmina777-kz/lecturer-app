@@ -618,3 +618,64 @@
 .practice-letter-main .human-stage {
   height: clamp(260px, calc(100vh - 290px), 560px);
 }
+
+/* letters practice: both columns start on one line — the side heading matches
+   the Video/Avatar toggle row, the cards below share the same top edge */
+.practice-letter-side { gap: 8px; }
+.practice-side-head {
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.practice-side-head span { font-weight: 600; color: var(--p-muted, #667085); font-size: 0.85rem; }
+.practice-side-card { display: grid; gap: 14px; padding: 16px; margin: 0; }
+.practice-letter-main .player-mode-wrap { gap: 8px; }
+.practice-letter-main .player-mode-wrap > .sign-sequence,
+.practice-letter-main .player-mode-wrap > div:not(.player-mode) {
+  width: 100%;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+}
+@media (min-width: 901px) {
+  .practice-letter-side { position: sticky; top: 16px; }
+}
+
+/* first words: video and the "how to learn" side by side, tops aligned */
+.phrase-practice {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+.phrase-practice .phrase-video { margin: 0; }
+.phrase-practice .phrase-video h2 { margin: 0 0 4px; }
+.phrase-practice .phrase-video > p { margin: 0 0 14px; color: var(--p-muted, #667085); }
+.phrase-side { display: grid; gap: 16px; }
+.phrase-side .panel { margin: 0; padding: 18px 20px; }
+.phrase-side h3 { margin: 0 0 12px; font-size: 1.05rem; }
+.phrase-steps ol { list-style: none; margin: 0 0 16px; padding: 0; display: grid; gap: 12px; }
+.phrase-steps li { display: flex; gap: 12px; align-items: flex-start; }
+.phrase-steps li > span {
+  flex: none; width: 36px; height: 36px; border-radius: 11px; display: grid; place-items: center;
+  color: var(--p-blue, #2563eb); background: color-mix(in srgb, var(--p-blue, #2563eb) 12%, transparent);
+}
+.phrase-steps li div { display: grid; gap: 2px; font-size: 0.9rem; color: var(--p-muted, #667085); line-height: 1.4; }
+.phrase-steps li strong { color: var(--p-text, #14171f); font-size: 0.95rem; }
+.phrase-steps .button { width: 100%; justify-content: center; }
+.phrase-more { display: grid; gap: 4px; }
+.phrase-more a {
+  display: flex; align-items: center; gap: 12px; padding: 10px 8px; border-radius: 10px;
+  color: inherit; text-decoration: none; font-weight: 600; font-size: 0.93rem; transition: background 150ms;
+}
+.phrase-more a span { flex: 1; }
+.phrase-more a svg:first-child { color: var(--p-blue, #2563eb); }
+.phrase-more a svg:last-child { opacity: 0.45; transition: transform 150ms; }
+.phrase-more a:hover { background: var(--p-subtle, #eef1f6); }
+.phrase-more a:hover svg:last-child { transform: translateX(3px); opacity: 1; }
+@media (max-width: 900px) {
+  .phrase-practice { grid-template-columns: 1fr; }
+}

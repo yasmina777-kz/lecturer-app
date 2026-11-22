@@ -1,8 +1,124 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Award, Check, CheckCircle2, Circle, Hand, Home, MessagesSquare, Mountain, Play, Sprout, Type, Users, X } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Award,
+  Baby,
+  BedDouble,
+  Bird,
+  BookOpen,
+  Brain,
+  Briefcase,
+  Building2,
+  Calculator,
+  CalendarClock,
+  CalendarDays,
+  Car,
+  Cat,
+  Check,
+  CheckCircle2,
+  ChefHat,
+  Circle,
+  CircleCheck,
+  CircleHelp,
+  Clock,
+  CloudSun,
+  Coffee,
+  Coins,
+  CreditCard,
+  Croissant,
+  CupSoda,
+  Dice5,
+  Dog,
+  Drama,
+  Dumbbell,
+  Ear,
+  Fish,
+  Flag,
+  Frown,
+  Gamepad2,
+  Gauge,
+  Gift,
+  GitBranch,
+  GraduationCap,
+  Hand,
+  Handshake,
+  Hash,
+  Heart,
+  HeartHandshake,
+  HeartPulse,
+  History,
+  Home,
+  House,
+  Infinity,
+  KeyRound,
+  Laugh,
+  Leaf,
+  Lightbulb,
+  Luggage,
+  MapPin,
+  Meh,
+  MessageCircle,
+  MessageSquare,
+  MessagesSquare,
+  Minus,
+  Moon,
+  Mountain,
+  Orbit,
+  Palette,
+  PartyPopper,
+  PawPrint,
+  PenLine,
+  PersonStanding,
+  Pill,
+  Plane,
+  Play,
+  Plus,
+  Pointer,
+  Quote,
+  Repeat,
+  Repeat2,
+  Ruler,
+  Salad,
+  Scale,
+  ScrollText,
+  Search,
+  Shapes,
+  Shirt,
+  ShoppingBag,
+  ShoppingCart,
+  Smile,
+  Snowflake,
+  Soup,
+  Sparkles,
+  Sprout,
+  Star,
+  Stethoscope,
+  Store,
+  Sun,
+  Sunrise,
+  Tag,
+  Thermometer,
+  ThumbsDown,
+  ThumbsUp,
+  Ticket,
+  TrafficCone,
+  Trees,
+  TrendingUp,
+  Type,
+  Umbrella,
+  UserRound,
+  Users,
+  UsersRound,
+  UtensilsCrossed,
+  Video,
+  Wallet,
+  X,
+  type LucideIcon,
+} from "lucide-react";
 import { at } from "../i18n/automation";
-import { SignChain, useWordCatalog } from "../components/SignChain";
+import { SignChain } from "../components/SignChain";
 import { WordPracticeCamera } from "../components/WordPracticeCamera";
 import { courseUnits, levelOf, type CefrLevel, type CourseUnit } from "../sign/courseUnits";
 import { shuffle } from "../sign/activities";
@@ -41,6 +157,58 @@ const STEPS = () => [
   at("Готово", "Done", "Дайын"),
 ];
 
+const ART: Record<number, [LucideIcon, LucideIcon[]]> = {
+  1: [Hand, [MessageCircle, Smile, UserRound]],
+  2: [Users, [Heart, Baby, House]],
+  3: [Hash, [Calculator, Dice5, Plus]],
+  4: [Clock, [CalendarDays, Sun, Moon]],
+  5: [Wallet, [ShoppingCart, Coins, Tag]],
+  6: [Sunrise, [Briefcase, BedDouble, House]],
+  7: [Coffee, [UtensilsCrossed, CupSoda, Croissant]],
+  8: [Heart, [Smile, Frown, Laugh]],
+  9: [Stethoscope, [Pill, HeartPulse, Thermometer]],
+  10: [BookOpen, [PenLine, GraduationCap, Lightbulb]],
+  11: [PawPrint, [Palette, Cat, Dog]],
+  12: [CloudSun, [Snowflake, Umbrella, Leaf]],
+  101: [UsersRound, [UserRound, Handshake, Heart]],
+  102: [Smile, [Ruler, Sparkles, Dumbbell]],
+  103: [Building2, [MapPin, Store, TrafficCone]],
+  104: [Plane, [Luggage, Ticket, KeyRound]],
+  105: [Repeat, [CalendarClock, Clock, Infinity]],
+  106: [CalendarDays, [Gamepad2, Sun, House]],
+  107: [ShoppingBag, [CreditCard, Shirt, Gift]],
+  108: [UtensilsCrossed, [ChefHat, Soup, Salad]],
+  109: [HeartHandshake, [ThumbsUp, Meh, PartyPopper]],
+  110: [Briefcase, [Search, CircleCheck, Brain]],
+  111: [Trees, [Fish, Sun, Bird]],
+  112: [MessagesSquare, [CircleHelp, Check, Ear]],
+  201: [Orbit, [MapPin, Pointer, Users]],
+  202: [Shapes, [Car, PersonStanding, Hand]],
+  203: [Quote, [MessageSquare, Repeat2, UserRound]],
+  204: [History, [ArrowRight, Flag, Clock]],
+  205: [GitBranch, [CircleHelp, Lightbulb, ArrowRight]],
+  206: [Scale, [ThumbsUp, ThumbsDown, MessageCircle]],
+  207: [Gauge, [Plus, Minus, TrendingUp]],
+  208: [ScrollText, [Star, Heart, Smile]],
+};
+
+/** Topic illustration for a lesson card: a big theme icon on a level-coloured
+ * gradient with three small floating icons (vector, crisp, no downloads). */
+const HUES = [0, 28, -30, 55, -60, 85];
+function TopicArt({ id, index }: { id: number; index: number }) {
+  const [Main, small] = ART[id] ?? [BookOpen, [Star, Heart, Smile]];
+  return (
+    <div className="topic-art" style={{ "--hue": `${HUES[index % HUES.length]}deg` } as React.CSSProperties} aria-hidden="true">
+      <span className="topic-blob a" />
+      <span className="topic-blob b" />
+      <span className="topic-main"><Main size={44} strokeWidth={1.8} /></span>
+      {small.map((Icon, k) => (
+        <span key={k} className={`topic-small s${k}`}><Icon size={18} strokeWidth={2} /></span>
+      ))}
+    </div>
+  );
+}
+
 const LEVELS: { id: CefrLevel; title: string; name: string; desc: string; icon: typeof Sprout }[] = [
   { id: "A1", title: "A1", name: "Выживание", desc: "Знакомство, семья, числа, время, покупки, еда", icon: Sprout },
   { id: "A2", title: "A2", name: "Быт", desc: "Люди, город, путешествия, неделя, ресторан, мнения", icon: Home },
@@ -61,6 +229,91 @@ function Ring({ done, total }: { done: number; total: number }) {
   );
 }
 
+const B2_SKILLS = () => [
+  { icon: Video, title: at("Живая речь", "Natural speech", "Тірі сөйлеу"), text: at("Понимать длинные рассказы носителей в обычном темпе.", "Follow long stories at natural speed.", "Ұзын әңгімелерді түсіну.") },
+  { icon: Shapes, title: at("Классификаторы", "Classifiers", "Классификаторлар"), text: at("Показывать форму, размер и движение предметов руками.", "Show shape, size and motion with handshapes.", "Пішін мен қозғалысты көрсету.") },
+  { icon: Drama, title: at("Ролевой сдвиг", "Role shift", "Рөлдік ауысу"), text: at("Говорить «за героя» корпусом и взглядом, шутить, рассказывать.", "Speak as a character with body and gaze.", "Кейіпкер атынан сөйлеу.") },
+  { icon: Briefcase, title: at("Сложная лексика", "Advanced vocabulary", "Күрделі сөздік"), text: at("Работа, наука, медицина, право — тысячи жестов.", "Work, science, medicine, law — thousands of signs.", "Мыңдаған ым.") },
+];
+
+function B2Roadmap({ count, onPick }: { count: (l: CefrLevel) => number[]; onPick: (l: CefrLevel) => void }) {
+  const path = LEVELS.slice(0, 3);
+  return (
+    <div className="b2 course-anim">
+      <section className="panel b2-path">
+        <h2>{at("Ваш путь к B2", "Your path to B2", "B2-ге жол")}</h2>
+        <ol className="b2-steps">
+          {path.map((l) => {
+            const [d, t] = count(l.id);
+            const pct = t ? Math.round((d / t) * 100) : 0;
+            const Icon = l.icon;
+            return (
+              <li key={l.id} className={d === t && t ? "done" : ""} data-level={l.id}>
+                <button onClick={() => onPick(l.id)}>
+                  <span className="b2-step-icon">{d === t && t ? <Check size={22} /> : <Icon size={22} />}</span>
+                  <strong>{l.title}</strong>
+                  <small>{l.name}</small>
+                  <span className="b2-bar"><i style={{ width: `${pct}%` }} /></span>
+                  <small>{d}/{t}</small>
+                </button>
+              </li>
+            );
+          })}
+          <li className="goal" data-level="B2">
+            <div>
+              <span className="b2-step-icon"><Mountain size={22} /></span>
+              <strong>B2+</strong>
+              <small>{at("Свобода", "Fluency", "Еркіндік")}</small>
+              <span className="b2-flag"><Flag size={14} /> {at("цель", "goal", "мақсат")}</span>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <h2 className="b2-heading">{at("Что умеет человек на B2", "What a B2 signer can do", "B2 деңгейінде не істей алады")}</h2>
+      <div className="b2-skills">
+        {B2_SKILLS().map((s) => (
+          <article key={s.title} className="panel b2-skill">
+            <span className="b2-skill-icon"><s.icon size={24} /></span>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </article>
+        ))}
+      </div>
+
+      <section className="panel b2-why">
+        <span className="b2-skill-icon"><HeartHandshake size={24} /></span>
+        <div>
+          <h3>{at("Почему этого уровня ещё нет в курсе", "Why this level is not in the course yet", "Неге бұл деңгей әлі жоқ")}</h3>
+          <p>{at("Для B2 нужны длинные видео носителей и проверка преподавателем РЖЯ — в открытых данных их нет. Мы не хотим учить вас неправильно, поэтому честно ведём туда через живую практику.", "B2 needs long native-signer videos and a teacher's review, which open data lacks. Until then we guide you there through live practice.", "B2 үшін ана тілді адамдардың видеолары керек.")}</p>
+        </div>
+      </section>
+
+      <h2 className="b2-heading">{at("Что делать уже сейчас", "What to do now", "Қазір не істеу керек")}</h2>
+      <div className="b2-actions">
+        <Link className="panel b2-action" to="/course?level=B1">
+          <MessagesSquare size={22} />
+          <strong>{at("Пройти B1", "Finish B1", "B1 өту")}</strong>
+          <span>{at("Пространство, рассказ, мнение", "Space, story, opinion", "Кеңістік, әңгіме")}</span>
+          <ArrowRight size={18} />
+        </Link>
+        <Link className="panel b2-action" to="/understanding/phrases">
+          <Ear size={22} />
+          <strong>{at("Тренировать понимание", "Train understanding", "Түсінуді жаттықтыру")}</strong>
+          <span>{at("Смотреть фразы и понимать смысл", "Watch phrases, get the meaning", "Фразаларды түсіну")}</span>
+          <ArrowRight size={18} />
+        </Link>
+        <Link className="panel b2-action" to="/live-practice">
+          <UsersRound size={22} />
+          <strong>{at("Живая практика", "Live practice", "Тірі тәжірибе")}</strong>
+          <span>{at("Зеркало с носителем и где найти собеседников", "Mirror and where to find signers", "Айна және серіктестер")}</span>
+          <ArrowRight size={18} />
+        </Link>
+      </div>
+    </div>
+  );
+}
+
 export function CoursePage() {
   const [params, setParams] = useSearchParams();
   const level = (LEVELS.find((l) => l.id === params.get("level"))?.id ?? "A1") as CefrLevel;
@@ -70,8 +323,6 @@ export function CoursePage() {
   const next = units.find((u) => !progress[u.id]?.done) ?? units[units.length - 1];
   const count = (l: CefrLevel) => (l === "B2" ? [0, 0] : [courseUnits(l).filter((u) => progress[u.id]?.done).length, courseUnits(l).length]);
   const doneCount = units.filter((u) => progress[u.id]?.done).length;
-  const words = useWordCatalog();
-  const poster = useMemo(() => new Map((words ?? []).map((w) => [w.label, w.poster])), [words]);
   return (
     <div className="sign-workspace vocab course" data-level={level}>
       <section className="course-hero course-anim">
@@ -124,17 +375,7 @@ export function CoursePage() {
       </div>
 
       {level === "B2" ? (
-        <section className="panel fs-answer course-anim">
-          <h2>{at("B2 и выше: что нужно, чтобы сделать честно", "B2 and above", "B2 және жоғары")}</h2>
-          <ul className="params-list">
-            <li>Длинные живые рассказы и диалоги носителей в обычном темпе — их нет в открытых наборах данных.</li>
-            <li>Классификаторы, ролевой сдвиг, юмор и региональные варианты — на видео, с разбором преподавателя.</li>
-            <li>Профессиональная и абстрактная лексика (наука, право, медицина) — свыше 1000 жестов словаря.</li>
-            <li>Проверка курса преподавателем РЖЯ и живая практика с носителями.</li>
-          </ul>
-          <p className="fs-tip">Пока лучший путь к B2 — пройти B1, а затем регулярно общаться с носителями: смотрите страницу «Самопроверка и практика».</p>
-          <Link className="button primary" to="/live-practice">{at("Самопроверка и практика", "Self-check and practice", "Тәжірибе")}</Link>
-        </section>
+        <B2Roadmap count={count} onPick={(l) => setParams({ level: l })} />
       ) : (
         <>
           {level === "A1" && (
@@ -159,11 +400,10 @@ export function CoursePage() {
             {units.map((u, i) => {
               const done = progress[u.id]?.done;
               const current = !done && u.id === next?.id;
-              const img = poster.get(u.words[0]) ?? poster.get(u.words[1]);
               return (
                 <Link key={u.id} className={`panel course-unit${done ? " done" : ""}${current ? " current" : ""} course-anim`} to={`/course/${u.id}`} style={{ "--i": i + 6 } as React.CSSProperties}>
                   <div className="course-unit-thumb">
-                    {img && <div className="course-unit-photo" style={{ backgroundImage: `url(${img})` }} />}
+                    <TopicArt id={u.id} index={i} />
                     <span className="course-unit-num">{done ? <CheckCircle2 size={20} /> : i + 1}</span>
                     {current && <span className="course-unit-now">{at("Сейчас", "Now", "Қазір")}</span>}
                   </div>

@@ -16,6 +16,13 @@ import {
   RotateCcw,
   ScanSearch,
   Award,
+  Eye,
+  Gauge,
+  Repeat,
+  Camera as CameraIcon,
+  BookOpen,
+  Hash,
+  MessageCircle,
 } from "lucide-react";
 import { at } from "../i18n/automation";
 import { exercises, courseLevels, recognitionLetters, alphabet } from "../sign/exercises";
@@ -364,10 +371,32 @@ export function ExercisePlayer({
     return <CapturedLetterPlayer key={exercise.id} letter={exercise.letter} />;
   if (SHOW_HUMAN_VIDEOS)
     return (
-      <div className="panel" data-workspace-enter>
-        <h2>{exercise.title}</h2>
-        <p>{exercise.hint}</p>
-        <PhraseVideos labels={EXERCISE_SIGNS[exercise.id] ?? []} />
+      <div className="phrase-practice" data-workspace-enter>
+        <section className="panel phrase-video">
+          <h2>{exercise.title}</h2>
+          <p>{exercise.hint}</p>
+          <PhraseVideos labels={EXERCISE_SIGNS[exercise.id] ?? []} />
+        </section>
+        <aside className="phrase-side">
+          <section className="panel phrase-steps">
+            <h3>{at("Как выучить жест", "How to learn the sign", "Ымды қалай үйрену")}</h3>
+            <ol>
+              <li><span><Eye size={18} /></span><div><strong>{at("Посмотрите целиком", "Watch it whole", "Толық қараңыз")}</strong>{at("Где руки, куда смотрит ладонь, какое лицо.", "Where the hands are, palm direction, the face.", "Қол, алақан, бет.")}</div></li>
+              <li><span><Gauge size={18} /></span><div><strong>{at("Замедлите до 0.5×", "Slow down to 0.5×", "0.5× баяулатыңыз")}</strong>{at("Разберите движение по шагам.", "Break the motion into steps.", "Қозғалысты бөліңіз.")}</div></li>
+              <li><span><Repeat size={18} /></span><div><strong>{at("Повторите 3–5 раз", "Repeat 3–5 times", "3–5 рет қайталаңыз")}</strong>{at("Вместе с видео, потом без него.", "With the video, then without it.", "Бейнемен, сосын онсыз.")}</div></li>
+              <li><span><CameraIcon size={18} /></span><div><strong>{at("Сравните себя", "Compare yourself", "Өзіңізді салыстырыңыз")}</strong>{at("Запишитесь рядом с образцом в «Зеркале».", "Record yourself next to the reference in the Mirror.", "Айнада жазыңыз.")}</div></li>
+            </ol>
+            <Link className="button primary" to="/live-practice">
+              <CameraIcon size={18} /> {at("Открыть зеркало", "Open the mirror", "Айнаны ашу")}
+            </Link>
+          </section>
+          <section className="panel phrase-more">
+            <h3>{at("Дальше по теме", "Next on this topic", "Тақырып бойынша әрі қарай")}</h3>
+            <Link to="/course/1"><MessageCircle size={18} /><span>{at("Урок «Знакомство»", "Lesson “Introductions”", "«Танысу» сабағы")}</span><ArrowRight size={16} /></Link>
+            <Link to="/vocab"><BookOpen size={18} /><span>{at("Словарь: 900+ слов", "Dictionary: 900+ words", "Сөздік: 900+ сөз")}</span><ArrowRight size={16} /></Link>
+            <Link to="/numbers"><Hash size={18} /><span>{at("Числа и время", "Numbers and time", "Сандар мен уақыт")}</span><ArrowRight size={16} /></Link>
+          </section>
+        </aside>
       </div>
     );
   return <AnimatedExercisePlayer key={exercise.id} exercise={exercise} />;
@@ -408,6 +437,11 @@ function CapturedLetterPlayer({ letter }: { letter: string }) {
   return (
     <div className="practice-letter-layout">
       <aside className="practice-letter-side">
+        <div className="practice-side-head">
+          {at("Выберите букву", "Choose a letter", "Әріпті таңдаңыз")}
+          <span>{alphabet.indexOf(letter) + 1} / {alphabet.length}</span>
+        </div>
+        <div className="panel practice-side-card">
         <div className="letter-picker" role="group" aria-label={at("Выберите букву", "Choose a letter", "Әріпті таңдаңыз")}>
           {alphabet.map((l) => (
             <button key={l} aria-pressed={l === letter} onClick={() => goLetter(l)}>
@@ -430,6 +464,7 @@ function CapturedLetterPlayer({ letter }: { letter: string }) {
             ? at("Посмотрите видео, замедлите и повторите букву сами.", "Watch, slow down and repeat.", "Қарап, баяулатып, қайталаңыз.")
             : at("Покажите букву в камеру и держите её около 2 секунд.", "Show the letter to the camera for about 2 seconds.", "Әріпті камераға 2 секундтай көрсетіңіз.")}
         </p>
+        </div>
       </aside>
       <div className="practice-letter-main" data-workspace-enter>
         {mode === "watch" ? (
