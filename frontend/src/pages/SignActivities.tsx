@@ -787,6 +787,19 @@ export function SignUnderstandingPage() {
               </p>
             </div>
           </div>
+          <Link className="panel activity-start understanding-phrases-link" to="/understanding/phrases">
+            <div>
+              <h2>{at("Понимание фраз", "Understanding phrases", "Сөйлемдерді түсіну")}</h2>
+              <p>
+                {at(
+                  "Следующий шаг: носители показывают целую фразу — выберите её смысл.",
+                  "Next step: signers show a whole phrase — choose its meaning.",
+                  "Келесі қадам: тұтас сөйлемді түсіну.",
+                )}
+              </p>
+            </div>
+            <ArrowRight />
+          </Link>
           <section className="panel activity-start">
             <div>
               <h2>

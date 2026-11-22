@@ -125,3 +125,9 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Phrase understanding: no captions or sign names until the learner answers. */
+.phrase-understanding .hide-answer .human-caption,
+.phrase-understanding .hide-answer .human-steps {
+  display: none;
+}
