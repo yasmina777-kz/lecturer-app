@@ -102,6 +102,24 @@ const TOPIC_ICONS: Record<string, [typeof Eye, (typeof Eye)[]]> = {
   "Понятия и предметы": [Lightbulb, [Key, Gift, Star]],
 };
 
+/** Number that counts up from 0 when it first appears. */
+function CountUp({ value }: { value: number }) {
+  const [shown, setShown] = useState(0);
+  useEffect(() => {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches || value === 0) return setShown(value);
+    let raf = 0;
+    const start = performance.now();
+    const tick = (t: number) => {
+      const k = Math.min((t - start) / 900, 1);
+      setShown(Math.round(value * (1 - (1 - k) ** 3)));
+      if (k < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [value]);
+  return <>{shown}</>;
+}
+
 function shuffle<T>(items: T[], seed = Math.random()) {
   const a = [...items];
   let s = Math.floor(seed * 2 ** 31) || 1;
@@ -237,58 +255,81 @@ function Overview({
   })();
   return (
     <div className="sign-workspace vocab">
-      <div className="page-heading">
-        <div>
+      <section className="vocab-hero">
+        <div className="vocab-hero-text">
           <span className="eyebrow">{at("СЛОВАРНЫЙ ЗАПАС", "VOCABULARY", "СӨЗДІК ҚОР")}</span>
           <h1>{at("Тренажёр слов РЖЯ", "RSL word trainer", "Ым сөздерінің жаттықтырғышы")}</h1>
           <p>
             {at(
-              `${words.length} жестов по ${topics.length} темам, по 8 слов в уроке. Выученные слова возвращаются на повторение через 1, 2, 4, 8… дней.`,
-              `${words.length} signs in ${topics.length} topics. Each lesson: watch → recognize → find → sign to the camera. Learned words come back for review after 1, 2, 4, 8… days.`,
-              `${words.length} ым, ${topics.length} тақырып. Әр сабақ: көру → тану → табу → камераға көрсету.`,
+              `${words.length} жестов по ${topics.length} темам, по 8 слов в уроке. Выученные слова сами вернутся на повторение через 1, 2, 4, 8… дней.`,
+              `${words.length} signs in ${topics.length} topics, 8 words per lesson. Learned words come back for review after 1, 2, 4, 8… days.`,
+              `${words.length} ым, ${topics.length} тақырып, әр сабақта 8 сөз.`,
             )}
           </p>
+          <div className="vocab-hero-actions">
+            {nextUp && (
+              <button className="button primary vocab-hero-cta" onClick={() => open(nextUp.topic, nextUp.lesson)}>
+                <Play size={18} />
+                {started ? at("Продолжить", "Continue", "Жалғастыру") : at("Начать", "Start", "Бастау")}: {nextUp.topic} · {nextUp.lesson + 1}
+              </button>
+            )}
+            {due > 0 && (
+              <button className="button secondary" onClick={review}>
+                <Repeat size={18} />
+                {at(`Повторить ${Math.min(due, 20)}`, `Review ${Math.min(due, 20)}`, `${Math.min(due, 20)} қайталау`)}
+              </button>
+            )}
+          </div>
+          {nextUp && (
+            <p className="vocab-hero-next">
+              {at("В уроке", "In this lesson", "Сабақта")}:{" "}
+              {nextUp.words.slice(0, 5).map((w) => <i key={w.id}>{w.label.replace(/[!?]$/, "")}</i>)}
+            </p>
+          )}
         </div>
+        <div className="vocab-hero-art" aria-hidden="true">
+          <span className="vocab-hero-blob" />
+          <img src="/images/landing-v2/mentor-pointing.webp" alt="" />
+          <span className="vocab-hero-bubble b1"><strong>{words.length}</strong> {at("жестов", "signs", "ым")}</span>
+          <span className="vocab-hero-bubble b2"><strong>{topics.length}</strong> {at("тем", "topics", "тақырып")}</span>
+        </div>
+      </section>
+
+      <div className="vocab-stats2">
+        {([
+          [GraduationCap, learned, at("выучено", "learned", "үйренілді"), "#2f6bff", learned / Math.max(words.length, 1)],
+          [Check, started, at("начато", "started", "басталды"), "#12a37b", started / Math.max(words.length, 1)],
+          [Repeat, due, at("к повторению", "due for review", "қайталауға"), "#7c5cff", null],
+          [Flame, days, at("дней подряд", "day streak", "күн қатарынан"), "#f08c00", null],
+        ] as [typeof Eye, number, string, string, number | null][]).map(([Icon, value, label, color, share], i) => (
+          <div key={label} className="vocab-stat" style={{ "--t": color, "--i": i } as React.CSSProperties}>
+            <span className="vocab-stat-icon"><Icon size={22} /></span>
+            <div>
+              <strong><CountUp value={value} /></strong>
+              <span>{label}</span>
+            </div>
+            {share !== null && <span className="vocab-stat-bar"><i style={{ width: `${Math.max(share * 100, value ? 2 : 0)}%` }} /></span>}
+          </div>
+        ))}
       </div>
-      <div className="vocab-stats">
-        <div><GraduationCap size={20} /><strong>{learned}</strong><span>{at("выучено", "learned", "үйренілді")}</span></div>
-        <div><Check size={20} /><strong>{started}</strong><span>{at("начато", "started", "басталды")}</span></div>
-        <div><Repeat size={20} /><strong>{due}</strong><span>{at("к повторению", "due for review", "қайталауға")}</span></div>
-        <div><Flame size={20} /><strong>{days}</strong><span>{at("дней подряд", "day streak", "күн қатарынан")}</span></div>
-      </div>
-      {due > 0 && (
-        <button className="button primary vocab-review" onClick={review}>
-          <Repeat size={18} />
-          {at(`Повторить ${Math.min(due, 20)} слов`, `Review ${Math.min(due, 20)} words`, `${Math.min(due, 20)} сөзді қайталау`)}
-        </button>
-      )}
-      <ol className="vocab-how">
-        {[
-          [Eye, at("Посмотреть", "Watch", "Көру"), at("видео носителя", "the signer video", "бейнені")],
-          [Search, at("Узнать", "Recognize", "Тану"), at("выбрать слово к жесту", "pick the word", "сөзді таңдау")],
-          [MousePointerClick, at("Найти", "Find", "Табу"), at("жест к слову", "the sign for a word", "ымды табу")],
-          [Camera, at("Показать", "Sign it", "Көрсету"), at("в камеру", "to the camera", "камераға")],
-        ].map(([Icon, title, text], i) => {
-          const I = Icon as typeof Eye;
-          return (
-            <li key={i}>
-              <span className="vocab-how-icon"><I size={18} /></span>
-              <span><strong>{title as string}</strong><small>{text as string}</small></span>
-            </li>
-          );
-        })}
+
+      <h2 className="vocab-section-title">{at("Как проходит урок", "How a lesson works", "Сабақ қалай өтеді")}</h2>
+      <ol className="vocab-how2">
+        {([
+          [Eye, at("Посмотреть", "Watch", "Көру"), at("Видео носителя: можно замедлить и отзеркалить", "Signer video: slow it down or mirror it", "Бейнені баяулатыңыз"), "#2f6bff"],
+          [Search, at("Узнать", "Recognize", "Тану"), at("Выберите слово, которое показали", "Pick the word that was signed", "Сөзді таңдаңыз"), "#12a37b"],
+          [MousePointerClick, at("Найти", "Find", "Табу"), at("Найдите нужный жест среди видео", "Find the right sign among videos", "Ымды табыңыз"), "#7c5cff"],
+          [Camera, at("Показать", "Sign it", "Көрсету"), at("Повторите жест в камеру", "Sign it to the camera", "Камераға көрсетіңіз"), "#f08c00"],
+        ] as [typeof Eye, string, string, string][]).map(([Icon, title, text, color], i) => (
+          <li key={title} style={{ "--t": color } as React.CSSProperties}>
+            <span className="vocab-how2-num">{i + 1}</span>
+            <span className="vocab-how2-icon"><Icon size={26} /></span>
+            <strong>{title}</strong>
+            <small>{text}</small>
+          </li>
+        ))}
       </ol>
-      {nextUp && (
-        <button className="vocab-continue" onClick={() => open(nextUp.topic, nextUp.lesson)}>
-          <span className="vocab-continue-icon"><Play size={22} /></span>
-          <span>
-            <small>{started ? at("Продолжить", "Continue", "Жалғастыру") : at("Начните отсюда", "Start here", "Осыдан бастаңыз")}</small>
-            <strong>{nextUp.topic} · {at("урок", "lesson", "сабақ")} {nextUp.lesson + 1}</strong>
-            <em>{nextUp.words.slice(0, 5).map((w) => w.label.replace(/[!?]$/, "")).join(", ")}…</em>
-          </span>
-          <ArrowRight size={20} />
-        </button>
-      )}
+
       <h2 className="vocab-section-title">{at("Темы", "Topics", "Тақырыптар")}</h2>
       <div className="vocab-topics vocab-topics-grid">
         {topics.map((t, k) => {
