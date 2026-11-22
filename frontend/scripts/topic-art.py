@@ -13,11 +13,39 @@ HAIR = ["#2b2321", "#6b3e26", "#c98a3c", "#1d1d2b"]
 INK = "#1f2333"
 
 
+# Scenes stay still; the cards around them carry the motion.
+ANIMATE = False
+STYLE = """<style>
+.f{animation:f 3.2s ease-in-out infinite}@keyframes f{50%{transform:translateY(-7px)}}
+.w{transform-box:fill-box;transform-origin:50% 100%;animation:w 1.1s ease-in-out infinite alternate}@keyframes w{from{transform:rotate(-12deg)}to{transform:rotate(14deg)}}
+.sp{transform-box:fill-box;transform-origin:center;animation:sp 16s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
+.rv{transform-box:fill-box;transform-origin:center;animation:rv 4s linear infinite}@keyframes rv{to{transform:rotate(-360deg)}}
+.dr{animation:dr 7s ease-in-out infinite alternate}@keyframes dr{from{transform:translateX(-14px)}to{transform:translateX(14px)}}
+.pu{transform-box:fill-box;transform-origin:center;animation:pu 1.5s ease-in-out infinite}@keyframes pu{50%{transform:scale(1.18)}}
+.st{animation:st 2.4s ease-in-out infinite}@keyframes st{0%{transform:translateY(8px);opacity:0}40%{opacity:1}100%{transform:translateY(-12px);opacity:0}}
+.fa{animation:fa 1.3s linear infinite}@keyframes fa{0%{transform:translateY(-12px);opacity:0}25%{opacity:1}100%{transform:translateY(26px);opacity:0}}
+.sw{transform-box:fill-box;transform-origin:50% 0;animation:sw 2.4s ease-in-out infinite alternate}@keyframes sw{from{transform:rotate(-9deg)}to{transform:rotate(9deg)}}
+.rk{transform-box:fill-box;transform-origin:50% 100%;animation:rk 2.8s ease-in-out infinite alternate}@keyframes rk{from{transform:rotate(-5deg)}to{transform:rotate(5deg)}}
+.dv{animation:dv 4.5s ease-in-out infinite alternate}@keyframes dv{from{transform:translateX(-40px)}to{transform:translateX(30px)}}
+.fl{animation:fl 6s ease-in-out infinite}@keyframes fl{0%,100%{transform:translate(-14px,6px)}50%{transform:translate(16px,-10px)}}
+.hd{transform-box:fill-box;transform-origin:50% 100%;animation:sp 8s linear infinite}
+.nd{transform-box:fill-box;transform-origin:50% 100%;animation:nd 2.2s ease-in-out infinite alternate}@keyframes nd{from{transform:rotate(-70deg)}to{transform:rotate(70deg)}}
+.tw{transform-box:fill-box;transform-origin:center;animation:tw 1.8s ease-in-out infinite}@keyframes tw{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1.1)}}
+.bo{animation:bo 1.6s ease-in-out infinite}@keyframes bo{50%{transform:translateY(-4px)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>"""
+
+
+def A(cls, content, delay=0):
+    d = f' style="animation-delay:{delay}s"' if delay else ""
+    return f'<g class="{cls}"{d}>{content}</g>'
+
+
 def svg(bg, body, accent):
     return (
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" preserveAspectRatio="xMidYMid slice">'
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" preserveAspectRatio="xMidYMid slice">{STYLE if ANIMATE else ""}'
         f'<rect width="{W}" height="{H}" fill="{bg}"/>'
-        f'<circle cx="320" cy="40" r="120" fill="{accent}" opacity=".35"/>'
+        f'<g class="dr"><circle cx="320" cy="40" r="120" fill="{accent}" opacity=".35"/></g>'
         f'<circle cx="40" cy="230" r="90" fill="{accent}" opacity=".25"/>'
         f'<rect y="196" width="{W}" height="44" fill="#000" opacity=".08"/>'
         f"{body}</svg>"
@@ -61,13 +89,18 @@ def person(x, base, s=1, shirt="#3b82f6", hair=0, skin=0, mood="smile", wave=Non
         p += f'<path d="M-6 -75 L6 -75" stroke="{INK}" stroke-width="2.2" stroke-linecap="round"/>'
     if wave is not None:
         side = 1 if wave >= 0 else -1
-        p += f'<rect x="{side * 24 - 7}" y="-80" width="14" height="44" rx="7" fill="{shirt}" transform="rotate({side * 25} {side * 30} -40)"/>'
-        p += g(hand(sk, shirt), side * 46, -78, 0.75, side * 18)
-    return g(p, x, base, s * (0.8 if child else 1))
+        arm = f'<rect x="{side * 24 - 7}" y="-80" width="14" height="44" rx="7" fill="{shirt}" transform="rotate({side * 25} {side * 30} -40)"/>'
+        arm += g(hand(sk, shirt), side * 46, -78, 0.75, side * 18)
+        p += A("w", arm, -0.3 * (hair % 3))
+    return A("bo", g(p, x, base, s * (0.8 if child else 1)), -0.4 * (skin % 4))
 
 
 # ---------- objects ----------
 def bubble(x, y, w, h, color="#fff", inner="", tail=-1):
+    return A("f", _bubble(x, y, w, h, color, inner, tail), -x / 100)
+
+
+def _bubble(x, y, w, h, color="#fff", inner="", tail=-1):
     t = f'<path d="M{w * 0.3 if tail < 0 else w * 0.6} {h - 2} l{-10 if tail < 0 else 10} 16 l14 -16 Z" fill="{color}"/>'
     return g(f'<rect width="{w}" height="{h}" rx="{min(h / 2, 16)}" fill="{color}"/>{t}{inner}', x, y)
 
@@ -81,39 +114,43 @@ def glyph(w, h, ch, c=INK, size=26):
 
 
 def heart(x, y, s=1, c="#ef4444"):
-    return g(f'<path d="M0 8 C-14 -4 -10 -16 0 -9 C10 -16 14 -4 0 8 Z" fill="{c}"/>', x, y, s)
+    return A("pu", g(f'<path d="M0 8 C-14 -4 -10 -16 0 -9 C10 -16 14 -4 0 8 Z" fill="{c}"/>', x, y, s))
 
 
 def sun(x, y, r=26, c="#fbbf24"):
     rays = "".join(
         f'<rect x="-3" y="{-r - 16}" width="6" height="11" rx="3" fill="{c}" transform="rotate({a})"/>' for a in range(0, 360, 45)
     )
-    return g(f'{rays}<circle r="{r}" fill="{c}"/>', x, y)
+    return g(f'<g class="sp">{rays}<circle r="{r + 18}" fill="none"/></g><circle r="{r}" fill="{c}"/>', x, y)
 
 
 def cloud(x, y, s=1, c="#fff"):
-    return g(f'<circle cx="-22" cy="4" r="16" fill="{c}"/><circle cx="0" cy="-6" r="22" fill="{c}"/><circle cx="24" cy="4" r="15" fill="{c}"/><rect x="-38" y="4" width="78" height="16" rx="8" fill="{c}"/>', x, y, s)
+    return A("dr", g(f'<circle cx="-22" cy="4" r="16" fill="{c}"/><circle cx="0" cy="-6" r="22" fill="{c}"/><circle cx="24" cy="4" r="15" fill="{c}"/><rect x="-38" y="4" width="78" height="16" rx="8" fill="{c}"/>', x, y, s), -x / 60)
 
 
 def drops(x, y, n=4, c="#60a5fa"):
-    return "".join(g(f'<path d="M0 -8 Q6 0 0 6 Q-6 0 0 -8 Z" fill="{c}"/>', x + i * 16, y + (i % 2) * 12) for i in range(n))
+    return "".join(A("fa", g(f'<path d="M0 -8 Q6 0 0 6 Q-6 0 0 -8 Z" fill="{c}"/>', x + i * 16, y + (i % 2) * 12), -0.33 * i) for i in range(n))
 
 
 def snow(x, y, s=1, c="#fff"):
+    return g(A("sp", _snow(0, 0, 1, c)), x, y, s)
+
+
+def _snow(x, y, s=1, c="#fff"):
     l = "".join(f'<rect x="-1.5" y="-12" width="3" height="24" rx="1.5" fill="{c}" transform="rotate({a})"/>' for a in (0, 60, 120))
     return g(l, x, y, s)
 
 
 def umbrella(x, y, s=1, c="#ef4444"):
-    return g(f'<path d="M-40 0 Q0 -50 40 0 Q30 -8 20 0 Q10 -8 0 0 Q-10 -8 -20 0 Q-30 -8 -40 0 Z" fill="{c}"/><rect x="-2" y="-2" width="4" height="44" fill="{INK}"/><path d="M2 42 q0 8 -8 8" stroke="{INK}" stroke-width="4" fill="none" stroke-linecap="round"/>', x, y, s)
+    return A("rk", g(f'<path d="M-40 0 Q0 -50 40 0 Q30 -8 20 0 Q10 -8 0 0 Q-10 -8 -20 0 Q-30 -8 -40 0 Z" fill="{c}"/><rect x="-2" y="-2" width="4" height="44" fill="{INK}"/><path d="M2 42 q0 8 -8 8" stroke="{INK}" stroke-width="4" fill="none" stroke-linecap="round"/>', x, y, s))
 
 
 def leaf(x, y, s=1, c="#f59e0b", r=0):
-    return g(f'<path d="M0 0 Q16 -22 0 -40 Q-16 -22 0 0 Z" fill="{c}"/><path d="M0 0 L0 -36" stroke="#00000033" stroke-width="2"/>', x, y, s, r)
+    return A("sw", g(f'<path d="M0 0 Q16 -22 0 -40 Q-16 -22 0 0 Z" fill="{c}"/><path d="M0 0 L0 -36" stroke="#00000033" stroke-width="2"/>', x, y, s, r))
 
 
 def cup(x, y, s=1, c="#fff", coffee="#7c4a2d"):
-    steam = "".join(f'<path d="M{d} -46 q6 -8 0 -16 q-6 -8 0 -16" stroke="#ffffffaa" stroke-width="4" fill="none" stroke-linecap="round"/>' for d in (-10, 6))
+    steam = "".join(f'<path class="st" style="animation-delay:{d / 10}s" d="M{d} -46 q6 -8 0 -16 q-6 -8 0 -16" stroke="#ffffffaa" stroke-width="4" fill="none" stroke-linecap="round"/>' for d in (-10, 6))
     return g(
         f'{steam}<path d="M-26 -32 L26 -32 L20 6 Q18 14 10 14 L-10 14 Q-18 14 -20 6 Z" fill="{c}"/>'
         f'<ellipse cx="0" cy="-32" rx="26" ry="6" fill="{coffee}"/>'
@@ -166,7 +203,7 @@ def clock(x, y, r=40, c="#fff", rim=INK, hh=-60, mm=90):
     return g(
         f'<circle r="{r + 5}" fill="{rim}"/><circle r="{r}" fill="{c}"/>{ticks}'
         f'<rect x="-2.5" y="{-r * 0.5}" width="5" height="{r * 0.5}" rx="2.5" fill="{rim}" transform="rotate({hh})"/>'
-        f'<rect x="-2" y="{-r * 0.75}" width="4" height="{r * 0.75}" rx="2" fill="#ef4444" transform="rotate({mm})"/><circle r="4" fill="{rim}"/>',
+        f'<rect class="hd" x="-2" y="{-r * 0.75}" width="4" height="{r * 0.75}" rx="2" fill="#ef4444"/><circle r="4" fill="{rim}"/>',
         x, y,
     )
 
@@ -188,6 +225,10 @@ def calendar(x, y, s=1, top="#ef4444", marks=(), checks=()):
 
 
 def coins(x, y, s=1):
+    return A("f", _coins(x, y, s), -x / 90)
+
+
+def _coins(x, y, s=1):
     st = "".join(f'<ellipse cx="0" cy="{-i * 8}" rx="22" ry="7" fill="#f59e0b"/><ellipse cx="0" cy="{-i * 8 - 2}" rx="22" ry="7" fill="#fbbf24"/>' for i in range(5))
     return g(st + f'<text x="0" y="-36" text-anchor="middle" font-family="Arial" font-weight="800" font-size="12" fill="#b45309">₽</text>', x, y, s)
 
@@ -201,10 +242,14 @@ def bag(x, y, s=1, c="#ec4899"):
 
 
 def tag(x, y, s=1, c="#fff", r=-15):
-    return g(f'<path d="M0 0 L50 0 L66 16 L50 32 L0 32 Z" fill="{c}"/><circle cx="54" cy="16" r="4" fill="{INK}"/>' + glyph(46, 32, "%", "#ef4444", 20), x, y, s, r)
+    return A("sw", g(f'<path d="M0 0 L50 0 L66 16 L50 32 L0 32 Z" fill="{c}"/><circle cx="54" cy="16" r="4" fill="{INK}"/>' + glyph(46, 32, "%", "#ef4444", 20), x, y, s, r))
 
 
 def face(x, y, r=24, mood="smile", c="#fbbf24"):
+    return A("f", _face(x, y, r, mood, c), -x / 90)
+
+
+def _face(x, y, r=24, mood="smile", c="#fbbf24"):
     m = {
         "smile": f'<path d="M-10 6 Q0 16 10 6" stroke="{INK}" stroke-width="3" fill="none" stroke-linecap="round"/>',
         "sad": f'<path d="M-10 12 Q0 2 10 12" stroke="{INK}" stroke-width="3" fill="none" stroke-linecap="round"/>',
@@ -227,7 +272,7 @@ def thermometer(x, y, s=1, r=20):
 
 
 def pill(x, y, s=1, r=30):
-    return g('<rect x="-22" y="-9" width="44" height="18" rx="9" fill="#fff"/><path d="M0 -9 h13 a9 9 0 0 1 0 18 h-13 Z" fill="#3b82f6"/>', x, y, s, r)
+    return A("f", g('<rect x="-22" y="-9" width="44" height="18" rx="9" fill="#fff"/><path d="M0 -9 h13 a9 9 0 0 1 0 18 h-13 Z" fill="#3b82f6"/>', x, y, s, r), -x / 80)
 
 
 def book(x, y, s=1, c="#3b82f6"):
@@ -240,7 +285,7 @@ def book(x, y, s=1, c="#3b82f6"):
 
 
 def pencil(x, y, s=1, r=-35):
-    return g('<rect x="-6" y="-60" width="12" height="52" fill="#fbbf24"/><rect x="-6" y="-66" width="12" height="8" fill="#f472b6"/><path d="M-6 -8 L6 -8 L0 8 Z" fill="#fde7c6"/><path d="M-2 2 L2 2 L0 8 Z" fill="' + INK + '"/>', x, y, s, r)
+    return A("rk", g('<rect x="-6" y="-60" width="12" height="52" fill="#fbbf24"/><rect x="-6" y="-66" width="12" height="8" fill="#f472b6"/><path d="M-6 -8 L6 -8 L0 8 Z" fill="#fde7c6"/><path d="M-2 2 L2 2 L0 8 Z" fill="' + INK + '"/>', x, y, s, r))
 
 
 def board(x, y, s=1, txt="А Б В"):
@@ -249,6 +294,10 @@ def board(x, y, s=1, txt="А Б В"):
 
 
 def cat(x, y, s=1, c="#f59e0b"):
+    return A("bo", _cat(x, y, s, c))
+
+
+def _cat(x, y, s=1, c="#f59e0b"):
     return g(
         f'<ellipse cx="0" cy="-22" rx="34" ry="24" fill="{c}"/><circle cx="-22" cy="-52" r="20" fill="{c}"/>'
         f'<path d="M-38 -62 L-36 -84 L-24 -70 Z M-6 -62 L-8 -84 L-20 -70 Z" fill="{c}"/>'
@@ -259,6 +308,10 @@ def cat(x, y, s=1, c="#f59e0b"):
 
 
 def dog(x, y, s=1, c="#a16207"):
+    return A("bo", _dog(x, y, s, c), -0.7)
+
+
+def _dog(x, y, s=1, c="#a16207"):
     return g(
         f'<ellipse cx="0" cy="-22" rx="36" ry="22" fill="{c}"/><circle cx="30" cy="-50" r="20" fill="{c}"/>'
         f'<ellipse cx="18" cy="-46" rx="8" ry="16" fill="#713f12" transform="rotate(20 18 -46)"/><ellipse cx="46" cy="-44" rx="7" ry="5" fill="{INK}"/>'
@@ -274,9 +327,9 @@ def palette(x, y, s=1):
 
 
 def plane(x, y, s=1, c="#fff", r=-12):
-    return g(f'<path d="M-50 0 Q-50 -10 -36 -10 L40 -10 Q56 -8 60 0 Q56 8 40 10 L-36 10 Q-50 10 -50 0 Z" fill="{c}"/>'
+    return A("fl", g(f'<path d="M-50 0 Q-50 -10 -36 -10 L40 -10 Q56 -8 60 0 Q56 8 40 10 L-36 10 Q-50 10 -50 0 Z" fill="{c}"/>'
              f'<path d="M0 -8 L-18 -40 L-6 -40 L22 -8 Z M0 8 L-18 40 L-6 40 L22 8 Z M-40 -8 L-50 -26 L-42 -26 L-28 -8 Z" fill="#93c5fd"/>'
-             + "".join(f'<circle cx="{i}" cy="-1" r="3" fill="#60a5fa"/>' for i in range(-20, 40, 12)), x, y, s, r)
+             + "".join(f'<circle cx="{i}" cy="-1" r="3" fill="#60a5fa"/>' for i in range(-20, 40, 12)), x, y, s, r))
 
 
 def suitcase(x, y, s=1, c="#f97316"):
@@ -285,15 +338,23 @@ def suitcase(x, y, s=1, c="#f97316"):
 
 
 def pin(x, y, s=1, c="#ef4444"):
-    return g(f'<path d="M0 0 C-30 -34 -26 -64 0 -64 C26 -64 30 -34 0 0 Z" fill="{c}"/><circle cx="0" cy="-42" r="10" fill="#fff"/>', x, y, s)
+    return A("f", g(f'<path d="M0 0 C-30 -34 -26 -64 0 -64 C26 -64 30 -34 0 0 Z" fill="{c}"/><circle cx="0" cy="-42" r="10" fill="#fff"/>', x, y, s))
 
 
 def bus(x, y, s=1, c="#facc15"):
+    return A("dv", _bus(x, y, s, c))
+
+
+def _bus(x, y, s=1, c="#facc15"):
     win = "".join(f'<rect x="{-60 + i * 26}" y="-58" width="20" height="18" rx="3" fill="#bfdbfe"/>' for i in range(5))
     return g(f'<rect x="-66" y="-66" width="136" height="58" rx="12" fill="{c}"/>{win}<circle cx="-36" cy="-6" r="11" fill="{INK}"/><circle cx="40" cy="-6" r="11" fill="{INK}"/><circle cx="-36" cy="-6" r="4" fill="#cbd5e1"/><circle cx="40" cy="-6" r="4" fill="#cbd5e1"/>', x, y, s)
 
 
 def car(x, y, s=1, c="#ef4444"):
+    return A("dv", _car(x, y, s, c))
+
+
+def _car(x, y, s=1, c="#ef4444"):
     return g(f'<path d="M-50 -14 L-40 -34 Q-36 -42 -26 -42 L22 -42 Q32 -42 38 -32 L50 -14 Z" fill="{c}"/><rect x="-60" y="-16" width="120" height="22" rx="8" fill="{c}"/>'
              f'<path d="M-32 -18 L-26 -36 L-4 -36 L-4 -18 Z M4 -18 L4 -36 L22 -36 L32 -18 Z" fill="#bfdbfe"/><circle cx="-32" cy="8" r="11" fill="{INK}"/><circle cx="34" cy="8" r="11" fill="{INK}"/>', x, y, s)
 
@@ -313,17 +374,29 @@ def mountain(x, y, s=1, c="#475569"):
 
 
 def flower(x, y, s=1, c="#f472b6"):
+    return A("rk", _flower(x, y, s, c), -x / 70)
+
+
+def _flower(x, y, s=1, c="#f472b6"):
     pet = "".join(f'<ellipse cx="0" cy="-12" rx="7" ry="11" fill="{c}" transform="rotate({a})"/>' for a in range(0, 360, 60))
     return g(f'<rect x="-2" y="0" width="4" height="40" fill="#16a34a"/>' + g(pet + '<circle r="7" fill="#fbbf24"/>'), x, y - 40 * s, s)
 
 
 def bulb(x, y, s=1):
+    return A("pu", _bulb(x, y, s))
+
+
+def _bulb(x, y, s=1):
     rays = "".join(f'<rect x="-2.5" y="-74" width="5" height="12" rx="2.5" fill="#fde047" transform="rotate({a} 0 -32)"/>' for a in (-60, -30, 0, 30, 60))
     return g(f'{rays}<circle cx="0" cy="-32" r="28" fill="#fde047"/><rect x="-14" y="-8" width="28" height="10" rx="3" fill="#94a3b8"/><rect x="-11" y="4" width="22" height="8" rx="3" fill="#64748b"/>'
              '<path d="M-8 -26 q8 -10 16 0" stroke="#ca8a04" stroke-width="3" fill="none"/>', x, y, s)
 
 
 def globe(x, y, r=34):
+    return A("f", _globe(x, y, r))
+
+
+def _globe(x, y, r=34):
     return g(f'<circle r="{r}" fill="#38bdf8"/><path d="M-20 -22 Q-6 -30 4 -18 Q0 -6 -12 -4 Q-24 0 -20 -22 Z M8 6 Q24 0 26 14 Q18 28 6 22 Q0 14 8 6 Z" fill="#22c55e"/>', x, y)
 
 
@@ -339,6 +412,10 @@ def blocks(x, y, labels, colors):
 
 
 def num_block(x, y, t, c, r=0):
+    return A("f", _num_block(x, y, t, c, r), -x / 70)
+
+
+def _num_block(x, y, t, c, r=0):
     return g(f'<rect x="-24" y="-48" width="48" height="48" rx="9" fill="{c}"/><rect x="-24" y="-8" width="48" height="8" rx="4" fill="#00000022"/>'
              f'<text x="0" y="-14" text-anchor="middle" font-family="Arial" font-weight="800" font-size="28" fill="#fff">{t}</text>', x, y, 1, r)
 
@@ -368,6 +445,10 @@ def table(x, y, w=180, c="#7c4a2d"):
 
 
 def scales(x, y, tilt=-10):
+    return A("rk", _scales(x, y, 0))
+
+
+def _scales(x, y, tilt=-10):
     return g(f'<rect x="-3" y="-90" width="6" height="90" fill="{INK}"/><rect x="-30" y="-4" width="60" height="8" rx="4" fill="{INK}"/>'
              + g(f'<rect x="-70" y="-3" width="140" height="6" rx="3" fill="{INK}"/><path d="M-70 0 l-16 30 h32 Z M70 0 l-16 30 h32 Z" fill="#fbbf24"/>', 0, -88, 1, tilt), x, y)
 
@@ -376,7 +457,7 @@ def speedo(x, y, level):
     a = -90 + 180 * level
     return g(f'<path d="M-60 0 A60 60 0 0 1 60 0" stroke="#fff" stroke-width="16" fill="none"/><path d="M-60 0 A60 60 0 0 1 -30 -52" stroke="#22c55e" stroke-width="16" fill="none"/>'
              f'<path d="M30 -52 A60 60 0 0 1 60 0" stroke="#ef4444" stroke-width="16" fill="none"/><path d="M-30 -52 A60 60 0 0 1 30 -52" stroke="#fbbf24" stroke-width="16" fill="none"/>'
-             f'<rect x="-3" y="-52" width="6" height="52" rx="3" fill="{INK}" transform="rotate({a - 0})"/><circle r="8" fill="{INK}"/>', x, y)
+             f'<rect class="nd" x="-3" y="-52" width="6" height="52" rx="3" fill="{INK}"/><circle r="8" fill="{INK}"/>', x, y)
 
 
 # ---------- scenes ----------
@@ -405,7 +486,7 @@ S["looks"] = svg("#00798c", mirror_frame(120, 190) + person(250, 200, 1.05, "#f4
 S["city"] = svg("#3d405b", building(30, 200, 70, 140, "#64748b") + building(110, 200, 60, 100, "#475569") + building(180, 200, 80, 160, "#334155") + building(270, 200, 60, 110, "#64748b") +
                 bus(330, 206, 0.7) + pin(220, 60, 0.8), "#6d7099")
 S["travel"] = svg("#0ea5b7", plane(140, 70, 1.2) + suitcase(260, 200, 1.1) + suitcase(330, 200, 0.8, "#2f6bff") + cloud(60, 160, 0.8) + cloud(300, 50, 0.6), "#68d1dc")
-S["often"] = svg("#e07a3f", calendar(140, 126, 1.3, marks=(2, 9), checks=(0, 2, 4, 5, 7, 9, 10)) + g('<path d="M-30 0 A30 30 0 1 1 0 30" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M-6 18 L0 30 L-14 36" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>', 310, 110, 1.2), "#f4a776")
+S["often"] = svg("#e07a3f", calendar(140, 126, 1.3, marks=(2, 9), checks=(0, 2, 4, 5, 7, 9, 10)) + A("rv", g('<path d="M-30 0 A30 30 0 1 1 0 30" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M-6 18 L0 30 L-14 36" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>', 310, 110, 1.2)), "#f4a776")
 S["week"] = svg("#30638e", "".join(num_block(56 + i * 48, 170 - (i % 2) * 14, d, c) for i, (d, c) in enumerate(zip(["П", "В", "С", "Ч", "П", "С", "В"], ["#ef4444", "#f97316", "#fbbf24", "#22c55e", "#0ea5e9", "#a855f7", "#ec4899"]))) + sun(330, 50, 22), "#5d8fc0")
 S["shop"] = svg("#3f7d20", store(130, 200) + bag(290, 200, 1) + tag(320, 70, 0.9, "#fff", -12), "#77ae55")
 S["restaurant"] = svg("#8e5572", table(200, 160, 280, "#fff") + plate(150, 150, 1) + g('<rect x="-4" y="-80" width="8" height="70" rx="3" fill="#7f1d1d"/><path d="M-8 -80 h16 l-2 -24 h-12 Z" fill="#7f1d1d"/>', 300, 160) +
@@ -428,7 +509,7 @@ S["cause"] = svg("#d1495b", cloud(90, 80, 1.1) + drops(70, 120, 3) + g('<path d=
 S["debate"] = svg("#3f7d20", scales(200, 200, -10) + bubble(40, 40, 70, 40, "#fff", glyph(70, 40, "?", "#2f6bff", 28)) + bubble(290, 30, 70, 40, "#fff", glyph(70, 40, "!", "#ef4444", 28), 1), "#77ae55")
 S["degree"] = svg("#c98a0b", speedo(200, 170, 0.8) + "".join(g(f'<rect x="-10" y="{-h}" width="20" height="{h}" rx="5" fill="#fff" opacity="{0.5 + i * 0.12}"/>', 40 + i * 24, 210) for i, h in enumerate([20, 36, 52, 70])) +
                   "".join(g(f'<rect x="-10" y="{-h}" width="20" height="{h}" rx="5" fill="#fff" opacity="{0.5 + i * 0.12}"/>', 296 + i * 24, 210) for i, h in enumerate([70, 52, 36, 20]))[::-1][::-1], "#ecc260")
-S["story"] = svg("#8e5572", book(200, 196, 1.6, "#fbbf24") + "".join(g('<path d="M0 -12 L3 -3 L12 -3 L5 3 L8 12 L0 6 L-8 12 L-5 3 L-12 -3 L-3 -3 Z" fill="#fde68a"/>', x, y, s) for x, y, s in [(120, 60, 1.2), (200, 36, 1.6), (290, 64, 1), (340, 120, 0.8), (70, 130, 0.8)]) +
+S["story"] = svg("#8e5572", book(200, 196, 1.6, "#fbbf24") + "".join(A("tw", g('<path d="M0 -12 L3 -3 L12 -3 L5 3 L8 12 L0 6 L-8 12 L-5 3 L-12 -3 L-3 -3 Z" fill="#fde68a"/>', x, y, s), -x / 100) for x, y, s in [(120, 60, 1.2), (200, 36, 1.6), (290, 64, 1), (340, 120, 0.8), (70, 130, 0.8)]) +
                 cloud(200, 110, 0.6), "#b98aa0")
 S["actions"] = svg("#2a9d8f", g(
     '<circle cx="0" cy="-118" r="16" fill="' + SKIN[0] + '"/><path d="M-4 -100 L6 -60" stroke="#ef4444" stroke-width="18" stroke-linecap="round"/>'

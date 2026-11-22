@@ -3596,3 +3596,69 @@
 @media (prefers-reduced-motion: reduce) {
   .learning-scroll-cue svg { animation: none; }
 }
+
+/* ---- card motion: shared by lesson / topic cards ---- */
+.card-motion.card-motion {
+  position: relative;
+  overflow: hidden;
+  animation: card-in 560ms cubic-bezier(.2, .9, .3, 1.15) backwards;
+  animation-delay: calc(min(var(--i, 0), 14) * 55ms);
+  transition: transform 260ms cubic-bezier(.2, .9, .3, 1.3), box-shadow 260ms ease, border-color 200ms ease;
+  will-change: transform;
+}
+.card-motion.card-motion:hover {
+  transform: translateY(-7px) rotate(-0.6deg);
+  box-shadow: 0 22px 40px -18px rgba(17, 24, 39, 0.35);
+}
+.card-motion.card-motion:nth-child(even):hover { transform: translateY(-7px) rotate(0.6deg); }
+.card-motion.card-motion:active { transform: translateY(-2px) scale(0.985); }
+/* light sweep across the card on hover */
+.card-motion::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.45) 50%, transparent 65%);
+  transform: translateX(-120%);
+}
+.card-motion:hover::after { transition: transform 750ms ease; transform: translateX(120%); }
+/* picture zooms and tilts slightly */
+.card-motion img { transition: transform 600ms cubic-bezier(.2, .8, .2, 1); }
+.card-motion.card-motion:hover img { transform: scale(1.09) rotate(1deg); }
+/* arrows nudge forward */
+.card-motion svg.lucide-arrow-right { transition: transform 220ms ease; }
+.card-motion:hover svg.lucide-arrow-right { transform: translateX(5px); }
+/* progress bars fill in */
+.card-motion .vocab-bar span,
+.card-motion .course-unit-bar span {
+  transform-origin: left center;
+  animation: bar-grow 1s cubic-bezier(.2, .8, .2, 1) both;
+  animation-delay: calc(300ms + min(var(--i, 0), 14) * 55ms);
+}
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(26px) scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes bar-grow { from { transform: scaleX(0); } }
+@media (prefers-reduced-motion: reduce) {
+  .card-motion, .card-motion .vocab-bar span { animation: none; }
+  .card-motion:hover, .card-motion.card-motion:hover img { transform: none; }
+  .card-motion::after { display: none; }
+}
+
+/* livelier small things across pages */
+.vocab .vocab-stats > div { transition: transform 220ms cubic-bezier(.2,.9,.3,1.3), box-shadow 220ms; }
+.vocab .vocab-stats > div:hover { transform: translateY(-4px); box-shadow: 0 14px 26px -16px rgba(17,24,39,.35); }
+.vocab .vocab-stats > div svg { transition: transform 300ms cubic-bezier(.2,.9,.3,1.5); }
+.vocab .vocab-stats > div:hover svg { transform: rotate(-12deg) scale(1.2); }
+.vocab .vocab-continue .vocab-continue-icon { animation: play-pulse 2.2s ease-in-out infinite; }
+@keyframes play-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(17,24,39,.25); } 50% { box-shadow: 0 0 0 10px rgba(17,24,39,0); } }
+.vocab .vocab-continue > svg:last-child { transition: transform 220ms; }
+.vocab .vocab-continue:hover > svg:last-child { transform: translateX(6px); }
+.vocab .vocab-how li .vocab-how-icon { transition: transform 300ms cubic-bezier(.2,.9,.3,1.5); }
+.vocab .vocab-how li:hover .vocab-how-icon { transform: scale(1.3) rotate(-8deg); opacity: 1; }
+.course-before-card svg, .b2-skill-icon svg { transition: transform 300ms cubic-bezier(.2,.9,.3,1.5); }
+.course-before-card:hover svg, .b2-skill:hover .b2-skill-icon svg { transform: rotate(-10deg) scale(1.15); }
+@media (prefers-reduced-motion: reduce) {
+  .vocab .vocab-continue .vocab-continue-icon { animation: none; }
+}

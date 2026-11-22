@@ -641,3 +641,20 @@
 .vocab .vocab-topic-card > header { height: 140px; background: none; }
 .vocab .vocab-topic-scene { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 400ms ease; }
 .vocab .vocab-topic-card:hover .vocab-topic-scene { transform: scale(1.05); }
+.vocab .vocab-topic-card > header { position: relative; }
+.vocab .vocab-topic-badge {
+  position: absolute; left: 12px; bottom: 10px; padding: 4px 10px; border-radius: 99px;
+  font-size: 0.75rem; font-weight: 800; color: #fff; background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
+  transition: transform 260ms cubic-bezier(.2, .9, .3, 1.4);
+}
+.vocab .vocab-topic-card:hover .vocab-topic-badge { transform: translateY(-3px) scale(1.05); }
+.vocab .vocab-topic-card .vocab-card-lessons button { transition: transform 160ms ease, background 160ms, border-color 160ms; }
+.vocab .vocab-topic-card .vocab-card-lessons button:hover { transform: translateY(-3px); border-color: var(--c); color: var(--c); }
+.vocab .vocab-topic-card .vocab-card-lessons button.next { animation: lesson-next 1.8s ease-in-out infinite; }
+@keyframes lesson-next { 50% { box-shadow: 0 0 0 5px color-mix(in srgb, var(--c) 22%, transparent); } }
+.vocab .vocab-topic-card .vocab-card-go { transition: letter-spacing 200ms; }
+.vocab .vocab-topic-card:hover .vocab-card-go { letter-spacing: 0.01em; }
+@media (prefers-reduced-motion: reduce) {
+  .vocab .vocab-topic-card .vocab-card-lessons button.next { animation: none; }
+}

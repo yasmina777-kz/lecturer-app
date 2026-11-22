@@ -15,7 +15,12 @@ export function useWorkspaceMotion(
     const seen = new WeakSet<Element>();
     const animations = new Set<Animation>();
     const selector =
-      ".sign-level-card,.sign-exercise-card,.activity-entry-links>a,.activity-scenario,.sign-word-card,[data-workspace-enter]";
+      [
+        ".sign-level-card,.sign-exercise-card,.activity-entry-links>a,.activity-scenario,.sign-word-card,[data-workspace-enter]",
+        // Blocks on the learn / course / vocab / culture pages rise in as they scroll into view.
+        ".learning-next-grid>*,.vocab-stats>div,.vocab-how>li,.vocab-continue,.vocab-phrase,.course-before-card",
+        ".culture-section,.b2-path,.b2-skill,.b2-why,.b2-action,.course-section-title,.vocab-section-title",
+      ].join(",");
     const observer = new IntersectionObserver(
       (entries) => {
         let index = 0;

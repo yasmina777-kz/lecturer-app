@@ -264,9 +264,10 @@ function Overview({
                     const first = t.lessons.findIndex((_, i) => s.lessons[`${t.name}:${i}`] === undefined);
           const go = first < 0 ? 0 : first;
           return (
-            <section key={t.name} className="panel vocab-topic-card" style={{ "--c": TOPIC_COLORS[k % TOPIC_COLORS.length] } as React.CSSProperties}>
+            <section key={t.name} className="panel vocab-topic-card card-motion" style={{ "--c": TOPIC_COLORS[k % TOPIC_COLORS.length], "--i": k } as React.CSSProperties}>
               <header>
                 <img className="vocab-topic-scene" src={`/images/topics/${TOPIC_SCENE[t.name] ?? "ideas"}.svg`} alt="" loading="lazy" />
+                <span className="vocab-topic-badge">{t.lessons.length} {at("уроков", "lessons", "сабақ")}</span>
               </header>
               <div className="vocab-topic-title">
                 <h3>{t.name}</h3>

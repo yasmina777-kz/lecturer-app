@@ -397,7 +397,7 @@ export function CoursePage() {
               const done = progress[u.id]?.done;
               const current = !done && u.id === next?.id;
               return (
-                <Link key={u.id} className={`panel course-unit${done ? " done" : ""}${current ? " current" : ""} course-anim`} to={`/course/${u.id}`} style={{ "--i": i + 6 } as React.CSSProperties}>
+                <Link key={u.id} className={`panel course-unit card-motion${done ? " done" : ""}${current ? " current" : ""} course-anim`} to={`/course/${u.id}`} style={{ "--i": i + 6 } as React.CSSProperties}>
                   <div className="course-unit-thumb">
                     <TopicArt id={u.id} index={i} />
                     <span className="course-unit-num">{done ? <CheckCircle2 size={20} /> : i + 1}</span>
