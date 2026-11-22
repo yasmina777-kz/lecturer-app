@@ -868,3 +868,18 @@
   font-size: 0.82rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .course .course-before-card > span:last-child { min-width: 0; }
+
+/* flat topic art: one solid colour, a big line icon bleeding off the corner */
+.course .topic-art { background: var(--art); filter: none; }
+.course .topic-art .topic-main {
+  left: auto; top: auto; right: -14px; bottom: -22px; width: auto; height: auto; margin: 0;
+  border-radius: 0; background: none; box-shadow: none; color: #fff; opacity: 0.95;
+  transform: rotate(-8deg);
+}
+.course .course-unit:hover .topic-art .topic-main { transform: rotate(0deg) translateY(-4px); }
+.course .topic-art .topic-small {
+  width: auto; height: auto; border: 0; border-radius: 0; background: none; backdrop-filter: none;
+  color: #fff; opacity: 0.75; animation: none;
+}
+.course .topic-art .topic-small.s0 { left: auto; right: 46%; top: 22%; }
+.course .topic-art .topic-small.s1 { left: auto; right: 38%; top: auto; bottom: 18%; }

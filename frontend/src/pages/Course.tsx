@@ -194,16 +194,15 @@ const ART: Record<number, [LucideIcon, LucideIcon[]]> = {
 
 /** Topic illustration for a lesson card: a big theme icon on a level-coloured
  * gradient with three small floating icons (vector, crisp, no downloads). */
-const HUES = [0, 28, -30, 55, -60, 85];
+// Flat, print-like palette shared with the word trainer: solid colours, no gradients.
+const ART_COLORS = ["#d1495b", "#00798c", "#e07a3f", "#30638e", "#3f7d20", "#8e5572", "#c98a0b", "#2a9d8f", "#5c6bc0", "#b5651d", "#a23b72", "#4e8b6f"];
 function TopicArt({ id, index }: { id: number; index: number }) {
   const [Main, small] = ART[id] ?? [BookOpen, [Star, Heart, Smile]];
   return (
-    <div className="topic-art" style={{ "--hue": `${HUES[index % HUES.length]}deg` } as React.CSSProperties} aria-hidden="true">
-      <span className="topic-blob a" />
-      <span className="topic-blob b" />
-      <span className="topic-main"><Main size={44} strokeWidth={1.8} /></span>
-      {small.map((Icon, k) => (
-        <span key={k} className={`topic-small s${k}`}><Icon size={18} strokeWidth={2} /></span>
+    <div className="topic-art" style={{ "--art": ART_COLORS[index % ART_COLORS.length] } as React.CSSProperties} aria-hidden="true">
+      <span className="topic-main"><Main size={120} strokeWidth={1.3} /></span>
+      {small.slice(0, 2).map((Icon, k) => (
+        <span key={k} className={`topic-small s${k}`}><Icon size={26} strokeWidth={1.6} /></span>
       ))}
     </div>
   );

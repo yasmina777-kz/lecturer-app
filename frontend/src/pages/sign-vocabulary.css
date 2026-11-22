@@ -483,20 +483,20 @@
   display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
   gap: 16px; align-items: stretch; margin-bottom: 24px;
 }
-.vocab .vocab-card {
+.vocab .vocab-topic-card {
   --c: hsl(var(--hue) 70% 50%);
   display: flex; flex-direction: column; gap: 12px; margin: 0; padding: 18px;
   border-top: 4px solid var(--c);
   transition: transform 160ms ease, box-shadow 160ms ease;
 }
-.vocab .vocab-card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(17, 24, 39, 0.08); }
-.vocab .vocab-card header { display: flex; gap: 12px; align-items: center; margin: 0; }
+.vocab .vocab-topic-card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(17, 24, 39, 0.08); }
+.vocab .vocab-topic-card header { display: flex; gap: 12px; align-items: center; margin: 0; }
 .vocab .vocab-card-icon {
   flex: none; width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center;
   color: var(--c); background: color-mix(in srgb, var(--c) 13%, transparent);
 }
-.vocab .vocab-card h3 { margin: 0; font-size: 1.08rem; }
-.vocab .vocab-card header small { opacity: 0.6; font-size: 0.82rem; }
+.vocab .vocab-topic-card h3 { margin: 0; font-size: 1.08rem; }
+.vocab .vocab-topic-card header small { opacity: 0.6; font-size: 0.82rem; }
 .vocab .vocab-card-words { display: flex; flex-wrap: wrap; gap: 6px; min-height: 28px; }
 .vocab .vocab-card-words i {
   font-style: normal; font-size: 0.8rem; padding: 3px 9px; border-radius: 99px;
@@ -545,7 +545,7 @@
   .vocab .vocab-how li::after { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .vocab .vocab-card:hover, .vocab .vocab-continue:hover, .vocab .vocab-phrase:hover { transform: none; }
+  .vocab .vocab-topic-card:hover, .vocab .vocab-continue:hover, .vocab .vocab-phrase:hover { transform: none; }
 }
 :root .product-ui[data-product-ui][data-product-theme] .vocab .vocab-continue {
   background: linear-gradient(120deg, #2f6bff, #7c5cff);
@@ -557,11 +557,11 @@
   background: color-mix(in srgb, var(--c) 14%, transparent);
 }
 .vocab .vocab-card-progress .vocab-bar span { display: block; height: 100%; }
-.vocab .vocab-card .vocab-card-go { width: 100%; align-self: stretch; }
+.vocab .vocab-topic-card .vocab-card-go { width: 100%; align-self: stretch; }
 .vocab .vocab-card-words { max-height: 28px; overflow: hidden; }
 .vocab .vocab-card-lessons button.more { width: auto; padding: 0 9px; color: var(--c); border-style: dashed; }
-.vocab .vocab-card .vocab-card-progress { width: 100%; }
-.vocab .vocab-card .vocab-card-progress .vocab-bar { flex: 1 1 auto; width: 100%; min-width: 60px; }
+.vocab .vocab-topic-card .vocab-card-progress { width: 100%; }
+.vocab .vocab-topic-card .vocab-card-progress .vocab-bar { flex: 1 1 auto; width: 100%; min-width: 60px; }
 
 /* calmer look: same black/white language as the rest of the platform */
 .vocab .vocab-how { gap: 0; margin: 4px 0 18px; display: flex; flex-wrap: wrap; column-gap: 22px; row-gap: 6px; }
@@ -583,22 +583,58 @@
 .vocab .vocab-continue small { text-transform: none; letter-spacing: 0; opacity: 0.6; }
 .vocab .vocab-continue em { opacity: 0.6; }
 
-.vocab .vocab-card { --c: var(--p-text, #14171f); border-top: 1px solid var(--p-line, #dfe3ea); gap: 10px; }
-.vocab .vocab-card:hover { transform: none; box-shadow: none; border-color: var(--p-muted, #98a2b3); }
+.vocab .vocab-topic-card { --c: var(--p-text, #14171f); border-top: 1px solid var(--p-line, #dfe3ea); gap: 10px; }
+.vocab .vocab-topic-card:hover { transform: none; box-shadow: none; border-color: var(--p-muted, #98a2b3); }
 .vocab .vocab-card-icon { width: auto; height: auto; background: none; color: var(--p-muted, #667085); }
 .vocab .vocab-card-words {
   margin: 0; max-height: none; font-size: 0.88rem; color: var(--p-muted, #667085);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.vocab .vocab-card .vocab-card-progress .vocab-bar { background: var(--p-line, #e4e7ec); height: 4px; }
+.vocab .vocab-topic-card .vocab-card-progress .vocab-bar { background: var(--p-line, #e4e7ec); height: 4px; }
 .vocab .vocab-card-progress .vocab-bar span { background: #1f9d6a; }
 .vocab .vocab-card-lessons button { border-radius: 8px; width: 30px; height: 30px; }
 .vocab .vocab-card-lessons button.next { box-shadow: none; border: 1.5px solid var(--p-text, #14171f); color: inherit; }
 .vocab .vocab-card-lessons button.more { color: inherit; }
-.vocab .vocab-card .vocab-card-go {
+.vocab .vocab-topic-card .vocab-card-go {
   width: auto; align-self: flex-start; height: auto; padding: 4px 0; background: none;
   color: inherit; justify-content: flex-start;
 }
-.vocab .vocab-card .vocab-card-go:hover { background: none; text-decoration: underline; }
-.vocab .vocab-card { min-width: 0; overflow: hidden; }
-.vocab .vocab-card .vocab-card-words { width: 100%; min-width: 0; }
+.vocab .vocab-topic-card .vocab-card-go:hover { background: none; text-decoration: underline; }
+.vocab .vocab-topic-card { min-width: 0; overflow: hidden; }
+.vocab .vocab-topic-card .vocab-card-words { width: 100%; min-width: 0; }
+
+/* flat colour style: solid block on top with a big number and a big line icon */
+.vocab .vocab-topic-card {
+  padding: 0; gap: 0; border: 1px solid var(--p-line, #dfe3ea); border-radius: 18px;
+}
+.vocab .vocab-topic-card:hover { border-color: var(--c); }
+.vocab .vocab-topic-card > header {
+  position: relative; height: 104px; display: block; overflow: hidden;
+  background: var(--c); color: #fff;
+}
+.vocab .vocab-topic-num {
+  position: absolute; left: 18px; top: 12px;
+  font-size: 2.4rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1;
+  font-variant-numeric: tabular-nums; opacity: 0.95;
+}
+.vocab .vocab-topic-icon {
+  position: absolute; right: -6px; bottom: -14px; color: #fff; opacity: 0.9;
+  transform: rotate(-8deg); transition: transform 250ms ease;
+}
+.vocab .vocab-topic-card:hover .vocab-topic-icon { transform: rotate(0deg) translateY(-4px); }
+.vocab .vocab-topic-card > :not(header) { margin-left: 18px; margin-right: 18px; }
+.vocab .vocab-topic-title { margin-top: 14px; }
+.vocab .vocab-topic-title h3 { margin: 0; font-size: 1.1rem; }
+.vocab .vocab-topic-title small { opacity: 0.6; font-size: 0.82rem; }
+.vocab .vocab-topic-card .vocab-card-words { margin-top: 8px; }
+.vocab .vocab-topic-card .vocab-card-progress { margin-top: 10px; width: auto; }
+.vocab .vocab-topic-card .vocab-card-progress .vocab-bar span { background: var(--c); }
+.vocab .vocab-topic-card .vocab-card-lessons { margin-top: 10px; }
+.vocab .vocab-topic-card .vocab-card-lessons button.next { border-color: var(--c); color: var(--c); }
+.vocab .vocab-topic-card .vocab-card-lessons button.done { background: var(--c); border-color: var(--c); }
+.vocab .vocab-topic-card .vocab-card-go { margin-top: auto; padding: 12px 0 16px; color: var(--c); font-weight: 700; }
+@media (prefers-reduced-motion: reduce) {
+  .vocab .vocab-topic-icon { transition: none; }
+}
+.vocab .vocab-topic-card .vocab-card-words { width: auto; }
+.vocab .vocab-topic-card .vocab-card-words { width: calc(100% - 36px); }
