@@ -1301,3 +1301,26 @@
 :root .product-ui[data-product-ui][data-product-theme] .vocab.bento-page .vocab-topic-card .vocab-card-go { background: var(--b-ink); color: var(--b-white); }
 .vocab.bento-page .vocab-phrase-num { background: #2f6bff; color: #fff; }
 :root .product-ui[data-product-ui][data-product-theme] .vocab.bento-page .vocab-phrase { border: 1px solid var(--b-line); }
+
+/* ---- simple top: page heading + two cards ---- */
+.vocab .vocab-heading { margin-bottom: 18px; }
+.vocab .bento.bento-simple { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "main road"; }
+.vocab.bento-page .bento-simple .bento-main { padding-top: 24px; }
+.vocab.bento-page .bento-simple .bento-main::before { display: none; }
+.vocab .bento-simple .bento-main h2 { font-size: clamp(1.7rem, 2.6vw, 2.3rem); }
+:root .product-ui[data-product-ui][data-product-theme] .vocab .bento-simple .bento-main h2 { color: #fff; }
+.vocab .bento-simple .bento-main { display: flex; flex-direction: column; }
+.vocab .bento-simple .bento-pick { margin-top: auto; padding-top: 18px; }
+.vocab .bento-review {
+  align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; height: 38px; padding: 0 16px;
+  border-radius: 99px; border: 1px solid rgba(255, 255, 255, .4); background: transparent; color: #fff; font: inherit; font-size: .86rem; font-weight: 600; cursor: pointer;
+}
+.vocab .bento-review:hover { background: rgba(255, 255, 255, .14); }
+@media (max-width: 860px) {
+  .vocab .bento.bento-simple { grid-template-columns: 1fr; grid-template-areas: "main" "road"; }
+}
+.vocab .bento-words { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 20px; }
+.vocab .bento-words i {
+  font-style: normal; font-size: .84rem; padding: 5px 12px; border-radius: 99px; color: #fff;
+  background: rgba(255, 255, 255, .16); border: 1px solid rgba(255, 255, 255, .25);
+}

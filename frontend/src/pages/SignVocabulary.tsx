@@ -66,16 +66,7 @@ import {
 } from "lucide-react";
 import { at } from "../i18n/automation";
 import { TopicArt } from "../components/TopicArt";
-import { useAuth } from "../context/AuthContext";
 
-const lang = () => {
-  try {
-    const l = document.documentElement.lang;
-    return l === "en" ? "en-US" : l === "kk" ? "kk-KZ" : "ru-RU";
-  } catch {
-    return "ru-RU";
-  }
-};
 import { Loading } from "../components/UI";
 import type { DictionaryEntry } from "../sign/dictionary";
 import { dueIds, LEARNED_BOX, streak, useVocabProgress } from "../sign/vocabProgress";
@@ -258,20 +249,7 @@ function Overview({
   const due = dueIds(s, 999).length;
   const days = streak(s.days);
   const [expanded, setExpanded] = useState<string[]>([]);
-  const { user } = useAuth();
   const [pick, setPick] = useState(() => topics[0]?.name ?? "");
-  const week = useMemo(() => {
-    const now = new Date();
-    const monday = new Date(now);
-    monday.setDate(now.getDate() - ((now.getDay() + 6) % 7));
-    const practiced = new Set(s.days);
-    return Array.from({ length: 7 }, (_, i) => {
-      const d = new Date(monday);
-      d.setDate(monday.getDate() + i);
-      const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
-      return { key, date: d.getDate(), name: d.toLocaleDateString(lang(), { weekday: "short" }), today: d.toDateString() === now.toDateString(), done: practiced.has(key) };
-    });
-  }, [s.days]);
   const nextUp = (() => {
     for (const t of topics)
       for (let i = 0; i < t.lessons.length; i++)
@@ -280,23 +258,29 @@ function Overview({
   })();
   return (
     <div className="sign-workspace vocab bento-page">
-      <div className="bento">
+      <div className="page-heading vocab-heading">
+        <div>
+          <span className="eyebrow">{at("СЛОВАРНЫЙ ЗАПАС", "VOCABULARY", "СӨЗДІК ҚОР")}</span>
+          <h1>{at("Тренажёр слов РЖЯ", "RSL word trainer", "Ым сөздерінің жаттықтырғышы")}</h1>
+          <p>{at(`${words.length} жестов по ${topics.length} темам, по 8 слов в уроке. Выученные слова вернутся на повторение через 1, 2, 4, 8… дней.`, `${words.length} signs in ${topics.length} topics, 8 words a lesson. Learned words come back after 1, 2, 4, 8… days.`, `${words.length} ым, ${topics.length} тақырып.`)}</p>
+        </div>
+      </div>
+      <div className="bento bento-simple">
         <section className="bento-card bento-main">
-          <div className="bento-user">
-            <span className="bento-avatar">{(user?.fullName ?? "?").slice(0, 1).toUpperCase()}</span>
-            <div>
-              <strong>{user?.fullName ?? at("Гость", "Guest", "Қонақ")}</strong>
-              <small>{at("Изучает РЖЯ", "Learning RSL", "РЖЯ үйренуде")}</small>
+          <h2>{nextUp ? `${nextUp.topic} · ${at("урок", "lesson", "сабақ")} ${nextUp.lesson + 1}` : at("Все уроки пройдены", "All lessons done", "Барлық сабақ өтілді")}</h2>
+          <p className="bento-sub">{started ? at("Продолжите с того места, где остановились", "Pick up where you left off", "Тоқтаған жерден жалғастырыңыз") : at("Начните с первой темы или выберите свою", "Start with the first topic or pick your own", "Бірінші тақырыптан бастаңыз")}</p>
+          {nextUp && (
+            <div className="bento-words">
+              {nextUp.words.map((w) => <i key={w.id}>{w.label.replace(/[!?]$/, "")}</i>)}
             </div>
-          </div>
-          <div className="bento-notch">
-            <button className="bento-round" onClick={review} disabled={!due} title={at("Повторить слова", "Review words", "Қайталау")}><Repeat size={18} /></button>
-            <Link className="bento-round" to="/learn" title={at("Все упражнения", "All exercises", "Барлық жаттығулар")}><GraduationCap size={18} /></Link>
-          </div>
-          <h1>{at("Тренажёр слов", "Word trainer", "Сөз жаттықтырғышы")}</h1>
-          <p className="bento-sub">{at("Тем", "Topics", "Тақырып")}: <b>{topics.length}</b> · {at("жестов", "signs", "ым")}: <b>{words.length}</b></p>
+          )}
           <div className="bento-progress"><i style={{ width: `${Math.max((100 * learned) / Math.max(words.length, 1), learned ? 1 : 0)}%` }} /></div>
           <div className="bento-progress-label"><span>{at("Прогресс по словарю", "Dictionary progress", "Сөздік прогресі")}</span><b>{Math.round((100 * learned) / Math.max(words.length, 1))}%</b></div>
+          {due > 0 && (
+            <button className="bento-review" onClick={review}>
+              <Repeat size={16} /> {at(`Повторить ${Math.min(due, 20)} слов`, `Review ${Math.min(due, 20)} words`, `${Math.min(due, 20)} сөзді қайталау`)}
+            </button>
+          )}
           <div className="bento-pick">
             <label className="bento-select">
               <BookOpen size={16} />
@@ -309,24 +293,6 @@ function Overview({
             </button>
           </div>
         </section>
-
-        <section className="bento-card bento-week">
-          <div className="bento-head">
-            <h2>{at("Эта", "This", "Осы")}<br />{at("неделя", "week", "апта")}</h2>
-            <span className="bento-chip">{new Date().toLocaleDateString(lang(), { month: "long" })}</span>
-          </div>
-          <p className="bento-meta"><Flame size={16} /> {days} {at("дн. подряд", "day streak", "күн қатарынан")} · {started} {at("слов начато", "words started", "сөз басталды")}</p>
-          <div className="bento-days">
-            {week.map((d) => (
-              <span key={d.key} className={`bento-day${d.today ? " today" : ""}${d.done ? " done" : ""}`}>
-                <b>{d.date}</b>
-                <small>{d.name}</small>
-              </span>
-            ))}
-          </div>
-          <div className="bento-dots">{week.map((d) => <i key={d.key} className={d.today ? "on" : ""} />)}</div>
-        </section>
-
         <section className="bento-card bento-road">
           <div className="bento-head">
             <h2>{at("Как проходит", "How a lesson", "Сабақ қалай")}<br />{at("урок", "works", "өтеді")}</h2>
@@ -353,36 +319,6 @@ function Overview({
             <span>{at("видео", "video", "бейне")}</span><span>{at("выбор", "choice", "таңдау")}</span><span>{at("поиск", "search", "іздеу")}</span><b>{at("камера", "camera", "камера")}</b>
           </div>
         </section>
-
-        <div className="bento-col">
-          <div className="bento-card bento-date">
-            <b>{new Date().getDate()}</b>
-            <span>{new Date().toLocaleDateString(lang(), { weekday: "short" })},<br />{new Date().toLocaleDateString(lang(), { month: "long" })}</span>
-          </div>
-          <section className="bento-card bento-dark">
-            <h3>{at("Повторение", "Review", "Қайталау")}</h3>
-            <small>{due ? at("пора повторить", "time to review", "қайталау уақыты") : at("всё повторено", "all caught up", "бәрі қайталанды")}</small>
-            <span className="bento-bubble">{due > 0 ? `+${due}` : "0"}</span>
-            <svg className="bento-wave" viewBox="0 0 200 90" preserveAspectRatio="none" aria-hidden="true">
-              <path className="fill" d="M0 70 C30 70 40 40 70 46 C95 52 100 20 125 24 C150 28 160 60 200 50 L200 90 L0 90 Z" />
-              <path className="line" d="M0 70 C30 70 40 40 70 46 C95 52 100 20 125 24 C150 28 160 60 200 50" />
-              <circle cx="125" cy="24" r="5" />
-            </svg>
-          </section>
-        </div>
-
-        <div className="bento-col">
-          <section className="bento-card bento-total">
-            <span className="bento-round light"><Clock size={18} /></span>
-            <small>{at("Всего выучено", "Learned in total", "Барлығы үйренілді")}</small>
-            <strong><CountUp value={learned} /> <em>{at("слов", "words", "сөз")}</em></strong>
-          </section>
-          <Link className="bento-card bento-mentor" to="/text-to-sign">
-            <span className="bento-round lime"><ArrowUpRight size={18} /></span>
-            <span className="bento-mentor-text">{at("Перевод", "Translate", "Аударма")}<br /><b>{at("текст → жесты", "text → signs", "мәтін → ым")}</b></span>
-            <img src="/images/landing-v2/mentor-wave.webp" alt="" />
-          </Link>
-        </div>
       </div>
 
       <h2 className="vocab-section-title">{at("Темы", "Topics", "Тақырыптар")}</h2>
