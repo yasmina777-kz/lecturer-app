@@ -295,39 +295,53 @@ function Overview({
         </div>
       </section>
 
-      <div className="vocab-stats2">
+      <div className="vocab-stats3">
         {([
-          [GraduationCap, learned, at("выучено", "learned", "үйренілді"), "#2f6bff", learned / Math.max(words.length, 1)],
-          [Check, started, at("начато", "started", "басталды"), "#12a37b", started / Math.max(words.length, 1)],
-          [Repeat, due, at("к повторению", "due for review", "қайталауға"), "#7c5cff", null],
-          [Flame, days, at("дней подряд", "day streak", "күн қатарынан"), "#f08c00", null],
-        ] as [typeof Eye, number, string, string, number | null][]).map(([Icon, value, label, color, share], i) => (
-          <div key={label} className="vocab-stat" style={{ "--t": color, "--i": i } as React.CSSProperties}>
-            <span className="vocab-stat-icon"><Icon size={22} /></span>
-            <div>
-              <strong><CountUp value={value} /></strong>
+          ["ring", GraduationCap, learned, words.length, at("выучено", "learned", "үйренілді"), at("из", "of", "/"), "#4f6bed"],
+          ["ring", Check, started, words.length, at("начато", "started", "басталды"), at("из", "of", "/"), "#2f9e78"],
+          ["due", Repeat, due, 0, at("к повторению", "due for review", "қайталауға"), "", "#7a5cd6"],
+          ["streak", Flame, days, 7, at("дней подряд", "day streak", "күн қатарынан"), "", "#d98a1c"],
+        ] as [string, typeof Eye, number, number, string, string, string][]).map(([kind, Icon, value, total, label, of, color], i) => (
+          <div key={label} className={`vocab-stat3 ${kind}`} style={{ "--t": color, "--i": i } as React.CSSProperties}>
+            {kind === "ring" ? (
+              <span className="vocab-ring" style={{ "--p": `${total ? (100 * value) / total : 0}` } as React.CSSProperties}>
+                <svg viewBox="0 0 44 44"><circle className="bg" cx="22" cy="22" r="19" /><circle className="fg" cx="22" cy="22" r="19" pathLength={100} /></svg>
+                <Icon size={18} />
+              </span>
+            ) : (
+              <span className="vocab-stat3-icon"><Icon size={20} /></span>
+            )}
+            <div className="vocab-stat3-body">
+              <strong><CountUp value={value} />{kind === "ring" && <small> {of} {total}</small>}</strong>
               <span>{label}</span>
+              {kind === "streak" && (
+                <span className="vocab-week" aria-hidden="true">
+                  {Array.from({ length: 7 }, (_, d) => <i key={d} className={d < Math.min(value, 7) ? "on" : ""} style={{ "--d": d } as React.CSSProperties} />)}
+                </span>
+              )}
+              {kind === "due" && (
+                <span className="vocab-due-note">{value ? at("пора повторить", "time to review", "қайталау уақыты") : at("всё повторено", "all caught up", "бәрі қайталанды")}</span>
+              )}
             </div>
-            {share !== null && <span className="vocab-stat-bar"><i style={{ width: `${Math.max(share * 100, value ? 2 : 0)}%` }} /></span>}
           </div>
         ))}
       </div>
 
       <h2 className="vocab-section-title">{at("Как проходит урок", "How a lesson works", "Сабақ қалай өтеді")}</h2>
-      <ol className="vocab-how2">
+      <ol className="vocab-path">
         {([
-          [Eye, at("Посмотреть", "Watch", "Көру"), at("Видео носителя: можно замедлить и отзеркалить", "Signer video: slow it down or mirror it", "Бейнені баяулатыңыз"), "#2f6bff"],
-          [Search, at("Узнать", "Recognize", "Тану"), at("Выберите слово, которое показали", "Pick the word that was signed", "Сөзді таңдаңыз"), "#12a37b"],
-          [MousePointerClick, at("Найти", "Find", "Табу"), at("Найдите нужный жест среди видео", "Find the right sign among videos", "Ымды табыңыз"), "#7c5cff"],
-          [Camera, at("Показать", "Sign it", "Көрсету"), at("Повторите жест в камеру", "Sign it to the camera", "Камераға көрсетіңіз"), "#f08c00"],
+          [Eye, at("Посмотреть", "Watch", "Көру"), at("видео носителя, можно замедлить", "signer video, slow it down", "бейнені баяулату"), "#4f6bed"],
+          [Search, at("Узнать", "Recognize", "Тану"), at("выбрать слово к жесту", "pick the word", "сөзді таңдау"), "#2f9e78"],
+          [MousePointerClick, at("Найти", "Find", "Табу"), at("найти жест к слову", "find the sign", "ымды табу"), "#7a5cd6"],
+          [Camera, at("Показать", "Sign it", "Көрсету"), at("повторить в камеру", "sign to the camera", "камераға көрсету"), "#d98a1c"],
         ] as [typeof Eye, string, string, string][]).map(([Icon, title, text, color], i) => (
-          <li key={title} style={{ "--t": color } as React.CSSProperties}>
-            <span className="vocab-how2-num">{i + 1}</span>
-            <span className="vocab-how2-icon"><Icon size={26} /></span>
+          <li key={title} style={{ "--t": color, "--i": i } as React.CSSProperties}>
+            <span className="vocab-path-node"><Icon size={22} /><b>{i + 1}</b></span>
             <strong>{title}</strong>
             <small>{text}</small>
           </li>
         ))}
+        <span className="vocab-path-runner" aria-hidden="true" />
       </ol>
 
       <h2 className="vocab-section-title">{at("Темы", "Topics", "Тақырыптар")}</h2>
