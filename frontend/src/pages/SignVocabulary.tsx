@@ -249,7 +249,6 @@ function Overview({
   const due = dueIds(s, 999).length;
   const days = streak(s.days);
   const [expanded, setExpanded] = useState<string[]>([]);
-  const [pick, setPick] = useState(() => topics[0]?.name ?? "");
   const nextUp = (() => {
     for (const t of topics)
       for (let i = 0; i < t.lessons.length; i++)
@@ -265,62 +264,12 @@ function Overview({
           <p>{at(`${words.length} жестов по ${topics.length} темам, по 8 слов в уроке. Выученные слова вернутся на повторение через 1, 2, 4, 8… дней.`, `${words.length} signs in ${topics.length} topics, 8 words a lesson. Learned words come back after 1, 2, 4, 8… days.`, `${words.length} ым, ${topics.length} тақырып.`)}</p>
         </div>
       </div>
-      <div className="bento bento-simple">
-        <section className="bento-card bento-main">
-          <h2>{nextUp ? `${nextUp.topic} · ${at("урок", "lesson", "сабақ")} ${nextUp.lesson + 1}` : at("Все уроки пройдены", "All lessons done", "Барлық сабақ өтілді")}</h2>
-          <p className="bento-sub">{started ? at("Продолжите с того места, где остановились", "Pick up where you left off", "Тоқтаған жерден жалғастырыңыз") : at("Начните с первой темы или выберите свою", "Start with the first topic or pick your own", "Бірінші тақырыптан бастаңыз")}</p>
-          {nextUp && (
-            <div className="bento-words">
-              {nextUp.words.map((w) => <i key={w.id}>{w.label.replace(/[!?]$/, "")}</i>)}
-            </div>
-          )}
-          <div className="bento-progress"><i style={{ width: `${Math.max((100 * learned) / Math.max(words.length, 1), learned ? 1 : 0)}%` }} /></div>
-          <div className="bento-progress-label"><span>{at("Прогресс по словарю", "Dictionary progress", "Сөздік прогресі")}</span><b>{Math.round((100 * learned) / Math.max(words.length, 1))}%</b></div>
-          {due > 0 && (
-            <button className="bento-review" onClick={review}>
-              <Repeat size={16} /> {at(`Повторить ${Math.min(due, 20)} слов`, `Review ${Math.min(due, 20)} words`, `${Math.min(due, 20)} сөзді қайталау`)}
-            </button>
-          )}
-          <div className="bento-pick">
-            <label className="bento-select">
-              <BookOpen size={16} />
-              <select value={pick} onChange={(e) => setPick(e.target.value)} aria-label={at("Выберите тему", "Choose a topic", "Тақырыпты таңдаңыз")}>
-                {topics.map((t) => <option key={t.name} value={t.name}>{t.name}</option>)}
-              </select>
-            </label>
-            <button className="bento-go" onClick={() => { const t = topics.find((x) => x.name === pick); if (!t) return; const i = t.lessons.findIndex((_, k) => s.lessons[`${t.name}:${k}`] === undefined); open(t.name, i < 0 ? 0 : i); }} title={at("Начать урок", "Start lesson", "Сабақты бастау")}>
-              <ArrowUpRight size={22} />
-            </button>
-          </div>
-        </section>
-        <section className="bento-card bento-road">
-          <div className="bento-head">
-            <h2>{at("Как проходит", "How a lesson", "Сабақ қалай")}<br />{at("урок", "works", "өтеді")}</h2>
-            {nextUp && (
-              <button className="bento-pill" onClick={() => open(nextUp.topic, nextUp.lesson)}>
-                <Play size={16} /> {at("Начать урок", "Start lesson", "Сабақты бастау")}
-              </button>
-            )}
-          </div>
-          <div className="bento-bars">
-            {[
-              [at("Посмотреть", "Watch", "Көру"), 0, "a"],
-              [at("Узнать", "Recognize", "Тану"), 1, "b"],
-              [at("Найти", "Find", "Табу"), 2, "c"],
-              [at("Показать", "Sign it", "Көрсету"), 3, "d"],
-            ].map(([name, k, cls]) => (
-              <div key={String(cls)} className={`bento-bar ${cls}`} style={{ "--k": Number(k) } as React.CSSProperties}>
-                <span>{name as string}</span>
-              </div>
-            ))}
-            <span className="bento-now" aria-hidden="true" />
-          </div>
-          <div className="bento-axis">
-            <span>{at("видео", "video", "бейне")}</span><span>{at("выбор", "choice", "таңдау")}</span><span>{at("поиск", "search", "іздеу")}</span><b>{at("камера", "camera", "камера")}</b>
-          </div>
-        </section>
-      </div>
-
+      {due > 0 && (
+        <button className="button primary vocab-review" onClick={review}>
+          <Repeat size={18} />
+          {at(`Повторить ${Math.min(due, 20)} слов`, `Review ${Math.min(due, 20)} words`, `${Math.min(due, 20)} сөзді қайталау`)}
+        </button>
+      )}
       <h2 className="vocab-section-title">{at("Темы", "Topics", "Тақырыптар")}</h2>
       <div className="vocab-topics vocab-topics-grid">
         {topics.map((t, k) => {
