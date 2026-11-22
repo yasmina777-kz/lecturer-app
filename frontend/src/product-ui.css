@@ -3662,3 +3662,43 @@
 @media (prefers-reduced-motion: reduce) {
   .vocab .vocab-continue .vocab-continue-icon { animation: none; }
 }
+
+/* ---- knowledge + library: platform surfaces instead of the old navy theme ---- */
+:root .product-ui[data-product-ui][data-product-theme] .main-content .panel:is(.subject-panel, .next-learning, .learning-empty),
+:root .product-ui[data-product-ui][data-product-theme] .main-content .knowledge-grid > .panel,
+:root .product-ui[data-product-ui][data-product-theme] .main-content .learning-metrics article,
+:root .product-ui[data-product-ui][data-product-theme] .main-content .lecture-card {
+  background: var(--p-surface) !important;
+  color: var(--p-text) !important;
+  border: 1px solid var(--p-line) !important;
+  box-shadow: none !important;
+}
+:root .product-ui[data-product-ui][data-product-theme] .main-content :is(.knowledge-grid, .learning-metrics, .subject-panel, .next-learning, .learning-empty, .lecture-card) :is(h2, h3, strong, b, td, th, li) {
+  color: var(--p-text) !important;
+}
+:root .product-ui[data-product-ui][data-product-theme] .main-content :is(.knowledge-grid, .subject-panel, .learning-empty, .lecture-card) :is(p, small, .muted, .form-hint, .card-meta) {
+  color: var(--p-muted) !important;
+}
+:root .product-ui[data-product-ui][data-product-theme] .main-content .lecture-card:hover { border-color: #2f6bff !important; transform: translateY(-4px); }
+:root .product-ui[data-product-ui][data-product-theme] .main-content .lecture-card .card-progress { background: var(--p-subtle); }
+:root .product-ui[data-product-ui][data-product-theme] .main-content :is(.tabs, .learning-filters) {
+  display: flex; gap: 6px; padding: 4px; border-radius: 99px; background: var(--p-subtle); width: fit-content; border: 0;
+}
+:root .product-ui[data-product-ui][data-product-theme] .main-content :is(.tabs, .learning-filters) button {
+  height: 36px; padding: 0 16px; border-radius: 99px; border: 0; background: transparent; color: var(--p-muted); font-weight: 600; font-size: .85rem;
+}
+:root .product-ui[data-product-ui][data-product-theme] .main-content :is(.tabs, .learning-filters) button:is(.active, [aria-pressed="true"], [aria-selected="true"]) {
+  background: var(--p-surface); color: var(--p-text); box-shadow: 0 1px 4px rgba(16, 24, 40, .1);
+}
+:root .product-ui[data-product-ui][data-product-theme] .main-content .search-field {
+  background: var(--p-surface); border: 1px solid var(--p-line); color: var(--p-text); border-radius: 99px;
+}
+:root .product-ui[data-product-ui][data-product-theme] .main-content .search-field input { background: transparent; color: var(--p-text); }
+
+/* no stray black cards: highlight cards use the platform blue */
+:root .product-ui[data-product-ui][data-product-theme] .learning-practice-banner { background: #2f6bff; }
+:root .product-ui[data-product-ui][data-product-theme] .learning-practice-banner p { color: rgba(255, 255, 255, .85); }
+:root .product-ui[data-product-ui][data-product-theme] .learning-practice-banner .button { background: #fff; color: #2f6bff; }
+:root .product-ui[data-product-ui][data-product-theme] .learning-practice-art { mix-blend-mode: luminosity; opacity: .9; }
+:root .product-ui[data-product-ui][data-product-theme] .help-overview .sign-help-grid > a:first-child { background: #2f6bff; color: #fff; }
+:root .product-ui[data-product-ui][data-product-theme] .help-overview .sign-help-grid > a:first-child .help-section-icon { color: #fff; background: rgba(255, 255, 255, .16); }

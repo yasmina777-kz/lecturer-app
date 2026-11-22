@@ -114,7 +114,15 @@ export function LivePracticePage() {
             {clip ? (
               <video key={clip} className="test-video face-mirror" src={clip} autoPlay loop muted playsInline />
             ) : (
-              <video ref={cam} className="test-video face-mirror" muted playsInline />
+              <div className="cam-frame">
+                <video ref={cam} className="test-video face-mirror" muted playsInline />
+                {!stream && (
+                  <div className="cam-off">
+                    <img src="/illustrations/sign-phrases/phrase-28.jpg" alt="" />
+                    <span>{at("Включите камеру, чтобы записать себя", "Turn on the camera to record yourself", "Камераны қосыңыз")}</span>
+                  </div>
+                )}
+              </div>
             )}
             <figcaption>{clip ? at("Ваша запись", "Your recording", "Сіздің жазбаңыз") : at("Камера", "Camera", "Камера")}</figcaption>
           </figure>

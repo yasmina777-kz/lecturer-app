@@ -134,7 +134,15 @@ export function FaceTrainerPage() {
       </div>
       <div className="fs-round">
         <section className="panel fs-player">
-          <video ref={video} className="test-video face-mirror" muted playsInline />
+          <div className="cam-frame">
+            <video ref={video} className="test-video face-mirror" muted playsInline />
+            {(state === "idle" || state === "error") && (
+              <div className="cam-off">
+                <img src="/illustrations/sign-phrases/phrase-14.jpg" alt="" />
+                <span>{at("Камера выключена", "Camera is off", "Камера өшірулі")}</span>
+              </div>
+            )}
+          </div>
           {state === "idle" && (
             <button className="button primary" onClick={start}>
               <Camera size={18} /> {at("Включить камеру", "Turn on camera", "Камераны қосу")}

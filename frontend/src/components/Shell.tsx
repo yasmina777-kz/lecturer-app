@@ -84,6 +84,8 @@ export function Shell() {
     ["/culture", "/numbers", "/face-trainer", "/live-practice"].includes(path) ||
     path === "/settings" ||
     path === "/help" ||
+    path === "/knowledge" ||
+    path === "/library" ||
     path === "/practice"
       ? ProductSurface
       : "div";

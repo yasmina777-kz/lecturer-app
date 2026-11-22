@@ -172,7 +172,13 @@ export function LevelTestPage() {
           {t.kind === "phrase" ? (
             <SignChain key={t.item.ru} signs={t.item.signs} compact />
           ) : t.kind === "grammar" ? (
-            <div className="test-grammar">{at("Вопрос по грамматике", "Grammar question", "Грамматика сұрағы")}</div>
+            <figure className="test-grammar">
+              <img src="/illustrations/sign-phrases/phrase-14.jpg" alt="" />
+              <figcaption>
+                <strong>{at("Вопрос по грамматике", "Grammar question", "Грамматика сұрағы")}</strong>
+                <span>{at("Видео не нужно — выберите ответ справа.", "No video needed — pick an answer on the right.", "Жауапты оң жақтан таңдаңыз.")}</span>
+              </figcaption>
+            </figure>
           ) : (
             <video key={t.entry.id} className="test-video" src={t.entry.displayVideo || t.entry.video} autoPlay loop muted playsInline controls />
           )}

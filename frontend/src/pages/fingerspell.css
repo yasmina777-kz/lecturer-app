@@ -150,3 +150,29 @@
   display: grid;
   gap: 6px;
 }
+
+/* grammar question: an illustration instead of an empty box */
+.test-grammar { margin: 0; display: grid; gap: 12px; }
+.test-grammar img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 16px; display: block; }
+.test-grammar figcaption { display: grid; gap: 2px; text-align: center; }
+.test-grammar figcaption strong { font-size: 1.05rem; }
+.test-grammar figcaption span { font-size: .85rem; opacity: .65; }
+.test-grammar { padding: 0; opacity: 1; font-weight: inherit; font-size: inherit; text-align: left; }
+
+/* camera placeholder instead of a black rectangle */
+.cam-frame { position: relative; width: 100%; max-width: 340px; margin: 0 auto; }
+.cam-frame .test-video { display: block; width: 100%; }
+.cam-off {
+  position: absolute; inset: 0; display: grid; align-content: end; justify-items: center; gap: 0; overflow: hidden;
+  border-radius: 16px; background: var(--p-subtle, #eef1f6);
+}
+.cam-off img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .9; }
+.cam-off span {
+  position: relative; margin: 12px; padding: 6px 12px; border-radius: 99px; font-size: .82rem; font-weight: 600;
+  color: #14171f; background: rgba(255, 255, 255, .9);
+}
+:root .product-ui[data-product-ui][data-product-theme] .mirror-search input {
+  width: 100%; max-width: 360px; height: 44px; padding: 0 16px; border-radius: 99px; margin: 0 0 10px;
+  background: var(--p-surface); color: var(--p-text); border: 1px solid var(--p-line); box-shadow: none;
+}
+:root .product-ui[data-product-ui][data-product-theme] .mirror-search input:focus { border-color: #2f6bff; outline: none; }
