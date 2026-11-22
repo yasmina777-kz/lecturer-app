@@ -14,6 +14,24 @@ import {
   RotateCcw,
   Repeat,
   X,
+  Eye,
+  Search,
+  MousePointerClick,
+  Play,
+  Lightbulb,
+  MessageCircle,
+  Users,
+  Hash,
+  Clock,
+  Sun,
+  UtensilsCrossed,
+  BookOpen,
+  Shapes,
+  Smile,
+  HeartPulse,
+  PawPrint,
+  CloudSun,
+  Footprints,
 } from "lucide-react";
 import { at } from "../i18n/automation";
 import { Loading } from "../components/UI";
@@ -27,6 +45,7 @@ const WordPracticeCamera = lazyPage(() =>
   import("../components/WordPracticeCamera").then((m) => ({ default: m.WordPracticeCamera })),
 );
 const LESSON_SIZE = 8;
+const LESSONS_SHOWN = 15;
 type Word = DictionaryEntry;
 type Step = "learn" | "recognize" | "find" | "camera" | "done";
 const TOPIC_ORDER = [
@@ -34,6 +53,13 @@ const TOPIC_ORDER = [
   "Учёба", "Описание", "Чувства", "Тело и здоровье", "Цвета и животные", "Природа и погода",
   "Действия", "Понятия и предметы",
 ];
+
+const TOPIC_ICONS: Record<string, typeof Eye> = {
+  "Общение": MessageCircle, "Семья и люди": Users, "Числа": Hash, "Время": Clock,
+  "Каждый день": Sun, "Еда и места": UtensilsCrossed, "Учёба": BookOpen, "Описание": Shapes,
+  "Чувства": Smile, "Тело и здоровье": HeartPulse, "Цвета и животные": PawPrint,
+  "Природа и погода": CloudSun, "Действия": Footprints, "Понятия и предметы": Lightbulb,
+};
 
 function shuffle<T>(items: T[], seed = Math.random()) {
   const a = [...items];
@@ -161,6 +187,13 @@ function Overview({
   const started = words.filter((w) => s.words[w.id]).length;
   const due = dueIds(s, 999).length;
   const days = streak(s.days);
+  const [expanded, setExpanded] = useState<string[]>([]);
+  const nextUp = (() => {
+    for (const t of topics)
+      for (let i = 0; i < t.lessons.length; i++)
+        if (s.lessons[`${t.name}:${i}`] === undefined) return { topic: t.name, lesson: i, words: t.lessons[i] };
+    return null;
+  })();
   return (
     <div className="sign-workspace vocab">
       <div className="page-heading">
@@ -169,7 +202,7 @@ function Overview({
           <h1>{at("Тренажёр слов РЖЯ", "RSL word trainer", "Ым сөздерінің жаттықтырғышы")}</h1>
           <p>
             {at(
-              `${words.length} жестов по ${topics.length} темам. Каждый урок: посмотреть → узнать → найти → показать в камеру. Выученные слова возвращаются на повторение через 1, 2, 4, 8… дней.`,
+              `${words.length} жестов по ${topics.length} темам, по 8 слов в уроке. Выученные слова возвращаются на повторение через 1, 2, 4, 8… дней.`,
               `${words.length} signs in ${topics.length} topics. Each lesson: watch → recognize → find → sign to the camera. Learned words come back for review after 1, 2, 4, 8… days.`,
               `${words.length} ым, ${topics.length} тақырып. Әр сабақ: көру → тану → табу → камераға көрсету.`,
             )}
@@ -188,46 +221,93 @@ function Overview({
           {at(`Повторить ${Math.min(due, 20)} слов`, `Review ${Math.min(due, 20)} words`, `${Math.min(due, 20)} сөзді қайталау`)}
         </button>
       )}
-      <div className="vocab-topics">
-        <section className="panel vocab-topic vocab-phrases">
-          <header>
-            <h2>{at("Фразы", "Phrases", "Сөйлемдер")}</h2>
-            <Link to="/grammar">{at("Грамматика →", "Grammar →", "Грамматика →")}</Link>
-          </header>
-          <div className="vocab-lessons">
-            {PHRASE_LESSONS.map((ps, i) => {
-              const score = s.lessons[`phrases:${i}`];
-              return (
-                <button key={i} onClick={() => openPhrases(i)} className={score !== undefined ? "done" : ""} title={ps.map((p) => p.ru).join(" · ")}>
-                  <span>{at("Урок", "Lesson", "Сабақ")} {i + 1}</span>
-                  <small>{score !== undefined ? `${Math.round(score * 100)}%` : ps.slice(0, 2).map((p) => p.ru).join(" ") + "…"}</small>
-                </button>
-              );
-            })}
-          </div>
-        </section>
-        {topics.map((t) => {
-          const total = t.lessons.flat().length;
-          const done = t.lessons.flat().filter((w) => (s.words[w.id]?.box ?? 0) >= LEARNED_BOX).length;
+      <ol className="vocab-how">
+        {[
+          [Eye, at("Посмотреть", "Watch", "Көру"), at("видео носителя", "the signer video", "бейнені")],
+          [Search, at("Узнать", "Recognize", "Тану"), at("выбрать слово к жесту", "pick the word", "сөзді таңдау")],
+          [MousePointerClick, at("Найти", "Find", "Табу"), at("жест к слову", "the sign for a word", "ымды табу")],
+          [Camera, at("Показать", "Sign it", "Көрсету"), at("в камеру", "to the camera", "камераға")],
+        ].map(([Icon, title, text], i) => {
+          const I = Icon as typeof Eye;
           return (
-            <section key={t.name} className="panel vocab-topic">
+            <li key={i}>
+              <span className="vocab-how-icon"><I size={18} /></span>
+              <span><strong>{title as string}</strong><small>{text as string}</small></span>
+            </li>
+          );
+        })}
+      </ol>
+      {nextUp && (
+        <button className="vocab-continue" onClick={() => open(nextUp.topic, nextUp.lesson)}>
+          <span className="vocab-continue-icon"><Play size={22} /></span>
+          <span>
+            <small>{started ? at("Продолжить", "Continue", "Жалғастыру") : at("Начните отсюда", "Start here", "Осыдан бастаңыз")}</small>
+            <strong>{nextUp.topic} · {at("урок", "lesson", "сабақ")} {nextUp.lesson + 1}</strong>
+            <em>{nextUp.words.slice(0, 5).map((w) => w.label.replace(/[!?]$/, "")).join(", ")}…</em>
+          </span>
+          <ArrowRight size={20} />
+        </button>
+      )}
+      <h2 className="vocab-section-title">{at("Темы", "Topics", "Тақырыптар")}</h2>
+      <div className="vocab-topics vocab-topics-grid">
+        {topics.map((t, k) => {
+          const all = t.lessons.flat();
+          const total = all.length;
+          const done = all.filter((w) => (s.words[w.id]?.box ?? 0) >= LEARNED_BOX).length;
+          const Icon = TOPIC_ICONS[t.name] ?? Lightbulb;
+          const first = t.lessons.findIndex((_, i) => s.lessons[`${t.name}:${i}`] === undefined);
+          const go = first < 0 ? 0 : first;
+          return (
+            <section key={t.name} className="panel vocab-card" style={{ "--hue": `${(k * 47) % 360}` } as React.CSSProperties}>
               <header>
-                <h2>{t.name}</h2>
-                <span>{done} / {total}</span>
+                <span className="vocab-card-icon"><Icon size={22} /></span>
+                <div>
+                  <h3>{t.name}</h3>
+                  <small>{t.lessons.length} {at("уроков", "lessons", "сабақ")} · {total} {at("слов", "words", "сөз")}</small>
+                </div>
               </header>
-              <div className="vocab-bar"><span style={{ width: `${(100 * done) / total}%` }} /></div>
-              <div className="vocab-lessons">
-                {t.lessons.map((ws, i) => {
+              <div className="vocab-card-words">
+                {all.slice(0, 5).map((w) => <i key={w.id}>{w.label.replace(/[!?]$/, "")}</i>)}
+              </div>
+              <div className="vocab-card-progress">
+                <div className="vocab-bar"><span style={{ width: `${(100 * done) / total}%` }} /></div>
+                <small>{done}/{total}</small>
+              </div>
+              <div className="vocab-card-lessons" aria-label={at("Уроки", "Lessons", "Сабақтар")}>
+                {t.lessons.slice(0, expanded.includes(t.name) || t.lessons.length <= LESSONS_SHOWN + 1 ? undefined : LESSONS_SHOWN).map((ws, i) => {
                   const score = s.lessons[`${t.name}:${i}`];
                   return (
-                    <button key={i} onClick={() => open(t.name, i)} className={score !== undefined ? "done" : ""} title={ws.map((w) => w.label).join(", ")}>
-                      <span>{at("Урок", "Lesson", "Сабақ")} {i + 1}</span>
-                      <small>{score !== undefined ? `${Math.round(score * 100)}%` : ws.slice(0, 3).map((w) => w.label).join(", ") + "…"}</small>
+                    <button key={i} onClick={() => open(t.name, i)} className={score !== undefined ? "done" : i === go ? "next" : ""} title={`${at("Урок", "Lesson", "Сабақ")} ${i + 1}: ${ws.map((w) => w.label).join(", ")}`}>
+                      {score !== undefined ? <Check size={14} /> : i + 1}
                     </button>
                   );
                 })}
+                {t.lessons.length > LESSONS_SHOWN + 1 && !expanded.includes(t.name) && (
+                  <button className="more" onClick={() => setExpanded((e) => [...e, t.name])} title={at("Показать все уроки", "Show all lessons", "Барлық сабақтар")}>
+                    +{t.lessons.length - LESSONS_SHOWN}
+                  </button>
+                )}
               </div>
+              <button className="vocab-card-go" onClick={() => open(t.name, go)}>
+                {first < 0 ? at("Повторить урок 1", "Redo lesson 1", "1-сабақты қайталау") : first === 0 ? at("Начать урок 1", "Start lesson 1", "1-сабақты бастау") : `${at("Продолжить: урок", "Continue: lesson", "Жалғастыру: сабақ")} ${go + 1}`}
+                <ArrowRight size={16} />
+              </button>
             </section>
+          );
+        })}
+      </div>
+      <h2 className="vocab-section-title">{at("Фразы целиком", "Whole phrases", "Тұтас сөйлемдер")} <Link to="/grammar">{at("Грамматика →", "Grammar →", "Грамматика →")}</Link></h2>
+      <div className="vocab-phrase-row">
+        {PHRASE_LESSONS.map((ps, i) => {
+          const score = s.lessons[`phrases:${i}`];
+          return (
+            <button key={i} className={`panel vocab-phrase${score !== undefined ? " done" : ""}`} onClick={() => openPhrases(i)} title={ps.map((p) => p.ru).join(" · ")}>
+              <span className="vocab-phrase-num">{score !== undefined ? <Check size={14} /> : i + 1}</span>
+              <span>
+                <strong>{ps[0]?.ru}</strong>
+                <small>{score !== undefined ? `${Math.round(score * 100)}%` : `${ps.length} ${at("фраз", "phrases", "сөйлем")}`}</small>
+              </span>
+            </button>
           );
         })}
       </div>
