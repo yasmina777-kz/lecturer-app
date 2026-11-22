@@ -60,6 +60,14 @@ assert.ok(!empty?.accepted, 'no hands must never be accepted');
   }
 }
 
+// faceRow (face channels) vs Python face_row on real Face Landmarker outputs
+{
+  const { faceRow } = await mod('../src/sign/wordFeatures.ts');
+  for (const f of await json('../public/models/rsl/face-row-fixtures.json'))
+    close(faceRow(f.blend, f.landmarks.map(([x, y]) => ({ x, y })), f.width, f.height), f.row, 1e-5, 'faceRow parity');
+  assert.ok(faceRow(null, null, 640, 480).every((v) => v === 0), 'no face -> zeros');
+}
+
 // Words v5 (hands + body): raw landmarks + poses -> features -> probabilities
 const words = loadSeqModel(await json('../public/models/rsl/words-v5-classifier.json'));
 assert.ok(words && words.channels === 147, 'word model must validate with 147 channels');

@@ -93,14 +93,14 @@ export function ContinuousSignCamera() {
     video,
     overlay,
     phase === "recording",
-    (now: number, hands: Landmark[][], pose: Landmark[]) => {
+    (now: number, hands: Landmark[][], pose: Landmark[], face?: number[] | null) => {
       // Continuous local word spotting (browser only, no pauses needed).
       const model = wordModel.current, v = video.current;
       if (model && v && !hasPreview && modeRef.current !== "letters") {
         const points = hands.filter((h) => h.length === 21).map((h) =>
           h.map((p) => ({ x: p.x, y: p.y, z: p.z ?? 0 })),
         ) as HandPoint[][];
-        const spotted = spotter.current.push(model.members[0], now, points, v.videoWidth, v.videoHeight, model.members, pose);
+        const spotted = spotter.current.push(model.members[0], now, points, v.videoWidth, v.videoHeight, model.members, pose, face ?? null);
         if (spotted && !(spotted.fingerspelling && modeRef.current === "auto")) {
           lastWordAt.current = now;
           addToken(spotted.label, "word");
@@ -109,10 +109,10 @@ export function ContinuousSignCamera() {
         }
         // A short pause closes the sign: classify the whole clip with the
         // 3-model ensemble (more accurate) unless the spotter already added it.
-        const clip = segmenter.current.push(now, points, pose);
+        const clip = segmenter.current.push(now, points, pose, face ?? null);
         if (spotted) lastSpotted.current = { label: spotted.label, at: now };
         if (clip) {
-          const guess = recognizeWord(model, clip, v.videoWidth, v.videoHeight, true, segmenter.current.clipPoses);
+          const guess = recognizeWord(model, clip, v.videoWidth, v.videoHeight, true, segmenter.current.clipPoses, segmenter.current.clipFaces);
           const duplicate = guess && lastSpotted.current.label === guess.label && now - lastSpotted.current.at < 4000;
           if (guess?.accepted && !duplicate) {
             lastWordAt.current = now;

@@ -67,8 +67,9 @@ export function recognizeWord(
   height: number,
   courseOnly = true,
   poses?: PosePoint[][],
+  faces?: (number[] | null)[],
 ): WordGuess | null {
-  const features = modelFeatures(model, frames, width, height, poses);
+  const features = modelFeatures(model, frames, width, height, poses, faces);
   if (!features || features.filter((f) => f[65] || f[131]).length < 5) return null;
   if (motionExtent(features) < ATTEMPT_GATE) return null; // no real sign movement
   const window = resampleFrames(features, model.frames ?? 32);
@@ -119,8 +120,10 @@ export function knowsWord(model: SeqModel, label: string) {
 export class WordSegmenter {
   private frames: HandPoint[][][] = [];
   private poses: PosePoint[][] = [];
-  /** Body poses of the clip last returned by push (same length). */
+  private faces: (number[] | null)[] = [];
+  /** Body poses / face rows of the clip last returned by push (same length). */
   clipPoses: PosePoint[][] = [];
+  clipFaces: (number[] | null)[] = [];
   private lastMotion = 0;
   private started = 0;
   private lastSeen = 0;
@@ -135,6 +138,7 @@ export class WordSegmenter {
   reset() {
     this.frames = [];
     this.poses = [];
+    this.faces = [];
     this.previous = [];
     this.moving = 0;
     this.lastMotionIndex = 0;
@@ -144,7 +148,7 @@ export class WordSegmenter {
     return this.frames.length > 0;
   }
   /** Returns a finished clip, or null while waiting/recording. */
-  push(now: number, hands: HandPoint[][], pose: PosePoint[] = []): HandPoint[][][] | null {
+  push(now: number, hands: HandPoint[][], pose: PosePoint[] = [], face: number[] | null = null): HandPoint[][][] | null {
     const visible = hands.filter((h) => h.length === 21);
     const wrists = visible.map((h) => h[0]);
     if (visible.length) {
@@ -159,6 +163,7 @@ export class WordSegmenter {
       }
       this.frames.push(visible);
       this.poses.push(pose);
+      this.faces.push(face);
       if (motion > 0.012) {
         this.lastMotion = now;
         this.lastMotionIndex = this.frames.length - 1;
@@ -167,6 +172,7 @@ export class WordSegmenter {
     } else if (this.frames.length) {
       this.frames.push([]);
       this.poses.push(pose);
+      this.faces.push(face);
     }
     if (!this.frames.length) return null;
     const ended =
@@ -176,6 +182,7 @@ export class WordSegmenter {
     if (!ended) return null;
     const clip = this.frames.slice(0, this.lastMotionIndex + 3), moving = this.moving;
     this.clipPoses = this.poses.slice(0, clip.length);
+    this.clipFaces = this.faces.slice(0, clip.length);
     this.reset();
     // A hand held still the whole time is not a sign attempt.
     return moving >= 2 ? clip : null;

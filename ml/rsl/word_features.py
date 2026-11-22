@@ -27,13 +27,16 @@ CHANNELS = 134
 # relative to shoulder centre, nose and mouth in shoulder widths (6), then a
 # body-found flag. Mirrored together with the hands for left-handed signers.
 BODY = 13
+# v6: + face (face_features.py): mouthing, brows, eyes, head yaw/pitch/roll.
+from face_features import FACE, YAW, ROLL
 
 
 def _palm(hand: np.ndarray) -> float:
     return float(np.linalg.norm(hand[9] - hand[0]))
 
 
-def clip_features(frames: list[list[np.ndarray]], width: float, height: float, poses: np.ndarray | None = None) -> np.ndarray | None:
+def clip_features(frames: list[list[np.ndarray]], width: float, height: float, poses: np.ndarray | None = None,
+                  faces: np.ndarray | None = None) -> np.ndarray | None:
     """poses: optional [len(frames), 9, 3] pose points (nose, mouth L/R, shoulders,
     elbows, wrists; x, y, visibility) → 134 + BODY channels."""
     m = max(width, height)
@@ -73,6 +76,7 @@ def clip_features(frames: list[list[np.ndarray]], width: float, height: float, p
     tracks = tracks[any_hand[0]:any_hand[-1] + 1]
     present = present[any_hand[0]:any_hand[-1] + 1]
     pose = None if poses is None else np.asarray(poses, np.float64)[any_hand[0]:any_hand[-1] + 1]
+    face = None if faces is None else np.asarray(faces, np.float32)[any_hand[0]:any_hand[-1] + 1]
     mirror = 1.
 
     def path(k):
@@ -92,7 +96,8 @@ def clip_features(frames: list[list[np.ndarray]], width: float, height: float, p
         return None
     scale = max(float(np.median([_palm(tracks[t, 0]) for t in dom])), 1e-3)
     origin = np.median(tracks[dom, 0, 0, :2], axis=0)
-    out = np.zeros((len(tracks), CHANNELS + (BODY if pose is not None else 0)), dtype=np.float32)
+    out = np.zeros((len(tracks), CHANNELS + (BODY if pose is not None else 0) + (FACE if face is not None else 0)), dtype=np.float32)
+    fb = CHANNELS + (BODY if pose is not None else 0)
     for t in range(len(tracks)):
         for k in range(2):
             if not present[t, k]:
@@ -106,7 +111,19 @@ def clip_features(frames: list[list[np.ndarray]], width: float, height: float, p
         if present[t].all():
             out[t, 132:134] = (tracks[t, 1, 0, :2] - tracks[t, 0, 0, :2]) / scale
         if pose is not None and t < len(pose):
-            out[t, CHANNELS:] = body_row(pose[t], tracks[t], present[t], sx, sy, mirror)
+            out[t, CHANNELS:CHANNELS + BODY] = body_row(pose[t], tracks[t], present[t], sx, sy, mirror)
+        if face is not None and t < len(face):
+            row = face[t].copy()
+            row[YAW] *= mirror; row[ROLL] *= mirror
+            out[t, fb:fb + FACE] = row
+    if face is not None:
+        # Relative face (v6b): subtract the signer's own median expression and head
+        # pose in this clip, so mouthing / brow / head movement remain and personal
+        # resting expressions (signer identity) do not.
+        seen = out[:, fb + FACE - 1] > 0
+        if seen.any():
+            med = np.median(out[seen, fb:fb + FACE - 1], axis=0)
+            out[seen, fb:fb + FACE - 1] -= med
     return out
 
 

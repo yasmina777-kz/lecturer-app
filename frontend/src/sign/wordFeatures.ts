@@ -8,6 +8,28 @@ export const WORD_CHANNELS = 134;
 /** v5 body channels (twin of body_row in ml/rsl/word_features.py). */
 export const WORD_BODY = 13;
 export type PosePoint = { x: number; y: number; visibility?: number };
+/** v6 face channels: twin of ml/rsl/face_features.py face_row. */
+export const WORD_FACE = 21;
+const FACE_GROUPS = [
+  ["browInnerUp"], ["browDownLeft", "browDownRight"], ["browOuterUpLeft", "browOuterUpRight"],
+  ["eyeSquintLeft", "eyeSquintRight"], ["eyeWideLeft", "eyeWideRight"], ["eyeBlinkLeft", "eyeBlinkRight"],
+  ["jawOpen"], ["mouthFunnel"], ["mouthPucker"], ["mouthSmileLeft", "mouthSmileRight"],
+  ["mouthPressLeft", "mouthPressRight"], ["mouthRollLower", "mouthRollUpper"],
+  ["mouthStretchLeft", "mouthStretchRight"], ["mouthClose"], ["mouthUpperUpLeft", "mouthUpperUpRight"],
+  ["mouthLowerDownLeft", "mouthLowerDownRight"], ["cheekPuff"],
+];
+const FACE_YAW = 17, FACE_ROLL = 19;
+/** blend: blendshape scores by name; landmarks: Face Landmarker points (image coords).
+ * Yaw/roll are not mirrored here (clipFeatures mirrors them with the hands). */
+export function faceRow(blend: Record<string, number> | null, landmarks: { x: number; y: number }[] | null, width: number, height: number): number[] {
+  if (!blend || !landmarks || landmarks.length <= 454) return new Array<number>(WORD_FACE).fill(0);
+  const row = FACE_GROUPS.map((g) => g.reduce((a, n) => a + (blend[n] ?? 0), 0) / g.length);
+  const m = Math.max(width, height);
+  const P = (i: number) => [(landmarks[i].x * width) / m, (landmarks[i].y * height) / m];
+  const [nx, ny] = P(1), [lx, ly] = P(234), [rx, ry] = P(454), [tx, ty] = P(10), [cx, cy] = P(152), [ax, ay] = P(33), [bx, by] = P(263);
+  const fw = Math.max(Math.hypot(rx - lx, ry - ly), 1e-4), fh = Math.max(Math.hypot(cx - tx, cy - ty), 1e-4);
+  return [...row, ((nx - (lx + rx) / 2) / fw) * 2, ((ny - (ty + cy) / 2) / fh) * 2, Math.atan2(by - ay, bx - ax), 1];
+}
 
 type Hand = number[][]; // 21 x [X, Y, Z]
 const palm = (h: Hand) => Math.hypot(h[9][0] - h[0][0], h[9][1] - h[0][1], h[9][2] - h[0][2]);
@@ -18,7 +40,7 @@ const median = (values: number[]) => {
 
 /** `poses` (optional, one per frame, MediaPipe Pose landmarks; [] = not found)
  * adds WORD_BODY channels: where each hand is relative to shoulders, nose, mouth. */
-export function clipFeatures(frames: HandPoint[][][], width: number, height: number, poses?: PosePoint[][]): number[][] | null {
+export function clipFeatures(frames: HandPoint[][][], width: number, height: number, poses?: PosePoint[][], faces?: (number[] | null)[]): number[][] | null {
   const m = Math.max(width, height);
   if (!(m > 0)) return null;
   const sx = width / m, sy = height / m;
@@ -57,6 +79,7 @@ export function clipFeatures(frames: HandPoint[][][], width: number, height: num
   if (!withHand.length) return null;
   let clip = tracks.slice(withHand[0], withHand[withHand.length - 1] + 1);
   const pose = poses?.slice(withHand[0], withHand[withHand.length - 1] + 1);
+  const face = faces?.slice(withHand[0], withHand[withHand.length - 1] + 1);
   let mirror = 1;
   const path = (k: number) => {
     const w = clip.map((r) => r[k]).filter((h): h is Hand => !!h).map((h) => h[0]);
@@ -73,8 +96,9 @@ export function clipFeatures(frames: HandPoint[][][], width: number, height: num
   if (!dom.length) return null;
   const scale = Math.max(median(dom.map(palm)), 1e-3);
   const origin = [median(dom.map((h) => h[0][0])), median(dom.map((h) => h[0][1]))];
-  return clip.map((r, t) => {
-    const out = new Array<number>(WORD_CHANNELS + (poses ? WORD_BODY : 0)).fill(0);
+  const rows = clip.map((r, t) => {
+    const fb = WORD_CHANNELS + (poses ? WORD_BODY : 0);
+    const out = new Array<number>(fb + (faces ? WORD_FACE : 0)).fill(0);
     r.forEach((h, k) => {
       if (!h) return;
       const p = Math.max(palm(h), 1e-3), base = k * 66;
@@ -90,8 +114,22 @@ export function clipFeatures(frames: HandPoint[][][], width: number, height: num
       out[133] = (r[1][0][1] - r[0][0][1]) / scale;
     }
     if (poses) bodyRow(pose?.[t] ?? [], r, sx * mirror, sy).forEach((v, i) => (out[WORD_CHANNELS + i] = v));
+    const fr = face?.[t];
+    if (faces && fr && fr.length === WORD_FACE) fr.forEach((v, i) => (out[fb + i] = i === FACE_YAW || i === FACE_ROLL ? v * mirror : v));
     return out;
   });
+  if (faces) {
+    // Relative face (v6b, twin of word_features.py): subtract the signer's own
+    // median expression/head pose in this clip; keep only the movement.
+    const fb = WORD_CHANNELS + (poses ? WORD_BODY : 0), flag = fb + WORD_FACE - 1;
+    const seen = rows.filter((o) => o[flag] > 0);
+    if (seen.length)
+      for (let c = fb; c < flag; c++) {
+        const med = median(seen.map((o) => o[c]));
+        for (const o of seen) o[c] -= med;
+      }
+  }
+  return rows;
 }
 
 function bodyRow(p: PosePoint[], hands: (Hand | null)[], kx: number, ky: number): number[] {
@@ -116,8 +154,9 @@ function bodyRow(p: PosePoint[], hands: (Hand | null)[], kx: number, ky: number)
 
 /** Features in the layout `model` expects: hands only (v4) or hands + body
  * (v5; frames without a pose get the "body not found" row). */
-export function modelFeatures(model: { channels: number }, frames: HandPoint[][][], width: number, height: number, poses?: PosePoint[][]) {
-  return clipFeatures(frames, width, height, model.channels > WORD_CHANNELS ? (poses ?? frames.map(() => [])) : undefined);
+export function modelFeatures(model: { channels: number }, frames: HandPoint[][][], width: number, height: number, poses?: PosePoint[][], faces?: (number[] | null)[]) {
+  const body = model.channels > WORD_CHANNELS, face = model.channels >= WORD_CHANNELS + WORD_BODY + WORD_FACE;
+  return clipFeatures(frames, width, height, body ? (poses ?? frames.map(() => [])) : undefined, face ? (faces ?? frames.map(() => null)) : undefined);
 }
 
 export function resampleFrames(features: number[][], frames = 32): number[][] {
