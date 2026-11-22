@@ -78,7 +78,8 @@ export function Shell() {
     path === "/grammar" ||
     path === "/recognition" ||
     path === "/dialogues" ||
-    path === "/understanding" ||
+    path.startsWith("/understanding") ||
+    path === "/fingerspell" ||
     path === "/settings" ||
     path === "/help" ||
     path === "/practice"

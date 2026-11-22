@@ -65,7 +65,7 @@ export function PhraseUnderstandingPage() {
     }
   }
   return (
-    <div className="sign-workspace fingerspell phrase-understanding">
+    <div className="sign-workspace vocab fingerspell phrase-understanding">
       <Link className="text-link back-link" to="/understanding">
         <ArrowLeft size={16} /> {at("Понимание жестов", "Understanding", "Ымдарды түсіну")}
       </Link>

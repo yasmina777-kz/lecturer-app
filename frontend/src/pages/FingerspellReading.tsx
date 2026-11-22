@@ -45,7 +45,7 @@ export function FingerspellReadingPage() {
   }, []);
   const best = readBest();
   return (
-    <div className="sign-workspace fingerspell">
+    <div className="sign-workspace vocab fingerspell">
       <Link className="text-link back-link" to="/learn">
         <ArrowLeft size={16} /> {at("Учиться", "Learn", "Оқу")}
       </Link>

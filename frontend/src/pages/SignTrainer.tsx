@@ -1,3 +1,4 @@
+import { readTests } from "../sign/levelTests";
 import { lazyPage } from "../lazyPage";
 import { LearningHome } from "./LearningHome";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
@@ -14,6 +15,7 @@ import {
   Pause,
   RotateCcw,
   ScanSearch,
+  Award,
 } from "lucide-react";
 import { at } from "../i18n/automation";
 import { exercises, courseLevels, recognitionLetters, alphabet } from "../sign/exercises";
@@ -76,6 +78,14 @@ export function SignCourseCatalog() {
               )}
           </p>
         </div>
+        {stage && (
+          <Link className="button primary level-test-link" to={`/learn-test?level=${stage.id}`}>
+            <Award size={18} />
+            {(readTests()[stage.id] ?? 0) >= 8
+              ? at(`Пройдено · ${readTests()[stage.id]}/10`, `Passed · ${readTests()[stage.id]}/10`, `Өтті · ${readTests()[stage.id]}/10`)
+              : at("Итоговый тест", "Level test", "Қорытынды тест")}
+          </Link>
+        )}
       </div>
       {!stage && (
         <section className="learning-start panel">
