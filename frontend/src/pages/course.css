@@ -841,3 +841,30 @@
 .course .b2-steps li[data-level="B1"] { --lvl: #7c5cff; }
 .course .b2-steps li[data-level="B2"] { --lvl: #f08c00; }
 .course .b2-steps::before { border-top-color: rgba(127, 127, 127, 0.3); }
+
+/* compact top: hero, level tabs and "before start" fit on one screen so the
+   lesson cards below already peek out */
+.course .course-hero { padding: 20px 28px; margin-bottom: 14px; }
+.course .course-hero h1 { font-size: clamp(24px, 2.4vw, 32px); margin: 4px 0 6px; }
+.course .course-hero p { font-size: 0.95rem; }
+.course .course-hero-art { height: 180px; margin: -20px -28px -20px 0; }
+.course .course-blob { width: 200px; height: 200px; }
+.course .course-hero-actions { margin-top: 14px; }
+.course .course-levels { margin-bottom: 16px; gap: 10px; }
+.course .course-levels button { padding: 12px 14px; gap: 10px; align-items: center; }
+.course .course-level-icon { width: 34px; height: 34px; border-radius: 10px; }
+.course .course-levels .course-level-text { gap: 2px; padding-right: 40px; }
+.course .course-levels .course-level-text strong { font-size: 1.05rem; }
+.course .course-levels .course-level-text > span {
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.course .course-before { margin-bottom: 12px; }
+.course .course-before h2 { margin: 0 0 10px; font-size: 1.1rem; }
+.course .course-before-grid { gap: 10px; }
+.course .course-before-card { padding: 10px 14px; gap: 12px; border-radius: 16px; }
+.course .course-before-icon { width: 36px; height: 36px; border-radius: 11px; }
+.course .course-before-card strong { font-size: 0.95rem; }
+.course .course-before-card > span:last-child > span {
+  font-size: 0.82rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.course .course-before-card > span:last-child { min-width: 0; }
