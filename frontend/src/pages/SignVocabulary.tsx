@@ -65,7 +65,7 @@ import {
   Gift,
 } from "lucide-react";
 import { at } from "../i18n/automation";
-import { TopicArt } from "../components/TopicArt";
+import "../components/topic-art.css";
 
 import { Loading } from "../components/UI";
 import type { DictionaryEntry } from "../sign/dictionary";
@@ -87,6 +87,12 @@ const TOPIC_ORDER = [
   "Действия", "Понятия и предметы",
 ];
 
+// Illustrated scenes of people signing, one per topic.
+const TOPIC_PHOTO: Record<string, number> = {
+  "Общение": 1, "Семья и люди": 17, "Числа": 7, "Время": 29, "Каждый день": 31, "Еда и места": 27,
+  "Учёба": 16, "Описание": 20, "Чувства": 21, "Тело и здоровье": 30, "Цвета и животные": 22,
+  "Природа и погода": 32, "Действия": 15, "Понятия и предметы": 14,
+};
 const TOPIC_ICONS: Record<string, [typeof Eye, (typeof Eye)[]]> = {
   "Общение": [Hand, [MessageCircle, Smile, Users]],
   "Семья и люди": [Users, [Heart, Home, Baby]],
@@ -281,7 +287,7 @@ function Overview({
           return (
             <section key={t.name} className="panel vocab-topic-card card-motion" style={{ "--i": k } as React.CSSProperties}>
               <header>
-                <TopicArt main={TOPIC_ICONS[t.name]?.[0] ?? Lightbulb} small={TOPIC_ICONS[t.name]?.[1] ?? [Star, Heart, Smile]} index={k} />
+                <img className="topic-photo" src={`/illustrations/sign-phrases/phrase-${String(TOPIC_PHOTO[t.name] ?? 1).padStart(2, "0")}.jpg`} alt="" loading="lazy" />
                 <span className="vocab-topic-badge">{t.lessons.length} {at("уроков", "lessons", "сабақ")}</span>
               </header>
               <div className="vocab-topic-title">

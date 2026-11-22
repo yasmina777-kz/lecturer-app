@@ -118,7 +118,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { at } from "../i18n/automation";
-import { TopicArt } from "../components/TopicArt";
+import "../components/topic-art.css";
 import { SignChain } from "../components/SignChain";
 import { WordPracticeCamera } from "../components/WordPracticeCamera";
 import { courseUnits, levelOf, type CefrLevel, type CourseUnit } from "../sign/courseUnits";
@@ -195,9 +195,15 @@ const ART: Record<number, [LucideIcon, LucideIcon[]]> = {
 
 /** Topic illustration for a lesson card: a big theme icon on a level-coloured
  * gradient with three small floating icons (vector, crisp, no downloads). */
-function UnitArt({ id, index }: { id: number; index: number }) {
-  const [main, small] = ART[id] ?? [BookOpen, [Star, Heart, Smile]];
-  return <TopicArt main={main} small={small} index={index} />;
+// Illustrated scenes of people signing, picked to match each lesson's topic.
+const UNIT_PHOTO: Record<number, number> = {
+  1: 1, 2: 17, 3: 7, 4: 29, 5: 27, 6: 24, 7: 25, 8: 21, 9: 30, 10: 10, 11: 22, 12: 32,
+  101: 23, 102: 20, 103: 31, 104: 28, 105: 12, 106: 29, 107: 27, 108: 26, 109: 8, 110: 11, 111: 32, 112: 2,
+  201: 5, 202: 6, 203: 18, 204: 9, 205: 3, 206: 4, 207: 19, 208: 16,
+};
+const scene = (n: number) => `/illustrations/sign-phrases/phrase-${String(n).padStart(2, "0")}.jpg`;
+function UnitArt({ id }: { id: number; index: number }) {
+  return <img className="topic-photo" src={scene(UNIT_PHOTO[id] ?? 1)} alt="" loading="lazy" />;
 }
 
 const LEVELS: { id: CefrLevel; title: string; name: string; desc: string; icon: typeof Sprout }[] = [

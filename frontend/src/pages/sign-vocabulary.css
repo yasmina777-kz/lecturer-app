@@ -1324,3 +1324,6 @@
   font-style: normal; font-size: .84rem; padding: 5px 12px; border-radius: 99px; color: #fff;
   background: rgba(255, 255, 255, .16); border: 1px solid rgba(255, 255, 255, .25);
 }
+/* illustrated topic covers: no tint, the scene is the colour */
+.vocab .vocab-topic-card > header { background: var(--p-subtle, #eef1f6); }
+.vocab .vocab-topic-card:hover .topic-photo { transform: scale(1.06); }
