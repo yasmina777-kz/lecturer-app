@@ -658,3 +658,8 @@
 @media (prefers-reduced-motion: reduce) {
   .vocab .vocab-topic-card .vocab-card-lessons button.next { animation: none; }
 }
+/* topic header uses the same art as course lessons */
+.vocab .vocab-topic-card { --lvl: #2f6bff; }
+.vocab .vocab-topic-card > header { height: 150px; }
+.vocab .vocab-topic-badge { z-index: 2; }
+.vocab .vocab-topic-card { --c: #2f6bff; }

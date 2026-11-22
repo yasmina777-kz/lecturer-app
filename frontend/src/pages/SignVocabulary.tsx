@@ -32,8 +32,39 @@ import {
   PawPrint,
   CloudSun,
   Footprints,
+  Heart,
+  Home,
+  Baby,
+  Calculator,
+  Plus,
+  Dice5,
+  CalendarDays,
+  Moon,
+  Coffee,
+  BedDouble,
+  Croissant,
+  MapPin,
+  PenLine,
+  Palette,
+  Ruler,
+  Star,
+  Frown,
+  Laugh,
+  Stethoscope,
+  Pill,
+  Thermometer,
+  Cat,
+  Fish,
+  Snowflake,
+  Umbrella,
+  Leaf,
+  Car,
+  Dumbbell,
+  Key,
+  Gift,
 } from "lucide-react";
 import { at } from "../i18n/automation";
+import { TopicArt } from "../components/TopicArt";
 import { Loading } from "../components/UI";
 import type { DictionaryEntry } from "../sign/dictionary";
 import { dueIds, LEARNED_BOX, streak, useVocabProgress } from "../sign/vocabProgress";
@@ -54,18 +85,21 @@ const TOPIC_ORDER = [
   "Действия", "Понятия и предметы",
 ];
 
-// Flat, print-like palette: one solid colour per topic, no gradients.
-const TOPIC_COLORS = ["#d1495b", "#00798c", "#e07a3f", "#30638e", "#3f7d20", "#8e5572", "#c98a0b", "#2a9d8f", "#5c6bc0", "#b5651d", "#a23b72", "#4e8b6f", "#3d405b", "#bc4b51"];
-const TOPIC_SCENE: Record<string, string> = {
-  "Общение": "greet", "Семья и люди": "family", "Числа": "numbers", "Время": "time", "Каждый день": "day", "Еда и места": "cafe",
-  "Учёба": "study", "Описание": "describe", "Чувства": "feelings", "Тело и здоровье": "health", "Цвета и животные": "animals",
-  "Природа и погода": "weather", "Действия": "actions", "Понятия и предметы": "ideas",
-};
-const TOPIC_ICONS: Record<string, typeof Eye> = {
-  "Общение": MessageCircle, "Семья и люди": Users, "Числа": Hash, "Время": Clock,
-  "Каждый день": Sun, "Еда и места": UtensilsCrossed, "Учёба": BookOpen, "Описание": Shapes,
-  "Чувства": Smile, "Тело и здоровье": HeartPulse, "Цвета и животные": PawPrint,
-  "Природа и погода": CloudSun, "Действия": Footprints, "Понятия и предметы": Lightbulb,
+const TOPIC_ICONS: Record<string, [typeof Eye, (typeof Eye)[]]> = {
+  "Общение": [Hand, [MessageCircle, Smile, Users]],
+  "Семья и люди": [Users, [Heart, Home, Baby]],
+  "Числа": [Hash, [Calculator, Plus, Dice5]],
+  "Время": [Clock, [CalendarDays, Sun, Moon]],
+  "Каждый день": [Sun, [Coffee, BedDouble, Home]],
+  "Еда и места": [UtensilsCrossed, [Coffee, Croissant, MapPin]],
+  "Учёба": [BookOpen, [PenLine, GraduationCap, Lightbulb]],
+  "Описание": [Shapes, [Palette, Ruler, Star]],
+  "Чувства": [Heart, [Smile, Frown, Laugh]],
+  "Тело и здоровье": [HeartPulse, [Stethoscope, Pill, Thermometer]],
+  "Цвета и животные": [PawPrint, [Palette, Cat, Fish]],
+  "Природа и погода": [CloudSun, [Snowflake, Umbrella, Leaf]],
+  "Действия": [Footprints, [Hand, Car, Dumbbell]],
+  "Понятия и предметы": [Lightbulb, [Key, Gift, Star]],
 };
 
 function shuffle<T>(items: T[], seed = Math.random()) {
@@ -264,9 +298,9 @@ function Overview({
                     const first = t.lessons.findIndex((_, i) => s.lessons[`${t.name}:${i}`] === undefined);
           const go = first < 0 ? 0 : first;
           return (
-            <section key={t.name} className="panel vocab-topic-card card-motion" style={{ "--c": TOPIC_COLORS[k % TOPIC_COLORS.length], "--i": k } as React.CSSProperties}>
+            <section key={t.name} className="panel vocab-topic-card card-motion" style={{ "--i": k } as React.CSSProperties}>
               <header>
-                <img className="vocab-topic-scene" src={`/images/topics/${TOPIC_SCENE[t.name] ?? "ideas"}.svg`} alt="" loading="lazy" />
+                <TopicArt main={TOPIC_ICONS[t.name]?.[0] ?? Lightbulb} small={TOPIC_ICONS[t.name]?.[1] ?? [Star, Heart, Smile]} index={k} />
                 <span className="vocab-topic-badge">{t.lessons.length} {at("уроков", "lessons", "сабақ")}</span>
               </header>
               <div className="vocab-topic-title">

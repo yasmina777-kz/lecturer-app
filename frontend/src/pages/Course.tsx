@@ -118,6 +118,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { at } from "../i18n/automation";
+import { TopicArt } from "../components/TopicArt";
 import { SignChain } from "../components/SignChain";
 import { WordPracticeCamera } from "../components/WordPracticeCamera";
 import { courseUnits, levelOf, type CefrLevel, type CourseUnit } from "../sign/courseUnits";
@@ -194,15 +195,9 @@ const ART: Record<number, [LucideIcon, LucideIcon[]]> = {
 
 /** Topic illustration for a lesson card: a big theme icon on a level-coloured
  * gradient with three small floating icons (vector, crisp, no downloads). */
-// Flat, print-like palette shared with the word trainer: solid colours, no gradients.
-const ART_COLORS = ["#d1495b", "#00798c", "#e07a3f", "#30638e", "#3f7d20", "#8e5572", "#c98a0b", "#2a9d8f", "#5c6bc0", "#b5651d", "#a23b72", "#4e8b6f"];
-const SCENE: Record<number, string> = {
-  1: "greet", 2: "family", 3: "numbers", 4: "time", 5: "money", 6: "day", 7: "cafe", 8: "feelings", 9: "health", 10: "study", 11: "animals", 12: "weather",
-  101: "people", 102: "looks", 103: "city", 104: "travel", 105: "often", 106: "week", 107: "shop", 108: "restaurant", 109: "opinions", 110: "work", 111: "nature", 112: "talk",
-  201: "space", 202: "classifiers", 203: "reported", 204: "past", 205: "cause", 206: "debate", 207: "degree", 208: "story",
-};
-function TopicArt({ id }: { id: number; index: number }) {
-  return <img className="topic-scene" src={`/images/topics/${SCENE[id] ?? "ideas"}.svg`} alt="" loading="lazy" />;
+function UnitArt({ id, index }: { id: number; index: number }) {
+  const [main, small] = ART[id] ?? [BookOpen, [Star, Heart, Smile]];
+  return <TopicArt main={main} small={small} index={index} />;
 }
 
 const LEVELS: { id: CefrLevel; title: string; name: string; desc: string; icon: typeof Sprout }[] = [
@@ -399,7 +394,7 @@ export function CoursePage() {
               return (
                 <Link key={u.id} className={`panel course-unit card-motion${done ? " done" : ""}${current ? " current" : ""} course-anim`} to={`/course/${u.id}`} style={{ "--i": i + 6 } as React.CSSProperties}>
                   <div className="course-unit-thumb">
-                    <TopicArt id={u.id} index={i} />
+                    <UnitArt id={u.id} index={i} />
                     <span className="course-unit-num">{done ? <CheckCircle2 size={20} /> : i + 1}</span>
                     {current && <span className="course-unit-now">{at("Сейчас", "Now", "Қазір")}</span>}
                   </div>
