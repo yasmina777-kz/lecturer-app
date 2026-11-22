@@ -347,6 +347,17 @@ export function SignDictionaryPage() {
       }),
     );
   }
+  function tryPhrase(v: string) {
+    setText(v);
+    setSubmitted(v);
+    setSpelling(false);
+    setSelected(null);
+    setMessage("");
+    setRun((n) => n + 1);
+    requestAnimationFrame(() =>
+      sequenceRef.current?.scrollIntoView({ block: "nearest", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }),
+    );
+  }
   function analyse() {
     if (!text.trim()) {
       setMessage(
@@ -471,61 +482,49 @@ export function SignDictionaryPage() {
       {error && <p role="alert">{error}</p>}
       {tab === "text" && (
         <>
-          <section className="panel sign-text-editor" data-workspace-enter>
-            <div className="sign-editor-title">
-              <span className="sign-step-number">01</span>
-              <div>
-                <h2>
-                  {at(
-                    "Что показать жестами?",
-                    "What should the avatar show?",
-                    "Аватар нені көрсетеді?",
-                  )}
-                </h2>
-                <p>
-                  {at(
-                    "Введите текст — видео жестов появятся справа.",
-                    "Enter text, then select Show with avatar.",
-                    "Мәтінді енгізіп, «Аватармен көрсету» түймесін басыңыз.",
-                  )}
-                </p>
-              </div>
+          <section className="panel tts-card" data-workspace-enter>
+            <div className="tts-card-head">
+              <span className="tts-lang">{at("Русский", "Russian", "Орыс тілі")}</span>
+              <ArrowRight size={16} />
+              <span className="tts-lang muted">{at("Жесты РЖЯ", "RSL signs", "РЖЯ ымдары")}</span>
+              <span className="tts-count">{text.length}/500</span>
             </div>
-            <label htmlFor="dictionary-text">
-              {at(
-                "Ваш текст на русском",
-                "Your text in Russian",
-                "Орыс тіліндегі мәтініңіз",
-              )}
+            <label htmlFor="dictionary-text" className="visually-hidden">
+              {at("Ваш текст на русском", "Your text in Russian", "Орыс тіліндегі мәтініңіз")}
             </label>
             <textarea
               id="dictionary-text"
+              className="tts-input"
               value={text}
               maxLength={500}
-              rows={3}
+              rows={4}
               onChange={(e) => {
                 setText(e.target.value);
                 setMessage("");
                 setSubmitted("");
                 setSelected(null);
               }}
-              placeholder={at(
-                "Например: Я хочу читать книгу",
-                "For example: Я хочу читать книгу",
-                "Мысалы: Я хочу читать книгу",
-              )}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) analyse();
+              }}
+              placeholder={at("Напишите или скажите фразу…", "Type or say a phrase…", "Сөйлемді жазыңыз не айтыңыз…")}
             />
-            <div className="translate-inputs">
-              <button className={`button secondary${recording ? " recording" : ""}`} onClick={toggleMic} disabled={(busy && !recording) || loading}>
-                {recording ? <Square size={16} /> : <Mic size={16} />}
-                {recording ? `${at("Стоп", "Stop", "Тоқтату")} · ${recording - 1} c` : at("Сказать голосом", "Speak", "Дауыспен айту")}
+            <div className="tts-toolbar">
+              <button
+                className={`tts-mic${recording ? " recording" : ""}`}
+                onClick={toggleMic}
+                disabled={(busy && !recording) || loading}
+                title={recording ? at("Остановить запись", "Stop", "Тоқтату") : at("Сказать голосом", "Speak", "Дауыспен айту")}
+              >
+                {recording ? <Square size={18} /> : <Mic size={20} />}
+                <span>{recording ? `${at("Стоп", "Stop", "Тоқтату")} · ${recording - 1} c` : at("Голосом", "Voice", "Дауыс")}</span>
               </button>
-              <label className="button secondary translate-file">
-                <Paperclip size={16} />
-                {at("Файл: аудио, видео, текст", "File: audio, video, text", "Файл: аудио, бейне, мәтін")}
+              <label className="tts-tool" title={at("Файл: аудио, видео, текст", "File: audio, video, text", "Файл")}>
+                <Paperclip size={18} />
+                <span>{at("Файл", "File", "Файл")}</span>
                 <input type="file" accept="audio/*,video/*,.txt,.srt,.vtt,text/plain" onChange={onFile} disabled={busy || loading} />
               </label>
-              <select value={speechModel} onChange={(e) => setSpeechModel(e.target.value)} aria-label={at("Качество распознавания речи", "Speech recognition quality", "Сөйлеуді тану сапасы")}>
+              <select className="tts-select" value={speechModel} onChange={(e) => setSpeechModel(e.target.value)} aria-label={at("Качество распознавания речи", "Speech recognition quality", "Сөйлеуді тану сапасы")}>
                 {browserSpeech() && <option value={BROWSER_SPEECH}>{at("Быстро (Chrome)", "Quick (browser)", "Жылдам (браузер)")}</option>}
                 {SPEECH_MODELS.map((m) => (
                   <option key={m.id} value={m.id}>
@@ -533,6 +532,10 @@ export function SignDictionaryPage() {
                   </option>
                 ))}
               </select>
+              <button className="button primary tts-go" disabled={loading || !!error} onClick={analyse}>
+                {at("Показать жестами", "Show in signs", "Ыммен көрсету")}
+                <ArrowRight size={18} />
+              </button>
             </div>
             {recording > 0 && speechModel === BROWSER_SPEECH && !speech && (
               <p className="translate-status" role="status">{at("Слушаем… говорите, текст появится в поле. Нажмите «Стоп», когда закончите.", "Listening… speak, the text appears above. Press Stop when done.", "Тыңдап тұрмыз…")}</p>
@@ -548,151 +551,56 @@ export function SignDictionaryPage() {
                       : speech.message}
               </p>
             )}
-            <div className="sign-reference-controls">
-              <label>
-                <input
-                  type="checkbox"
-                  checked={spelling}
-                  onChange={(e) => {
-                    setSpelling(e.target.checked);
-                    setSelected(null);
-                  }}
-                />
-                {at(
-                  "Имя по буквам (не перевод фразы)",
-                  "Spell a name (not phrase translation)",
-                  "Есімді әріптеу (сөйлем аудармасы емес)",
-                )}
-              </label>
-              <span>{text.length}/500</span>
-              <button
-                className="button primary"
-                disabled={loading || !!error}
-                onClick={analyse}
-              >
-                <Search size={17} />
-                {at(
-                  "Показать жестами",
-                  "Show with avatar",
-                  "Аватармен көрсету",
-                )}
-              </button>
-            </div>
+            {message && <p className="translate-status" role="status">{message}</p>}
             {!loading && !error && text.trim() && (previewPlan.spelledWords?.length ?? 0) > 0 && previewPlan.missing.length === 0 && (
               <p role="status" className="translate-status">
                 {at("Без отдельного жеста, покажутся по буквам:", "No sign yet, fingerspelled:", "Жеке ымы жоқ, әріппен көрсетіледі:")}{" "}
                 {previewPlan.spelledWords!.join(", ")}
               </p>
             )}
-            {!loading &&
-              !error &&
-              text.trim() &&
-              previewPlan.missing.length > 0 && (
-                <div role="status" className="sign-input-hint">
-                  <p>
-                    {at(
-                      "Пока нет движений для:",
-                      "No motion available for:",
-                      "Қимылдар әзірше жоқ:",
-                    )}{" "}
-                    {previewPlan.missing.join(", ")}.{" "}
-                    {at(
-                      "Вся фраза не будет запущена; слова не пропускаются.",
-                      "The phrase will not play; words are never skipped.",
-                      "Сөйлем көрсетілмейді; сөздер түсіп қалмайды.",
-                    )}
-                  </p>
-                  <button
-                    className="button secondary"
-                    onClick={() => setTab("phrases")}
-                  >
-                    {at(
-                      "Выбрать готовую фразу",
-                      "Choose a ready phrase",
-                      "Дайын сөйлемді таңдау",
-                    )}
-                  </button>
-                  <p>
-                    {at(
-                      "Для имени оставьте в поле только имя и включите «Имя по буквам».",
-                      "For a name, enter only the name and enable spelling.",
-                      "Есім үшін өріске тек есімді енгізіп, әріптеуді қосыңыз.",
-                    )}
-                  </p>
-                </div>
-              )}
-            <button
-              className="button secondary motion-reference-example"
-              disabled={loading || !!error}
-              onClick={() => {
-                setText("Привет!");
-                setSubmitted("Привет!");
-                setSpelling(false);
-                setSelected(null);
-                setRun((v) => v + 1);
-                requestAnimationFrame(() =>
-                  sequenceRef.current?.scrollIntoView({
-                    block: "start",
-                    behavior: window.matchMedia(
-                      "(prefers-reduced-motion: reduce)",
-                    ).matches
-                      ? "auto"
-                      : "smooth",
-                  }),
-                );
-              }}
-            >
-              <Play size={17} />
-              {at("Показать «Привет!»", "Show «Привет!»", "«Привет!» көрсету")}
-            </button>
-            <details className="sign-letter-picker">
-              <summary>
-                {at(
-                  "Выбрать букву · А–Я",
-                  "Choose a letter · А–Я",
-                  "Әріпті таңдау · А–Я",
-                )}
-              </summary>
-              <div
-                className="sign-examples"
-                aria-label={at("Алфавит", "Alphabet", "Әліпби")}
-              >
+            {!loading && !error && text.trim() && previewPlan.missing.length > 0 && (
+              <div role="status" className="sign-input-hint">
+                <p>
+                  {at("Пока нет жестов для:", "No signs yet for:", "Ымдар әзірше жоқ:")} {previewPlan.missing.join(", ")}.{" "}
+                  {at("Попробуйте готовую фразу или включите «Имя по буквам».", "Try a ready phrase or enable spelling.", "Дайын сөйлемді таңдаңыз.")}
+                </p>
+                <button className="button secondary" onClick={() => setTab("phrases")}>
+                  {at("Выбрать готовую фразу", "Choose a ready phrase", "Дайын сөйлемді таңдау")}
+                </button>
+              </div>
+            )}
+          </section>
+
+          <div className="tts-extras">
+            <div className="tts-examples">
+              <span>{at("Попробуйте", "Try", "Байқап көріңіз")}:</span>
+              {["Привет!", "Как тебя зовут?", "Я хочу пить", "Добро пожаловать!"].map((ex) => (
+                <button key={ex} onClick={() => tryPhrase(ex)} disabled={loading || !!error}>{ex}</button>
+              ))}
+            </div>
+            <label className={`tts-toggle${spelling ? " on" : ""}`}>
+              <input
+                type="checkbox"
+                checked={spelling}
+                onChange={(e) => {
+                  setSpelling(e.target.checked);
+                  setSelected(null);
+                }}
+              />
+              <span className="tts-switch" aria-hidden="true" />
+              {at("Имя по буквам", "Spell a name", "Есімді әріптеу")}
+            </label>
+            <details className="sign-letter-picker tts-letters">
+              <summary>{at("Буквы А–Я", "Letters А–Я", "Әріптер А–Я")}</summary>
+              <div className="sign-examples" aria-label={at("Алфавит", "Alphabet", "Әліпби")}>
                 {alphabetEntries().map((entry) => (
-                  <button
-                    key={entry.id}
-                    onClick={() => choose(entry)}
-                    aria-pressed={selected?.id === entry.id}
-                  >
+                  <button key={entry.id} onClick={() => choose(entry)} aria-pressed={selected?.id === entry.id}>
                     {entry.label}
                   </button>
                 ))}
               </div>
             </details>
-            <p className="sign-input-hint">
-              {at(
-                "Одна буква распознаётся автоматически. Для целого имени включите показ по буквам.",
-                "A single letter is selected automatically. For a whole name, enable spelling.",
-                "Бір әріп автоматты таңдалады. Толық есім үшін әріптеуді қосыңыз.",
-              )}
-            </p>
-            {message && <p role="status">{message}</p>}
-            <div className="sign-workflow-hint">
-              <span>01 · {at("Ваш текст", "Your text", "Мәтініңіз")}</span>
-              <ArrowRight size={16} />
-              <span>
-                02 ·{" "}
-                {at(
-                  "Видео жестов",
-                  "Avatar demonstration",
-                  "Аватар көрсетілімі",
-                )}
-              </span>
-              <ArrowRight size={16} />
-              <span>
-                03 · {at("Повторите жест", "Repeat the sign", "Ымды қайталау")}
-              </span>
-            </div>
-          </section>
+          </div>
         </>
       )}
       {tab === "phrases" && (
@@ -776,6 +684,14 @@ export function SignDictionaryPage() {
           ref={sequenceRef}
           className="sign-dictionary-result text-sign-player"
         >
+          {tab === "text" && !submitted && !selected && !text.trim() ? (
+            <div className="tts-empty">
+              <span className="tts-empty-blob" />
+              <img src="/images/landing-v2/mentor-wave.webp" alt="" />
+              <strong>{at("Здесь появится перевод", "The translation appears here", "Аударма осында шығады")}</strong>
+              <p>{at("Напишите или скажите фразу слева — жесты покажут по порядку, их можно замедлить.", "Type or say a phrase — signs play in order, and you can slow them down.", "Сөйлемді жазыңыз — ымдар ретімен көрсетіледі.")}</p>
+            </div>
+          ) : (
           <SignSequencePlayer
             key={`${run}-${spelling}-${selected?.id ?? submitted}`}
             plan={selectedPlan ?? (submitted ? motionPlan : previewPlan)}
@@ -791,6 +707,7 @@ export function SignDictionaryPage() {
               setRun((v) => v + 1);
             }}
           />
+          )}
           {!!submitted && !selected && submitted.trim().includes(" ") && (
             <p className="translate-status">
               {at(
