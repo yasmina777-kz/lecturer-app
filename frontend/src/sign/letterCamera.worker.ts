@@ -33,6 +33,8 @@ let poseRestarting = false;
 let poseRetryAt = -Infinity;
 let selectedSide = "";
 let poseAt = -Infinity;
+/** Smoothed milliseconds one pose detection takes on this device. */
+let poseCost = 0;
 let lastPose: import("@mediapipe/tasks-vision").NormalizedLandmark[] = [];
 
 const live = new LiveLetterStream();
@@ -142,17 +144,19 @@ self.onmessage = async ({ data }) => {
       const detected = detector.detectForVideo(data.bitmap, data.now);
       if (!poseDetector) recoverPoseDetector(data.now);
       try {
-        // Framing feedback needs fewer updates than fingers. Do not block every
-        // hand frame on a second neural network; discard stale poses on gaps.
-        // Pose landmarks are only used for the body guide and phrase-capture
-        // framing. Running this second CPU model four times per second competes
-        // with the hand classifier on laptops and throttled mobile browsers.
-        // Two updates per second keep the guide responsive while freeing the
-        // worker for hand tracking on every sampled frame.
-        if (data.now - poseAt >= 500) {
+        // The word and letter models read hand position relative to the body
+        // and were trained with a pose on every frame, so while hands are in
+        // view the pose runs every frame (a stale pose from 500 ms ago put the
+        // hands next to the wrong body position). Without hands two updates a
+        // second keep the framing guide alive. Slow machines fall back to
+        // ~10 poses a second instead of starving the hand tracker.
+        const poseEvery = detected.landmarks.length ? (poseCost > 30 ? 100 : 0) : 500;
+        if (data.now - poseAt >= poseEvery) {
+          const t0 = performance.now();
           lastPose =
             poseDetector?.detectForVideo(data.bitmap, data.now).landmarks[0] ??
             [];
+          poseCost = poseCost * 0.8 + (performance.now() - t0) * 0.2;
           poseAt = data.now;
         }
       } catch {

@@ -21,6 +21,18 @@ const MAX_CLIP_BYTES = import.meta.env.PROD
   : 25 * 1024 * 1024;
 const MAX_CLIP_MB = import.meta.env.PROD ? 4 : 25;
 
+/** A hand is in signing space: wrist above the lower chest. MediaPipe Pose:
+ * 0 nose, 11/12 shoulders. Without a body in view nothing is filtered. */
+function handRaised(hands: Landmark[][], pose: Landmark[]) {
+  const visible = hands.filter((h) => h.length === 21);
+  if (!visible.length) return false;
+  const nose = pose[0], l = pose[11], r = pose[12];
+  if (!nose || !l || !r || (l.visibility ?? 1) < 0.5 || (r.visibility ?? 1) < 0.5) return true;
+  const shoulderY = (l.y + r.y) / 2;
+  const unit = Math.max(shoulderY - nose.y, 0.05);
+  return visible.some((h) => h[0].y < shoulderY + 2.2 * unit);
+}
+
 function appendPhraseToTranscript(text: string, phrase: string) {
   const clean = phrase.trim();
   if (!clean) return text;
@@ -73,8 +85,15 @@ export function ContinuousSignCamera() {
   const recentWords = useRef<{ label: string; at: number }[]>([]);
   // Last recognized word and the model's next guesses, offered as one-tap fixes.
   const [fix, setFix] = useState<{ label: string; alternatives: string[] } | null>(null);
+  const raisedAt = useRef(-Infinity);
+  const lastWord = useRef({ label: "", at: -Infinity });
   const addToken = (token: string, kind: "word" | "letter") => {
     const now = performance.now();
+    // The same sign recognized twice in a row within 3 s is one sign, not two.
+    if (kind === "word") {
+      if (lastWord.current.label === token && now - lastWord.current.at < 3000) return;
+      lastWord.current = { label: token, at: now };
+    }
     const join = kind === "letter" && lastToken.current.kind === "letter" && now - lastToken.current.at < 4000;
     lastToken.current = { kind, at: now };
     if (kind === "letter") recentWords.current = [];
@@ -94,6 +113,7 @@ export function ContinuousSignCamera() {
     overlay,
     phase === "recording",
     (now: number, hands: Landmark[][], pose: Landmark[], face?: number[] | null) => {
+      if (handRaised(hands, pose)) raisedAt.current = now;
       // Continuous local word spotting (browser only, no pauses needed).
       const model = wordModel.current, v = video.current;
       if (model && v && !hasPreview && modeRef.current !== "letters") {
@@ -101,7 +121,7 @@ export function ContinuousSignCamera() {
           h.map((p) => ({ x: p.x, y: p.y, z: p.z ?? 0 })),
         ) as HandPoint[][];
         const spotted = spotter.current.push(model.members[0], now, points, v.videoWidth, v.videoHeight, model.members, pose, face ?? null);
-        if (spotted && !(spotted.fingerspelling && modeRef.current === "auto")) {
+        if (spotted && !(spotted.fingerspelling && modeRef.current === "auto") && now - raisedAt.current < 800) {
           lastWordAt.current = now;
           addToken(spotted.label, "word");
           setFix({ label: spotted.label, alternatives: spotted.alternatives });
@@ -114,7 +134,7 @@ export function ContinuousSignCamera() {
         if (clip) {
           const guess = recognizeWord(model, clip, v.videoWidth, v.videoHeight, true, segmenter.current.clipPoses, segmenter.current.clipFaces);
           const duplicate = guess && lastSpotted.current.label === guess.label && now - lastSpotted.current.at < 4000;
-          if (guess?.accepted && !duplicate) {
+          if (guess?.accepted && !duplicate && now - raisedAt.current < 800) {
             lastWordAt.current = now;
             lastSpotted.current = { label: guess.label, at: now };
             addToken(guess.label, "word");
@@ -136,6 +156,8 @@ export function ContinuousSignCamera() {
     (label) => {
       if (modeRef.current === "words") return;
       if (modeRef.current === "auto" && (spotter.current.busy || spotter.current.moving(performance.now()) || performance.now() - lastWordAt.current < 1200)) return;
+      // Fingerspelling happens in front of the chest; a resting hand is not a letter.
+      if (performance.now() - raisedAt.current > 400) return;
       if (/^[А-ЯЁ]$/u.test(label)) addToken(label, "letter");
     },
     50,

@@ -11,7 +11,7 @@ import { clipFeatures, modelFeatures, MOTION_GATE, motionExtent, resampleFrames,
 export const SPOT = {
   hopMs: 300,
   windowsMs: [800, 1200, 1600],
-  threshold: 0.2,
+  threshold: 0.4,
   margin: 0.2,
   votes: 2,
   restMs: 400,
