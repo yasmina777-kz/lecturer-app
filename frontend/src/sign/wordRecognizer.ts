@@ -58,6 +58,9 @@ export type WordGuess = {
  * Acceptance gate fixed before test evaluation; see ml/rsl/course_mode_eval.py. */
 export const COURSE_THRESHOLD = 0.5;
 export const COURSE_MARGIN = 0.2;
+/** Lesson mode (a handful of choices): stricter, because chance is higher. */
+export const LESSON_THRESHOLD = 0.6;
+export const LESSON_MARGIN = 0.3;
 
 /** frames: hand landmarks per sampled camera frame (any number of hands). */
 export function recognizeWord(
@@ -68,6 +71,8 @@ export function recognizeWord(
   courseOnly = true,
   poses?: PosePoint[][],
   faces?: (number[] | null)[],
+  /** Lesson mode: rank only these signs (e.g. the 8 words of the lesson). */
+  choices?: string[],
 ): WordGuess | null {
   const features = modelFeatures(model, frames, width, height, poses, faces);
   if (!features || features.filter((f) => f[65] || f[131]).length < 5) return null;
@@ -87,6 +92,17 @@ export function recognizeWord(
     threshold = COURSE_THRESHOLD;
     margin = COURSE_MARGIN;
   }
+  if (choices?.length) {
+    const keep = new Set(choices.map(normalizeSignText));
+    const subset = ranked.filter((r) => keep.has(normalizeSignText(r.label)));
+    if (subset.length >= 2) {
+      const sum = subset.reduce((a, r) => a + r.p, 0) || 1;
+      ranked = subset.map((r) => ({ ...r, p: r.p / sum }));
+      // Among few options the top pick is easy; ask for a clear winner.
+      threshold = LESSON_THRESHOLD;
+      margin = LESSON_MARGIN;
+    }
+  }
   ranked.sort((a, b) => b.p - a.p);
   const [first, second] = ranked;
   return {
@@ -99,10 +115,12 @@ export function recognizeWord(
 
 /** Exercise check against a known target: top-1 among course signs = correct,
  * top-3 = close. The target is never fed to the model. */
-export function judgeWord(guess: WordGuess | null, target: string) {
+export function judgeWord(guess: WordGuess | null, target: string, lesson = false) {
   if (!guess) return { verdict: "unclear" as const, rank: -1 };
   const key = normalizeSignText(target);
   const rank = guess.top.findIndex((t) => normalizeSignText(t.label) === key);
+  // Among a lesson's few words a first place alone is not enough: it must be a confident one.
+  if (rank === 0 && lesson && !guess.accepted) return { verdict: "close" as const, rank };
   if (rank === 0) return { verdict: "correct" as const, rank };
   if (rank > 0 && rank < 3) return { verdict: "close" as const, rank };
   return { verdict: "different" as const, rank };

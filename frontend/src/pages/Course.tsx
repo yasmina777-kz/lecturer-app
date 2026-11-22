@@ -624,7 +624,7 @@ function CameraStep({ entries, onNext }: { entries: DictionaryEntry[]; onNext: (
         </div>
         <button className="button primary" onClick={onNext}>{at("Дальше", "Next", "Келесі")} <ArrowRight size={16} /></button>
       </section>
-      {e && <WordPracticeCamera key={e.id} target={e.label} />}
+      {e && <WordPracticeCamera key={e.id} target={e.label} choices={entries.map((w) => w.label)} />}
     </div>
   );
 }

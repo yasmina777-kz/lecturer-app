@@ -487,7 +487,7 @@ function Session({
           {tryCamera && (
             <div className="vocab-learn-camera">
               <Suspense fallback={<Loading />}>
-                <WordPracticeCamera key={current.id} target={current.label} />
+                <WordPracticeCamera key={current.id} target={current.label} choices={words.map((w) => w.label)} />
               </Suspense>
             </div>
           )}
@@ -541,7 +541,7 @@ function Session({
             <div className="vocab-camera-pair">
               <SignVideo word={cameraWord} small />
               <Suspense fallback={<Loading />}>
-                <WordPracticeCamera key={cameraWord.id} target={cameraWord.label} />
+                <WordPracticeCamera key={cameraWord.id} target={cameraWord.label} choices={words.map((w) => w.label)} />
               </Suspense>
             </div>
           )}

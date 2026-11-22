@@ -18,7 +18,9 @@ import "./word-practice.css";
 type Attempt = { guess: WordGuess | null; verdict: ReturnType<typeof judgeWord>["verdict"] };
 
 /** Camera self-check for one dictionary word. Runs fully in the browser. */
-export function WordPracticeCamera({ target }: { target: string }) {
+/** choices: the lesson's words — the model then picks among them only
+ * (much more reliable than among all course signs). */
+export function WordPracticeCamera({ target, choices }: { target: string; choices?: string[] }) {
   const video = useRef<HTMLVideoElement>(null);
   const overlay = useRef<HTMLCanvasElement>(null);
   const stream = useRef<MediaStream | null>(null);
@@ -54,8 +56,8 @@ export function WordPracticeCamera({ target }: { target: string }) {
     const clip = segmenter.current.push(now, points, pose, face ?? null);
     setRecording(segmenter.current.recording);
     if (!clip) return;
-    const guess = recognizeWord(model, clip, video.current.videoWidth, video.current.videoHeight, true, segmenter.current.clipPoses, segmenter.current.clipFaces);
-    const { verdict } = judgeWord(guess, target);
+    const guess = recognizeWord(model, clip, video.current.videoWidth, video.current.videoHeight, true, segmenter.current.clipPoses, segmenter.current.clipFaces, choices);
+    const { verdict } = judgeWord(guess, target, !!choices?.length);
     setAttempts((list) => [{ guess, verdict }, ...list].slice(0, 5));
   }, "balanced", undefined, 50);
 

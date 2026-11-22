@@ -25,9 +25,9 @@ for form, ids in forms.items():
  if ranked[0][0] > 0 and ranked[0][0] >= 2 * ranked[1][0]:
   forms[form] = {ranked[0][1]}
 # Everyday words whose sign is a headword under another name (same sign in RSL):
-# «мама» is signed МАТЬ, «спасибо» is БЛАГОДАРНОСТЬ. Only fills forms that have
+# «мама» is signed МАТЬ, «папа» is ОТЕЦ. Only fills forms that have
 # no sign of their own.
-SYNONYMS={'мама':'мать','папа':'отец','спасибо':'благодарность','благодарю':'благодарность'}
+SYNONYMS={'мама':'мать','папа':'отец'}
 by_label={e['label'].lower().rstrip('!?'):e['id'] for e in entries}
 for word,target in SYNONYMS.items():
  if target not in by_label:continue
