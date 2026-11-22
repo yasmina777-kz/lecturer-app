@@ -28,6 +28,10 @@ const PhraseUnderstandingPage = lazyPage(() => import("./pages/PhraseUnderstandi
 const LevelTestPage = lazyPage(() => import("./pages/LevelTest").then(m => ({default:m.LevelTestPage})));
 const CoursePage = lazyPage(() => import("./pages/Course").then(m => ({default:m.CoursePage})));
 const CourseUnitPage = lazyPage(() => import("./pages/Course").then(m => ({default:m.CourseUnitPage})));
+const CulturePage = lazyPage(() => import("./pages/Culture").then(m => ({default:m.CulturePage})));
+const NumbersTrainerPage = lazyPage(() => import("./pages/NumbersTrainer").then(m => ({default:m.NumbersTrainerPage})));
+const FaceTrainerPage = lazyPage(() => import("./pages/FaceTrainer").then(m => ({default:m.FaceTrainerPage})));
+const LivePracticePage = lazyPage(() => import("./pages/LivePractice").then(m => ({default:m.LivePracticePage})));
 const SignUnderstandingPage = lazyPage(() => import("./pages/SignActivities").then(m => ({default:m.SignUnderstandingPage})));
 const SignHelpPage = lazyPage(() => import("./pages/SignWorkspace").then(m => ({default:m.SignHelpPage})));
 import { LibraryPage } from "./pages/LibraryPage";
@@ -115,6 +119,10 @@ export function App() {
             <Route path="learn-test" element={<LevelTestPage />} />
             <Route path="course" element={<CoursePage />} />
             <Route path="course/:id" element={<CourseUnitPage />} />
+            <Route path="culture" element={<CulturePage />} />
+            <Route path="numbers" element={<NumbersTrainerPage />} />
+            <Route path="face-trainer" element={<FaceTrainerPage />} />
+            <Route path="live-practice" element={<LivePracticePage />} />
             <Route path="knowledge" element={<KnowledgePage />} />
             <Route path="groups" element={<GroupsPage />} />
             <Route path="courses" element={<CoursesRoute />} />
