@@ -255,44 +255,38 @@ function Overview({
   })();
   return (
     <div className="sign-workspace vocab">
-      <section className="vocab-hero">
-        <div className="vocab-hero-text">
+      <section className="vocab-hero2">
+        <div className="vocab-hero2-text">
           <span className="eyebrow">{at("СЛОВАРНЫЙ ЗАПАС", "VOCABULARY", "СӨЗДІК ҚОР")}</span>
           <h1>{at("Тренажёр слов РЖЯ", "RSL word trainer", "Ым сөздерінің жаттықтырғышы")}</h1>
-          <p>
-            {at(
-              `${words.length} жестов по ${topics.length} темам, по 8 слов в уроке. Выученные слова сами вернутся на повторение через 1, 2, 4, 8… дней.`,
-              `${words.length} signs in ${topics.length} topics, 8 words per lesson. Learned words come back for review after 1, 2, 4, 8… days.`,
-              `${words.length} ым, ${topics.length} тақырып, әр сабақта 8 сөз.`,
-            )}
-          </p>
-          <div className="vocab-hero-actions">
-            {nextUp && (
-              <button className="button primary vocab-hero-cta" onClick={() => open(nextUp.topic, nextUp.lesson)}>
-                <Play size={18} />
-                {started ? at("Продолжить", "Continue", "Жалғастыру") : at("Начать", "Start", "Бастау")}: {nextUp.topic} · {nextUp.lesson + 1}
-              </button>
-            )}
-            {due > 0 && (
-              <button className="button secondary" onClick={review}>
-                <Repeat size={18} />
-                {at(`Повторить ${Math.min(due, 20)}`, `Review ${Math.min(due, 20)}`, `${Math.min(due, 20)} қайталау`)}
-              </button>
-            )}
-          </div>
-          {nextUp && (
-            <p className="vocab-hero-next">
-              {at("В уроке", "In this lesson", "Сабақта")}:{" "}
-              {nextUp.words.slice(0, 5).map((w) => <i key={w.id}>{w.label.replace(/[!?]$/, "")}</i>)}
-            </p>
+          <p>{at("Короткие уроки по 8 слов: смотрите жест, узнаёте его, находите и показываете сами. Выученное вернётся на повторение через 1, 2, 4, 8… дней.", "Short 8-word lessons: watch, recognize, find and sign. Learned words come back after 1, 2, 4, 8… days.", "8 сөзден тұратын қысқа сабақтар.")}</p>
+          <ul className="vocab-hero2-facts">
+            <li><strong>{words.length}</strong>{at("жестов", "signs", "ым")}</li>
+            <li><strong>{topics.length}</strong>{at("тем", "topics", "тақырып")}</li>
+            <li><strong>8</strong>{at("слов в уроке", "words a lesson", "сөз сабақта")}</li>
+          </ul>
+          {due > 0 && (
+            <button className="button secondary vocab-hero2-review" onClick={review}>
+              <Repeat size={16} />
+              {at(`Повторить ${Math.min(due, 20)} слов`, `Review ${Math.min(due, 20)} words`, `${Math.min(due, 20)} сөзді қайталау`)}
+            </button>
           )}
         </div>
-        <div className="vocab-hero-art" aria-hidden="true">
-          <span className="vocab-hero-blob" />
-          <img src="/images/landing-v2/mentor-pointing.webp" alt="" />
-          <span className="vocab-hero-bubble b1"><strong>{words.length}</strong> {at("жестов", "signs", "ым")}</span>
-          <span className="vocab-hero-bubble b2"><strong>{topics.length}</strong> {at("тем", "topics", "тақырып")}</span>
-        </div>
+        {nextUp && (
+          <button className="vocab-next" onClick={() => open(nextUp.topic, nextUp.lesson)} style={{ "--lvl": "#4f6bed" } as React.CSSProperties}>
+            <span className="vocab-next-art">
+              <TopicArt main={TOPIC_ICONS[nextUp.topic]?.[0] ?? Lightbulb} small={TOPIC_ICONS[nextUp.topic]?.[1] ?? [Star, Heart, Smile]} index={0} />
+            </span>
+            <span className="vocab-next-body">
+              <small>{started ? at("Следующий урок", "Next lesson", "Келесі сабақ") : at("Начните отсюда", "Start here", "Осыдан бастаңыз")}</small>
+              <strong>{nextUp.topic} · {at("урок", "lesson", "сабақ")} {nextUp.lesson + 1}</strong>
+              <span className="vocab-next-words">
+                {nextUp.words.slice(0, 6).map((w) => <i key={w.id}>{w.label.replace(/[!?]$/, "")}</i>)}
+              </span>
+              <span className="vocab-next-go"><Play size={16} /> {started ? at("Продолжить", "Continue", "Жалғастыру") : at("Начать урок", "Start lesson", "Сабақты бастау")}</span>
+            </span>
+          </button>
+        )}
       </section>
 
       <dl className="vocab-ledger">

@@ -82,15 +82,32 @@ function markCached(model: string) {
 }
 
 const warming = new Map<string, Promise<void>>();
-/** Download / load the model ahead of time (e.g. while the person is still speaking). */
+const listeners = new Map<string, Set<(p: SpeechProgress) => void>>();
+/** Download / load the model ahead of time (e.g. while the person is still speaking).
+ * Every caller gets download progress, also when the download was started earlier. */
 export function preloadSpeech(model: string, onProgress: (p: SpeechProgress) => void = () => {}): Promise<void> {
+  const set = listeners.get(model) ?? new Set();
+  listeners.set(model, set);
+  set.add(onProgress);
   let p = warming.get(model);
   if (!p) {
-    p = call(model, null, onProgress).then(() => markCached(model));
+    p = call(model, null, (x) => set.forEach((f) => f(x))).then(() => markCached(model));
     p.catch(() => warming.delete(model));
     warming.set(model, p);
   }
-  return p;
+  return p.finally(() => set.delete(onProgress)).catch((e) => {
+    throw friendly(e);
+  });
+}
+
+/** Turn low-level failures into something a learner can act on. */
+export function friendly(e: unknown): Error {
+  const m = e instanceof Error ? e.message : String(e);
+  if (/network|fetch|load|ERR_|timed? ?out|Failed to/i.test(m))
+    return new Error(
+      "Не удалось скачать модель распознавания (нужен интернет, ≈80 МБ один раз). Проверьте связь и попробуйте ещё раз — или выберите режим «Быстро (Chrome)».",
+    );
+  return e instanceof Error ? e : new Error(m);
 }
 
 /** Speech in a file → subtitle lines with times, computed on this device. */

@@ -2,7 +2,26 @@ import { lazyPage } from "../lazyPage";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Search, BookOpen, Play, ArrowRight, Mic, Square, Paperclip } from "lucide-react";
-import { SPEECH_MODELS, preloadSpeech, speechCached, transcribe, type SpeechProgress } from "../local-ai/speech";
+import { SPEECH_MODELS, friendly, preloadSpeech, speechCached, transcribe, type SpeechProgress } from "../local-ai/speech";
+
+/** "Quick" voice input: the browser's own recogniser (Chrome sends audio to its
+ * service). The Whisper modes keep audio on this device. */
+const BROWSER_SPEECH = "browser";
+type SpeechRecognitionEventLike = { resultIndex: number; results: ArrayLike<{ isFinal: boolean; 0: { transcript: string } }> };
+type LiveRecognizer = {
+  lang: string;
+  interimResults: boolean;
+  continuous: boolean;
+  onresult: (e: SpeechRecognitionEventLike) => void;
+  onerror: (e: { error: string }) => void;
+  onend: () => void;
+  start(): void;
+  stop(): void;
+};
+function browserSpeech(): (new () => LiveRecognizer) | null {
+  const w = window as unknown as { SpeechRecognition?: new () => LiveRecognizer; webkitSpeechRecognition?: new () => LiveRecognizer };
+  return w.SpeechRecognition ?? w.webkitSpeechRecognition ?? null;
+}
 import { numberWords, parseSubtitles } from "../sign/studio";
 import { at } from "../i18n/automation";
 import {
@@ -82,12 +101,14 @@ export function SignDictionaryPage() {
   const [speechModel, setSpeechModelState] = useState(() => {
     try {
       const v = localStorage.getItem("rsl-speech-model-v1");
-      if (v && SPEECH_MODELS.some((m) => m.id === v)) return v;
+      if (v && (SPEECH_MODELS.some((m) => m.id === v) || (v === BROWSER_SPEECH && browserSpeech()))) return v;
     } catch {
       /* default below */
     }
-    return SPEECH_MODELS[0].id;
+    return browserSpeech() ? BROWSER_SPEECH : SPEECH_MODELS[0].id;
   });
+  const whisperModel = speechModel === BROWSER_SPEECH ? SPEECH_MODELS[0].id : speechModel;
+  const live = useRef<{ stop(): void } | null>(null);
   const setSpeechModel = (v: string) => {
     setSpeechModelState(v);
     try {
@@ -99,7 +120,7 @@ export function SignDictionaryPage() {
   // Already downloaded once on this device → load it into memory right away, so
   // the first phrase is recognised without waiting.
   useEffect(() => {
-    if (speechCached(speechModel)) void preloadSpeech(speechModel).catch(() => {});
+    if (speechModel !== BROWSER_SPEECH && speechCached(speechModel)) void preloadSpeech(speechModel).catch(() => {});
   }, [speechModel]);
   const [recording, setRecording] = useState(0);
   const mic = useRef<{ rec: MediaRecorder; started: number } | null>(null);
@@ -120,12 +141,73 @@ export function SignDictionaryPage() {
   }
   async function fromAudio(blob: Blob) {
     try {
-      const cues = await transcribe(blob, speechModel, setSpeech);
+      const cues = await transcribe(blob, whisperModel, setSpeech);
       setSpeech(null);
       showText(cues.map((c) => c.text).join(" "));
     } catch (e) {
-      setSpeech({ stage: "error", message: e instanceof Error ? e.message : String(e) });
+      setSpeech({ stage: "error", message: friendly(e).message });
     }
+  }
+  /** Chrome / Safari built-in recognition: instant, text appears while speaking. */
+  function startLive() {
+    const Rec = browserSpeech()!;
+    const rec = new Rec();
+    rec.lang = "ru-RU";
+    rec.interimResults = true;
+    rec.continuous = true;
+    let finalText = "";
+    let failed = false;
+    rec.onresult = (ev: SpeechRecognitionEventLike) => {
+      let interim = "";
+      for (let i = ev.resultIndex; i < ev.results.length; i++) {
+        const r = ev.results[i];
+        if (r.isFinal) finalText += r[0].transcript + " ";
+        else interim += r[0].transcript;
+      }
+      setText((finalText + interim).trim());
+    };
+    rec.onerror = (ev: { error: string }) => {
+      failed = true;
+      setSpeech({
+        stage: "error",
+        message:
+          ev.error === "not-allowed" || ev.error === "service-not-allowed"
+            ? at("Микрофон заблокирован. Разрешите микрофон (значок слева от адреса).", "Microphone blocked. Allow it next to the address bar.", "Микрофон бұғатталған.")
+            : ev.error === "no-speech"
+              ? at("Ничего не услышали. Говорите ближе к микрофону.", "Didn't hear anything. Speak closer to the mic.", "Ештеңе естілмеді.")
+              : ev.error === "network"
+                ? at("Быстрый режим не смог связаться с сервисом распознавания. Выберите «Приватно» в списке справа.", "The quick mode could not reach the recognition service. Choose a private mode.", "Жеке режимді таңдаңыз.")
+                : `${at("Ошибка распознавания", "Recognition error", "Тану қатесі")}: ${ev.error}`,
+      });
+    };
+    rec.onend = () => {
+      live.current = null;
+      mic.current = null;
+      setRecording(0);
+      if (!failed) {
+        setSpeech(null);
+        if (finalText.trim()) showText(finalText);
+        else
+          setSpeech({
+            stage: "error",
+            message: at(
+              "Ничего не распознали. Говорите чуть громче и ближе к микрофону — или выберите «Приватно» в списке справа.",
+              "Nothing recognized. Speak louder and closer — or choose a private mode.",
+              "Ештеңе танылмады.",
+            ),
+          });
+      }
+    };
+    try {
+      rec.start();
+    } catch {
+      return;
+    }
+    live.current = rec;
+    mic.current = { rec: { stop: () => rec.stop() } as unknown as MediaRecorder, started: Date.now() };
+    setSpeech(null);
+    setText("");
+    setRecording(1);
   }
   async function onFile(e: React.ChangeEvent<HTMLInputElement>) {
     const f = e.target.files?.[0];
@@ -140,6 +222,7 @@ export function SignDictionaryPage() {
       mic.current.rec.stop();
       return;
     }
+    if (speechModel === BROWSER_SPEECH && browserSpeech()) return startLive();
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       const rec = new MediaRecorder(stream);
@@ -154,7 +237,7 @@ export function SignDictionaryPage() {
       rec.start(250);
       mic.current = { rec, started: Date.now() };
       // Fetch / load the model while the person is speaking.
-      void preloadSpeech(speechModel, (p) => mic.current && setSpeech(p))
+      void preloadSpeech(whisperModel, (p) => setSpeech(p))
         .then(() => mic.current && setSpeech(null))
         .catch(() => {});
       setRecording(1);
@@ -443,13 +526,17 @@ export function SignDictionaryPage() {
                 <input type="file" accept="audio/*,video/*,.txt,.srt,.vtt,text/plain" onChange={onFile} disabled={busy || loading} />
               </label>
               <select value={speechModel} onChange={(e) => setSpeechModel(e.target.value)} aria-label={at("Качество распознавания речи", "Speech recognition quality", "Сөйлеуді тану сапасы")}>
+                {browserSpeech() && <option value={BROWSER_SPEECH}>{at("Быстро (Chrome)", "Quick (browser)", "Жылдам (браузер)")}</option>}
                 {SPEECH_MODELS.map((m) => (
                   <option key={m.id} value={m.id}>
-                    {m.label} · {m.size}
+                    {at("Приватно", "Private", "Жеке")} · {m.label.toLowerCase()} · {m.size}
                   </option>
                 ))}
               </select>
             </div>
+            {recording > 0 && speechModel === BROWSER_SPEECH && !speech && (
+              <p className="translate-status" role="status">{at("Слушаем… говорите, текст появится в поле. Нажмите «Стоп», когда закончите.", "Listening… speak, the text appears above. Press Stop when done.", "Тыңдап тұрмыз…")}</p>
+            )}
             {speech && (
               <p className={`translate-status${speech.stage === "error" ? " error" : ""}`} role="status">
                 {speech.stage === "decoding"
