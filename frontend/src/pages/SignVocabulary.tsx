@@ -56,6 +56,11 @@ const TOPIC_ORDER = [
 
 // Flat, print-like palette: one solid colour per topic, no gradients.
 const TOPIC_COLORS = ["#d1495b", "#00798c", "#e07a3f", "#30638e", "#3f7d20", "#8e5572", "#c98a0b", "#2a9d8f", "#5c6bc0", "#b5651d", "#a23b72", "#4e8b6f", "#3d405b", "#bc4b51"];
+const TOPIC_SCENE: Record<string, string> = {
+  "Общение": "greet", "Семья и люди": "family", "Числа": "numbers", "Время": "time", "Каждый день": "day", "Еда и места": "cafe",
+  "Учёба": "study", "Описание": "describe", "Чувства": "feelings", "Тело и здоровье": "health", "Цвета и животные": "animals",
+  "Природа и погода": "weather", "Действия": "actions", "Понятия и предметы": "ideas",
+};
 const TOPIC_ICONS: Record<string, typeof Eye> = {
   "Общение": MessageCircle, "Семья и люди": Users, "Числа": Hash, "Время": Clock,
   "Каждый день": Sun, "Еда и места": UtensilsCrossed, "Учёба": BookOpen, "Описание": Shapes,
@@ -256,14 +261,12 @@ function Overview({
           const all = t.lessons.flat();
           const total = all.length;
           const done = all.filter((w) => (s.words[w.id]?.box ?? 0) >= LEARNED_BOX).length;
-          const Icon = TOPIC_ICONS[t.name] ?? Lightbulb;
-          const first = t.lessons.findIndex((_, i) => s.lessons[`${t.name}:${i}`] === undefined);
+                    const first = t.lessons.findIndex((_, i) => s.lessons[`${t.name}:${i}`] === undefined);
           const go = first < 0 ? 0 : first;
           return (
             <section key={t.name} className="panel vocab-topic-card" style={{ "--c": TOPIC_COLORS[k % TOPIC_COLORS.length] } as React.CSSProperties}>
               <header>
-                <span className="vocab-topic-num">{String(k + 1).padStart(2, "0")}</span>
-                <span className="vocab-topic-icon"><Icon size={78} strokeWidth={1.4} /></span>
+                <img className="vocab-topic-scene" src={`/images/topics/${TOPIC_SCENE[t.name] ?? "ideas"}.svg`} alt="" loading="lazy" />
               </header>
               <div className="vocab-topic-title">
                 <h3>{t.name}</h3>

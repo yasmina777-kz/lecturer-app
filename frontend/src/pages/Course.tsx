@@ -196,16 +196,13 @@ const ART: Record<number, [LucideIcon, LucideIcon[]]> = {
  * gradient with three small floating icons (vector, crisp, no downloads). */
 // Flat, print-like palette shared with the word trainer: solid colours, no gradients.
 const ART_COLORS = ["#d1495b", "#00798c", "#e07a3f", "#30638e", "#3f7d20", "#8e5572", "#c98a0b", "#2a9d8f", "#5c6bc0", "#b5651d", "#a23b72", "#4e8b6f"];
-function TopicArt({ id, index }: { id: number; index: number }) {
-  const [Main, small] = ART[id] ?? [BookOpen, [Star, Heart, Smile]];
-  return (
-    <div className="topic-art" style={{ "--art": ART_COLORS[index % ART_COLORS.length] } as React.CSSProperties} aria-hidden="true">
-      <span className="topic-main"><Main size={120} strokeWidth={1.3} /></span>
-      {small.slice(0, 2).map((Icon, k) => (
-        <span key={k} className={`topic-small s${k}`}><Icon size={26} strokeWidth={1.6} /></span>
-      ))}
-    </div>
-  );
+const SCENE: Record<number, string> = {
+  1: "greet", 2: "family", 3: "numbers", 4: "time", 5: "money", 6: "day", 7: "cafe", 8: "feelings", 9: "health", 10: "study", 11: "animals", 12: "weather",
+  101: "people", 102: "looks", 103: "city", 104: "travel", 105: "often", 106: "week", 107: "shop", 108: "restaurant", 109: "opinions", 110: "work", 111: "nature", 112: "talk",
+  201: "space", 202: "classifiers", 203: "reported", 204: "past", 205: "cause", 206: "debate", 207: "degree", 208: "story",
+};
+function TopicArt({ id }: { id: number; index: number }) {
+  return <img className="topic-scene" src={`/images/topics/${SCENE[id] ?? "ideas"}.svg`} alt="" loading="lazy" />;
 }
 
 const LEVELS: { id: CefrLevel; title: string; name: string; desc: string; icon: typeof Sprout }[] = [

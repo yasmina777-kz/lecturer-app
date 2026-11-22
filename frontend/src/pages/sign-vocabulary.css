@@ -638,3 +638,6 @@
 }
 .vocab .vocab-topic-card .vocab-card-words { width: auto; }
 .vocab .vocab-topic-card .vocab-card-words { width: calc(100% - 36px); }
+.vocab .vocab-topic-card > header { height: 140px; background: none; }
+.vocab .vocab-topic-scene { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 400ms ease; }
+.vocab .vocab-topic-card:hover .vocab-topic-scene { transform: scale(1.05); }

@@ -883,3 +883,5 @@
 }
 .course .topic-art .topic-small.s0 { left: auto; right: 46%; top: 22%; }
 .course .topic-art .topic-small.s1 { left: auto; right: 38%; top: auto; bottom: 18%; }
+.course .topic-scene { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 400ms ease; }
+.course .course-unit:hover .topic-scene { transform: scale(1.05); }
