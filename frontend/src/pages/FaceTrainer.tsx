@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Camera, Check } from "lucide-react";
+import { ArrowLeft, Camera, CameraOff, Check } from "lucide-react";
 import { FaceLandmarker, FilesetResolver } from "@mediapipe/tasks-vision";
 import { at } from "../i18n/automation";
 import { faceRow } from "../sign/wordFeatures";
@@ -111,6 +111,12 @@ export function FaceTrainerPage() {
     };
   }, [state === "calibrating" || state === "ready"]);
   useEffect(() => () => stream.current?.getTracks().forEach((t) => t.stop()), []);
+  function stop() {
+    stream.current?.getTracks().forEach((t) => t.stop());
+    stream.current = null;
+    if (video.current) video.current.srcObject = null;
+    setState("idle");
+  }
 
   const cur = TASKS().find((t) => t.id === task)!;
   const bar = (v: number, max: number) => <i style={{ width: `${Math.min(100, (v / max) * 100)}%` }} />;
@@ -142,6 +148,9 @@ export function FaceTrainerPage() {
                 : at("Лицо не видно — сядьте напротив камеры, при хорошем свете.", "Face not visible — sit facing the camera in good light.", "Бет көрінбейді.")}
             </p>
           )}
+          {state === "calibrating" && (
+            <button className="button secondary" onClick={stop}><CameraOff size={16} /> {at("Выключить камеру", "Turn off camera", "Камераны өшіру")}</button>
+          )}
           {state === "error" && <p className="translate-status error">{at("Камера недоступна. Откройте сайт в Chrome и разрешите камеру.", "Camera unavailable. Use Chrome and allow the camera.", "Камера қолжетімсіз.")}</p>}
           {state === "ready" && (
             <div className="face-meters">
@@ -150,6 +159,7 @@ export function FaceTrainerPage() {
               <label>{at("Покачивание", "Head shake", "Шайқау")}<span>{bar(meters.shake, 3)}</span></label>
               <label>{at("Кивок", "Nod", "Изеу")}<span>{bar(meters.nod, 3)}</span></label>
               {!meters.face && <p className="fs-tip">{at("Лицо не видно — сядьте ближе к камере.", "Face not visible — come closer.", "Бет көрінбейді.")}</p>}
+              <button className="button secondary" onClick={stop}><CameraOff size={16} /> {at("Выключить камеру", "Turn off camera", "Камераны өшіру")}</button>
             </div>
           )}
         </section>

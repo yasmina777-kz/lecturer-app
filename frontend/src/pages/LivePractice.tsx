@@ -1,6 +1,6 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Camera, Circle, RotateCcw, Trash2 } from "lucide-react";
+import { ArrowLeft, Camera, CameraOff, Circle, RotateCcw, Trash2 } from "lucide-react";
 import { at } from "../i18n/automation";
 import { useActivityCatalog } from "../sign/useActivities";
 import "./sign-workspace.css";
@@ -28,6 +28,15 @@ export function LivePracticePage() {
   const [clip, setClip] = useState<string | null>(null);
   const [error, setError] = useState("");
   const [deleted, setDeleted] = useState(false);
+  // Turn the camera off: on the button and whenever the page is left.
+  const streamRef = useRef<MediaStream | null>(null);
+  streamRef.current = stream;
+  function stopCam() {
+    streamRef.current?.getTracks().forEach((t) => t.stop());
+    if (cam.current) cam.current.srcObject = null;
+    setStream(null);
+  }
+  useEffect(() => () => streamRef.current?.getTracks().forEach((t) => t.stop()), []);
   function remove() {
     if (clip) URL.revokeObjectURL(clip);
     setClip(null);
@@ -120,6 +129,7 @@ export function LivePracticePage() {
               </button>
               {clip && <button className="button secondary" onClick={record}><RotateCcw size={16} /> {at("Записать заново", "Record again", "Қайта жазу")}</button>}
               {clip && <button className="button secondary" onClick={remove}><Trash2 size={16} /> {at("Удалить запись", "Delete recording", "Жазбаны өшіру")}</button>}
+              <button className="button secondary" onClick={stopCam} disabled={recording}><CameraOff size={16} /> {at("Выключить камеру", "Turn off camera", "Камераны өшіру")}</button>
             </>
           )}
         </div>
