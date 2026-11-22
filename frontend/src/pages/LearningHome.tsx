@@ -196,9 +196,23 @@ export function LearningHome() {
               <strong>{at("Диалоги", "Dialogues", "Диалогтар")}</strong>
               <span>
                 {at(
-                  "Знакомство, занятие и магазин",
-                  "Meeting, class and shopping",
-                  "Танысу, сабақ және дүкен",
+                  "7 ситуаций: знакомство, кафе, семья, планы…",
+                  "7 situations: meeting, café, family, plans…",
+                  "7 жағдаят: танысу, кафе, отбасы, жоспар…",
+                )}
+              </span>
+            </div>
+            <ArrowUpRight size={18} />
+          </Link>
+          <Link to="/fingerspell">
+            <Eye size={21} />
+            <div>
+              <strong>{at("Чтение дактиля", "Reading fingerspelling", "Дактильді оқу")}</strong>
+              <span>
+                {at(
+                  "Имена и слова по буквам — как в жизни",
+                  "Names and words spelled letter by letter",
+                  "Есімдер мен сөздер әріптермен",
                 )}
               </span>
             </div>

@@ -1,0 +1,345 @@
+{
+ "source": "Bukva (ai-forever), letters cut to their annotated spans; see /research/rsl/ATTRIBUTION.txt",
+ "signers": {
+  "signer1": {
+   "quality": 1.0,
+   "letters": {
+    "А": {
+     "file": "/research/rsl/fingerspell/signer1/00.mp4",
+     "frames": 64,
+     "attachmentId": "cb872cac7fcdbe188412fc69804ff6e2"
+    },
+    "Б": {
+     "file": "/research/rsl/fingerspell/signer1/01.mp4",
+     "frames": 72,
+     "attachmentId": "100fec9535a40011c62302a0631035f1"
+    },
+    "В": {
+     "file": "/research/rsl/fingerspell/signer1/02.mp4",
+     "frames": 55,
+     "attachmentId": "77ee4c70d599a082601c9e3746c60a55"
+    },
+    "Г": {
+     "file": "/research/rsl/fingerspell/signer1/03.mp4",
+     "frames": 64,
+     "attachmentId": "2c7ce50fa5c99641d8cc3e9e109d8d89"
+    },
+    "Д": {
+     "file": "/research/rsl/fingerspell/signer1/04.mp4",
+     "frames": 57,
+     "attachmentId": "665a5952d9fe736438cc9c6859276813"
+    },
+    "Е": {
+     "file": "/research/rsl/fingerspell/signer1/05.mp4",
+     "frames": 57,
+     "attachmentId": "b46c6845a36033a93264df41a304af27"
+    },
+    "Ё": {
+     "file": "/research/rsl/fingerspell/signer1/06.mp4",
+     "frames": 92,
+     "attachmentId": "c66c59892b0d4c806ec9427361636507"
+    },
+    "Ж": {
+     "file": "/research/rsl/fingerspell/signer1/07.mp4",
+     "frames": 50,
+     "attachmentId": "bfd7c500a4e28be440d85b7bd3730c00"
+    },
+    "З": {
+     "file": "/research/rsl/fingerspell/signer1/08.mp4",
+     "frames": 88,
+     "attachmentId": "9f1d04aa67410ff3d7a32ee50cece825"
+    },
+    "И": {
+     "file": "/research/rsl/fingerspell/signer1/09.mp4",
+     "frames": 51,
+     "attachmentId": "1595eb445282610ebdca663baba93845"
+    },
+    "Й": {
+     "file": "/research/rsl/fingerspell/signer1/10.mp4",
+     "frames": 51,
+     "attachmentId": "461f7f95afd5fb61c23c4c9eb21b6891"
+    },
+    "К": {
+     "file": "/research/rsl/fingerspell/signer1/11.mp4",
+     "frames": 64,
+     "attachmentId": "b9982d3156f0409185274dc4a3f1e1b0"
+    },
+    "Л": {
+     "file": "/research/rsl/fingerspell/signer1/12.mp4",
+     "frames": 67,
+     "attachmentId": "ee9cebe4ec90c48a10055183a3bc9fff"
+    },
+    "М": {
+     "file": "/research/rsl/fingerspell/signer1/13.mp4",
+     "frames": 46,
+     "attachmentId": "041f329769ddbe059a16f31b2dc6a234"
+    },
+    "Н": {
+     "file": "/research/rsl/fingerspell/signer1/14.mp4",
+     "frames": 56,
+     "attachmentId": "f657fe5e6ea4107d59c9ac12e3f55924"
+    },
+    "О": {
+     "file": "/research/rsl/fingerspell/signer1/15.mp4",
+     "frames": 45,
+     "attachmentId": "c33cc77e9550508af34fa9033f2bdb77"
+    },
+    "П": {
+     "file": "/research/rsl/fingerspell/signer1/16.mp4",
+     "frames": 68,
+     "attachmentId": "afe330b34098f432309ebc48eab7aa03"
+    },
+    "Р": {
+     "file": "/research/rsl/fingerspell/signer1/17.mp4",
+     "frames": 55,
+     "attachmentId": "c2b4dc0c30767003ceea901f53776c27"
+    },
+    "С": {
+     "file": "/research/rsl/fingerspell/signer1/18.mp4",
+     "frames": 56,
+     "attachmentId": "82367ec15a06066f05da4df8c706e24b"
+    },
+    "Т": {
+     "file": "/research/rsl/fingerspell/signer1/19.mp4",
+     "frames": 67,
+     "attachmentId": "43232d4a6612f4d062148a64863e21de"
+    },
+    "У": {
+     "file": "/research/rsl/fingerspell/signer1/20.mp4",
+     "frames": 59,
+     "attachmentId": "899e62d09c2e2431b7a709624b507de1"
+    },
+    "Ф": {
+     "file": "/research/rsl/fingerspell/signer1/21.mp4",
+     "frames": 79,
+     "attachmentId": "7af2a8024d5fe2bf98f775f6735d08ea"
+    },
+    "Х": {
+     "file": "/research/rsl/fingerspell/signer1/22.mp4",
+     "frames": 57,
+     "attachmentId": "bfa826affe787060985ebe02b3da9d5b"
+    },
+    "Ц": {
+     "file": "/research/rsl/fingerspell/signer1/23.mp4",
+     "frames": 52,
+     "attachmentId": "36dff50d74139c906e330bc2e8b14e80"
+    },
+    "Ч": {
+     "file": "/research/rsl/fingerspell/signer1/24.mp4",
+     "frames": 54,
+     "attachmentId": "8c6964a77009b8b25e4f1c0b0a4e42dd"
+    },
+    "Ш": {
+     "file": "/research/rsl/fingerspell/signer1/25.mp4",
+     "frames": 41,
+     "attachmentId": "90935ca72c9d6351ef716eb0bad41b72"
+    },
+    "Щ": {
+     "file": "/research/rsl/fingerspell/signer1/26.mp4",
+     "frames": 67,
+     "attachmentId": "1a37fb12239b92bb3c01deec373f4c18"
+    },
+    "Ъ": {
+     "file": "/research/rsl/fingerspell/signer1/27.mp4",
+     "frames": 58,
+     "attachmentId": "31a9e381ba70a583eefbebdb80e9fc61"
+    },
+    "Ы": {
+     "file": "/research/rsl/fingerspell/signer1/28.mp4",
+     "frames": 82,
+     "attachmentId": "521f264a42bd069ea84b59695e8796e5"
+    },
+    "Ь": {
+     "file": "/research/rsl/fingerspell/signer1/29.mp4",
+     "frames": 47,
+     "attachmentId": "cfe76e9c6b24d7567cbfa6e9aaa29777"
+    },
+    "Э": {
+     "file": "/research/rsl/fingerspell/signer1/30.mp4",
+     "frames": 96,
+     "attachmentId": "9554add13f0b4fe6dd43e248fcf9738c"
+    },
+    "Ю": {
+     "file": "/research/rsl/fingerspell/signer1/31.mp4",
+     "frames": 36,
+     "attachmentId": "08af8020649efef2c8d1fd6f2c8959ee"
+    },
+    "Я": {
+     "file": "/research/rsl/fingerspell/signer1/32.mp4",
+     "frames": 51,
+     "attachmentId": "61b38d6c247854432b0f51f1e97930e0"
+    }
+   }
+  },
+  "signer2": {
+   "quality": 0.987,
+   "letters": {
+    "А": {
+     "file": "/research/rsl/fingerspell/signer2/00.mp4",
+     "frames": 77,
+     "attachmentId": "2b7a452b-a739-44d6-9c76-7562bcae7abd"
+    },
+    "Б": {
+     "file": "/research/rsl/fingerspell/signer2/01.mp4",
+     "frames": 65,
+     "attachmentId": "c73027c7-8998-430f-8c80-fc5422d4093a"
+    },
+    "В": {
+     "file": "/research/rsl/fingerspell/signer2/02.mp4",
+     "frames": 59,
+     "attachmentId": "66925434-68ac-4503-8a2c-44e12bc5cdf2"
+    },
+    "Г": {
+     "file": "/research/rsl/fingerspell/signer2/03.mp4",
+     "frames": 60,
+     "attachmentId": "0ae8cb87-adc7-4bb7-b702-384ef24faa04"
+    },
+    "Д": {
+     "file": "/research/rsl/fingerspell/signer2/04.mp4",
+     "frames": 72,
+     "attachmentId": "70b4cc03-44ad-4c68-96d8-79971b9f2f84"
+    },
+    "Е": {
+     "file": "/research/rsl/fingerspell/signer2/05.mp4",
+     "frames": 60,
+     "attachmentId": "55317fe7-f243-4664-ac5d-6bb41ce6f8fc"
+    },
+    "Ё": {
+     "file": "/research/rsl/fingerspell/signer2/06.mp4",
+     "frames": 60,
+     "attachmentId": "45d5e918-d13d-43c1-a4e2-d341e9c69240"
+    },
+    "Ж": {
+     "file": "/research/rsl/fingerspell/signer2/07.mp4",
+     "frames": 49,
+     "attachmentId": "f64e786d-4252-4037-b6af-007421f3a661"
+    },
+    "З": {
+     "file": "/research/rsl/fingerspell/signer2/08.mp4",
+     "frames": 57,
+     "attachmentId": "af1a310c-f6f0-42b6-9c04-413a84dbd3ff"
+    },
+    "И": {
+     "file": "/research/rsl/fingerspell/signer2/09.mp4",
+     "frames": 57,
+     "attachmentId": "da45a056-2677-487a-99d3-5caabd915459"
+    },
+    "Й": {
+     "file": "/research/rsl/fingerspell/signer2/10.mp4",
+     "frames": 58,
+     "attachmentId": "fb2d5bc3-0f2d-44bd-8b74-4e94de8f474c"
+    },
+    "К": {
+     "file": "/research/rsl/fingerspell/signer2/11.mp4",
+     "frames": 58,
+     "attachmentId": "717b23c7-bd80-4d66-9247-e2b7db7d5558"
+    },
+    "Л": {
+     "file": "/research/rsl/fingerspell/signer2/12.mp4",
+     "frames": 57,
+     "attachmentId": "11e81bc6-81dd-4198-866d-22e47dc6f1f5"
+    },
+    "М": {
+     "file": "/research/rsl/fingerspell/signer2/13.mp4",
+     "frames": 65,
+     "attachmentId": "27e668c8-9734-4c0e-b995-1f9ae5a80411"
+    },
+    "Н": {
+     "file": "/research/rsl/fingerspell/signer2/14.mp4",
+     "frames": 61,
+     "attachmentId": "6bb959c1-4363-4bd4-af24-378249b97580"
+    },
+    "О": {
+     "file": "/research/rsl/fingerspell/signer2/15.mp4",
+     "frames": 54,
+     "attachmentId": "fce6535c-3b21-4fd1-96d4-1a3f7eadef97"
+    },
+    "П": {
+     "file": "/research/rsl/fingerspell/signer2/16.mp4",
+     "frames": 59,
+     "attachmentId": "3e139e78-f12c-4a66-84b0-46825d6dc734"
+    },
+    "Р": {
+     "file": "/research/rsl/fingerspell/signer2/17.mp4",
+     "frames": 53,
+     "attachmentId": "8ddf7ff2-3421-43a7-9e70-775edb7578e1"
+    },
+    "С": {
+     "file": "/research/rsl/fingerspell/signer2/18.mp4",
+     "frames": 59,
+     "attachmentId": "7d951d9a-94bf-4653-967e-bfaf975c5a36"
+    },
+    "Т": {
+     "file": "/research/rsl/fingerspell/signer2/19.mp4",
+     "frames": 63,
+     "attachmentId": "282dfaf6-5069-4167-b02c-34618291e721"
+    },
+    "У": {
+     "file": "/research/rsl/fingerspell/signer2/20.mp4",
+     "frames": 59,
+     "attachmentId": "3e19e439-2044-4f2e-9e76-5f4ddc59e6a8"
+    },
+    "Ф": {
+     "file": "/research/rsl/fingerspell/signer2/21.mp4",
+     "frames": 69,
+     "attachmentId": "a2a4c24f-a131-465e-b63d-8e03193a77ce"
+    },
+    "Х": {
+     "file": "/research/rsl/fingerspell/signer2/22.mp4",
+     "frames": 54,
+     "attachmentId": "01c2f5a8-a743-4ff1-a88e-1b5a78c4f2d7"
+    },
+    "Ц": {
+     "file": "/research/rsl/fingerspell/signer2/23.mp4",
+     "frames": 60,
+     "attachmentId": "35b2bb08-36f6-41e3-b6f6-bb04bc586149"
+    },
+    "Ч": {
+     "file": "/research/rsl/fingerspell/signer2/24.mp4",
+     "frames": 49,
+     "attachmentId": "bd9387e9-338f-499b-b158-75b99275213d"
+    },
+    "Ш": {
+     "file": "/research/rsl/fingerspell/signer2/25.mp4",
+     "frames": 63,
+     "attachmentId": "721b9e8d-31c1-4487-8e1b-cac36f87af1d"
+    },
+    "Щ": {
+     "file": "/research/rsl/fingerspell/signer2/26.mp4",
+     "frames": 47,
+     "attachmentId": "38a920f1-dcf4-4341-aae2-3aa056f97879"
+    },
+    "Ъ": {
+     "file": "/research/rsl/fingerspell/signer2/27.mp4",
+     "frames": 65,
+     "attachmentId": "6464fd56-9cf0-4d52-a70c-e81a0852df3f"
+    },
+    "Ы": {
+     "file": "/research/rsl/fingerspell/signer2/28.mp4",
+     "frames": 57,
+     "attachmentId": "b8a8c4f3-b8b6-478f-ba38-13b76ce30490"
+    },
+    "Ь": {
+     "file": "/research/rsl/fingerspell/signer2/29.mp4",
+     "frames": 68,
+     "attachmentId": "4eabdc55-58fe-49f1-ae10-e4beb12bd3f0"
+    },
+    "Э": {
+     "file": "/research/rsl/fingerspell/signer2/30.mp4",
+     "frames": 49,
+     "attachmentId": "05a95ce7-7a61-4ea9-b155-ea0469798974"
+    },
+    "Ю": {
+     "file": "/research/rsl/fingerspell/signer2/31.mp4",
+     "frames": 62,
+     "attachmentId": "c63c7a59-fb42-4bd7-8b36-03196a041643"
+    },
+    "Я": {
+     "file": "/research/rsl/fingerspell/signer2/32.mp4",
+     "frames": 57,
+     "attachmentId": "c90e3c7d-9927-4236-810d-a013e69ca296"
+    }
+   }
+  }
+ }
+}

@@ -23,6 +23,7 @@ const SignGrammarPage = lazyPage(() => import("./pages/SignGrammar").then(m => (
 const SignVocabularyPage = lazyPage(() => import("./pages/SignVocabulary").then(m => ({default:m.SignVocabularyPage})));
 const SignPracticePage = lazyPage(() => import("./pages/SignWorkspace").then(m => ({default:m.SignPracticePage})));
 const SignDialoguesPage = lazyPage(() => import("./pages/SignActivities").then(m => ({default:m.SignDialoguesPage})));
+const FingerspellReadingPage = lazyPage(() => import("./pages/FingerspellReading").then(m => ({default:m.FingerspellReadingPage})));
 const SignUnderstandingPage = lazyPage(() => import("./pages/SignActivities").then(m => ({default:m.SignUnderstandingPage})));
 const SignHelpPage = lazyPage(() => import("./pages/SignWorkspace").then(m => ({default:m.SignHelpPage})));
 import { LibraryPage } from "./pages/LibraryPage";
@@ -105,6 +106,7 @@ export function App() {
             <Route path="grammar" element={<SignGrammarPage />} />
             <Route path="dialogues" element={<SignDialoguesPage />} />
             <Route path="understanding" element={<SignUnderstandingPage />} />
+            <Route path="fingerspell" element={<FingerspellReadingPage />} />
             <Route path="knowledge" element={<KnowledgePage />} />
             <Route path="groups" element={<GroupsPage />} />
             <Route path="courses" element={<CoursesRoute />} />
