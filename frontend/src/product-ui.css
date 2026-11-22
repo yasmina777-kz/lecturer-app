@@ -3707,7 +3707,7 @@
 :root .product-ui[data-product-ui][data-product-theme] .learning-practice-banner h2 { color: var(--p-text); transition: color 280ms; }
 :root .product-ui[data-product-ui][data-product-theme] .learning-practice-banner p { color: var(--p-muted); transition: color 280ms; }
 :root .product-ui[data-product-ui][data-product-theme] .learning-practice-banner .button { background: var(--p-text); color: var(--p-surface); }
-:root .product-ui[data-product-ui][data-product-theme] .learning-practice-art { filter: grayscale(1); opacity: .55; transition: filter 320ms ease, opacity 320ms ease, transform 500ms cubic-bezier(.2, .8, .2, 1); }
+:root .product-ui[data-product-ui][data-product-theme] .learning-practice-art { filter: grayscale(1) contrast(1.05); opacity: 1; transition: filter 320ms ease, opacity 320ms ease, transform 500ms cubic-bezier(.2, .8, .2, 1); }
 :root .product-ui[data-product-ui][data-product-theme] .learning-practice-banner:is(:hover, :focus-within) { background: #2f6bff; border-color: transparent; transform: translateY(-3px); }
 :root .product-ui[data-product-ui][data-product-theme] .learning-practice-banner:is(:hover, :focus-within) :is(h2, p) { color: #fff; }
 :root .product-ui[data-product-ui][data-product-theme] .learning-practice-banner:is(:hover, :focus-within) .button { background: #fff; color: #2f6bff; }
