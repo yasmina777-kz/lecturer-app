@@ -8,6 +8,10 @@ import {
   MessageCircle,
   Play,
   Type,
+  Hash,
+  Smile,
+  Users,
+  Video,
 } from "lucide-react";
 import { at } from "../i18n/automation";
 import { courseLevels } from "../sign/exercises";
@@ -205,7 +209,7 @@ export function LearningHome() {
             <ArrowUpRight size={18} />
           </Link>
           <Link to="/numbers">
-            <Eye size={21} />
+            <Hash size={21} />
             <div>
               <strong>{at("Числа, время, деньги", "Числа, время, деньги", "Числа, время, деньги")}</strong>
               <span>{at("Цифры, часы и цены на видео носителей", "Цифры, часы и цены на видео носителей", "Цифры, часы и цены на видео носителей")}</span>
@@ -213,7 +217,7 @@ export function LearningHome() {
             <ArrowUpRight size={18} />
           </Link>
           <Link to="/face-trainer">
-            <Eye size={21} />
+            <Smile size={21} />
             <div>
               <strong>{at("Тренажёр мимики", "Тренажёр мимики", "Тренажёр мимики")}</strong>
               <span>{at("Вопрос, отрицание и кивок — ИИ проверит по камере", "Вопрос, отрицание и кивок — ИИ проверит по камере", "Вопрос, отрицание и кивок — ИИ проверит по камере")}</span>
@@ -221,7 +225,7 @@ export function LearningHome() {
             <ArrowUpRight size={18} />
           </Link>
           <Link to="/culture">
-            <Eye size={21} />
+            <Users size={21} />
             <div>
               <strong>{at("Культура и этикет глухих", "Культура и этикет глухих", "Культура и этикет глухих")}</strong>
               <span>{at("С чего начинают любой курс РЖЯ", "С чего начинают любой курс РЖЯ", "С чего начинают любой курс РЖЯ")}</span>
@@ -229,7 +233,7 @@ export function LearningHome() {
             <ArrowUpRight size={18} />
           </Link>
           <Link to="/live-practice">
-            <Eye size={21} />
+            <Video size={21} />
             <div>
               <strong>{at("Самопроверка и практика", "Самопроверка и практика", "Самопроверка и практика")}</strong>
               <span>{at("Вы рядом с носителем + где найти живую практику", "Вы рядом с носителем + где найти живую практику", "Вы рядом с носителем + где найти живую практику")}</span>
@@ -237,7 +241,7 @@ export function LearningHome() {
             <ArrowUpRight size={18} />
           </Link>
           <Link to="/fingerspell">
-            <Eye size={21} />
+            <Type size={21} />
             <div>
               <strong>{at("Чтение дактиля", "Reading fingerspelling", "Дактильді оқу")}</strong>
               <span>
