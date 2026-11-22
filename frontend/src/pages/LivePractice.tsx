@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Camera, Circle, RotateCcw } from "lucide-react";
+import { ArrowLeft, Camera, Circle, RotateCcw, Trash2 } from "lucide-react";
 import { at } from "../i18n/automation";
 import { useActivityCatalog } from "../sign/useActivities";
 import "./sign-workspace.css";
@@ -27,6 +27,12 @@ export function LivePracticePage() {
   const [recording, setRecording] = useState(false);
   const [clip, setClip] = useState<string | null>(null);
   const [error, setError] = useState("");
+  const [deleted, setDeleted] = useState(false);
+  function remove() {
+    if (clip) URL.revokeObjectURL(clip);
+    setClip(null);
+    setDeleted(true);
+  }
   const entries = data?.entries ?? [];
   const matches = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -59,6 +65,8 @@ export function LivePracticePage() {
       setRecording(false);
     };
     setRecording(true);
+    setDeleted(false);
+    if (clip) URL.revokeObjectURL(clip);
     setClip(null);
     rec.start();
     setTimeout(() => rec.stop(), 4000);
@@ -110,12 +118,14 @@ export function LivePracticePage() {
               <button className="button primary" onClick={record} disabled={recording}>
                 <Circle size={16} /> {recording ? at("Запись… 4 с", "Recording… 4 s", "Жазылуда…") : at("Записать себя (4 с)", "Record yourself (4 s)", "Өзіңізді жазу")}
               </button>
-              {clip && <button className="button secondary" onClick={() => setClip(null)}><RotateCcw size={16} /> {at("Ещё раз", "Again", "Тағы")}</button>}
+              {clip && <button className="button secondary" onClick={record}><RotateCcw size={16} /> {at("Записать заново", "Record again", "Қайта жазу")}</button>}
+              {clip && <button className="button secondary" onClick={remove}><Trash2 size={16} /> {at("Удалить запись", "Delete recording", "Жазбаны өшіру")}</button>}
             </>
           )}
         </div>
         {error && <p className="translate-status error">{error}</p>}
-        <p className="fs-tip">{at("Запись остаётся только в этой вкладке и никуда не отправляется.", "The recording stays in this tab only.", "Жазба тек осы бетте қалады.")}</p>
+        {deleted && <p className="vocab-feedback ok" role="status">{at("Запись удалена.", "Recording deleted.", "Жазба өшірілді.")}</p>}
+        <p className="fs-tip">{at("Запись хранится только в памяти этой вкладки: она не сохраняется на компьютер и не отправляется на сервер, а при закрытии или обновлении страницы исчезает.", "The recording lives only in this tab's memory; it is never saved or uploaded and disappears when you close or reload the page.", "Жазба тек осы беттің жадында.")}</p>
         <h3>{at("Сравните по пяти параметрам", "Compare on five parameters", "Бес параметр")}</h3>
         <ol className="params-list">
           {PARAMS().map((p) => (
