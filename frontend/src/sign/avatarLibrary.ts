@@ -10,7 +10,9 @@ type Entry = AvatarEntry;
 /** Signer verdicts from the avatar review page (/avatar-review), published as
  * /avatars/alex/review.json. A clip marked "wrong" is never shown to learners
  * (the real video plays instead). */
-export type AvatarVerdict = "ok" | "wrong" | "unsure";
+/** "variant": the avatar matches the video, but the consultant signs it
+ * differently in her region — kept, with the note shown as a regional variant. */
+export type AvatarVerdict = "ok" | "wrong" | "unsure" | "variant";
 export type AvatarReview = { verdicts: Record<string, { verdict: AvatarVerdict; note?: string }> };
 let reviewFile: Promise<AvatarReview> | null = null;
 export function loadAvatarReview() {

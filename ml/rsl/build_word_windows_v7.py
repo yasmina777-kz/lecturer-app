@@ -18,7 +18,7 @@ import numpy as np
 from word_features import clip_features
 
 DATA = Path(__file__).resolve().parents[2] / 'ml/rsl/data'
-LM = DATA / 'slovo-origin-lm'
+LM = Path(os.environ.get('LM', DATA / 'slovo-origin-lm'))
 ANN = Path(os.environ.get('ANN', DATA / 'slovo-origin/annotations.csv'))
 NEG_PER_VIDEO = 3
 rng = np.random.default_rng(7)
@@ -76,6 +76,6 @@ for n, r in enumerate(rows, 1):
         chunks.append(x.astype(np.float16)); offsets.append(offsets[-1] + len(x)); labels.append(lab); kinds.append(kind); ids.append(aid)
     if n % 2000 == 0:
         print('WINDOWS', n, len(rows), len(ids), round(time.monotonic() - t0), flush=True)
-np.savez(DATA / 'slovo-word-windows-v7.npz', x=np.concatenate(chunks), offsets=np.array(offsets),
+np.savez(Path(os.environ.get('OUT', DATA / 'slovo-word-windows-v7.npz')), x=np.concatenate(chunks), offsets=np.array(offsets),
          labels=np.array(labels), kinds=np.array(kinds), ids=np.array(ids))
 print('WINDOWS_V7', len(ids), {k: kinds.count(k) for k in set(kinds)}, round(time.monotonic() - t0), flush=True)

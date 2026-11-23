@@ -56,3 +56,8 @@
 .avatar-review .ar-compare .sign-sequence { margin: 0; padding: 0; border: 0; background: none; box-shadow: none; }
 :root .product-ui[data-product-ui][data-product-theme] .avatar-review .ar-search,
 :root .product-ui[data-product-ui][data-product-theme] .avatar-review .ar-note { background: var(--p-bg); color: var(--p-text); border: 1px solid var(--p-line); }
+.avatar-review .ar-actions { grid-template-columns: repeat(4, 1fr); }
+.avatar-review .ar-bar .variant, .avatar-review .ar-dot.variant { background: #2f6bff; }
+.avatar-review .ar-btn.variant:hover, .avatar-review .ar-btn.variant[aria-pressed="true"] { border-color: #2f6bff; background: rgba(47, 107, 255, .1); color: #2f6bff; }
+:root .product-ui[data-product-ui][data-product-theme] .avatar-review .ar-note.need { border-color: #2f6bff; box-shadow: 0 0 0 3px rgba(47, 107, 255, .18); }
+@media (max-width: 860px) { .avatar-review .ar-actions { grid-template-columns: repeat(2, 1fr); } }

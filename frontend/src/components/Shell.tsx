@@ -81,7 +81,7 @@ export function Shell() {
     path.startsWith("/understanding") ||
     path === "/fingerspell" ||
     path.startsWith("/course") ||
-    ["/culture", "/numbers", "/face-trainer", "/live-practice", "/avatar-review"].includes(path) ||
+    ["/culture", "/numbers", "/face-trainer", "/live-practice", "/avatar-review", "/record-signs"].includes(path) ||
     path === "/settings" ||
     path === "/help" ||
     path === "/knowledge" ||

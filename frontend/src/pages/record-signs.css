@@ -1,0 +1,17 @@
+.record-signs .rs-consent { display: grid; gap: 14px; max-width: 640px; }
+.record-signs .rs-consent h2 { margin: 0; font-size: 20px; }
+.record-signs .rs-consent label { display: grid; gap: 6px; font-weight: 600; }
+.record-signs .rs-consent label.rs-check { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; color: var(--p-muted); line-height: 1.45; }
+.record-signs .rs-check input { margin-top: 3px; width: 18px; height: 18px; accent-color: #2f6bff; flex: none; }
+.record-signs .rs-count { color: var(--p-muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.record-signs .rs-dots { display: flex; justify-content: center; gap: 8px; }
+.record-signs .rs-dots i { width: 12px; height: 12px; border-radius: 50%; background: var(--p-subtle); border: 1px solid var(--p-line); transition: background .25s, transform .25s; }
+.record-signs .rs-dots i.on { background: #2f6bff; border-color: #2f6bff; transform: scale(1.1); }
+.record-signs .rs-camera { position: relative; border-radius: 16px; overflow: hidden; background: #0b1220; aspect-ratio: 4 / 3; }
+.record-signs .rs-camera video, .record-signs .rs-camera canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
+.record-signs .rs-start { min-height: 160px; }
+.record-signs .rs-rec { color: #e5484d; margin-left: 8px; animation: rs-blink 1s infinite; }
+@keyframes rs-blink { 50% { opacity: .35; } }
+.record-signs .rs-hint { margin: 0; color: var(--p-muted); font-size: 14px; text-align: center; }
+.record-signs .rs-actions { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+.record-signs .ar-btn:disabled { opacity: .45; cursor: default; transform: none; }

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Check, X, HelpCircle, Download, Upload, ChevronLeft, ChevronRight } from "lucide-react";
+import { Check, X, HelpCircle, Download, Upload, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 import { SignSequencePlayer } from "../components/SignSequencePlayer";
 import { learningDictionary, type DictionaryEntry } from "../sign/dictionary";
 import type { MotionAsset, MotionPlan } from "../sign/motion";
@@ -13,7 +13,7 @@ import "./avatar-review.css";
  * "wrong" stop being shown to learners. */
 const KEY = "rsl-avatar-review-v1";
 type Verdicts = AvatarReview["verdicts"];
-type Filter = "todo" | "all" | "wrong" | "unsure" | "ok";
+type Filter = "todo" | "all" | "wrong" | "unsure" | "variant" | "ok";
 
 function loadLocal(): Verdicts {
   try {
@@ -33,6 +33,7 @@ export function AvatarReviewPage() {
   const [current, setCurrent] = useState<string | null>(null);
   const [note, setNote] = useState("");
   const [failed, setFailed] = useState(false);
+  const [needNote, setNeedNote] = useState(false);
 
   useEffect(() => {
     Promise.all([
@@ -73,7 +74,7 @@ export function AvatarReviewPage() {
     [catalog, playable],
   );
   const counts = useMemo(() => {
-    const c = { ok: 0, wrong: 0, unsure: 0 };
+    const c = { ok: 0, wrong: 0, unsure: 0, variant: 0 };
     for (const i of items) {
       const v = verdicts[i.id]?.verdict;
       if (v) c[v]++;
@@ -128,7 +129,7 @@ export function AvatarReviewPage() {
       }
     });
 
-  const done = counts.ok + counts.wrong + counts.unsure;
+  const done = counts.ok + counts.wrong + counts.unsure + counts.variant;
   return (
     <div className="sign-workspace avatar-review">
       <header className="ar-head">
@@ -137,7 +138,8 @@ export function AvatarReviewPage() {
           <h1>Проверка аватара</h1>
           <p className="ar-lead">
             Слева настоящий жест с видео, справа его показывает аватар. Если аватар показывает неверно (форма руки, место, движение,
-            мимика), отметьте «Неверно» — такой жест больше не будет показан ученикам, вместо него останется видео.
+            мимика), отметьте «Неверно» — такой жест больше не будет показан ученикам, вместо него останется видео. Если аватар
+            повторяет видео верно, но в вашем регионе жест показывают иначе, отметьте «Другой вариант» и напишите в комментарии, где и как.
           </p>
         </div>
         <div className="ar-progress" aria-label="Прогресс">
@@ -145,11 +147,12 @@ export function AvatarReviewPage() {
           <span>из {items.length || "…"} проверено</span>
           <div className="ar-bar">
             <i className="ok" style={{ width: `${(counts.ok / Math.max(1, items.length)) * 100}%` }} />
+            <i className="variant" style={{ width: `${(counts.variant / Math.max(1, items.length)) * 100}%` }} />
             <i className="unsure" style={{ width: `${(counts.unsure / Math.max(1, items.length)) * 100}%` }} />
             <i className="wrong" style={{ width: `${(counts.wrong / Math.max(1, items.length)) * 100}%` }} />
           </div>
           <small>
-            верно {counts.ok} · неверно {counts.wrong} · не уверена {counts.unsure}
+            верно {counts.ok} · другой вариант {counts.variant} · неверно {counts.wrong} · не уверена {counts.unsure}
           </small>
         </div>
       </header>
@@ -164,6 +167,7 @@ export function AvatarReviewPage() {
               [
                 ["todo", "Не проверены"],
                 ["wrong", "Неверно"],
+                ["variant", "Другой вариант"],
                 ["unsure", "Не уверена"],
                 ["ok", "Верно"],
                 ["all", "Все"],
@@ -211,15 +215,26 @@ export function AvatarReviewPage() {
                 </figure>
               </div>
               <textarea
-                className="ar-note"
-                placeholder="Комментарий (необязательно): что не так — форма руки, место, движение, мимика…"
+                className={`ar-note${needNote ? " need" : ""}`}
+                placeholder={needNote ? "Напишите, где и как показывают этот жест (например: в СКО — двумя руками)" : "Комментарий (необязательно): что не так — форма руки, место, движение, мимика…"}
                 value={note}
-                onChange={(e) => setNote(e.target.value)}
+                onChange={(e) => {
+                  setNote(e.target.value);
+                  setNeedNote(false);
+                }}
                 rows={2}
               />
               <div className="ar-actions">
                 <button className="ar-btn ok" onClick={() => mark("ok")} aria-pressed={verdicts[item.id]?.verdict === "ok"}>
                   <Check size={18} /> Верно
+                </button>
+                <button
+                  className="ar-btn variant"
+                  onClick={() => (note.trim() ? mark("variant") : setNeedNote(true))}
+                  aria-pressed={verdicts[item.id]?.verdict === "variant"}
+                  title="Аватар повторяет видео верно, но у нас этот жест показывают по-другому"
+                >
+                  <MapPin size={18} /> Другой вариант
                 </button>
                 <button className="ar-btn unsure" onClick={() => mark("unsure")} aria-pressed={verdicts[item.id]?.verdict === "unsure"}>
                   <HelpCircle size={18} /> Не уверена
