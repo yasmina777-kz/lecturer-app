@@ -362,3 +362,12 @@
   color: inherit;
   cursor: pointer;
 }
+
+/* Which words the camera looks for */
+:root .product-ui[data-product-ui][data-product-theme] .translator-vocab { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 4px 0 12px; }
+:root .product-ui[data-product-ui][data-product-theme] .translator-vocab > button { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 99px; border: 1px solid var(--p-line); background: var(--p-surface); color: var(--p-text); font: inherit; font-size: 14px; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+:root .product-ui[data-product-ui][data-product-theme] .translator-vocab > button[aria-pressed="true"] { background: rgba(47, 107, 255, .1); border-color: #2f6bff; color: #2f6bff; font-weight: 600; }
+:root .product-ui[data-product-ui][data-product-theme] .translator-vocab small { padding: 1px 7px; border-radius: 99px; background: var(--p-subtle); color: var(--p-muted); font-size: 11px; }
+:root .product-ui[data-product-ui][data-product-theme] .translator-vocab details { font-size: 13px; color: var(--p-muted); }
+:root .product-ui[data-product-ui][data-product-theme] .translator-vocab summary { cursor: pointer; }
+:root .product-ui[data-product-ui][data-product-theme] .translator-vocab details p { margin: 6px 0 0; max-width: 520px; line-height: 1.5; }

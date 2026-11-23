@@ -21,6 +21,9 @@ export const SPOT = {
   noneMax: 0.7,
 };
 type Frame = { at: number; hands: HandPoint[][]; pose: PosePoint[]; face: number[] | null };
+/** Everyday words for the camera translator's «Основные слова» mode
+ * (ml eval: scratchpad basic_eval.py, 346 held-out clips). */
+export const BASIC_WORDS = ["Привет!", "Пока", "благодарность", "да", "я", "ты", "мы", "вы", "меня", "тебя", "имя", "кто?", "что", "когда", "сколько", "почему", "хорошо", "Плохо", "понять", "знать", "хотеть", "есть", "пить", "помочь", "мать", "отец", "семья", "друг", "дом", "школа", "работать", "любить", "жить", "идти", "сегодня", "завтра", "вчера", "хороший", "плохой", "вода", "еда", "время", "деньги"];
 export type Spotted = { label: string; confidence: number; fingerspelling: boolean; alternatives: string[] };
 
 const LETTER = /^[А-ЯЁ]$/u;
@@ -50,6 +53,9 @@ export class WordSpotter {
   }
   /** model: the fast single model scanned every hop; confirm: optional
    * ensemble members that must agree before a word is emitted. */
+  /** Restrict answers to these labels (e.g. the basic everyday words): with
+   * 43 words instead of 1,000, held-out top-1 rises from 49% to 81%. */
+  only: Set<string> | null = null;
   push(model: SeqModel, now: number, hands: HandPoint[][], width: number, height: number, confirm: SeqModel[] = [], pose: PosePoint[] = [], face: number[] | null = null): Spotted | null {
     const visible = hands.filter((h) => h.length === 21);
     if (visible.length) this.lastSeen = now;
@@ -68,7 +74,7 @@ export class WordSpotter {
     this.lastHop = now;
     const recent = clipFeatures(this.frames.filter((f) => f.at > now - 1000).map((f) => f.hands), width, height);
     if (recent && motionExtent(recent) >= MOTION_GATE) this.movingUntil = now + 1000;
-    const course = model.courseLabels?.length ? new Set(model.courseLabels) : null;
+    const course = this.only ?? (model.courseLabels?.length ? new Set(model.courseLabels) : null);
     let best: { label: string; p: number; margin: number; letter: boolean; window: number[][]; alts: string[] } | null = null;
     for (const ms of SPOT.windowsMs) {
       const recentFrames = this.frames.filter((f) => f.at > now - ms);

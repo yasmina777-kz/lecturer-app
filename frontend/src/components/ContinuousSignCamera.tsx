@@ -5,7 +5,8 @@ import { useLiveLetters } from "../sign/useLiveLetters";
 import { at } from "../i18n/automation";
 import type { HandPoint } from "../sign/wordFeatures";
 import { loadWordModel, recognizeWord, WordSegmenter, type WordModel } from "../sign/wordRecognizer";
-import { appendTranslation, replaceLastWord, WordSpotter } from "../sign/wordSpotter";
+import { appendTranslation, replaceLastWord, WordSpotter, BASIC_WORDS } from "../sign/wordSpotter";
+const BASIC_SET = new Set(BASIC_WORDS);
 import { composePhrase, replaceTail } from "../sign/phraseComposer";
 import {
   parseRecognitionHealth,
@@ -72,6 +73,12 @@ export function ContinuousSignCamera() {
   const [mode, setMode] = useState<"auto" | "words" | "letters">("auto");
   const modeRef = useRef(mode);
   modeRef.current = mode;
+  // «Основные слова»: answer among 43 everyday words (81% vs 49% top-1 on
+  // held-out signers); «Все слова» searches the whole 1,000-sign model.
+  const [basic, setBasic] = useState(true);
+  spotter.current.only = basic ? BASIC_SET : null;
+  const basicRef = useRef(basic);
+  basicRef.current = basic;
   // Translator bookkeeping: join consecutive fingerspelled letters into one
   // word; mute letters right after/while a word sign is being recognized.
   const lastToken = useRef<{ kind: "word" | "letter"; at: number }>({ kind: "word", at: 0 });
@@ -142,7 +149,7 @@ export function ContinuousSignCamera() {
         const clip = segmenter.current.push(now, points, pose, face ?? null);
         if (spotted) lastSpotted.current = { label: spotted.label, at: now };
         if (clip) {
-          const guess = recognizeWord(model, clip, v.videoWidth, v.videoHeight, true, segmenter.current.clipPoses, segmenter.current.clipFaces);
+          const guess = recognizeWord(model, clip, v.videoWidth, v.videoHeight, true, segmenter.current.clipPoses, segmenter.current.clipFaces, basicRef.current ? BASIC_WORDS : undefined);
           const duplicate = guess && lastSpotted.current.label === guess.label && now - lastSpotted.current.at < 4000;
           if (guess?.accepted && !duplicate && now - raisedAt.current < 800) {
             lastWordAt.current = now;
@@ -708,6 +715,20 @@ export function ContinuousSignCamera() {
               </button>
             ))}
           </div>
+          {mode !== "letters" && (
+            <div className="translator-vocab" role="group" aria-label={at("Какие слова искать", "Which words", "Қай сөздер")}>
+              <button type="button" aria-pressed={basic} onClick={() => setBasic(true)}>
+                {at("Основные слова", "Basic words", "Негізгі сөздер")} <small>{BASIC_WORDS.length}</small>
+              </button>
+              <button type="button" aria-pressed={!basic} onClick={() => setBasic(false)}>
+                {at("Все слова", "All words", "Барлық сөздер")} <small>1000</small>
+              </button>
+              <details>
+                <summary>{at("Какие слова?", "Which words?", "Қандай сөздер?")}</summary>
+                <p>{BASIC_WORDS.join(", ")}</p>
+              </details>
+            </div>
+          )}
           <textarea
             id="krsl-text"
             rows={10}
