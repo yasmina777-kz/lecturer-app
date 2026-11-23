@@ -561,7 +561,17 @@ export function SignDictionaryPage() {
             {!loading && !error && rslOrder && !spelling && text.trim() && previewPlan.steps.length > 1 && (
               <p className="translate-status tts-gloss">
                 {at("Жесты по порядку:", "Signs in order:", "Ымдар реті:")}{" "}
-                <b>{previewPlan.steps.map((s) => s.text.toLocaleUpperCase("ru")).join(" · ")}</b>
+                <b>
+                  {previewPlan.steps
+                    // Letters of a fingerspelled word are one item: «ЯСМИНА (по буквам)».
+                    .filter((s) => !(s.id.startsWith("letter-") && s.text.length === 1))
+                    .map((s) =>
+                      s.id.startsWith("letter-") && previewPlan.spelledWords?.includes(s.text)
+                        ? `${s.text.toLocaleUpperCase("ru")} ${at("(по буквам)", "(spelled)", "(әріппен)")}`
+                        : s.text.toLocaleUpperCase("ru"),
+                    )
+                    .join(" · ")}
+                </b>
                 {(previewPlan.dropped?.length ?? 0) > 0 && (
                   <span> {at("· без отдельного жеста:", "· no own sign:", "· жеке ымсыз:")} {previewPlan.dropped!.join(", ")}</span>
                 )}

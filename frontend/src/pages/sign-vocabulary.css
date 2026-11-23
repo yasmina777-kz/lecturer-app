@@ -1365,3 +1365,34 @@
 @media (prefers-reduced-motion: reduce) {
   .vocab.bento-page .vocab-phrase { animation: none; }
 }
+
+/* «Найди видео» as a small game: progress dots, numbered cards, feedback motion */
+:root .product-ui[data-product-ui][data-product-theme] .vocab-find--game { display: grid; gap: 22px; padding: 28px 32px 32px; position: relative; overflow: hidden; }
+:root .product-ui[data-product-ui][data-product-theme] .vocab-find--game::before { content: ""; position: absolute; inset: -40% -10% auto auto; width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(circle, rgba(47, 107, 255, .12), transparent 70%); pointer-events: none; }
+.vocab-find--game .vf-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.vocab-find--game .vf-progress { display: flex; gap: 6px; flex: 1; max-width: 420px; }
+.vocab-find--game .vf-progress i { flex: 1; height: 6px; border-radius: 99px; background: var(--p-subtle, #e9edf5); transition: background .3s; }
+.vocab-find--game .vf-progress i.done { background: #2f6bff; }
+.vocab-find--game .vf-progress i.now { background: linear-gradient(90deg, #2f6bff, rgba(47, 107, 255, .35)); animation: vf-pulse 1.4s ease-in-out infinite; }
+.vocab-find--game .vf-score { padding: 6px 14px; border-radius: 99px; background: rgba(34, 160, 107, .12); color: #1a7f55; font-weight: 700; font-variant-numeric: tabular-nums; }
+.vocab-find--game .vf-task { display: grid; gap: 4px; position: relative; }
+.vocab-find--game .vf-task h2 { margin: 0; font-size: clamp(30px, 4vw, 44px); letter-spacing: -.02em; color: #2f6bff; animation: vf-pop .45s cubic-bezier(.2, .9, .3, 1.3) both; }
+.vocab-find--game .vf-task p { margin: 0; color: var(--p-muted); font-size: 14px; }
+:root .product-ui[data-product-ui][data-product-theme] .vocab-find--game .vf-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+:root .product-ui[data-product-ui][data-product-theme] .vocab-find--game .vf-cards button { position: relative; padding: 8px; border-radius: 22px; border: 2px solid transparent; background: var(--p-surface, #fff); box-shadow: 0 6px 20px rgba(20, 30, 60, .08); cursor: pointer; transition: transform .25s cubic-bezier(.2, .8, .3, 1), box-shadow .25s, border-color .25s, opacity .3s; }
+:root .product-ui[data-product-ui][data-product-theme] .vocab-find--game .vf-cards button:hover:not(.right):not(.wrong):not(.dim) { transform: translateY(-6px) scale(1.02); border-color: rgba(47, 107, 255, .45); box-shadow: 0 16px 34px rgba(47, 107, 255, .18); }
+:root .product-ui[data-product-ui][data-product-theme] .vocab-find--game .vf-cards button.right { border-color: #22a06b; box-shadow: 0 0 0 6px rgba(34, 160, 107, .18), 0 16px 34px rgba(34, 160, 107, .2); animation: vf-pop .5s cubic-bezier(.2, .9, .3, 1.3); }
+:root .product-ui[data-product-ui][data-product-theme] .vocab-find--game .vf-cards button.wrong { border-color: #e5484d; animation: vf-shake .45s; }
+:root .product-ui[data-product-ui][data-product-theme] .vocab-find--game .vf-cards button.dim { opacity: .45; }
+.vocab-find--game .vf-num { position: absolute; top: 16px; left: 16px; z-index: 2; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; background: rgba(255, 255, 255, .92); color: #1b2440; font-weight: 700; font-size: 14px; box-shadow: 0 2px 8px rgba(0, 0, 0, .15); }
+.vocab-find--game .vf-label { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 2; padding: 6px 14px; border-radius: 99px; background: rgba(20, 28, 48, .82); color: #fff; font-weight: 600; white-space: nowrap; animation: vf-pop .35s both; }
+.vocab-find--game .vf-cards button.right .vf-label { background: #22a06b; }
+@keyframes vf-pop { from { transform: scale(.85); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes vf-shake { 0%, 100% { transform: none; } 20% { transform: translateX(-8px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-5px); } 80% { transform: translateX(4px); } }
+@keyframes vf-pulse { 50% { opacity: .55; } }
+@media (max-width: 860px) { :root .product-ui[data-product-ui][data-product-theme] .vocab-find--game .vf-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (prefers-reduced-motion: reduce) { .vocab-find--game * { animation: none !important; transition: none !important; } }
+
+/* Camera beside the video in «Посмотри» */
+.vocab-learn-camera--side { display: grid; gap: 12px; }
+.vocab-learn-camera--side .word-practice { margin: 0; }

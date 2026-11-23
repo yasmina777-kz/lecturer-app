@@ -406,6 +406,15 @@ function Session({
         <p className="panel">{at("Сегодня повторять нечего — пройдите новый урок.", "Nothing to review today — take a new lesson.", "Бүгін қайталайтын ештеңе жоқ.")}</p>
       </div>
     );
+  useEffect(() => {
+    if (step !== "find" || picked) return;
+    const onKey = (e: KeyboardEvent) => {
+      const k = Number(e.key) - 1;
+      if (k >= 0 && k < choices.length && !(e.target instanceof HTMLInputElement)) answer(choices[k].id);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  });
   function answer(id: string) {
     if (picked || !current) return;
     setPicked(id);
@@ -461,36 +470,43 @@ function Session({
           <div className="vocab-card-side">
             <span className="eyebrow">{current.category} · {index + 1} / {words.length}</span>
             <h2>{current.label}</h2>
-            <ul className="vocab-tips">
-              <li><Hand size={16} />{at("Форма кисти: какие пальцы согнуты?", "Handshape: which fingers bend?", "Қол пішіні: қай саусақтар бүгілген?")}</li>
-              <li><Move size={16} />{at("Движение: куда и сколько раз?", "Movement: where and how many times?", "Қозғалыс: қайда және неше рет?")}</li>
-              <li><Repeat size={16} />{at("Повторите 3 раза вместе с видео", "Repeat 3 times with the video", "Бейнемен бірге 3 рет қайталаңыз")}</li>
-            </ul>
-            <div className="vocab-chips" aria-label={at("Слова урока", "Lesson words", "Сабақ сөздері")}>
-              {words.map((w, i) => (
-                <button key={w.id} aria-pressed={i === index} className={i < index ? "seen" : ""} onClick={() => { setIndex(i); setTryCamera(false); }}>
-                  {w.label}
+            {tryCamera ? (
+              // The camera opens right next to the video — no scrolling to find it.
+              <div className="vocab-learn-camera vocab-learn-camera--side">
+                <Suspense fallback={<Loading />}>
+                  <WordPracticeCamera key={current.id} target={current.label} choices={words.map((w) => w.label)} />
+                </Suspense>
+                <button className="button secondary" onClick={() => setTryCamera(false)}>
+                  <ArrowLeft size={18} />{at("Закрыть камеру", "Close camera", "Камераны жабу")}
                 </button>
-              ))}
-            </div>
-            <div className="vocab-nav">
-              <button className="button secondary" disabled={!index} onClick={() => { setIndex(index - 1); setTryCamera(false); }} aria-label={at("Назад", "Back", "Артқа")}><ArrowLeft size={18} /></button>
-              <button className="button primary" onClick={() => { setTryCamera(false); next(); }}>
-                {index + 1 < words.length ? at("Следующий жест", "Next sign", "Келесі ым") : at("К проверке", "Start the quiz", "Тексеруге")}
-                <ArrowRight size={18} />
-              </button>
-              <button className="button secondary" aria-pressed={tryCamera} onClick={() => setTryCamera(!tryCamera)}>
+              </div>
+            ) : (
+              <>
+            <ul className="vocab-tips">
+                <li><Hand size={16} />{at("Форма кисти: какие пальцы согнуты?", "Handshape: which fingers bend?", "Қол пішіні: қай саусақтар бүгілген?")}</li>
+                <li><Move size={16} />{at("Движение: куда и сколько раз?", "Movement: where and how many times?", "Қозғалыс: қайда және неше рет?")}</li>
+                <li><Repeat size={16} />{at("Повторите 3 раза вместе с видео", "Repeat 3 times with the video", "Бейнемен бірге 3 рет қайталаңыз")}</li>
+              </ul>
+              <div className="vocab-chips" aria-label={at("Слова урока", "Lesson words", "Сабақ сөздері")}>
+                {words.map((w, i) => (
+                  <button key={w.id} aria-pressed={i === index} className={i < index ? "seen" : ""} onClick={() => { setIndex(i); setTryCamera(false); }}>
+                    {w.label}
+                  </button>
+                ))}
+              </div>
+              <div className="vocab-nav">
+                <button className="button secondary" disabled={!index} onClick={() => { setIndex(index - 1); setTryCamera(false); }} aria-label={at("Назад", "Back", "Артқа")}><ArrowLeft size={18} /></button>
+                <button className="button primary" onClick={() => { setTryCamera(false); next(); }}>
+                  {index + 1 < words.length ? at("Следующий жест", "Next sign", "Келесі ым") : at("К проверке", "Start the quiz", "Тексеруге")}
+                  <ArrowRight size={18} />
+                </button>
+    <button className="button secondary" onClick={() => setTryCamera(true)}>
                 <Camera size={18} />{at("Попробовать с камерой", "Try with camera", "Камерамен көру")}
               </button>
             </div>
+              </>
+            )}
           </div>
-          {tryCamera && (
-            <div className="vocab-learn-camera">
-              <Suspense fallback={<Loading />}>
-                <WordPracticeCamera key={current.id} target={current.label} choices={words.map((w) => w.label)} />
-              </Suspense>
-            </div>
-          )}
         </section>
       )}
       {step === "recognize" && current && (
@@ -512,15 +528,28 @@ function Session({
         </section>
       )}
       {step === "find" && current && (
-        <section className="panel vocab-find">
-          <span className="eyebrow">{index + 1} / {quizList.length}</span>
-          <h2>{at("Найдите жест", "Find the sign", "Ымды табыңыз")}: «{current.label}»</h2>
-          <div className="vocab-video-choices">
-            {choices.map((c) => (
-              <button key={c.id} onClick={() => answer(c.id)} className={picked ? (c.id === current.id ? "right" : c.id === picked ? "wrong" : "") : ""}
-                aria-label={picked ? c.label : at("Вариант", "Option", "Нұсқа")}>
+        <section className="panel vocab-find vocab-find--game">
+          <header className="vf-head">
+            <div className="vf-progress" aria-label={`${index + 1} / ${quizList.length}`}>
+              {quizList.map((_, i) => (
+                <i key={i} className={i < index ? "done" : i === index ? "now" : ""} />
+              ))}
+            </div>
+            <span className="vf-score" title={at("Верных ответов", "Correct answers", "Дұрыс жауаптар")}>✓ {score.right}</span>
+          </header>
+          <div className="vf-task">
+            <span className="eyebrow">{at("Какое видео показывает жест?", "Which video shows the sign?", "Қай бейнеде осы ым?")}</span>
+            <h2 key={current.id}>«{current.label}»</h2>
+            <p>{at("Наведите на видео, чтобы рассмотреть. Можно нажимать клавиши 1–4.", "Hover to look closer. Keys 1–4 work too.", "1–4 пернелерін басуға болады.")}</p>
+          </div>
+          <div className="vocab-video-choices vf-cards">
+            {choices.map((c, k) => (
+              <button key={c.id} onClick={() => answer(c.id)} className={`card-motion ${picked ? (c.id === current.id ? "right" : c.id === picked ? "wrong" : "dim") : ""}`}
+                style={{ "--i": k } as React.CSSProperties}
+                aria-label={picked ? c.label : `${at("Вариант", "Option", "Нұсқа")} ${k + 1}`}>
+                <span className="vf-num">{k + 1}</span>
                 <SignVideo word={c} small />
-                {picked && <span>{c.label}</span>}
+                {picked && <span className="vf-label">{c.id === current.id ? "✓ " : ""}{c.label}</span>}
               </button>
             ))}
           </div>

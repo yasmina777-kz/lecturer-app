@@ -19,9 +19,10 @@ const QUESTION_WORDS = new Set(
 
 /** Phrases whose Russian wording has no sign-for-sign equivalent. */
 const REWRITES: [RegExp, string][] = [
-  [/(^|[^\p{L}])как\s+(тебя|тебе)\s+зовут(?=[^\p{L}]|$)/giu, "$1ты имя кто"],
+  // The dictionary has МЕНЯ and ТЕБЯ signs: keep the learner's own word.
+  [/(^|[^\p{L}])как\s+(тебя|тебе)\s+зовут(?=[^\p{L}]|$)/giu, "$1тебя имя кто"],
   [/(^|[^\p{L}])как\s+(вас|вам)\s+зовут(?=[^\p{L}]|$)/giu, "$1вы имя кто"],
-  [/(^|[^\p{L}])меня\s+зовут(?=[^\p{L}]|$)/giu, "$1я имя"],
+  [/(^|[^\p{L}])меня\s+зовут(?=[^\p{L}]|$)/giu, "$1меня имя"],
 ];
 
 export function rslRewrite(text: string) {
