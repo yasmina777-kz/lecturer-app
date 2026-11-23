@@ -120,6 +120,8 @@ import {
 import { at } from "../i18n/automation";
 import "../components/topic-art.css";
 import { ProgressRing } from "../components/ProgressRing";
+import { PlacementPrompt } from "../components/PlacementPrompt";
+import { readPlacement } from "../sign/levelTests";
 import { SignChain } from "../components/SignChain";
 import { WordPracticeCamera } from "../components/WordPracticeCamera";
 import { courseUnits, levelOf, type CefrLevel, type CourseUnit } from "../sign/courseUnits";
@@ -302,7 +304,9 @@ function B2Roadmap({ count, onPick }: { count: (l: CefrLevel) => number[]; onPic
 
 export function CoursePage() {
   const [params, setParams] = useSearchParams();
-  const level = (LEVELS.find((l) => l.id === params.get("level"))?.id ?? "A1") as CefrLevel;
+  const placed = readPlacement();
+  const placedLevel = placed && "level" in placed ? (placed.level === "B2" ? "B1" : placed.level) : "A1";
+  const level = (LEVELS.find((l) => l.id === params.get("level"))?.id ?? placedLevel) as CefrLevel;
   const meta = LEVELS.find((l) => l.id === level)!;
   const units = level === "B2" ? [] : courseUnits(level);
   const progress = readProgress();
@@ -311,6 +315,7 @@ export function CoursePage() {
   const doneCount = units.filter((u) => progress[u.id]?.done).length;
   return (
     <div className="sign-workspace vocab course" data-level={level}>
+      <PlacementPrompt hasHistory={Object.keys(progress).length > 0} />
       <section className="course-hero course-anim">
         <div className="course-hero-text">
           <span className="eyebrow">{at("КУРС ПО ШАГАМ", "STEP-BY-STEP COURSE", "ҚАДАМДЫҚ КУРС")} · {level} · {meta.name}</span>

@@ -1,0 +1,9 @@
+:root .product-ui[data-product-ui][data-product-theme] .placement-prompt { display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center; padding: 18px 22px; margin: 0 0 20px; border-radius: 20px; background: linear-gradient(120deg, rgba(47, 107, 255, .1), rgba(47, 107, 255, .03)); border: 1px solid rgba(47, 107, 255, .25); color: var(--p-text); }
+:root .product-ui[data-product-ui][data-product-theme] .placement-prompt > svg { color: #2f6bff; }
+:root .product-ui[data-product-ui][data-product-theme] .placement-prompt strong { font-size: 17px; }
+:root .product-ui[data-product-ui][data-product-theme] .placement-prompt p { margin: 4px 0 0; color: var(--p-muted); line-height: 1.45; }
+:root .product-ui[data-product-ui][data-product-theme] .placement-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+@media (max-width: 760px) {
+  :root .product-ui[data-product-ui][data-product-theme] .placement-prompt { grid-template-columns: 1fr; }
+}
+:root .product-ui[data-product-ui][data-product-theme] .placement-prompt .button.primary { background: #2f6bff; border-color: #2f6bff; color: #fff; }

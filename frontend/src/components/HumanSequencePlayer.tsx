@@ -33,6 +33,17 @@ export function HumanSequencePlayer({
       .filter((s) => !s.reference?.startsWith("/") && !(s as { sequence?: unknown[] }).sequence?.length)
       .map((s) => s.text),
   ];
+  // A fingerspelled word is one item for the learner: its letters share a chip.
+  const groups = useMemo(() => {
+    const out: { start: number; end: number; text: string; spelled: boolean }[] = [];
+    steps.forEach((s, i) => {
+      const letter = s.id.startsWith("letter-");
+      const prev = out[out.length - 1];
+      if (letter && s.text.length === 1 && prev?.spelled && prev.end === i - 1) prev.end = i;
+      else out.push({ start: i, end: i, text: s.text, spelled: letter && s.text.length > 1 });
+    });
+    return out;
+  }, [steps]);
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(autoPlay);
   const [speed, setSpeed] = useState(1);
@@ -86,7 +97,14 @@ export function HumanSequencePlayer({
           onLoadedMetadata={(e) => (e.currentTarget.playbackRate = speed)}
           aria-label={`${at("Видео жеста", "Sign video", "Ым бейнесі")}: ${current.text}`}
         />
-        <span className="human-caption">{current.text}</span>
+        <span className="human-caption">
+          {(() => {
+            const g = groups.find((x) => x.start <= index && index <= x.end);
+            if (!g?.spelled) return current.text;
+            const letter = index === g.start ? (steps[index].label ?? g.text[0]).toLocaleUpperCase("ru") : current.text;
+            return `${g.text} · ${letter}`;
+          })()}
+        </span>
         {single && letterIndex >= 0 && onLetterChange && (
           <>
             <button
@@ -136,19 +154,20 @@ export function HumanSequencePlayer({
           {at("Повтор", "Loop", "Қайталау")}
         </button>
       </div>
-      {steps.length > 1 && (
+      {groups.length > 1 && (
         <div className="human-steps">
-          {steps.map((s, i) => (
+          {groups.map((g, k) => (
             <button
-              key={s.id + i}
-              aria-pressed={i === index}
+              key={steps[g.start].id + g.start}
+              aria-pressed={g.start <= index && index <= g.end}
               onClick={() => {
-                setIndex(i);
+                setIndex(g.start);
                 setPlaying(true);
               }}
             >
-              <span>{i + 1}</span>
-              {s.text}
+              <span>{k + 1}</span>
+              {g.text}
+              {g.spelled && <small className="human-spelled">{at("по буквам", "spelled", "әріппен")}</small>}
             </button>
           ))}
         </div>

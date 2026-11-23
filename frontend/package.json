@@ -30,7 +30,8 @@
     "test:smooth-motion": "node scripts/check-smooth-motion.mjs",
     "test:course": "node scripts/check-course.mjs",
     "test:studio": "node scripts/check-studio.mjs",
-    "test:rsl-order": "node scripts/check-rsl-order.mjs"
+    "test:rsl-order": "node scripts/check-rsl-order.mjs",
+    "test:camera-hints": "node scripts/check-camera-hints.mjs"
   },
   "dependencies": {
     "@huggingface/transformers": "^4.3.2",

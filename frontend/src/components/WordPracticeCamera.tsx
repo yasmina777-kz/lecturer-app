@@ -13,9 +13,10 @@ import {
   type WordGuess,
 } from "../sign/wordRecognizer";
 import { at } from "../i18n/automation";
+import { cameraHints, type CameraHint } from "../sign/cameraHints";
 import "./word-practice.css";
 
-type Attempt = { guess: WordGuess | null; verdict: ReturnType<typeof judgeWord>["verdict"] };
+type Attempt = { guess: WordGuess | null; verdict: ReturnType<typeof judgeWord>["verdict"]; hints: CameraHint[] };
 
 /** Camera self-check for one dictionary word. Runs fully in the browser. */
 /** choices: the lesson's words — the model then picks among them only
@@ -58,7 +59,8 @@ export function WordPracticeCamera({ target, choices }: { target: string; choice
     if (!clip) return;
     const guess = recognizeWord(model, clip, video.current.videoWidth, video.current.videoHeight, true, segmenter.current.clipPoses, segmenter.current.clipFaces, choices);
     const { verdict } = judgeWord(guess, target, !!choices?.length);
-    setAttempts((list) => [{ guess, verdict }, ...list].slice(0, 5));
+    const hints = verdict === "correct" ? [] : cameraHints(clip, segmenter.current.clipPoses, 50);
+    setAttempts((list) => [{ guess, verdict, hints }, ...list].slice(0, 5));
   }, "balanced", undefined, 50);
 
   async function start() {
@@ -154,6 +156,13 @@ export function WordPracticeCamera({ target, choices }: { target: string; choice
                   ? at("Руки видны плохо — повторите в кадре.", "Hands unclear — repeat in frame.", "Қол анық емес — қайталаңыз.")
                   : at("Похоже на другой жест.", "Looks like a different sign.", "Басқа ымға ұқсайды.")}
           </strong>
+          {last.hints.length > 0 && (
+            <ul className="word-practice-hints">
+              {last.hints.map((h) => (
+                <li key={h.id}>💡 {at(h.ru, h.en, h.kk)}</li>
+              ))}
+            </ul>
+          )}
           {last.guess && (
             <ol>
               {last.guess.top.slice(0, 3).map((t) => (

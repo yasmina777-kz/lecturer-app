@@ -27,7 +27,10 @@ for form, ids in forms.items():
 # Everyday words whose sign is a headword under another name (same sign in RSL):
 # «мама» is signed МАТЬ, «папа» is ОТЕЦ. Only fills forms that have
 # no sign of their own.
-SYNONYMS={'мама':'мать','папа':'отец'}
+# Nouns and verbs of one root are one sign in RSL (ПОМОЩЬ = ПОМОЧЬ, РАБОТА = РАБОТАТЬ).
+SYNONYMS={'мама':'мать','папа':'отец','помощь':'помочь','работа':'работать','игра':'играть','сон':'спать',
+ 'ответ':'ответить','мысль':'думать','радоваться':'радость','благодарить':'благодарность','учёба':'учить','учиться':'учить',
+ 'любимый':'любить','вопрос':'спросить'}
 by_label={e['label'].lower().rstrip('!?'):e['id'] for e in entries}
 for word,target in SYNONYMS.items():
  if target not in by_label:continue

@@ -1,0 +1,16 @@
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import ts from "typescript";
+const js = ts.transpileModule(await readFile(new URL("../src/sign/cameraHints.ts", import.meta.url), "utf8"), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2020 } }).outputText;
+const { cameraHints } = await import("data:text/javascript;base64," + Buffer.from(js).toString("base64"));
+const hand = (cx, cy, s) => Array.from({ length: 21 }, (_, k) => ({ x: cx + s * Math.cos(k), y: cy + s * Math.sin(k), z: 0 }));
+const pose = () => { const p = Array.from({ length: 33 }, () => ({ x: 0.5, y: 0.5, visibility: 1 })); p[11] = { x: 0.4, y: 0.4, visibility: 1 }; p[12] = { x: 0.6, y: 0.4, visibility: 1 }; p[23] = { x: 0.45, y: 0.85, visibility: 1 }; p[24] = { x: 0.55, y: 0.85, visibility: 1 }; return p; };
+const ids = (f, p) => cameraHints(f, p, 50).map((h) => h.id);
+const good = Array.from({ length: 30 }, () => [hand(0.5, 0.35, 0.08)]);
+assert.deepEqual(ids(good, good.map(pose)), [], "a clear sign gets no hints");
+assert.ok(ids(good.slice(0, 6), good.slice(0, 6).map(pose)).includes("fast"), "too short");
+assert.ok(ids(Array.from({ length: 30 }, () => [hand(0.5, 0.35, 0.02)]), good.map(pose)).includes("far"), "small hand");
+assert.ok(ids(Array.from({ length: 30 }, () => [hand(0.97, 0.35, 0.05)]), good.map(pose)).includes("edge"), "hand at the edge");
+assert.ok(ids(Array.from({ length: 30 }, () => [hand(0.5, 0.8, 0.06)]), good.map(pose)).includes("low"), "hand low");
+assert.ok(ids(Array.from({ length: 30 }, (_, i) => (i % 3 ? [] : [hand(0.5, 0.35, 0.08)])), good.map(pose)).includes("lost"), "hand lost");
+console.log("camera hints: fast, far, edge, low, lost and a clean sign checked");

@@ -81,3 +81,5 @@
   margin: 0;
   font-weight: 600;
 }
+.word-practice-hints { list-style: none; margin: 8px 0 4px; padding: 0; display: grid; gap: 6px; }
+.word-practice-hints li { padding: 8px 12px; border-radius: 10px; background: rgba(47, 107, 255, .08); color: inherit; font-size: 14px; line-height: 1.4; }

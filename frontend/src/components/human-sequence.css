@@ -160,3 +160,4 @@
   color: var(--p-muted, #667085);
   font-size: 0.85rem;
 }
+.human-steps .human-spelled { margin-left: 6px; font-size: 11px; color: var(--p-muted, #6b7280); font-weight: 500; }

@@ -1,3 +1,4 @@
+import { PlacementPrompt } from "../components/PlacementPrompt";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
@@ -45,6 +46,7 @@ export function LearningHome() {
     : "/practice?exercise=a";
   return (
     <div className="sign-workspace learning-home">
+      <PlacementPrompt hasHistory={hasHistory} />
       <section className="learning-intro" aria-labelledby="learning-title">
         <div className="learning-intro-copy">
           <h1 id="learning-title">

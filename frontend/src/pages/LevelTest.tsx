@@ -9,16 +9,26 @@ import { questionOptions, shuffle } from "../sign/activities";
 import { useActivityCatalog } from "../sign/useActivities";
 import { optionsFor } from "./PhraseUnderstanding";
 import { courseUnits, type CefrLevel } from "../sign/courseUnits";
-import { readTests, TEST_KEY } from "../sign/levelTests";
+import { placementLevel, readTests, savePlacement, TEST_KEY } from "../sign/levelTests";
 import "./sign-workspace.css";
 import "./sign-vocabulary.css";
 import "./fingerspell.css";
 
 /** End-of-level test: 10 mixed tasks on real signer videos; 8/10 passes. */
-type Task =
+type Task = (
   | { kind: "letter" | "word"; entry: DictionaryEntry; options: DictionaryEntry[] }
   | { kind: "phrase"; item: PhraseItem; options: PhraseItem[] }
-  | { kind: "grammar"; task: Extract<GrammarTask, { kind: "choice" }> };
+  | { kind: "grammar"; task: Extract<GrammarTask, { kind: "choice" }> }
+) & { cefr?: "A1" | "A2" | "B1" };
+/** Placement: 4 tasks per level, easiest first (A1 → A2 → B1). */
+function buildPlacement(words: DictionaryEntry[]): Task[] {
+  return (["A1", "A2", "B1"] as const).flatMap((c) => {
+    const t = buildCefrTasks(c, words);
+    // Prefer one phrase/grammar question per level so it is not words only.
+    const mixed = [...t.filter((x) => x.kind !== "word").slice(0, 1), ...t.filter((x) => x.kind === "word")].slice(0, 4);
+    return mixed.map((x) => ({ ...x, cefr: c }));
+  });
+}
 const SKILL: Record<Task["kind"], { name: string; to: string; tip: string }> = {
   letter: { name: "Буквы", to: "/practice", tip: "Повторите азбуку в «Практике» и потренируйте «Чтение дактиля»." },
   word: { name: "Слова", to: "/vocab", tip: "Повторите слова в тренажёре — особенно отмеченные для повторения." },
@@ -71,13 +81,17 @@ export function LevelTestPage() {
   const [params] = useSearchParams();
   const cefr = (["A1", "A2", "B1"] as const).find((c) => c === params.get("cefr"));
   const level = Math.min(3, Math.max(1, Number(params.get("level")) || 1));
-  const key = cefr ? `cefr-${cefr}` : String(level);
+  const placement = params.get("placement") === "1";
+  const key = placement ? "placement" : cefr ? `cefr-${cefr}` : String(level);
   const { data, error } = useActivityCatalog();
   const words = useMemo(() => (data?.entries ?? []).filter((e) => e.category !== "Алфавит" && (e.displayVideo || e.video)), [data]);
   const [seed, setSeed] = useState(0);
-  const tasks = useMemo(() => (words.length ? (cefr ? buildCefrTasks(cefr, words) : buildTasks(level, words)) : []), [level, cefr, words, seed]);
+  const tasks = useMemo(
+    () => (words.length ? (placement ? buildPlacement(words) : cefr ? buildCefrTasks(cefr, words) : buildTasks(level, words)) : []),
+    [level, cefr, placement, words, seed],
+  );
   const [i, setI] = useState(0);
-  const [answers, setAnswers] = useState<{ kind: Task["kind"]; ok: boolean }[]>([]);
+  const [answers, setAnswers] = useState<{ kind: Task["kind"]; ok: boolean; cefr?: string }[]>([]);
   const [picked, setPicked] = useState<number | null>(null);
   const titles = ["", at("Буквы и дактиль", "Letters", "Әріптер"), at("Первые слова", "First words", "Алғашқы сөздер"), at("Понимание и общение", "Understanding", "Түсіну")];
   if (error) return <p className="translate-status error">{error}</p>;
@@ -90,12 +104,22 @@ export function LevelTestPage() {
   function choose(k: number) {
     if (picked !== null) return;
     setPicked(k);
-    setAnswers((a) => [...a, { kind: t.kind, ok: k === correctIndex }]);
+    setAnswers((a) => [...a, { kind: t.kind, ok: k === correctIndex, cefr: t.cefr }]);
   }
   function next() {
     setPicked(null);
     setI((n) => n + 1);
-    if (i + 1 >= tasks.length) {
+    if (i + 1 >= tasks.length && placement) {
+      const all = answers;
+      const ok = (c: string) => all.filter((a) => a.cefr === c && a.ok).length;
+      const per = (c: string) => all.filter((a) => a.cefr === c).length;
+      savePlacement({
+        level: placementLevel({ A1: ok("A1"), A2: ok("A2"), B1: ok("B1") }, 4),
+        scores: Object.fromEntries(["A1", "A2", "B1"].map((c) => [c, `${ok(c)}/${per(c)}`])),
+        at: new Date().toISOString(),
+      });
+    }
+    if (i + 1 >= tasks.length && !placement) {
       const final = answers.filter((a) => a.ok).length;
       const best = readTests();
       try {
@@ -112,13 +136,53 @@ export function LevelTestPage() {
       </Link>
       <div className="page-heading">
         <div>
-          <span className="eyebrow">{at("ИТОГОВЫЙ ТЕСТ", "LEVEL TEST", "ҚОРЫТЫНДЫ ТЕСТ")} · {cefr ?? `${at("уровень", "level", "деңгей")} ${level}`}</span>
-          <h1>{cefr ? `${at("Уровень", "Level", "Деңгей")} ${cefr}` : titles[level]}</h1>
-          <p>{at("10 заданий на видео носителей языка. Тест пройден, если 8 и больше верных ответов.", "10 tasks on native-signer videos. Pass with 8 or more.", "10 тапсырма. 8 және одан көп — өтті.")}</p>
+          <span className="eyebrow">{placement ? at("ТЕСТ УРОВНЯ", "PLACEMENT TEST", "ДЕҢГЕЙ ТЕСТІ") : at("ИТОГОВЫЙ ТЕСТ", "LEVEL TEST", "ҚОРЫТЫНДЫ ТЕСТ")} · {placement ? "A1 → B1" : cefr ?? `${at("уровень", "level", "деңгей")} ${level}`}</span>
+          <h1>{placement ? at("С какого уровня начать?", "Where should you start?", "Қай деңгейден бастау керек?") : cefr ? `${at("Уровень", "Level", "Деңгей")} ${cefr}` : titles[level]}</h1>
+          <p>{placement
+            ? at("12 вопросов: сначала простые, потом сложнее. Не знаете ответ — выберите любой, это нормально.", "12 questions from easy to harder. Don’t know? Just pick one.", "12 сұрақ: оңайдан қиынға.")
+            : at("10 заданий на видео носителей языка. Тест пройден, если 8 и больше верных ответов.", "10 tasks on native-signer videos. Pass with 8 or more.", "10 тапсырма. 8 және одан көп — өтті.")}</p>
         </div>
       </div>
     </>
   );
+  if (done && placement) {
+    const ok = (c: string) => answers.filter((a) => a.cefr === c && a.ok).length;
+    const start = placementLevel({ A1: ok("A1"), A2: ok("A2"), B1: ok("B1") }, 4);
+    const course = start === "B2" ? "B1" : start;
+    return (
+      <div className="sign-workspace vocab fingerspell">
+        {header}
+        <section className="panel fs-done">
+          <Award size={40} />
+          <h2>
+            {start === "A1"
+              ? at("Начнём с основ — уровень A1", "Let’s start with the basics — A1", "A1 деңгейінен бастаймыз")
+              : start === "B2"
+                ? at("Отлично! Вы знаете материал курса", "Great! You know the course material", "Керемет!")
+                : at(`Ваш уровень: ${start}`, `Your level: ${start}`, `Деңгейіңіз: ${start}`)}
+          </h2>
+          <ul className="test-skills">
+            {(["A1", "A2", "B1"] as const).map((c) => (
+              <li key={c}>
+                <strong>{c}</strong>: {ok(c)} / {answers.filter((a) => a.cefr === c).length}
+              </li>
+            ))}
+          </ul>
+          <p>
+            {start === "B2"
+              ? at("Повторите B1 и переходите к живой практике.", "Review B1 and move on to live practice.", "B1 қайталаңыз.")
+              : at("Предыдущие уровни можно открыть в любой момент.", "Earlier levels stay open any time.", "Алдыңғы деңгейлер ашық.")}
+          </p>
+          <div className="fs-actions">
+            <Link className="button primary" to={`/course?level=${course}`}>
+              {at(`Начать ${course}`, `Start ${course}`, `${course} бастау`)} <ArrowRight size={16} />
+            </Link>
+            {course !== "A1" && <Link className="button secondary" to="/course?level=A1">{at("Всё равно с A1", "Start from A1 anyway", "A1-ден бастау")}</Link>}
+          </div>
+        </section>
+      </div>
+    );
+  }
   if (done) {
     const passed = score >= Math.ceil(tasks.length * 0.8);
     const weak = (Object.keys(SKILL) as Task["kind"][])
