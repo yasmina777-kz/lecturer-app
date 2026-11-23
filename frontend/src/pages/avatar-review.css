@@ -61,3 +61,4 @@
 .avatar-review .ar-btn.variant:hover, .avatar-review .ar-btn.variant[aria-pressed="true"] { border-color: #2f6bff; background: rgba(47, 107, 255, .1); color: #2f6bff; }
 :root .product-ui[data-product-ui][data-product-theme] .avatar-review .ar-note.need { border-color: #2f6bff; box-shadow: 0 0 0 3px rgba(47, 107, 255, .18); }
 @media (max-width: 860px) { .avatar-review .ar-actions { grid-template-columns: repeat(2, 1fr); } }
+.avatar-review .ar-auto { margin: 0; padding: 10px 14px; border-radius: 12px; background: rgba(242, 169, 59, .12); color: #8a5a0c; font-size: 14px; line-height: 1.45; }

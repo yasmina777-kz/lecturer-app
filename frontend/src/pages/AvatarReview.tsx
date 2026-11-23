@@ -4,7 +4,7 @@ import { SignSequencePlayer } from "../components/SignSequencePlayer";
 import { learningDictionary, type DictionaryEntry } from "../sign/dictionary";
 import type { MotionAsset, MotionPlan } from "../sign/motion";
 import { withVideoAssets } from "../sign/videoAssets";
-import { loadAvatarCatalog, loadAvatarReview, type AvatarEntry, type AvatarReview, type AvatarVerdict } from "../sign/avatarLibrary";
+import { loadAutoCheck, loadAvatarCatalog, loadAvatarReview, type AutoCheck, type AvatarEntry, type AvatarReview, type AvatarVerdict } from "../sign/avatarLibrary";
 import "./avatar-review.css";
 
 /** For a sign-language consultant: compare every avatar clip with the real
@@ -13,7 +13,7 @@ import "./avatar-review.css";
  * "wrong" stop being shown to learners. */
 const KEY = "rsl-avatar-review-v1";
 type Verdicts = AvatarReview["verdicts"];
-type Filter = "todo" | "all" | "wrong" | "unsure" | "variant" | "ok";
+type Filter = "todo" | "doubtful" | "all" | "wrong" | "unsure" | "variant" | "ok";
 
 function loadLocal(): Verdicts {
   try {
@@ -34,6 +34,7 @@ export function AvatarReviewPage() {
   const [note, setNote] = useState("");
   const [failed, setFailed] = useState(false);
   const [needNote, setNeedNote] = useState(false);
+  const [auto, setAuto] = useState<AutoCheck>({ clips: {} });
 
   useEffect(() => {
     Promise.all([
@@ -41,8 +42,10 @@ export function AvatarReviewPage() {
       fetch("/avatars/sign-motion/catalog.json").then((r) => r.json()),
       fetch("/research/rsl/words/catalog.json").then((r) => r.json()),
       loadAvatarReview(),
+      loadAutoCheck(),
     ])
-      .then(([c, m, w, published]) => {
+      .then(([c, m, w, published, check]) => {
+        setAuto(check);
         setCatalog(c);
         setAssets(m);
         setWords(w);
@@ -70,8 +73,14 @@ export function AvatarReviewPage() {
       catalog
         .filter((e) => playable.has(e.id))
         .map((e) => ({ id: e.id, label: e.label ?? playable.get(e.id)!.label }))
-        .sort((a, b) => Number(a.id.startsWith("letter-")) - Number(b.id.startsWith("letter-")) || a.label.localeCompare(b.label, "ru")),
-    [catalog, playable],
+        // Doubtful clips (auto check) first: those are the likely errors.
+        .sort(
+          (a, b) =>
+            Number(auto.clips[a.id]?.ok !== false) - Number(auto.clips[b.id]?.ok !== false) ||
+            Number(a.id.startsWith("letter-")) - Number(b.id.startsWith("letter-")) ||
+            a.label.localeCompare(b.label, "ru"),
+        ),
+    [catalog, playable, auto],
   );
   const counts = useMemo(() => {
     const c = { ok: 0, wrong: 0, unsure: 0, variant: 0 };
@@ -84,6 +93,7 @@ export function AvatarReviewPage() {
   const shown = items.filter((i) => {
     const v = verdicts[i.id]?.verdict;
     if (search && !i.label.toLocaleLowerCase("ru").includes(search.toLocaleLowerCase("ru"))) return false;
+    if (filter === "doubtful") return !v && auto.clips[i.id]?.ok === false;
     return filter === "all" || (filter === "todo" ? !v : v === filter);
   });
 
@@ -166,6 +176,7 @@ export function AvatarReviewPage() {
             {(
               [
                 ["todo", "Не проверены"],
+                ["doubtful", "Сомнительные"],
                 ["wrong", "Неверно"],
                 ["variant", "Другой вариант"],
                 ["unsure", "Не уверена"],
@@ -204,6 +215,12 @@ export function AvatarReviewPage() {
                   <ChevronRight size={18} />
                 </button>
               </div>
+              {auto.clips[item.id]?.ok === false && !verdicts[item.id] && (
+                <p className="ar-auto">
+                  Автопроверка сомневается: {auto.clips[item.id].reason}. Сейчас ученики видят вместо аватара видео. Если аватар всё же верный —
+                  отметьте «Верно», и он вернётся.
+                </p>
+              )}
               <div className="ar-compare">
                 <figure>
                   <figcaption>Видео (образец)</figcaption>

@@ -21,6 +21,24 @@ export function loadAvatarReview() {
     .catch(() => ({ verdicts: {} }));
   return reviewFile;
 }
+/** Automatic trust check (art/realistic-male/check_tracking.py): clips whose
+ * reference video had hands missing, swapped or jittering — the solver had to
+ * guess there. Hidden from learners unless the consultant marked them ok. */
+export type AutoCheck = { clips: Record<string, { ok: boolean; reason?: string }> };
+let autoFile: Promise<AutoCheck> | null = null;
+export function loadAutoCheck() {
+  autoFile ??= fetch("/avatars/alex/auto-check.json")
+    .then((r) => (r.ok ? r.json() : { clips: {} }))
+    .catch(() => ({ clips: {} }));
+  return autoFile;
+}
+/** Whether learners may see this clip: a consultant's verdict wins, then the auto check. */
+export function avatarTrusted(id: string, review: AvatarReview, auto: AutoCheck) {
+  const v = review.verdicts[id]?.verdict;
+  if (v === "wrong") return false;
+  if (v === "ok" || v === "variant") return true;
+  return auto.clips[id]?.ok !== false;
+}
 let library: Promise<Map<string, Entry>> | null = null;
 let fullLibrary: Promise<Map<string, Entry>> | null = null;
 export function loadAvatarCatalog() {
@@ -28,11 +46,15 @@ export function loadAvatarCatalog() {
 }
 export function loadAvatarLibrary(includeWrong = false) {
   const build = (skip: boolean) =>
-    Promise.all([loadAvatarCatalog(), skip ? loadAvatarReview() : Promise.resolve({ verdicts: {} } as AvatarReview)])
-    .then(([list, review]) => {
+    Promise.all([
+      loadAvatarCatalog(),
+      skip ? loadAvatarReview() : Promise.resolve({ verdicts: {} } as AvatarReview),
+      skip ? loadAutoCheck() : Promise.resolve({ clips: {} } as AutoCheck),
+    ])
+    .then(([list, review, auto]) => {
       const map = new Map<string, Entry>();
       for (const e of list) {
-        if (review.verdicts[e.id]?.verdict === "wrong") continue;
+        if (!avatarTrusted(e.id, review, auto)) continue;
         map.set(e.id, e);
         if (e.originalUrl) map.set(e.originalUrl, e);
       }
