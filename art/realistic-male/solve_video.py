@@ -22,8 +22,8 @@ import numpy as np
 from mathutils import Vector, Matrix, Quaternion
 
 ROOT = Path(__file__).resolve().parents[2]
-DATA = ROOT / "ml/rsl/data/motion"
-OUT = ROOT / "frontend/public/avatars/alex"
+DATA = Path(os.environ.get("MOTION_DIR", ROOT / "ml/rsl/data/motion"))
+OUT = Path(os.environ.get("AVATAR_OUT", ROOT / "frontend/public/avatars/alex"))
 OUT.mkdir(parents=True, exist_ok=True)
 P = "mixamorig:"
 FPS = 30
@@ -136,6 +136,36 @@ RNSIGN = {s: (1 if RN[s].dot(RP[s].col[2]) >= 0 else -1) for s in RN}
 print("palm normal sign", RNSIGN, flush=True)
 
 
+def _hinge(d, n):
+    """Bend axis of a finger pointing along d on a palm with normal n:
+    +angle about it curls the finger toward the palm."""
+    h = d.cross(n).normalized()
+    return -h if h.cross(d).dot(n) < 0 else h
+
+
+# Each finger bone's own bend axis, in bone space (from the rest pose). Used to
+# give the solved phalanges their roll as well as their direction: with the
+# direction alone (shortest-arc "look"), each phalanx picked up a random twist
+# about its length and curled fingers looked crooked and corkscrewed.
+HINGE_LOCAL = {}
+for _s in ("Left", "Right"):
+    for _f in ("Index", "Middle", "Ring", "Pinky"):
+        for _k in (1, 2, 3):
+            _b = P + _s + "Hand" + _f + str(_k)
+            if _b in restq:
+                HINGE_LOCAL[_b] = restq[_b].inverted() @ _hinge(restq[_b] @ Y, RN[_s])
+
+
+def orient(bname, direction, hinge):
+    """World rotation for a finger bone: length along `direction`, bend axis on `hinge`."""
+    hl = HINGE_LOCAL.get(bname)
+    if hl is None:
+        return None
+    world = frame(direction, hinge)
+    local = frame(Y, hl)
+    return (world @ local.transposed()).to_quaternion()
+
+
 def relaxed_pose():
     """Arms down, slightly forward, fingers softly curled."""
     q = {}
@@ -148,6 +178,10 @@ def relaxed_pose():
                 q[n] = look(q[n], Vector((sg * 0.16, -0.06, -1)))
             elif short == s + "ForeArm":
                 q[n] = look(q[n], Vector((sg * 0.04, -0.42, -1)))
+    # Softly curled fingers on their own hinges (the rig's rest fingers are
+    # bunched and the thumb sticks out).
+    for s in ("Left", "Right"):
+        solve_fingers(q, s, None)
     return q
 
 
@@ -455,8 +489,10 @@ def solve_fingers(q, s, hp):
                     mid = (spreads[a] + spreads[b]) / 2
                     spreads[a], spreads[b] = mid + gap / 2, mid - gap / 2
     else:
-        for f, sp in zip(FINGERS, (6, 0, -7, -14)):
-            flexes[f] = [math.radians(18), math.radians(22), math.radians(12)]
+        # A relaxed hand: index almost straight, each next finger a little more
+        # curled (the natural cascade), small fan.
+        for (f, sp), k in zip(zip(FINGERS, (4, 0, -4, -9)), range(4)):
+            flexes[f] = [math.radians(v + 4 * k) for v in (8, 14, 6)]
             spreads[f] = math.radians(sp)
     f_c = rot @ (head[P + s + "HandMiddle1"] - head[hand])
     f_c = (f_c - n_c * f_c.dot(n_c)).normalized()
@@ -474,7 +510,8 @@ def solve_fingers(q, s, hp):
         for k, bname in enumerate(chain):
             base = prev @ restq[prev_name].inverted() @ restq[bname]
             cum += flexes[f][k]
-            q[bname] = look(base, Quaternion(h, cum) @ d)
+            target = Quaternion(h, cum) @ d
+            q[bname] = orient(bname, target, h) or look(base, target)
             prev, prev_name = q[bname], bname
     # Thumb: the tracked directions, taken relative to the tracked palm and put
     # on Alex's palm (so a clamped wrist does not swing the thumb across it).
@@ -489,7 +526,10 @@ def solve_fingers(q, s, hp):
             dirk = to_av @ (hp[THUMB[k + 1]] - hp[THUMB[k]])
             q[bname] = limit(look(base, dirk), base, (45, 55, 70)[k])
         else:
-            q[bname] = base
+            # Relaxed thumb rests beside the index finger instead of pointing out.
+            cur = base @ Y
+            toward = (cur.normalized() * 0.55 + f_c * 0.45 + n_c * 0.12).normalized()
+            q[bname] = limit(look(base, toward), base, (28, 14, 10)[k])
         prev, prev_name = q[bname], bname
 
 

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Camera, Square, Download, Trash2, Shuffle, Upload } from "lucide-react";
+import { Camera, Square, Download, Trash2, Shuffle, Upload, Video } from "lucide-react";
 import { useLiveLetters } from "../sign/useLiveLetters";
 import type { Landmark } from "../sign/phraseCapture";
 import { SignSequencePlayer } from "../components/SignSequencePlayer";
@@ -8,7 +8,7 @@ import type { MotionAsset, MotionPlan } from "../sign/motion";
 import { withVideoAssets } from "../sign/videoAssets";
 import { loadWordModel } from "../sign/wordRecognizer";
 import { courseUnits } from "../sign/courseUnits";
-import { deleteTake, frameRow, listTakes, saveTake, type Take } from "../sign/signRecordings";
+import { deleteTake, frameRow, listTakes, listVideos, saveTake, saveVideo, videoType, type SignVideo, type Take } from "../sign/signRecordings";
 import "./avatar-review.css";
 import "./record-signs.css";
 import "../components/word-practice.css";
@@ -31,9 +31,9 @@ export function RecordSignsPage() {
   const [search, setSearch] = useState("");
   const [profile, setProfile] = useState(() => {
     try {
-      return JSON.parse(localStorage.getItem(PROFILE) ?? "") as { participant: string; region: string; consent: boolean };
+      return { videoConsent: false, ...JSON.parse(localStorage.getItem(PROFILE) ?? "") } as { participant: string; region: string; consent: boolean; videoConsent: boolean };
     } catch {
-      return { participant: "", region: "", consent: false };
+      return { participant: "", region: "", consent: false, videoConsent: false };
     }
   });
   const [active, setActive] = useState(false);
@@ -45,6 +45,9 @@ export function RecordSignsPage() {
   const stream = useRef<MediaStream | null>(null);
   const buffer = useRef<Frame[]>([]);
   const take = useRef<{ start: number; lastHand: number; handMs: number } | null>(null);
+  const recorder = useRef<MediaRecorder | null>(null);
+  const [videos, setVideos] = useState<SignVideo[]>([]);
+  const withVideo = profile.videoConsent && !!videoType();
 
   useEffect(() => {
     Promise.all([
@@ -52,8 +55,10 @@ export function RecordSignsPage() {
       fetch("/avatars/sign-motion/catalog.json").then((r) => r.json()),
       fetch("/research/rsl/words/catalog.json").then((r) => r.json()),
       listTakes(),
+      listVideos().catch(() => [] as SignVideo[]),
     ])
-      .then(([model, m, w, saved]) => {
+      .then(([model, m, w, saved, vids]) => {
+        setVideos(vids);
         // Course words first, in lesson order: those are what learners practise.
         const known = new Map(model.labels.filter((l) => l !== "__none__").map((l) => [normalizeSignText(l), l]));
         const course: string[] = [];
@@ -114,6 +119,7 @@ export function RecordSignsPage() {
       if (!hand) return;
       t = take.current = { start: now, lastHand: now, handMs: 0 };
       setRecording(true);
+      startVideo();
     }
     const prev = buf[buf.length - 2];
     if (hand) {
@@ -124,7 +130,9 @@ export function RecordSignsPage() {
     const frames = buf.splice(0);
     take.current = null;
     setRecording(false);
-    if (t.handMs < MIN_HAND_MS) return; // a hand only flickered into view
+    const good = t.handMs >= MIN_HAND_MS;
+    stopVideo(good ? current : null);
+    if (!good) return; // a hand only flickered into view
     const t0 = frames[0].now;
     const saved: Take = {
       id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
@@ -146,6 +154,39 @@ export function RecordSignsPage() {
     });
   };
   const letters = useLiveLetters(video, overlay, active, tracking, "balanced", undefined, 33);
+
+  // Video for the avatar: one clip per take, the latest kept per word.
+  function startVideo() {
+    if (!withVideo || !stream.current || recorder.current) return;
+    const type = videoType();
+    const rec = new MediaRecorder(stream.current, { mimeType: type, videoBitsPerSecond: 4_000_000 });
+    const chunks: Blob[] = [];
+    rec.ondataavailable = (e) => e.data.size && chunks.push(e.data);
+    rec.start();
+    recorder.current = rec;
+    (rec as MediaRecorder & { chunks?: Blob[] }).chunks = chunks;
+  }
+  function stopVideo(label: string | null) {
+    const rec = recorder.current as (MediaRecorder & { chunks?: Blob[] }) | null;
+    recorder.current = null;
+    if (!rec || rec.state === "inactive") return;
+    rec.onstop = () => {
+      if (!label) return;
+      const v: SignVideo = { label, participant: profile.participant.trim(), createdAt: new Date().toISOString(), type: rec.mimeType, blob: new Blob(rec.chunks ?? [], { type: rec.mimeType }) };
+      void saveVideo(v).then(() => setVideos((list) => [...list.filter((x) => x.label !== label), v]));
+    };
+    rec.stop();
+  }
+  async function downloadVideos() {
+    for (const v of videos) {
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(v.blob);
+      a.download = `${v.label.replace(/[\\/:*?"<>|]/g, "")}.${v.type.includes("mp4") ? "mp4" : "webm"}`;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+      await new Promise((r) => setTimeout(r, 400));
+    }
+  }
 
   async function start() {
     setError("");
@@ -252,6 +293,11 @@ export function RecordSignsPage() {
             />
           </label>
           <label className="rs-check">
+            <input type="checkbox" checked={profile.videoConsent} onChange={(e) => setProfile({ ...profile, videoConsent: e.target.checked })} />
+            Необязательно: я согласен(на), чтобы для каждого слова сохранялось одно видео со мной (с лицом) — по нему аватар научится
+            показывать жест правильно. Видео остаётся в этом браузере, пока я сам(а) не скачаю и не передам его автору платформы.
+          </label>
+          <label className="rs-check">
             <input type="checkbox" checked={profile.consent} onChange={(e) => setProfile({ ...profile, consent: e.target.checked })} />
             Я согласен(на), что записи движений моих рук и плеч (без видео и без лица) будут использованы для обучения распознавания
             жестов на платформе AI Mentor. Я могу удалить свои записи в любой момент.
@@ -307,6 +353,13 @@ export function RecordSignsPage() {
                 {active && !letters.ready && <p className="ar-empty">{letters.status}</p>}
               </figure>
             </div>
+            {withVideo && (
+              <p className="rs-hint rs-light">
+                🎥 Видео для аватара включено: встаньте лицом к окну или лампе, фон однотонный и не белый, одежда тёмная однотонная,
+                руки целиком в кадре. Так пальцы будут видны чётко.
+                {videos.some((v) => v.label === current) && " Видео этого слова уже есть — новый повтор заменит его."}
+              </p>
+            )}
             <p className="rs-hint">
               Если в вашем регионе жест показывают иначе — показывайте так, как привыкли вы. Это тоже ценно.
             </p>
@@ -331,6 +384,11 @@ export function RecordSignsPage() {
       <footer className="ar-foot ar-card">
         <p>Записи хранятся в этом браузере. Когда закончите, нажмите «Скачать записи» и отправьте файл автору платформы.</p>
         <div>
+          {videos.length > 0 && (
+            <button className="ar-download" onClick={downloadVideos}>
+              <Video size={16} /> Скачать видео для аватара ({videos.length})
+            </button>
+          )}
           <label className="ar-file">
             <Upload size={16} /> Загрузить файл
             <input type="file" accept="application/json" onChange={(e) => importFile(e.target.files?.[0])} />

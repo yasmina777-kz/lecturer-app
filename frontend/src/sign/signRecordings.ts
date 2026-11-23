@@ -21,18 +21,25 @@ export const POSE_POINTS = [0, 9, 10, 11, 12, 13, 14, 15, 16];
 
 const DB = "rsl-sign-recordings";
 const STORE = "takes";
+/** Optional well-lit video per word (with separate consent) to re-make the
+ * avatar's sign: ml/rsl/avatar_from_recording.py. Latest take per word. */
+const VIDEOS = "videos";
+export type SignVideo = { label: string; participant: string; createdAt: string; type: string; blob: Blob };
 function open(): Promise<IDBDatabase> {
   return new Promise((resolve, reject) => {
-    const req = indexedDB.open(DB, 1);
-    req.onupgradeneeded = () => req.result.createObjectStore(STORE, { keyPath: "id" });
+    const req = indexedDB.open(DB, 2);
+    req.onupgradeneeded = () => {
+      if (!req.result.objectStoreNames.contains(STORE)) req.result.createObjectStore(STORE, { keyPath: "id" });
+      if (!req.result.objectStoreNames.contains(VIDEOS)) req.result.createObjectStore(VIDEOS, { keyPath: "label" });
+    };
     req.onsuccess = () => resolve(req.result);
     req.onerror = () => reject(req.error);
   });
 }
-async function tx<T>(mode: IDBTransactionMode, run: (s: IDBObjectStore) => IDBRequest<T>): Promise<T> {
+async function tx<T>(mode: IDBTransactionMode, run: (s: IDBObjectStore) => IDBRequest<T>, store = STORE): Promise<T> {
   const db = await open();
   return new Promise((resolve, reject) => {
-    const req = run(db.transaction(STORE, mode).objectStore(STORE));
+    const req = run(db.transaction(store, mode).objectStore(store));
     req.onsuccess = () => resolve(req.result);
     req.onerror = () => reject(req.error);
   });
@@ -40,6 +47,15 @@ async function tx<T>(mode: IDBTransactionMode, run: (s: IDBObjectStore) => IDBRe
 export const listTakes = () => tx<Take[]>("readonly", (s) => s.getAll() as IDBRequest<Take[]>);
 export const saveTake = (t: Take) => tx("readwrite", (s) => s.put(t));
 export const deleteTake = (id: string) => tx("readwrite", (s) => s.delete(id));
+export const listVideos = () => tx<SignVideo[]>("readonly", (s) => s.getAll() as IDBRequest<SignVideo[]>, VIDEOS);
+export const saveVideo = (v: SignVideo) => tx("readwrite", (s) => s.put(v), VIDEOS);
+export const deleteVideo = (label: string) => tx("readwrite", (s) => s.delete(label), VIDEOS);
+/** A recorder format this browser supports (Chrome: webm, Safari: mp4). */
+export function videoType() {
+  for (const t of ["video/webm;codecs=vp9", "video/webm;codecs=vp8", "video/webm", "video/mp4"])
+    if (typeof MediaRecorder !== "undefined" && MediaRecorder.isTypeSupported(t)) return t;
+  return "";
+}
 
 type P = { x: number; y: number; z?: number; visibility?: number };
 /** One camera frame in the stored format. */

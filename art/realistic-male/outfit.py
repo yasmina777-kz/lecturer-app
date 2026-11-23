@@ -360,5 +360,55 @@ for o in bpy.data.objects:
             with bpy.context.temp_override(object=o, active_object=o):
                 bpy.ops.object.modifier_apply(modifier=m.name)
 print("body vertices", len(body.data.vertices), flush=True)
+
+# --- fit: the stock casual suit hangs like a sack (wide sleeves and sides,
+# untucked hem, baggy trousers). Pull every garment vertex toward the body,
+# keeping a small gap; tuck the shirt hem; leave the chest front alone (the
+# tie and the closed shirt front are fitted to it).
+from mathutils.bvhtree import BVHTree as _BVH
+bw = body.matrix_world
+body_bvh2 = _BVH.FromPolygons([bw @ v.co for v in body.data.vertices], [tuple(p.vertices) for p in body.data.polygons])
+sm = suit.data
+shirt_v = set()
+for poly in sm.polygons:
+    if poly.material_index == 0:
+        shirt_v.update(poly.vertices)
+inv = suit.matrix_world.inverted()
+GAP = 0.009
+n = len(sm.vertices)
+disp = [Vector((0, 0, 0)) for _ in range(n)]
+for v in sm.vertices:
+    w = suit.matrix_world @ v.co
+    loc, nrm, _, d = body_bvh2.find_nearest(w)
+    if loc is None or d > 0.25 or d <= GAP:
+        continue
+    off = w - loc
+    if off.dot(nrm) < 0:
+        continue                             # inside the body: leave to the skin mask
+    shirt = v.index in shirt_v
+    keep = 0.55 if shirt else 0.7            # share of the current slack to keep
+    if shirt and w.z < waist + 0.07:
+        keep = 0.3                           # tucked hem
+    # Chest front (tie, closed shirt front) stays put, fading out smoothly.
+    if shirt and w.y < loc.y and waist + 0.05 < w.z < neck_z:
+        t = min(1.0, max(0.0, (abs(w.x) - 0.10) / 0.08))
+        keep = 1 - (1 - keep) * t * t * (3 - 2 * t)
+    new_d = max(GAP, d * keep)
+    disp[v.index] = off.normalized() * (new_d - d)
+# Smooth the displacement over the mesh so no folds or steps appear.
+nbr = [[] for _ in range(n)]
+for e in sm.edges:
+    i, j = e.vertices
+    nbr[i].append(j); nbr[j].append(i)
+for _ in range(4):
+    disp = [(disp[i] * 2 + sum((disp[j] for j in nbr[i]), Vector())) / (2 + len(nbr[i])) if nbr[i] else disp[i] for i in range(n)]
+moved = 0
+for v in sm.vertices:
+    if disp[v.index].length > 1e-5:
+        w = suit.matrix_world @ v.co + disp[v.index]
+        v.co = inv @ w
+        moved += 1
+sm.update()
+print("fitted garment vertices", moved, flush=True)
 bpy.ops.wm.save_as_mainfile(filepath=str(BUILD / "avatar.blend"))
 print("OUTFIT_DONE", "waist", round(waist, 3), "neck", round(neck_z, 3), flush=True)

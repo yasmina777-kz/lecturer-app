@@ -15,3 +15,4 @@
 .record-signs .rs-hint { margin: 0; color: var(--p-muted); font-size: 14px; text-align: center; }
 .record-signs .rs-actions { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
 .record-signs .ar-btn:disabled { opacity: .45; cursor: default; transform: none; }
+.record-signs .rs-light { padding: 10px 14px; border-radius: 12px; background: rgba(47, 107, 255, .08); color: var(--p-text); text-align: left; line-height: 1.45; }
