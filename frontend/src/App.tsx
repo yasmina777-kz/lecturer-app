@@ -17,6 +17,7 @@ const GesturePreviewPage = lazyPage(() => import("./pages/GesturePreviewPage").t
 import LandingPage from "./pages/LandingPage";
 const SignLearningPage = lazyPage(() => import("./pages/SignWorkspace").then(m => ({default:m.SignLearningPage})));
 const SignLessonPage = lazyPage(() => import("./pages/SignWorkspace").then(m => ({default:m.SignLessonPage})));
+const AvatarReviewPage = lazyPage(() => import("./pages/AvatarReview").then(m => ({default:m.AvatarReviewPage})));
 const SignTextPage = lazyPage(() => import("./pages/SignWorkspace").then(m => ({default:m.SignTextPage})));
 const SignRecognitionPage = lazyPage(() => import("./pages/SignRecognition").then(m => ({default:m.SignRecognitionPage})));
 const SignGrammarPage = lazyPage(() => import("./pages/SignGrammar").then(m => ({default:m.SignGrammarPage})));
@@ -103,6 +104,7 @@ export function App() {
             <Route path="learn" element={<SignLearningPage />} />
             <Route path="learn/:id" element={<SignLessonPage />} />
             <Route path="text-to-sign" element={<SignTextPage />} />
+            <Route path="avatar-review" element={<AvatarReviewPage />} />
             <Route path="avatar-woman" element={<Navigate to="/text-to-sign" replace />} />
 
             <Route path="library" element={<LibraryPage />} />

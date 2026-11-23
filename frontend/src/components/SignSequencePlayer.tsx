@@ -26,12 +26,24 @@ const Mentor = lazyPage(() =>
 /** The 3D avatar is paused for now: every sign is shown with the real signer
  * videos the recognizers were trained on. Flip to false to restore 3D. */
 export const SHOW_HUMAN_VIDEOS = true;
-type PlayerProps = Parameters<typeof AvatarSequencePlayer>[0];
-export function SignSequencePlayer(props: PlayerProps) {
-  const mode = usePlayerMode();
-  const lib = useAvatarLibrary();
+type PlayerProps = Parameters<typeof AvatarSequencePlayer>[0] & {
+  /** Fixed mode without tabs (avatar review shows both side by side). */
+  only?: "video" | "avatar";
+};
+export function SignSequencePlayer({ only, ...props }: PlayerProps) {
+  const savedMode = usePlayerMode();
+  const mode = only ?? savedMode;
+  // The review page must show every clip, including ones marked wrong.
+  const lib = useAvatarLibrary(only === "avatar");
   const forAvatar = useMemo(() => (lib ? avatarPlan(props.plan, lib) : null), [props.plan, lib]);
   const avatarReady = !!forAvatar && forAvatar.steps.length > 0 && forAvatar.missing.length === 0;
+  if (only === "avatar")
+    return forAvatar && avatarReady ? (
+      <AvatarSequencePlayer {...props} plan={forAvatar} modelUrl={`${AVATAR_MODEL}?v=3`} framing="sign" studio />
+    ) : (
+      <p className="player-mode-note">{lib ? at("Для этого жеста аватара нет.", "No avatar for this sign.", "Аватар жоқ.") : "…"}</p>
+    );
+  if (only === "video") return <HumanSequencePlayer plan={props.plan} autoPlay={props.autoPlay} onLetterChange={props.onLetterChange} />;
   if (!SHOW_HUMAN_VIDEOS) return <AvatarSequencePlayer {...props} />;
   const showAvatar = mode === "avatar" && avatarReady;
   return (

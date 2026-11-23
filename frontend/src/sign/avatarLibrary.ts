@@ -5,34 +5,59 @@ import type { MotionPlan } from "./motion";
  * saved motion. Clips are the shared library retargeted to his own rig
  * (art/realistic-male/retarget.py). */
 export const AVATAR_MODEL = "/avatars/alex/alex.glb";
-type Entry = { id: string; url: string; originalUrl: string; revision: string; duration: number; core?: [number, number] | null };
+export type AvatarEntry = { id: string; label?: string; url: string; originalUrl: string; revision: string; duration: number; core?: [number, number] | null; review?: string };
+type Entry = AvatarEntry;
+/** Signer verdicts from the avatar review page (/avatar-review), published as
+ * /avatars/alex/review.json. A clip marked "wrong" is never shown to learners
+ * (the real video plays instead). */
+export type AvatarVerdict = "ok" | "wrong" | "unsure";
+export type AvatarReview = { verdicts: Record<string, { verdict: AvatarVerdict; note?: string }> };
+let reviewFile: Promise<AvatarReview> | null = null;
+export function loadAvatarReview() {
+  reviewFile ??= fetch("/avatars/alex/review.json")
+    .then((r) => (r.ok ? r.json() : { verdicts: {} }))
+    .catch(() => ({ verdicts: {} }));
+  return reviewFile;
+}
 let library: Promise<Map<string, Entry>> | null = null;
-export function loadAvatarLibrary() {
-  library ??= fetch("/avatars/alex/catalog.json")
-    .then((r) => (r.ok ? r.json() : []))
-    .then((list: Entry[]) => {
+let fullLibrary: Promise<Map<string, Entry>> | null = null;
+export function loadAvatarCatalog() {
+  return fetch("/avatars/alex/catalog.json").then((r) => (r.ok ? r.json() : [])) as Promise<Entry[]>;
+}
+export function loadAvatarLibrary(includeWrong = false) {
+  const build = (skip: boolean) =>
+    Promise.all([loadAvatarCatalog(), skip ? loadAvatarReview() : Promise.resolve({ verdicts: {} } as AvatarReview)])
+    .then(([list, review]) => {
       const map = new Map<string, Entry>();
       for (const e of list) {
+        if (review.verdicts[e.id]?.verdict === "wrong") continue;
         map.set(e.id, e);
         if (e.originalUrl) map.set(e.originalUrl, e);
       }
       return map;
-    })
-    .catch(() => {
-      library = null;
+    });
+  if (includeWrong) {
+    fullLibrary ??= build(false).catch(() => {
+      fullLibrary = null;
       return new Map<string, Entry>();
     });
+    return fullLibrary;
+  }
+  library ??= build(true).catch(() => {
+    library = null;
+    return new Map<string, Entry>();
+  });
   return library;
 }
-export function useAvatarLibrary() {
+export function useAvatarLibrary(includeWrong = false) {
   const [lib, setLib] = useState<Map<string, Entry> | null>(null);
   useEffect(() => {
     let alive = true;
-    void loadAvatarLibrary().then((l) => alive && setLib(l));
+    void loadAvatarLibrary(includeWrong).then((l) => alive && setLib(l));
     return () => {
       alive = false;
     };
-  }, []);
+  }, [includeWrong]);
   return lib;
 }
 

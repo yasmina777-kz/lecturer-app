@@ -26,12 +26,14 @@ import { numberWords, parseSubtitles } from "../sign/studio";
 import { at } from "../i18n/automation";
 import {
   alphabetEntries,
+  decomposeText,
   learningDictionary,
   matchesDictionary,
   type DictionaryEntry,
   type DictionaryForms,
 } from "../sign/dictionary";
 import { planMotion, type MotionAsset } from "../sign/motion";
+import { rslOrderText } from "../sign/rslOrder";
 import { SignSequencePlayer, SHOW_HUMAN_VIDEOS } from "../components/SignSequencePlayer";
 import { withVideoAssets } from "../sign/videoAssets";
 import { exercises } from "../sign/exercises";
@@ -91,6 +93,7 @@ export function SignDictionaryPage() {
     ),
     [submitted, setSubmitted] = useState(""),
     [spelling, setSpelling] = useState(false),
+    [rslOrder, setRslOrder] = useState(true),
     [search, setSearch] = useState(""),
     [category, setCategory] = useState("Все"),
     [selected, setSelected] = useState<DictionaryEntry | null>(null),
@@ -309,12 +312,15 @@ export function SignDictionaryPage() {
     [motions, entries],
   );
   const previewPlan = useMemo(
-    () => planMotion(spoken(text), entries, forms, playable, spelling, true),
-    [text, entries, forms, playable, spelling],
+    () => {
+      const r = rslOrder && !spelling ? rslOrderText(spoken(text), (t) => decomposeText(t, entries, forms)) : null;
+      return { ...planMotion(r ? r.text : spoken(text), entries, forms, playable, spelling, true), dropped: r?.dropped ?? [] };
+    },
+    [text, entries, forms, playable, spelling, rslOrder],
   );
   const motionPlan = useMemo(
-    () => planMotion(submitted, entries, forms, playable, spelling, true),
-    [submitted, entries, forms, playable, spelling],
+    () => planMotion(rslOrder && !spelling ? rslOrderText(submitted, (t) => decomposeText(t, entries, forms)).text : submitted, entries, forms, playable, spelling, true),
+    [submitted, entries, forms, playable, spelling, rslOrder],
   );
   const selectedPlan = useMemo(
     () =>
@@ -552,6 +558,15 @@ export function SignDictionaryPage() {
               </p>
             )}
             {message && <p className="translate-status" role="status">{message}</p>}
+            {!loading && !error && rslOrder && !spelling && text.trim() && previewPlan.steps.length > 1 && (
+              <p className="translate-status tts-gloss">
+                {at("Жесты по порядку:", "Signs in order:", "Ымдар реті:")}{" "}
+                <b>{previewPlan.steps.map((s) => s.text.toLocaleUpperCase("ru")).join(" · ")}</b>
+                {(previewPlan.dropped?.length ?? 0) > 0 && (
+                  <span> {at("· без отдельного жеста:", "· no own sign:", "· жеке ымсыз:")} {previewPlan.dropped!.join(", ")}</span>
+                )}
+              </p>
+            )}
             {!loading && !error && text.trim() && (previewPlan.spelledWords?.length ?? 0) > 0 && previewPlan.missing.length === 0 && (
               <p role="status" className="translate-status">
                 {at("Без отдельного жеста, покажутся по буквам:", "No sign yet, fingerspelled:", "Жеке ымы жоқ, әріппен көрсетіледі:")}{" "}
@@ -589,6 +604,11 @@ export function SignDictionaryPage() {
               />
               <span className="tts-switch" aria-hidden="true" />
               {at("Имя по буквам", "Spell a name", "Есімді әріптеу")}
+            </label>
+            <label className={`tts-toggle${rslOrder ? " on" : ""}`} title={at("Жесты в порядке жестового языка: время в начале, вопросительное слово в конце, без предлогов", "Sign order of RSL", "РЖЯ тәртібі")}>
+              <input type="checkbox" checked={rslOrder} onChange={(e) => setRslOrder(e.target.checked)} />
+              <span className="tts-switch" aria-hidden="true" />
+              {at("Порядок РЖЯ", "RSL order", "РЖЯ тәртібі")}
             </label>
             <details className="sign-letter-picker tts-letters">
               <summary>{at("Буквы А–Я", "Letters А–Я", "Әріптер А–Я")}</summary>
@@ -710,11 +730,17 @@ export function SignDictionaryPage() {
           )}
           {!!submitted && !selected && submitted.trim().includes(" ") && (
             <p className="translate-status">
-              {at(
-                "Пословный перевод: жесты в порядке русской фразы (калькирующая жестовая речь). Как сказать это на разговорном РЖЯ — ",
-                "Word-by-word (Signed Russian order). For Russian Sign Language grammar see ",
-                "Сөзбе-сөз аударма (КЖР). Сөйлеу РЖЯ грамматикасы — ",
-              )}
+              {rslOrder && !spelling
+                ? at(
+                    "Порядок РЖЯ (упрощённо): время в начале, вопрос в конце, без предлогов. Мимику и пространство жесты по словам не передают — ",
+                    "Simplified RSL order: time first, question word last, no prepositions. Facial grammar and space are not shown — ",
+                    "РЖЯ тәртібі (жеңілдетілген). Толығырақ — ",
+                  )
+                : at(
+                    "Пословный перевод: жесты в порядке русской фразы (калькирующая жестовая речь). Как сказать это на разговорном РЖЯ — ",
+                    "Word-by-word (Signed Russian order). For Russian Sign Language grammar see ",
+                    "Сөзбе-сөз аударма (КЖР). Сөйлеу РЖЯ грамматикасы — ",
+                  )}
               <Link to="/grammar?track=rsl&lesson=two-forms">{at("Грамматика", "Grammar", "Грамматика")}</Link>
             </p>
           )}

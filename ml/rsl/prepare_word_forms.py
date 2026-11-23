@@ -33,6 +33,31 @@ for word,target in SYNONYMS.items():
  if target not in by_label:continue
  for form in {f.word for f in morph.parse(word)[0].lexeme}|{word}:
   if form not in forms:forms[form]={by_label[target]}
+# Perfective partners share the sign of their verb («сделаю» → ДЕЛАТЬ,
+# «напишу» → ПИСАТЬ). Only aspect-forming prefixes, only verbs pymorphy knows,
+# and never over a form that already has a sign.
+ASPECT_PREFIXES=['по','с','на','вы','про']
+IRREGULAR={'пойти':'идти','поехать':'ехать','увидеть':'видеть','узнать':'знать','услышать':'слышать'}
+added=0
+def add_lexeme(verb,target_id):
+ global added
+ for p in morph.parse(verb):
+  if p.normal_form==verb and p.tag.POS=='INFN':
+   for f in p.lexeme:
+    if f.word not in forms:forms[f.word]={target_id};added+=1
+   return True
+ return False
+for e in entries:
+ word=e['label'].lower()
+ if ' ' in word or '?' in word or morph.parse(word)[0].tag.POS!='INFN':continue
+ for pre in ASPECT_PREFIXES:
+  cand=pre+word
+  if pre=='с' and word[0] in 'аеёиоуыэюя':continue
+  if cand in by_label or not morph.word_is_known(cand):continue
+  add_lexeme(cand,e['id'])
+for verb,base in IRREGULAR.items():
+ if base in by_label and verb not in by_label:add_lexeme(verb,by_label[base])
+print('perfective forms',added)
 (dest/'forms.json').write_text(json.dumps({f:sorted(ids) for f,ids in forms.items()},ensure_ascii=False))
 print(len(entries),'entries',len(forms),'forms')
 

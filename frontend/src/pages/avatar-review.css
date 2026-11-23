@@ -1,0 +1,58 @@
+:root .product-ui[data-product-ui][data-product-theme] .avatar-review { display: grid; gap: 20px; padding-bottom: 32px; }
+.avatar-review .ar-head { display: flex; gap: 24px; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; }
+.avatar-review .ar-eyebrow { margin: 0 0 6px; color: #2f6bff; font-size: 13px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+.avatar-review h1 { margin: 0 0 8px; font-size: clamp(26px, 3vw, 34px); }
+.avatar-review .ar-lead { margin: 0; max-width: 640px; color: var(--p-muted); line-height: 1.5; }
+.avatar-review .ar-progress { display: grid; gap: 6px; min-width: 240px; padding: 16px 18px; border-radius: 18px; background: var(--p-surface); border: 1px solid var(--p-line); }
+.avatar-review .ar-progress b { font-size: 28px; line-height: 1; }
+.avatar-review .ar-progress span, .avatar-review .ar-progress small { color: var(--p-muted); }
+.avatar-review .ar-bar { display: flex; height: 8px; border-radius: 99px; overflow: hidden; background: var(--p-subtle); }
+.avatar-review .ar-bar i { display: block; transition: width .3s; }
+.avatar-review .ar-bar .ok, .avatar-review .ar-dot.ok { background: #22a06b; }
+.avatar-review .ar-bar .unsure, .avatar-review .ar-dot.unsure { background: #f2a93b; }
+.avatar-review .ar-bar .wrong, .avatar-review .ar-dot.wrong { background: #e5484d; }
+.avatar-review .ar-layout { display: grid; grid-template-columns: 260px 1fr; gap: 20px; align-items: start; }
+.avatar-review .ar-card { background: var(--p-surface); border: 1px solid var(--p-line); border-radius: 20px; padding: 16px; }
+.avatar-review .ar-list { display: grid; gap: 10px; position: sticky; top: 16px; max-height: calc(100vh - 120px); grid-template-rows: auto auto 1fr; }
+.avatar-review .ar-search, .avatar-review .ar-note { width: 100%; box-sizing: border-box; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--p-line); background: var(--p-bg); color: var(--p-text); font: inherit; }
+.avatar-review .ar-filters { display: flex; flex-wrap: wrap; gap: 6px; }
+.avatar-review .ar-filters button { padding: 5px 10px; border-radius: 99px; border: 1px solid var(--p-line); background: transparent; color: var(--p-muted); font-size: 13px; cursor: pointer; }
+.avatar-review .ar-filters button[aria-selected="true"] { background: #2f6bff; border-color: #2f6bff; color: #fff; }
+.avatar-review .ar-list ul { list-style: none; margin: 0; padding: 0; overflow: auto; min-height: 0; }
+.avatar-review .ar-list li button { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 10px; border: 0; border-radius: 10px; background: transparent; color: var(--p-text); font: inherit; text-align: left; cursor: pointer; }
+.avatar-review .ar-list li button:hover { background: var(--p-subtle); }
+.avatar-review .ar-list li button[aria-current="true"] { background: rgba(47, 107, 255, .12); color: #2f6bff; font-weight: 600; }
+.avatar-review .ar-dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+.avatar-review .ar-more { padding: 10px; color: var(--p-muted); font-size: 13px; }
+.avatar-review .ar-main { display: grid; gap: 16px; }
+.avatar-review .ar-title { display: flex; align-items: center; justify-content: center; gap: 16px; }
+.avatar-review .ar-title h2 { margin: 0; font-size: 26px; text-transform: capitalize; }
+.avatar-review .ar-nav { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--p-line); background: var(--p-bg); color: var(--p-text); cursor: pointer; }
+.avatar-review .ar-nav:disabled { opacity: .35; cursor: default; }
+.avatar-review .ar-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.avatar-review .ar-compare figure { margin: 0; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.avatar-review .ar-compare figcaption { font-weight: 600; color: var(--p-muted); font-size: 14px; }
+.avatar-review .ar-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.avatar-review .ar-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px; border-radius: 14px; border: 1.5px solid var(--p-line); background: var(--p-bg); color: var(--p-text); font: inherit; font-weight: 600; cursor: pointer; transition: transform .15s, background .15s, border-color .15s; }
+.avatar-review .ar-btn:hover { transform: translateY(-1px); }
+.avatar-review .ar-btn.ok:hover, .avatar-review .ar-btn.ok[aria-pressed="true"] { border-color: #22a06b; background: rgba(34, 160, 107, .1); color: #1a7f55; }
+.avatar-review .ar-btn.unsure:hover, .avatar-review .ar-btn.unsure[aria-pressed="true"] { border-color: #f2a93b; background: rgba(242, 169, 59, .12); color: #a86a10; }
+.avatar-review .ar-btn.wrong:hover, .avatar-review .ar-btn.wrong[aria-pressed="true"] { border-color: #e5484d; background: rgba(229, 72, 77, .1); color: #c4363b; }
+.avatar-review .ar-empty { color: var(--p-muted); text-align: center; padding: 40px 0; }
+.avatar-review .ar-foot { display: flex; gap: 16px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.avatar-review .ar-foot p { margin: 0; color: var(--p-muted); max-width: 560px; }
+.avatar-review .ar-foot > div { display: flex; gap: 10px; flex-wrap: wrap; }
+.avatar-review .ar-file, .avatar-review .ar-download { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 12px; font: inherit; font-weight: 600; cursor: pointer; }
+.avatar-review .ar-file { border: 1px solid var(--p-line); color: var(--p-text); }
+.avatar-review .ar-file input { display: none; }
+.avatar-review .ar-download { border: 0; background: #2f6bff; color: #fff; }
+.avatar-review .ar-download:disabled { opacity: .45; cursor: default; }
+@media (max-width: 860px) {
+  .avatar-review .ar-layout { grid-template-columns: 1fr; }
+  .avatar-review .ar-list { position: static; max-height: 320px; }
+  .avatar-review .ar-compare { grid-template-columns: 1fr; }
+}
+.avatar-review .ar-compare .sign-sequence-heading { display: none; }
+.avatar-review .ar-compare .sign-sequence { margin: 0; padding: 0; border: 0; background: none; box-shadow: none; }
+:root .product-ui[data-product-ui][data-product-theme] .avatar-review .ar-search,
+:root .product-ui[data-product-ui][data-product-theme] .avatar-review .ar-note { background: var(--p-bg); color: var(--p-text); border: 1px solid var(--p-line); }

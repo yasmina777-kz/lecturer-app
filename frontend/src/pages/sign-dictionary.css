@@ -756,3 +756,7 @@
 :root .product-ui[data-product-ui][data-product-theme] .text-sign-page .tts-tool,
 :root .product-ui[data-product-ui][data-product-theme] .text-sign-page .tts-toggle { flex-direction: row; width: auto; }
 .player-mode-beta { font-size: .68rem; font-weight: 700; padding: 1px 6px; border-radius: 99px; background: rgba(229, 72, 77, .12); color: #c4373c; margin-left: 4px; vertical-align: middle; }
+
+/* RSL sign order line under the translator input */
+:root .product-ui[data-product-ui][data-product-theme] .tts-gloss b { color: #2f6bff; font-weight: 650; letter-spacing: .02em; }
+:root .product-ui[data-product-ui][data-product-theme] .tts-gloss span { color: var(--p-muted); }
