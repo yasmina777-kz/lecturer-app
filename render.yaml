@@ -1,0 +1,15 @@
+# Render Blueprint (free plan, no card): New → Blueprint → this repository.
+services:
+  - type: web
+    name: ai-mentor
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile.render
+    dockerContext: .
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: ConnectionStrings__Default   # the same Postgres as on Vercel (paste yourself)
+        sync: false
+      - key: Jwt__Key                     # the same key as on Vercel, so logins stay valid
+        sync: false
