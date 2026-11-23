@@ -2,10 +2,12 @@ import {
   FilesetResolver,
   HandLandmarker,
   PoseLandmarker,
+  FaceLandmarker,
 } from "@mediapipe/tasks-vision";
 import { LETTER_SAMPLE_MS, LiveLetterStream, trackingQuality } from "./liveRecognition";
 import { BODY_CHANNELS, bodyFrame, temporalFrame, recognizeSequence, completedLetterFrames, type TemporalFrame } from "./temporal";
 import { agreeLetters } from "./phraseCapture";
+import { FACE_POINTS } from "./faceContours";
 import { validClassifier, type SignClassifier } from "./recognition";
 import { loadSeqModel, type SeqModel } from "./seqModel";
 
@@ -28,6 +30,25 @@ function finishLetter() {
   self.postMessage({type: "captured", generation, prediction});
 }
 let poseDetector: PoseLandmarker | undefined;
+/** Face contours for the on-screen guide (eyes, brows, lips, oval) — the
+ * face carries grammar in sign language. A few times a second is enough to
+ * draw; recognition models do not read it yet. */
+let faceDetector: FaceLandmarker | undefined;
+let faceLoading = false;
+let faceAt = -Infinity;
+let lastFace: number[] = [];
+function loadFace() {
+  if (faceDetector || faceLoading || !visionFiles) return;
+  faceLoading = true;
+  void FaceLandmarker.createFromOptions(visionFiles, {
+    baseOptions: { modelAssetPath: `${self.location.origin}/models/rsl/face_landmarker.task`, delegate: "CPU" },
+    runningMode: "VIDEO",
+    numFaces: 1,
+  })
+    .then((f) => (faceDetector = f))
+    .catch(() => undefined)
+    .finally(() => (faceLoading = false));
+}
 let visionFiles: Awaited<ReturnType<typeof FilesetResolver.forVisionTasks>> | undefined;
 let poseRestarting = false;
 let poseRetryAt = -Infinity;
@@ -214,11 +235,22 @@ self.onmessage = async ({ data }) => {
       const second = frames && mode === "strict" ? recognizeSequence(frames, verifier) : null;
       const prediction = mode === "strict" ? agreeLetters(primary, second) : primary;
       const accepted = frames ? live.confirm(prediction) : false;
+      loadFace();
+      if (faceDetector && data.now - faceAt >= 150) {
+        faceAt = data.now;
+        try {
+          const f = faceDetector.detectForVideo(data.bitmap, data.now).faceLandmarks[0];
+          lastFace = f ? FACE_POINTS.flatMap((i) => [f[i].x, f[i].y]) : [];
+        } catch {
+          lastFace = [];
+        }
+      }
       self.postMessage({
         type: "frame",
         generation: data.generation,
         detected,
         pose: lastPose,
+        face: lastFace,
         bodyAvailable: !!poseDetector,
         disagreement: !!(primary?.accepted && !prediction?.accepted),
         quality,

@@ -15,7 +15,10 @@ assert.equal(LETTER_SAMPLE_MS,100);
 assert.equal(firstAccepted,1700,'two agreeing windows should confirm after 1.7 seconds at target cadence');
 const sure=new LiveLetterStream();let sureAt=-1;
 for(let now=0;now<=2200;now+=10){ if(sure.sample(fastFrame,now,'ready') && sure.confirm({accepted:true,label:'Б',confidence:.9}) && sureAt<0) sureAt=now; }
-assert.equal(sureAt,1500,'a very confident first window is emitted at 1.5 seconds');
+assert.equal(sureAt,900,'a very confident letter is emitted from the stretched 1 s window');
+const fair=new LiveLetterStream();let fairAt=-1;
+for(let now=0;now<=2200;now+=10){ if(fair.sample(fastFrame,now,'ready') && fair.confirm({accepted:true,label:'Г',confidence:.75}) && fairAt<0) fairAt=now; }
+assert.equal(fairAt,1500,'a confident (≥0.7) full window is emitted at 1.5 seconds without a second vote');
 const slower=new LiveLetterStream();let slowAccepted=-1;
 for(let now=0;now<=4000;now+=200){
   if(slower.sample(fastFrame,now,'ready') && slower.confirm({accepted:true,label:'А'})) slowAccepted=now;
@@ -25,7 +28,10 @@ const stream=new LiveLetterStream();
 const frame=Array(66).fill(0);frame[65]=0.2;
 let windows=0;
 for(let i=0;i<20;i++){if(stream.sample(frame,i*150,'ready')) windows++;}
-assert.equal(windows,3,'first 16-frame window then two-frame stride');
+assert.equal(windows,6,'stretched windows from 10 samples, then a two-sample stride');
+const early=new LiveLetterStream();let earlyAt=-1;
+for(let now=0;now<=2200;now+=10){ if(early.sample(fastFrame,now,'ready') && early.confirm({accepted:true,label:'В',confidence:.96}) && earlyAt<0) earlyAt=now; }
+assert.equal(earlyAt,900,'a held letter the model is very sure of is shown after ~1 second');
 const yes=label=>({accepted:true,label});
 assert.equal(stream.confirm(yes('А')),false);
 assert.equal(stream.confirm(yes('А')),true);
@@ -63,7 +69,7 @@ for(let t=1400;t<=2000;t+=100){
   const window=occluded.sample(frame,t,'ready');
   if(window && occluded.confirm(yes('Й'))) recovered=t;
 }
-assert.equal(recovered,1700,'brief occlusion preserves the temporal window, but never emits on a missing frame');
+assert.equal(recovered,1800,'brief occlusion preserves the temporal window, but never emits on a missing frame');
 occluded.sample(Array(66).fill(0),2100,'missing');
 assert.equal(occluded.sample(frame,2600,'ready'),null,'long loss restarts even if no intermediate missing sample arrives');
 assert.ok(occluded.progress<100);

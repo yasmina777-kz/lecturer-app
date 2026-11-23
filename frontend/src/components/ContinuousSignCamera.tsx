@@ -108,12 +108,22 @@ export function ContinuousSignCamera() {
       setWordStatus(`Фраза: «${phrase.text}» (из жестов ${phrase.words.join(" + ")})`);
     }
   };
+  const stillSince = useRef(0);
+  const lastWrist = useRef<{ x: number; y: number } | null>(null);
   const letters = useLiveLetters(
     video,
     overlay,
     phase === "recording",
     (now: number, hands: Landmark[][], pose: Landmark[], face?: number[] | null) => {
       if (handRaised(hands, pose)) raisedAt.current = now;
+      // A letter is a held handshape: track since when the hand stopped moving.
+      const wrist = hands.find((h) => h.length === 21)?.[0];
+      if (!wrist) stillSince.current = now;
+      else {
+        const prev = lastWrist.current;
+        if (prev && Math.hypot(wrist.x - prev.x, wrist.y - prev.y) > 0.012) stillSince.current = now;
+        lastWrist.current = { x: wrist.x, y: wrist.y };
+      }
       // Continuous local word spotting (browser only, no pauses needed).
       const model = wordModel.current, v = video.current;
       if (model && v && !hasPreview && modeRef.current !== "letters") {
@@ -158,6 +168,9 @@ export function ContinuousSignCamera() {
       if (modeRef.current === "auto" && (spotter.current.busy || spotter.current.moving(performance.now()) || performance.now() - lastWordAt.current < 1200)) return;
       // Fingerspelling happens in front of the chest; a resting hand is not a letter.
       if (performance.now() - raisedAt.current > 400) return;
+      // In «Авто» a hand passing between signs is not a letter: it must have
+      // been held still for a moment (the «Буквы» mode trusts the user).
+      if (modeRef.current === "auto" && performance.now() - stillSince.current < 450) return;
       if (/^[А-ЯЁ]$/u.test(label)) addToken(label, "letter");
     },
     50,

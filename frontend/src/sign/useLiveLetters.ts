@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
 import type { HandLandmarkerResult } from "@mediapipe/tasks-vision";
-import { drawBodyOverlay } from "./bodyOverlay";
+import { drawBodyOverlay, drawFaceOverlay } from "./bodyOverlay";
 import type { Landmark } from "./phraseCapture";
 import { drawHandOverlay } from "./handOverlay";
 import { appendRecognizedLetter } from "./captions";
@@ -133,6 +133,7 @@ export function useLiveLetters(
         }
         drawHandOverlay(canvas.current, video.current, handOverlay);
         drawBodyOverlay(canvas.current, data.pose ?? []);
+        drawFaceOverlay(canvas.current, data.face ?? []);
       }
       const body = (data.pose ?? []) as Landmark[];
       const seen = (i: number) => body[i] && (body[i].visibility ?? 0) > 0.6;
