@@ -10,48 +10,75 @@
       "headers": [
         {
           "source": "/assets/(.*)",
-          "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=31536000, immutable"
+            }
+          ]
         },
         {
           "source": "/models/(.*)",
-          "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400, s-maxage=2592000, stale-while-revalidate=604800" }]
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=86400, s-maxage=2592000, stale-while-revalidate=604800"
+            }
+          ]
         },
         {
           "source": "/research/(.*)",
-          "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400, s-maxage=2592000, stale-while-revalidate=604800" }]
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=86400, s-maxage=2592000, stale-while-revalidate=604800"
+            }
+          ]
         },
         {
           "source": "/avatars/(.*)",
-          "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600, s-maxage=604800, stale-while-revalidate=604800" }]
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=3600, s-maxage=604800, stale-while-revalidate=604800"
+            }
+          ]
         },
         {
           "source": "/index.html",
-          "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }]
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=0, must-revalidate"
+            }
+          ]
         }
       ],
-      "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
-    },
-    "mentor": {
-      "root": ".",
-      "entrypoint": "Dockerfile.vercel",
-      "runtime": "container",
-      "bindings": [
+      "rewrites": [
         {
-          "type": "service",
-          "service": "krsl",
-          "format": "url",
-          "env": "KRSL_PRIVATE_SERVICE_URL"
+          "source": "/(.*)",
+          "destination": "/index.html"
         }
       ]
     },
-    "krsl": {
-      "root": "ml/krsl",
+    "mentor": {
+      "root": ".",
       "entrypoint": "Dockerfile.vercel",
       "runtime": "container"
     }
   },
   "rewrites": [
-    { "source": "/api/(.*)", "destination": { "service": "mentor" } },
-    { "source": "/(.*)", "destination": { "service": "web" } }
+    {
+      "source": "/api/(.*)",
+      "destination": {
+        "service": "mentor"
+      }
+    },
+    {
+      "source": "/(.*)",
+      "destination": {
+        "service": "web"
+      }
+    }
   ]
 }
