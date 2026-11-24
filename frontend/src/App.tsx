@@ -30,6 +30,7 @@ const PhraseUnderstandingPage = lazyPage(() => import("./pages/PhraseUnderstandi
 const LevelTestPage = lazyPage(() => import("./pages/LevelTest").then(m => ({default:m.LevelTestPage})));
 const CoursePage = lazyPage(() => import("./pages/Course").then(m => ({default:m.CoursePage})));
 const CourseUnitPage = lazyPage(() => import("./pages/Course").then(m => ({default:m.CourseUnitPage})));
+const KazakhSignPage = lazyPage(() => import("./pages/KazakhSign").then(m => ({default:m.KazakhSignPage})));
 const CulturePage = lazyPage(() => import("./pages/Culture").then(m => ({default:m.CulturePage})));
 const NumbersTrainerPage = lazyPage(() => import("./pages/NumbersTrainer").then(m => ({default:m.NumbersTrainerPage})));
 const FaceTrainerPage = lazyPage(() => import("./pages/FaceTrainer").then(m => ({default:m.FaceTrainerPage})));
@@ -124,6 +125,7 @@ export function App() {
             <Route path="course" element={<CoursePage />} />
             <Route path="course/:id" element={<CourseUnitPage />} />
             <Route path="culture" element={<CulturePage />} />
+            <Route path="kazakh" element={<KazakhSignPage />} />
             <Route path="numbers" element={<NumbersTrainerPage />} />
             <Route path="face-trainer" element={<FaceTrainerPage />} />
             <Route path="live-practice" element={<LivePracticePage />} />

@@ -224,6 +224,14 @@ export function LearningHome() {
             </div>
             <ArrowUpRight size={18} />
           </Link>
+          <Link to="/kazakh">
+            <Type size={21} />
+            <div>
+              <strong>{at("Казахский жестовый язык", "Kazakh Sign Language", "Қазақ ым тілі")}</strong>
+              <span>{at("Дактиль 42 буквы с камерой, отличия от РЖЯ, аналоги", "42-letter fingerspelling with camera, RSL vs Kazakh, alternatives", "42 әріпті дактиль, камера, аналогтар")}</span>
+            </div>
+            <ArrowUpRight size={18} />
+          </Link>
           <Link to="/culture">
             <Users size={21} />
             <div>

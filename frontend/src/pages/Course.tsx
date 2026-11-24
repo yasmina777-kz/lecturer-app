@@ -376,6 +376,7 @@ export function CoursePage() {
                 {[
                   { to: "/culture", icon: Users, t: at("Культура и этикет глухих", "Deaf culture", "Керең мәдениеті"), d: at("Как привлечь внимание и общаться уважительно", "Etiquette and respectful words", "Әдеп") },
                   { to: "/practice", icon: Hand, t: at("Азбука (дактиль)", "Alphabet", "Әліпби"), d: at("33 буквы — чтобы показать своё имя", "33 letters for your name", "33 әріп") },
+                  { to: "/kazakh", icon: Hand, t: at("Казахский дактиль", "Kazakh fingerspelling", "Қазақ дактилі"), d: at("42 буквы: + Ә Ғ Қ Ң Ө Ұ Ү Һ І, проверка камерой", "42 letters incl. 9 Kazakh ones, camera check", "42 әріп, камерамен тексеру") },
                   { to: "/fingerspell", icon: Type, t: at("Чтение дактиля", "Reading fingerspelling", "Дактильді оқу"), d: at("Понимать имена по буквам", "Understand spelled names", "Есімдерді түсіну") },
                 ].map((c, i) => (
                   <Link key={c.to} className="panel course-before-card course-anim" to={c.to} style={{ "--i": i + 4 } as React.CSSProperties}>

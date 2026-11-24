@@ -1,0 +1,16 @@
+Kazakh fingerspelling recognizer ksl-v1 (AI-Mentor)
+
+QazSL: A Kazakh Sign Language Fingerspelling Dataset.
+Nurbol Beisov, Vladimir Jotsov, Nurassyl Kerimbayev. Zenodo record 22830162.
+https://zenodo.org/records/22830162 — licence CC BY 4.0.
+Reference silhouettes in ref/*.png are resized, blurred frames from this dataset.
+Paper: Technologies 2026, 14(11), 744, https://doi.org/10.3390/technologies14110744
+
+Bukva: Russian Sign Language Alphabet Dataset (ai-forever, 2024), https://github.com/ai-forever/bukva
+Landmark tracks of its 33 letters shared with the Kazakh alphabet were drawn as
+silhouettes for training. Model weights are therefore distributed under the Bukva
+licence terms as well (see /research/rsl/bukva-license.pdf).
+
+MediaPipe Hand Landmarker: Google, Apache 2.0.
+No endorsement by the dataset authors. The model was not reviewed by Kazakh sign
+language experts; dynamic letters are recognised from a single hand shape only.
