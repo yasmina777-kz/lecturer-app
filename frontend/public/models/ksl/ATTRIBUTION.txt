@@ -1,4 +1,4 @@
-Kazakh fingerspelling recognizer ksl-v2 (AI-Mentor)
+Kazakh fingerspelling recognizer ksl-v3 (AI-Mentor)
 
 QazSL: A Kazakh Sign Language Fingerspelling Dataset.
 Nurbol Beisov, Vladimir Jotsov, Nurassyl Kerimbayev. Zenodo record 22830162.
@@ -17,6 +17,10 @@ Hand landmarks were extracted from frames of 37 letter lessons marked correct (g
 The videos are standard-licence YouTube content and are NOT redistributed; only derived
 landmark-based model weights are. Remove on the rights holder's request.
 
+SURDO.KZ «Сурдосервер» (supported by the Ministry of Education of Kazakhstan), YouTube channel
+surdoKazakhstan: hand landmarks from 193 letter clips (front/right/left views). Videos are not
+redistributed; the site shows them through the YouTube embed.
+
 MediaPipe Hand Landmarker: Google, Apache 2.0.
 No endorsement by the dataset authors. The model was not reviewed by Kazakh sign
-language experts; dynamic letters are recognised from a single hand shape only; Һ has no video data.
+language experts; dynamic letters are recognised from a single hand shape only.

@@ -248,6 +248,12 @@ def sausaq():
     bp, by, bt = D['bp'], D['by'].astype(int), D['bt']
     S_ = np.load(ROOT / 'ml/rsl/data/sausaq/landmarks.npz')
     sp = S_['points'][::2]; sy = np.array([LABELS.index(c) for c in S_['labels'][::2]])
+    # v3: SURDO.KZ letter clips (another Kazakh signer, front/right/left views)
+    SU = ROOT / 'ml/rsl/data/surdo-letters/landmarks.npz'
+    if SU.exists():
+        U = np.load(SU)
+        sp = np.concatenate([sp, U['points'][::2]])
+        sy = np.concatenate([sy, np.array([LABELS.index(c) for c in U['labels'][::2]])])
     epochs = int(sys.argv[2]) if len(sys.argv) > 2 else 8
     global DANN
     DANN = float(sys.argv[3]) if len(sys.argv) > 3 else 0.
@@ -274,7 +280,7 @@ def sausaq():
     zp, zy = np.concatenate(zp), np.concatenate(zy)
     rep['transfer_teacher_plus_qazsl'] = {'top1': acc(zp, zy), 'top3': top3(zp, zy), 'n': int(len(zy)), 'folds': nfolds,
         'per_letter': {LABELS[c]: round(acc(zp, zy, zy == c), 3) for c in sorted(set(zy))},
-        'note': 'Bukva test signers; these letters had camera data only from one YouTube teacher'}
+        'note': 'Bukva test signers; these letters had camera data only from Kazakh signers (YouTube lessons)'}
     print('TEACHER TRANSFER', rep['transfer_teacher_plus_qazsl']['top1'], rep['transfer_teacher_plus_qazsl']['top3'], flush=True)
     if not (len(sys.argv) > 5 and sys.argv[5] == 'final'):
         return
@@ -290,22 +296,24 @@ def sausaq():
                     'bukva_per_letter': {LABELS[c]: round(acc(pb, bte_y, bte_y == c), 3) for c in sorted(set(bte_y))}}
     old = json.load(open(ROOT / 'docs/ksl-v1-report.json', encoding='utf-8'))['report']
     rep['v1_transfer_qazsl_only'] = old['transfer_qazsl_only_letters']
+    rep['v2_transfer_one_teacher'] = json.load(open(ROOT / 'docs/ksl-v2-report.json', encoding='utf-8'))['report']['transfer_teacher_plus_qazsl']
     print(json.dumps({k: {a: b for a, b in v.items() if not isinstance(b, dict)} for k, v in rep.items()}, ensure_ascii=False, indent=1), flush=True)
     out = ROOT / 'frontend/public/models/ksl'
-    meta = dict(version='ksl-v2', input='50x50 binary silhouette drawn from 21 hand world landmarks (kslSilhouette.ts)',
+    meta = dict(version='ksl-v3', input='50x50 binary silhouette drawn from 21 hand world landmarks (kslSilhouette.ts)',
                 sources=['QazSL: Beisov, Jotsov, Kerimbayev. Zenodo record 22830162, CC BY 4.0',
                          'Bukva (ai-forever): landmark tracks of 33 letters shared with the Kazakh alphabet',
-                         '«Саусақтар сөйлейді» (YouTube: Sausaqtarsoileidi, «Жас Өрен», Aktobe): hand landmarks from 37 letter lessons, videos not redistributed'],
+                         '«Саусақтар сөйлейді» (YouTube: Sausaqtarsoileidi, «Жас Өрен», Aktobe): hand landmarks from 37 letter lessons, videos not redistributed',
+                         'SURDO.KZ «Сурдосервер» (YouTube: surdoKazakhstan): hand landmarks from 193 letter clips (front/right/left), videos not redistributed'],
                 split='QazSL: last 25% of each class folder held out; Bukva: official signer-disjoint test flag (20 test signers); '
                       'transfer: shared letters with Bukva data removed, learned from the teacher + QazSL only',
                 report=rep)
-    export(net, out / 'ksl-v2.json', meta)
+    export(net, out / 'ksl-v3.json', meta)
     import subprocess
-    subprocess.run([sys.executable, str(ROOT / 'ml/ksl/pack_weights.py'), str(out / 'ksl-v2.json')], check=True)
-    json.dump(meta, open(ROOT / 'docs/ksl-v2-report.json', 'w'), ensure_ascii=False, indent=1)
+    subprocess.run([sys.executable, str(ROOT / 'ml/ksl/pack_weights.py'), str(out / 'ksl-v3.json')], check=True)
+    json.dump(meta, open(ROOT / 'docs/ksl-v3-report.json', 'w'), ensure_ascii=False, indent=1)
     idx = np.flatnonzero(bt)[::540]
     fx = [{'points': bp[i][:, :2].round(6).tolist(), 'probs': np.round(predict(net, render_many(bp[i:i+1]), True)[0], 5).tolist()} for i in idx]
-    json.dump(fx, open(out / 'ksl-v2-fixtures.json', 'w'))
+    json.dump(fx, open(out / 'ksl-v3-fixtures.json', 'w'))
     print('exported', flush=True)
 
 
