@@ -98,9 +98,9 @@ export default function LandingPage() {
               </span>
               <h1 className="mentor-warm-title">
                 {at(
-                  "Изучайте\nрусский жестовый\nязык",
-                  "Learn\nRussian Sign\nLanguage",
-                  "Орыс\nым тілін\nүйреніңіз",
+                  "Изучайте\nрусский и казахский\nжестовые языки",
+                  "Learn\nRussian and Kazakh\nSign Languages",
+                  "Орыс және қазақ\nым тілдерін\nүйреніңіз",
                 )}
               </h1>
               <p>
@@ -177,7 +177,7 @@ export default function LandingPage() {
             </span>
             <div>
               <FileText size={15} />
-              РЖЯ
+              РЖЯ · ҚЖЯ
               <i />
               3D
               <i />
@@ -664,14 +664,14 @@ export default function LandingPage() {
                 <p>
                   {audience === "student"
                     ? at(
-                        "Для тех, кто хочет начать знакомство с РЖЯ: смотреть жесты, замечать детали и возвращаться к сложным движениям столько раз, сколько нужно.",
-                        "For anyone starting to explore RSL: watch signs, notice details and revisit difficult movements as often as needed.",
-                        "Орыс ым тілімен танысуды бастағысы келетіндерге: ымдарды қарау, бөлшектерін байқау және күрделі қимылдарды қайталау.",
+                        "Для тех, кто хочет начать знакомство с русским (РЖЯ) или казахским (ҚЖЯ) жестовым языком: смотреть жесты носителей, замечать детали и возвращаться к сложным движениям столько раз, сколько нужно.",
+                        "For anyone starting Russian (RSL) or Kazakh (KSL) Sign Language: watch native signers, notice details and revisit difficult movements as often as needed.",
+                        "Орыс (ОЫТ) немесе қазақ (ҚЫТ) ым тілімен танысуды бастағысы келетіндерге: ым иелерінің бейнелерін қарау, бөлшектерін байқау және күрделі қимылдарды қайталау.",
                       )
                     : at(
-                        "В развитии проекта особенно важны преподаватели и носители РЖЯ. Вместе с ними нужно проверить форму кистей, направление движений и мимику, прежде чем превращать прототипы в учебные уроки.",
-                        "RSL teachers and signers are essential to this project. Hand shapes, movement direction and facial expression need their review before prototypes become teaching materials.",
-                        "Жобаға орыс ым тілі оқытушылары мен қолданушылары қажет. Прототиптерді оқу материалына айналдырмас бұрын қол пішіні, қимыл бағыты және мимика тексерілуі тиіс.",
+                        "В развитии проекта особенно важны преподаватели и носители РЖЯ и казахского жестового языка. Вместе с ними нужно проверить форму кистей, направление движений и мимику, прежде чем превращать прототипы в учебные уроки.",
+                        "RSL and Kazakh SL teachers and signers are essential to this project. Hand shapes, movement direction and facial expression need their review before prototypes become teaching materials.",
+                        "Жобаға орыс және қазақ ым тілдерінің оқытушылары мен қолданушылары қажет. Прототиптерді оқу материалына айналдырмас бұрын қол пішіні, қимыл бағыты және мимика тексерілуі тиіс.",
                       )}
                 </p>
                 <ul>
@@ -748,9 +748,9 @@ export default function LandingPage() {
               <h2>{t("Ближе на вашем языке.")}</h2>
               <p>
                 {at(
-                  "Интерфейс можно переключить на русский, английский или казахский. Демонстрируемый жестовый язык остаётся русским жестовым языком: перевод меню не меняет сами жесты.",
-                  "Choose Russian, English or Kazakh for the interface. The demonstration remains in Russian Sign Language: translating the menus does not change the signs.",
-                  "Интерфейсті орыс, ағылшын немесе қазақ тіліне ауыстыруға болады. Көрсетілім орыс ым тілінде қалады: мәзір аудармасы ымдарды өзгертпейді.",
+                  "Выберите, что учить: русский жестовый язык (РЖЯ) или казахский (ҚЖЯ) — переключатель РЖЯ / ҚЖЯ меняет уроки, словарь и алфавит (33 или 42 буквы). Интерфейс — на русском, английском или казахском.",
+                  "Choose what to learn: Russian (RSL) or Kazakh Sign Language (KSL) — the РЖЯ / ҚЖЯ switch changes lessons, dictionary and alphabet (33 or 42 letters). The interface is in Russian, English or Kazakh.",
+                  "Не үйренетініңізді таңдаңыз: орыс ым тілі (ОЫТ) немесе қазақ ым тілі (ҚЫТ) — РЖЯ / ҚЖЯ ауыстырғышы сабақтарды, сөздікті және әліпбиді (33 немесе 42 әріп) өзгертеді. Интерфейс — орыс, ағылшын немесе қазақ тілінде.",
                 )}
               </p>
             </div>
@@ -791,9 +791,9 @@ export default function LandingPage() {
                     "Қай ым тілі қолданылады?",
                   ),
                   at(
-                    "Русский жестовый язык — РЖЯ. Переключение языка интерфейса не меняет язык демонстрации.",
-                    "Russian Sign Language (RSL). Switching the interface language does not change the language demonstrated.",
-                    "Орыс ым тілі қолданылады. Интерфейс тілін ауыстыру көрсетілім тілін өзгертпейді.",
+                    "Два: русский жестовый язык (РЖЯ; видео носителей из Slovo и Bukva) и казахский жестовый язык (ҚЖЯ; 751 жест из словаря SURDO.KZ, казахский дактиль из 42 букв). Выбор — переключателем РЖЯ / ҚЖЯ.",
+                    "Two: Russian Sign Language (RSL; native-signer videos from Slovo and Bukva) and Kazakh Sign Language (KSL; 751 signs from the SURDO.KZ dictionary, 42-letter Kazakh fingerspelling). Use the РЖЯ / ҚЖЯ switch.",
+                    "Екеуі: орыс ым тілі (ОЫТ; Slovo мен Bukva бейнелері) және қазақ ым тілі (ҚЫТ; SURDO.KZ сөздігінен 751 ым, 42 әріпті қазақ дактилі). Таңдау — РЖЯ / ҚЖЯ ауыстырғышымен.",
                   ),
                 ],
                 [
@@ -815,7 +815,7 @@ export default function LandingPage() {
                     "Бұл толық курс па?",
                   ),
                   at(
-                    "Пока нет. Анимация — прототип, её форму кистей, направление движения и мимику ещё должен проверить носитель РЖЯ. Для обучения сверяйтесь с видеообразцом человека.",
+                    "Пока нет. Анимация — прототип, её форму кистей, направление движения и мимику ещё должен проверить носитель жестового языка. Для обучения сверяйтесь с видеообразцом человека.",
                     "Not yet. The animation is a prototype: an RSL signer still needs to review hand shapes, movement and facial expression. Use the human reference video when learning.",
                     "Әзірге жоқ. Анимация — прототип: қол пішіні, қимыл және мимиканы маман тексеруі керек. Үйрену үшін адамның бейнеүлгісіне сүйеніңіз.",
                   ),
@@ -870,9 +870,9 @@ export default function LandingPage() {
             </h2>
             <p>
               {at(
-                "Начните со знакомства — посмотрите первую фразу на РЖЯ.",
-                "Start with an introduction: explore your first RSL phrase.",
-                "Танысудан бастаңыз — орыс ым тіліндегі алғашқы сөйлемді қараңыз.",
+                "Начните со знакомства — первая фраза на русском или казахском жестовом языке.",
+                "Start with an introduction: your first phrase in Russian or Kazakh Sign Language.",
+                "Танысудан бастаңыз — орыс немесе қазақ ым тіліндегі алғашқы сөйлем.",
               )}
             </p>
             <Link to={destination} className="mentor-cta">

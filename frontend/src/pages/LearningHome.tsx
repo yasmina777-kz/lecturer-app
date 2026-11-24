@@ -20,7 +20,8 @@ import { courseLevels } from "../sign/exercises";
 import { useSignProgress } from "../sign/useProgress";
 import { useActivityProgress } from "../sign/useActivities";
 import { reviewItems } from "../sign/activities";
-import { lessonIds } from "../sign/catalog";
+import { lessonIds } from "../sign/catalog";import { useSignLang } from "../sign/signLanguage";
+
 
 /** Static mentor portrait (same person as the home page hero). */
 export function LearningMentorPreview() {
@@ -36,6 +37,7 @@ export function LearningMentorPreview() {
 }
 
 export function LearningHome() {
+  const [sl] = useSignLang();
   const { progress } = useSignProgress();
   const { attempts } = useActivityProgress();
   const reviewCount = reviewItems(attempts).size;
@@ -50,11 +52,9 @@ export function LearningHome() {
       <section className="learning-intro" aria-labelledby="learning-title">
         <div className="learning-intro-copy">
           <h1 id="learning-title">
-            {at(
-              "Изучайте\nрусский жестовый\nязык",
-              "Learn\nRussian Sign\nLanguage",
-              "Орыс\nым тілін\nүйреніңіз",
-            )}
+            {sl === "ksl"
+              ? at("Изучайте\nказахский жестовый\nязык", "Learn\nKazakh Sign\nLanguage", "Қазақ\nым тілін\nүйреніңіз")
+              : at("Изучайте\nрусский жестовый\nязык", "Learn\nRussian Sign\nLanguage", "Орыс\nым тілін\nүйреніңіз")}
           </h1>
           <p>
             {at(
@@ -236,7 +236,7 @@ export function LearningHome() {
             <Users size={21} />
             <div>
               <strong>{at("Культура и этикет глухих", "Культура и этикет глухих", "Культура и этикет глухих")}</strong>
-              <span>{at("С чего начинают любой курс РЖЯ", "С чего начинают любой курс РЖЯ", "С чего начинают любой курс РЖЯ")}</span>
+              <span>{at("С чего начинают любой курс жестового языка", "Where every sign language course starts", "Кез келген ым тілі курсы осыдан басталады")}</span>
             </div>
             <ArrowUpRight size={18} />
           </Link>
