@@ -807,3 +807,19 @@
 .course-sl-switch button[aria-checked="true"] { border-color: var(--lvl, var(--p-blue, #2563eb)); background: color-mix(in srgb, var(--lvl, #2563eb) 10%, var(--p-surface, #fff)); }
 .course-word-ru { display: block; font-size: .85rem; color: var(--p-muted, #5b6472); }
 @media (max-width: 520px) { .course-sl-switch { grid-template-columns: 1fr; } }
+
+.ksl-course-intro { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.ksl-course-intro > div { display: grid; gap: 4px; max-width: 640px; }
+.ksl-course-intro span { color: var(--p-muted, #5b6472); font-size: .9rem; }
+.ksl-yt { width: 100%; aspect-ratio: 4 / 3; border: 0; border-radius: 14px; background: #000; display: block; }
+.vocab-choices .course-word-ru { display: block; font-size: .75rem; opacity: .75; }
+.ksl-dict { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 18px; align-items: start; }
+.ksl-dict > * { min-width: 0; }
+.ksl-search { width: 100%; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--p-line, #dfe3ea); font: inherit; margin: 6px 0 10px; background: var(--p-surface, #fff); color: inherit; }
+.ksl-topics { margin-bottom: 10px; }
+.ksl-words { max-height: 360px; overflow: auto; }
+@media (max-width: 820px) { .ksl-dict { grid-template-columns: 1fr; } }
+.ksl-warn { margin: 0 0 14px; padding: 10px 12px; border-radius: 10px; background: #fdf0d2; color: #6b4a00; font-size: .92rem; }
+.ksl-quiz-video { position: relative; }
+.ksl-quiz-video .ksl-mask-title { position: absolute; left: 0; right: 0; top: 0; height: 17%; background: #0d2a3a; border-radius: 14px 14px 0 0; }
+.ksl-quiz-video .ksl-mask-word { position: absolute; left: 0; top: 0; width: 38%; height: 40%; background: #0f3c52; border-radius: 14px 0 12px 0; }

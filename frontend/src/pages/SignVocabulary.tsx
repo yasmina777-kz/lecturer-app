@@ -66,6 +66,7 @@ import {
 } from "lucide-react";
 import { at } from "../i18n/automation";
 import { getSignLang, useSignLang, wordText } from "../sign/signLanguage";
+import { KazakhDictionary } from "./KazakhCourse";
 import "../components/topic-art.css";
 import { ProgressRing } from "../components/ProgressRing";
 import "./course.css";
@@ -180,7 +181,29 @@ function SignVideo({
 }
 
 export function SignVocabularyPage() {
-  useSignLang();
+  const [sl] = useSignLang();
+  return sl === "ksl" ? <KazakhVocabulary /> : <SignVocabularyRsl />;
+}
+
+function KazakhVocabulary() {
+  return (
+    <div className="sign-workspace vocab fingerspell course">
+      <div className="page-heading">
+        <div>
+          <span className="eyebrow">ҚЖЯ</span>
+          <h1>{at("Тренажёр слов ҚЖЯ", "Kazakh SL word trainer", "Қазақ ым тілі сөздерінің жаттықтырғышы")}</h1>
+          <p>
+            {at("Повторяйте жесты по темам; проверка с вариантами ответа — в уроках курса.", "Review signs by topic; quizzes are in the course lessons.", "Ымдарды тақырып бойынша қайталаңыз; тест — курс сабақтарында.")}{" "}
+            <Link className="text-link" to="/course">{at("К урокам ҚЖЯ", "To Kazakh SL lessons", "ҚЫТ сабақтарына")}</Link>
+          </p>
+        </div>
+      </div>
+      <KazakhDictionary />
+    </div>
+  );
+}
+
+function SignVocabularyRsl() {
   const [words, setWords] = useState<Word[] | null>(null);
   const [failed, setFailed] = useState(false);
   const [params, setParams] = useSearchParams();

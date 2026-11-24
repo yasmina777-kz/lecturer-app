@@ -24,6 +24,7 @@ import {
 } from "../sign/activities";
 import { useActivityCatalog, useActivityProgress } from "../sign/useActivities";
 import { useSignLang, wordText } from "../sign/signLanguage";
+import "./kazakh-sign.css";
 import "./sign-workspace.css";
 import "./sign-activities.css";
 type Catalog = NonNullable<ReturnType<typeof useActivityCatalog>["data"]>;
@@ -116,7 +117,7 @@ function AvatarStudy({ text, data }: { text: string; data: Catalog }) {
 }
 
 export function SignDialoguesPage() {
-  useSignLang();
+  const [sl] = useSignLang();
   const { data, error, retry } = useActivityCatalog();
   const [params, setParams] = useSearchParams();
   const scenarios = dialogueScenarios();
@@ -125,6 +126,15 @@ export function SignDialoguesPage() {
   if (!data) return <Loading />;
   return (
     <div className="sign-workspace activity-workspace dialogues-workspace">
+      {sl === "ksl" && (
+        <p className="ksl-warn" role="note">
+          {at(
+            "В диалогах пока показаны жесты русского жестового языка: видео казахских фраз в открытых источниках нет. Казахские жесты по темам — в уроках курса ҚЖЯ и в словаре.",
+            "Dialogues still show Russian SL signs: no open videos of Kazakh phrases exist yet. Kazakh signs are in the Kazakh SL lessons and dictionary.",
+            "Диалогтарда әзірге орыс ым тілінің ымдары көрсетілген: қазақ сөйлемдерінің ашық бейнелері жоқ. Қазақ ымдары — ҚЫТ курсы сабақтарында және сөздікте.",
+          )}
+        </p>
+      )}
       {selected ? (
         <DialogueSession
           key={selected.id}

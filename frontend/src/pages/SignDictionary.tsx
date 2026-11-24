@@ -37,7 +37,8 @@ import { rslOrderText } from "../sign/rslOrder";
 import { SignSequencePlayer, SHOW_HUMAN_VIDEOS } from "../components/SignSequencePlayer";
 import { withVideoAssets } from "../sign/videoAssets";
 import { exercises } from "../sign/exercises";
-import { useSignLang, wordText } from "../sign/signLanguage";
+import { useSignLang } from "../sign/signLanguage";
+import { KazakhDictionary } from "./KazakhCourse";
 import "./sign-dictionary.css";
 import { phraseArt } from "../sign/phraseArt";
 import { phraseGroups } from "../sign/phraseExamples";
@@ -340,8 +341,7 @@ export function SignDictionaryPage() {
   const visible = entries.filter(
     (e) =>
       (category === "Все" || e.category === category) &&
-      (matchesDictionary(e, search, forms) ||
-        (sl === "ksl" && !!search.trim() && wordText(e.label).toLocaleLowerCase("kk").includes(search.trim().toLocaleLowerCase("kk")))),
+      matchesDictionary(e, search, forms),
   );
   const categories = ["Все", ...new Set(entries.map((e) => e.category))];
   function choose(entry: DictionaryEntry) {
@@ -829,7 +829,8 @@ export function SignDictionaryPage() {
           </>
         )}
       </div>
-      {tab === "dictionary" && (
+      {tab === "dictionary" && sl === "ksl" && <KazakhDictionary />}
+      {tab === "dictionary" && sl !== "ksl" && (
         <>
           <div className="sign-dictionary-filter">
             <label>
@@ -895,8 +896,7 @@ export function SignDictionaryPage() {
                 ) : (
                   <span className="sign-letter-cover">{e.label}</span>
                 )}
-                <strong>{e.category === "Алфавит" ? e.label : wordText(e.label)}</strong>
-                {sl === "ksl" && e.category !== "Алфавит" && <small>{e.label}</small>}
+                <strong>{e.label}</strong>
                 <small>{categoryName(e.category)}</small>
                 <span>
                   <Play size={14} />

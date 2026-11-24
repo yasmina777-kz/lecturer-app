@@ -120,6 +120,7 @@ import {
 import { at } from "../i18n/automation";
 import { phraseText, tipText, useSignLang, wordText } from "../sign/signLanguage";
 import { useChooseSignLang } from "../components/SignLangSwitcher";
+import { KazakhCourseList } from "./KazakhCourse";
 import "../components/topic-art.css";
 import { ProgressRing } from "../components/ProgressRing";
 import { PlacementPrompt } from "../components/PlacementPrompt";
@@ -347,9 +348,9 @@ export function CoursePage() {
             {kz &&
               " " +
                 at(
-                  "В казахском жестовом языке большинство жестов те же, что в русском, поэтому видео общие; слова и фразы уроков — на казахском, алфавит — 42 буквы.",
-                  "Most Kazakh SL signs match Russian SL, so videos are shared; lesson words and phrases are in Kazakh, the alphabet has 42 letters.",
-                  "Қазақ ым тіліндегі ымдардың көбі орыс ым тілімен бірдей, сондықтан бейнелер ортақ; сөздер мен сөйлемдер қазақша, әліпби — 42 әріп.",
+                  "Уроки построены на видео носителей казахского жестового языка (словарь SURDO.KZ), алфавит — 42 буквы.",
+                  "Lessons use videos of Kazakh signers (SURDO.KZ dictionary); the alphabet has 42 letters.",
+                  "Сабақтар қазақ ым тілі иелерінің бейнелеріне негізделген (SURDO.KZ сөздігі), әліпби — 42 әріп.",
                 )}
           </p>
           <div className="course-hero-actions">
@@ -373,6 +374,26 @@ export function CoursePage() {
         </div>
       </section>
 
+      {kz ? (
+        <>
+          <section className="course-before">
+            <h2>{at("Перед стартом", "Before you start", "Бастамас бұрын")}</h2>
+            <div className="course-before-grid">
+              <Link className="panel course-before-card" to="/kazakh">
+                <span className="course-before-icon"><Hand size={20} /></span>
+                <span><strong>{at("Казахский дактиль", "Kazakh fingerspelling", "Қазақ дактилі")}</strong><span>{at("42 буквы, проверка камерой", "42 letters, camera check", "42 әріп, камерамен тексеру")}</span></span>
+              </Link>
+              <Link className="panel course-before-card" to="/culture">
+                <span className="course-before-icon"><Users size={20} /></span>
+                <span><strong>{at("Культура и этикет глухих", "Deaf culture", "Керең мәдениеті")}</strong><span>{at("Как общаться уважительно", "Respectful communication", "Әдеп")}</span></span>
+              </Link>
+            </div>
+          </section>
+          <h2 className="course-section-title">{at("Уроки казахского жестового языка", "Kazakh Sign Language lessons", "Қазақ ым тілі сабақтары")}</h2>
+          <KazakhCourseList />
+        </>
+      ) : (
+      <>
       <div className="course-levels" role="tablist" aria-label={at("Уровень", "Level", "Деңгей")}>
         {LEVELS.map((l, i) => {
           const [d, t] = count(l.id);
@@ -443,11 +464,15 @@ export function CoursePage() {
           </div>
         </>
       )}
+      </>
+      )}
       <p className="fs-credit">
         {at(
-          "Жесты — видео носителей РЖЯ (Slovo, Bukva · ai-forever). Порядок и правила — по учебной литературе; курс не проверен сертифицированным переводчиком.",
+          kz
+            ? "Жесты — видео носителей казахского жестового языка из словаря SURDO.KZ (МОН РК); курс не проверен сертифицированным переводчиком."
+            : "Жесты — видео носителей РЖЯ (Slovo, Bukva · ai-forever). Порядок и правила — по учебной литературе; курс не проверен сертифицированным переводчиком.",
           "Signs are native-signer videos (Slovo, Bukva). Rules follow textbooks; not reviewed by a certified interpreter.",
-          "Ымдар — Slovo, Bukva бейнелері.",
+          kz ? "Ымдар — SURDO.KZ сөздігіндегі қазақ ым тілі бейнелері." : "Ымдар — Slovo, Bukva бейнелері.",
         )}
       </p>
     </div>

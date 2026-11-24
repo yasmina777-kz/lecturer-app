@@ -1,0 +1,5462 @@
+{
+"source": "SURDO.KZ «Сурдосервер» (supported by the Ministry of Education of Kazakhstan)",
+"site": "http://surdo.kz/rus/",
+"channel": "https://www.youtube.com/user/surdoKazakhstan",
+"note": "Videos are shown through the YouTube embed; they are not re-hosted.",
+"entries": [
+{
+"label": "Граница",
+"topic": "Мемлекет, ел, қала",
+"youtube": "a37KlanA4QA",
+"slow": "sfCjk6E0TC4"
+},
+{
+"label": "Егемендік",
+"topic": "Мемлекет, ел, қала",
+"youtube": "rMxVguu2Jjw",
+"slow": "s6tHxfjfeXg"
+},
+{
+"label": "Ел",
+"topic": "Мемлекет, ел, қала",
+"youtube": "mYYqXfD5oXc",
+"slow": "xzeeIQlFUKg"
+},
+{
+"label": "Жарғы",
+"topic": "Мемлекет, ел, қала",
+"youtube": "KNLMoGQvu_k",
+"slow": "W4-p7yaokeY"
+},
+{
+"label": "Заң",
+"topic": "Мемлекет, ел, қала",
+"youtube": "7BGKFwdebeY",
+"slow": "mNGeysTi2GQ"
+},
+{
+"label": "Қала",
+"topic": "Мемлекет, ел, қала",
+"youtube": "vrvnrU_gxGY",
+"slow": "PH9X8gheCOE"
+},
+{
+"label": "Мемлекет",
+"topic": "Мемлекет, ел, қала",
+"youtube": "UTfENT31p7o",
+"slow": "efusfWxFefs"
+},
+{
+"label": "Мәдениет",
+"topic": "Мемлекет, ел, қала",
+"youtube": "J7RfwuvyArA",
+"slow": "8HxsYQDzQMc"
+},
+{
+"label": "Халық",
+"topic": "Мемлекет, ел, қала",
+"youtube": "53vMbiJmdXA",
+"slow": "j2aMGHCurOg"
+},
+{
+"label": "Шекара",
+"topic": "Мемлекет, ел, қала",
+"youtube": "60QHmkfuviQ",
+"slow": "JUYI22TzZ4g"
+},
+{
+"label": "Австралия",
+"topic": "Мемлекет, ел, қала",
+"youtube": "oLiUQsCublo",
+"slow": "bcsQJKxjLjQ"
+},
+{
+"label": "Австрия",
+"topic": "Мемлекет, ел, қала",
+"youtube": "UfJivQd2r90",
+"slow": "pNcMzA3V8wg"
+},
+{
+"label": "Азербайджан",
+"topic": "Мемлекет, ел, қала",
+"youtube": "XbRrILOhI9A",
+"slow": "8UlpfqrEa-8"
+},
+{
+"label": "Азия",
+"topic": "Мемлекет, ел, қала",
+"youtube": "iSIY9m2loE8",
+"slow": "hhHNge-DfYQ"
+},
+{
+"label": "Ақтөбе",
+"topic": "Мемлекет, ел, қала",
+"youtube": "cNHS22anizE",
+"slow": "qFVKZya_Wms"
+},
+{
+"label": "Албания",
+"topic": "Мемлекет, ел, қала",
+"youtube": "bM8pZxnLmvo",
+"slow": "3ePB-J8N49g"
+},
+{
+"label": "Алматы",
+"topic": "Мемлекет, ел, қала",
+"youtube": "VNXXioOsx9U",
+"slow": "g9KcZG5lvLU"
+},
+{
+"label": "Америка",
+"topic": "Мемлекет, ел, қала",
+"youtube": "xHM4qi6tXsg",
+"slow": "iPHv9sypffI"
+},
+{
+"label": "Англия",
+"topic": "Мемлекет, ел, қала",
+"youtube": "5UhmmKH-YiU",
+"slow": "g24xZIiozA4"
+},
+{
+"label": "Араб",
+"topic": "Мемлекет, ел, қала",
+"youtube": "xANrPcHzOng",
+"slow": "KDjY59KaQcw"
+},
+{
+"label": "Аргентина",
+"topic": "Мемлекет, ел, қала",
+"youtube": "I0OuNm0b3HA",
+"slow": "3OMNsO6p6oA"
+},
+{
+"label": "Армения",
+"topic": "Мемлекет, ел, қала",
+"youtube": "H2Ndo4VqAEY",
+"slow": "mIm83DYsrSo"
+},
+{
+"label": "Астана",
+"topic": "Мемлекет, ел, қала",
+"youtube": "InbrMBfESQA",
+"slow": "nVispaWLvdc"
+},
+{
+"label": "Ауғаныстан",
+"topic": "Мемлекет, ел, қала",
+"youtube": "u1LTjJVChU8",
+"slow": "tsntmlIKspI"
+},
+{
+"label": "Африка",
+"topic": "Мемлекет, ел, қала",
+"youtube": "5oxPbkCWFjc",
+"slow": "ZqZvuKkKX_M"
+},
+{
+"label": "Батыс",
+"topic": "Мемлекет, ел, қала",
+"youtube": "dkKEZb8GdSA",
+"slow": "HEnVM5PWQ3c"
+},
+{
+"label": "Белоруссия",
+"topic": "Мемлекет, ел, қала",
+"youtube": "MQbQBgdNEmg",
+"slow": "P9gqUkNRPmg"
+},
+{
+"label": "Болгария",
+"topic": "Мемлекет, ел, қала",
+"youtube": "DW4mA5B8QBE",
+"slow": "JO1Q3vjPpGA"
+},
+{
+"label": "Венгрия",
+"topic": "Мемлекет, ел, қала",
+"youtube": "KAgdtp3-TDw",
+"slow": "6rFAKNVAK2k"
+},
+{
+"label": "Германия",
+"topic": "Мемлекет, ел, қала",
+"youtube": "ANweYg_s2Ew",
+"slow": "ljSJz3H7Qa0"
+},
+{
+"label": "Голландия",
+"topic": "Мемлекет, ел, қала",
+"youtube": "eB7talrhcRM",
+"slow": "FszMtcsniqs"
+},
+{
+"label": "Греция",
+"topic": "Мемлекет, ел, қала",
+"youtube": "t48q0EbWjXw",
+"slow": "ga8sHkfYRp8"
+},
+{
+"label": "Грузия",
+"topic": "Мемлекет, ел, қала",
+"youtube": "YB6nAResiEA",
+"slow": "YYUdQIduab4"
+},
+{
+"label": "Дания",
+"topic": "Мемлекет, ел, қала",
+"youtube": "Mx5xFGvcQyc",
+"slow": "i-L-u2n60VI"
+},
+{
+"label": "Европа",
+"topic": "Мемлекет, ел, қала",
+"youtube": "es99AXbB5Zw",
+"slow": "AhZPtPJlB_I"
+},
+{
+"label": "Египет",
+"topic": "Мемлекет, ел, қала",
+"youtube": "0WaJ4194XE4",
+"slow": "4E_qOXE-qlA"
+},
+{
+"label": "Жаңа Зеландия",
+"topic": "Мемлекет, ел, қала",
+"youtube": "SPhsacwM_Ik",
+"slow": "1fQLsiIZPGc"
+},
+{
+"label": "Жапония",
+"topic": "Мемлекет, ел, қала",
+"youtube": "4E_yIe5WO9w",
+"slow": "Is6gLJvIwGw"
+},
+{
+"label": "Жезқазған",
+"topic": "Мемлекет, ел, қала",
+"youtube": "c5dReyHYgbQ",
+"slow": "29c2gXGYwUY"
+},
+{
+"label": "Израиль",
+"topic": "Мемлекет, ел, қала",
+"youtube": "q2qqf9Pqjq0",
+"slow": "_4bQtwuocus"
+},
+{
+"label": "Италия",
+"topic": "Мемлекет, ел, қала",
+"youtube": "SEd3bwXWV3g",
+"slow": "KRK-nQc_q7k"
+},
+{
+"label": "Көкшетау",
+"topic": "Мемлекет, ел, қала",
+"youtube": "OTRNkjwn2Ks",
+"slow": "cz2Sgowa9qA"
+},
+{
+"label": "Қазақстан",
+"topic": "Мемлекет, ел, қала",
+"youtube": "QSW8PHJdKXE",
+"slow": "9L3XKyiASh8"
+},
+{
+"label": "Латвия",
+"topic": "Мемлекет, ел, қала",
+"youtube": "rQb8HWwuzWs",
+"slow": "yT3Pjr32nGM"
+},
+{
+"label": "Литва",
+"topic": "Мемлекет, ел, қала",
+"youtube": "dva-4mKAfnE",
+"slow": "0TF5HAWAh-A"
+},
+{
+"label": "Малазия",
+"topic": "Мемлекет, ел, қала",
+"youtube": "uzUEGk5lzFM",
+"slow": "-Bv0bxE5crg"
+},
+{
+"label": "Мексика",
+"topic": "Мемлекет, ел, қала",
+"youtube": "iSBQz8JMrPk",
+"slow": "bOMPrH4AnH8"
+},
+{
+"label": "Молдова",
+"topic": "Мемлекет, ел, қала",
+"youtube": "TUHaIW3bKcM",
+"slow": "qpXIW6Uw0LY"
+},
+{
+"label": "Норвегия",
+"topic": "Мемлекет, ел, қала",
+"youtube": "KVp8FDnD93I",
+"slow": "kyaRfrv1RA8"
+},
+{
+"label": "Оңтүстік Корея",
+"topic": "Мемлекет, ел, қала",
+"youtube": "kLrgMfzCkmI",
+"slow": "FEsIe7oW-n0"
+},
+{
+"label": "Оңтүстік",
+"topic": "Мемлекет, ел, қала",
+"youtube": "Q7yNa-OPCtw",
+"slow": "r4K5wKvd0G0"
+},
+{
+"label": "Орталық Азия",
+"topic": "Мемлекет, ел, қала",
+"youtube": "Cnv4-fkttHE",
+"slow": "SUO4nolGuec"
+},
+{
+"label": "Орталық",
+"topic": "Мемлекет, ел, қала",
+"youtube": "wggOK9SKadA",
+"slow": "pqjufphtd5A"
+},
+{
+"label": "Өзбекстан",
+"topic": "Мемлекет, ел, қала",
+"youtube": "6qEmg5T43aY",
+"slow": "1zAh_cMlgBM"
+},
+{
+"label": "Өмір сүру",
+"topic": "Мемлекет, ел, қала",
+"youtube": "7vZh0z-l8eo",
+"slow": "-YncX2Wo-ZU"
+},
+{
+"label": "Өскемен",
+"topic": "Мемлекет, ел, қала",
+"youtube": "UwmclO0Ohvg",
+"slow": "cBS7vyxPRPs"
+},
+{
+"label": "Польша",
+"topic": "Мемлекет, ел, қала",
+"youtube": "riynOnpmduU",
+"slow": "yO7US4RKar4"
+},
+{
+"label": "Португалия",
+"topic": "Мемлекет, ел, қала",
+"youtube": "hz-HI9NlZ00",
+"slow": "3HExiSRc2qQ"
+},
+{
+"label": "Ресей",
+"topic": "Мемлекет, ел, қала",
+"youtube": "YNbe3u-Gl10",
+"slow": "IyjrbBOmKEQ"
+},
+{
+"label": "Республика",
+"topic": "Мемлекет, ел, қала",
+"youtube": "m6l3vSE2fQ0",
+"slow": "QLGDvcJ9vFU"
+},
+{
+"label": "Румыния",
+"topic": "Мемлекет, ел, қала",
+"youtube": "4-pgZeHWpF4",
+"slow": "roY_a5hQkkc"
+},
+{
+"label": "Семей",
+"topic": "Мемлекет, ел, қала",
+"youtube": "hICM2XbUpUc",
+"slow": "cnBvpI3q7tI"
+},
+{
+"label": "Солтүстік Корея",
+"topic": "Мемлекет, ел, қала",
+"youtube": "WBEpMVi5CWw",
+"slow": "moT5BQTj0kA"
+},
+{
+"label": "Солтүстік",
+"topic": "Мемлекет, ел, қала",
+"youtube": "TZRgMmmHv4Q",
+"slow": "CKhPdJXAKwA"
+},
+{
+"label": "Тәжікстан",
+"topic": "Мемлекет, ел, қала",
+"youtube": "rZm6G3X0G7w",
+"slow": "nUW1UJSGqS4"
+},
+{
+"label": "Туркия",
+"topic": "Мемлекет, ел, қала",
+"youtube": "fu1mHynrm2Q",
+"slow": "4TKVQAidg_k"
+},
+{
+"label": "Туркіменстан",
+"topic": "Мемлекет, ел, қала",
+"youtube": "NL4Q2-cBFwo",
+"slow": "JkzsJW93vw8"
+},
+{
+"label": "Украина",
+"topic": "Мемлекет, ел, қала",
+"youtube": "XariQot5KiY",
+"slow": "QFZ2qavbXyE"
+},
+{
+"label": "Үндістан",
+"topic": "Мемлекет, ел, қала",
+"youtube": "AgkgARnCD74",
+"slow": "kUVrDu526WI"
+},
+{
+"label": "Ұлыбритания",
+"topic": "Мемлекет, ел, қала",
+"youtube": "i6v9ASHoC7o",
+"slow": "SQVHsehipjo"
+},
+{
+"label": "Финляндия",
+"topic": "Мемлекет, ел, қала",
+"youtube": "pZlWP_FHqsI",
+"slow": "JvAtJzLauQo"
+},
+{
+"label": "Чехия",
+"topic": "Мемлекет, ел, қала",
+"youtube": "KfdrGi_JkoQ",
+"slow": "WECKrJt-l34"
+},
+{
+"label": "Швеция",
+"topic": "Мемлекет, ел, қала",
+"youtube": "C7jljGC9QAQ",
+"slow": "nd4Ya-nilQE"
+},
+{
+"label": "Шығыс",
+"topic": "Мемлекет, ел, қала",
+"youtube": "51PKpDdmCMM",
+"slow": "bW3sgU2c6SU"
+},
+{
+"label": "Эстония",
+"topic": "Мемлекет, ел, қала",
+"youtube": "Xgzi3i5I-dY",
+"slow": "6uh1C967RE0"
+},
+{
+"label": "Испания",
+"topic": "Мемлекет, ел, қала",
+"youtube": "uFf3wysdQT4",
+"slow": "TnHPJrWmWjQ"
+},
+{
+"label": "Қытай",
+"topic": "Мемлекет, ел, қала",
+"youtube": "rIlDcTjDzeM",
+"slow": "EIX6JuF38B8"
+},
+{
+"label": "Франция",
+"topic": "Мемлекет, ел, қала",
+"youtube": "n_K9z4tE3ME",
+"slow": "Z6c7Aku3kxU"
+},
+{
+"label": "Швейцария",
+"topic": "Мемлекет, ел, қала",
+"youtube": "oYeBxMFv92Q",
+"slow": "gvJ3RrWPI8U"
+},
+{
+"label": "Религия",
+"topic": "Мемлекет, ел, қала",
+"youtube": "FmeH53pefng",
+"slow": "MqiEq1CekSU"
+},
+{
+"label": "Жасыл",
+"topic": "Түс",
+"youtube": "bOyPvQOvQvw",
+"slow": "ZAu3dRQlkCY"
+},
+{
+"label": "Көк",
+"topic": "Түс",
+"youtube": "1JDJUF10rG8",
+"slow": "dQ-feIugbjs"
+},
+{
+"label": "Күлгін",
+"topic": "Түс",
+"youtube": "eNir79-fjto",
+"slow": "-AQS1LDcl8s"
+},
+{
+"label": "Қара",
+"topic": "Түс",
+"youtube": "bivx9dzatag",
+"slow": "9b5bZAP8XIM"
+},
+{
+"label": "Қоңыр",
+"topic": "Түс",
+"youtube": "_OfJNJKUp4o",
+"slow": "6_7W75qGXkM"
+},
+{
+"label": "Қызыл",
+"topic": "Түс",
+"youtube": "V-nMc-Tifq4",
+"slow": "Kv1vXqrzvPo"
+},
+{
+"label": "Қырғылт",
+"topic": "Түс",
+"youtube": "rfb6pgcHRIg"
+},
+{
+"label": "Сары",
+"topic": "Түс",
+"youtube": "2V3wEM9iSj8",
+"slow": "mf6kszmcMAA"
+},
+{
+"label": "Сұр",
+"topic": "Түс",
+"youtube": "m6c99ovCA5c",
+"slow": "goL9XR2h9lo"
+},
+{
+"label": "Атыңыз кім",
+"topic": "Сұрақ",
+"youtube": "xmECwR1-n8U"
+},
+{
+"label": "Әкесінің аты",
+"topic": "Сұрақ",
+"youtube": "23tV95jxQNQ",
+"slow": "Mr7LnTagqF8"
+},
+{
+"label": "Кешіріңіз",
+"topic": "Сұрақ",
+"youtube": "PCKGF-KfYBQ",
+"slow": "VEt7DGlDwzQ"
+},
+{
+"label": "Кім",
+"topic": "Сұрақ",
+"youtube": "fXOVSLgyg48"
+},
+{
+"label": "Қайда",
+"topic": "Сұрақ",
+"youtube": "uchSPV8MLzY"
+},
+{
+"label": "Қанша",
+"topic": "Сұрақ",
+"youtube": "4Ui8yvhE7Bg"
+},
+{
+"label": "Не үшін",
+"topic": "Сұрақ",
+"youtube": "-OW6I7Lt2XM"
+},
+{
+"label": "Не",
+"topic": "Сұрақ",
+"youtube": "x44FTfB7g_s"
+},
+{
+"label": "Неге",
+"topic": "Сұрақ",
+"youtube": "CAFIkx-N1Do"
+},
+{
+"label": "Рахмет",
+"topic": "Сұрақ",
+"youtube": "nJJhQwetbl0",
+"slow": "aX3FWg2j-oo"
+},
+{
+"label": "Сау болыңыз",
+"topic": "Сұрақ",
+"youtube": "GmAUXvrVwVQ",
+"slow": "W-FAixi4a8s"
+},
+{
+"label": "Сәлеметсізбе",
+"topic": "Сұрақ",
+"youtube": "fusHlVUQPPs",
+"slow": "enJkjaWQXE8"
+},
+{
+"label": "Түсі қандай",
+"topic": "Сұрақ",
+"youtube": "aFfzU5PF7p4"
+},
+{
+"label": "Ақжелкен",
+"topic": "Сын-сапа, зат",
+"youtube": "sl6c_KWiBB4",
+"slow": "JeDBnDvHgqQ"
+},
+{
+"label": "Алтын",
+"topic": "Сын-сапа, зат",
+"youtube": "aO-tFiyY32M",
+"slow": "c74jAk6qRD0"
+},
+{
+"label": "Альбом",
+"topic": "Сын-сапа, зат",
+"youtube": "JhbctJ1X2Bw",
+"slow": "8YhX5wMhRCQ"
+},
+{
+"label": "Ашық",
+"topic": "Сын-сапа, зат",
+"youtube": "mCTPPsHE0MA",
+"slow": "SgRIA-Sao5U"
+},
+{
+"label": "Байтақ",
+"topic": "Сын-сапа, зат",
+"youtube": "nPH31IBSIJk",
+"slow": "03EV4wQbnSs"
+},
+{
+"label": "Барабан",
+"topic": "Сын-сапа, зат",
+"youtube": "XklkCmlrneU",
+"slow": "aNAAhUdVNIA"
+},
+{
+"label": "Бомба",
+"topic": "Сын-сапа, зат",
+"youtube": "qcFELsbvOwI",
+"slow": "ecKXlHOLRS4"
+},
+{
+"label": "Дәлдік",
+"topic": "Сын-сапа, зат",
+"youtube": "pTgu60USUrU",
+"slow": "-9HkVDPwARc"
+},
+{
+"label": "Әртүрлі",
+"topic": "Сын-сапа, зат",
+"youtube": "qRAKVYkExKw",
+"slow": "xfCarCg_Rts"
+},
+{
+"label": "Жақсы",
+"topic": "Сын-сапа, зат",
+"youtube": "tCpfJKHRjtk",
+"slow": "eNYuYhzbgRk"
+},
+{
+"label": "Жақын",
+"topic": "Сын-сапа, зат",
+"youtube": "UwhV_IxONyM",
+"slow": "VMH6JBuGIpY"
+},
+{
+"label": "Зиян",
+"topic": "Сын-сапа, зат",
+"youtube": "izRFQakP_FQ",
+"slow": "Tsa6Ob54lG4"
+},
+{
+"label": "Ине",
+"topic": "Сын-сапа, зат",
+"youtube": "buZ6s4D7MSM",
+"slow": "cGRvNb70WRs"
+},
+{
+"label": "Ілгіш",
+"topic": "Сын-сапа, зат",
+"youtube": "zW5z5Xj_pJA",
+"slow": "jjSyuqMPvnk"
+},
+{
+"label": "Келесі",
+"topic": "Сын-сапа, зат",
+"youtube": "9WNwDG_FYJM",
+"slow": "8mxAFzxhDDo"
+},
+{
+"label": "Қабат",
+"topic": "Сын-сапа, зат",
+"youtube": "BAeSztQlMBs",
+"slow": "xOsUNLNGPN8"
+},
+{
+"label": "Қайта-қайта",
+"topic": "Сын-сапа, зат",
+"youtube": "wHp8voMoJKU",
+"slow": "4m2WZ7Q_Hjo"
+},
+{
+"label": "Қысқаша",
+"topic": "Сын-сапа, зат",
+"youtube": "Nckti91rJQ8",
+"slow": "zCFP4hbni_I"
+},
+{
+"label": "Маңызды",
+"topic": "Сын-сапа, зат",
+"youtube": "_DyXIrkEKYA",
+"slow": "R2XPq_VBqAQ"
+},
+{
+"label": "Мәңгі",
+"topic": "Сын-сапа, зат",
+"youtube": "fTpNUK9EHXg",
+"slow": "joACzh2MAHI"
+},
+{
+"label": "Өте",
+"topic": "Сын-сапа, зат",
+"youtube": "4B-Yok031K4",
+"slow": "Q6PFAXgwHdk"
+},
+{
+"label": "Соңғы",
+"topic": "Сын-сапа, зат",
+"youtube": "sqTUz4NpBAw",
+"slow": "XJIiGVUOFsg"
+},
+{
+"label": "Сосын",
+"topic": "Сын-сапа, зат",
+"youtube": "LWHiDi1YwHk",
+"slow": "QAEHUkM3UEc"
+},
+{
+"label": "Жирен",
+"topic": "Сын-сапа, зат",
+"youtube": "1jlfk8Sal4A",
+"slow": "1R2PngvtGcg"
+},
+{
+"label": "Алпыс",
+"topic": "Сандар",
+"youtube": "QRYeIp-sYYw",
+"slow": "w1PbF1BjgtE"
+},
+{
+"label": "Алты мың",
+"topic": "Сандар",
+"youtube": "m0eV79SNuZ4",
+"slow": "nrlHAoCAvhE"
+},
+{
+"label": "Алты",
+"topic": "Сандар",
+"youtube": "kklxl-bmpqE",
+"slow": "tooJZ_wOfqM"
+},
+{
+"label": "Алты жүз",
+"topic": "Сандар",
+"youtube": "x14tFWWooWE",
+"slow": "HPjvIB3DEA0"
+},
+{
+"label": "Бес жүз",
+"topic": "Сандар",
+"youtube": "GEHzqnTr560",
+"slow": "PUAu5xnBsUc"
+},
+{
+"label": "Бес мың",
+"topic": "Сандар",
+"youtube": "-mGlcFj8op4",
+"slow": "nUK3B1XhWTc"
+},
+{
+"label": "Бес",
+"topic": "Сандар",
+"youtube": "c7KJ7rdxMXw",
+"slow": "VDwdJVSrf9U"
+},
+{
+"label": "Бір",
+"topic": "Сандар",
+"youtube": "WQVz3lgILp8",
+"slow": "Idrr1eXPPmQ"
+},
+{
+"label": "Доллар",
+"topic": "Сандар",
+"youtube": "LbWYEI3PZRM",
+"slow": "zbsEZX7GZrk"
+},
+{
+"label": "Екі жүз",
+"topic": "Сандар",
+"youtube": "q5OGrwg3vkQ",
+"slow": "SjzNF86Pd4c"
+},
+{
+"label": "Екі мың",
+"topic": "Сандар",
+"youtube": "Z1RbhC3o2P8",
+"slow": "2VPKHBR4RNc"
+},
+{
+"label": "Екі рет",
+"topic": "Сандар",
+"youtube": "pWoU_7TYYBM",
+"slow": "6izS1PHI000"
+},
+{
+"label": "Екі",
+"topic": "Сандар",
+"youtube": "YFAa4qQX8Qw",
+"slow": "4-C2xq5Hwu8"
+},
+{
+"label": "Елу",
+"topic": "Сандар",
+"youtube": "MgkJHP0vmdw",
+"slow": "o5KTwra3Hc4"
+},
+{
+"label": "Жеті жүз",
+"topic": "Сандар",
+"youtube": "JZ0GlLo0G1A",
+"slow": "GH51vevFD84"
+},
+{
+"label": "Жеті мың",
+"topic": "Сандар",
+"youtube": "dZOS7hrUukI",
+"slow": "msHI81BDcig"
+},
+{
+"label": "Жеті",
+"topic": "Сандар",
+"youtube": "kxBnWQaX1NM",
+"slow": "SXcTiBJTKUA"
+},
+{
+"label": "Жетпіс",
+"topic": "Сандар",
+"youtube": "n6myET1IgdI",
+"slow": "-j8o4Ji-Sog"
+},
+{
+"label": "Жиырма алты",
+"topic": "Сандар",
+"youtube": "MpwEMxILqe0",
+"slow": "IP5G4W8Mcdo"
+},
+{
+"label": "Жиырма бес",
+"topic": "Сандар",
+"youtube": "j4aMWw6jhT0",
+"slow": "ZA--6oMxiaw"
+},
+{
+"label": "Жиырма бір",
+"topic": "Сандар",
+"youtube": "eEcd_j9iLak",
+"slow": "4BjXTxMbkMI"
+},
+{
+"label": "Жиырма екі",
+"topic": "Сандар",
+"youtube": "VsREIdIa6ws",
+"slow": "ry3_aMGOzmg"
+},
+{
+"label": "Жиырма жеті",
+"topic": "Сандар",
+"youtube": "q9XAhyvjMlA",
+"slow": "OAGEnIM6g48"
+},
+{
+"label": "Жиырма сегіз",
+"topic": "Сандар",
+"youtube": "Kg2T7tShmYQ",
+"slow": "EzdzO71nOAU"
+},
+{
+"label": "Жиырма тоғыз",
+"topic": "Сандар",
+"youtube": "MsyZlnIlwts",
+"slow": "ci4Y3sbV-mQ"
+},
+{
+"label": "Жиырма төрт",
+"topic": "Сандар",
+"youtube": "1nNdeR09iT8",
+"slow": "0jmY71IFaS0"
+},
+{
+"label": "Жиырма үш",
+"topic": "Сандар",
+"youtube": "oO86M3lSiRc",
+"slow": "WIdHbRU0i8E"
+},
+{
+"label": "Жиырма",
+"topic": "Сандар",
+"youtube": "QKK7xF3JsT0",
+"slow": "oL9pxfH2_dE"
+},
+{
+"label": "Жүз",
+"topic": "Сандар",
+"youtube": "wGDeiSJY5go",
+"slow": "qM-98YxmE9Q"
+},
+{
+"label": "Қырық",
+"topic": "Сандар",
+"youtube": "w69tPQdBF8Y",
+"slow": "UE19Z9oWN1Q"
+},
+{
+"label": "Миллиард",
+"topic": "Сандар",
+"youtube": "8VoEJvxqwn0",
+"slow": "oY-fmfwYPt4"
+},
+{
+"label": "Миллион",
+"topic": "Сандар",
+"youtube": "0zwHPqVcIL8",
+"slow": "zFDwyGdt9j8"
+},
+{
+"label": "Мың",
+"topic": "Сандар",
+"youtube": "vIrGIqe9KUo",
+"slow": "keycSbZnnHA"
+},
+{
+"label": "Он алты",
+"topic": "Сандар",
+"youtube": "N5hF6ObcEQY",
+"slow": "_1cx2OIYr9M"
+},
+{
+"label": "Он бес",
+"topic": "Сандар",
+"youtube": "yNOdTyrATJ4",
+"slow": "SctANbJCWx4"
+},
+{
+"label": "Он бір",
+"topic": "Сандар",
+"youtube": "vUQJxqyT2rk",
+"slow": "LRZxI3sj3PM"
+},
+{
+"label": "Он екі",
+"topic": "Сандар",
+"youtube": "12QowHwqdFI",
+"slow": "zv8bv-ZyiI0"
+},
+{
+"label": "Он жеті",
+"topic": "Сандар",
+"youtube": "gwSAs84QHuA",
+"slow": "kthal722COE"
+},
+{
+"label": "Он мың",
+"topic": "Сандар",
+"youtube": "k8rSOZzyCm4",
+"slow": "eWeQ3F-mrqc"
+},
+{
+"label": "Он сегіз",
+"topic": "Сандар",
+"youtube": "JxL8pQfcxL4",
+"slow": "4XhpMBE90zE"
+},
+{
+"label": "Он тоғыз",
+"topic": "Сандар",
+"youtube": "1k55X42z0-c",
+"slow": "Ruo_gvGJGug"
+},
+{
+"label": "Он төрт",
+"topic": "Сандар",
+"youtube": "jrAnsERllKo",
+"slow": "rol-stRpstI"
+},
+{
+"label": "Он үш",
+"topic": "Сандар",
+"youtube": "-k6HwGUZJRE",
+"slow": "o8545PtCl68"
+},
+{
+"label": "Он",
+"topic": "Сандар",
+"youtube": "vFA4KRvNR_U",
+"slow": "SSj5UQuHLwk"
+},
+{
+"label": "Отыз",
+"topic": "Сандар",
+"youtube": "Xn00dTBqKhA",
+"slow": "AfXYWYUTZnA"
+},
+{
+"label": "Санау",
+"topic": "Сандар",
+"youtube": "8KPdOlLOp0c",
+"slow": "g5widHZ4O0U"
+},
+{
+"label": "Сегіз жүз",
+"topic": "Сандар",
+"youtube": "86bFvjD-pLk",
+"slow": "_lr4-2xjq0k"
+},
+{
+"label": "Сегіз мың",
+"topic": "Сандар",
+"youtube": "9Q0K7mTcrSY",
+"slow": "vH8ZRVmgj3A"
+},
+{
+"label": "Сегіз",
+"topic": "Сандар",
+"youtube": "_kk4ZgFj7PA",
+"slow": "UunrSIw7n2o"
+},
+{
+"label": "Сексен",
+"topic": "Сандар",
+"youtube": "ltM1StAxDTU",
+"slow": "b1xAOVqg-iE"
+},
+{
+"label": "Тоғыз мың",
+"topic": "Сандар",
+"youtube": "spqRrIgfHAM",
+"slow": "yy3euy4hh9w"
+},
+{
+"label": "Тоғыз жүз",
+"topic": "Сандар",
+"youtube": "1826le2x_1o",
+"slow": "iGLFy2Gaw3k"
+},
+{
+"label": "Тоғыз",
+"topic": "Сандар",
+"youtube": "cOqC2lq9lCg",
+"slow": "kJQWhmVazfY"
+},
+{
+"label": "Тоқсан",
+"topic": "Сандар",
+"youtube": "YaVtIFZDeIU",
+"slow": "11elMjFaBfo"
+},
+{
+"label": "Төрт жүз",
+"topic": "Сандар",
+"youtube": "LSjEOOFzDS8",
+"slow": "fVgXH_2wro8"
+},
+{
+"label": "Төрт мың",
+"topic": "Сандар",
+"youtube": "Dw9VwRcUL1s",
+"slow": "L_IzjwZm9w0"
+},
+{
+"label": "Төрт",
+"topic": "Сандар",
+"youtube": "Ky3QA86qqXo",
+"slow": "OxqCU7NBKXc"
+},
+{
+"label": "Үш жүз",
+"topic": "Сандар",
+"youtube": "-Wiamk7ygDY",
+"slow": "y1g2A0kPHGo"
+},
+{
+"label": "Үш мың",
+"topic": "Сандар",
+"youtube": "6LpnHeNrTPw",
+"slow": "9TCGxvnimx8"
+},
+{
+"label": "Үш",
+"topic": "Сандар",
+"youtube": "QYNVfnqzUts",
+"slow": "9_GVbAWDEKQ"
+},
+{
+"label": "Аз",
+"topic": "Салмақ, өлшем, жылдамдық",
+"youtube": "p_EGtpnpTuc",
+"slow": "65Ug8UnMMnA"
+},
+{
+"label": "Ауыр",
+"topic": "Салмақ, өлшем, жылдамдық",
+"youtube": "MdDkDt95kYk",
+"slow": "MZmLAKwYzqI"
+},
+{
+"label": "Жаңа",
+"topic": "Салмақ, өлшем, жылдамдық",
+"youtube": "w1YKaiYGAsg",
+"slow": "1JOB1_A1B7c"
+},
+{
+"label": "Жеңіл",
+"topic": "Салмақ, өлшем, жылдамдық",
+"youtube": "aWWqCMwwJ9I",
+"slow": "h-ykyhv1OCc"
+},
+{
+"label": "Жүк",
+"topic": "Салмақ, өлшем, жылдамдық",
+"youtube": "t5X0StC4AjI",
+"slow": "fD1j6xSTa34"
+},
+{
+"label": "Жылдам",
+"topic": "Салмақ, өлшем, жылдамдық",
+"youtube": "Sh5h2-OtAGA",
+"slow": "hlvXnMTbs3s"
+},
+{
+"label": "Ірі",
+"topic": "Салмақ, өлшем, жылдамдық",
+"youtube": "dPPsCEQ4SF4",
+"slow": "oQMqyEE7Awk"
+},
+{
+"label": "Кіші",
+"topic": "Салмақ, өлшем, жылдамдық",
+"youtube": "S_Fputuuupo",
+"slow": "xN5WxzTq0FQ"
+},
+{
+"label": "Көп",
+"topic": "Салмақ, өлшем, жылдамдық",
+"youtube": "Cahoux3S7xM",
+"slow": "wtGTIT4yEiI"
+},
+{
+"label": "Қатты",
+"topic": "Салмақ, өлшем, жылдамдық",
+"youtube": "bSY0jTnVlO8",
+"slow": "RQek9V8OlgE"
+},
+{
+"label": "Қымбат",
+"topic": "Салмақ, өлшем, жылдамдық",
+"youtube": "drTC_BpVUUQ",
+"slow": "Di5xvvYKMck"
+},
+{
+"label": "Тар",
+"topic": "Салмақ, өлшем, жылдамдық",
+"youtube": "RwI57e1aCmc",
+"slow": "TlkqT6bxwjA"
+},
+{
+"label": "Тез",
+"topic": "Салмақ, өлшем, жылдамдық",
+"youtube": "29IiJhgfZkQ",
+"slow": "1buoSrqb-JQ"
+},
+{
+"label": "Кенет",
+"topic": "Салмақ, өлшем, жылдамдық",
+"youtube": "Cef3Kn4QagI",
+"slow": "8qK7s-7P55I"
+},
+{
+"label": "Анда санда",
+"topic": "Мезгіл, уақыт",
+"youtube": "gZ1OTtsaSiw"
+},
+{
+"label": "Арғы күні",
+"topic": "Мезгіл, уақыт",
+"youtube": "zTMUt1aH6s8",
+"slow": "GbqZYkYAzA8"
+},
+{
+"label": "Баяғыда",
+"topic": "Мезгіл, уақыт",
+"youtube": "aBoZTYlAC2A",
+"slow": "YmUq8ZGYpmY"
+},
+{
+"label": "Бейсенбі",
+"topic": "Мезгіл, уақыт",
+"youtube": "5IEJobv6FKg",
+"slow": "Kg7ZxH9ufiA"
+},
+{
+"label": "Бір ай",
+"topic": "Мезгіл, уақыт",
+"youtube": "HcY8ovFQMns",
+"slow": "ZUID4zZpmhk"
+},
+{
+"label": "Бірте бірте",
+"topic": "Мезгіл, уақыт",
+"youtube": "m6JED_qtKMw",
+"slow": "WndzftB6n_E"
+},
+{
+"label": "Бүгін",
+"topic": "Мезгіл, уақыт",
+"youtube": "9H59RRCAB-I",
+"slow": "dFRm_NipLkg"
+},
+{
+"label": "Градус",
+"topic": "Мезгіл, уақыт",
+"youtube": "xpnCs1InCyA",
+"slow": "KKc6-H_NzAU"
+},
+{
+"label": "Дейін",
+"topic": "Мезгіл, уақыт",
+"youtube": "WdC01M_bLVw",
+"slow": "_8CHUWnBrQo"
+},
+{
+"label": "Дүйсенбі",
+"topic": "Мезгіл, уақыт",
+"youtube": "Y054o_mO7zg",
+"slow": "9G-LE-sSdxo"
+},
+{
+"label": "Ешқашан",
+"topic": "Мезгіл, уақыт",
+"youtube": "N7cNXq40xas",
+"slow": "QK1qR6CB-_Q"
+},
+{
+"label": "Әрқашан",
+"topic": "Мезгіл, уақыт",
+"youtube": "k-WWHZOrQ7U",
+"slow": "G0CmPLjOTYg"
+},
+{
+"label": "Жаз",
+"topic": "Мезгіл, уақыт",
+"youtube": "9GC7RKvySK8",
+"slow": "FwCVAPpwRyE"
+},
+{
+"label": "Жанында",
+"topic": "Мезгіл, уақыт",
+"youtube": "inJApBSuhtw",
+"slow": "dj1HCTnjls4"
+},
+{
+"label": "Жексенбі",
+"topic": "Мезгіл, уақыт",
+"youtube": "v9mg2mmjTsQ",
+"slow": "7UjLbBMxQrM"
+},
+{
+"label": "Жұма",
+"topic": "Мезгіл, уақыт",
+"youtube": "yPUTZtstyJk",
+"slow": "6dp7qpbumUw"
+},
+{
+"label": "Жыл",
+"topic": "Мезгіл, уақыт",
+"youtube": "TfNEjONHUAY",
+"slow": "WXzILqnJxC0"
+},
+{
+"label": "Жылнама",
+"topic": "Мезгіл, уақыт",
+"youtube": "fMo-S07VH_k",
+"slow": "Uers-YP1qrk"
+},
+{
+"label": "Келесі жылы",
+"topic": "Мезгіл, уақыт",
+"youtube": "tzVVdSZ-zrs",
+"slow": "JA6DUCgt1Vk"
+},
+{
+"label": "Кеше",
+"topic": "Мезгіл, уақыт",
+"youtube": "uS6A6KK7_go",
+"slow": "LU2_W_lFQVE"
+},
+{
+"label": "Көктем",
+"topic": "Мезгіл, уақыт",
+"youtube": "jdt31Ju0YJk",
+"slow": "SOL46g52il0"
+},
+{
+"label": "Күз",
+"topic": "Мезгіл, уақыт",
+"youtube": "ozqEQQ9J8GQ",
+"slow": "A3lGEU4AYhg"
+},
+{
+"label": "Күн",
+"topic": "Мезгіл, уақыт",
+"youtube": "MI46N-BRZLg",
+"slow": "v-j17MI5-IE"
+},
+{
+"label": "Күні",
+"topic": "Мезгіл, уақыт",
+"youtube": "hd_Gj3_O2zA",
+"slow": "6mnipb3FIO4"
+},
+{
+"label": "Қазір",
+"topic": "Мезгіл, уақыт",
+"youtube": "SbN334My_FA",
+"slow": "O4r6-T8zRu0"
+},
+{
+"label": "Қараңғы",
+"topic": "Мезгіл, уақыт",
+"youtube": "1rYgcZahcCY",
+"slow": "TEw5eosbCDY"
+},
+{
+"label": "Қыс",
+"topic": "Мезгіл, уақыт",
+"youtube": "13OSuM_FtHI",
+"slow": "mfvxjd5Rsco"
+},
+{
+"label": "Қысқа",
+"topic": "Мезгіл, уақыт",
+"youtube": "fTJxBDwLC54",
+"slow": "orJbeDny40Y"
+},
+{
+"label": "Қысым",
+"topic": "Мезгіл, уақыт",
+"youtube": "UsGeKK_P2y4",
+"slow": "fPVIHTW5lXI"
+},
+{
+"label": "Мамыр",
+"topic": "Мезгіл, уақыт",
+"youtube": "M4HT0kFVRf8",
+"slow": "xQouEYsn7o8"
+},
+{
+"label": "Минут",
+"topic": "Мезгіл, уақыт",
+"youtube": "_mRPpvDUaXk",
+"slow": "lttWIkDiDec"
+},
+{
+"label": "Наурыз",
+"topic": "Мезгіл, уақыт",
+"youtube": "_zswuhOtLZ4",
+"slow": "WktfpvrH2vA"
+},
+{
+"label": "Өлім",
+"topic": "Мезгіл, уақыт",
+"youtube": "NepBvOtYPEU",
+"slow": "gYUQMidnQEE"
+},
+{
+"label": "Өлшем",
+"topic": "Мезгіл, уақыт",
+"youtube": "4MZ23KqZU78",
+"slow": "Q2dd6lDT2Hc"
+},
+{
+"label": "Өткен жылы",
+"topic": "Мезгіл, уақыт",
+"youtube": "_3P4boHEEZs",
+"slow": "-i6Lrgz0kKA"
+},
+{
+"label": "Өтті",
+"topic": "Мезгіл, уақыт",
+"youtube": "yeMxdcQ-lUY",
+"slow": "xHP2-BvhYM4"
+},
+{
+"label": "Салмақ",
+"topic": "Мезгіл, уақыт",
+"youtube": "mpyLfrPUa0I",
+"slow": "Rj0ix054mUE"
+},
+{
+"label": "Сейсенбі",
+"topic": "Мезгіл, уақыт",
+"youtube": "v7VMnveQS-Q",
+"slow": "hpUyAlgjIb4"
+},
+{
+"label": "Секунд",
+"topic": "Мезгіл, уақыт",
+"youtube": "9dM3k_WnuNQ",
+"slow": "ASguEyq0z4o"
+},
+{
+"label": "Сенбі",
+"topic": "Мезгіл, уақыт",
+"youtube": "gEHsh5VQr8Q",
+"slow": "-1S7t5d0pus"
+},
+{
+"label": "Сәрсенбі",
+"topic": "Мезгіл, уақыт",
+"youtube": "DvRbbRh8iV4",
+"slow": "086Y-Lz5oyk"
+},
+{
+"label": "Таңертең",
+"topic": "Мезгіл, уақыт",
+"youtube": "AdXUfTs4CU4",
+"slow": "d0S887wEdlQ"
+},
+{
+"label": "Тәулік",
+"topic": "Мезгіл, уақыт",
+"youtube": "GNhjlNd2DVM",
+"slow": "dRFb6jNVQKI"
+},
+{
+"label": "Түн",
+"topic": "Мезгіл, уақыт",
+"youtube": "hbI_3gUhyoc",
+"slow": "WYs_dCyK1As"
+},
+{
+"label": "Уақыт",
+"topic": "Мезгіл, уақыт",
+"youtube": "qzNDZA00Xsg",
+"slow": "BtZcfqm_t7k"
+},
+{
+"label": "Уақытша",
+"topic": "Мезгіл, уақыт",
+"youtube": "uez6CC0YgWI",
+"slow": "y796Nfz3kq4"
+},
+{
+"label": "Үлкен",
+"topic": "Мезгіл, уақыт",
+"youtube": "muyMXhX_r00",
+"slow": "p3LBndZ9ac4"
+},
+{
+"label": "Ұзын",
+"topic": "Мезгіл, уақыт",
+"youtube": "2UEX5xEw1ww",
+"slow": "fB8ROQKm550"
+},
+{
+"label": "Ерте",
+"topic": "Мезгіл, уақыт",
+"youtube": "Tuy9dMAcklY",
+"slow": "Eo7SK24AFmU"
+},
+{
+"label": "Кеш",
+"topic": "Мезгіл, уақыт",
+"youtube": "dLJZjJgC0Ks",
+"slow": "tp45Y8MhkXc"
+},
+{
+"label": "Ақпан",
+"topic": "Мезгіл, уақыт",
+"youtube": "g8MIwKaAOkM",
+"slow": "VUggGquKx5Q"
+},
+{
+"label": "Қазан",
+"topic": "Мезгіл, уақыт",
+"youtube": "g3fQXljllvg",
+"slow": "lmHDVL1VR1M"
+},
+{
+"label": "Қаңтар",
+"topic": "Мезгіл, уақыт",
+"youtube": "VS-tN-MisYs"
+},
+{
+"label": "Сәуір",
+"topic": "Мезгіл, уақыт",
+"youtube": "5bN2tqgaJCE",
+"slow": "fzqeGXmUkBo"
+},
+{
+"label": "Тамыз",
+"topic": "Мезгіл, уақыт",
+"youtube": "zkdIaQBaKPw",
+"slow": "8EGRF3HgZ28"
+},
+{
+"label": "Шілде",
+"topic": "Мезгіл, уақыт",
+"youtube": "IPYZ8OK4s3Y",
+"slow": "XPtwUXOPwsY"
+},
+{
+"label": "Желтоқсан",
+"topic": "Мезгіл, уақыт",
+"youtube": "4NLg99zkS6s",
+"slow": "3I2OQ8AAUiA"
+},
+{
+"label": "Қараша",
+"topic": "Мезгіл, уақыт",
+"youtube": "pUByLjRDwig",
+"slow": "x7y0dlOVFHg"
+},
+{
+"label": "Сағат",
+"topic": "Мезгіл, уақыт",
+"youtube": "DZM2lE_GxPY",
+"slow": "md1HydRUe_o"
+},
+{
+"label": "Бөтелке",
+"topic": "Ыдыс",
+"youtube": "zR6njDbjhSI",
+"slow": "lGqcBnsQtWc"
+},
+{
+"label": "Кружка",
+"topic": "Ыдыс",
+"youtube": "1XwFAfujRfg",
+"slow": "NohGIC5_Vbk"
+},
+{
+"label": "Қасық",
+"topic": "Ыдыс",
+"youtube": "nzm7-TKNGFA",
+"slow": "z_3e0fIWYFQ"
+},
+{
+"label": "Құты",
+"topic": "Ыдыс",
+"youtube": "XX-FbMeXkrY",
+"slow": "M0voOiRfhWQ"
+},
+{
+"label": "Ожау",
+"topic": "Ыдыс",
+"youtube": "5wK-uXl-Kho",
+"slow": "oaIzaIgqhjY"
+},
+{
+"label": "Оқтау",
+"topic": "Ыдыс",
+"youtube": "lQo8Adk2UUo",
+"slow": "BZJ6-ppE6hg"
+},
+{
+"label": "Пышақ",
+"topic": "Ыдыс",
+"youtube": "OiG9qcZResQ",
+"slow": "tc1XCnjEe38"
+},
+{
+"label": "Шәйнек",
+"topic": "Ыдыс",
+"youtube": "G93t6wH5Q6Y",
+"slow": "Ad5Voh8BRsU"
+},
+{
+"label": "Шыны",
+"topic": "Ыдыс",
+"youtube": "eQcOfjHRN-g",
+"slow": "KhDWZZFwXJg"
+},
+{
+"label": "Шыныаяқ",
+"topic": "Ыдыс",
+"youtube": "d2u4qLWtDvk",
+"slow": "lG5COc9UBUk"
+},
+{
+"label": "Автобус",
+"topic": "Транспорт",
+"youtube": "lku_1lAUdbU",
+"slow": "ZnWIDqDhN1w"
+},
+{
+"label": "Автобусқа мінді",
+"topic": "Транспорт",
+"youtube": "ljZqMi1_3-Y",
+"slow": "3N4Aq6k8P6A"
+},
+{
+"label": "Автобусқа міну",
+"topic": "Транспорт",
+"youtube": "2_m72QJmz9o",
+"slow": "s9I6_pk9-F0"
+},
+{
+"label": "Автобусқа отыру",
+"topic": "Транспорт",
+"youtube": "378tjkD7oHs",
+"slow": "18An5TcvX2I"
+},
+{
+"label": "Автобустан түсіп қалдым",
+"topic": "Транспорт",
+"youtube": "KGS9wecvsw0",
+"slow": "yD16KxrxaFQ"
+},
+{
+"label": "Алыс",
+"topic": "Транспорт",
+"youtube": "odr24Im16yo",
+"slow": "LU66HZWzjJA"
+},
+{
+"label": "Атқа отыру",
+"topic": "Транспорт",
+"youtube": "JDd9Wg7nM7A",
+"slow": "8gP3xtQuRzA"
+},
+{
+"label": "Аялдама",
+"topic": "Транспорт",
+"youtube": "D8tLSji8a6w",
+"slow": "k50jgME7rjw"
+},
+{
+"label": "Бағдаршам",
+"topic": "Транспорт",
+"youtube": "XWW9F4dDOeA",
+"slow": "1OjIn33iS-U"
+},
+{
+"label": "Бағыт",
+"topic": "Транспорт",
+"youtube": "gMjtXLIO55s",
+"slow": "9U5vT5GQNjQ"
+},
+{
+"label": "Бензин",
+"topic": "Транспорт",
+"youtube": "DD01DcwTmGw",
+"slow": "mpA6NM3DTJw"
+},
+{
+"label": "Вагон",
+"topic": "Транспорт",
+"youtube": "pSLKQgBIoNM",
+"slow": "IdBL8ft9_2g"
+},
+{
+"label": "Көпір",
+"topic": "Транспорт",
+"youtube": "iSCf1a9SNVg",
+"slow": "IiU0kIfbcfY"
+},
+{
+"label": "Қайық",
+"topic": "Транспорт",
+"youtube": "lSglKoxK0Nk",
+"slow": "MMTFNrMdyvg"
+},
+{
+"label": "Озу",
+"topic": "Транспорт",
+"youtube": "kyguDURAVAs",
+"slow": "UQGXLLExjQo"
+},
+{
+"label": "Поезд",
+"topic": "Транспорт",
+"youtube": "mXEWFNdEaBU",
+"slow": "8uF2DIUjjJg"
+},
+{
+"label": "Тура",
+"topic": "Транспорт",
+"youtube": "hcKB7uHdDOY",
+"slow": "4hxc77rGEXQ"
+},
+{
+"label": "Көлік",
+"topic": "Транспорт",
+"youtube": "Uyb5-feIiFs",
+"slow": "9rQkaS3YKe8"
+},
+{
+"label": "Жарнама",
+"topic": "Техника",
+"youtube": "LcNbVQFjNyM",
+"slow": "I_6W881IeG4"
+},
+{
+"label": "Кір жуғыш манинасы",
+"topic": "Техника",
+"youtube": "LaZolp_VGac"
+},
+{
+"label": "Кино",
+"topic": "Техника",
+"youtube": "HrW90eWKIwE",
+"slow": "yRjMhUMLMLc"
+},
+{
+"label": "Кір жуу",
+"topic": "Техника",
+"youtube": "kSwc25xrkbA",
+"slow": "6WYhjslEt5w"
+},
+{
+"label": "Радио",
+"topic": "Техника",
+"youtube": "sli1BNlaWzA",
+"slow": "okcD3sUNdAE"
+},
+{
+"label": "Теледидар",
+"topic": "Техника",
+"youtube": "Ys7xD9s0Kyw",
+"slow": "mQMhxddnd_Y"
+},
+{
+"label": "Ұялы телефон",
+"topic": "Техника",
+"youtube": "-lC-iwQvoZU",
+"slow": "n8lFOTGn_FA"
+},
+{
+"label": "Тоңазытқыш",
+"topic": "Техника",
+"youtube": "LxMiHpX_uw8",
+"slow": "fFPT4aJrI8I"
+},
+{
+"label": "Телефон",
+"topic": "Техника",
+"youtube": "N_2Z9CgZj2g",
+"slow": "DniQHMQc_b8"
+},
+{
+"label": "Ағаш сынды",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "zQu-igspTyI",
+"slow": "EKR3ejFAnIU"
+},
+{
+"label": "Ағаш",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "SPeBneIasYU",
+"slow": "sFST9gMB9As"
+},
+{
+"label": "Ағашты ою",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "_KrTnSVpGpM",
+"slow": "V9U0L6L9bkg"
+},
+{
+"label": "Ай",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "jsX19gja4dQ",
+"slow": "NvmGPenGsVI"
+},
+{
+"label": "Аққайын",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "cWw8USC4ENc",
+"slow": "TiX0a2SftOE"
+},
+{
+"label": "Апат",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "fFD0NU5uShE",
+"slow": "pYnozJVVhzo"
+},
+{
+"label": "Аспан",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "wbQ3p77sEqA",
+"slow": "2dp6C2K49F4"
+},
+{
+"label": "Ауа",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "7Tcz7T8q124",
+"slow": "2Mm-ULOR_T4"
+},
+{
+"label": "Батпақ",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "PegBN_KlTA0",
+"slow": "onJGqRYYqCM"
+},
+{
+"label": "Вулкан",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "7ROBV00wEXo",
+"slow": "-pCNS_oQl_4"
+},
+{
+"label": "Ғалам",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "M86dMCpixPc",
+"slow": "i6iMkoyEoRQ"
+},
+{
+"label": "Ғарыш",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "glo58cTaCAY",
+"slow": "klyeUWPyiG8"
+},
+{
+"label": "Гул",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "Sj6tkMV_kZs"
+},
+{
+"label": "Гулдену",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "mxlclvi1T6g"
+},
+{
+"label": "Дауыл",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "AMqd1P163UI",
+"slow": "TrdJ6870Xig"
+},
+{
+"label": "Дүниеге келу",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "6icJEdED02U",
+"slow": "o-SBgPmnMMU"
+},
+{
+"label": "Жағажай",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "afcHPazJcQM",
+"slow": "Xv7zihAyBgU"
+},
+{
+"label": "Жаңбыр",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "QgfL0wdrs78",
+"slow": "m2MUTeHm8Ok"
+},
+{
+"label": "Жапырақ",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "r3ygIp_4kaQ",
+"slow": "f8SuTNpSHZk"
+},
+{
+"label": "Жарық",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "gkJcz32YkXk",
+"slow": "P3SbAMW260U"
+},
+{
+"label": "Жел",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "LhjXTSu5PXk",
+"slow": "AetXkIfXvQQ"
+},
+{
+"label": "Жер сілкінісі",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "zRAXRGMi9z0",
+"slow": "DmdAwSi9t6U"
+},
+{
+"label": "Жұлдыз",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "PwkkYSiYtY4",
+"slow": "_LdtKv8m_zM"
+},
+{
+"label": "Көл",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "ugE7N-toYMA",
+"slow": "FGP_oMMFSJg"
+},
+{
+"label": "Күн күркіреді",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "m82CY599zFk",
+"slow": "WmCRL-qn4vQ"
+},
+{
+"label": "Күркіреу",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "l9nMxjLxQY4",
+"slow": "rhUAo6de4mY"
+},
+{
+"label": "Қар",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "1CR-g1QR_2w",
+"slow": "XBWClyeRnDo"
+},
+{
+"label": "Құрғақ",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "45pG21foGYs",
+"slow": "tdqPTEUfajU"
+},
+{
+"label": "Найзағай",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "A4pw2otzVwY",
+"slow": "5pOfGAdJ4A8"
+},
+{
+"label": "Орман",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "A4_H1GojqsY",
+"slow": "w2H3GsRag80"
+},
+{
+"label": "Өзен",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "-jXsu6dip8U",
+"slow": "dKUUEgB7MEY"
+},
+{
+"label": "Өрт",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "xUo8YzE1MWU",
+"slow": "AhZJBPCFxwc"
+},
+{
+"label": "Пайда болу",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "6n_xw1n4bEs",
+"slow": "FUtFHMiUvV8"
+},
+{
+"label": "Су тасқыны",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "comQFpwZoyc",
+"slow": "DJOHLxD1RvE"
+},
+{
+"label": "Суық",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "jJf2FZc45p4",
+"slow": "ue1gENo4pCQ"
+},
+{
+"label": "Сыз",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "PpJ8ck5qtkE",
+"slow": "PjuIzdeklSc"
+},
+{
+"label": "Табиғат",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "FXXssRcj34w",
+"slow": "PvQC59hqa08"
+},
+{
+"label": "Талшық",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "aYbwj_FSbYk",
+"slow": "k2xMBOLtBlg"
+},
+{
+"label": "Теңіз",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "1efKwjKBPMU",
+"slow": "n-tB6mDiubk"
+},
+{
+"label": "Терең",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "Z2chLiBEYso",
+"slow": "i1SNfatR9OQ"
+},
+{
+"label": "Тозаң",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "0crE614AZN0",
+"slow": "HPjrIg90aNY"
+},
+{
+"label": "Тоңдым",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "s4sZSWahNv0",
+"slow": "m2nF9AWDmlU"
+},
+{
+"label": "Ылғал",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "fa9QT1R7zgo",
+"slow": "Xvll2jTvbRM"
+},
+{
+"label": "Ыстық",
+"topic": "Табиғат құбылысы, табиғат",
+"youtube": "wciuA2eWyRs",
+"slow": "4UzOju2jTB4"
+},
+{
+"label": "Аю",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "LR3sDmRLaUI",
+"slow": "M_Qf6J3A5eE"
+},
+{
+"label": "Бақа",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "zstVGUGR6fQ",
+"slow": "RPcpZOKpdx0"
+},
+{
+"label": "Балық",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "asW-sN5FCOM",
+"slow": "zFAoJ1d-l4c"
+},
+{
+"label": "Бұғы",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "57DkTzhP3TA",
+"slow": "h1HUnldUCk0"
+},
+{
+"label": "Бұқа сүзді",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "yg4v6uTR5R4",
+"slow": "ndJIrmc_vuQ"
+},
+{
+"label": "Бұқа",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "P8uBG8KfvS4",
+"slow": "k6x0N7VaUEQ"
+},
+{
+"label": "Егеуқұйрық",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "A6kJhmPPLGk"
+},
+{
+"label": "Есек",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "wMeLgzk3ieo",
+"slow": "ZhEKNQfaDlk"
+},
+{
+"label": "Әтеш",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "AVRe0eaB4Oc",
+"slow": "RkzVzfxt5FQ"
+},
+{
+"label": "Шошқа",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "6cm8QA6S-1Q",
+"slow": "xFQUag_PfgU"
+},
+{
+"label": "Тышқан",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "1BNX1inSpsY",
+"slow": "VFEeeoPk0ZQ"
+},
+{
+"label": "Түлкі",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "17-JI9ix_KI",
+"slow": "0G23KlrSavg"
+},
+{
+"label": "Түйе",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "maHKuu4ZtMk",
+"slow": "rw9-HXVz4kU"
+},
+{
+"label": "Тауық",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "4r_zSOX7Qos",
+"slow": "uTSRPwpfgq4"
+},
+{
+"label": "Сиыр",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "7oGBvgtZhq8",
+"slow": "kqOpJUwJs3M"
+},
+{
+"label": "Піл",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "iGgR9syhXFw",
+"slow": "WsMFVEZzCgI"
+},
+{
+"label": "Өрмекші",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "NF-0lrsga9k",
+"slow": "7y5Arn4TN3o"
+},
+{
+"label": "Маймыл",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "e_zpyC-oauI",
+"slow": "lkIRjTi_Fgg"
+},
+{
+"label": "Қоян",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "wrIyYMQHREg",
+"slow": "NKpGzww4mYE"
+},
+{
+"label": "Қой",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "eg62SobmL6E",
+"slow": "RSojvWAsRPM"
+},
+{
+"label": "Қасқыр",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "coA0dQC-yck",
+"slow": "yJmVyjWNG98"
+},
+{
+"label": "Қаз",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "gRR_DEq4-sI",
+"slow": "sI6yF0sWFlY"
+},
+{
+"label": "Көбелек",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "IGyZcw4NNLU",
+"slow": "Eo2X5aDalzs"
+},
+{
+"label": "Кірпі",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "tx5ATQfdzVs",
+"slow": "SDwavd-v088"
+},
+{
+"label": "Кенгуру",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "rbVP_iRweag",
+"slow": "pt1zO-89O7o"
+},
+{
+"label": "Ит",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "tUHRq2O-ZTI",
+"slow": "vJ-iZseueFM"
+},
+{
+"label": "Зіл",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "3aqa4QZdz4o",
+"slow": "-Lh5cSNrel4"
+},
+{
+"label": "Жираф",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "8OGd9bnDfKg",
+"slow": "YsKYPMPf2TY"
+},
+{
+"label": "Жануар",
+"topic": "Жан-жануарлар, жәндіктер",
+"youtube": "9yQd_f8f0RE",
+"slow": "brN8zYAIKRs"
+},
+{
+"label": "Ажырасу",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "6XvrTfei5xs",
+"slow": "VzfBbFY1_t0"
+},
+{
+"label": "Айыптаушы",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "dZcNSWPuFBE",
+"slow": "aiHfuJjoGWw"
+},
+{
+"label": "Бұзақы",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "Mkixz0ygmMQ",
+"slow": "3xbyCzMINUQ"
+},
+{
+"label": "Ескерту",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "ceskZKlAii4",
+"slow": "xkO4sKtgzoY"
+},
+{
+"label": "Жазалау",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "1UJvEWN88iU",
+"slow": "dBkskJxasqk"
+},
+{
+"label": "Жемқорлық",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "MKReO5wn1-M",
+"slow": "Gb0oS9mZAbU"
+},
+{
+"label": "Зорлау",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "xwdoyhP1IPM",
+"slow": "mzw9k2OFqso"
+},
+{
+"label": "Кедергі жасау",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "ll_jNzTmQLA",
+"slow": "yCP1HSqMfI0"
+},
+{
+"label": "Кешірім сұрау",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "vibqV_VXTVc",
+"slow": "-dSOL_M152A"
+},
+{
+"label": "Кінәлі",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "H3lrxC-7KeQ",
+"slow": "HTbe4h4tnlk"
+},
+{
+"label": "Көмек",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "odku0E7Ot4g",
+"slow": "jG1GEmwATEo"
+},
+{
+"label": "Куәгер",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "rbhUQAgBzJo",
+"slow": "ivI4hM098qw"
+},
+{
+"label": "Күмәндану",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "JqOwP1fV4-Q",
+"slow": "zquRspPCD78"
+},
+{
+"label": "Күнә",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "vQTesM_SEq8",
+"slow": "dRXGsH7NJgQ"
+},
+{
+"label": "Күресу",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "XXcDkEIseq8",
+"slow": "9MemdZUqQ4o"
+},
+{
+"label": "Қаза",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "yRCxlrvUm5o",
+"slow": "ah22Wu8KaSw"
+},
+{
+"label": "Қамқор",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "G18ZMDsmKtk",
+"slow": "H7ckbmlyNrE"
+},
+{
+"label": "Қарсы",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "dOs8OyVqa2Q",
+"slow": "-QG1x_xSrWo"
+},
+{
+"label": "Қашу",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "i5OmSHvfhm4",
+"slow": "Fsjmx-pOFWc"
+},
+{
+"label": "Өлтіру",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "81tq_E-VYOo",
+"slow": "6OH53aO70bE"
+},
+{
+"label": "Өтінем",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "cOUPtTBkztE",
+"slow": "5vvUO-NCIDA"
+},
+{
+"label": "Өтінемін",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "FF9Bt6nP8D0",
+"slow": "QcM-yddOSus"
+},
+{
+"label": "Полиция",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "1cyJtVKKw4E",
+"slow": "MMioh5sGrf4"
+},
+{
+"label": "Тұтқындау",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "4YqmHGvcBXM",
+"slow": "5Tj43ohOfhk"
+},
+{
+"label": "Ұрлау",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "XKaBtEaTngw",
+"slow": "Rt28R3Zg8ak"
+},
+{
+"label": "Кінәсіз",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "qPQp-R14U4I",
+"slow": "dYfiMTqdMrA"
+},
+{
+"label": "Қылмыстық топ",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "96bETOqmp84",
+"slow": "xuq6RR2zZjs"
+},
+{
+"label": "Әділ",
+"topic": "Қылмыс, сот, отырысы",
+"youtube": "e-PoE2iLvbM",
+"slow": "CAvry0w5zCs"
+},
+{
+"label": "Аванс",
+"topic": "Қаржы",
+"youtube": "U4C6Hk3COnA",
+"slow": "7SuG1XEAUP4"
+},
+{
+"label": "Ақша",
+"topic": "Қаржы",
+"youtube": "F_luzMPwrL0",
+"slow": "8jnTjeRZch8"
+},
+{
+"label": "Баға",
+"topic": "Қаржы",
+"youtube": "uNjYLqhlCaE",
+"slow": "7y1co3WvUbY"
+},
+{
+"label": "Ақшаны жұмсау",
+"topic": "Қаржы",
+"youtube": "ZLG91zY9XkE",
+"slow": "YkS5a1TsTN8"
+},
+{
+"label": "Дағдарыс",
+"topic": "Қаржы",
+"youtube": "QgqRUM9yj14",
+"slow": "m649D25VoJI"
+},
+{
+"label": "Жалақы",
+"topic": "Қаржы",
+"youtube": "7co1iKYyoCk",
+"slow": "h37sBG71x4g"
+},
+{
+"label": "Келісімшарт",
+"topic": "Қаржы",
+"youtube": "j8JacAK0mUc",
+"slow": "zzdRUVZ00H4"
+},
+{
+"label": "Қарыз",
+"topic": "Қаржы",
+"youtube": "jKndy_mmTYU",
+"slow": "Qmp50EHv7OU"
+},
+{
+"label": "Қарызға ақша алу",
+"topic": "Қаржы",
+"youtube": "ToUPL_ZMldY",
+"slow": "uhyHeAz7ZLY"
+},
+{
+"label": "Қарызға алу",
+"topic": "Қаржы",
+"youtube": "TvntPKGSZkg",
+"slow": "WRqukr7aVHY"
+},
+{
+"label": "Құжат",
+"topic": "Қаржы",
+"youtube": "yDnBXZychhU",
+"slow": "zDItf34z8Jw"
+},
+{
+"label": "Елтаңба",
+"topic": "Рәміздер",
+"youtube": "4h9u8p72Mkc",
+"slow": "IgQBB7LnCxI"
+},
+{
+"label": "Әнұран",
+"topic": "Рәміздер",
+"youtube": "DL1gKGVlsFM",
+"slow": "jH3QbE47vi8"
+},
+{
+"label": "Мемлекеттік елтаңба",
+"topic": "Рәміздер",
+"youtube": "yad6fGnOh04",
+"slow": "N2rzBq8RpYE"
+},
+{
+"label": "Мемлекеттік әнұран",
+"topic": "Рәміздер",
+"youtube": "mQarG6BfPWA",
+"slow": "XZhJ2eO1uIo"
+},
+{
+"label": "Мемлекеттік ту",
+"topic": "Рәміздер",
+"youtube": "N5cXl0Z5-70",
+"slow": "VM-HbZfS_Vg"
+},
+{
+"label": "Монша",
+"topic": "Мекеме, ғимарат",
+"youtube": "JfmTfv5tbCk",
+"slow": "uRf27uO-Z10"
+},
+{
+"label": "Перде",
+"topic": "Мекеме, ғимарат",
+"youtube": "XQiumN_hvTw",
+"slow": "htrejYDLOXg"
+},
+{
+"label": "Пәтер",
+"topic": "Мекеме, ғимарат",
+"youtube": "BL4E7CsaCDg",
+"slow": "pRrAEht8ahE"
+},
+{
+"label": "Пошта",
+"topic": "Мекеме, ғимарат",
+"youtube": "3v8UEKcOxqI",
+"slow": "Ap6MxRXYwzs"
+},
+{
+"label": "Сарай",
+"topic": "Мекеме, ғимарат",
+"youtube": "ywR7MEP_1Pc",
+"slow": "Aa3h9JGq1L8"
+},
+{
+"label": "Сөре",
+"topic": "Мекеме, ғимарат",
+"youtube": "WjkTeucWUbQ",
+"slow": "TVYQCeS3B6w"
+},
+{
+"label": "Сырты",
+"topic": "Мекеме, ғимарат",
+"youtube": "ddio71g7_7g",
+"slow": "plUirjqPpZ8"
+},
+{
+"label": "Тартпа",
+"topic": "Мекеме, ғимарат",
+"youtube": "Jszv7VnKWSA",
+"slow": "xMvCz80Hbac"
+},
+{
+"label": "Терезе сынды",
+"topic": "Мекеме, ғимарат",
+"youtube": "VSdK9pZhUCE",
+"slow": "_hYEgAYdzTg"
+},
+{
+"label": "Терезе",
+"topic": "Мекеме, ғимарат",
+"youtube": "wA-HxOBsi8A",
+"slow": "h8gLQnAt65w"
+},
+{
+"label": "Үй",
+"topic": "Мекеме, ғимарат",
+"youtube": "FUSSw3Qb9XE",
+"slow": "8sWpmwWByjA"
+},
+{
+"label": "Үстел",
+"topic": "Мекеме, ғимарат",
+"youtube": "T3AICLQU6Y8",
+"slow": "1QyJSiNQxHo"
+},
+{
+"label": "Фундамент",
+"topic": "Мекеме, ғимарат",
+"youtube": "rKSz9qBWldU",
+"slow": "-TBN1Udn43k"
+},
+{
+"label": "Шатыр",
+"topic": "Мекеме, ғимарат",
+"youtube": "EHzdg9inXlg",
+"slow": "_PFMPE13HVs"
+},
+{
+"label": "Шеге",
+"topic": "Мекеме, ғимарат",
+"youtube": "Ydne6S7N840",
+"slow": "RAjncikjOJo"
+},
+{
+"label": "Алаң",
+"topic": "Мекеме, ғимарат",
+"youtube": "1h876INsR5w"
+},
+{
+"label": "Ас үй",
+"topic": "Мекеме, ғимарат",
+"youtube": "BJqAxTS0UQo",
+"slow": "37MMWbmCf2w"
+},
+{
+"label": "Аула",
+"topic": "Мекеме, ғимарат",
+"youtube": "Mb-ZkfxL7P0",
+"slow": "kfWGZt0N4NI"
+},
+{
+"label": "Базар",
+"topic": "Мекеме, ғимарат",
+"youtube": "NNrGV1BGkhI",
+"slow": "XV6O4e-QBA4"
+},
+{
+"label": "Балкон",
+"topic": "Мекеме, ғимарат",
+"youtube": "yJ_6C3Y8zlI",
+"slow": "aU4Gqp0EWUo"
+},
+{
+"label": "Баспалдақ",
+"topic": "Мекеме, ғимарат",
+"youtube": "ZQR8jCFkVXA",
+"slow": "l9fh5I2F9NQ"
+},
+{
+"label": "Ғимарат",
+"topic": "Мекеме, ғимарат",
+"youtube": "Kem2qf6pJF4",
+"slow": "gR-mxUC2QkI"
+},
+{
+"label": "Дәрісхана",
+"topic": "Мекеме, ғимарат",
+"youtube": "lYqkKo8uS0M",
+"slow": "uZ8ZRAi5n78"
+},
+{
+"label": "Душ",
+"topic": "Мекеме, ғимарат",
+"youtube": "eJQhCiymNQs",
+"slow": "OGZrIVAKyiU"
+},
+{
+"label": "Дүкен",
+"topic": "Мекеме, ғимарат",
+"youtube": "PEI-pMzhpHg",
+"slow": "MQJKOb9iHJE"
+},
+{
+"label": "Есік",
+"topic": "Мекеме, ғимарат",
+"youtube": "2Y7K7BuzLxk",
+"slow": "s_GCsuGKVIg"
+},
+{
+"label": "Әжетхана",
+"topic": "Мекеме, ғимарат",
+"youtube": "nOW95nD22vk",
+"slow": "c3Z_MDZYzcM"
+},
+{
+"label": "Әкімшілік",
+"topic": "Мекеме, ғимарат",
+"youtube": "jJ4RaLxVXSI",
+"slow": "01_tRJaFYE8"
+},
+{
+"label": "Әлем",
+"topic": "Мекеме, ғимарат",
+"youtube": "4HYO3D0bMu0",
+"slow": "UJpGr-_LGCQ"
+},
+{
+"label": "Әмбебап",
+"topic": "Мекеме, ғимарат",
+"youtube": "MTBhJIi05SU",
+"slow": "SkHo8XfgpR4"
+},
+{
+"label": "Әуежай",
+"topic": "Мекеме, ғимарат",
+"youtube": "vzrh-ztSXcw",
+"slow": "Bh62jrGHeJM"
+},
+{
+"label": "Жеңілдік",
+"topic": "Мекеме, ғимарат",
+"youtube": "w9S7h3R5qc4",
+"slow": "IBeSkQeqZXI"
+},
+{
+"label": "Завод",
+"topic": "Мекеме, ғимарат",
+"youtube": "02SlcK3asjc",
+"slow": "aloWvPeOVaw"
+},
+{
+"label": "Іші",
+"topic": "Мекеме, ғимарат",
+"youtube": "3FLFqkKdhbI",
+"slow": "BZwgxOc8QNQ"
+},
+{
+"label": "Кафель",
+"topic": "Мекеме, ғимарат",
+"youtube": "6gc6kX37oaE",
+"slow": "wsYHQ-7t06c"
+},
+{
+"label": "Кесене",
+"topic": "Мекеме, ғимарат",
+"youtube": "x0WfjBgDnf0",
+"slow": "LXJ8TbcRP5s"
+},
+{
+"label": "Кілт",
+"topic": "Мекеме, ғимарат",
+"youtube": "OOuxVmDSaFo",
+"slow": "0gxYsafNh-g"
+},
+{
+"label": "Кітапхана",
+"topic": "Мекеме, ғимарат",
+"youtube": "_dZ4CHgvQBk",
+"slow": "ZCeAlVH9yZs"
+},
+{
+"label": "Көше",
+"topic": "Мекеме, ғимарат",
+"youtube": "BHMP3SKGbrY",
+"slow": "uTxZEP-9QFE"
+},
+{
+"label": "Қабырға",
+"topic": "Мекеме, ғимарат",
+"youtube": "SGtrFhV6NXI",
+"slow": "G0fjKOL4VOc"
+},
+{
+"label": "Лифт",
+"topic": "Мекеме, ғимарат",
+"youtube": "70DHlAkGg0M",
+"slow": "nsLxyr4hMlU"
+},
+{
+"label": "Мейрамхана",
+"topic": "Мекеме, ғимарат",
+"youtube": "GJiAlfNGsTI",
+"slow": "avV7OU2XMco"
+},
+{
+"label": "Мектеп",
+"topic": "Мекеме, ғимарат",
+"youtube": "UZADaIDu2JA",
+"slow": "JY5JLxDfP4I"
+},
+{
+"label": "Алмасу",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "-5DJ87_i1dg",
+"slow": "9c6YC3N4DTg"
+},
+{
+"label": "Алу",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "hPGEGe2T5ac",
+"slow": "PiisAMntO-k"
+},
+{
+"label": "Алып келу",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "Helu1UvyyLc",
+"slow": "HdDy5K1oRYc"
+},
+{
+"label": "Араласу",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "uPU-gnHek8E",
+"slow": "I2H5bWaZiW8"
+},
+{
+"label": "Артта қалу",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "imVeA6iAv2k",
+"slow": "gcfX0vtqiZ8"
+},
+{
+"label": "Ауыстыру",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "pjq0BNrI2no",
+"slow": "zvjgnaDO754"
+},
+{
+"label": "Байқау",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "Kk9HXxqRtZw",
+"slow": "CjzAElGXjxc"
+},
+{
+"label": "Балалар демалады",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "Uj0l8BHp9ZU",
+"slow": "CdTvZCjc63I"
+},
+{
+"label": "Бар",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "UmkXc5avD9c",
+"slow": "m7dX777bMVo"
+},
+{
+"label": "Бас тарту",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "V2OsnWNF8-4",
+"slow": "5zfETRWKmbI"
+},
+{
+"label": "Басталу",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "1jLv6AV0HA8",
+"slow": "syxCQSU4vhM"
+},
+{
+"label": "Белсенді",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "rIwONUWg6ps",
+"slow": "wIEhgeEZNJU"
+},
+{
+"label": "Беру",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "6CXmR1XAUXc",
+"slow": "VG56GZ-A5Nw"
+},
+{
+"label": "Біле",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "eHawNyT8__o",
+"slow": "GrYvvL6Ay5k"
+},
+{
+"label": "Былау",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "zo2E9m7ONfQ",
+"slow": "AgI0XxMPIn8"
+},
+{
+"label": "Демалу",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "CrinRRo-cEk",
+"slow": "-t5Q4rQXf3U"
+},
+{
+"label": "Апару",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "Ye0ESEen3Io",
+"slow": "dqjRBwk-VKA"
+},
+{
+"label": "Демеу",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "NxEinUjchac",
+"slow": "dDk5YoSnD6g"
+},
+{
+"label": "Есту",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "Y4r1dzWBcew",
+"slow": "bqNptvoDrdQ"
+},
+{
+"label": "Әкелу",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "Gh4MI83SUqs",
+"slow": "JBTy3zdvKqU"
+},
+{
+"label": "Жалғасу",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "FdUMwvcLamk",
+"slow": "QW9ESxZv2O0"
+},
+{
+"label": "Жариялау",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "ec4H-M4zBbQ",
+"slow": "eOAorOei-98"
+},
+{
+"label": "Жоғалттым",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "r_MeqiOkCnM",
+"slow": "HtU1-7gTcy8"
+},
+{
+"label": "Жоғары",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "_unNSDFT3b8",
+"slow": "s30bquL7UIk"
+},
+{
+"label": "Жою",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "0ensVWMBBYo",
+"slow": "S0gEK9Adp8E"
+},
+{
+"label": "Жырту",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "8LD33oUBFxo",
+"slow": "PWT5rh9EhKk"
+},
+{
+"label": "Зымыра",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "oi51H9LJmy8"
+},
+{
+"label": "Кебіру",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "sRXmTqWTW7c",
+"slow": "nycK2dnhbrg"
+},
+{
+"label": "Кездесу",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "IJacXtOLT7E",
+"slow": "Nk1hGIZljwI"
+},
+{
+"label": "Кезек",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "yGQEFdQwk4w",
+"slow": "s7KbDFwOtcA"
+},
+{
+"label": "Кезектен тыс",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "Mzefx89LME4",
+"slow": "BQekiUG4P1I"
+},
+{
+"label": "Келдім",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "9bXTtDWxRg0",
+"slow": "keJuRtSS-9A"
+},
+{
+"label": "Келіспеу",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "_khOlhBnlSI",
+"slow": "Yz0ZTv5Iz8E"
+},
+{
+"label": "Келісу",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "WRY8T_5rjLw",
+"slow": "BOrq91MNpHg"
+},
+{
+"label": "Керек",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "kLWccUbaev0",
+"slow": "AEmQ262iWPQ"
+},
+{
+"label": "Кешігіп қалу",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "h1H0OSxTCts",
+"slow": "jL01gg65BtQ"
+},
+{
+"label": "Кешіру",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "ygkMEm-gNlg",
+"slow": "A9R7ZqVgKNc"
+},
+{
+"label": "Кірме",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "fV7FrhV2D0Q",
+"slow": "TFJuNKd2d5w"
+},
+{
+"label": "Қатысу",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "0SGHrteMqTU",
+"slow": "dNl70z12-pE"
+},
+{
+"label": "Қорқу",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "LidiEmbE3wY",
+"slow": "pFACKsyrkLg"
+},
+{
+"label": "Қуып жету",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "RwfXKoj9Sj0",
+"slow": "2bZNohExvWw"
+},
+{
+"label": "Құмалақ ашу",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "mhVSlknWidI",
+"slow": "wtZKpUeLfIM"
+},
+{
+"label": "Ояту",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "v3mJJNXLSgk",
+"slow": "LWs_-aNlDFc"
+},
+{
+"label": "Пайдалы",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "Ie_ssqPT_oY",
+"slow": "LHKsMuh54-I"
+},
+{
+"label": "Сатып алу",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "fdQSSe9csPs",
+"slow": "Tzx1KfTTbbc"
+},
+{
+"label": "Танысу",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "JMNXsx8suNA",
+"slow": "mglMs2fg63Y"
+},
+{
+"label": "Тарту",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "ZRqhYfbnot4",
+"slow": "JdE4xUlsAY8"
+},
+{
+"label": "Шыдау",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "86dpjACPs50",
+"slow": "n-6XotWtK_k"
+},
+{
+"label": "Тұру",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "bbcvP5GGGWQ",
+"slow": "hGOwgU3Bhyw"
+},
+{
+"label": "Ұзақ өмір сүру",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "vawPk1bMdq4",
+"slow": "t_NbXhFKG28"
+},
+{
+"label": "Ұқсайды",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "HPq7mDzfr9E",
+"slow": "EoaovX9RyuQ"
+},
+{
+"label": "Шақыру",
+"topic": "Қимыл, іс-әрекет",
+"youtube": "WPod0H2v1Sc",
+"slow": "g2ZkOJeAXMo"
+},
+{
+"label": "Ағылшын тілі",
+"topic": "Пән",
+"youtube": "944tOOOUpzw",
+"slow": "-Dm3ScxOigk"
+},
+{
+"label": "Биология",
+"topic": "Пән",
+"youtube": "pFVJlzOkDHg",
+"slow": "dEuCLYx-q18"
+},
+{
+"label": "Қазақ тілі",
+"topic": "Пән",
+"youtube": "ycIVMIcn3BM",
+"slow": "7qs5D7AFTpo"
+},
+{
+"label": "Математика",
+"topic": "Пән",
+"youtube": "jIjBoE_DM_Y",
+"slow": "CybsLBUzEQE"
+},
+{
+"label": "Орыс тілі",
+"topic": "Пән",
+"youtube": "Np_-vilamSU",
+"slow": "BS2P07K2l6M"
+},
+{
+"label": "Тарих",
+"topic": "Пән",
+"youtube": "F6m2uGNjoSc",
+"slow": "-OB-C5lwRrw"
+},
+{
+"label": "Физика",
+"topic": "Пән",
+"youtube": "JZmADX1X_3E",
+"slow": "qosX8mobFQE"
+},
+{
+"label": "Химия",
+"topic": "Пән",
+"youtube": "8Ta501lXlos",
+"slow": "m4U4FYD1eFU"
+},
+{
+"label": "Ым есім",
+"topic": "Пән",
+"youtube": "fvcBw8TsROE",
+"slow": "FG3hbaWIOrk"
+},
+{
+"label": "Ым тілі",
+"topic": "Пән",
+"youtube": "IsAKHfwJUDw",
+"slow": "UGH8Ex8Le-g"
+},
+{
+"label": "Экология",
+"topic": "Пән",
+"youtube": "eW1UOdjP01o",
+"slow": "BN7XIrKSxVw"
+},
+{
+"label": "Иегер",
+"topic": "Оқу, білім беру",
+"youtube": "BS7-HfX0N-M",
+"slow": "2-1XjZlOIdA"
+},
+{
+"label": "Аттестат",
+"topic": "Оқу, білім беру",
+"youtube": "m143HLlF9BM",
+"slow": "ZycxFE0ckxM"
+},
+{
+"label": "Ақылсыз",
+"topic": "Оқу, білім беру",
+"youtube": "BM_V37w7e6U",
+"slow": "5_PB16Ws6Yo"
+},
+{
+"label": "Ұмыту",
+"topic": "Оқу, білім беру",
+"youtube": "jMJUatPO9gc",
+"slow": "cF_c8hMQURs"
+},
+{
+"label": "Түсіндіру",
+"topic": "Оқу, білім беру",
+"youtube": "xu_nLSa8NXc",
+"slow": "aslSAq5nX_Q"
+},
+{
+"label": "Тәртіп",
+"topic": "Оқу, білім беру",
+"youtube": "2Ndpt2LX6cg",
+"slow": "Isf9R-k3B-4"
+},
+{
+"label": "Тәрбиелеу",
+"topic": "Оқу, білім беру",
+"youtube": "wYI32i1qL5U",
+"slow": "CJKFDnbfdP8"
+},
+{
+"label": "Тексеру",
+"topic": "Оқу, білім беру",
+"youtube": "4PnrUgmDAmk",
+"slow": "aGzckWLJMXo"
+},
+{
+"label": "Сурет",
+"topic": "Оқу, білім беру",
+"youtube": "8AfFgPWIyIw",
+"slow": "tnIIOntudCE"
+},
+{
+"label": "Өшіргіш",
+"topic": "Оқу, білім беру",
+"youtube": "1rf2PUL9s-o",
+"slow": "y2K0DY_dhd4"
+},
+{
+"label": "Олимпиада",
+"topic": "Оқу, білім беру",
+"youtube": "D0UrygEgwpQ",
+"slow": "DyRMFdXVq34"
+},
+{
+"label": "Мектеп бітірушілер",
+"topic": "Оқу, білім беру",
+"youtube": "eF3pZ8FKIRA",
+"slow": "ralO0LT4EO4"
+},
+{
+"label": "Қорытынды",
+"topic": "Оқу, білім беру",
+"youtube": "QaMenYxs3-A",
+"slow": "id3x0ON1NlI"
+},
+{
+"label": "Қайталау",
+"topic": "Оқу, білім беру",
+"youtube": "4yDebSjfE_Y",
+"slow": "keZtc_CBJog"
+},
+{
+"label": "Қағаз",
+"topic": "Оқу, білім беру",
+"youtube": "f4y5Z_77_BM",
+"slow": "PtZcB4RY3Rc"
+},
+{
+"label": "Емтихан",
+"topic": "Оқу, білім беру",
+"youtube": "czIG3JExID4",
+"slow": "XwPpnJrgJMg"
+},
+{
+"label": "Дәуір",
+"topic": "Оқу, білім беру",
+"youtube": "hJseKgxDR1o",
+"slow": "RSkjQU0RA2Y"
+},
+{
+"label": "Дерек",
+"topic": "Оқу, білім беру",
+"youtube": "4zkjtcaL64I",
+"slow": "PHAegB4yhrc"
+},
+{
+"label": "Дауыссыз",
+"topic": "Оқу, білім беру",
+"youtube": "XMX6bYyVbqY",
+"slow": "0zJZTw92II0"
+},
+{
+"label": "Дарын",
+"topic": "Оқу, білім беру",
+"youtube": "8lnE3HtBBVk",
+"slow": "iiqWc_aACTE"
+},
+{
+"label": "Ғаламтор",
+"topic": "Оқу, білім беру",
+"youtube": "i8MQQzZ2Y4o",
+"slow": "o-XsoSws-HI"
+},
+{
+"label": "Бөлу",
+"topic": "Оқу, білім беру",
+"youtube": "5xcfYBL-ims",
+"slow": "LewBJvkkS-Y"
+},
+{
+"label": "Бояу",
+"topic": "Оқу, білім беру",
+"youtube": "NZKRSKZalyc",
+"slow": "HkgrJ91n-ww"
+},
+{
+"label": "Білу",
+"topic": "Оқу, білім беру",
+"youtube": "CEOnqFSbzhg",
+"slow": "-55-Uxk1IYo"
+},
+{
+"label": "Баяндау",
+"topic": "Оқу, білім беру",
+"youtube": "FBSFQ7WXyiM",
+"slow": "KxF0PkMPI6U"
+},
+{
+"label": "Атымдық",
+"topic": "Оқу, білім беру",
+"youtube": "6GMzJRgHBik",
+"slow": "vAQOYmURsYA"
+},
+{
+"label": "Жауап",
+"topic": "Оқу, білім беру",
+"youtube": "Kf1b3-ZqGZE",
+"slow": "ZDpEcO4ayNM"
+},
+{
+"label": "Әңгімелеу",
+"topic": "Оқу, білім беру",
+"youtube": "HZ9W2tNTM9A",
+"slow": "-rD0dYpC7r8"
+},
+{
+"label": "Кітап оқү",
+"topic": "Оқу, білім беру",
+"youtube": "K8QwCHMeDHk"
+},
+{
+"label": "Білмейн",
+"topic": "Оқу, білім беру",
+"youtube": "x7SWTCMUjbc"
+},
+{
+"label": "Есте сақтау",
+"topic": "Оқу, білім беру",
+"youtube": "W1MTBsq_avI",
+"slow": "fMNeqbZbgvQ"
+},
+{
+"label": "Ғалым",
+"topic": "Оқу, білім беру",
+"youtube": "edEjeGqk4Kw",
+"slow": "X1_5Xs1uUBM"
+},
+{
+"label": "Жебеуші",
+"topic": "Ойын, спорт, би, ән",
+"youtube": "Q4alVRsr5ts",
+"slow": "nACB0HXkids"
+},
+{
+"label": "Каратэ",
+"topic": "Ойын, спорт, би, ән",
+"youtube": "yMVyZcsU9Gk",
+"slow": "wr4fpYRWfXo"
+},
+{
+"label": "Жеңіс",
+"topic": "Ойын, спорт, би, ән",
+"youtube": "9CUx8LufRSY",
+"slow": "WZwP2rUajig"
+},
+{
+"label": "Жүгіру",
+"topic": "Ойын, спорт, би, ән",
+"youtube": "zJnX8jm0q3k",
+"slow": "bLoXry6Qf6o"
+},
+{
+"label": "Ойнау",
+"topic": "Ойын, спорт, би, ән",
+"youtube": "mdDeDI6AV4E",
+"slow": "Rt4stomPQAo"
+},
+{
+"label": "Балет",
+"topic": "Ойын, спорт, би, ән",
+"youtube": "mg4aTK_Jy1U",
+"slow": "IDAeBl8S178"
+},
+{
+"label": "Футбол",
+"topic": "Ойын, спорт, би, ән",
+"youtube": "cpXDJKkmxbQ",
+"slow": "vbnZ3sYocCU"
+},
+{
+"label": "Баскетбол",
+"topic": "Ойын, спорт, би, ән",
+"youtube": "OtjUE28CnCw",
+"slow": "rPYiGq6G6pU"
+},
+{
+"label": "Билеу",
+"topic": "Ойын, спорт, би, ән",
+"youtube": "hg1nb6-GCoU",
+"slow": "SDDF9zwpY2s"
+},
+{
+"label": "Цирк",
+"topic": "Ойын, спорт, би, ән",
+"youtube": "gup9JFo5fbQ",
+"slow": "qjWfHBc1LZQ"
+},
+{
+"label": "Бокс",
+"topic": "Ойын, спорт, би, ән",
+"youtube": "KOaRB4_JYgU",
+"slow": "ePFtvvDhqCc"
+},
+{
+"label": "Шаңғы",
+"topic": "Ойын, спорт, би, ән",
+"youtube": "zsG8xRYYK3o",
+"slow": "a7W1mis29Vc"
+},
+{
+"label": "Волейбол",
+"topic": "Ойын, спорт, би, ән",
+"youtube": "XRYZmG6p65s",
+"slow": "0ZHRFUhWkqQ"
+},
+{
+"label": "Гастроль",
+"topic": "Ойын, спорт, би, ән",
+"youtube": "R2zUswCkuzQ",
+"slow": "6yUk4VBLnxI"
+},
+{
+"label": "Шахматы",
+"topic": "Ойын, спорт, би, ән",
+"youtube": "4V1112X88nM",
+"slow": "ldT1V8qQ9zU"
+},
+{
+"label": "Дойбы",
+"topic": "Ойын, спорт, би, ән",
+"youtube": "sM8Agz9n8iQ",
+"slow": "ARAWbNoeans"
+},
+{
+"label": "Доп",
+"topic": "Ойын, спорт, би, ән",
+"youtube": "MHNi8-OHYiU",
+"slow": "pzhoRD2Kt3Y"
+},
+{
+"label": "Айқас",
+"topic": "Ойын, спорт, би, ән",
+"youtube": "tvcDL9azFzo",
+"slow": "gOjc5l-91QE"
+},
+{
+"label": "Ән",
+"topic": "Ойын, спорт, би, ән",
+"youtube": "rDTkF4Lqous",
+"slow": "vDV05LYecCI"
+},
+{
+"label": "Ұтып алу",
+"topic": "Ойын, спорт, би, ән",
+"youtube": "t53ZIkytgJY",
+"slow": "Liq4SE1JVoY"
+},
+{
+"label": "Акробатикалық",
+"topic": "Ойын, спорт, би, ән",
+"youtube": "5C48EFiL-rU",
+"slow": "OU9H_AsoPk0"
+},
+{
+"label": "Ақылды",
+"topic": "Ойын, спорт, би, ән",
+"youtube": "jQVWS_fdoFM",
+"slow": "2flEygeBUp8"
+},
+{
+"label": "Ұтыс",
+"topic": "Ойын, спорт, би, ән",
+"youtube": "rbxtouZu-FM",
+"slow": "mSiJ_dmNas4"
+},
+{
+"label": "Стадион",
+"topic": "Ойын, спорт, би, ән",
+"youtube": "cEb0B7vGsL8",
+"slow": "la3nLbeKiUU"
+},
+{
+"label": "Сырнай",
+"topic": "Ойын, спорт, би, ән",
+"youtube": "sb0K37kGtTI",
+"slow": "YvUREZnzYxA"
+},
+{
+"label": "Теннис",
+"topic": "Ойын, спорт, би, ән",
+"youtube": "TdNQPrdcjC8",
+"slow": "vzMl1mYF1UM"
+},
+{
+"label": "Ұтылыс",
+"topic": "Ойын, спорт, би, ән",
+"youtube": "v-CJ8IPnX9E",
+"slow": "r65a7lHfmJY"
+},
+{
+"label": "Адвокат",
+"topic": "Мамандық, жұмыс",
+"youtube": "111wRWGFEjY",
+"slow": "wIWLJr8BS3A"
+},
+{
+"label": "Басқару",
+"topic": "Мамандық, жұмыс",
+"youtube": "MwjXdYxXYBw",
+"slow": "hLPERoyADs0"
+},
+{
+"label": "Басшы",
+"topic": "Мамандық, жұмыс",
+"youtube": "os04F7VJlUc",
+"slow": "Ztr-3eiET0o"
+},
+{
+"label": "Ғарышкер",
+"topic": "Мамандық, жұмыс",
+"youtube": "UywVDA5xe3E",
+"slow": "wnxkUZhRQac"
+},
+{
+"label": "Генерал",
+"topic": "Мамандық, жұмыс",
+"youtube": "W2aKpdf3bh4",
+"slow": "6tnyBgCZO-w"
+},
+{
+"label": "Демалыс",
+"topic": "Мамандық, жұмыс",
+"youtube": "F9SzDPAWbXw",
+"slow": "9FzgdjyO33k"
+},
+{
+"label": "Демеуші",
+"topic": "Мамандық, жұмыс",
+"youtube": "xIBpJ_2dwts",
+"slow": "UdzaIhYXtJM"
+},
+{
+"label": "Депутат",
+"topic": "Мамандық, жұмыс",
+"youtube": "IC1-KWNests",
+"slow": "HTffp7FmKsk"
+},
+{
+"label": "Елбасы",
+"topic": "Мамандық, жұмыс",
+"youtube": "emoWzrkQdlg",
+"slow": "yTyKIQVqLPM"
+},
+{
+"label": "Еңбек демалысы",
+"topic": "Мамандық, жұмыс",
+"youtube": "dU4f5FgGIIs",
+"slow": "lX8Y8zAU8mA"
+},
+{
+"label": "Етікші",
+"topic": "Мамандық, жұмыс",
+"youtube": "zyU5m5w3DnI",
+"slow": "Z4NyOwj3Yms"
+},
+{
+"label": "Әкім",
+"topic": "Мамандық, жұмыс",
+"youtube": "OLAOgaRUhbw",
+"slow": "gqZg6b_X2UI"
+},
+{
+"label": "Әртіс",
+"topic": "Мамандық, жұмыс",
+"youtube": "Hfj9qTk6aMw",
+"slow": "RALI637IcYE"
+},
+{
+"label": "Жауынгер",
+"topic": "Мамандық, жұмыс",
+"youtube": "DnE4WgyjYtc",
+"slow": "lAreo-qrzkI"
+},
+{
+"label": "Жиналыс",
+"topic": "Мамандық, жұмыс",
+"youtube": "i-PFYnfz_r8",
+"slow": "aB4G1hCS6rI"
+},
+{
+"label": "Жоба",
+"topic": "Мамандық, жұмыс",
+"youtube": "xWsjzMyCNE4",
+"slow": "7vZ5xayFd9c"
+},
+{
+"label": "Жұмысшы",
+"topic": "Мамандық, жұмыс",
+"youtube": "Kv8exn5EJas",
+"slow": "3psaQlfY6PA"
+},
+{
+"label": "Заңгер",
+"topic": "Мамандық, жұмыс",
+"youtube": "c8IFxN-lmW8",
+"slow": "ZCod-3kGSzc"
+},
+{
+"label": "Зейнетақы",
+"topic": "Мамандық, жұмыс",
+"youtube": "5LBzFfVAYP0",
+"slow": "hv69zT5N_Ig"
+},
+{
+"label": "Зейнеткер",
+"topic": "Мамандық, жұмыс",
+"youtube": "__UOU1YncmU",
+"slow": "MDEb6b6Iy3U"
+},
+{
+"label": "Іс сапар",
+"topic": "Мамандық, жұмыс",
+"youtube": "rwZ6ySBDP9Q",
+"slow": "wcsNG6qN0d8"
+},
+{
+"label": "Кеден",
+"topic": "Мамандық, жұмыс",
+"youtube": "eKmdKVfkpps",
+"slow": "Ma1AddVyRWw"
+},
+{
+"label": "Кезекші",
+"topic": "Мамандық, жұмыс",
+"youtube": "u0VXWoTbXwo",
+"slow": "pWeixdIQO28"
+},
+{
+"label": "Үгіт насихат",
+"topic": "Мамандық, жұмыс",
+"youtube": "Pwvofd0vLHA",
+"slow": "obuBrMII6JU"
+},
+{
+"label": "Сот",
+"topic": "Мамандық, жұмыс",
+"youtube": "ODmRLxAkO2o",
+"slow": "heBA_tfJhKU"
+},
+{
+"label": "Отпуск",
+"topic": "Мамандық, жұмыс",
+"youtube": "EX9afln1Stk",
+"slow": "QQrSnWRAzps"
+},
+{
+"label": "Қарауыл",
+"topic": "Мамандық, жұмыс",
+"youtube": "wqIVbbhfj7Q",
+"slow": "u44B6W-7eV0"
+},
+{
+"label": "Қақпашы",
+"topic": "Мамандық, жұмыс",
+"youtube": "pLVStdOiidU",
+"slow": "Ow8qGAlN7dE"
+},
+{
+"label": "Күзетші",
+"topic": "Мамандық, жұмыс",
+"youtube": "fkPkZN2oc0E",
+"slow": "uVFpzqw9vDk"
+},
+{
+"label": "Көлік жүргізуші",
+"topic": "Мамандық, жұмыс",
+"youtube": "gi4_rhXIoTc",
+"slow": "5j6sZUx_Sdo"
+},
+{
+"label": "Дипломат",
+"topic": "Мамандық, жұмыс",
+"youtube": "wv2miuCoEIQ",
+"slow": "iqBfoezxnS8"
+},
+{
+"label": "Дәрігер",
+"topic": "Мамандық, жұмыс",
+"youtube": "gnCKbeoqvac",
+"slow": "cCcZjfYy3L0"
+},
+{
+"label": "Айрықша",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "na5688Sscl0",
+"slow": "KBhEgsWxZKY"
+},
+{
+"label": "Ашулану",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "TSJhQ0ta-TY",
+"slow": "qtRbs5KQgT8"
+},
+{
+"label": "Аяу",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "KuxGXRz5x8g",
+"slow": "TN-XphAAB0w"
+},
+{
+"label": "Бақыт",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "YLelDkEJAHc",
+"slow": "wckP-LsmRck"
+},
+{
+"label": "Ғашық болу",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "AvLC0G-q4BI",
+"slow": "2C7SmFQDXV4"
+},
+{
+"label": "Ғашық",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "wedqgnkKyQ8",
+"slow": "_RXUik4N2B8"
+},
+{
+"label": "Әсем",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "sW_ZxfKiu-Y",
+"slow": "_UugudpWI38"
+},
+{
+"label": "Әсер ету",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "NcpBGI01Tnk",
+"slow": "D_veRCARHe8"
+},
+{
+"label": "Жылау",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "AaqnGkasbGA",
+"slow": "uI8gq6mPboY"
+},
+{
+"label": "Ізгіліқ",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "-oKPwKRB0Bg",
+"slow": "aKEpL_j0t8U"
+},
+{
+"label": "Көңілдену",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "mh5-riAMJrY",
+"slow": "CzhGCeYmS-0"
+},
+{
+"label": "Көңілді",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "ZdUSuA-c--U",
+"slow": "J-Dq9ztGUSU"
+},
+{
+"label": "Көңілкүй",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "kE9wJeaDOvM",
+"slow": "uj4wMcOyD4k"
+},
+{
+"label": "Күйгелек",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "RouCSxHRMws",
+"slow": "i-cOmZr342Q"
+},
+{
+"label": "Күрсіну",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "LU7J8TUYktY",
+"slow": "LqRnLovkL1c"
+},
+{
+"label": "Қатал",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "nQ_c418YpIU",
+"slow": "jk_4BkWK6yk"
+},
+{
+"label": "Қуану",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "LWw-EmYVqb8",
+"slow": "NAgKyD745uE"
+},
+{
+"label": "Қурмет",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "kcXQoKw3PWw",
+"slow": "_zmPMJJol9U"
+},
+{
+"label": "Мақтаныш",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "speMenN-fzs",
+"slow": "CbhU4tRCTwk"
+},
+{
+"label": "Мен сені сүйемін",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "MrWL1C36Pjw",
+"slow": "8LltCSlR84w"
+},
+{
+"label": "Намыс",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "Vi1w0GsHO44",
+"slow": "FeAAOXqYf_0"
+},
+{
+"label": "Өте керемет",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "9fxsDj17UHU",
+"slow": "yvZFZq22DvU"
+},
+{
+"label": "Сабыр",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "XtaiBDbFIJY",
+"slow": "bSxvD_GjjJs"
+},
+{
+"label": "Семіз",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "JCdxjDBNeAo",
+"slow": "MKyw6__enKw"
+},
+{
+"label": "Сену",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "az_ykabRTb8",
+"slow": "eBEPxbaams4"
+},
+{
+"label": "Ұнайды",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "H4vgSP3mfr0",
+"slow": "mhwmNMAGqo8"
+},
+{
+"label": "Ұнамайды",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "qjxHwwaY7Pc",
+"slow": "FN4-v5P12zU"
+},
+{
+"label": "Шаттану",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "0j6PLUBRHnY",
+"slow": "6GPGhHqeVcI"
+},
+{
+"label": "Шындық",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "rdKBb9rotz4",
+"slow": "Rj0J4DX1vnk"
+},
+{
+"label": "Күлу",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "mbS_nqzwVwA",
+"slow": "Z8r466hg1UI"
+},
+{
+"label": "Қалау",
+"topic": "Сезім, қасиет, мінез",
+"youtube": "i6ya1jv_4MU",
+"slow": "gRjaKcOmygQ"
+},
+{
+"label": "Ата",
+"topic": "Отбасы",
+"youtube": "cqKhzP8O6DM",
+"slow": "n_iy750byYc"
+},
+{
+"label": "Бала",
+"topic": "Отбасы",
+"youtube": "D8PuSPPw9co",
+"slow": "khtdUGBhSGo"
+},
+{
+"label": "Балалар",
+"topic": "Отбасы",
+"youtube": "x5EMVihcmOw",
+"slow": "o11sMP3D0vQ"
+},
+{
+"label": "Әже",
+"topic": "Отбасы",
+"youtube": "VN-jKkum1O0",
+"slow": "iMyFEWxUTNw"
+},
+{
+"label": "Әке",
+"topic": "Отбасы",
+"youtube": "90K13E683KQ",
+"slow": "rvJpH5bXNAo"
+},
+{
+"label": "Жиен",
+"topic": "Отбасы",
+"youtube": "msBsQLLgueI",
+"slow": "UIWKkh882Ns"
+},
+{
+"label": "Көрші",
+"topic": "Отбасы",
+"youtube": "-ubhHT_lSX0",
+"slow": "j12h6_BHqMQ"
+},
+{
+"label": "Күйеу жігіт",
+"topic": "Отбасы",
+"youtube": "7erm7jFmXlo",
+"slow": "h6Z8QXtY0-8"
+},
+{
+"label": "Күйеу",
+"topic": "Отбасы",
+"youtube": "_UCIzE2GLSk",
+"slow": "CL_6SgPA45s"
+},
+{
+"label": "Қалыңдық",
+"topic": "Отбасы",
+"youtube": "DUu4K8Hldhk",
+"slow": "hBYSSVxDnKA"
+},
+{
+"label": "Қыз",
+"topic": "Отбасы",
+"youtube": "AAMTSjz3brk",
+"slow": "apubkzCHxLQ"
+},
+{
+"label": "Нәресте",
+"topic": "Отбасы",
+"youtube": "7tyYEpuYlYw",
+"slow": "VnxSwLcfZHU"
+},
+{
+"label": "Отбасы",
+"topic": "Отбасы",
+"youtube": "41_e15wVxZ8",
+"slow": "6vZSOowx5dY"
+},
+{
+"label": "Тәте",
+"topic": "Отбасы",
+"youtube": "OWUkw9pz5bs",
+"slow": "Xxdhd3vFqKk"
+},
+{
+"label": "Ана",
+"topic": "Отбасы",
+"youtube": "fAH8VgvzXlU",
+"slow": "92PBDpi3T_E"
+},
+{
+"label": "Апа",
+"topic": "Отбасы",
+"youtube": "_TsD_nHkVtg",
+"slow": "dQRSo1OjSpY"
+},
+{
+"label": "Үйлену",
+"topic": "Отбасы",
+"youtube": "nNxm3-1qm1k",
+"slow": "IpVxI_GQKUI"
+},
+{
+"label": "Аяқ киім",
+"topic": "Киім, аяқ киім, сән",
+"youtube": "Z-CADl_E0Dk",
+"slow": "hCwe-2geEJc"
+},
+{
+"label": "Әйелдер қалпағы",
+"topic": "Киім, аяқ киім, сән",
+"youtube": "6mlwOEvkcwg",
+"slow": "uCRrUxL5D0c"
+},
+{
+"label": "Шүберек",
+"topic": "Киім, аяқ киім, сән",
+"youtube": "fnXhEIPAD6o",
+"slow": "C1mq4rg4_Ec"
+},
+{
+"label": "Шалбар",
+"topic": "Киім, аяқ киім, сән",
+"youtube": "bgMivveRUwE",
+"slow": "C38F_M40HRw"
+},
+{
+"label": "Үтіктеу",
+"topic": "Киім, аяқ киім, сән",
+"youtube": "nBtBcKWqOlA",
+"slow": "I4vNNFsA8Z0"
+},
+{
+"label": "Тоқу",
+"topic": "Киім, аяқ киім, сән",
+"youtube": "KnwLKNm-nts",
+"slow": "C_2nrRLs--o"
+},
+{
+"label": "Тігу",
+"topic": "Киім, аяқ киім, сән",
+"youtube": "bMoLhmUvhms",
+"slow": "Lw4KpkkgkgM"
+},
+{
+"label": "Спорт жейдесі",
+"topic": "Киім, аяқ киім, сән",
+"youtube": "a6PoyRxyS8Y",
+"slow": "k9PjPoHmJfk"
+},
+{
+"label": "Сөмке",
+"topic": "Киім, аяқ киім, сән",
+"youtube": "dxMVFJnyjZo",
+"slow": "oy8i68LCFQ4"
+},
+{
+"label": "Сән",
+"topic": "Киім, аяқ киім, сән",
+"youtube": "NqwtHy7EQFo",
+"slow": "IL9_qfQYR9c"
+},
+{
+"label": "Пима",
+"topic": "Киім, аяқ киім, сән",
+"youtube": "B2wQhTtgGWA",
+"slow": "jFuZm1iEWUM"
+},
+{
+"label": "Өкше",
+"topic": "Киім, аяқ киім, сән",
+"youtube": "_HTkxKagWsc",
+"slow": "obzsJoOKtgk"
+},
+{
+"label": "Орамал",
+"topic": "Киім, аяқ киім, сән",
+"youtube": "jZ_rt1bEQEc",
+"slow": "WTO4CrLIn6o"
+},
+{
+"label": "Мода",
+"topic": "Киім, аяқ киім, сән",
+"youtube": "l9fJuxcS7bI",
+"slow": "S0h8v-mU_QI"
+},
+{
+"label": "Қолғап",
+"topic": "Киім, аяқ киім, сән",
+"youtube": "U6sCZolO9ew",
+"slow": "Cd8OsUGKiQE"
+},
+{
+"label": "Қалпақ",
+"topic": "Киім, аяқ киім, сән",
+"youtube": "7dgQG3oWjHU",
+"slow": "LX5a3kgk2x0"
+},
+{
+"label": "Костюм",
+"topic": "Киім, аяқ киім, сән",
+"youtube": "uDT8Ppn8vWg",
+"slow": "FplFFp4PdZM"
+},
+{
+"label": "Киім",
+"topic": "Киім, аяқ киім, сән",
+"youtube": "4MnkD-mYrjc",
+"slow": "5G98L9AzgRM"
+},
+{
+"label": "Етік",
+"topic": "Киім, аяқ киім, сән",
+"youtube": "6pki6nIfonI",
+"slow": "DNhyOcwOmM0"
+},
+{
+"label": "Грим",
+"topic": "Киім, аяқ киім, сән",
+"youtube": "SX6NrmKUxfw",
+"slow": "lvjHHLEE2Qw"
+},
+{
+"label": "Бәтеңке",
+"topic": "Киім, аяқ киім, сән",
+"youtube": "a2x3crTq9D8",
+"slow": "o-kJD6rwOzI"
+},
+{
+"label": "Бетперде",
+"topic": "Киім, аяқ киім, сән",
+"youtube": "eMtiIzL9jUU",
+"slow": "XdC3gn2j_LY"
+},
+{
+"label": "Белдемше",
+"topic": "Киім, аяқ киім, сән",
+"youtube": "SEHhdEiQxJ4",
+"slow": "pCwS5ovymO0"
+},
+{
+"label": "Діни",
+"topic": "Дін",
+"youtube": "bDfnS__W78I",
+"slow": "qRe4P8X2UfE"
+},
+{
+"label": "Христиан",
+"topic": "Дін",
+"youtube": "QHbDcbx7X-8",
+"slow": "SU-YIDRc3fM"
+},
+{
+"label": "Періште",
+"topic": "Дін",
+"youtube": "3oWP_9WRPNs",
+"slow": "tYlir_eAeQA"
+},
+{
+"label": "Мұсылман",
+"topic": "Дін",
+"youtube": "RsZ9uQXkNQM",
+"slow": "S3if_jqNpd8"
+},
+{
+"label": "Қияр",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "OJpHK20VeRc",
+"slow": "7grN_LVOuuI"
+},
+{
+"label": "Сәбіз",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "9DiovJ_ZBj4",
+"slow": "iBEL_D8JgRs"
+},
+{
+"label": "Нан",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "oub4HG6aYX0",
+"slow": "PDBPFcs4XBw"
+},
+{
+"label": "Жастық",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "i9cOaZedYIw",
+"slow": "6AdQwpxVpLY"
+},
+{
+"label": "Тамақтан улану",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "iVC7xAlZLCo",
+"slow": "0gf-GmHc3mw"
+},
+{
+"label": "Тоқ",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "bwYkbYycOok",
+"slow": "auN4I-piHCc"
+},
+{
+"label": "Көрпе",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "bDjdVvNqiYs",
+"slow": "DW6B1qIbXM0"
+},
+{
+"label": "Азық түлік",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "P-4Q9xB58m4",
+"slow": "GBncAUQzTZs"
+},
+{
+"label": "Қарбыз",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "uLuT92BlVSU",
+"slow": "_QpDyVCfZ98"
+},
+{
+"label": "Қант",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "NoUfhGUN7A8",
+"slow": "5yY1e76Izd4"
+},
+{
+"label": "Қаймақ",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "kc5yxcFon-8",
+"slow": "7YBGy91SRn4"
+},
+{
+"label": "Көкөніс",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "aLKvGOKW1zE",
+"slow": "BvbdPh5XNUw"
+},
+{
+"label": "Кәмпит",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "TiE1Z04pPV4",
+"slow": "tIFsYiOl8TQ"
+},
+{
+"label": "Картоп",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "9xA1M1AyVIo",
+"slow": "V4qZ7IpDMpc"
+},
+{
+"label": "Ірімшік",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "A9vuuJL6wDQ",
+"slow": "YyMw8zGhzRc"
+},
+{
+"label": "Жұмыртқа",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "Qf7VTkFcRE4",
+"slow": "E9hK4uBK0FA"
+},
+{
+"label": "Жүзім",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "NWys1A49MBM",
+"slow": "GsT6oimTZFo"
+},
+{
+"label": "Жаңғақ",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "GdMl3YoT46A",
+"slow": "ASMzIvVIeFw"
+},
+{
+"label": "Ет",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "ZDr1O3GVW5c",
+"slow": "oCxliZhwTHk"
+},
+{
+"label": "Дәмді",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "SAEHjn7sn-w",
+"slow": "MTmM7T_3p1w"
+},
+{
+"label": "Варенье",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "IOz_ILKPH1w",
+"slow": "KAOESTNtzI8"
+},
+{
+"label": "Бұрыш",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "kYqTaRvOBjc",
+"slow": "QiaDbTSbFlk"
+},
+{
+"label": "Бұршақ",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "v4vBjAnYPO8",
+"slow": "qY2b5YqA5gA"
+},
+{
+"label": "Ботқа",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "Se_g-KU_XDA",
+"slow": "nIeiRAFryCg"
+},
+{
+"label": "Блины",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "ceh7hqTlarw",
+"slow": "alNgKAwDTuU"
+},
+{
+"label": "Бидай",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "aaHJDB83X_k",
+"slow": "rmkx5gnpYDY"
+},
+{
+"label": "Банан",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "hzyS6WKHb_s",
+"slow": "3KODdYTx_Pw"
+},
+{
+"label": "Асқабақ",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "OhMqEe2fefk",
+"slow": "u3BuroRCUGI"
+},
+{
+"label": "Арақ",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "6DyxrFyOExw",
+"slow": "hLz4mYL6e00"
+},
+{
+"label": "Шарап",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "1r3VnR0OfUU",
+"slow": "HZUNPWIsJCo"
+},
+{
+"label": "Шай",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "IhYELeBWPJY",
+"slow": "0I0DcbHzme0"
+},
+{
+"label": "Ұн",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "XUtqykHE7Pk",
+"slow": "XTdybi0xT5w"
+},
+{
+"label": "Улану",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "1h9liv0FSMA",
+"slow": "EI7CqJ1BqPE"
+},
+{
+"label": "Тұз",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "st7E8C4Phmw",
+"slow": "ybwCrlUi400"
+},
+{
+"label": "Тамақ жеу",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "9gZgHPY6rIk",
+"slow": "fDLwRt-RGOo"
+},
+{
+"label": "Тамақ дайындау",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "Qr6p_85KUys",
+"slow": "lGVVGlnnP9Q"
+},
+{
+"label": "Тамақ бүлініп кетті",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "K4umSHbkbI0",
+"slow": "qkf1ZqhBFLM"
+},
+{
+"label": "Сыра",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "E-i02qKMFz0",
+"slow": "uK0_o5-AJRE"
+},
+{
+"label": "Сүт",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "RshzTKu8YKA",
+"slow": "z-5ce5xjtDY"
+},
+{
+"label": "Су",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "C6pC6sfoDE0",
+"slow": "iPI8EXhjSe8"
+},
+{
+"label": "Сорпа",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "osZxTXnGEew",
+"slow": "N1_ThFKx_-A"
+},
+{
+"label": "Сары май",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "cBUuGHnsFdw",
+"slow": "0dGpKrEbZ8I"
+},
+{
+"label": "Сарымсақ",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "80pR6nvWIbE",
+"slow": "3yyzOSzK_AU"
+},
+{
+"label": "Пісіру",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "VxKRoDPV0Ig",
+"slow": "GR4jo7zbWTw"
+},
+{
+"label": "Пияз",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "9Nf83qmkkbQ",
+"slow": "ytAA-f85Qg0"
+},
+{
+"label": "Өсімдік майы",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "XAvrASdCzR4",
+"slow": "2xNujPDsjm4"
+},
+{
+"label": "Нан пісіру",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "2UwPICYTq3w",
+"slow": "NxOkNzb-E1E"
+},
+{
+"label": "Қышқыл",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "4J0f7ejKa-w",
+"slow": "-uufH9ctl3A"
+},
+{
+"label": "Қуыру",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "gxnRICBLj6s",
+"slow": "BcMd22CF8nc"
+},
+{
+"label": "Қауын",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "TsY8lgWMj6w",
+"slow": "peRhSjme_jE"
+},
+{
+"label": "Айран",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "WD9VhaeButQ",
+"slow": "IQu4BX-jSYQ"
+},
+{
+"label": "Алма",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "NE19Y_76eFc",
+"slow": "E5c5b54aCgU"
+},
+{
+"label": "Апельсин",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "AJJNNhy4tCA",
+"slow": "DojN-m9EQ-A"
+},
+{
+"label": "Алмұрт",
+"topic": "Азық-түлік,тамақ,сусын ,төсек орын",
+"youtube": "G1rIBQfURj0",
+"slow": "-TlcGs_dxrw"
+},
+{
+"label": "Артикуляция",
+"topic": "Денсаулық , медицина",
+"youtube": "KmBOzusWgKw",
+"slow": "moUPzgfNkcE"
+},
+{
+"label": "Жұқпалы ауру",
+"topic": "Денсаулық , медицина",
+"youtube": "NnUG02QuMPE",
+"slow": "ZG24VKlW3qA"
+},
+{
+"label": "Бетжүзі",
+"topic": "Денсаулық , медицина",
+"youtube": "YRMJfxC11uE",
+"slow": "iIBWRFrH69c"
+},
+{
+"label": "Дене",
+"topic": "Денсаулық , медицина",
+"youtube": "Bfi3qYEGFDY",
+"slow": "KdQXrKl5wnI"
+},
+{
+"label": "Жүрек",
+"topic": "Денсаулық , медицина",
+"youtube": "qc3RFyPIDIE",
+"slow": "5w2DclQL2R8"
+},
+{
+"label": "Емхана",
+"topic": "Денсаулық , медицина",
+"youtube": "qze8AW9oLlE",
+"slow": "mTdSpr84Foo"
+},
+{
+"label": "Емдеу",
+"topic": "Денсаулық , медицина",
+"youtube": "VMytxAzymf0",
+"slow": "zC4lJoubBCU"
+},
+{
+"label": "Дәрі",
+"topic": "Денсаулық , медицина",
+"youtube": "fFWe-f68l9w",
+"slow": "ihP8rzwlxIk"
+},
+{
+"label": "Денсаулық",
+"topic": "Денсаулық , медицина",
+"youtube": "GcYvEmUr5zk",
+"slow": "ul6DHUf7yAk"
+},
+{
+"label": "Бас",
+"topic": "Денсаулық , медицина",
+"youtube": "qsMEgFYUgow",
+"slow": "SyvziW1DEMs"
+},
+{
+"label": "Ауру",
+"topic": "Денсаулық , медицина",
+"youtube": "LP50bpUU-Jg",
+"slow": "Y-GxyucEKxM"
+},
+{
+"label": "Аборт",
+"topic": "Денсаулық , медицина",
+"youtube": "vDIZbDsiJAw",
+"slow": "M63BUtTFb3E"
+}
+],
+"letters": [
+{
+"title": "А",
+"youtube": "LBFsmk7kooQ",
+"duration": 5
+},
+{
+"title": "Б",
+"youtube": "jhmtdinluLk",
+"duration": 6
+},
+{
+"title": "В",
+"youtube": "11T1owDlWC0",
+"duration": 6
+},
+{
+"title": "Г",
+"youtube": "0mJupwZb8vk",
+"duration": 7
+},
+{
+"title": "Ғ",
+"youtube": "mm4kD30r89I",
+"duration": 6
+},
+{
+"title": "Д",
+"youtube": "qa0EMegWkIA",
+"duration": 5
+},
+{
+"title": "Е",
+"youtube": "qMoUuPFr5jM",
+"duration": 6
+},
+{
+"title": "Ё",
+"youtube": "Fj_OY85_qrM",
+"duration": 6
+},
+{
+"title": "Ә",
+"youtube": "vXc_OMRw-ek",
+"duration": 6
+},
+{
+"title": "Ж",
+"youtube": "rXDZ8zqm3xA",
+"duration": 6
+},
+{
+"title": "З",
+"youtube": "bNMINs-A4mk",
+"duration": 5
+},
+{
+"title": "И",
+"youtube": "QF6zMkgKMnM",
+"duration": 5
+},
+{
+"title": "Й",
+"youtube": "iAnraRHKWY0",
+"duration": 5
+},
+{
+"title": "І",
+"youtube": "W2PfoWp5pkU",
+"duration": 6
+},
+{
+"title": "К",
+"youtube": "JqAFpKZI0wk",
+"duration": 5
+},
+{
+"title": "Қ",
+"youtube": "dnWpJDEdsqw",
+"duration": 5
+},
+{
+"title": "Л",
+"youtube": "QngmH9wHZ_0",
+"duration": 5
+},
+{
+"title": "М",
+"youtube": "wCq4QB_3hSU",
+"duration": 6
+},
+{
+"title": "Н",
+"youtube": "JV09jOl-uD4",
+"duration": 4
+},
+{
+"title": "Ң",
+"youtube": "r_gKsFMNxyc",
+"duration": 6
+},
+{
+"title": "О",
+"youtube": "YShMbUzOqck",
+"duration": 4
+},
+{
+"title": "П",
+"youtube": "kJAUxA91eyg",
+"duration": 5
+},
+{
+"title": "Р",
+"youtube": "63Xslfr4VD8",
+"duration": 5
+},
+{
+"title": "С",
+"youtube": "1qnhE4-pguo",
+"duration": 5
+},
+{
+"title": "Т",
+"youtube": "GTQDY9f7UrM",
+"duration": 5
+},
+{
+"title": "У",
+"youtube": "q_isprC03eg",
+"duration": 5
+},
+{
+"title": "Ұ",
+"youtube": "XDbmRsxCuIY",
+"duration": 5
+},
+{
+"title": "Ф",
+"youtube": "rZ5di9-JZng",
+"duration": 6
+},
+{
+"title": "Х",
+"youtube": "6UuINqsH3x0",
+"duration": 5
+},
+{
+"title": "Ц",
+"youtube": "nZ9Co_XsKSM",
+"duration": 5
+},
+{
+"title": "Ч",
+"youtube": "nBRRAjiNovo",
+"duration": 5
+},
+{
+"title": "Щ",
+"youtube": "mMXq280DxoU",
+"duration": 5
+},
+{
+"title": "Ъ",
+"youtube": "UTSetRhp_DM",
+"duration": 5
+},
+{
+"title": "Ы",
+"youtube": "L3LthsEXGxQ",
+"duration": 6
+},
+{
+"title": "Ь",
+"youtube": "ExmRc38dZNc",
+"duration": 5
+},
+{
+"title": "Э",
+"youtube": "LY8MpyT3YD4",
+"duration": 6
+},
+{
+"title": "Ю",
+"youtube": "STAM0ogTyRo",
+"duration": 6
+},
+{
+"title": "Я",
+"youtube": "jEPbSLxActg",
+"duration": 6
+},
+{
+"title": "a",
+"youtube": "WeNpxOP_DwM",
+"duration": 4
+},
+{
+"title": "а(оң жақтан)",
+"youtube": "KKYj2sl6GB8",
+"duration": 4
+},
+{
+"title": "а(сол жақтан)",
+"youtube": "IijIpMbY6DM",
+"duration": 3
+},
+{
+"title": "а(әріпі)",
+"youtube": "KYGlMkuS1kU",
+"duration": 2
+},
+{
+"title": "б",
+"youtube": "-UM_qJY5kvU",
+"duration": 5
+},
+{
+"title": "б(сол жақтан)",
+"youtube": "MOaQIXQm89o",
+"duration": 4
+},
+{
+"title": "б(оң жақтан)",
+"youtube": "nRcA9rKxr1I",
+"duration": 4
+},
+{
+"title": "б",
+"youtube": "kxmG26rQon8",
+"duration": 3
+},
+{
+"title": "в",
+"youtube": "EX4t7z3Vva0",
+"duration": 4
+},
+{
+"title": "в(сол жақтан)",
+"youtube": "vbCErf-7Nlw",
+"duration": 4
+},
+{
+"title": "в (оң жақтан)",
+"youtube": "FCpvGbvutmk",
+"duration": 4
+},
+{
+"title": "в",
+"youtube": "6RGFpY7DPUQ",
+"duration": 4
+},
+{
+"title": "г",
+"youtube": "WGdakCeeRlE",
+"duration": 4
+},
+{
+"title": "г (сол жақтан)",
+"youtube": "tr8n_IK5ve4",
+"duration": 4
+},
+{
+"title": "г (оң жақтан)",
+"youtube": "CRtP1UEiC4U",
+"duration": 5
+},
+{
+"title": "г",
+"youtube": "19ZEFqJ4IH0",
+"duration": 4
+},
+{
+"title": "ғ",
+"youtube": "xYiRthQRluw",
+"duration": 5
+},
+{
+"title": "ғ (сол жақтан)",
+"youtube": "JTDiqr7fjk8",
+"duration": 4
+},
+{
+"title": "ғ (оң жақтан)",
+"youtube": "yUWchjIVFfY",
+"duration": 5
+},
+{
+"title": "ғ",
+"youtube": "Idzf1FZQsn8",
+"duration": 4
+},
+{
+"title": "д",
+"youtube": "IYWh8GBTwvg",
+"duration": 4
+},
+{
+"title": "д (сол жақтан)",
+"youtube": "lHYkbd8ruJM",
+"duration": 5
+},
+{
+"title": "д (оң жақтан)",
+"youtube": "snlQvuY95xs",
+"duration": 4
+},
+{
+"title": "д",
+"youtube": "h4GDTK81WMQ",
+"duration": 3
+},
+{
+"title": "е",
+"youtube": "UF8H5XcY-yo",
+"duration": 4
+},
+{
+"title": "е (сол жақтан)",
+"youtube": "0VJGR7AYlrA",
+"duration": 4
+},
+{
+"title": "е (оң жақтан)",
+"youtube": "UUQWhvL573s",
+"duration": 4
+},
+{
+"title": "е",
+"youtube": "XI6YbI8DGVI",
+"duration": 4
+},
+{
+"title": "ё",
+"youtube": "2pQ6Znkpr6A",
+"duration": 4
+},
+{
+"title": "ё (сол жақтан)",
+"youtube": "0f7kEltD1Z0",
+"duration": 5
+},
+{
+"title": "ё (оң жақтан)",
+"youtube": "b1bubfYidKc",
+"duration": 4
+},
+{
+"title": "ё",
+"youtube": "M0pwFL0D7h8",
+"duration": 4
+},
+{
+"title": "ә",
+"youtube": "bgqPA-d0kmg",
+"duration": 4
+},
+{
+"title": "ә (сол жақтан)",
+"youtube": "gqe6mWYqxJU",
+"duration": 5
+},
+{
+"title": "ә (оң жақтан)",
+"youtube": "fdSqRl4kefw",
+"duration": 4
+},
+{
+"title": "ә",
+"youtube": "pdyN5pBMEcI",
+"duration": 4
+},
+{
+"title": "ж",
+"youtube": "HGOjF8n8vC0",
+"duration": 4
+},
+{
+"title": "ж (сол жақтан)",
+"youtube": "fXtGe8bV5iQ",
+"duration": 4
+},
+{
+"title": "ж (оң жақтан)",
+"youtube": "A_9Kbf-Lh3Q",
+"duration": 4
+},
+{
+"title": "ж",
+"youtube": "jKrc8HT6EZQ",
+"duration": 4
+},
+{
+"title": "з",
+"youtube": "dtvR7xSBMfc",
+"duration": 3
+},
+{
+"title": "з (сол жақтан)",
+"youtube": "JoWii9pokZU",
+"duration": 4
+},
+{
+"title": "з (оң жақтан)",
+"youtube": "EyfCtxQU27k",
+"duration": 4
+},
+{
+"title": "з",
+"youtube": "Md_wlXVUT0o",
+"duration": 4
+},
+{
+"title": "й",
+"youtube": "dwMJ_TSs0_s",
+"duration": 3
+},
+{
+"title": "й (оң жақтан)",
+"youtube": "4xQUUpZzURU",
+"duration": 3
+},
+{
+"title": "й",
+"youtube": "u0wEsWnEx0E",
+"duration": 4
+},
+{
+"title": "і",
+"youtube": "EkEsc6D1NiI",
+"duration": 4
+},
+{
+"title": "і (сол жақтан)",
+"youtube": "WcwciPAZUKw",
+"duration": 4
+},
+{
+"title": "і (оң жақтан)",
+"youtube": "vJudlrQ9hNs",
+"duration": 4
+},
+{
+"title": "і",
+"youtube": "vUIkgzFfy_s",
+"duration": 4
+},
+{
+"title": "к",
+"youtube": "QYgXpDJ22CQ",
+"duration": 4
+},
+{
+"title": "к",
+"youtube": "i1eAdm0NihU",
+"duration": 4
+},
+{
+"title": "к (оң жақтан)",
+"youtube": "XSVHE91KA4g",
+"duration": 4
+},
+{
+"title": "қ",
+"youtube": "HFqrHNUj20M",
+"duration": 3
+},
+{
+"title": "қ",
+"youtube": "nwxHkQIDJi4",
+"duration": 4
+},
+{
+"title": "қ",
+"youtube": "FnIjN6798XU",
+"duration": 3
+},
+{
+"title": "қ",
+"youtube": "Kn0mDxO-50Y",
+"duration": 4
+},
+{
+"title": "л",
+"youtube": "yF24zHt0JF0",
+"duration": 4
+},
+{
+"title": "л (сол жақтан)",
+"youtube": "aJM-wVykAqs",
+"duration": 4
+},
+{
+"title": "л (оң жақтан)",
+"youtube": "aqDuIxirQv4",
+"duration": 4
+},
+{
+"title": "л",
+"youtube": "EGK5jFvnkQU",
+"duration": 4
+},
+{
+"title": "м",
+"youtube": "2LusH-X6w84",
+"duration": 5
+},
+{
+"title": "м (сол жақтан)",
+"youtube": "A5jvc75t09E",
+"duration": 5
+},
+{
+"title": "м (оң жақтан)",
+"youtube": "r_OYpMxrlbY",
+"duration": 4
+},
+{
+"title": "м",
+"youtube": "WajCAQWcPBU",
+"duration": 4
+},
+{
+"title": "н",
+"youtube": "wbV4m7TexOs",
+"duration": 4
+},
+{
+"title": "н (сол жақтан)",
+"youtube": "qw6-AstHzPg",
+"duration": 4
+},
+{
+"title": "н (оң жақтан)",
+"youtube": "8uWinOh3lQ8",
+"duration": 4
+},
+{
+"title": "н",
+"youtube": "rkblldm4AUY",
+"duration": 5
+},
+{
+"title": "ң",
+"youtube": "QlvphUW4fug",
+"duration": 2
+},
+{
+"title": "ң (сол жақтан)",
+"youtube": "RnJzWugkUXo",
+"duration": 3
+},
+{
+"title": "ң (оң жақтан)",
+"youtube": "-LgyI-qM8Ng",
+"duration": 4
+},
+{
+"title": "ң",
+"youtube": "6oaQ3gfJPi0",
+"duration": 4
+},
+{
+"title": "һ",
+"youtube": "zySXMQue2gA",
+"duration": 5
+},
+{
+"title": "һ (сол жақтан)",
+"youtube": "w9umdSlZjUY",
+"duration": 4
+},
+{
+"title": "һ (оң жақтан)",
+"youtube": "APVPVKVbROY",
+"duration": 4
+},
+{
+"title": "о",
+"youtube": "CMjj6SVRrcE",
+"duration": 4
+},
+{
+"title": "о (сол жақтан)",
+"youtube": "25fI7LWLwBY",
+"duration": 4
+},
+{
+"title": "о (оң жақтан)",
+"youtube": "jH7Dow9XMUA",
+"duration": 4
+},
+{
+"title": "о",
+"youtube": "HXnnXL239B8",
+"duration": 3
+},
+{
+"title": "п",
+"youtube": "aPft8Femjfk",
+"duration": 4
+},
+{
+"title": "п (сол жақтан)",
+"youtube": "vkQMsYIQbLc",
+"duration": 4
+},
+{
+"title": "п (он жақтан)",
+"youtube": "yG-XY0aHATs",
+"duration": 4
+},
+{
+"title": "п",
+"youtube": "31sjY9BgjL4",
+"duration": 3
+},
+{
+"title": "ө",
+"youtube": "BIlIbNiHJSo",
+"duration": 4
+},
+{
+"title": "ө (сол жақтан)",
+"youtube": "YrB1G0iHqIc",
+"duration": 3
+},
+{
+"title": "ө",
+"youtube": "sgDIaol5t6w",
+"duration": 3
+},
+{
+"title": "ө",
+"youtube": "v02FsgiFQ9U",
+"duration": 3
+},
+{
+"title": "р",
+"youtube": "r5ebD04ULo0",
+"duration": 4
+},
+{
+"title": "р (сол жақтан)",
+"youtube": "W247RxjMUdg",
+"duration": 4
+},
+{
+"title": "р (оң жақтан )",
+"youtube": "O3ApK92frzs",
+"duration": 4
+},
+{
+"title": "р",
+"youtube": "DF8oB3KJQOU",
+"duration": 4
+},
+{
+"title": "с",
+"youtube": "31OsosXamyw",
+"duration": 4
+},
+{
+"title": "с (сол жақтан)",
+"youtube": "1nxcAZSZ24E",
+"duration": 4
+},
+{
+"title": "с (оң жақтан)",
+"youtube": "uTtgT2SkW1c",
+"duration": 4
+},
+{
+"title": "с",
+"youtube": "6rWBTZbwp4A",
+"duration": 4
+},
+{
+"title": "т",
+"youtube": "w-vciZAeZBI",
+"duration": 4
+},
+{
+"title": "т (сол жақтан)",
+"youtube": "AgvA2RkPWd0",
+"duration": 4
+},
+{
+"title": "т (оң жақтан)",
+"youtube": "7k7LONXmpqM",
+"duration": 4
+},
+{
+"title": "т",
+"youtube": "dGYJF2Y3wyk",
+"duration": 4
+},
+{
+"title": "у",
+"youtube": "bzrybA8XRnI",
+"duration": 4
+},
+{
+"title": "у (сол жақтан)",
+"youtube": "1n-oF11XGV0",
+"duration": 3
+},
+{
+"title": "у (оң жақтан)",
+"youtube": "_2l-TGP20dg",
+"duration": 3
+},
+{
+"title": "у",
+"youtube": "IaW3aNV1Iqs",
+"duration": 3
+},
+{
+"title": "ф",
+"youtube": "bU83JHS_kpY",
+"duration": 4
+},
+{
+"title": "ф (сол жақтан)",
+"youtube": "QR4FKTxt0CI",
+"duration": 4
+},
+{
+"title": "ф (оң жақтан)",
+"youtube": "EaC0mrms0gk",
+"duration": 4
+},
+{
+"title": "ф",
+"youtube": "N-FnZw0xX_Y",
+"duration": 5
+},
+{
+"title": "х",
+"youtube": "6sk7UVd_LmI",
+"duration": 4
+},
+{
+"title": "х",
+"youtube": "L6lJWro73Kc",
+"duration": 4
+},
+{
+"title": "ц",
+"youtube": "E5M8NszOHt8",
+"duration": 4
+},
+{
+"title": "ц (сол жақтан)",
+"youtube": "XM5GD_uPmUI",
+"duration": 4
+},
+{
+"title": "ц (оң жақтан)",
+"youtube": "gbogshUzKSQ",
+"duration": 3
+},
+{
+"title": "ц",
+"youtube": "yqMkmq6ouo4",
+"duration": 4
+},
+{
+"title": "ч",
+"youtube": "tad-NjhqEqo",
+"duration": 4
+},
+{
+"title": "ч (сол жақтан)",
+"youtube": "cGS5mTrzuTo",
+"duration": 4
+},
+{
+"title": "ч (оң жақтан)",
+"youtube": "ECH4w-WfFx0",
+"duration": 4
+},
+{
+"title": "ч",
+"youtube": "7KA8ovLuYk0",
+"duration": 4
+},
+{
+"title": "ш",
+"youtube": "ONLARL5Jjnk",
+"duration": 4
+},
+{
+"title": "ш (сол жақтан)",
+"youtube": "76_gpWCKtBQ",
+"duration": 4
+},
+{
+"title": "ш (оң жақтан)",
+"youtube": "gJwQpF8ylOo",
+"duration": 4
+},
+{
+"title": "ш",
+"youtube": "we1bR9spArM",
+"duration": 4
+},
+{
+"title": "щ",
+"youtube": "-1qHe_b6bJs",
+"duration": 3
+},
+{
+"title": "щ (сол жақтан)",
+"youtube": "ztk1CxBZKQ8",
+"duration": 4
+},
+{
+"title": "щ (оң жақтан)",
+"youtube": "iGvEk3d6_ro",
+"duration": 3
+},
+{
+"title": "щ",
+"youtube": "c9CPcOccDmg",
+"duration": 4
+},
+{
+"title": "ъ",
+"youtube": "djbRFvdQhnA",
+"duration": 3
+},
+{
+"title": "ъ (сол жақтан)",
+"youtube": "O0b1FmRtHyo",
+"duration": 3
+},
+{
+"title": "ъ (оң жақтан)",
+"youtube": "Y7PP1exVOe0",
+"duration": 3
+},
+{
+"title": "ъ",
+"youtube": "DjN4-T4C9-c",
+"duration": 3
+},
+{
+"title": "ы",
+"youtube": "OrVIVVQhMs4",
+"duration": 4
+},
+{
+"title": "ы (сол жақтан)",
+"youtube": "0i3cZpqw4-8",
+"duration": 3
+},
+{
+"title": "ы (оң жақтан)",
+"youtube": "aw78R_3dkpo",
+"duration": 4
+},
+{
+"title": "ы",
+"youtube": "xs8jovOn6ec",
+"duration": 4
+},
+{
+"title": "ь",
+"youtube": "kOfyJicqszg",
+"duration": 3
+},
+{
+"title": "ь (сол жақтан)",
+"youtube": "58J62PbV7HM",
+"duration": 3
+},
+{
+"title": "ь (оң жақтан)",
+"youtube": "kFC3ImPPZyY",
+"duration": 3
+},
+{
+"title": "ь",
+"youtube": "sKD9rFKhNlg",
+"duration": 4
+},
+{
+"title": "э",
+"youtube": "5poq3ICRbkE",
+"duration": 4
+},
+{
+"title": "э (сол жақтан)",
+"youtube": "OPuY-WylqAE",
+"duration": 4
+},
+{
+"title": "э (оң жақтан)",
+"youtube": "6VX59kuCLHs",
+"duration": 3
+},
+{
+"title": "э",
+"youtube": "M-gnzudX-Ms",
+"duration": 3
+},
+{
+"title": "ю",
+"youtube": "JR-7vLneXBM",
+"duration": 3
+},
+{
+"title": "ю (сол жақтан)",
+"youtube": "lhgx4gAgCPA",
+"duration": 4
+},
+{
+"title": "ю (оң жақтан)",
+"youtube": "btl0F7h2tLM",
+"duration": 3
+},
+{
+"title": "ю",
+"youtube": "i_nH-nYy68A",
+"duration": 3
+},
+{
+"title": "я",
+"youtube": "8Mye-EItpgE",
+"duration": 4
+},
+{
+"title": "я (сол жақтан)",
+"youtube": "2EkXh9HhnVM",
+"duration": 4
+},
+{
+"title": "я (оң жақтан)",
+"youtube": "klLGJSsgteo",
+"duration": 3
+},
+{
+"title": "я",
+"youtube": "NaZvmze0cT0",
+"duration": 3
+},
+{
+"title": "х",
+"youtube": "5X9N3ybH298",
+"duration": 3
+},
+{
+"title": "х (сол жақтан)",
+"youtube": "K60PyOByh5I",
+"duration": 4
+},
+{
+"title": "һ",
+"youtube": "q-MbEUbfNOs",
+"duration": 3
+},
+{
+"title": "к (сол жақтан)",
+"youtube": "3-6ju9-WbFo",
+"duration": 4
+}
+]
+}
