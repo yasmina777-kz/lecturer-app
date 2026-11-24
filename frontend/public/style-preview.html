@@ -5,174 +5,170 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Mentor — превью стиля</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f2ece3; --bg2: #e9e1d5; --ink: #171411; --muted: #6f655b; --line: #d8cdbd;
-    --band: #151210; --band-ink: #efe7dc; --accent: #8a6a4f;
+    --bg: #f8f4ee; --cream: #f2ebe1; --sand: #ebe1d3; --clay: #e7d6c3; --sage: #dfe5dc;
+    --ink: #2e2722; --muted: #85786c; --line: #e4d9cb; --brown: #5b4637; --brown-2: #745a47;
     --serif: "Playfair Display", Georgia, serif; --sans: "Manrope", system-ui, sans-serif;
+    --r: 22px;
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
   a { color: inherit; text-decoration: none; }
   img { display: block; max-width: 100%; }
-  .warm { filter: sepia(.5) saturate(.62) contrast(.95) brightness(1.03) hue-rotate(-6deg); }
   .wrap { max-width: 1240px; margin: 0 auto; padding: 0 40px; }
-  .caps { text-transform: uppercase; letter-spacing: .14em; font-size: 11px; font-weight: 600; }
+  .eyebrow { text-transform: uppercase; letter-spacing: .16em; font-size: 11px; font-weight: 600; color: var(--muted); }
+  .warm { filter: sepia(.38) saturate(.7) contrast(.94) brightness(1.04); }
 
-  /* top strip + nav */
-  .strip { background: #8f7e6c; color: #f6efe6; }
-  .strip .wrap { display: flex; justify-content: space-between; padding-block: 9px; }
-  nav .wrap { display: flex; align-items: center; justify-content: space-between; padding-block: 22px; }
-  nav .links { display: flex; gap: 28px; }
-  nav .brand { font-family: var(--serif); font-size: 22px; letter-spacing: .04em; }
-  nav .right { display: flex; gap: 22px; align-items: center; }
-  nav .right a { border-bottom: 1px solid transparent; transition: border-color .2s; }
-  nav .right a:hover, nav .links a:hover { border-color: var(--ink); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; padding-block: 24px; }
+  .brand { font-family: var(--serif); font-size: 22px; }
+  .brand i { font-style: normal; color: var(--brown-2); }
+  nav .links { display: flex; gap: 6px; padding: 5px; background: var(--cream); border-radius: 99px; }
+  nav .links a { padding: 9px 18px; border-radius: 99px; font-size: 14px; transition: background .25s; }
+  nav .links a.on, nav .links a:hover { background: #fff; box-shadow: 0 2px 10px rgba(91, 70, 55, .08); }
+  nav .me { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+  nav .me span { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--clay); font-weight: 600; }
+
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 15px 26px; border-radius: 99px; background: var(--brown); color: #fbf7f1; font-size: 15px; font-weight: 600; transition: background .25s, transform .25s, box-shadow .25s; }
+  .btn:hover { background: var(--brown-2); transform: translateY(-2px); box-shadow: 0 12px 26px rgba(91, 70, 55, .22); }
+  .btn.soft { background: #fff; color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); }
+  .btn.soft:hover { box-shadow: inset 0 0 0 1px var(--brown-2), 0 10px 22px rgba(91, 70, 55, .1); }
 
   /* hero */
-  .hero { position: relative; overflow: hidden; }
-  .hero .word { font-family: var(--serif); font-weight: 500; font-size: clamp(110px, 17vw, 250px); line-height: .82; letter-spacing: -.01em; text-align: center; margin: 6px 0 0; color: var(--ink); }
-  .hero .stage { display: grid; grid-template-columns: 1fr 1.25fr; align-items: end; margin-top: -120px; position: relative; }
-  .hero .copy { padding: 140px 0 70px; position: relative; z-index: 2; }
-  .hero h1 { font-family: var(--serif); font-weight: 500; font-size: 40px; line-height: 1.08; margin: 14px 0 18px; text-transform: uppercase; }
-  .hero p { color: var(--muted); max-width: 340px; line-height: 1.6; margin: 0 0 28px; }
-  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 15px 26px; background: var(--ink); color: #f5efe7; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; transition: background .25s, transform .25s; }
-  .btn:hover { background: #3a2f26; transform: translateY(-2px); }
-  .btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
-  .hero .figure { position: relative; height: 560px; }
-  .hero .plinth { position: absolute; right: -40px; bottom: 0; width: 88%; height: 250px; background: linear-gradient(180deg, #ddd2c2, #cfc2ae); border-radius: 6px 6px 0 0; }
-  .hero .linen { position: absolute; right: -60px; bottom: 120px; width: 70%; height: 220px; border-radius: 40% 10% 0 30%; background: repeating-linear-gradient(105deg, #b9ab97 0 3px, #c4b6a2 3px 7px); opacity: .55; filter: blur(.4px); }
-  .hero .mentor { position: absolute; left: 6%; bottom: 0; height: 600px; filter: sepia(.18) saturate(.85); }
-  .hero .badge { position: absolute; right: 8%; top: 120px; background: #f8f3ec; padding: 16px 18px; box-shadow: 0 14px 40px rgba(60, 40, 20, .12); font-family: var(--serif); }
-  .hero .badge b { display: block; font-size: 30px; font-weight: 500; }
-  .hero .badge span { font-family: var(--sans); font-size: 11px; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; }
+  .hero .wrap { display: grid; grid-template-columns: 1fr 1.15fr; gap: 48px; align-items: center; padding-block: 24px 64px; }
+  .hero h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(46px, 5.4vw, 74px); line-height: 1.02; margin: 18px 0 22px; letter-spacing: -.01em; }
+  .hero h1 em { font-style: italic; color: var(--brown-2); }
+  .hero p { color: var(--muted); font-size: 17px; line-height: 1.65; max-width: 430px; margin: 0 0 34px; }
+  .hero .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .hero .stats { display: flex; gap: 34px; margin-top: 44px; }
+  .hero .stats b { display: block; font-family: var(--serif); font-size: 30px; font-weight: 400; }
+  .hero .stats span { font-size: 13px; color: var(--muted); }
+  .hero .pic { position: relative; }
+  .hero .pic img { border-radius: 32px; width: 100%; aspect-ratio: 16 / 11; object-fit: cover; box-shadow: 0 30px 60px rgba(91, 70, 55, .14); }
+  .hero .chip { position: absolute; background: rgba(255, 252, 247, .92); backdrop-filter: blur(10px); border-radius: 18px; padding: 12px 16px; box-shadow: 0 14px 34px rgba(91, 70, 55, .14); font-size: 14px; animation: float 6s ease-in-out infinite; }
+  .hero .chip small { display: block; color: var(--muted); font-size: 12px; }
+  .hero .c1 { left: -26px; top: 18%; }
+  .hero .c2 { right: 22px; bottom: -22px; animation-delay: -3s; }
+  @keyframes float { 50% { transform: translateY(-8px); } }
 
-  /* black band of sections */
-  .band { background: var(--band); color: var(--band-ink); }
-  .band .wrap { display: grid; grid-template-columns: repeat(4, 1fr); }
-  .band a { display: grid; grid-template-columns: 96px 1fr; gap: 18px; padding: 34px 22px; border-right: 1px solid #2c2620; transition: background .3s; }
-  .band a:last-child { border-right: 0; }
-  .band a:hover { background: #1f1a16; }
-  .band img { width: 96px; height: 118px; object-fit: cover; }
-  .band h3 { font-family: var(--serif); font-weight: 400; font-size: 19px; line-height: 1.2; margin: 6px 0 auto; text-transform: uppercase; }
-  .band .go { display: flex; align-items: center; gap: 8px; margin-top: 28px; }
-  .band a > div { display: flex; flex-direction: column; }
+  /* sections (soft cards instead of a black band) */
+  .sections .wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .sec { display: flex; flex-direction: column; border-radius: var(--r); overflow: hidden; background: #fff; box-shadow: 0 1px 0 var(--line); transition: transform .35s, box-shadow .35s; }
+  .sec:hover { transform: translateY(-6px); box-shadow: 0 22px 44px rgba(91, 70, 55, .14); }
+  .sec .ph { aspect-ratio: 4 / 3; overflow: hidden; }
+  .sec .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
+  .sec:hover .ph img { transform: scale(1.05); }
+  .sec .tx { padding: 20px 22px 22px; }
+  .sec h3 { font-family: var(--serif); font-weight: 400; font-size: 22px; margin: 6px 0 8px; }
+  .sec p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
+  .sec .go { margin-top: 14px; font-size: 14px; font-weight: 600; color: var(--brown-2); }
 
-  /* split collection */
-  .split { display: grid; grid-template-columns: .95fr 1.3fr; min-height: 520px; }
-  .split .text { display: flex; flex-direction: column; justify-content: center; padding: 60px 40px 60px max(40px, calc((100vw - 1240px) / 2 + 40px)); }
-  .split h2 { font-family: var(--serif); font-weight: 500; font-size: 44px; line-height: 1.05; margin: 14px 0 20px; text-transform: uppercase; }
-  .split p { color: var(--muted); line-height: 1.65; max-width: 380px; margin: 0 0 30px; }
-  .split .mosaic { display: grid; grid-template-columns: 1.2fr 1fr; grid-template-rows: 1fr 1fr; gap: 6px; background: var(--bg2); }
-  .split .mosaic img { width: 100%; height: 100%; object-fit: cover; }
-  .split .mosaic img:first-child { grid-row: span 2; }
-  .levels { display: flex; gap: 10px; margin-bottom: 30px; }
-  .levels span { padding: 7px 14px; border: 1px solid var(--line); font-size: 12px; letter-spacing: .1em; }
-  .levels span.on { background: var(--ink); color: #f5efe7; border-color: var(--ink); }
+  /* level block */
+  .level { margin-top: 80px; }
+  .level .wrap { display: grid; grid-template-columns: 1fr 1.1fr; gap: 40px; align-items: center; background: var(--cream); border-radius: 34px; padding: 48px; }
+  .level h2 { font-family: var(--serif); font-weight: 400; font-size: 46px; line-height: 1.06; margin: 14px 0 18px; }
+  .level p { color: var(--muted); line-height: 1.65; max-width: 400px; margin: 0 0 26px; }
+  .tabs { display: flex; gap: 8px; margin-bottom: 28px; }
+  .tabs span { padding: 8px 16px; border-radius: 99px; background: #fff; font-size: 14px; }
+  .tabs span.on { background: var(--brown); color: #fbf7f1; }
+  .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .tiles figure { margin: 0; }
+  .tiles img { border-radius: 20px; aspect-ratio: 3 / 4; object-fit: cover; width: 100%; transition: transform .4s; }
+  .tiles figure:hover img { transform: translateY(-6px) rotate(-1deg); }
+  .tiles figcaption { margin-top: 10px; font-size: 14px; }
+  .tiles figcaption small { display: block; color: var(--muted); }
 
   /* features */
-  .features .wrap { display: grid; grid-template-columns: repeat(4, 1fr); padding-block: 40px; border-bottom: 1px solid var(--line); }
-  .features div { display: grid; grid-template-columns: 30px 1fr; gap: 14px; padding: 0 22px; border-left: 1px solid var(--line); }
-  .features div:first-child { border-left: 0; padding-left: 0; }
-  .features svg { width: 26px; height: 26px; stroke: var(--ink); fill: none; stroke-width: 1.4; }
-  .features b { display: block; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 4px; }
-  .features small { color: var(--muted); line-height: 1.5; }
+  .features .wrap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; padding-block: 64px 10px; }
+  .features div { display: flex; gap: 14px; align-items: flex-start; }
+  .features i { flex: none; width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; background: var(--cream); font-style: normal; font-size: 20px; }
+  .features b { display: block; font-size: 15px; margin-bottom: 4px; }
+  .features small { color: var(--muted); line-height: 1.5; font-size: 13px; }
 
   /* sign cards */
   .signs { padding: 56px 0 80px; }
-  .signs header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 26px; }
-  .signs h2 { font-family: var(--serif); font-weight: 500; font-size: 28px; margin: 0; text-transform: uppercase; }
-  .signs header a { border-bottom: 1px solid var(--ink); }
-  .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 22px; }
+  .signs header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 24px; }
+  .signs h2 { font-family: var(--serif); font-weight: 400; font-size: 34px; margin: 0; }
+  .signs header a { color: var(--brown-2); font-weight: 600; }
+  .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
   .card { cursor: pointer; }
-  .card .ph { position: relative; aspect-ratio: 3 / 4; overflow: hidden; background: var(--bg2); }
+  .card .ph { position: relative; aspect-ratio: 3 / 4; overflow: hidden; border-radius: 20px; background: var(--sand); }
   .card .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
   .card:hover .ph img { transform: scale(1.06); }
-  .card .heart { position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; display: grid; place-items: center; background: rgba(248, 243, 236, .9); border-radius: 50%; font-size: 14px; }
-  .card .play { position: absolute; left: 10px; bottom: 10px; padding: 6px 10px; background: rgba(21, 18, 16, .78); color: #f2ebe2; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; opacity: 0; transform: translateY(6px); transition: .3s; }
+  .card .heart { position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; display: grid; place-items: center; background: rgba(255, 252, 247, .9); border-radius: 50%; font-size: 14px; }
+  .card .play { position: absolute; left: 10px; bottom: 10px; padding: 7px 12px; border-radius: 99px; background: rgba(255, 252, 247, .92); font-size: 13px; font-weight: 600; opacity: 0; transform: translateY(6px); transition: .3s; }
   .card:hover .play { opacity: 1; transform: none; }
-  .card h4 { font-weight: 500; font-size: 15px; margin: 14px 0 4px; }
+  .card h4 { font-weight: 600; font-size: 15px; margin: 12px 0 2px; }
   .card span { color: var(--muted); font-size: 13px; }
 
-  footer { background: var(--band); color: #a99c8d; }
-  footer .wrap { display: flex; justify-content: space-between; padding-block: 34px; font-size: 13px; }
-  footer .brand { font-family: var(--serif); color: var(--band-ink); font-size: 20px; }
-  .note { position: fixed; right: 18px; bottom: 18px; background: #fff; padding: 10px 14px; font-size: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.15); }
+  footer .wrap { display: flex; justify-content: space-between; align-items: center; padding-block: 30px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+  .note { position: fixed; right: 18px; bottom: 18px; background: #fff; padding: 10px 14px; border-radius: 12px; font-size: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.12); }
 
   @media (max-width: 900px) {
     .wrap { padding: 0 18px; }
-    nav .links, .strip .mid { display: none; }
-    .hero .stage, .split { grid-template-columns: 1fr; }
-    .hero .stage { margin-top: 0; }
-    .hero .copy { padding: 30px 0; }
-    .hero .figure { height: 420px; }
-    .hero .mentor { height: 440px; left: 10%; }
-    .band .wrap, .features .wrap { grid-template-columns: 1fr 1fr; }
-    .split .text { padding: 50px 18px; }
-    .split .mosaic { min-height: 420px; }
+    nav .links { display: none; }
+    .hero .wrap, .level .wrap { grid-template-columns: 1fr; }
+    .level .wrap { padding: 28px 20px; border-radius: 24px; }
+    .sections .wrap, .features .wrap { grid-template-columns: 1fr 1fr; }
     .grid { grid-template-columns: 1fr 1fr; }
-    .features div { border: 0; padding: 12px 0; }
+    .hero .c1 { left: 10px; }
   }
 </style>
 </head>
 <body>
-  <div class="strip caps"><div class="wrap"><span>Бесплатно · 941 жест · 48 уроков</span><span class="mid">Русский жестовый язык. Учитесь в своём темпе</span><span>Мой кабинет</span></div></div>
   <nav><div class="wrap">
-    <div class="links caps"><a href="#">Курс</a><a href="#">Тренажёр</a><a href="#">Перевод</a><a href="#">Словарь</a></div>
-    <a class="brand" href="#">AI MENTOR</a>
-    <div class="right caps"><a href="#">Поиск жеста</a><a href="#">Профиль</a><a href="#">Продолжить урок</a></div>
+    <a class="brand" href="#">AI <i>Mentor</i></a>
+    <div class="links"><a class="on" href="#">Учиться</a><a href="#">Тренажёр</a><a href="#">Перевод</a><a href="#">Словарь</a></div>
+    <div class="me"><span>Я</span>Ясмина</div>
   </div></nav>
 
   <section class="hero"><div class="wrap">
-    <h2 class="word">ЖЕСТЫ</h2>
-    <div class="stage">
-      <div class="copy">
-        <div class="caps">Для тех, кто хочет понимать</div>
-        <h1>Говорите<br>руками</h1>
-        <p>Уроки русского жестового языка на видео носителей, тренажёр слов и камера, которая проверит ваш жест.</p>
-        <a class="btn" href="#">Начать обучение →</a>
-      </div>
-      <div class="figure">
-        <div class="linen"></div>
-        <div class="plinth"></div>
-        <img class="mentor" src="/images/landing-v2/mentor-cutout.webp" alt="">
-        <div class="badge"><b>A1 → B1</b><span>48 уроков по шагам</span></div>
-      </div>
+    <div>
+      <div class="eyebrow">Русский жестовый язык</div>
+      <h1>Говорите <em>руками</em> — спокойно и в своём темпе</h1>
+      <p>Уроки на видео носителей языка, тренажёр слов и камера, которая мягко подскажет, что поправить.</p>
+      <div class="actions"><a class="btn" href="#">Начать обучение →</a><a class="btn soft" href="#">Пройти тест уровня</a></div>
+      <div class="stats"><div><b>941</b><span>жест в словаре</span></div><div><b>48</b><span>уроков A1–B1</span></div><div><b>5 мин</b><span>в день достаточно</span></div></div>
+    </div>
+    <div class="pic">
+      <img src="/images/editorial/hero-hands.webp" alt="Руки показывают жесты">
+      <div class="chip c1">✋ 941 жест<small>видео носителей языка</small></div>
+      <div class="chip c2">🎉 Верно! Жест узнан<small>проверка камерой</small></div>
     </div>
   </div></section>
 
-  <section class="band"><div class="wrap">
-    <a href="#"><img class="warm" src="/images/landing-v2/practice.webp" alt=""><div><span class="caps" style="color:#9d8f80">01</span><h3>Курс<br>по уровням</h3><span class="go caps">Смотреть →</span></div></a>
-    <a href="#"><img class="warm" src="/images/landing-v2/hands-detail.webp" alt=""><div><span class="caps" style="color:#9d8f80">02</span><h3>Тренажёр<br>слов</h3><span class="go caps">Смотреть →</span></div></a>
-    <a href="#"><img class="warm" src="/images/landing-v2/study-desk.webp" alt=""><div><span class="caps" style="color:#9d8f80">03</span><h3>Текст<br>в жесты</h3><span class="go caps">Смотреть →</span></div></a>
-    <a href="#"><img class="warm" src="/images/landing-v2/conversation.webp" alt=""><div><span class="caps" style="color:#9d8f80">04</span><h3>Камера<br>проверит вас</h3><span class="go caps">Смотреть →</span></div></a>
+  <section class="sections"><div class="wrap">
+    <a class="sec" href="#"><div class="ph"><img class="warm" src="/images/landing-v2/practice.webp" alt=""></div><div class="tx"><span class="eyebrow">01</span><h3>Курс по уровням</h3><p>Шаг за шагом: от «привет» до разговора.</p><div class="go">Открыть →</div></div></a>
+    <a class="sec" href="#"><div class="ph"><img src="/images/editorial/tile-open.webp" alt=""></div><div class="tx"><span class="eyebrow">02</span><h3>Тренажёр слов</h3><p>14 тем, повторение трудных слов.</p><div class="go">Открыть →</div></div></a>
+    <a class="sec" href="#"><div class="ph"><img class="warm" src="/images/landing-v2/study-desk.webp" alt=""></div><div class="tx"><span class="eyebrow">03</span><h3>Текст в жесты</h3><p>Напишите фразу — увидите её жестами.</p><div class="go">Открыть →</div></div></a>
+    <a class="sec" href="#"><div class="ph"><img class="warm" src="/images/landing-v2/conversation.webp" alt=""></div><div class="tx"><span class="eyebrow">04</span><h3>Проверка камерой</h3><p>Покажите жест — получите подсказку.</p><div class="go">Открыть →</div></div></a>
   </div></section>
 
-  <section class="split">
-    <div class="text">
-      <div class="caps">Новый уровень</div>
-      <h2>Повседневная<br>жизнь · A2</h2>
-      <p>Город, покупки, чувства, планы на неделю. Двадцать уроков с живыми видео, фразами в порядке жестового языка и проверкой камерой.</p>
-      <div class="levels"><span>A1</span><span class="on">A2</span><span>B1</span><span>B2+</span></div>
-      <div><a class="btn" href="#">Открыть уровень →</a></div>
+  <section class="level"><div class="wrap">
+    <div>
+      <div class="eyebrow">Новый уровень</div>
+      <h2>Повседневная жизнь · A2</h2>
+      <p>Город, покупки, чувства, планы на неделю. Двадцать уроков с живыми видео и фразами в порядке жестового языка.</p>
+      <div class="tabs"><span>A1</span><span class="on">A2</span><span>B1</span><span>B2+</span></div>
+      <a class="btn" href="#">Открыть уровень →</a>
     </div>
-    <div class="mosaic">
-      <img class="warm" src="/images/landing-v2/workshop.webp" alt="">
-      <img class="warm" src="/images/landing-v2/shop-signing-v1.webp" alt="">
-      <img class="warm" src="/images/landing-v2/conversation.webp" alt="" style="object-position: 50% 30%">
+    <div class="tiles">
+      <figure><img src="/images/editorial/tile-open.webp" alt=""><figcaption>Открытая ладонь<small>форма руки</small></figcaption></figure>
+      <figure><img src="/images/editorial/tile-v.webp" alt=""><figcaption>Два пальца<small>форма руки</small></figcaption></figure>
+      <figure><img src="/images/editorial/tile-circle.webp" alt=""><figcaption>Кольцо<small>форма руки</small></figcaption></figure>
     </div>
-  </section>
+  </div></section>
 
   <section class="features"><div class="wrap">
-    <div><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M10 9l5 3-5 3z"/></svg><span><b>Видео носителей</b><small>Настоящие люди, а не анимация</small></span></div>
-    <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg><span><b>Проверка камерой</b><small>Подскажем, что поправить</small></span></div>
-    <div><svg viewBox="0 0 24 24"><path d="M5 19V9m7 10V5m7 14v-7"/></svg><span><b>Тест уровня</b><small>Не начинайте с нуля, если уже знаете</small></span></div>
-    <div><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.5-7 10-7 10z"/></svg><span><b>Бесплатно</b><small>Учитесь в своём темпе</small></span></div>
+    <div><i>🎬</i><span><b>Видео носителей</b><small>Настоящие люди, а не анимация</small></span></div>
+    <div><i>📷</i><span><b>Проверка камерой</b><small>Подскажем, что поправить</small></span></div>
+    <div><i>🧭</i><span><b>Тест уровня</b><small>Не начинайте с нуля, если уже знаете</small></span></div>
+    <div><i>🌿</i><span><b>Бесплатно</b><small>Учитесь в своём темпе</small></span></div>
   </div></section>
 
   <section class="signs"><div class="wrap">
-    <header><h2>Популярные жесты</h2><a class="caps" href="#">Весь словарь</a></header>
+    <header><h2>Популярные жесты</h2><a href="#">Весь словарь →</a></header>
     <div class="grid">
       <div class="card"><div class="ph"><img class="warm" src="/research/rsl/words/f17a6060-6ced-4bd1-9886-8578cfbb864f.jpg" alt=""><span class="heart">♡</span><span class="play">▶ Смотреть</span></div><h4>Привет</h4><span>Общение · A1</span></div>
       <div class="card"><div class="ph"><img class="warm" src="/research/rsl/words/3fc519d4-541e-450a-a72c-a030bcdca9ed.jpg" alt=""><span class="heart">♡</span><span class="play">▶ Смотреть</span></div><h4>Спасибо</h4><span>Общение · A1</span></div>
@@ -182,7 +178,7 @@
     </div>
   </div></section>
 
-  <footer><div class="wrap"><span class="brand">AI MENTOR</span><span>Русский жестовый язык · учебная платформа</span><span>Видео: открытый набор «Слово»</span></div></footer>
+  <footer><div class="wrap"><span class="brand">AI <i>Mentor</i></span><span>Учебная платформа русского жестового языка</span><span>Видео: открытый набор «Слово»</span></div></footer>
   <div class="note">Превью стиля · не рабочая страница</div>
 </body>
 </html>
