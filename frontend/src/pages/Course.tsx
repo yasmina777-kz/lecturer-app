@@ -119,10 +119,7 @@ import {
 } from "lucide-react";
 import { at } from "../i18n/automation";
 import { phraseText, tipText, useSignLang, wordText } from "../sign/signLanguage";
-import { getLanguage, setLanguage } from "../i18n";
-import { useAuth } from "../context/AuthContext";
-import { patch } from "../api/httpClient";
-import type { Language, User } from "../types/auth";
+import { useChooseSignLang } from "../components/SignLangSwitcher";
 import "../components/topic-art.css";
 import { ProgressRing } from "../components/ProgressRing";
 import { PlacementPrompt } from "../components/PlacementPrompt";
@@ -318,15 +315,8 @@ export function CoursePage() {
   const next = units.find((u) => !progress[u.id]?.done) ?? units[units.length - 1];
   const count = (l: CefrLevel) => (l === "B2" ? [0, 0] : [courseUnits(l).filter((u) => progress[u.id]?.done).length, courseUnits(l).length]);
   const doneCount = units.filter((u) => progress[u.id]?.done).length;
-  const [sl, setSl] = useSignLang();
+  const [sl, chooseSl] = useChooseSignLang();
   const kz = sl === "ksl";
-  const { user, setUser } = useAuth();
-  // Choosing the course language also switches the lesson interface (saved in the profile like RU/KZ).
-  const uiTo = (lang: Language) => {
-    if (getLanguage() === lang || getLanguage() === "en") return;
-    setLanguage(lang);
-    if (user) patch<User>("/auth/language", { language: lang }).then(setUser).catch(() => undefined);
-  };
   return (
     <div className="sign-workspace vocab course" data-level={level}>
       <PlacementPrompt hasHistory={Object.keys(progress).length > 0} />
@@ -339,11 +329,11 @@ export function CoursePage() {
               : at("Русский жестовый язык с нуля", "Russian Sign Language from zero", "Нөлден бастап орыс ым тілі")}
           </h1>
           <div className="course-sl-switch" role="radiogroup" aria-label={at("Какой жестовый язык учим", "Which sign language", "Қай ым тілін үйренеміз")}>
-            <button role="radio" aria-checked={!kz} onClick={() => { setSl("rsl"); uiTo("ru"); }}>
+            <button role="radio" aria-checked={!kz} onClick={() => chooseSl("rsl")}>
               <strong>🇷🇺 РЖЯ</strong>
               <span>{at("Русский жестовый · уроки на русском", "Russian SL · lessons in Russian", "Орыс ым тілі · сабақтар орысша")}</span>
             </button>
-            <button role="radio" aria-checked={kz} onClick={() => { setSl("ksl"); uiTo("kk"); }}>
+            <button role="radio" aria-checked={kz} onClick={() => chooseSl("ksl")}>
               <strong>🇰🇿 ҚЖЯ</strong>
               <span>{at("Казахский жестовый · уроки на казахском", "Kazakh SL · lessons in Kazakh", "Қазақ ым тілі · сабақтар қазақша")}</span>
             </button>

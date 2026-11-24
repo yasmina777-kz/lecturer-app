@@ -65,6 +65,7 @@ import {
   Gift,
 } from "lucide-react";
 import { at } from "../i18n/automation";
+import { getSignLang, useSignLang, wordText } from "../sign/signLanguage";
 import "../components/topic-art.css";
 import { ProgressRing } from "../components/ProgressRing";
 import "./course.css";
@@ -179,6 +180,7 @@ function SignVideo({
 }
 
 export function SignVocabularyPage() {
+  useSignLang();
   const [words, setWords] = useState<Word[] | null>(null);
   const [failed, setFailed] = useState(false);
   const [params, setParams] = useSearchParams();
@@ -251,6 +253,7 @@ function Overview({
   openPhrases: (lesson: number) => void;
   review: () => void;
 }) {
+  useSignLang();
   const s = progress.state;
   const learned = words.filter((w) => (s.words[w.id]?.box ?? 0) >= LEARNED_BOX).length;
   const started = words.filter((w) => s.words[w.id]).length;
@@ -268,7 +271,7 @@ function Overview({
       <section className="course-hero course-anim vocab-hero3">
         <div className="course-hero-text">
           <span className="eyebrow">{at("СЛОВАРНЫЙ ЗАПАС", "VOCABULARY", "СӨЗДІК ҚОР")} · {words.length} {at("жестов", "signs", "ым")} · {topics.length} {at("тем", "topics", "тақырып")}</span>
-          <h1>{at("Тренажёр слов РЖЯ", "RSL word trainer", "Ым сөздерінің жаттықтырғышы")}</h1>
+          <h1>{getSignLang() === "ksl" ? at("Тренажёр слов ҚЖЯ", "Kazakh SL word trainer", "Қазақ ым тілі сөздерінің жаттықтырғышы") : at("Тренажёр слов РЖЯ", "RSL word trainer", "Орыс ым тілі сөздерінің жаттықтырғышы")}</h1>
           <p>{at("Уроки по 8 слов: смотрите жест, узнаёте его, находите среди других и показываете сами. Выученное вернётся на повторение.", "8-word lessons: watch, recognize, find and sign. Learned words come back for review.", "8 сөзден тұратын сабақтар.")}</p>
           <div className="course-hero-actions">
             {nextUp && (
@@ -309,7 +312,7 @@ function Overview({
                 <small>{t.lessons.length} {at("уроков", "lessons", "сабақ")} · {total} {at("слов", "words", "сөз")}</small>
               </div>
               <p className="vocab-card-words">
-                {all.slice(0, 6).map((w) => w.label.replace(/[!?]$/, "")).join(", ")}…
+                {all.slice(0, 6).map((w) => wordText(w.label)).join(", ")}…
               </p>
               <div className="vocab-card-progress">
                 <div className="vocab-bar"><span style={{ width: `${(100 * done) / total}%` }} /></div>
@@ -319,7 +322,7 @@ function Overview({
                 {t.lessons.slice(0, expanded.includes(t.name) || t.lessons.length <= LESSONS_SHOWN + 1 ? undefined : LESSONS_SHOWN).map((ws, i) => {
                   const score = s.lessons[`${t.name}:${i}`];
                   return (
-                    <button key={i} onClick={() => open(t.name, i)} className={score !== undefined ? "done" : i === go ? "next" : ""} title={`${at("Урок", "Lesson", "Сабақ")} ${i + 1}: ${ws.map((w) => w.label).join(", ")}`}>
+                    <button key={i} onClick={() => open(t.name, i)} className={score !== undefined ? "done" : i === go ? "next" : ""} title={`${at("Урок", "Lesson", "Сабақ")} ${i + 1}: ${ws.map((w) => wordText(w.label)).join(", ")}`}>
                       {score !== undefined ? <Check size={14} /> : i + 1}
                     </button>
                   );
@@ -376,6 +379,7 @@ function Session({
   onNext?: () => void;
   progress: ProgressApi;
 }) {
+  useSignLang();
   const [step, setStep] = useState<Step>(review ? "recognize" : "learn");
   const [index, setIndex] = useState(0);
   const [rate, setRate] = useState(1);
@@ -469,7 +473,7 @@ function Session({
           </div>
           <div className="vocab-card-side">
             <span className="eyebrow">{current.category} · {index + 1} / {words.length}</span>
-            <h2>{current.label}</h2>
+            <h2>{wordText(current.label)}</h2>
             {tryCamera ? (
               // The camera opens right next to the video — no scrolling to find it.
               <div className="vocab-learn-camera vocab-learn-camera--side">
@@ -490,7 +494,7 @@ function Session({
               <div className="vocab-chips" aria-label={at("Слова урока", "Lesson words", "Сабақ сөздері")}>
                 {words.map((w, i) => (
                   <button key={w.id} aria-pressed={i === index} className={i < index ? "seen" : ""} onClick={() => { setIndex(i); setTryCamera(false); }}>
-                    {w.label}
+                    {wordText(w.label)}
                   </button>
                 ))}
               </div>
@@ -518,7 +522,7 @@ function Session({
             <div className="vocab-choices">
               {choices.map((c) => (
                 <button key={c.id} onClick={() => answer(c.id)} className={picked ? (c.id === current.id ? "right" : c.id === picked ? "wrong" : "") : ""}>
-                  {c.label}
+                  {wordText(c.label)}
                 </button>
               ))}
             </div>
@@ -539,17 +543,17 @@ function Session({
           </header>
           <div className="vf-task">
             <span className="eyebrow">{at("Какое видео показывает жест?", "Which video shows the sign?", "Қай бейнеде осы ым?")}</span>
-            <h2 key={current.id}>«{current.label}»</h2>
+            <h2 key={current.id}>«{wordText(current.label)}»</h2>
             <p>{at("Наведите на видео, чтобы рассмотреть. Можно нажимать клавиши 1–4.", "Hover to look closer. Keys 1–4 work too.", "1–4 пернелерін басуға болады.")}</p>
           </div>
           <div className="vocab-video-choices vf-cards">
             {choices.map((c, k) => (
               <button key={c.id} onClick={() => answer(c.id)} className={`card-motion ${picked ? (c.id === current.id ? "right" : c.id === picked ? "wrong" : "dim") : ""}`}
                 style={{ "--i": k } as React.CSSProperties}
-                aria-label={picked ? c.label : `${at("Вариант", "Option", "Нұсқа")} ${k + 1}`}>
+                aria-label={picked ? wordText(c.label) : `${at("Вариант", "Option", "Нұсқа")} ${k + 1}`}>
                 <span className="vf-num">{k + 1}</span>
                 <SignVideo word={c} small />
-                {picked && <span className="vf-label">{c.id === current.id ? "✓ " : ""}{c.label}</span>}
+                {picked && <span className="vf-label">{c.id === current.id ? "✓ " : ""}{wordText(c.label)}</span>}
               </button>
             ))}
           </div>
@@ -563,7 +567,7 @@ function Session({
           <p>{at("Выберите слово и покажите его в камеру. Этот шаг необязательный, но именно он учит говорить, а не только понимать.", "Pick a word and sign it to the camera. Optional, but it trains production, not just understanding.", "Сөзді таңдап, камераға көрсетіңіз.")}</p>
           <div className="vocab-chips">
             {words.map((w) => (
-              <button key={w.id} aria-pressed={cameraWord?.id === w.id} onClick={() => setCameraWord(w)}>{w.label}</button>
+              <button key={w.id} aria-pressed={cameraWord?.id === w.id} onClick={() => setCameraWord(w)}>{wordText(w.label)}</button>
             ))}
           </div>
           {cameraWord && (
@@ -584,7 +588,7 @@ function Session({
           {score.missed.length > 0 ? (
             <>
               <p>{at("Эти жесты вернутся на повторение завтра:", "These signs come back for review tomorrow:", "Бұл ымдар ертең қайталанады:")}</p>
-              <div className="vocab-chips">{[...new Set(score.missed)].map((w) => <span key={w.id}>{w.label}</span>)}</div>
+              <div className="vocab-chips">{[...new Set(score.missed)].map((w) => <span key={w.id}>{wordText(w.label)}</span>)}</div>
             </>
           ) : (
             <p>{at("Без ошибок. Слова вернутся на повторение через пару дней.", "No mistakes. The words will come back in a couple of days.", "Қатесіз. Сөздер бірнеше күннен кейін қайталанады.")}</p>
@@ -601,12 +605,13 @@ function Session({
 }
 
 function Feedback({ picked, current }: { picked: string | null; current: Word }) {
+  useSignLang();
   if (!picked) return null;
   const ok = picked === current.id;
   return (
     <p className={`vocab-feedback ${ok ? "ok" : "no"}`} role="status">
       {ok ? <Check size={18} /> : <X size={18} />}
-      {ok ? at("Верно!", "Correct!", "Дұрыс!") : `${at("Правильно", "Correct answer", "Дұрыс жауап")}: «${current.label}»`}
+      {ok ? at("Верно!", "Correct!", "Дұрыс!") : `${at("Правильно", "Correct answer", "Дұрыс жауап")}: «${wordText(current.label)}»`}
     </p>
   );
 }

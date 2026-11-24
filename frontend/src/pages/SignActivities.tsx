@@ -23,6 +23,7 @@ import {
   shuffle,
 } from "../sign/activities";
 import { useActivityCatalog, useActivityProgress } from "../sign/useActivities";
+import { useSignLang, wordText } from "../sign/signLanguage";
 import "./sign-workspace.css";
 import "./sign-activities.css";
 type Catalog = NonNullable<ReturnType<typeof useActivityCatalog>["data"]>;
@@ -115,6 +116,7 @@ function AvatarStudy({ text, data }: { text: string; data: Catalog }) {
 }
 
 export function SignDialoguesPage() {
+  useSignLang();
   const { data, error, retry } = useActivityCatalog();
   const [params, setParams] = useSearchParams();
   const scenarios = dialogueScenarios();
@@ -261,6 +263,7 @@ function DialogueSession({
   data: Catalog;
   leave: () => void;
 }) {
+  useSignLang();
   const [stepId, setStepId] = useState(scenario.start);
   const [phase, setPhase] = useState<"watch" | "answer" | "feedback">("watch");
   const [selected, setSelected] = useState<string | null>(null);
@@ -507,7 +510,7 @@ function DialogueSession({
                           aria-pressed={wordIndex === i}
                           onClick={() => setWordIndex(i)}
                         >
-                          {s.label}
+                          {wordText(s.label)}
                         </button>
                       ))}
                     </div>
@@ -728,6 +731,7 @@ function DialogueSession({
   );
 }
 export function SignUnderstandingPage() {
+  useSignLang();
   const { data, error, retry } = useActivityCatalog();
   const progress = useActivityProgress();
   const [category, setCategory] = useState("all");
@@ -891,6 +895,7 @@ function UnderstandingSession({
   record: ReturnType<typeof useActivityProgress>["record"];
   leave: () => void;
 }) {
+  useSignLang();
   const [index, setIndex] = useState(0);
   const [results, setResults] = useState<
     { label: string; correct: boolean; assisted: boolean }[]
@@ -925,7 +930,7 @@ function UnderstandingSession({
           <ul>
             {results.map((r, i) => (
               <li key={i}>
-                <strong>{r.label}</strong>
+                <strong>{wordText(r.label)}</strong>
                 <span>
                   {r.correct && !r.assisted
                     ? at("Узнали", "Recognized", "Таныдыңыз")
@@ -997,6 +1002,7 @@ function UnderstandingQuestion({
   record: (correct: boolean, assisted: boolean) => void;
   next: (correct: boolean, assisted: boolean) => void;
 }) {
+  useSignLang();
   const options = useMemo(
     () => questionOptions(answer, data.entries),
     [answer, data.entries],
@@ -1171,7 +1177,7 @@ function UnderstandingQuestion({
                   checked={selected === option.id}
                   onChange={() => setSelected(option.id)}
                 />
-                {option.label}
+                {wordText(option.label)}
               </label>
             ))}
           </fieldset>
@@ -1243,7 +1249,7 @@ function UnderstandingQuestion({
                   "This video shows",
                   "Бейнеде көрсетілгені",
                 )}
-                : <b>{answer.label}</b>.{" "}
+                : <b>{wordText(answer.label)}</b>.{" "}
                 {!correct &&
                   at(
                     "Посмотрите движение ещё раз, теперь зная значение. Слово добавлено к повторению.",

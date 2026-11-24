@@ -1,3 +1,4 @@
+import { useSignLang, wordText } from "../sign/signLanguage";
 import { useEffect, useRef, useState } from "react";
 import { Camera, Square, RotateCcw } from "lucide-react";
 import { useLiveLetters } from "../sign/useLiveLetters";
@@ -22,6 +23,7 @@ type Attempt = { guess: WordGuess | null; verdict: ReturnType<typeof judgeWord>[
 /** choices: the lesson's words — the model then picks among them only
  * (much more reliable than among all course signs). */
 export function WordPracticeCamera({ target, choices }: { target: string; choices?: string[] }) {
+  useSignLang();
   const video = useRef<HTMLVideoElement>(null);
   const overlay = useRef<HTMLCanvasElement>(null);
   const stream = useRef<MediaStream | null>(null);
@@ -110,7 +112,7 @@ export function WordPracticeCamera({ target, choices }: { target: string; choice
   return (
     <section className="word-practice panel" aria-label={at("Проверка жеста камерой", "Camera sign check", "Ымды камерамен тексеру")}>
       <header>
-        <h3>{at("Проверить себя", "Check yourself", "Өзіңізді тексеру")}: «{target}»</h3>
+        <h3>{at("Проверить себя", "Check yourself", "Өзіңізді тексеру")}: «{wordText(target)}»</h3>
         <p>
           {at(
             "Покажите жест и опустите руки.",
@@ -167,7 +169,7 @@ export function WordPracticeCamera({ target, choices }: { target: string; choice
             <ol>
               {last.guess.top.slice(0, 3).map((t) => (
                 <li key={t.label}>
-                  {t.label} <span>{Math.round(t.p * 100)}%</span>
+                  {wordText(t.label)} <span>{Math.round(t.p * 100)}%</span>
                 </li>
               ))}
             </ol>

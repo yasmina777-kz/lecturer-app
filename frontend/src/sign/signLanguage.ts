@@ -1,5 +1,6 @@
 import { useSyncExternalStore } from "react";
 import { KK_PHRASES, KK_TIPS, KK_WORDS } from "./kazakhGlossary";
+import { KK_WORDS_EXTRA } from "./kazakhGlossaryExtra";
 
 /** Which sign language the learner studies. Same sign videos (Kazakh-Russian
  * SL shares most signs with RSL); the written side, the alphabet (33 vs 42
@@ -34,7 +35,7 @@ export function useSignLang() {
 const clean = (w: string) => w.replace(/[!?]$/, "");
 /** Written form of a course word for the chosen sign language. */
 export function wordText(label: string, lang: SignLang = current): string {
-  return lang === "ksl" ? clean(KK_WORDS[label] ?? label) : clean(label);
+  return lang === "ksl" ? clean(KK_WORDS[label] ?? KK_WORDS_EXTRA[label] ?? label) : clean(label);
 }
 /** Written form of a course phrase for the chosen sign language. */
 export function phraseText(ru: string, lang: SignLang = current): string {
