@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Mentor — превью стиля</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f2ece3; --bg2: #e9e1d5; --ink: #171411; --muted: #6f655b; --line: #d8cdbd;
+    --band: #151210; --band-ink: #efe7dc; --accent: #8a6a4f;
+    --serif: "Playfair Display", Georgia, serif; --sans: "Manrope", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  .warm { filter: sepia(.5) saturate(.62) contrast(.95) brightness(1.03) hue-rotate(-6deg); }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 40px; }
+  .caps { text-transform: uppercase; letter-spacing: .14em; font-size: 11px; font-weight: 600; }
+
+  /* top strip + nav */
+  .strip { background: #8f7e6c; color: #f6efe6; }
+  .strip .wrap { display: flex; justify-content: space-between; padding-block: 9px; }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; padding-block: 22px; }
+  nav .links { display: flex; gap: 28px; }
+  nav .brand { font-family: var(--serif); font-size: 22px; letter-spacing: .04em; }
+  nav .right { display: flex; gap: 22px; align-items: center; }
+  nav .right a { border-bottom: 1px solid transparent; transition: border-color .2s; }
+  nav .right a:hover, nav .links a:hover { border-color: var(--ink); }
+
+  /* hero */
+  .hero { position: relative; overflow: hidden; }
+  .hero .word { font-family: var(--serif); font-weight: 500; font-size: clamp(110px, 17vw, 250px); line-height: .82; letter-spacing: -.01em; text-align: center; margin: 6px 0 0; color: var(--ink); }
+  .hero .stage { display: grid; grid-template-columns: 1fr 1.25fr; align-items: end; margin-top: -120px; position: relative; }
+  .hero .copy { padding: 140px 0 70px; position: relative; z-index: 2; }
+  .hero h1 { font-family: var(--serif); font-weight: 500; font-size: 40px; line-height: 1.08; margin: 14px 0 18px; text-transform: uppercase; }
+  .hero p { color: var(--muted); max-width: 340px; line-height: 1.6; margin: 0 0 28px; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 15px 26px; background: var(--ink); color: #f5efe7; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; transition: background .25s, transform .25s; }
+  .btn:hover { background: #3a2f26; transform: translateY(-2px); }
+  .btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+  .hero .figure { position: relative; height: 560px; }
+  .hero .plinth { position: absolute; right: -40px; bottom: 0; width: 88%; height: 250px; background: linear-gradient(180deg, #ddd2c2, #cfc2ae); border-radius: 6px 6px 0 0; }
+  .hero .linen { position: absolute; right: -60px; bottom: 120px; width: 70%; height: 220px; border-radius: 40% 10% 0 30%; background: repeating-linear-gradient(105deg, #b9ab97 0 3px, #c4b6a2 3px 7px); opacity: .55; filter: blur(.4px); }
+  .hero .mentor { position: absolute; left: 6%; bottom: 0; height: 600px; filter: sepia(.18) saturate(.85); }
+  .hero .badge { position: absolute; right: 8%; top: 120px; background: #f8f3ec; padding: 16px 18px; box-shadow: 0 14px 40px rgba(60, 40, 20, .12); font-family: var(--serif); }
+  .hero .badge b { display: block; font-size: 30px; font-weight: 500; }
+  .hero .badge span { font-family: var(--sans); font-size: 11px; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; }
+
+  /* black band of sections */
+  .band { background: var(--band); color: var(--band-ink); }
+  .band .wrap { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .band a { display: grid; grid-template-columns: 96px 1fr; gap: 18px; padding: 34px 22px; border-right: 1px solid #2c2620; transition: background .3s; }
+  .band a:last-child { border-right: 0; }
+  .band a:hover { background: #1f1a16; }
+  .band img { width: 96px; height: 118px; object-fit: cover; }
+  .band h3 { font-family: var(--serif); font-weight: 400; font-size: 19px; line-height: 1.2; margin: 6px 0 auto; text-transform: uppercase; }
+  .band .go { display: flex; align-items: center; gap: 8px; margin-top: 28px; }
+  .band a > div { display: flex; flex-direction: column; }
+
+  /* split collection */
+  .split { display: grid; grid-template-columns: .95fr 1.3fr; min-height: 520px; }
+  .split .text { display: flex; flex-direction: column; justify-content: center; padding: 60px 40px 60px max(40px, calc((100vw - 1240px) / 2 + 40px)); }
+  .split h2 { font-family: var(--serif); font-weight: 500; font-size: 44px; line-height: 1.05; margin: 14px 0 20px; text-transform: uppercase; }
+  .split p { color: var(--muted); line-height: 1.65; max-width: 380px; margin: 0 0 30px; }
+  .split .mosaic { display: grid; grid-template-columns: 1.2fr 1fr; grid-template-rows: 1fr 1fr; gap: 6px; background: var(--bg2); }
+  .split .mosaic img { width: 100%; height: 100%; object-fit: cover; }
+  .split .mosaic img:first-child { grid-row: span 2; }
+  .levels { display: flex; gap: 10px; margin-bottom: 30px; }
+  .levels span { padding: 7px 14px; border: 1px solid var(--line); font-size: 12px; letter-spacing: .1em; }
+  .levels span.on { background: var(--ink); color: #f5efe7; border-color: var(--ink); }
+
+  /* features */
+  .features .wrap { display: grid; grid-template-columns: repeat(4, 1fr); padding-block: 40px; border-bottom: 1px solid var(--line); }
+  .features div { display: grid; grid-template-columns: 30px 1fr; gap: 14px; padding: 0 22px; border-left: 1px solid var(--line); }
+  .features div:first-child { border-left: 0; padding-left: 0; }
+  .features svg { width: 26px; height: 26px; stroke: var(--ink); fill: none; stroke-width: 1.4; }
+  .features b { display: block; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 4px; }
+  .features small { color: var(--muted); line-height: 1.5; }
+
+  /* sign cards */
+  .signs { padding: 56px 0 80px; }
+  .signs header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 26px; }
+  .signs h2 { font-family: var(--serif); font-weight: 500; font-size: 28px; margin: 0; text-transform: uppercase; }
+  .signs header a { border-bottom: 1px solid var(--ink); }
+  .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 22px; }
+  .card { cursor: pointer; }
+  .card .ph { position: relative; aspect-ratio: 3 / 4; overflow: hidden; background: var(--bg2); }
+  .card .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
+  .card:hover .ph img { transform: scale(1.06); }
+  .card .heart { position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; display: grid; place-items: center; background: rgba(248, 243, 236, .9); border-radius: 50%; font-size: 14px; }
+  .card .play { position: absolute; left: 10px; bottom: 10px; padding: 6px 10px; background: rgba(21, 18, 16, .78); color: #f2ebe2; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; opacity: 0; transform: translateY(6px); transition: .3s; }
+  .card:hover .play { opacity: 1; transform: none; }
+  .card h4 { font-weight: 500; font-size: 15px; margin: 14px 0 4px; }
+  .card span { color: var(--muted); font-size: 13px; }
+
+  footer { background: var(--band); color: #a99c8d; }
+  footer .wrap { display: flex; justify-content: space-between; padding-block: 34px; font-size: 13px; }
+  footer .brand { font-family: var(--serif); color: var(--band-ink); font-size: 20px; }
+  .note { position: fixed; right: 18px; bottom: 18px; background: #fff; padding: 10px 14px; font-size: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.15); }
+
+  @media (max-width: 900px) {
+    .wrap { padding: 0 18px; }
+    nav .links, .strip .mid { display: none; }
+    .hero .stage, .split { grid-template-columns: 1fr; }
+    .hero .stage { margin-top: 0; }
+    .hero .copy { padding: 30px 0; }
+    .hero .figure { height: 420px; }
+    .hero .mentor { height: 440px; left: 10%; }
+    .band .wrap, .features .wrap { grid-template-columns: 1fr 1fr; }
+    .split .text { padding: 50px 18px; }
+    .split .mosaic { min-height: 420px; }
+    .grid { grid-template-columns: 1fr 1fr; }
+    .features div { border: 0; padding: 12px 0; }
+  }
+</style>
+</head>
+<body>
+  <div class="strip caps"><div class="wrap"><span>Бесплатно · 941 жест · 48 уроков</span><span class="mid">Русский жестовый язык. Учитесь в своём темпе</span><span>Мой кабинет</span></div></div>
+  <nav><div class="wrap">
+    <div class="links caps"><a href="#">Курс</a><a href="#">Тренажёр</a><a href="#">Перевод</a><a href="#">Словарь</a></div>
+    <a class="brand" href="#">AI MENTOR</a>
+    <div class="right caps"><a href="#">Поиск жеста</a><a href="#">Профиль</a><a href="#">Продолжить урок</a></div>
+  </div></nav>
+
+  <section class="hero"><div class="wrap">
+    <h2 class="word">ЖЕСТЫ</h2>
+    <div class="stage">
+      <div class="copy">
+        <div class="caps">Для тех, кто хочет понимать</div>
+        <h1>Говорите<br>руками</h1>
+        <p>Уроки русского жестового языка на видео носителей, тренажёр слов и камера, которая проверит ваш жест.</p>
+        <a class="btn" href="#">Начать обучение →</a>
+      </div>
+      <div class="figure">
+        <div class="linen"></div>
+        <div class="plinth"></div>
+        <img class="mentor" src="/images/landing-v2/mentor-cutout.webp" alt="">
+        <div class="badge"><b>A1 → B1</b><span>48 уроков по шагам</span></div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="band"><div class="wrap">
+    <a href="#"><img class="warm" src="/images/landing-v2/practice.webp" alt=""><div><span class="caps" style="color:#9d8f80">01</span><h3>Курс<br>по уровням</h3><span class="go caps">Смотреть →</span></div></a>
+    <a href="#"><img class="warm" src="/images/landing-v2/hands-detail.webp" alt=""><div><span class="caps" style="color:#9d8f80">02</span><h3>Тренажёр<br>слов</h3><span class="go caps">Смотреть →</span></div></a>
+    <a href="#"><img class="warm" src="/images/landing-v2/study-desk.webp" alt=""><div><span class="caps" style="color:#9d8f80">03</span><h3>Текст<br>в жесты</h3><span class="go caps">Смотреть →</span></div></a>
+    <a href="#"><img class="warm" src="/images/landing-v2/conversation.webp" alt=""><div><span class="caps" style="color:#9d8f80">04</span><h3>Камера<br>проверит вас</h3><span class="go caps">Смотреть →</span></div></a>
+  </div></section>
+
+  <section class="split">
+    <div class="text">
+      <div class="caps">Новый уровень</div>
+      <h2>Повседневная<br>жизнь · A2</h2>
+      <p>Город, покупки, чувства, планы на неделю. Двадцать уроков с живыми видео, фразами в порядке жестового языка и проверкой камерой.</p>
+      <div class="levels"><span>A1</span><span class="on">A2</span><span>B1</span><span>B2+</span></div>
+      <div><a class="btn" href="#">Открыть уровень →</a></div>
+    </div>
+    <div class="mosaic">
+      <img class="warm" src="/images/landing-v2/workshop.webp" alt="">
+      <img class="warm" src="/images/landing-v2/shop-signing-v1.webp" alt="">
+      <img class="warm" src="/images/landing-v2/conversation.webp" alt="" style="object-position: 50% 30%">
+    </div>
+  </section>
+
+  <section class="features"><div class="wrap">
+    <div><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M10 9l5 3-5 3z"/></svg><span><b>Видео носителей</b><small>Настоящие люди, а не анимация</small></span></div>
+    <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg><span><b>Проверка камерой</b><small>Подскажем, что поправить</small></span></div>
+    <div><svg viewBox="0 0 24 24"><path d="M5 19V9m7 10V5m7 14v-7"/></svg><span><b>Тест уровня</b><small>Не начинайте с нуля, если уже знаете</small></span></div>
+    <div><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.5-7 10-7 10z"/></svg><span><b>Бесплатно</b><small>Учитесь в своём темпе</small></span></div>
+  </div></section>
+
+  <section class="signs"><div class="wrap">
+    <header><h2>Популярные жесты</h2><a class="caps" href="#">Весь словарь</a></header>
+    <div class="grid">
+      <div class="card"><div class="ph"><img class="warm" src="/research/rsl/words/f17a6060-6ced-4bd1-9886-8578cfbb864f.jpg" alt=""><span class="heart">♡</span><span class="play">▶ Смотреть</span></div><h4>Привет</h4><span>Общение · A1</span></div>
+      <div class="card"><div class="ph"><img class="warm" src="/research/rsl/words/3fc519d4-541e-450a-a72c-a030bcdca9ed.jpg" alt=""><span class="heart">♡</span><span class="play">▶ Смотреть</span></div><h4>Спасибо</h4><span>Общение · A1</span></div>
+      <div class="card"><div class="ph"><img class="warm" src="/research/rsl/words/c3c582bb-00ef-48cd-b8f5-cbf21473ca56.jpg" alt=""><span class="heart">♡</span><span class="play">▶ Смотреть</span></div><h4>Семья</h4><span>Семья и люди · A1</span></div>
+      <div class="card"><div class="ph"><img class="warm" src="/research/rsl/words/cc14b58e-ac2c-4484-a1d5-c2f387d361a7.jpg" alt=""><span class="heart">♡</span><span class="play">▶ Смотреть</span></div><h4>Любить</h4><span>Чувства · A2</span></div>
+      <div class="card"><div class="ph"><img class="warm" src="/research/rsl/words/728c296d-1cc6-4475-865b-8a3396221970.jpg" alt=""><span class="heart">♡</span><span class="play">▶ Смотреть</span></div><h4>Имя</h4><span>Общение · A1</span></div>
+    </div>
+  </div></section>
+
+  <footer><div class="wrap"><span class="brand">AI MENTOR</span><span>Русский жестовый язык · учебная платформа</span><span>Видео: открытый набор «Слово»</span></div></footer>
+  <div class="note">Превью стиля · не рабочая страница</div>
+</body>
+</html>
