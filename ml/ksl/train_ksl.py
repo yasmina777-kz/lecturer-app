@@ -240,5 +240,74 @@ def final():
     print('exported', flush=True)
 
 
+def sausaq():
+    """Adds the «Саусақтар сөйлейді» teacher (one signer, YouTube lessons) as camera data.
+    Transfer check: shared letters whose Bukva data is removed are learned only from
+    this teacher + QazSL, then tested on 20 unseen Bukva signers."""
+    qx, qy, qt = D['qx'], D['qy'].astype(int), D['qt']
+    bp, by, bt = D['bp'], D['by'].astype(int), D['bt']
+    S_ = np.load(ROOT / 'ml/rsl/data/sausaq/landmarks.npz')
+    sp = S_['points'][::2]; sy = np.array([LABELS.index(c) for c in S_['labels'][::2]])
+    epochs = int(sys.argv[2]) if len(sys.argv) > 2 else 8
+    global DANN
+    DANN = float(sys.argv[3]) if len(sys.argv) > 3 else 0.
+    nfolds = int(sys.argv[4]) if len(sys.argv) > 4 else 4
+    print('rendering …', flush=True)
+    btr = render_many(bp[~bt], deg=20, copies=3, seed=1); btr_y = np.tile(by[~bt], 3)
+    bte = render_many(bp[bt]); bte_y = by[bt]
+    sr = render_many(sp, deg=20, copies=3, seed=2); sr_y = np.tile(sy, 3)
+    print('teacher frames', len(sp), 'letters', len(set(sy)), flush=True)
+    rng = np.random.default_rng(7)
+    order = [LABELS.index(c) for c in SHARED if c != 'Ё']
+    rng.shuffle(order)
+    folds = [order[i::4] for i in range(4)]
+    rep = {}
+    zp, zy = [], []
+    for fi, held in enumerate(folds[:nfolds]):
+        keep = ~np.isin(btr_y, held)
+        X = np.concatenate([qx[~qt], btr[keep], sr]); y = np.concatenate([qy[~qt], btr_y[keep], sr_y])
+        dom = np.r_[np.zeros((~qt).sum()), np.ones(keep.sum() + len(sr))]
+        net = fit(X, y, epochs, seed=fi, domain=dom, dann=DANN)
+        pb = predict(net, bte); m = np.isin(bte_y, held)
+        zp.append(pb[m]); zy.append(bte_y[m])
+        print(f'fold {fi}: letters known only from QazSL + the teacher {acc(pb, bte_y, m):.3f} | others {acc(pb, bte_y, ~m):.3f}', flush=True)
+    zp, zy = np.concatenate(zp), np.concatenate(zy)
+    rep['transfer_teacher_plus_qazsl'] = {'top1': acc(zp, zy), 'top3': top3(zp, zy), 'n': int(len(zy)), 'folds': nfolds,
+        'per_letter': {LABELS[c]: round(acc(zp, zy, zy == c), 3) for c in sorted(set(zy))},
+        'note': 'Bukva test signers; these letters had camera data only from one YouTube teacher'}
+    print('TEACHER TRANSFER', rep['transfer_teacher_plus_qazsl']['top1'], rep['transfer_teacher_plus_qazsl']['top3'], flush=True)
+    if not (len(sys.argv) > 5 and sys.argv[5] == 'final'):
+        return
+    X = np.concatenate([qx[~qt], btr, sr]); y = np.concatenate([qy[~qt], btr_y, sr_y])
+    dom = np.r_[np.zeros((~qt).sum()), np.ones(len(btr) + len(sr))]
+    net = fit(X, y, epochs, seed=11, domain=dom, dann=DANN)
+    pq, pb = predict(net, qx[qt]), predict(net, bte)
+    kz = [LABELS.index(c) for c in KZ9]
+    kzm = np.isin(qy[qt], kz)
+    rep['final'] = {'bukva_test_signers_top1': acc(pb, bte_y), 'bukva_test_signers_top3': top3(pb, bte_y),
+                    'qazsl_heldout_block_top1': acc(pq, qy[qt]), 'qazsl_heldout_kazakh9_top1': acc(pq, qy[qt], kzm),
+                    'teacher_frames_per_letter': {LABELS[c]: int((sy == c).sum()) for c in sorted(set(sy))},
+                    'bukva_per_letter': {LABELS[c]: round(acc(pb, bte_y, bte_y == c), 3) for c in sorted(set(bte_y))}}
+    old = json.load(open(ROOT / 'docs/ksl-v1-report.json', encoding='utf-8'))['report']
+    rep['v1_transfer_qazsl_only'] = old['transfer_qazsl_only_letters']
+    print(json.dumps({k: {a: b for a, b in v.items() if not isinstance(b, dict)} for k, v in rep.items()}, ensure_ascii=False, indent=1), flush=True)
+    out = ROOT / 'frontend/public/models/ksl'
+    meta = dict(version='ksl-v2', input='50x50 binary silhouette drawn from 21 hand world landmarks (kslSilhouette.ts)',
+                sources=['QazSL: Beisov, Jotsov, Kerimbayev. Zenodo record 22830162, CC BY 4.0',
+                         'Bukva (ai-forever): landmark tracks of 33 letters shared with the Kazakh alphabet',
+                         '«Саусақтар сөйлейді» (YouTube: Sausaqtarsoileidi, «Жас Өрен», Aktobe): hand landmarks from 37 letter lessons, videos not redistributed'],
+                split='QazSL: last 25% of each class folder held out; Bukva: official signer-disjoint test flag (20 test signers); '
+                      'transfer: shared letters with Bukva data removed, learned from the teacher + QazSL only',
+                report=rep)
+    export(net, out / 'ksl-v2.json', meta)
+    import subprocess
+    subprocess.run([sys.executable, str(ROOT / 'ml/ksl/pack_weights.py'), str(out / 'ksl-v2.json')], check=True)
+    json.dump(meta, open(ROOT / 'docs/ksl-v2-report.json', 'w'), ensure_ascii=False, indent=1)
+    idx = np.flatnonzero(bt)[::540]
+    fx = [{'points': bp[i][:, :2].round(6).tolist(), 'probs': np.round(predict(net, render_many(bp[i:i+1]), True)[0], 5).tolist()} for i in idx]
+    json.dump(fx, open(out / 'ksl-v2-fixtures.json', 'w'))
+    print('exported', flush=True)
+
+
 if __name__ == '__main__':
-    {'probe': probe, 'final': final}[sys.argv[1]]()
+    {'probe': probe, 'final': final, 'sausaq': sausaq}[sys.argv[1]]()

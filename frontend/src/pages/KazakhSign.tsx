@@ -3,7 +3,6 @@ import { Link, useSearchParams } from "react-router-dom";
 import { ArrowLeft, Camera, CameraOff, Check, Download, Hand, Info, Scale, Type } from "lucide-react";
 import { FilesetResolver, HandLandmarker } from "@mediapipe/tasks-vision";
 import { at } from "../i18n/automation";
-import { alphabetIllustration } from "../sign/alphabetIllustrations";
 import {
   KAZAKH_LETTERS,
   KAZAKH_ONLY,
@@ -23,9 +22,46 @@ import "./kazakh-sign.css";
 type Tab = "alphabet" | "trainer" | "why" | "analogs";
 const ref = (c: string) => `/models/ksl/ref/${c.codePointAt(0)!.toString(16).padStart(4, "0")}.png`;
 const SAMPLES = "ksl-letter-samples-v1";
+/** «Саусақтар сөйлейді» (Aktobe) lesson per letter on YouTube: [video id, second where the correct (✓) demonstration starts]. */
+const LESSON: Record<string, [string, number]> = {"И": ["90xdTon6er4", 9], "Ц": ["issSBk8pVWs", 9], "І": ["jCjee4V5UVE", 9], "А": ["x3QXeIERykg", 9], "Б": ["J0CpWOkifnQ", 9], "В": ["Cd5aaLlLIZ8", 9], "Г": ["BbJH-E1WGgM", 9], "Д": ["LoVHXR-FSzQ", 10], "Ж": ["korruiQvtr8", 9], "З": ["_1b3Nk0Fh_A", 9], "К": ["-WdIUDCvg3Y", 9], "Л": ["ULxmWy7elBg", 9], "М": ["qK-E3KALqFs", 9], "Н": ["hyST3J_p518", 9], "О": ["joEhvTHSsJw", 9], "П": ["sQEoBqjnDcY", 9], "Р": ["E8A3wUmV7jU", 9], "С": ["WHEyI_Dve94", 9], "Т": ["0smyRYW6-cA", 9], "У": ["wpoD2haG7W4", 9], "Ф": ["CZGQNB-3DGY", 9], "Х": ["bPcDJcnY_94", 9], "Ч": ["NErs_OeKi1Y", 9], "Ш": ["pijPLPAp2EE", 9], "Ы": ["7e_satlQKKA", 9], "Э": ["LK1coYwUT5s", 9], "Ю": ["S_izKezgfVo", 9], "Я": ["A7zExUfbhP0", 9], "Ғ": ["Xou3tSuwaAE", 9], "Қ": ["MYWYthN7AGk", 9], "Ң": ["YyQ7RPgoi6I", 9], "Ү": ["wtKosfU8HkY", 9], "Ұ": ["f02AJ4ylhHY", 9], "Ә": ["KOsEb_t5RTs", 9], "Ө": ["aZaSYg_wJYw", 9], "Й": ["-irYZUsDEfc", 9], "Ё": ["WeDg28ZgtIs", 9]};
+const BUKVA_CLIP = (c: string) => `/research/rsl/alphabet/${c.codePointAt(0)!.toString(16).padStart(4, "0")}.mp4`;
+
+/** A person showing the letter: our own Bukva clip for shared letters, the
+ * Kazakh teacher via the official YouTube embed for Kazakh letters. */
+function LetterDemo({ letter, compact = false }: { letter: string; compact?: boolean }) {
+  const kz = KAZAKH_ONLY.includes(letter);
+  const lesson = LESSON[letter];
+  if (kz && lesson)
+    return (
+      <div className={`ksl-demo${compact ? " ksl-demo-sm" : ""}`}>
+        <iframe
+          key={letter}
+          src={`https://www.youtube-nocookie.com/embed/${lesson[0]}?start=${lesson[1]}&rel=0&playsinline=1&modestbranding=1`}
+          title={`${letter} — «Саусақтар сөйлейді»`}
+          allow="autoplay; encrypted-media; picture-in-picture"
+          allowFullScreen
+        />
+        <small>{at("Видеоурок «Саусақтар сөйлейді» (Актобе), YouTube. Смотрите показ с зелёной галочкой ✓", "«Саусақтар сөйлейді» lesson (Aktobe), YouTube. Watch the demo marked ✓", "«Саусақтар сөйлейді» бейнесабағы (Ақтөбе). ✓ белгісі бар көрсетілімді қараңыз")}</small>
+      </div>
+    );
+  if (!kz)
+    return (
+      <div className={`ksl-demo${compact ? " ksl-demo-sm" : ""}`}>
+        <video key={letter} src={BUKVA_CLIP(letter)} autoPlay loop muted playsInline controls />
+        <small>{at("Эта буква показывается так же, как в русском дактиле (видео Bukva).", "Shown as in Russian fingerspelling (Bukva video).", "Орыс дактиліндегідей көрсетіледі (Bukva бейнесі).")}</small>
+      </div>
+    );
+  return (
+    <div className={`ksl-demo${compact ? " ksl-demo-sm" : ""}`}>
+      <img className="ksl-sil" src={ref(letter)} alt={letter} />
+      <small>{at("Видео с человеком для Һ в открытом доступе не нашлось — пока только силуэт кисти из датасета QazSL.", "No public video of a person showing Һ was found — only a QazSL hand silhouette.", "Һ үшін адам көрсеткен бейне табылмады — тек QazSL силуэті.")}</small>
+    </div>
+  );
+}
 
 type Report = {
-  transfer_qazsl_only_letters?: { top1: number; top3: number };
+  transfer_teacher_plus_qazsl?: { top1: number; top3: number };
+  v1_transfer_qazsl_only?: { top1: number; top3: number };
   letters_with_camera_data?: { top1: number; top3: number };
   final?: { bukva_test_signers_top1: number; qazsl_heldout_kazakh9_top1: number };
 };
@@ -71,7 +107,8 @@ export function KazakhSignPage() {
       <p className="fs-credit">
         {at("Данные: ", "Data: ", "Деректер: ")}
         <a href="https://zenodo.org/records/22830162" target="_blank" rel="noreferrer">QazSL</a> (Beisov, Jotsov, Kerimbayev, CC BY 4.0) ·{" "}
-        <a href="https://github.com/ai-forever/bukva" target="_blank" rel="noreferrer">Bukva</a> (ai-forever) · MediaPipe (Google, Apache 2.0).{" "}
+        <a href="https://github.com/ai-forever/bukva" target="_blank" rel="noreferrer">Bukva</a> (ai-forever) ·{" "}
+        <a href="https://www.youtube.com/channel/UCmKNkh-WKUBVKU19atCGyNQ" target="_blank" rel="noreferrer">«Саусақтар сөйлейді»</a> ({at("видеоуроки, Актобе", "video lessons, Aktobe", "бейнесабақтар, Ақтөбе")}) · MediaPipe (Google, Apache 2.0).{" "}
         <a href="/models/ksl/ATTRIBUTION.txt" target="_blank" rel="noreferrer">{at("Лицензии", "Licences", "Лицензиялар")}</a>
       </p>
     </div>
@@ -80,8 +117,6 @@ export function KazakhSignPage() {
 
 function Alphabet({ onPractice }: { onPractice: (l: string) => void }) {
   const [pick, setPick] = useState("Ә");
-  const kz = KAZAKH_ONLY.includes(pick);
-  const img = kz ? ref(pick) : alphabetIllustration(pick);
   return (
     <div className="ksl-alphabet">
       <section className="panel ksl-grid-panel">
@@ -99,16 +134,7 @@ function Alphabet({ onPractice }: { onPractice: (l: string) => void }) {
       </section>
       <section className="panel ksl-letter">
         <span className="ksl-big">{pick}</span>
-        {img ? <img className={kz ? "ksl-sil" : ""} src={img} alt={pick} /> : <p>{at("Для Ё нет рисунка: покажите Е и встряхните кисть.", "No picture for Ё.", "Ё үшін сурет жоқ.")}</p>}
-        <p className="ksl-note">
-          {kz
-            ? at(
-                "Силуэт кисти из открытого датасета QazSL — так букву показывают носители казахского дактиля. Часть букв показывается с движением: на силуэте виден только конечный момент.",
-                "Hand silhouette from the open QazSL dataset. Some letters include a movement; the silhouette shows one moment.",
-                "QazSL ашық деректер жинағындағы қол силуэті. Кейбір әріптер қимылмен көрсетіледі.",
-              )
-            : at("Эта буква показывается так же, как в русском дактиле.", "Shown the same as in Russian fingerspelling.", "Бұл әріп орыс дактиліндегідей көрсетіледі.")}
-        </p>
+        <LetterDemo letter={pick} />
         <button className="button primary" onClick={() => onPractice(pick)}>
           <Camera size={18} /> {at("Проверить камерой", "Check with camera", "Камерамен тексеру")}
         </button>
@@ -243,7 +269,6 @@ function Trainer({ initial }: { initial: string }) {
 
   const kz = KAZAKH_ONLY.includes(target);
   const pct = (v?: number) => (v === undefined ? "—" : `${Math.round(v * 100)}%`);
-  const img = kz ? ref(target) : alphabetIllustration(target);
   return (
     <div className="ksl-trainer">
       <section className="panel fs-player">
@@ -289,8 +314,8 @@ function Trainer({ initial }: { initial: string }) {
       <section className="panel fs-answer">
         <div className="ksl-target">
           <span className={`ksl-big ${done[target] ? "ok" : ""}`}>{target}</span>
-          {img && <img className={kz ? "ksl-sil" : ""} src={img} alt="" />}
         </div>
+        <LetterDemo letter={target} compact />
         {done[target] ? (
           <p className="vocab-feedback ok"><Check size={18} /> {at("Получилось!", "Got it!", "Дұрыс!")}</p>
         ) : (
@@ -307,11 +332,17 @@ function Trainer({ initial }: { initial: string }) {
         </ol>
         {kz && (
           <p className="ksl-warn">
-            {at(
-              "Для 9 казахских букв у модели пока есть только силуэты QazSL, а не записи с камеры. Для этих букв проверка экспериментальная.",
-              "For the 9 Kazakh letters the model has only QazSL silhouettes, not camera recordings, so checking them is experimental.",
-              "9 қазақ әрпі үшін модельде тек QazSL силуэттері бар, сондықтан тексеру тәжірибелік.",
-            )}
+            {target === "Һ"
+              ? at(
+                  "Для Һ у модели есть только силуэты QazSL, видео с камеры нет — проверка экспериментальная.",
+                  "Һ has only QazSL silhouettes, no camera video, so checking it is experimental.",
+                  "Һ үшін тек QazSL силуэттері бар — тексеру тәжірибелік.",
+                )
+              : at(
+                  "Казахские буквы модель выучила по силуэтам QazSL и видеоурокам одного преподавателя («Саусақтар сөйлейді»). Если у вас рука стоит иначе, модель может ошибаться.",
+                  "Kazakh letters were learned from QazSL silhouettes and one teacher's video lessons, so the model can be wrong for other hand styles.",
+                  "Қазақ әріптерін модель QazSL силуэттері мен бір мұғалімнің бейнесабақтарынан үйренді.",
+                )}
           </p>
         )}
         <div className="ksl-grid small">
@@ -333,9 +364,10 @@ function Trainer({ initial }: { initial: string }) {
             <ul>
               <li>{at("33 общие буквы, новые люди, которых не было в обучении (Bukva):", "33 shared letters, unseen signers (Bukva):", "33 ортақ әріп, жаңа адамдар:")} <b>{pct(report.final?.bukva_test_signers_top1)}</b></li>
               <li>{at("9 казахских букв на отложенной части QazSL (силуэты):", "9 Kazakh letters, held-out QazSL silhouettes:", "9 қазақ әрпі, QazSL:")} <b>{pct(report.final?.qazsl_heldout_kazakh9_top1)}</b></li>
-              <li>{at("Перенос с силуэтов QazSL на камеру (буквы без записей с камеры):", "Transfer from QazSL silhouettes to the camera:", "QazSL-ден камераға тасымалдау:")} <b>{pct(report.transfer_qazsl_only_letters?.top1)}</b></li>
+              <li>{at("Буквы, выученные только по QazSL и видео одного преподавателя, у новых людей:", "Letters learned only from QazSL and one teacher's videos, unseen people:", "Тек QazSL мен бір мұғалімнен үйренілген әріптер, жаңа адамдар:")} <b>{pct(report.transfer_teacher_plus_qazsl?.top1)}</b> ({at("в топ-3", "top-3", "топ-3")} {pct(report.transfer_teacher_plus_qazsl?.top3)})</li>
+              <li>{at("То же без видео преподавателя, только силуэты QazSL (v1):", "Same with QazSL silhouettes only (v1):", "Тек QazSL силуэттерімен (v1):")} <b>{pct(report.v1_transfer_qazsl_only?.top1)}</b></li>
             </ul>
-            <p>{at("Последняя цифра — ожидаемая точность казахских букв с камеры. Чтобы её поднять, нужны записи с камеры: кнопка «Записать пример» сохраняет только точки кисти в этом браузере.", "The last figure estimates camera accuracy for Kazakh letters. Recording samples improves it.", "Соңғы сан — камерадағы қазақ әріптерінің күтілетін дәлдігі.")}</p>
+            <p>{at("Предпоследняя цифра — ожидаемая точность 8 казахских букв с камеры. Чтобы её поднять, нужны записи разных людей: кнопка «Записать пример» сохраняет только точки кисти в этом браузере.", "The second-to-last figure estimates camera accuracy for Kazakh letters. Recordings from more people improve it.", "Бұл — қазақ әріптерінің камерадағы күтілетін дәлдігі.")}</p>
           </details>
         )}
       </section>

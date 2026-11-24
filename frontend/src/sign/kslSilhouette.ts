@@ -4,7 +4,7 @@
  * world landmarks are drawn as a 50×50 hand silhouette (palm polygon, finger
  * capsules, forearm stub cut by the frame), then a small CNN trained on QazSL
  * silhouettes (CC BY 4.0) and Bukva landmark tracks classifies it. Both files
- * must draw the same pixels; ksl-v1-fixtures.json checks that. */
+ * must draw the same pixels; ksl-v2-fixtures.json checks that. */
 
 export const KSL_N = 50;
 const FINGERS: [number, number][] = [
@@ -190,7 +190,7 @@ export function handPoints(world: { x: number; y: number }[], handedness: string
 
 let cached: Promise<KslModel> | null = null;
 export function loadKslModel(): Promise<KslModel> {
-  cached ??= fetch("/models/ksl/ksl-v1.json").then((r) => {
+  cached ??= fetch("/models/ksl/ksl-v2.json").then((r) => {
     if (!r.ok) throw new Error(`ksl model ${r.status}`);
     return r.json().then(unpackKslModel);
   });
