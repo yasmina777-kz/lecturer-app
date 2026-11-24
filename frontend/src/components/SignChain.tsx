@@ -4,6 +4,7 @@ import { at } from "../i18n/automation";
 import type { DictionaryEntry } from "../sign/dictionary";
 import type { MotionPlan, MotionStep } from "../sign/motion";
 import { HumanSequencePlayer } from "./HumanSequencePlayer";
+import { useSignLang, wordText } from "../sign/signLanguage";
 import "./sign-chain.css";
 
 let catalog: Promise<DictionaryEntry[]> | null = null;
@@ -31,6 +32,7 @@ export function useWordCatalog() {
 /** Real signer videos for a list of dictionary signs, played one after another. */
 export function SignChain({ signs, autoPlay = true, compact = false }: { signs: string[]; autoPlay?: boolean; compact?: boolean }) {
   const words = useWordCatalog();
+  const [sl] = useSignLang();
   const plan = useMemo<MotionPlan | null>(() => {
     if (!words) return null;
     const steps: MotionStep[] = [];
@@ -41,14 +43,14 @@ export function SignChain({ signs, autoPlay = true, compact = false }: { signs: 
       steps.push({
         id: `${w.id}-${i}`,
         label: w.label,
-        text: w.label.replace(/[!?]$/, ""),
+        text: wordText(w.label, sl),
         reference: w.displayVideo ?? w.video,
         url: "",
         duration: 2,
       } as unknown as MotionStep);
     });
     return { steps, missing, spelling: false } as MotionPlan;
-  }, [words, signs.join("|")]);
+  }, [words, signs.join("|"), sl]);
   useEffect(() => {
     // Warm the cache so the chain plays without gaps.
     plan?.steps.forEach((s) => void fetch(s.reference!).catch(() => {}));

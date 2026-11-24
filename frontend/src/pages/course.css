@@ -799,3 +799,11 @@
 }
 .course .course-before-card > span:last-child { min-width: 0; }
 
+
+.course-sl-switch { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 10px 0 12px; max-width: 560px; }
+.course-sl-switch button { display: grid; gap: 2px; text-align: left; padding: 10px 14px; border-radius: 14px; border: 2px solid var(--p-line, #dfe3ea); background: var(--p-surface, #fff); color: inherit; font: inherit; cursor: pointer; }
+.course-sl-switch button strong { font-size: 1.05rem; }
+.course-sl-switch button span { font-size: .8rem; color: var(--p-muted, #5b6472); }
+.course-sl-switch button[aria-checked="true"] { border-color: var(--lvl, var(--p-blue, #2563eb)); background: color-mix(in srgb, var(--lvl, #2563eb) 10%, var(--p-surface, #fff)); }
+.course-word-ru { display: block; font-size: .85rem; color: var(--p-muted, #5b6472); }
+@media (max-width: 520px) { .course-sl-switch { grid-template-columns: 1fr; } }

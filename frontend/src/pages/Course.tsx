@@ -118,6 +118,11 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { at } from "../i18n/automation";
+import { phraseText, tipText, useSignLang, wordText } from "../sign/signLanguage";
+import { getLanguage, setLanguage } from "../i18n";
+import { useAuth } from "../context/AuthContext";
+import { patch } from "../api/httpClient";
+import type { Language, User } from "../types/auth";
 import "../components/topic-art.css";
 import { ProgressRing } from "../components/ProgressRing";
 import { PlacementPrompt } from "../components/PlacementPrompt";
@@ -313,19 +318,49 @@ export function CoursePage() {
   const next = units.find((u) => !progress[u.id]?.done) ?? units[units.length - 1];
   const count = (l: CefrLevel) => (l === "B2" ? [0, 0] : [courseUnits(l).filter((u) => progress[u.id]?.done).length, courseUnits(l).length]);
   const doneCount = units.filter((u) => progress[u.id]?.done).length;
+  const [sl, setSl] = useSignLang();
+  const kz = sl === "ksl";
+  const { user, setUser } = useAuth();
+  // Choosing the course language also switches the lesson interface (saved in the profile like RU/KZ).
+  const uiTo = (lang: Language) => {
+    if (getLanguage() === lang || getLanguage() === "en") return;
+    setLanguage(lang);
+    if (user) patch<User>("/auth/language", { language: lang }).then(setUser).catch(() => undefined);
+  };
   return (
     <div className="sign-workspace vocab course" data-level={level}>
       <PlacementPrompt hasHistory={Object.keys(progress).length > 0} />
       <section className="course-hero course-anim">
         <div className="course-hero-text">
           <span className="eyebrow">{at("КУРС ПО ШАГАМ", "STEP-BY-STEP COURSE", "ҚАДАМДЫҚ КУРС")} · {level} · {meta.name}</span>
-          <h1>{at("Русский жестовый язык с нуля", "Russian Sign Language from zero", "Нөлден бастап РЖЯ")}</h1>
+          <h1>
+            {kz
+              ? at("Казахский жестовый язык с нуля", "Kazakh Sign Language from zero", "Нөлден бастап қазақ ым тілі")
+              : at("Русский жестовый язык с нуля", "Russian Sign Language from zero", "Нөлден бастап орыс ым тілі")}
+          </h1>
+          <div className="course-sl-switch" role="radiogroup" aria-label={at("Какой жестовый язык учим", "Which sign language", "Қай ым тілін үйренеміз")}>
+            <button role="radio" aria-checked={!kz} onClick={() => { setSl("rsl"); uiTo("ru"); }}>
+              <strong>🇷🇺 РЖЯ</strong>
+              <span>{at("Русский жестовый · уроки на русском", "Russian SL · lessons in Russian", "Орыс ым тілі · сабақтар орысша")}</span>
+            </button>
+            <button role="radio" aria-checked={kz} onClick={() => { setSl("ksl"); uiTo("kk"); }}>
+              <strong>🇰🇿 ҚЖЯ</strong>
+              <span>{at("Казахский жестовый · уроки на казахском", "Kazakh SL · lessons in Kazakh", "Қазақ ым тілі · сабақтар қазақша")}</span>
+            </button>
+          </div>
           <p>
             {at(
               "Учитесь по шагам: смотрите жесты носителей, проверяйте себя, показывайте в камеру и закрепляйте в диалогах.",
               "Learn step by step: watch native signers, check yourself, sign to the camera, practise in dialogues.",
               "Қадаммен үйреніңіз.",
             )}
+            {kz &&
+              " " +
+                at(
+                  "В казахском жестовом языке большинство жестов те же, что в русском, поэтому видео общие; слова и фразы уроков — на казахском, алфавит — 42 буквы.",
+                  "Most Kazakh SL signs match Russian SL, so videos are shared; lesson words and phrases are in Kazakh, the alphabet has 42 letters.",
+                  "Қазақ ым тіліндегі ымдардың көбі орыс ым тілімен бірдей, сондықтан бейнелер ортақ; сөздер мен сөйлемдер қазақша, әліпби — 42 әріп.",
+                )}
           </p>
           <div className="course-hero-actions">
             {next && (
@@ -375,8 +410,9 @@ export function CoursePage() {
               <div className="course-before-grid">
                 {[
                   { to: "/culture", icon: Users, t: at("Культура и этикет глухих", "Deaf culture", "Керең мәдениеті"), d: at("Как привлечь внимание и общаться уважительно", "Etiquette and respectful words", "Әдеп") },
-                  { to: "/practice", icon: Hand, t: at("Азбука (дактиль)", "Alphabet", "Әліпби"), d: at("33 буквы — чтобы показать своё имя", "33 letters for your name", "33 әріп") },
-                  { to: "/kazakh", icon: Hand, t: at("Казахский дактиль", "Kazakh fingerspelling", "Қазақ дактилі"), d: at("42 буквы: + Ә Ғ Қ Ң Ө Ұ Ү Һ І, проверка камерой", "42 letters incl. 9 Kazakh ones, camera check", "42 әріп, камерамен тексеру") },
+                  kz
+                    ? { to: "/kazakh", icon: Hand, t: at("Казахский дактиль", "Kazakh fingerspelling", "Қазақ дактилі"), d: at("42 буквы: + Ә Ғ Қ Ң Ө Ұ Ү Һ І, проверка камерой", "42 letters incl. Ә Ғ Қ Ң Ө Ұ Ү Һ І, camera check", "42 әріп: Ә Ғ Қ Ң Ө Ұ Ү Һ І, камерамен тексеру") }
+                    : { to: "/practice", icon: Hand, t: at("Азбука (дактиль)", "Alphabet", "Әліпби"), d: at("33 буквы — чтобы показать своё имя", "33 letters for your name", "33 әріп") },
                   { to: "/fingerspell", icon: Type, t: at("Чтение дактиля", "Reading fingerspelling", "Дактильді оқу"), d: at("Понимать имена по буквам", "Understand spelled names", "Есімдерді түсіну") },
                 ].map((c, i) => (
                   <Link key={c.to} className="panel course-before-card course-anim" to={c.to} style={{ "--i": i + 4 } as React.CSSProperties}>
@@ -403,7 +439,7 @@ export function CoursePage() {
                     <strong>{u.title}</strong>
                     <span>{u.goal}</span>
                     <div className="course-unit-words">
-                      {u.words.slice(0, 4).map((w) => <i key={w}>{w.replace(/[!?]$/, "")}</i>)}
+                      {u.words.slice(0, 4).map((w) => <i key={w}>{wordText(w, sl)}</i>)}
                       {u.words.length > 4 && <i>+{u.words.length - 4}</i>}
                     </div>
                   </div>
@@ -510,6 +546,7 @@ export function CourseUnitPage() {
 }
 
 function WordsStep({ entries, unit, onNext }: { entries: DictionaryEntry[]; unit: CourseUnit; onNext: () => void }) {
+  const [sl] = useSignLang();
   const [sel, setSel] = useState(0);
   const [seen, setSeen] = useState<Set<number>>(() => new Set([0]));
   const e = entries[sel];
@@ -517,14 +554,15 @@ function WordsStep({ entries, unit, onNext }: { entries: DictionaryEntry[]; unit
     <div className="fs-round">
       <section className="panel fs-player">
         {e && <video key={e.id} className="test-video" src={e.displayVideo || e.video} autoPlay loop muted playsInline controls />}
-        <strong className="course-word">{e?.label.replace(/[!?]$/, "")}</strong>
+        <strong className="course-word">{e && wordText(e.label, sl)}</strong>
+        {e && sl === "ksl" && <span className="course-word-ru">{e.label.replace(/[!?]$/, "")}</span>}
       </section>
       <section className="panel fs-answer">
         <h2>{at("Посмотрите каждый жест и повторите его", "Watch each sign and repeat it", "Әр ымды қарап, қайталаңыз")}</h2>
         <div className="vocab-chips course-chips">
           {entries.map((w, k) => (
             <button key={w.id} aria-pressed={k === sel} className={seen.has(k) ? "seen" : ""} onClick={() => { setSel(k); setSeen((s) => new Set(s).add(k)); }}>
-              {w.label.replace(/[!?]$/, "")}
+              {wordText(w.label, sl)}
             </button>
           ))}
         </div>
@@ -539,6 +577,7 @@ function WordsStep({ entries, unit, onNext }: { entries: DictionaryEntry[]; unit
 }
 
 function QuizStep({ entries, all, unit, onNext }: { entries: DictionaryEntry[]; all: DictionaryEntry[]; unit: CourseUnit; onNext: () => void }) {
+  const [sl] = useSignLang();
   const items = useMemo(() => shuffle(entries).slice(0, 6), [entries]);
   const [i, setI] = useState(0);
   const [picked, setPicked] = useState<string | null>(null);
@@ -573,13 +612,13 @@ function QuizStep({ entries, all, unit, onNext }: { entries: DictionaryEntry[]; 
         <div className="vocab-choices">
           {options.map((o) => (
             <button key={o.id} className={!picked ? "" : o.id === t.id ? "right" : o.id === picked ? "wrong" : ""} onClick={() => { if (picked) return; setPicked(o.id); if (o.id === t.id) setScore((s) => s + 1); }}>
-              {o.label.replace(/[!?]$/, "")}
+              {wordText(o.label, sl)}
             </button>
           ))}
         </div>
         {picked && (
           <>
-            <p className={`vocab-feedback ${picked === t.id ? "ok" : "no"}`}>{picked === t.id ? <Check size={18} /> : <X size={18} />} {t.label.replace(/[!?]$/, "")}</p>
+            <p className={`vocab-feedback ${picked === t.id ? "ok" : "no"}`}>{picked === t.id ? <Check size={18} /> : <X size={18} />} {wordText(t.label, sl)}</p>
             <button className="button primary" onClick={() => { setPicked(null); setI((n) => n + 1); }}>{at("Дальше", "Next", "Келесі")} <ArrowRight size={16} /></button>
           </>
         )}
@@ -589,6 +628,7 @@ function QuizStep({ entries, all, unit, onNext }: { entries: DictionaryEntry[]; 
 }
 
 function PhrasesStep({ unit, onNext }: { unit: CourseUnit; onNext: () => void }) {
+  const [sl] = useSignLang();
   const [k, setK] = useState(0);
   const p = unit.phrases[k];
   return (
@@ -600,13 +640,14 @@ function PhrasesStep({ unit, onNext }: { unit: CourseUnit; onNext: () => void })
         <h2>{at("Фразы урока", "Lesson phrases", "Сабақ сөйлемдері")}</h2>
         <div className="vocab-chips">
           {unit.phrases.map((x, j) => (
-            <button key={x.ru} aria-pressed={j === k} onClick={() => setK(j)}>{x.ru}</button>
+            <button key={x.ru} aria-pressed={j === k} onClick={() => setK(j)}>{phraseText(x.ru, sl)}</button>
           ))}
         </div>
         <p className="grammar-example">
-          <strong>{p.ru}</strong>
-          <span>{p.signs.map((s) => s.replace(/[!?]$/, "").toUpperCase()).join(" + ")}</span>
-          {p.tip && <em>{p.tip}</em>}
+          <strong>{phraseText(p.ru, sl)}</strong>
+          {sl === "ksl" && <small className="course-word-ru">{p.ru}</small>}
+          <span>{p.signs.map((s) => wordText(s, sl).toUpperCase()).join(" + ")}</span>
+          {p.tip && <em>{tipText(p.tip, sl)}</em>}
         </p>
         <p className="fs-tip">{at("Повторите фразу вслед за видео — сначала медленно (0.5×), потом в обычном темпе.", "Repeat the phrase after the video, slowly first.", "Бейнеден кейін қайталаңыз.")}</p>
         <button className="button primary" onClick={onNext}>{at("Показать самому", "Sign it yourself", "Өзің көрсет")} <ArrowRight size={16} /></button>
@@ -616,6 +657,7 @@ function PhrasesStep({ unit, onNext }: { unit: CourseUnit; onNext: () => void })
 }
 
 function CameraStep({ entries, onNext }: { entries: DictionaryEntry[]; onNext: () => void }) {
+  const [sl] = useSignLang();
   const [sel, setSel] = useState(0);
   const e = entries[sel];
   return (
@@ -625,7 +667,7 @@ function CameraStep({ entries, onNext }: { entries: DictionaryEntry[]; onNext: (
         <p className="fs-tip">{at("Нужен Chrome и разрешение на камеру. Видео не покидает компьютер. Шаг можно пропустить.", "Chrome and camera permission needed. Video stays on your device. You may skip this step.", "Chrome және камера рұқсаты керек.")}</p>
         <div className="vocab-chips">
           {entries.map((w, k) => (
-            <button key={w.id} aria-pressed={k === sel} onClick={() => setSel(k)}>{w.label.replace(/[!?]$/, "")}</button>
+            <button key={w.id} aria-pressed={k === sel} onClick={() => setSel(k)}>{wordText(w.label, sl)}</button>
           ))}
         </div>
         <button className="button primary" onClick={onNext}>{at("Дальше", "Next", "Келесі")} <ArrowRight size={16} /></button>

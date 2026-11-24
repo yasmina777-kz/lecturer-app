@@ -1,3 +1,4 @@
+import { SignLangSwitcher } from "./SignLangSwitcher";
 import { ProductSurface } from "./ProductSurface";
 import { at } from "../i18n/automation";
 import { t } from "../i18n";
@@ -188,6 +189,7 @@ export function Shell() {
           </div>
           <div className="topbar-right">
             <ThemeSwitcher />
+            <SignLangSwitcher />
             <LanguageSwitcher />
           </div>
         </header>
