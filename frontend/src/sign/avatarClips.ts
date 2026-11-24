@@ -74,3 +74,45 @@ export function blinker() {
   };
 }
 
+
+/** Small signs of life on top of the clips: a soft resting smile and the eyes
+ * moving a little every few seconds (a fixed stare looks like a mannequin).
+ * Additive like the blinker, so recorded face curves still play. */
+export function faceLife() {
+  let gazeAt = performance.now() + 1200;
+  let from = [0, 0], to = [0, 0];
+  const added = new Map<THREE.Mesh, Record<string, number>>();
+  return (meshes: THREE.Mesh[], talking = false) => {
+    const now = performance.now();
+    if (now > gazeAt + 220) {
+      from = to;
+      // Mostly back to the viewer, sometimes a glance aside or down at the hands.
+      to = Math.random() < 0.55 ? [0, 0] : [(Math.random() - 0.5) * 0.5, Math.random() * 0.35];
+      gazeAt = now + 1800 + Math.random() * 2600;
+    }
+    const k = Math.min(1, Math.max(0, (now - gazeAt) / 220));
+    const e = k * k * (3 - 2 * k);
+    const gx = from[0] + (to[0] - from[0]) * e, gy = from[1] + (to[1] - from[1]) * e;
+    const smile = talking ? 0.05 : 0.14;
+    const want: Record<string, number> = {
+      mouthSmileLeft: smile, mouthSmileRight: smile,
+      eyeLookOutLeft: Math.max(0, -gx) * 0.6, eyeLookInRight: Math.max(0, -gx) * 0.6,
+      eyeLookInLeft: Math.max(0, gx) * 0.6, eyeLookOutRight: Math.max(0, gx) * 0.6,
+      eyeLookDownLeft: gy * 0.6, eyeLookDownRight: gy * 0.6,
+    };
+    for (const mesh of meshes) {
+      const dict = mesh.morphTargetDictionary, inf = mesh.morphTargetInfluences;
+      if (!dict || !inf) continue;
+      const prev = added.get(mesh) ?? {};
+      for (const [name, v] of Object.entries(want)) {
+        const i = dict[name];
+        if (i === undefined) continue;
+        const base = Math.max(0, inf[i] - (prev[name] ?? 0));
+        const add = Math.max(0, Math.min(1, base + v) - base);
+        inf[i] = base + add;
+        prev[name] = add;
+      }
+      added.set(mesh, prev);
+    }
+  };
+}

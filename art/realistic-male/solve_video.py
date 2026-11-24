@@ -434,6 +434,8 @@ def solve_clip(cap):
                     b = relax[n] if relax[n].dot(a) >= 0 else -relax[n]
                     q[n] = a.slerp(b, w)
         out.append(q)
+    if os.environ.get("NO_SMOOTH") != "1":
+        out = smooth_motion(out)
     # The sign itself plays in full, frame for frame as on the video; the move
     # from and back to the shared relaxed pose is added OUTSIDE it.
     def blend(a, b, w):
@@ -447,6 +449,62 @@ def solve_clip(cap):
     tail = [blend(out[-1], relax, smooth((k + 1) / (TRANS + 1))) for k in range(TRANS)]
     hold = [dict(relax) for _ in range(HOLD)]
     return hold + lead + out + tail + hold
+
+
+# Calm, human motion: tracking jitter makes the solved bones twitch from frame
+# to frame (a real signer's joints move smoothly). Each bone's rotation is
+# smoothed in time with a Gaussian in quaternion space; the trunk and head
+# most (they barely move), the fingers least (handshape changes are fast).
+SMOOTH_SIGMA = {"trunk": 3.0, "head": 2.5, "arm": 1.6, "hand": 1.3, "finger": 1.0}
+
+
+def bone_group(n):
+    short = n.removeprefix(P)
+    if any(k in short for k in ("Thumb", "Index", "Middle", "Ring", "Pinky")):
+        return "finger"
+    if short.endswith("Hand"):
+        return "hand"
+    if "Arm" in short or "Shoulder" in short:
+        return "arm"
+    if short in ("Neck", "Head") or "Eye" in short:
+        return "head"
+    return "trunk"
+
+
+def smooth_motion(frames):
+    T = len(frames)
+    if T < 3:
+        return frames
+    out = [dict(f) for f in frames]
+    for n in order:
+        sig = SMOOTH_SIGMA[bone_group(n)]
+        r = int(3 * sig)
+        w = [math.exp(-0.5 * (k / sig) ** 2) for k in range(-r, r + 1)]
+        seq = [frames[t][n] for t in range(T)]
+        for t in range(1, T):  # one hemisphere, so averaging does not cancel out
+            if seq[t].dot(seq[t - 1]) < 0:
+                seq[t] = -seq[t]
+        for t in range(T):
+            acc = [0.0, 0.0, 0.0, 0.0]
+            for k, wk in zip(range(-r, r + 1), w):
+                qk = seq[min(T - 1, max(0, t + k))]
+                acc = [a + wk * c for a, c in zip(acc, qk)]
+            qq = Quaternion(acc)
+            qq.normalize()
+            out[t][n] = qq
+    return out
+
+
+def motion_stats(frames):
+    """Mean / 95th-percentile angular acceleration (deg per frame²) per group."""
+    acc = {}
+    for n in order:
+        g = bone_group(n)
+        for t in range(1, len(frames) - 1):
+            a, b, c = frames[t - 1][n], frames[t][n], frames[t + 1][n]
+            d1, d2 = a.rotation_difference(b), b.rotation_difference(c)
+            acc.setdefault(g, []).append(math.degrees(d1.rotation_difference(d2).angle))
+    return {g: (round(float(np.mean(v)), 2), round(float(np.percentile(v, 95)), 2)) for g, v in acc.items()}
 
 
 def solve_fingers(q, s, hp):
@@ -583,7 +641,9 @@ def idle_clip(seconds=6.0):
         q = {}
         breathe = Quaternion(Vector((1, 0, 0)), math.radians(1.3) * math.sin(t * 1))
         sway = Quaternion(Vector((0, 1, 0)), math.radians(0.8) * math.sin(t * 1 + 1.1))
-        nod = Quaternion(Vector((1, 0, 0)), math.radians(1.5) * math.sin(t * 2 + 0.4)) @ Quaternion(Vector((0, 0, 1)), math.radians(2.0) * math.sin(t * 1 + 2.0))
+        # Head: a slow, small drift (a quick nod read as bobbing).
+        nod = Quaternion(Vector((1, 0, 0)), math.radians(0.8) * math.sin(t * 1 + 0.4)) @ Quaternion(Vector((0, 0, 1)), math.radians(1.2) * math.sin(t * 1 + 2.0))
+        lift = math.radians(0.7) * max(0.0, math.sin(t * 1))  # shoulders rise on the in-breath
         for n in order:
             p = parent[n]
             short = n.removeprefix(P)
@@ -594,6 +654,8 @@ def idle_clip(seconds=6.0):
                 base = breathe @ base
             elif short == "Head":
                 base = nod @ base
+            elif short.endswith("Shoulder"):
+                base = Quaternion(Vector((0, 1, 0)), lift if short.startswith("Left") else -lift) @ base
             elif short.endswith("ForeArm"):
                 base = Quaternion(Vector((1, 0, 0)), math.radians(1.2) * math.sin(t * 1 + 0.6)) @ base
             q[n] = base
@@ -628,6 +690,9 @@ for f in files:
     try:
         cap = json.loads(f.read_text())
         poses = solve_clip(cap)
+        if os.environ.get("MEASURE"):
+            print("STATS", f.stem, json.dumps(motion_stats(poses)), flush=True)
+            continue
     except Exception as e:
         print("SKIP", f.stem, e, flush=True)
         continue
