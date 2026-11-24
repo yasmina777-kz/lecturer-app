@@ -182,7 +182,7 @@ def relaxed_pose():
     # bunched and the thumb sticks out).
     for s in ("Left", "Right"):
         solve_fingers(q, s, None)
-    return q
+    return anatomy([q])[0]  # the rest hand must obey the same joint limits
 
 
 # --- landmark preparation ---------------------------------------------------------
@@ -434,8 +434,14 @@ def solve_clip(cap):
                     b = relax[n] if relax[n].dot(a) >= 0 else -relax[n]
                     q[n] = a.slerp(b, w)
         out.append(q)
+    if os.environ.get("NO_CALM") != "1":
+        out = calm_fingers(out, img, relax)
+    if os.environ.get("NO_ANATOMY") != "1":
+        out = anatomy(out)
     if os.environ.get("NO_SMOOTH") != "1":
         out = smooth_motion(out)
+        if os.environ.get("NO_ANATOMY") != "1":
+            out = anatomy(out)  # smoothing bones one by one can bring a small roll back
     # The sign itself plays in full, frame for frame as on the video; the move
     # from and back to the shared relaxed pose is added OUTSIDE it.
     def blend(a, b, w):
@@ -448,7 +454,9 @@ def solve_clip(cap):
     lead = [blend(relax, out[0], smooth((k + 1) / (TRANS + 1))) for k in range(TRANS)]
     tail = [blend(out[-1], relax, smooth((k + 1) / (TRANS + 1))) for k in range(TRANS)]
     hold = [dict(relax) for _ in range(HOLD)]
-    return hold + lead + out + tail + hold
+    seq = hold + lead + out + tail + hold
+    # Blending into and out of the rest pose must not wind fingers or wrists either.
+    return seq if os.environ.get("NO_ANATOMY") == "1" else anatomy(seq)
 
 
 # Calm, human motion: tracking jitter makes the solved bones twitch from frame
@@ -492,6 +500,127 @@ def smooth_motion(frames):
             qq = Quaternion(acc)
             qq.normalize()
             out[t][n] = qq
+    return out
+
+
+FINGER_BONES = tuple(f for f in ("Thumb", "Index", "Middle", "Ring", "Pinky"))
+
+
+def calm_fingers(frames, img, relax):
+    """Fingers read from a blurred, fast-moving or still-arriving hand curl
+    into claws. While the wrist moves fast, and in the first/last frames of the
+    sign, ease the fingers toward the relaxed hand; the held handshape (slow
+    wrist) keeps the tracked fingers exactly."""
+    T = len(frames)
+    out = [dict(f) for f in frames]
+    for s, jw in (("Left", 15), ("Right", 16)):
+        sp = np.zeros(T)
+        sp[1:] = np.linalg.norm(np.diff(img[:, jw, :2], axis=0), axis=1)
+        sp = np.convolve(np.pad(sp, 2, mode="edge"), np.ones(5) / 5, "valid")  # 5-frame mean
+        hand = P + s + "Hand"
+        bones = [n for n in order if n.startswith(P + s + "Hand") and n != hand]
+        for i in range(T):
+            w = min(1.0, max(0.0, (sp[i] - 0.012) / 0.025))
+            edge = min(i, T - 1 - i)
+            w = max(w, max(0.0, 1 - edge / 6))
+            w = w * w * (3 - 2 * w)
+            if w <= 0:
+                continue
+            f = out[i]
+            for n in bones:  # parents come first in `order`
+                p = parent[n]
+                rel = restq[p].inverted() @ restq[n]
+                cur = rel.inverted() @ frames[i][p].inverted() @ frames[i][n]
+                rl = rel.inverted() @ relax[p].inverted() @ relax[n]
+                if cur.dot(rl) < 0:
+                    rl = -rl
+                f[n] = f[p] @ rel @ cur.slerp(rl, w)
+    return out
+
+
+def split_twist(L):
+    """L = swing @ twist, twist about the bone's own length (local Y)."""
+    tw = twist(L, Y)
+    ang = 2 * math.atan2(Vector((tw.x, tw.y, tw.z)).dot(Y), tw.w)
+    ang = (ang + math.pi) % (2 * math.pi) - math.pi
+    return L @ Quaternion(Y, ang).inverted(), ang
+
+
+FINGERS_ALL = ("Index", "Middle", "Ring", "Pinky")
+# Human limits, degrees. Pronation/supination happens along the forearm (no
+# twist bones here, so it is shared between the forearm and the wrist bone
+# instead of one bone winding the skin like a sweet wrapper); the wrist itself
+# bends but hardly twists; a finger joint only bends, a phalanx never rolls.
+ROLL_TOTAL, ROLL_FORE, ROLL_HAND, ROLL_SHARE = 95, 60, 40, 0.6
+WRIST_SWING, THUMB_ROLL = 75, 25
+
+
+def anatomy(frames):
+    out = []
+    prev_roll = {}
+    for f in frames:
+        L = {}
+        for n in order:
+            p = parent[n]
+            L[n] = restq[n].copy() if p is None else (restq[p].inverted() @ restq[n]).inverted() @ f[p].inverted() @ f[n]
+        for s in ("Left", "Right"):
+            fo, ha = P + s + "ForeArm", P + s + "Hand"
+            if fo not in L or ha not in L:
+                continue
+            sw_f, a_f = split_twist(L[fo])
+            sw_h, a_h = split_twist(L[ha])
+            roll = a_f + a_h
+            # A tracked palm that flips by ~180° in one frame is a tracking
+            # error, not a real turn of the hand: keep the previous roll.
+            if s in prev_roll and abs(roll - prev_roll[s]) > math.radians(150):
+                roll = prev_roll[s]
+            roll = max(-math.radians(ROLL_TOTAL), min(math.radians(ROLL_TOTAL), roll))
+            prev_roll[s] = roll
+            rf = max(-math.radians(ROLL_FORE), min(math.radians(ROLL_FORE), roll * ROLL_SHARE))
+            rh = max(-math.radians(ROLL_HAND), min(math.radians(ROLL_HAND), roll - rf))
+            if sw_h.angle > math.radians(WRIST_SWING):
+                sw_h = Quaternion().slerp(sw_h, math.radians(WRIST_SWING) / sw_h.angle)
+            L[fo] = sw_f @ Quaternion(Y, rf)
+            L[ha] = sw_h @ Quaternion(Y, rh)
+            for fn in FINGERS_ALL:
+                for k in (1, 2, 3):
+                    b = P + s + "Hand" + fn + str(k)
+                    if b in L:
+                        L[b] = split_twist(L[b])[0]
+            for k in (1, 2, 3):
+                b = P + s + "HandThumb" + str(k)
+                if b in L:
+                    sw, a = split_twist(L[b])
+                    a = max(-math.radians(THUMB_ROLL), min(math.radians(THUMB_ROLL), a))
+                    L[b] = sw @ Quaternion(Y, a)
+        g = {}
+        for n in order:
+            p = parent[n]
+            g[n] = f[n] if p is None else g[p] @ (restq[p].inverted() @ restq[n]) @ L[n]
+            g[n].normalize()
+        out.append(g)
+    return out
+
+
+def local_twist(frames, t, n):
+    """Twist (deg) of bone n about its own length, relative to its parent."""
+    p = parent[n]
+    L = (restq[p].inverted() @ restq[n]).inverted() @ frames[t][p].inverted() @ frames[t][n]
+    tw = twist(L, Y)
+    ang = math.degrees(2 * math.atan2(Vector((tw.x, tw.y, tw.z)).dot(Y), tw.w))
+    return (ang + 180) % 360 - 180
+
+
+def twist_stats(frames):
+    out = {}
+    for s in ("Left", "Right"):
+        for b in ("ForeArm", "Hand"):
+            v = [abs(local_twist(frames, t, P + s + b)) for t in range(len(frames))]
+            out[s[0] + b] = round(float(np.percentile(v, 95)), 1)
+        # Finger roll about its own length (should be ~0: a phalanx cannot twist).
+        v = [abs(local_twist(frames, t, P + s + "Hand" + f + "2")) for f in ("Index", "Middle", "Ring", "Pinky") for t in range(len(frames))]
+        out[s[0] + "FingerWorstFrame"] = int(np.argmax(v)) % len(frames)
+        out[s[0] + "Finger"] = round(float(np.percentile(v, 95)), 1)
     return out
 
 
@@ -691,7 +820,7 @@ for f in files:
         cap = json.loads(f.read_text())
         poses = solve_clip(cap)
         if os.environ.get("MEASURE"):
-            print("STATS", f.stem, json.dumps(motion_stats(poses)), flush=True)
+            print("STATS", f.stem, json.dumps(motion_stats(poses)), "TWIST", json.dumps(twist_stats(poses)), flush=True)
             continue
     except Exception as e:
         print("SKIP", f.stem, e, flush=True)
