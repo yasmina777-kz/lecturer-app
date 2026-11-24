@@ -11,7 +11,7 @@ import { signingBounds, fitSigningFrame } from "../sign/motionFraming";
 import { composeMotion } from "../sign/composeMotion";
 import { at } from "../i18n/automation";
 import { loadAvatar } from "../sign/avatarModel";
-import { bindFace, blinker, faceLife, loadSavedMotion } from "../sign/avatarClips";
+import { bindFace, blinker, loadSavedMotion } from "../sign/avatarClips";
 import { softenArmMotion } from "../sign/softenArmMotion";
 import { smoothSignMotion } from "../sign/smoothSignMotion";
 
@@ -155,13 +155,9 @@ export function GestureMentor3D({
       visible = true;
     let faceMeshes: THREE.Mesh[] = [];
     const blink = blinker();
-    const life = faceLife();
     const render = () => {
       if (!alive || !visible) return;
-      if (faceMeshes.length) {
-        blink(faceMeshes);
-        life(faceMeshes, current.current.playbackState === "playing");
-      }
+      if (faceMeshes.length) blink(faceMeshes);
       renderer.render(scene, camera);
     };
     // Scrubbing and pause use the same Blender-baked animation clock.
