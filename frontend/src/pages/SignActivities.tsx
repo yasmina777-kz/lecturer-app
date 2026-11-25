@@ -127,13 +127,16 @@ export function SignDialoguesPage() {
   return (
     <div className="sign-workspace activity-workspace dialogues-workspace">
       {sl === "ksl" && (
-        <p className="ksl-warn" role="note">
-          {at(
-            "В диалогах пока показаны жесты русского жестового языка: видео казахских фраз в открытых источниках нет. Казахские жесты по темам — в уроках курса ҚЖЯ и в словаре.",
-            "Dialogues still show Russian SL signs: no open videos of Kazakh phrases exist yet. Kazakh signs are in the Kazakh SL lessons and dictionary.",
-            "Диалогтарда әзірге орыс ым тілінің ымдары көрсетілген: қазақ сөйлемдерінің ашық бейнелері жоқ. Қазақ ымдары — ҚЫТ курсы сабақтарында және сөздікте.",
-          )}
-        </p>
+        <div className="ksl-warn ksl-phrases-inline" role="note">
+          <span>
+            {at(
+              "Казахские фразы («Сәлеметсіз бе!», «Рахмет!», «Маған көмектесе аласыз ба?») показывают сурдопереводчик и глухие жители Астаны: откройте «Фразы ҚЖЯ». Сценарии диалогов ниже пока на жестах РЖЯ.",
+              "Kazakh phrases are in «Kazakh SL phrases». The dialogue scenarios below still use Russian SL signs.",
+              "Қазақ сөйлемдерін («Сәлеметсіз бе!», «Рахмет!») аудармашы мен Астананың естімейтін тұрғындары көрсетеді: «ҚЫТ сөйлемдері» бөлімін ашыңыз. Төмендегі диалогтар әзірге орыс ым тілінде.",
+            )}
+          </span>
+          <Link className="button primary" to="/course/kz/phrases">{at("Фразы ҚЖЯ", "Kazakh SL phrases", "ҚЫТ сөйлемдері")}</Link>
+        </div>
       )}
       {selected ? (
         <DialogueSession

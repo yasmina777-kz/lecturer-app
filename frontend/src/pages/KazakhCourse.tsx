@@ -1,6 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Check, CheckCircle2, Play, Turtle, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Camera, Check, CheckCircle2, Play, Turtle, UserRound, X } from "lucide-react";
+import { WordPracticeCamera } from "../components/WordPracticeCamera";
+import { loadKslWordModel } from "../sign/wordRecognizer";
+import { KazakhTeacherSection, KslClip, teacherSegment, useTeacherLessons } from "./KazakhTeacher";
 import { at } from "../i18n/automation";
 import { useLanguage } from "../i18n";
 import { shuffle } from "../sign/activities";
@@ -140,6 +143,8 @@ export function KazakhCourseList() {
           <Play size={16} /> {done ? at("Продолжить", "Continue", "Жалғастыру") : at("Начать", "Start", "Бастау")}
         </Link>
       </section>
+      <KazakhTeacherSection />
+      <h2 className="ksl-teacher-h">{at("Уроки по темам словаря SURDO.KZ", "Topic lessons (SURDO.KZ)", "SURDO.KZ сөздігі бойынша сабақтар")}</h2>
       <div className="course-units">
         {lessons.map((l) => (
           <Link key={l.id} className={`panel course-unit card-motion${progress[l.id] !== undefined ? " done" : ""}${l.id === next.id ? " current" : ""}`} to={`/course/kz/${l.id}`}>
@@ -232,16 +237,25 @@ export function KazakhLessonPage() {
 function Watch({ words, showRu, onNext }: { words: KslEntry[]; showRu: boolean; onNext: () => void }) {
   const [sel, setSel] = useState(0);
   const [slow, setSlow] = useState(false);
+  const [other, setOther] = useState(false);
+  const [camera, setCamera] = useState(false);
   const [seen, setSeen] = useState<Set<number>>(() => new Set([0]));
+  const teacher = useTeacherLessons().data;
   const w = words[sel];
   const ru = ruOf(w.label);
+  const seg = teacherSegment(teacher, w.label);
   return (
     <div className="fs-round">
       <section className="panel fs-player">
-        <KslVideo id={slow && w.slow ? w.slow : w.youtube} slow={slow} />
+        {other && seg ? <KslClip id={seg.youtube} start={seg.start} end={seg.end} /> : <KslVideo id={slow && w.slow ? w.slow : w.youtube} slow={slow} />}
         <strong className="course-word">{w.label.replace(/[!?]$/, "")}</strong>
         {showRu && ru && <span className="course-word-ru">{ru}</span>}
-        {w.slow && (
+        {seg && (
+          <button className="button secondary" aria-pressed={other} onClick={() => setOther((o) => !o)}>
+            <UserRound size={16} /> {other ? at("Носитель SURDO.KZ", "SURDO.KZ signer", "SURDO.KZ") : at("Другой носитель", "Another signer", "Басқа адам көрсетеді")}
+          </button>
+        )}
+        {w.slow && !other && (
           <button className="button secondary" onClick={() => setSlow((s) => !s)}>
             <Turtle size={16} /> {slow ? at("Обычная скорость", "Normal speed", "Қалыпты жылдамдық") : at("Медленно", "Slow", "Баяу")}
           </button>
@@ -251,11 +265,22 @@ function Watch({ words, showRu, onNext }: { words: KslEntry[]; showRu: boolean; 
         <h2>{at("Посмотрите каждый жест и повторите его", "Watch each sign and repeat it", "Әр ымды қарап, қайталаңыз")}</h2>
         <div className="vocab-chips course-chips">
           {words.map((x, k) => (
-            <button key={x.youtube} aria-pressed={k === sel} className={seen.has(k) ? "seen" : ""} onClick={() => { setSel(k); setSlow(false); setSeen((s) => new Set(s).add(k)); }}>
+            <button key={x.youtube} aria-pressed={k === sel} className={seen.has(k) ? "seen" : ""} onClick={() => { setSel(k); setSlow(false); setOther(false); setSeen((s) => new Set(s).add(k)); }}>
               {x.label.replace(/[!?]$/, "")}
             </button>
           ))}
         </div>
+        <button className="button secondary" aria-pressed={camera} onClick={() => setCamera((c) => !c)}>
+          <Camera size={16} /> {camera ? at("Скрыть камеру", "Hide camera", "Камераны жасыру") : at("Покажи сам — проверка камерой", "Sign it — camera check", "Өзің көрсет — камерамен тексеру")}
+        </button>
+        {camera && (
+          <WordPracticeCamera
+            target={w.label}
+            choices={words.map((x) => x.label)}
+            loadModel={loadKslWordModel}
+            display={(l) => l.replace(/[!?]$/, "")}
+          />
+        )}
         <p className="fs-tip">{at(`Просмотрено: ${seen.size} из ${words.length}`, `Viewed: ${seen.size} of ${words.length}`, `${seen.size} / ${words.length}`)}</p>
         <button className="button primary" onClick={onNext}>
           {at("Проверить себя", "Check yourself", "Өзіңді тексер")} <ArrowRight size={16} />

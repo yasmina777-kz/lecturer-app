@@ -1,0 +1,76 @@
+{
+ "frozen_rsl": [
+  {
+   "name": "D: prototypes, 1 RSL model",
+   "top1": 0.164,
+   "top5": 0.448,
+   "lesson": 0.552,
+   "n": 116
+  },
+  {
+   "name": "E: prototypes, 3 RSL models",
+   "top1": 0.216,
+   "top5": 0.474,
+   "lesson": 0.578,
+   "n": 116
+  },
+  {
+   "name": "F: frozen RSL + Kazakh head, 1 model",
+   "top1": 0.198,
+   "top5": 0.353,
+   "lesson": 0.552,
+   "n": 116
+  },
+  {
+   "name": "G: frozen RSL + Kazakh head, 3 models",
+   "top1": 0.207,
+   "top5": 0.448,
+   "lesson": 0.603,
+   "n": 116
+  },
+  {
+   "name": "G on card shots",
+   "top1": 0.155,
+   "top5": 0.431,
+   "lesson": 0.569,
+   "n": 58
+  },
+  {
+   "name": "G on closeup shots",
+   "top1": 0.259,
+   "top5": 0.466,
+   "lesson": 0.638,
+   "n": 58
+  }
+ ],
+ "vocabulary": 736,
+ "train_clips": 1418,
+ "test_clips": 116,
+ "test_words": 56,
+ "test_signers": "2 «Саусақтар сөйлейді» teachers, never in training",
+ "chance": {
+  "top1": 0.0014,
+  "lesson": 0.146
+ },
+ "fine_tune": [
+  {
+   "name": "A: RSL features + SURDO.KZ prototypes",
+   "top1": 0.181,
+   "top5": 0.431,
+   "lesson": 0.569
+  },
+  {
+   "name": "B: fine-tuned from RSL (seed 0)",
+   "top1": 0.198,
+   "top5": 0.379,
+   "lesson": 0.578
+  },
+  {
+   "name": "B: fine-tuned from RSL (seed 1)",
+   "top1": 0.138,
+   "top5": 0.353,
+   "lesson": 0.5
+  }
+ ],
+ "chosen": "G: frozen RSL + Kazakh head, 3 models (final model also trained on the Sausaq clips)"
+}

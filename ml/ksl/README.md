@@ -23,3 +23,9 @@ v2 adds hand landmarks of one teacher from the «Саусақтар сөйлей
 lessons (8 of 9 Kazakh letters): transfer to unseen signers 36 % top-1.
 Videos are standard-licence and stay local; the site embeds the YouTube player.
 The trainer's «Записать пример» exports hand world landmarks for more signers.
+
+## Kazakh words (ksl-words-v1)
+1. `extract_words.py` — MediaPipe hands + pose from SURDO.KZ word clips and the «Саусақтар сөйлейді» lessons (card runs: `sausaq-card-runs.json`, labels: `sausaq-words.tsv`).
+2. `ksl_words_probe.py eval` — honest test on the two Sausaq teachers; `final` exports the 3-member ensemble.
+3. `train_ksl_words.py eval` — the fine-tuning comparison (worse; kept for the record).
+4. `build_teacher_lessons.py` — teacher lessons and «Оян, Qazaqstan» phrases with timestamps for the course.

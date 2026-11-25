@@ -823,3 +823,18 @@
 .ksl-quiz-video { position: relative; }
 .ksl-quiz-video .ksl-mask-title { position: absolute; left: 0; right: 0; top: 0; height: 17%; background: #0d2a3a; border-radius: 14px 14px 0 0; }
 .ksl-quiz-video .ksl-mask-word { position: absolute; left: 0; top: 0; width: 38%; height: 40%; background: #0f3c52; border-radius: 14px 0 12px 0; }
+
+.ksl-yt.wide { aspect-ratio: 16 / 9; }
+.ksl-quiz-video .ksl-mask-caption { position: absolute; left: 0; right: 0; bottom: 6%; height: 16%; background: #0f3c52; }
+.ksl-teacher-section { display: grid; gap: 12px; margin-bottom: 18px; }
+.ksl-phrases-card { display: flex; gap: 14px; align-items: center; text-decoration: none; color: inherit; }
+.ksl-phrases-card > div { display: grid; gap: 4px; flex: 1; min-width: 0; }
+.ksl-phrases-card span { color: var(--p-muted, #5b6472); font-size: .9rem; }
+.ksl-teacher-h { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; font-size: 1.1rem; margin: 8px 0 4px; }
+.ksl-teacher-h small { color: var(--p-muted, #5b6472); font-weight: 400; font-size: .85rem; }
+.ksl-teacher-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; }
+.ksl-teacher-card { display: grid; gap: 4px; padding: 10px; text-decoration: none; color: inherit; }
+.ksl-teacher-card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 10px; background: #e8ecf2; }
+.ksl-teacher-card span { color: var(--p-muted, #5b6472); font-size: .85rem; }
+.ksl-phrases-inline { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
+.ksl-quiz-video .ksl-mask-phrase { position: absolute; left: 0; top: 15%; width: 36%; height: 32%; background: #0f3c52; border-radius: 0 0 12px 0; }

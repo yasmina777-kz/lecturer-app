@@ -1,0 +1,60 @@
+# video	card-run	SURDO label	signer	(card runs found by ml/ksl/extract_words.py; '-' = word not in SURDO.KZ)
+23QnvVYEBnE	0	Кім	A
+23QnvVYEBnE	1	Не	A
+23QnvVYEBnE	2	Қайда	A
+23QnvVYEBnE	3	-	A
+23QnvVYEBnE	4	Неге	A
+5Sx7aFrNi4k	0	Отбасы	A
+5Sx7aFrNi4k	1	Әке	A
+5Sx7aFrNi4k	2	Ана	A
+5Sx7aFrNi4k	3	Ата	A
+5Sx7aFrNi4k	4	Әже	A
+h6ukdwq-D6o	0	Сәлеметсізбе	A
+h6ukdwq-D6o	1	Сау болыңыз	A
+h6ukdwq-D6o	2	Рахмет	A
+h6ukdwq-D6o	3	Кешіріңіз	A
+h6ukdwq-D6o	6	Әкесінің аты	A
+h6ukdwq-D6o	7	Әкесінің аты	A
+xCPLp2Sy0F4	1	Бір	A
+xCPLp2Sy0F4	2	Екі	A
+xCPLp2Sy0F4	3	Үш	A
+xCPLp2Sy0F4	4	Төрт	A
+xCPLp2Sy0F4	5	Бес	A
+xCPLp2Sy0F4	6	Алты	A
+xCPLp2Sy0F4	7	Жеті	A
+xCPLp2Sy0F4	8	Сегіз	A
+xCPLp2Sy0F4	9	Тоғыз	A
+xtzQEz8a3i8	0	Он	A
+xtzQEz8a3i8	1	Он бір	A
+xtzQEz8a3i8	2	Он екі	A
+xtzQEz8a3i8	3	Он үш	A
+xtzQEz8a3i8	4	Он төрт	A
+xtzQEz8a3i8	5	Он бес	A
+xtzQEz8a3i8	6	Он алты	A
+xtzQEz8a3i8	7	Он жеті	A
+xtzQEz8a3i8	8	Он сегіз	A
+xtzQEz8a3i8	9	Он тоғыз	A
+T_XJeRPc6Sk	0	Жиырма	A
+T_XJeRPc6Sk	1	Отыз	A
+T_XJeRPc6Sk	2	Қырық	A
+T_XJeRPc6Sk	3	Елу	A
+T_XJeRPc6Sk	4	Алпыс	A
+T_XJeRPc6Sk	5	Жетпіс	A
+T_XJeRPc6Sk	6	Сексен	A
+T_XJeRPc6Sk	7	Тоқсан	A
+xQo0pd9iIRQ	0	Жүз	A
+xQo0pd9iIRQ	1	Екі жүз	A
+xQo0pd9iIRQ	2	Үш жүз	A
+xQo0pd9iIRQ	3	Төрт жүз	A
+xQo0pd9iIRQ	4	Бес жүз	A
+xQo0pd9iIRQ	5	Алты жүз	A
+xQo0pd9iIRQ	6	Жеті жүз	A
+xQo0pd9iIRQ	7	Сегіз жүз	A
+xQo0pd9iIRQ	8	Тоғыз жүз	A
+xQo0pd9iIRQ	9	Мың	A
+_rL51pEYS0s	2	Футбол	B
+_rL51pEYS0s	3	Шахматы	B
+hooL1fiLhuQ	2	Мектеп	B
+dEAouzZnW6w	0	Мәдениет	B
+dEAouzZnW6w	1	Кітапхана	B
+dEAouzZnW6w	2	Кітапхана	B

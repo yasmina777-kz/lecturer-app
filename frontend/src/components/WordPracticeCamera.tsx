@@ -22,7 +22,18 @@ type Attempt = { guess: WordGuess | null; verdict: ReturnType<typeof judgeWord>[
 /** Camera self-check for one dictionary word. Runs fully in the browser. */
 /** choices: the lesson's words — the model then picks among them only
  * (much more reliable than among all course signs). */
-export function WordPracticeCamera({ target, choices }: { target: string; choices?: string[] }) {
+export function WordPracticeCamera({
+  target,
+  choices,
+  loadModel = loadWordModel,
+  display = wordText,
+}: {
+  target: string;
+  choices?: string[];
+  /** Kazakh lessons pass loadKslWordModel. */
+  loadModel?: () => Promise<SeqModel>;
+  display?: (label: string) => string;
+}) {
   useSignLang();
   const video = useRef<HTMLVideoElement>(null);
   const overlay = useRef<HTMLCanvasElement>(null);
@@ -37,7 +48,7 @@ export function WordPracticeCamera({ target, choices }: { target: string; choice
 
   useEffect(() => {
     let alive = true;
-    loadWordModel().then(
+    loadModel().then(
       (m) => alive && setModel(m),
       () => alive && setModelError(true),
     );
@@ -112,7 +123,7 @@ export function WordPracticeCamera({ target, choices }: { target: string; choice
   return (
     <section className="word-practice panel" aria-label={at("Проверка жеста камерой", "Camera sign check", "Ымды камерамен тексеру")}>
       <header>
-        <h3>{at("Проверить себя", "Check yourself", "Өзіңізді тексеру")}: «{wordText(target)}»</h3>
+        <h3>{at("Проверить себя", "Check yourself", "Өзіңізді тексеру")}: «{display(target)}»</h3>
         <p>
           {at(
             "Покажите жест и опустите руки.",
@@ -169,7 +180,7 @@ export function WordPracticeCamera({ target, choices }: { target: string; choice
             <ol>
               {last.guess.top.slice(0, 3).map((t) => (
                 <li key={t.label}>
-                  {wordText(t.label)} <span>{Math.round(t.p * 100)}%</span>
+                  {display(t.label)} <span>{Math.round(t.p * 100)}%</span>
                 </li>
               ))}
             </ol>

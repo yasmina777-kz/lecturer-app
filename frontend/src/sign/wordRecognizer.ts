@@ -47,6 +47,34 @@ export function loadWordModel(): Promise<WordModel> {
   return loading;
 }
 
+/** Kazakh sign words (ksl-words-v1): the three frozen RSL words-v5 networks,
+ * each with a Kazakh output layer learned on SURDO.KZ and «Саусақтар сөйлейді»
+ * clips (ml/ksl/ksl_words_probe.py). Same features, averaged like the RSL ensemble. */
+export const KSL_WORD_MODEL_URLS = ["/models/ksl/ksl-words-v1.json", "/models/ksl/ksl-words-v1-m1.json", "/models/ksl/ksl-words-v1-m2.json"];
+let kslLoading: Promise<WordModel> | null = null;
+export function loadKslWordModel(): Promise<WordModel> {
+  kslLoading ??= Promise.all(
+    KSL_WORD_MODEL_URLS.map((url) =>
+      fetch(url)
+        .then((r) => {
+          if (!r.ok) throw new Error("ksl word model");
+          return r.json();
+        })
+        .then((json) => {
+          const m = loadSeqModel(json);
+          if (!m) throw new Error("invalid ksl word model");
+          return m;
+        }),
+    ),
+  )
+    .then((members) => ({ ...members[0], members }))
+    .catch((error) => {
+      kslLoading = null;
+      throw error;
+    });
+  return kslLoading;
+}
+
 export type WordGuess = {
   label: string;
   confidence: number;

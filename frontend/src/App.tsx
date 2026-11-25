@@ -30,6 +30,8 @@ const PhraseUnderstandingPage = lazyPage(() => import("./pages/PhraseUnderstandi
 const LevelTestPage = lazyPage(() => import("./pages/LevelTest").then(m => ({default:m.LevelTestPage})));
 const CoursePage = lazyPage(() => import("./pages/Course").then(m => ({default:m.CoursePage})));
 const CourseUnitPage = lazyPage(() => import("./pages/Course").then(m => ({default:m.CourseUnitPage})));
+const KazakhTeacherLessonPage = lazyPage(() => import("./pages/KazakhTeacher").then(m => ({default:m.KazakhTeacherLessonPage})));
+const KazakhPhrasesPage = lazyPage(() => import("./pages/KazakhTeacher").then(m => ({default:m.KazakhPhrasesPage})));
 const KazakhLessonPage = lazyPage(() => import("./pages/KazakhCourse").then(m => ({default:m.KazakhLessonPage})));
 const KazakhSignPage = lazyPage(() => import("./pages/KazakhSign").then(m => ({default:m.KazakhSignPage})));
 const CulturePage = lazyPage(() => import("./pages/Culture").then(m => ({default:m.CulturePage})));
@@ -124,6 +126,8 @@ export function App() {
             <Route path="understanding/phrases" element={<PhraseUnderstandingPage />} />
             <Route path="learn-test" element={<LevelTestPage />} />
             <Route path="course" element={<CoursePage />} />
+            <Route path="course/kz/phrases" element={<KazakhPhrasesPage />} />
+            <Route path="course/kz/teacher/:vid" element={<KazakhTeacherLessonPage />} />
             <Route path="course/kz/:id" element={<KazakhLessonPage />} />
             <Route path="course/:id" element={<CourseUnitPage />} />
             <Route path="culture" element={<CulturePage />} />
