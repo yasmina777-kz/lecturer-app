@@ -261,50 +261,6 @@ export function SignCourseCatalog() {
           <ActivityLinks />
         </>
       )}
-      <Link
-        className="button secondary sign-catalog-dictionary"
-        to="/text-to-sign?tab=dictionary"
-      >
-        {at("Открыть словарь", "Open dictionary", "Сөздікті ашу")}
-      </Link>
-
-      <div className="sign-shortcuts">
-        <Link className="panel" to="/practice">
-          <Play />
-          <div>
-            <h3>
-              {at("Открыть тренажёр", "Open practice room", "Жаттығуды ашу")}
-            </h3>
-            <p>
-              {at(
-                "Аватар и упражнения в одном окне.",
-                "Avatar and exercises in one place.",
-                "Аватар мен жаттығулар бір жерде.",
-              )}
-            </p>
-          </div>
-          <ArrowRight />
-        </Link>
-        <Link className="panel" to="/learn/alphabet-intro">
-          <div>
-            <h3>
-              {at(
-                "Для чего нужен дактиль?",
-                "What is fingerspelling for?",
-                "Дактиль не үшін қажет?",
-              )}
-            </h3>
-            <p>
-              {at(
-                "Короткая справка — читать необязательно.",
-                "Optional short introduction.",
-                "Міндетті емес қысқа анықтама.",
-              )}
-            </p>
-          </div>
-          <ArrowRight />
-        </Link>
-      </div>
     </div>
   );
 }

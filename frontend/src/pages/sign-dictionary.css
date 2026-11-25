@@ -760,3 +760,46 @@
 /* RSL sign order line under the translator input */
 :root .product-ui[data-product-ui][data-product-theme] .tts-gloss b { color: #2f6bff; font-weight: 650; letter-spacing: .02em; }
 :root .product-ui[data-product-ui][data-product-theme] .tts-gloss span { color: var(--p-muted); }
+
+/* Translator header pills + examples inside the card (РЖЯ and ҚЖЯ). */
+.text-sign-page .tts-pill { white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: var(--p-text, #14171f); color: var(--p-surface, #fff); font-weight: 700; font-size: .82rem; }
+.text-sign-page .tts-pill.to { background: color-mix(in srgb, #4f6bed 14%, transparent); color: #4f6bed; }
+.text-sign-page .tts-examples-in { padding: 0 20px 14px; }
+.text-sign-page .tts-note { margin: 0; color: var(--p-muted, #667085); font-size: .88rem; }
+
+/* ҚЖЯ translator player */
+.ksl-tr-player { display: grid; gap: 12px; }
+.ksl-tr-now { display: grid; justify-items: center; gap: 2px; text-align: center; }
+.ksl-tr-now strong { font-size: 1.8rem; }
+.ksl-tr-now span { color: var(--p-muted, #667085); }
+.ksl-tr-strip { display: flex; gap: 8px; margin: 0; padding: 2px 0 6px; list-style: none; overflow-x: auto; }
+.ksl-tr-strip button { display: grid; gap: 4px; width: 96px; padding: 4px; border: 2px solid transparent; border-radius: 14px; background: var(--p-surface, #fff); color: inherit; font: inherit; font-size: .78rem; cursor: pointer; }
+.ksl-tr-strip button img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 10px; }
+.ksl-tr-strip button span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ksl-tr-strip button[aria-current="true"] { border-color: #4f6bed; }
+.ksl-tr-phrase-list { display: grid; gap: 6px; padding: 10px; max-height: 560px; overflow: auto; }
+.ksl-tr-phrase-list button { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1px solid var(--p-line, #dfe3ea); border-radius: 16px; background: var(--p-surface, #fff); color: inherit; font: inherit; text-align: left; cursor: pointer; transition: border-color .16s, transform .16s; }
+.ksl-tr-phrase-list button:hover { border-color: #4f6bed; transform: translateY(-1px); }
+.ksl-tr-phrase-list button[aria-pressed="true"] { border-color: #4f6bed; background: color-mix(in srgb, #4f6bed 8%, var(--p-surface, #fff)); }
+.ksl-tr-phrase-list button > span:last-child { display: grid; gap: 2px; }
+.ksl-tr-phrase-list small { color: var(--p-muted, #667085); }
+.ksl-tr-play { display: grid; place-items: center; flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; background: #4f6bed; color: #fff; }
+
+/* Ready phrases (РЖЯ): compact text cards, no repeated cover pictures. */
+:root .product-ui[data-product-ui][data-product-theme] .text-sign-page .sign-phrase-tiles { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
+:root .product-ui[data-product-ui][data-product-theme] .text-sign-page .sign-phrase-tiles > button {
+  position: relative; display: flex; flex-direction: row; align-items: center; gap: 12px; min-height: 0; padding: 14px 16px;
+  border: 1px solid var(--p-line); border-radius: 16px; text-align: left; transition: border-color .16s, transform .16s;
+}
+:root .product-ui[data-product-ui][data-product-theme] .text-sign-page .sign-phrase-tiles > button:hover { border-color: #4f6bed; transform: translateY(-1px); }
+:root .product-ui[data-product-ui][data-product-theme] .text-sign-page .sign-phrase-play {
+  position: static; flex-shrink: 0; width: 36px; height: 36px; background: #4f6bed; color: #fff; box-shadow: none;
+}
+:root .product-ui[data-product-ui][data-product-theme] .text-sign-page .sign-phrase-caption { padding: 0; gap: 4px; border: 0; }
+:root .product-ui[data-product-ui][data-product-theme] .text-sign-page .sign-phrase-caption strong { font-size: 1rem; }
+:root .product-ui[data-product-ui][data-product-theme] .text-sign-page .sign-phrase-caption > span { justify-content: flex-start; }
+@media (max-width: 540px) {
+  :root .product-ui[data-product-ui][data-product-theme] .text-sign-page .sign-phrase-tiles { grid-template-columns: 1fr; }
+}
+.text-sign-page .tts-card-head { flex-wrap: wrap; row-gap: 8px; }
+.text-sign-page .tts-card { min-width: 0; }

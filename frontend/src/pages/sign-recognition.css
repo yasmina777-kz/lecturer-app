@@ -371,3 +371,17 @@
 :root .product-ui[data-product-ui][data-product-theme] .translator-vocab details { font-size: 13px; color: var(--p-muted); }
 :root .product-ui[data-product-ui][data-product-theme] .translator-vocab summary { cursor: pointer; }
 :root .product-ui[data-product-ui][data-product-theme] .translator-vocab details p { margin: 6px 0 0; max-width: 520px; line-height: 1.5; }
+
+/* Caption panel title (replaces the dark «Субтитры» banner) + start steps. */
+.recognition-caption-title { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.recognition-caption-title h2 { margin: 0; font-size: 22px; }
+.recognition-caption-title small { color: var(--p-muted, var(--sw-muted)); }
+.recognition-caption-icon { display: grid; place-items: center; flex-shrink: 0; width: 44px; height: 44px; border-radius: 14px; background: var(--p-blue-soft, #eef3ff); color: var(--p-blue, #2f6bff); }
+.krsl-placeholder.krsl-steps { background: radial-gradient(80% 70% at 50% 0%, color-mix(in srgb, var(--p-blue, #2f6bff) 12%, transparent), transparent 70%); }
+.krsl-steps ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; width: 100%; max-width: 620px; margin: 0; padding: 0; list-style: none; counter-reset: step; }
+.krsl-steps li { position: relative; display: grid; justify-items: center; gap: 6px; padding: 18px 12px; border: 1px solid var(--p-line, var(--sw-border)); border-radius: 18px; background: var(--p-surface, #fff); text-align: center; counter-increment: step; }
+.krsl-steps li::before { content: counter(step); position: absolute; top: 8px; left: 10px; color: var(--p-muted, var(--sw-muted)); font-size: 12px; font-weight: 700; }
+.krsl-steps li > span { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--p-blue, #2f6bff); color: #fff; }
+.krsl-steps li strong { color: var(--p-text, inherit) !important; font-size: 15px; }
+.krsl-steps li small { color: var(--p-muted, var(--sw-muted)); font-size: 12.5px; line-height: 1.35; }
+@media (max-width: 640px) { .krsl-steps ol { grid-template-columns: 1fr; } .krsl-steps li { grid-template-columns: auto 1fr; justify-items: start; text-align: left; } .krsl-steps li > span { grid-row: span 2; width: 40px; height: 40px; } }

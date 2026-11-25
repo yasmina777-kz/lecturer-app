@@ -13,7 +13,9 @@ import {
   ScanLine,
   MessageCircle,
   Eye,
+  Layers,
 } from "lucide-react";
+import { useSignLang } from "../sign/signLanguage";
 import { at } from "../i18n/automation";
 import { Empty, ErrorMessage, Loading } from "../components/UI";
 import { lessonIds, lessons, reading } from "../sign/catalog";
@@ -272,177 +274,70 @@ export function SignPracticePage() {
     </div>
   );
 }
+/** «Что где находится»: one picture card per section, different for РЖЯ and ҚЖЯ. */
 export function SignHelpPage() {
+  const [sl] = useSignLang();
+  const ksl = sl === "ksl";
+  const cards: { to: string; icon: typeof BookOpen; image: string; title: string; text: string; tag: string }[] = ksl
+    ? [
+        { to: "/learn", icon: BookOpen, image: "study-desk", title: at("Обучение", "Learning", "Оқу"), text: at("Казахская азбука, слова SURDO.KZ, фразы и диалоги — по шагам.", "Kazakh alphabet, SURDO.KZ words, phrases and dialogues — step by step.", "Қазақ әліпбиі, SURDO.KZ сөздері, сөйлемдер мен диалогтар — қадаммен."), tag: at("3 уровня", "3 levels", "3 деңгей") },
+        { to: "/vocab", icon: Layers, image: "hand-open", title: at("Тренажёр слов", "Word trainer", "Сөз жаттықтырғышы"), text: at("Выберите тему и смотрите жесты носителя по одному.", "Pick a topic and watch the signer word by word.", "Тақырып таңдап, ымдарды бір-бірлеп қараңыз."), tag: at("751 жест", "751 signs", "751 ым") },
+        { to: "/text-to-sign", icon: Type, image: "hands-detail", title: at("Текст → жесты", "Text → signs", "Мәтін → ым"), text: at("Напишите по-казахски или по-русски — покажем жесты по порядку.", "Type in Kazakh or Russian — signs play in order.", "Қазақша не орысша жазыңыз — ымдар ретімен көрсетіледі."), tag: at("+ 14 фраз", "+ 14 phrases", "+ 14 сөйлем") },
+        { to: "/recognition", icon: ScanLine, image: "practice", title: at("Жесты → текст", "Signs → text", "Ым → мәтін"), text: at("Покажите жест камере — ИИ напишет слово. Работает в браузере.", "Sign to the camera — the AI writes the word, in your browser.", "Камераға ым көрсетіңіз — ЖИ сөзді жазады."), tag: at("748 слов и фраз", "748 words & phrases", "748 сөз бен сөйлем") },
+        { to: "/course/kz/dialogue/tanysu", icon: MessageCircle, image: "conversation", title: at("Диалоги", "Dialogues", "Диалогтар"), text: at("Знакомство, помощь, приветствия. Камера проверяет вашу реплику.", "Meeting, asking for help, greetings. The camera checks your reply.", "Танысу, көмек, амандасу. Камера жауабыңызды тексереді."), tag: at("3 диалога", "3 dialogues", "3 диалог") },
+        { to: "/kazakh?tab=trainer", icon: Hand, image: "hand-v", title: at("Тренажёр азбуки", "Alphabet trainer", "Әліпби жаттықтырғышы"), text: at("Покажите букву — камера скажет, верно ли.", "Show a letter — the camera says if it is right.", "Әріпті көрсетіңіз — камера дұрыс па, айтады."), tag: at("42 буквы", "42 letters", "42 әріп") },
+      ]
+    : [
+        { to: "/learn", icon: BookOpen, image: "study-desk", title: at("Обучение", "Learning", "Оқу"), text: at("Азбука, первые слова и темы курса — по шагам.", "Alphabet, first words and course topics — step by step.", "Әліпби, алғашқы сөздер және курс тақырыптары — қадаммен."), tag: at("3 уровня", "3 levels", "3 деңгей") },
+        { to: "/vocab", icon: Layers, image: "hand-open", title: at("Тренажёр слов", "Word trainer", "Сөз жаттықтырғышы"), text: at("Слова по темам на видео носителей и повторение ошибок.", "Topic words on signer videos, with review of mistakes.", "Тақырыптық сөздер және қателерді қайталау."), tag: at("900+ слов", "900+ words", "900+ сөз") },
+        { to: "/text-to-sign", icon: Type, image: "hands-detail", title: at("Текст → жесты", "Text → signs", "Мәтін → ым"), text: at("Напишите или скажите фразу — жесты покажут по порядку.", "Type or say a phrase — signs play in order.", "Сөйлемді жазыңыз не айтыңыз — ымдар ретімен көрсетіледі."), tag: at("+ 32 фразы", "+ 32 phrases", "+ 32 сөйлем") },
+        { to: "/recognition", icon: ScanLine, image: "practice", title: at("Жесты → текст", "Signs → text", "Ым → мәтін"), text: at("Покажите жест или букву камере — ИИ напишет текст.", "Sign a word or letter — the AI writes the text.", "Камераға ым не әріп көрсетіңіз — ЖИ мәтін жазады."), tag: at("1000 слов · 33 буквы", "1000 words · 33 letters", "1000 сөз · 33 әріп") },
+        { to: "/dialogues", icon: MessageCircle, image: "conversation", title: at("Диалоги", "Dialogues", "Диалогтар"), text: at("Знакомство, кафе, семья: выбирайте ответы и продолжайте разговор.", "Meeting, café, family: choose replies and keep talking.", "Танысу, кафе, отбасы: жауап таңдап, әңгімені жалғастырыңыз."), tag: at("7 ситуаций", "7 situations", "7 жағдаят") },
+        { to: "/understanding", icon: Eye, image: "hand-circle", title: at("Понимание жестов", "Understand signs", "Ымдарды түсіну"), text: at("Смотрите жест без подписи и выбирайте смысл. Камера не нужна.", "Watch an unlabelled sign and choose its meaning. No camera.", "Жазусыз ымды көріп, мағынасын таңдаңыз."), tag: at("171 видео", "171 videos", "171 бейне") },
+      ];
   return (
-    <div className="sign-workspace help-overview">
-      <Heading
-        title={at(
-          "Что где находится",
-          "Where to find everything",
-          "Қай бөлімде не бар",
-        )}
-        description={at(
-          "Выберите задачу: изучать, понимать, общаться или проверять свой показ.",
-          "Choose a task: learn, understand, communicate or check your signing.",
-          "Міндет таңдаңыз: үйрену, түсіну, сөйлесу немесе өз қимылыңызды тексеру.",
-        )}
-      />
-      <div className="sign-help-grid">
-        {[
-          [
-            "/learn",
-            at("Обучение", "Learning", "Оқу"),
-            at(
-              "Три уровня: буквы, первые слова и фразы. Карточка открывает видео носителя языка.",
-              "Three levels: letters, first words and phrases. A card opens an avatar or a human video reference.",
-              "Үш деңгей: әріптер, алғашқы сөздер және сөйлемдер. Карточка аватарды не адамның бейнеүлгісін ашады.",
-            ),
-          ],
-          [
-            "/text-to-sign",
-            at("Текст → жесты", "Text → signs", "Мәтін → ымдар"),
-            at(
-              "Буквы, слова и фразы на видео носителей языка. Введите текст — известные жесты покажутся подряд; грамматика РЖЯ автоматически не переводится.",
-              "Letters, words and learning phrases with experimental avatar motion. Enter text to play known signs in sequence. Unknown words block the full sequence; RSL grammar is not translated automatically.",
-              "Әріптер, сөздер және оқу сөйлемдерінің сынақ аватар қимылдары. Мәтін енгізсеңіз, таныс ымдар ретімен көрсетіледі. Белгісіз сөз толық көрсетілімді тоқтатады; грамматика автоматты аударылмайды.",
-            ),
-          ],
-          [
-            "/recognition",
-            at("Жесты → текст", "Signs → text", "Ымдар → мәтін"),
-            at(
-              "Показывайте отдельные буквы камере или загрузите короткое видео. Принятые ответы модели собираются в редактируемые субтитры. Свободные фразы и грамматика пока не распознаются.",
-              "Show isolated letters to the camera or upload a short video. Accepted predictions become editable captions. Continuous phrases and grammar are not yet recognized.",
-              "Камераға жеке әріптерді көрсетіңіз не қысқа бейне жүктеңіз. Қабылданған жауаптар түзетілетін субтитрге жиналады. Еркін сөйлемдер мен грамматика әзірге танылмайды.",
-            ),
-          ],
-          [
-            "/practice",
-            at("Моя практика", "My practice", "Менің жаттығуым"),
-            at(
-              "3D-показы и видео всех 33 букв. Запишите короткий жест камерой или выберите видео: экспериментальный ИИ предложит букву либо откажется от ответа.",
-              "3D demonstrations and videos of all 33 letters. Record a short sign or choose a video: the experimental AI suggests a letter or declines to answer.",
-              "3D көрсетілімдер және 33 әріптің бейнесі. Камерамен қысқа қимыл жазыңыз не бейне таңдаңыз: тәжірибелік ЖИ әріпті ұсынады немесе жауаптан бас тартады.",
-            ),
-          ],
-          [
-            "/dialogues",
-            at("Диалоги", "Dialogues", "Диалогтар"),
-            at(
-              "Знакомство, занятие и магазин: выберите ответ, получите объяснение и продолжите разговор. Это учебные сценарии, а не распознавание свободного ответа.",
-              "Meeting, class and shopping: choose replies, read feedback and continue. These are guided scenarios, not free-sign recognition.",
-              "Танысу, сабақ және дүкен: жауап таңдап, түсіндірме алып, әңгімені жалғастырыңыз. Бұл — еркін ымды тану емес, оқу сценарийлері.",
-            ),
-          ],
-          [
-            "/understanding",
-            at("Понимание жестов", "Understand signs", "Ымдарды түсіну"),
-            at(
-              "171 видеообразец по темам. Посмотрите жест без подписи, выберите смысл и повторите слова, в которых ошиблись. Камера не нужна.",
-              "171 topic-based videos. Watch an unlabelled sign, choose its meaning and review mistakes. No camera needed.",
-              "Тақырып бойынша 171 бейне. Жазусыз ымды көріп, мағынасын таңдаңыз және қателескен сөздерді қайталаңыз. Камера қажет емес.",
-            ),
-          ],
-        ].map(([url, title, text], index) => {
-          const Icon = [BookOpen, Type, ScanLine, Hand, MessageCircle, Eye][
-            index
-          ];
-          return (
-            <Link className="panel" to={url} key={url}>
-              <span className="help-section-icon" aria-hidden="true">
-                <Icon size={24} />
-              </span>
-              <h2>
-                {title}
-                <ArrowUpRight size={20} />
-              </h2>
-              <p>{text}</p>
-            </Link>
-          );
-        })}
-      </div>
-      <section className="panel sign-reading">
-        <h2>
-          {at(
-            "Что ещё готовится",
-            "What is still being prepared",
-            "Әлі не әзірленуде",
-          )}
-        </h2>
-        <p>
-          {at(
-            "Распознавание слов и фраз, непрерывная дактильная речь и перевод с грамматикой РЖЯ ещё не обучены. Сейчас модель обучена на 33 отдельных буквах и примерах «нет жеста». Лицо и корпус модель не оценивает.",
-            "Word and phrase recognition, continuous fingerspelling and grammatical RSL translation are not trained yet. The current model covers 33 isolated letters and no-sign examples. It does not assess the face or body.",
-            "Сөздер мен сөйлемдерді тану, үздіксіз дактиль және РЖЯ грамматикасымен аудару әлі үйретілмеген. Қазіргі модель 33 жеке әріпке және «ым жоқ» мысалдарына үйретілді. Бет пен денені бағаламайды.",
-          )}
-        </p>
-        <p>
-          {at(
-            "RU / EN / KZ переключают язык интерфейса. Изучаемый язык остаётся РЖЯ.",
-            "RU / EN / KZ switch the interface language. The target language remains RSL.",
-            "RU / EN / KZ интерфейс тілін ауыстырады. Үйренілетін тіл — орыс ым тілі.",
-          )}
-        </p>
-      </section>
-      <details className="learning-source-details">
-        <summary>
-          {at(
-            "О модели и материалах",
-            "Model and materials",
-            "Модель мен материалдар",
-          )}
-        </summary>
-        <p>
-          {at(
-            "Аватар воспроизводит сохранённые движения. Они пока не прошли полную проверку преподавателем РЖЯ; автоматического перевода грамматики нет. Модель букв работает на устройстве и не оценивает слова и мимику.",
-            "The avatar plays saved motions that have not completed RSL teacher review. Grammar is not translated automatically. The on-device letter model does not assess words or facial expressions.",
-            "Аватар сақталған қимылдарды көрсетеді; оларды РЖЯ мұғалімі толық тексермеген. Грамматика автоматты аударылмайды. Құрылғыдағы әріп моделі сөздер мен мимиканы бағаламайды.",
-          )}
-        </p>
-        <div className="learning-source-links">
-          <a
-            href="/research/rsl/alphabet-report.html"
-            target="_blank"
-            rel="noreferrer"
-          >
+    <div className="sign-workspace help-overview help-v2">
+      <div className="page-heading">
+        <div>
+          <span className="eyebrow">
+            {ksl ? at("КАЗАХСКИЙ ЖЕСТОВЫЙ ЯЗЫК", "KAZAKH SIGN LANGUAGE", "ҚАЗАҚ ЫМ ТІЛІ") : at("РУССКИЙ ЖЕСТОВЫЙ ЯЗЫК", "RUSSIAN SIGN LANGUAGE", "ОРЫС ЫМ ТІЛІ")}
+          </span>
+          <h1>{at("Что где находится", "Where to find everything", "Қай бөлімде не бар")}</h1>
+          <p>
             {at(
-              "Отчёт по буквам",
-              "Letter model report",
-              "Әріп моделі туралы есеп",
+              "Шесть разделов платформы. Выберите, что хотите сделать: учиться, переводить или проверять себя камерой.",
+              "Six sections. Choose what you want to do: learn, translate or check yourself with the camera.",
+              "Платформаның алты бөлімі. Не істегіңіз келетінін таңдаңыз: үйрену, аудару немесе камерамен тексеру.",
             )}
-          </a>
-          <a
-            href="/research/rsl/alphabet-comparison.html"
-            target="_blank"
-            rel="noreferrer"
-          >
-            {at(
-              "Сравнение моделей",
-              "Model comparison",
-              "Модельдерді салыстыру",
-            )}
-          </a>
-          <a
-            href="/research/rsl/words/ATTRIBUTION.txt"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Slovo ·{" "}
-            {at(
-              "авторы и лицензия",
-              "credits and license",
-              "авторлар мен лицензия",
-            )}
-          </a>
-          <a
-            href="/research/rsl/ATTRIBUTION.txt"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Bukva · {at("источник", "source", "дереккөз")}
-          </a>
+          </p>
         </div>
-      </details>
+        <img className="help-hero-art" src="/images/landing-v2/mentor-pointing.webp" alt="" />
+      </div>
+      <div className="help-cards">
+        {cards.map(({ to, icon: Icon, image, title, text, tag }) => (
+          <Link className="help-card card-motion" to={to} key={to}>
+            <span className="help-card-media">
+              <img src={`/images/landing-v2/${image}.webp`} alt="" loading="lazy" />
+              <span className="help-card-tag">{tag}</span>
+            </span>
+            <span className="help-card-body">
+              <span className="help-card-icon" aria-hidden="true"><Icon size={20} /></span>
+              <strong>{title}</strong>
+              <span>{text}</span>
+              <span className="help-card-cta">
+                {at("Открыть", "Open", "Ашу")} <ArrowUpRight size={16} />
+              </span>
+            </span>
+          </Link>
+        ))}
+      </div>
+      <p className="help-note">
+        {at(
+          "Распознавание жестов работает прямо в браузере: видео с камеры никуда не отправляется. ИИ иногда ошибается — сверяйтесь с видео носителей.",
+          "Sign recognition runs in your browser: camera video never leaves your device. The AI can be wrong — compare with the signer videos.",
+          "Ымды тану браузерде жұмыс істейді: камера бейнесі ешқайда жіберілмейді. ЖИ қателесуі мүмкін — ым иелерінің бейнелерімен салыстырыңыз.",
+        )}
+      </p>
     </div>
   );
 }

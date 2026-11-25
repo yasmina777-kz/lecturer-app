@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from "react";
-import { Camera, Square, Upload, RefreshCw, Copy } from "lucide-react";
+import { Camera, Square, Upload, RefreshCw, Copy, Hand, Captions } from "lucide-react";
+import { useSignLang } from "../sign/signLanguage";
 import { PhraseCapture, type Landmark } from "../sign/phraseCapture";
 import { useLiveLetters } from "../sign/useLiveLetters";
 import { at } from "../i18n/automation";
 import type { HandPoint } from "../sign/wordFeatures";
-import { loadWordModel, recognizeWord, WordSegmenter, type WordModel } from "../sign/wordRecognizer";
+import { loadKslWordModel, loadWordModel, recognizeWord, WordSegmenter, type WordModel } from "../sign/wordRecognizer";
 import { appendTranslation, replaceLastWord, WordSpotter, BASIC_WORDS } from "../sign/wordSpotter";
-const BASIC_SET = new Set(BASIC_WORDS);
+/** ҚЖЯ «основные слова»: everyday phrases and words of the Kazakh course
+ * (labels of ksl-words-v2; ones the model lacks are dropped at load). */
+const KSL_BASIC = ["Сәлеметсізбе", "Халіңіз қалай", "Керемет", "Қайырлы таң", "Қайырлы күн", "Қайырлы кеш", "Қайырлы түн", "Рахмет", "Сау болыңыз", "Кешірім сұраймын", "Жол көрсетіңізші", "Маған көмектесе аласыз ба", "Күніңіз сәтті өтсін", "Мен сізді жақсы көремін", "Атыңыз кім", "Кім", "Не", "Қайда", "Неге", "Отбасы", "Ана", "Әке", "Ата", "Әже", "Мектеп", "Үй", "Су", "Нан", "Жақсы", "Бір", "Екі", "Үш", "Төрт", "Бес"];
 import { composePhrase, replaceTail } from "../sign/phraseComposer";
 import {
   parseRecognitionHealth,
@@ -76,7 +79,13 @@ export function ContinuousSignCamera() {
   // «Основные слова»: answer among 43 everyday words (81% vs 49% top-1 on
   // held-out signers); «Все слова» searches the whole 1,000-sign model.
   const [basic, setBasic] = useState(true);
-  spotter.current.only = basic ? BASIC_SET : null;
+  const [sl] = useSignLang();
+  const [basicWords, setBasicWords] = useState<string[]>(BASIC_WORDS);
+  const [vocabSize, setVocabSize] = useState(1000);
+  const basicSet = useRef(new Set(BASIC_WORDS));
+  spotter.current.only = basic ? basicSet.current : null;
+  const basicWordsRef = useRef(basicWords);
+  basicWordsRef.current = basicWords;
   const basicRef = useRef(basic);
   basicRef.current = basic;
   // Translator bookkeeping: join consecutive fingerspelled letters into one
@@ -84,11 +93,19 @@ export function ContinuousSignCamera() {
   const lastToken = useRef<{ kind: "word" | "letter"; at: number }>({ kind: "word", at: 0 });
   const lastWordAt = useRef(-Infinity);
   useEffect(() => {
-    loadWordModel().then(
-      (m) => (wordModel.current = m),
+    // РЖЯ: words-v5 (1000 signs); ҚЖЯ: ksl-words-v2 (Kazakh words + phrases).
+    wordModel.current = null;
+    (sl === "ksl" ? loadKslWordModel() : loadWordModel()).then(
+      (m) => {
+        wordModel.current = m;
+        const words = sl === "ksl" ? KSL_BASIC.filter((w) => m.labels.includes(w)) : BASIC_WORDS;
+        basicSet.current = new Set(words);
+        setBasicWords(words);
+        setVocabSize(m.labels.length);
+      },
       () => setWordStatus("Модель слов не загрузилась — распознаются только буквы."),
     );
-  }, []);
+  }, [sl]);
   const recentWords = useRef<{ label: string; at: number }[]>([]);
   // Last recognized word and the model's next guesses, offered as one-tap fixes.
   const [fix, setFix] = useState<{ label: string; alternatives: string[] } | null>(null);
@@ -149,7 +166,7 @@ export function ContinuousSignCamera() {
         const clip = segmenter.current.push(now, points, pose, face ?? null);
         if (spotted) lastSpotted.current = { label: spotted.label, at: now };
         if (clip) {
-          const guess = recognizeWord(model, clip, v.videoWidth, v.videoHeight, true, segmenter.current.clipPoses, segmenter.current.clipFaces, basicRef.current ? BASIC_WORDS : undefined);
+          const guess = recognizeWord(model, clip, v.videoWidth, v.videoHeight, true, segmenter.current.clipPoses, segmenter.current.clipFaces, basicRef.current ? basicWordsRef.current : undefined);
           const duplicate = guess && lastSpotted.current.label === guess.label && now - lastSpotted.current.at < 4000;
           if (guess?.accepted && !duplicate && now - raisedAt.current < 800) {
             lastWordAt.current = now;
@@ -553,22 +570,24 @@ export function ContinuousSignCamera() {
           </div>
           <div className="krsl-view">
             {!stream.current && !hasPreview && (
-              <div className="krsl-placeholder">
-                <Camera size={42} />
-                <strong>
-                  {at(
-                    "Камера пока выключена",
-                    "Camera is off",
-                    "Камера өшірулі",
-                  )}
-                </strong>
-                <span>
-                  {at(
-                    "Покажите лицо и руки целиком",
-                    "Keep your face and hands in frame",
-                    "Бет пен қол толық көрінсін",
-                  )}
-                </span>
+              <div className="krsl-placeholder krsl-steps">
+                <ol>
+                  <li>
+                    <span><Camera size={22} /></span>
+                    <strong>{at("Включите камеру", "Start the camera", "Камераны қосыңыз")}</strong>
+                    <small>{at("Лицо и руки целиком в кадре", "Face and hands in frame", "Бет пен қол толық көрінсін")}</small>
+                  </li>
+                  <li>
+                    <span><Hand size={22} /></span>
+                    <strong>{at("Покажите жест", "Sign", "Ым көрсетіңіз")}</strong>
+                    <small>{at("После жеста — короткая пауза", "Pause briefly after each sign", "Әр ымнан кейін қысқа үзіліс")}</small>
+                  </li>
+                  <li>
+                    <span><Captions size={22} /></span>
+                    <strong>{at("Получите текст", "Get text", "Мәтін алыңыз")}</strong>
+                    <small>{at("Слова появятся справа", "Words appear on the right", "Сөздер оң жақта шығады")}</small>
+                  </li>
+                </ol>
               </div>
             )}
             <video
@@ -686,9 +705,12 @@ export function ContinuousSignCamera() {
           </p>
         </section>
         <aside className="panel recognition-captions">
-          <div className="recognition-caption-heading">
-            <h2>{at("Субтитры", "Captions", "Субтитрлер")}</h2>
-            <span>{at("Черновик ИИ", "AI draft", "ЖИ нобайы")}</span>
+          <div className="recognition-caption-title">
+            <span className="recognition-caption-icon"><Captions size={20} /></span>
+            <div>
+              <h2>{at("Текст из жестов", "Text from signs", "Ымнан мәтін")}</h2>
+              <small>{sl === "ksl" ? at("Казахский жестовый язык", "Kazakh Sign Language", "Қазақ ым тілі") : at("Русский жестовый язык", "Russian Sign Language", "Орыс ым тілі")}</small>
+            </div>
           </div>
           <label htmlFor="krsl-text" className="sr-only">
             {at(
@@ -718,14 +740,14 @@ export function ContinuousSignCamera() {
           {mode !== "letters" && (
             <div className="translator-vocab" role="group" aria-label={at("Какие слова искать", "Which words", "Қай сөздер")}>
               <button type="button" aria-pressed={basic} onClick={() => setBasic(true)}>
-                {at("Основные слова", "Basic words", "Негізгі сөздер")} <small>{BASIC_WORDS.length}</small>
+                {at("Основные слова", "Basic words", "Негізгі сөздер")} <small>{basicWords.length}</small>
               </button>
               <button type="button" aria-pressed={!basic} onClick={() => setBasic(false)}>
-                {at("Все слова", "All words", "Барлық сөздер")} <small>1000</small>
+                {at("Все слова", "All words", "Барлық сөздер")} <small>{vocabSize}</small>
               </button>
               <details>
                 <summary>{at("Какие слова?", "Which words?", "Қандай сөздер?")}</summary>
-                <p>{BASIC_WORDS.join(", ")}</p>
+                <p>{basicWords.join(", ")}</p>
               </details>
             </div>
           )}

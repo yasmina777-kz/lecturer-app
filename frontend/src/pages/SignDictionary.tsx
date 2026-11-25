@@ -1,7 +1,7 @@
 import { lazyPage } from "../lazyPage";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { Search, BookOpen, Play, ArrowRight, Mic, Square, Paperclip } from "lucide-react";
+import { Search, BookOpen, Play, ArrowRight, Mic, Square, Paperclip, Type, Hand } from "lucide-react";
 import { SPEECH_MODELS, friendly, preloadSpeech, speechCached, transcribe, type SpeechProgress } from "../local-ai/speech";
 
 /** "Quick" voice input: the browser's own recogniser (Chrome sends audio to its
@@ -38,9 +38,9 @@ import { SignSequencePlayer, SHOW_HUMAN_VIDEOS } from "../components/SignSequenc
 import { withVideoAssets } from "../sign/videoAssets";
 import { exercises } from "../sign/exercises";
 import { useSignLang } from "../sign/signLanguage";
-import { KazakhDictionary } from "./KazakhCourse";
+
+import { KazakhTranslate } from "./KazakhTranslate";
 import "./sign-dictionary.css";
-import { phraseArt } from "../sign/phraseArt";
 import { phraseGroups } from "../sign/phraseExamples";
 import { alphabetIllustration } from "../sign/alphabetIllustrations";
 import { AlphabetCardArt } from "../components/AlphabetCardArt";
@@ -401,6 +401,8 @@ export function SignDictionaryPage() {
       }),
     );
   }
+  // ҚЖЯ: Kazakh text → SURDO.KZ signs, «Оян, Qazaqstan» phrases, Kazakh dictionary.
+  if (sl === "ksl") return <KazakhTranslate tab={tab} setTab={setTab} />;
   return (
     <div
       className={`sign-workspace sign-dictionary text-sign-page text-sign-page--${tab}`}
@@ -493,9 +495,9 @@ export function SignDictionaryPage() {
         <>
           <section className="panel tts-card" data-workspace-enter>
             <div className="tts-card-head">
-              <span className="tts-lang">{at("Русский", "Russian", "Орыс тілі")}</span>
+              <span className="tts-pill"><Type size={14} /> {at("Русский текст", "Russian text", "Орысша мәтін")}</span>
               <ArrowRight size={16} />
-              <span className="tts-lang muted">{at("Жесты РЖЯ", "RSL signs", "РЖЯ ымдары")}</span>
+              <span className="tts-pill to"><Hand size={14} /> {at("Жесты РЖЯ", "RSL signs", "РЖЯ ымдары")}</span>
               <span className="tts-count">{text.length}/500</span>
             </div>
             <label htmlFor="dictionary-text" className="visually-hidden">
@@ -518,6 +520,12 @@ export function SignDictionaryPage() {
               }}
               placeholder={at("Напишите или скажите фразу…", "Type or say a phrase…", "Сөйлемді жазыңыз не айтыңыз…")}
             />
+            <div className="tts-examples tts-examples-in">
+              <span>{at("Попробуйте", "Try", "Байқап көріңіз")}:</span>
+              {["Привет!", "Как тебя зовут?", "Я хочу пить", "Добро пожаловать!"].map((ex) => (
+                <button key={ex} onClick={() => tryPhrase(ex)} disabled={loading || !!error}>{ex}</button>
+              ))}
+            </div>
             <div className="tts-toolbar">
               <button
                 className={`tts-mic${recording ? " recording" : ""}`}
@@ -600,12 +608,6 @@ export function SignDictionaryPage() {
           </section>
 
           <div className="tts-extras">
-            <div className="tts-examples">
-              <span>{at("Попробуйте", "Try", "Байқап көріңіз")}:</span>
-              {["Привет!", "Как тебя зовут?", "Я хочу пить", "Добро пожаловать!"].map((ex) => (
-                <button key={ex} onClick={() => tryPhrase(ex)} disabled={loading || !!error}>{ex}</button>
-              ))}
-            </div>
             <label className={`tts-toggle${spelling ? " on" : ""}`}>
               <input
                 type="checkbox"
@@ -659,9 +661,9 @@ export function SignDictionaryPage() {
             </select>
             <p>
               {at(
-                "Нажмите на карточку, чтобы открыть показ. Картинки — обложки по теме, а не точные образцы жестов. Показы составлены из доступных слов.",
-                "Select a card to open its demonstration. Pictures are thematic covers, not exact sign references. Demonstrations combine available word signs.",
-                "Көрсетілім үшін карточканы таңдаңыз. Суреттер — тақырыптық мұқабалар, нақты ым үлгілері емес. Көрсетілімдер қолжетімді сөздерден құралады.",
+                "Нажмите на фразу — справа покажут её жесты по порядку.",
+                "Select a phrase — its signs play on the right, in order.",
+                "Сөйлемді басыңыз — оң жақта ымдары ретімен көрсетіледі.",
               )}
             </p>
           </div>
@@ -688,17 +690,8 @@ export function SignDictionaryPage() {
                   );
                 }}
               >
-                <span className="sign-phrase-cover">
-                  <img
-                    src={phraseArt(v)}
-                    alt=""
-                    loading="lazy"
-                    width="800"
-                    height="533"
-                  />
-                  <span className="sign-phrase-play">
-                    <Play size={18} aria-hidden="true" />
-                  </span>
+                <span className="sign-phrase-play">
+                  <Play size={16} aria-hidden="true" />
                 </span>
                 <span className="sign-phrase-caption">
                   <strong>{v}</strong>
@@ -829,8 +822,7 @@ export function SignDictionaryPage() {
           </>
         )}
       </div>
-      {tab === "dictionary" && sl === "ksl" && <KazakhDictionary />}
-      {tab === "dictionary" && sl !== "ksl" && (
+      {tab === "dictionary" && (
         <>
           <div className="sign-dictionary-filter">
             <label>

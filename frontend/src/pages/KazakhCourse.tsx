@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Camera, Check, CheckCircle2, Play, Turtle, UserRound, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Camera, Check, CheckCircle2, Play, Search, Turtle, UserRound, X } from "lucide-react";
 import { WordPracticeCamera } from "../components/WordPracticeCamera";
 import { loadKslWordModel } from "../sign/wordRecognizer";
 import { KazakhTeacherSection, KslClip, teacherSegment, useTeacherLessons } from "./KazakhTeacher";
@@ -343,64 +343,129 @@ function Quiz({ words, all, showRu, onDone }: { words: KslEntry[]; all: KslEntry
 }
 
 /** Kazakh sign dictionary: search, topics, real Kazakh signer videos. */
+/** Kazakh sign dictionary in two steps: pick a topic (or search), then watch
+ * the words of that topic one by one. */
 export function KazakhDictionary() {
   const { data, error } = useKslCatalog();
   const { language } = useLanguage();
   const [q, setQ] = useState("");
   const [topic, setTopic] = useState<string>("");
-  const [sel, setSel] = useState<KslEntry | null>(null);
+  const [index, setIndex] = useState(0);
   const [slow, setSlow] = useState(false);
+  const lessons = useMemo(() => (data ? kslLessons(data.entries) : []), [data]);
   if (error) return <p className="translate-status error">{at("Не удалось загрузить казахский словарь.", "Could not load the Kazakh dictionary.", "Қазақ сөздігі жүктелмеді.")}</p>;
   if (!data) return <p>…</p>;
   const needle = q.trim().toLocaleLowerCase("kk");
+  const topics = [...ORDER.filter((t) => data.entries.some((e) => e.topic === t)), ...new Set(data.entries.map((e) => e.topic).filter((t) => !ORDER.includes(t)))];
   const list = data.entries.filter(
     (e) =>
       (!topic || e.topic === topic) &&
       (!needle || e.label.toLocaleLowerCase("kk").includes(needle) || (ruOf(e.label) ?? "").toLocaleLowerCase("ru").includes(needle)),
   );
-  const cur = sel ?? list[0];
-  const topics = [...ORDER.filter((t) => data.entries.some((e) => e.topic === t))];
-  return (
-    <div className="ksl-dict">
-      <section className="panel fs-player">
-        {cur ? (
-          <>
-            <KslVideo id={slow && cur.slow ? cur.slow : cur.youtube} slow={slow} />
-            <strong className="course-word">{cur.label.replace(/[!?]$/, "")}</strong>
-            {language !== "kk" && ruOf(cur.label) && <span className="course-word-ru">{ruOf(cur.label)}</span>}
-            <span className="course-word-ru">{topicName(cur.topic)}</span>
-            {cur.slow && (
-              <button className="button secondary" onClick={() => setSlow((s) => !s)}>
-                <Turtle size={16} /> {slow ? at("Обычная скорость", "Normal speed", "Қалыпты жылдамдық") : at("Медленно", "Slow", "Баяу")}
+  const pick = (t: string) => { setTopic(t); setIndex(0); setSlow(false); setQ(""); };
+  const search = (
+    <div className="ksl-dict-search">
+      <Search size={18} aria-hidden="true" />
+      <input
+        type="search"
+        value={q}
+        onChange={(e) => { setQ(e.target.value); setIndex(0); }}
+        placeholder={at("Найти слово: по-казахски или по-русски", "Find a word in Kazakh or Russian", "Сөзді табу: қазақша немесе орысша")}
+      />
+    </div>
+  );
+  if (!topic && !needle)
+    return (
+      <div className="ksl-dict-home">
+        {search}
+        <p className="ksl-dict-hint">
+          {at(`${data.entries.length} жестов в ${topics.length} темах. Выберите тему:`, `${data.entries.length} signs in ${topics.length} topics. Choose a topic:`, `${topics.length} тақырыпта ${data.entries.length} ым. Тақырып таңдаңыз:`)}
+        </p>
+        <div className="ksl-topic-grid">
+          {topics.map((t) => {
+            const words = data.entries.filter((e) => e.topic === t);
+            return (
+              <button key={t} type="button" className="ksl-topic-card card-motion" onClick={() => pick(t)}>
+                <span className="ksl-topic-media">
+                  <img src={`https://i.ytimg.com/vi/${words[0].youtube}/mqdefault.jpg`} alt="" loading="lazy" />
+                  <span className="ksl-topic-num">{at(`${words.length} жестов`, `${words.length} signs`, `${words.length} ым`)}</span>
+                </span>
+                <span className="ksl-topic-body">
+                  <strong>{topicName(t)}</strong>
+                  <span className="ksl-topic-words">{words.slice(0, 3).map((w) => w.label.replace(/[!?]$/, "")).join(" · ")}</span>
+                </span>
               </button>
-            )}
-          </>
-        ) : (
-          <p>{at("Ничего не найдено", "Nothing found", "Ештеңе табылмады")}</p>
-        )}
-      </section>
-      <section className="panel fs-answer">
-        <h2>{at(`Казахский жестовый словарь · ${data.entries.length} жестов`, `Kazakh sign dictionary · ${data.entries.length} signs`, `Қазақ ым сөздігі · ${data.entries.length} ым`)}</h2>
-        <input className="ksl-search" type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder={at("Поиск: по-казахски или по-русски", "Search in Kazakh or Russian", "Іздеу: қазақша немесе орысша")} />
-        <div className="vocab-chips ksl-topics">
-          <button aria-pressed={!topic} onClick={() => setTopic("")}>{at("Все темы", "All topics", "Барлық тақырып")}</button>
-          {topics.map((t) => (
-            <button key={t} aria-pressed={topic === t} onClick={() => { setTopic(t); setSel(null); }}>{topicName(t)}</button>
-          ))}
+            );
+          })}
         </div>
-        <div className="vocab-chips ksl-words">
-          {list.slice(0, 200).map((e) => (
-            <button key={e.youtube} aria-pressed={cur?.youtube === e.youtube} onClick={() => { setSel(e); setSlow(false); }}>
-              {e.label.replace(/[!?]$/, "")}
-            </button>
-          ))}
-        </div>
-        {list.length > 200 && <p className="fs-tip">{at("Уточните поиск или выберите тему, чтобы увидеть остальные.", "Refine the search to see more.", "Көбірек көру үшін тақырып таңдаңыз.")}</p>}
         <p className="fs-credit">
           {at("Видео: ", "Videos: ", "Бейнелер: ")}
           <a href="http://surdo.kz/rus/" target="_blank" rel="noreferrer">SURDO.KZ «Сурдосервер»</a> (YouTube surdoKazakhstan)
         </p>
-      </section>
+      </div>
+    );
+  const i = Math.min(index, Math.max(0, list.length - 1));
+  const cur = list[i];
+  const lesson = topic ? lessons.find((l) => l.topic === topic) : undefined;
+  const go = (n: number) => { setIndex(n); setSlow(false); };
+  return (
+    <div className="ksl-dict-topic">
+      <div className="ksl-dict-bar">
+        <button type="button" className="text-link" onClick={() => pick("")}>
+          <ArrowLeft size={16} /> {at("Все темы", "All topics", "Барлық тақырыптар")}
+        </button>
+        <h2>{topic ? topicName(topic) : at("Поиск", "Search", "Іздеу")} <small>{list.length}</small></h2>
+        {lesson && (
+          <Link className="button primary" to={`/course/kz/${lesson.id}`}>
+            <Check size={16} /> {at("Пройти тест по теме", "Take the topic quiz", "Тақырып бойынша тест")}
+          </Link>
+        )}
+      </div>
+      {search}
+      <div className="ksl-dict">
+        <section className="panel fs-player">
+          {cur ? (
+            <>
+              <KslVideo id={slow && cur.slow ? cur.slow : cur.youtube} slow={slow} />
+              <strong className="course-word">{cur.label.replace(/[!?]$/, "")}</strong>
+              {language !== "kk" && ruOf(cur.label) && <span className="course-word-ru">{ruOf(cur.label)}</span>}
+              <div className="ksl-dict-nav">
+                <button className="button secondary" disabled={i === 0} onClick={() => go(i - 1)} aria-label={at("Предыдущее слово", "Previous word", "Алдыңғы сөз")}>
+                  <ArrowLeft size={16} />
+                </button>
+                <span>{i + 1} / {list.length}</span>
+                {cur.slow && (
+                  <button className="button secondary" onClick={() => setSlow((v) => !v)}>
+                    <Turtle size={16} /> {slow ? at("Обычно", "Normal", "Қалыпты") : at("Медленно", "Slow", "Баяу")}
+                  </button>
+                )}
+                <button className="button primary" disabled={i >= list.length - 1} onClick={() => go(i + 1)}>
+                  {at("Дальше", "Next", "Келесі")} <ArrowRight size={16} />
+                </button>
+              </div>
+            </>
+          ) : (
+            <p>{at("Ничего не найдено", "Nothing found", "Ештеңе табылмады")}</p>
+          )}
+        </section>
+        <section className="panel ksl-dict-list">
+          <ol>
+            {list.slice(0, 120).map((e, n) => (
+              <li key={e.youtube}>
+                <button type="button" aria-current={n === i ? "true" : undefined} onClick={() => go(n)}>
+                  <span className="ksl-dict-n">{n + 1}</span>
+                  <span className="ksl-dict-w">
+                    {e.label.replace(/[!?]$/, "")}
+                    {language !== "kk" && ruOf(e.label) && <small>{ruOf(e.label)}</small>}
+                  </span>
+                  <Play size={14} aria-hidden="true" />
+                </button>
+              </li>
+            ))}
+          </ol>
+          {list.length > 120 && <p className="fs-tip">{at("Уточните поиск, чтобы увидеть остальные.", "Refine the search to see more.", "Көбірек көру үшін іздеуді нақтылаңыз.")}</p>}
+        </section>
+      </div>
     </div>
   );
 }

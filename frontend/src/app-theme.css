@@ -1,5 +1,5 @@
 /* Workspace and landing share the data-theme set by useTheme. */
-:root[data-theme="dark"] .app-shell {
+:root[data-theme="dark"] .app-shell:not([data-product-ui]) {
   color-scheme: dark;
   --dark: #edf3fa;
   --muted: #a4b3c4;
@@ -9,65 +9,65 @@
   color: var(--dark);
   background: #080c12;
 }
-:root[data-theme="dark"] .app-shell .app-main {
+:root[data-theme="dark"] .app-shell:not([data-product-ui]) .app-main {
   background: #080c12;
   color: var(--dark);
   min-height: 100vh;
 }
-:root[data-theme="dark"] .app-shell .topbar {
+:root[data-theme="dark"] .app-shell:not([data-product-ui]) .topbar {
   background: #0d1520f5;
   border-color: var(--line);
   color: var(--dark);
 }
 :root[data-theme="dark"]
-  .app-shell
+  .app-shell:not([data-product-ui])
   :is(.panel, .stat-card, .lecture-card, .modal, .empty-state) {
   background: #111a25;
   border-color: var(--line);
   color: var(--dark);
   box-shadow: 0 8px 28px #00000012;
 }
-:root[data-theme="dark"] .app-shell :is(input, textarea, select) {
+:root[data-theme="dark"] .app-shell:not([data-product-ui]) :is(input, textarea, select) {
   background: #0d1520;
   border-color: #3a4c60;
   color: #edf3fa;
 }
-:root[data-theme="dark"] .app-shell :is(input, textarea)::placeholder {
+:root[data-theme="dark"] .app-shell:not([data-product-ui]) :is(input, textarea)::placeholder {
   color: #91a3b7;
 }
-:root[data-theme="dark"] .app-shell :is(input, textarea, select):focus {
+:root[data-theme="dark"] .app-shell:not([data-product-ui]) :is(input, textarea, select):focus {
   border-color: #b7dfff;
   box-shadow: 0 0 0 3px #b7dfff22;
 }
-:root[data-theme="dark"] .app-shell input:disabled {
+:root[data-theme="dark"] .app-shell:not([data-product-ui]) input:disabled {
   color: #a4b3c4;
   background: #192533;
 }
-:root[data-theme="dark"] .app-shell .primary {
+:root[data-theme="dark"] .app-shell:not([data-product-ui]) .primary {
   background: #edc481;
   border-color: #edc481;
   color: #17212e;
 }
-:root[data-theme="dark"] .app-shell .primary:hover {
+:root[data-theme="dark"] .app-shell:not([data-product-ui]) .primary:hover {
   background: #f5d59e;
   border-color: #f5d59e;
 }
 :root[data-theme="dark"]
-  .app-shell
+  .app-shell:not([data-product-ui])
   :is(.secondary, .tabs button, .icon-button, .language-segments) {
   background: #162231;
   border-color: var(--line);
   color: #bfcede;
 }
 :root[data-theme="dark"]
-  .app-shell
+  .app-shell:not([data-product-ui])
   :is(.tabs button.active, .language-segments button[aria-pressed="true"]) {
   background: #2b4055;
   color: #edf3fa;
   border-color: #7296b4;
 }
 :root[data-theme="dark"]
-  .app-shell
+  .app-shell:not([data-product-ui])
   :is(
     .page-heading p,
     .muted,
@@ -80,42 +80,42 @@
   ) {
   color: #a4b3c4;
 }
-:root[data-theme="dark"] .app-shell :is(th, .tag, .count, .notice) {
+:root[data-theme="dark"] .app-shell:not([data-product-ui]) :is(th, .tag, .count, .notice) {
   background: #192533;
   color: #b9c9da;
   border-color: var(--line);
 }
-:root[data-theme="dark"] .app-shell :is(td, th, .service-row, .activity-row) {
+:root[data-theme="dark"] .app-shell:not([data-product-ui]) :is(td, th, .service-row, .activity-row) {
   border-color: var(--line);
 }
-:root[data-theme="dark"] .app-shell .sign-workspace {
+:root[data-theme="dark"] .app-shell:not([data-product-ui]) .sign-workspace {
   --sw-ink: #edf3fa;
   --sw-muted: #a4b3c4;
   --sw-soft: #1b2939;
   --sw-border: #2c3b4b;
 }
-:root[data-theme="dark"] .app-shell .sign-card-art {
+:root[data-theme="dark"] .app-shell:not([data-product-ui]) .sign-card-art {
   background: radial-gradient(ellipse at top right, #2b4055, #182433);
   color: #b7dfff;
 }
-:root[data-theme="light"] .app-shell .app-main {
+:root[data-theme="light"] .app-shell:not([data-product-ui]) .app-main {
   background: #f8f3e9;
   color: #43382a;
 }
-:root[data-theme="light"] .app-shell .topbar {
+:root[data-theme="light"] .app-shell:not([data-product-ui]) .topbar {
   background: #fbf7efee;
   border-color: #e4d8c5;
 }
 
 /* Shared shell: keep sections connected without frame-like dividers. */
-:root .app-shell .sidebar {
+:root .app-shell:not([data-product-ui]) .sidebar {
   border-right: 0;
 }
-:root .app-shell .topbar {
+:root .app-shell:not([data-product-ui]) .topbar {
   border-bottom: 0;
   box-shadow: none;
 }
-:root .app-shell .sidebar-bottom,
-:root .app-shell .user-row {
+:root .app-shell:not([data-product-ui]) .sidebar-bottom,
+:root .app-shell:not([data-product-ui]) .user-row {
   border-top: 0;
 }

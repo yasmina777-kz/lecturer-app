@@ -873,3 +873,25 @@
 @media (max-width: 540px) { .ksl-topic-grid { grid-template-columns: 1fr 1fr; gap: 12px; } .ksl-topic-body { padding: 10px 12px 12px; } .ksl-topic-body strong { font-size: 15px; } }
 :root .app-shell .ksl-stage .panel.panel { background: var(--p-surface, var(--sw-soft)); color: var(--sw-ink); border: 1px solid var(--sw-border, var(--line)); }
 :root .app-shell .ksl-stage .panel :is(h2, strong) { color: var(--sw-ink); }
+
+/* Kazakh dictionary: topics first, then the words of one topic. */
+.ksl-dict-search { display: flex; align-items: center; gap: 10px; padding: 0 16px; margin-bottom: 14px; border: 1px solid var(--p-line, #dfe3ea); border-radius: 16px; background: var(--p-surface, #fff); color: var(--p-muted); }
+.ksl-dict-search input { flex: 1; min-width: 0; padding: 14px 0; border: 0; outline: 0; background: transparent; color: var(--p-text, inherit); font: inherit; font-size: 16px; }
+.ksl-dict-search:focus-within { border-color: var(--p-blue); box-shadow: 0 0 0 3px color-mix(in srgb, var(--p-blue) 18%, transparent); }
+.ksl-dict-hint { margin: 0 0 12px; color: var(--p-muted); }
+button.ksl-topic-card { padding: 0; text-align: left; font: inherit; cursor: pointer; }
+.ksl-dict-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-bottom: 14px; }
+.ksl-dict-bar .text-link { display: inline-flex; align-items: center; gap: 6px; padding: 0; border: 0; background: none; cursor: pointer; font: inherit; color: var(--p-blue); }
+.ksl-dict-bar h2 { flex: 1; margin: 0; font-size: 26px; }
+.ksl-dict-bar h2 small { margin-left: 6px; padding: 2px 9px; border-radius: 999px; background: var(--p-blue-soft, #eef3ff); color: var(--p-blue); font-size: 14px; vertical-align: middle; }
+.ksl-dict-nav { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px; margin-top: 6px; }
+.ksl-dict-nav > span { color: var(--p-muted); font-size: 14px; min-width: 56px; text-align: center; }
+.ksl-dict-list { max-height: 560px; overflow: auto; padding: 8px !important; }
+.ksl-dict-list ol { display: grid; gap: 4px; margin: 0; padding: 0; list-style: none; }
+.ksl-dict-list li button { display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px 12px; border: 0; border-radius: 12px; background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.ksl-dict-list li button:hover { background: var(--p-blue-soft, #eef3ff); }
+.ksl-dict-list li button[aria-current="true"] { background: var(--p-blue); color: #fff; }
+.ksl-dict-list li button[aria-current="true"] small, .ksl-dict-list li button[aria-current="true"] .ksl-dict-n { color: #fff; }
+.ksl-dict-n { min-width: 26px; color: var(--p-muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+.ksl-dict-w { display: grid; flex: 1; min-width: 0; font-weight: 600; }
+.ksl-dict-w small { color: var(--p-muted); font-weight: 400; font-size: 13px; }
