@@ -25,7 +25,9 @@ MediaPipe Hand Landmarker: Google, Apache 2.0.
 No endorsement by the dataset authors. The model was not reviewed by Kazakh sign
 language experts; dynamic letters are recognised from a single hand shape only.
 
-ksl-words-v1*.json — Kazakh sign words (736). Body: RSL words-v5 (Slovo, ai-forever),
-unchanged. Kazakh output layer learned on hand/body landmarks (no video stored) from
-SURDO.KZ «Сурдосервер» (YouTube surdoKazakhstan) and «Саусақтар сөйлейді» (YouTube
-Sausaqtarsoileidi). Script: ml/ksl/ksl_words_probe.py. Evaluation: docs/ksl-words-v1-eval.json.
+ksl-words-v2*.json — Kazakh sign words (736) + 12 everyday phrases. Body: RSL words-v5
+(Slovo, ai-forever), unchanged. Kazakh output layer learned on hand/body landmarks (no
+video stored) from SURDO.KZ «Сурдосервер» (YouTube surdoKazakhstan), «Саусақтар сөйлейді»
+(YouTube Sausaqtarsoileidi) and the «Оян, Qazaqstan» sign-language segments (Седьмой
+канал, YouTube). Scripts: ml/ksl/extract_phrases.py, ml/ksl/train_ksl_phrases.py.
+Evaluation: docs/ksl-words-v1-eval.json (keys frozen_rsl, phrases_v2).

@@ -72,5 +72,15 @@
    "lesson": 0.5
   }
  ],
- "chosen": "G: frozen RSL + Kazakh head, 3 models (final model also trained on the Sausaq clips)"
+ "chosen": "G: frozen RSL + Kazakh head, 3 models (final model also trained on the Sausaq clips)",
+ "phrases_v2": {
+  "name": "phrases, person held out (4 folds)",
+  "among_14_phrases": 0.432,
+  "full_vocabulary_top1": 0.351,
+  "dialogue_turn_3_choices": 0.574,
+  "dialogue_checks": 61,
+  "clips": 74,
+  "chance_14": 0.071,
+  "chance_dialogue": 0.333
+ }
 }

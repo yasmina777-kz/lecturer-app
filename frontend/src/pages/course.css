@@ -841,3 +841,11 @@
 .ksl-dialog-empty { width: 100%; box-sizing: border-box; display: grid; place-items: center; aspect-ratio: 16 / 9; border-radius: 14px; background: var(--p-soft, #eef2f7); color: var(--p-muted, #5b6472); font-weight: 600; }
 .ksl-ksl-dialogues { margin-bottom: 18px; }
 .ksl-ksl-dialogues h2 { font-size: 1.1rem; margin: 0 0 10px; }
+
+/* Kazakh dialogue: camera check of the learner's reply, full width under the round. */
+.ksl-dialog-camera {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}

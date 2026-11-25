@@ -27,12 +27,15 @@ export function WordPracticeCamera({
   choices,
   loadModel = loadWordModel,
   display = wordText,
+  onCorrect,
 }: {
   target: string;
   choices?: string[];
   /** Kazakh lessons pass loadKslWordModel. */
   loadModel?: () => Promise<SeqModel>;
   display?: (label: string) => string;
+  /** Called on each attempt the model accepts as the target sign. */
+  onCorrect?: () => void;
 }) {
   useSignLang();
   const video = useRef<HTMLVideoElement>(null);
@@ -73,6 +76,7 @@ export function WordPracticeCamera({
     const guess = recognizeWord(model, clip, video.current.videoWidth, video.current.videoHeight, true, segmenter.current.clipPoses, segmenter.current.clipFaces, choices);
     const { verdict } = judgeWord(guess, target, !!choices?.length);
     const hints = verdict === "correct" ? [] : cameraHints(clip, segmenter.current.clipPoses, 50);
+    if (verdict === "correct") onCorrect?.();
     setAttempts((list) => [{ guess, verdict, hints }, ...list].slice(0, 5));
   }, "balanced", undefined, 50);
 

@@ -29,3 +29,5 @@ The trainer's «Записать пример» exports hand world landmarks for
 2. `ksl_words_probe.py eval` — honest test on the two Sausaq teachers; `final` exports the 3-member ensemble.
 3. `train_ksl_words.py eval` — the fine-tuning comparison (worse; kept for the record).
 4. `build_teacher_lessons.py` — teacher lessons and «Оян, Qazaqstan» phrases with timestamps for the course.
+5. `extract_phrases.py` — the phrase segments split into camera shots (presenter + 3–5 people on the street), each shot cut into sign attempts like the browser `WordSegmenter`.
+6. `train_ksl_phrases.py eval|final` — the site model **ksl-words-v2** (words + phrases, used by the lessons and the dialogue camera check). `eval` holds out whole people per phrase. Use its `final` (not `ksl_words_probe.py final`) after importing recordings.

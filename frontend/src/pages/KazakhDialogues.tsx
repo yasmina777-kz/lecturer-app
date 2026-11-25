@@ -1,10 +1,12 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Check, CheckCircle2, MessageCircle, RotateCcw, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Camera, Check, CheckCircle2, MessageCircle, RotateCcw, X } from "lucide-react";
 import { at } from "../i18n/automation";
 import { useLanguage } from "../i18n";
 import { shuffle } from "../sign/activities";
 import { KslClip, useTeacherLessons, type Phrase, type TeacherLesson } from "./KazakhTeacher";
+import { WordPracticeCamera } from "../components/WordPracticeCamera";
+import { kslModelLabel, loadKslWordModel } from "../sign/wordRecognizer";
 import "./sign-workspace.css";
 import "./sign-vocabulary.css";
 import "./fingerspell.css";
@@ -13,7 +15,9 @@ import "./course.css";
 /** Kazakh SL dialogues built only from real Kazakh signer videos: the
  * «Оян, Qazaqstan» phrases and the «Саусақтар сөйлейді» words. In each turn
  * the learner reads the situation (and watches the partner, when the partner
- * signs), picks the right Kazakh reply, then watches it signed. */
+ * signs), picks the right Kazakh reply, watches it signed, then can sign it to
+ * the camera: ksl-words-v2 picks among the turn's options (words + the
+ * «Оян, Qazaqstan» phrases, ml/ksl/train_ksl_phrases.py). */
 type Turn = {
   /** What the partner signs first (video), if anything. */
   partner?: string;
@@ -98,13 +102,21 @@ export function KazakhDialoguePage() {
   const [picked, setPicked] = useState<string | null>(null);
   const [score, setScore] = useState(0);
   const [replay, setReplay] = useState(0);
+  const [camera, setCamera] = useState(false);
+  const [signed, setSigned] = useState<Set<number>>(new Set());
+  const [labels, setLabels] = useState<string[]>([]);
+  useEffect(() => {
+    loadKslWordModel().then((m) => setLabels(m.labels), () => setLabels([]));
+  }, []);
   const clips = useMemo(() => (data ? clipIndex(data.phrases.items, data.teacher.lessons) : null), [data]);
   const turn = scenario.turns[i];
   const options = useMemo(() => (turn ? shuffle([turn.answer, ...turn.distractors]) : []), [turn]);
   if (error) return <p className="translate-status error">{at("Не удалось загрузить видео.", "Could not load videos.", "Бейнелер жүктелмеді.")}</p>;
   if (!clips) return <p>…</p>;
   const ru = (kk: string) => clips.get(kk)?.ru ?? "";
-  const restart = () => { setI(0); setPicked(null); setScore(0); };
+  const restart = () => { setI(0); setPicked(null); setScore(0); setSigned(new Set()); };
+  const toModel = (kk: string) => kslModelLabel(kk, labels);
+  const textOf = (label: string) => [turn?.answer, ...(turn?.distractors ?? [])].find((o) => o && toModel(o) === label) ?? label;
   const next = KSL_SCENARIOS[KSL_SCENARIOS.indexOf(scenario) + 1];
   const shown = picked ? clips.get(turn?.answer ?? "") : turn?.partner ? clips.get(turn.partner) : undefined;
   return (
@@ -123,6 +135,9 @@ export function KazakhDialoguePage() {
         <section className="panel fs-done">
           <CheckCircle2 size={40} />
           <h2>{at("Диалог пройден", "Dialogue complete", "Диалог аяқталды")}: {score} / {scenario.turns.length}</h2>
+          {signed.size > 0 && (
+            <p>{at("Показано в камеру и узнано", "Signed to the camera and recognized", "Камераға көрсетіліп, танылды")}: {signed.size} / {scenario.turns.length}</p>
+          )}
           <div className="fs-actions">
             {next && (
               <Link className="button primary" to={`/course/kz/dialogue/${next.id}`} onClick={restart}>
@@ -172,10 +187,38 @@ export function KazakhDialoguePage() {
                   {picked === turn.answer ? <Check size={18} /> : <X size={18} />}{" "}
                   {picked === turn.answer ? at("Верно! Повторите жест за видео.", "Correct! Repeat the sign.", "Дұрыс! Ымды қайталаңыз.") : at(`Правильно: ${turn.answer}. Повторите жест за видео.`, `Correct: ${turn.answer}`, `Дұрысы: ${turn.answer}`)}
                 </p>
-                <button className="button primary" onClick={() => { setPicked(null); setI((n) => n + 1); }}>{at("Дальше", "Next", "Келесі")} <ArrowRight size={16} /></button>
+                <div className="fs-actions">
+                  {!camera && (
+                    <button className="button secondary" onClick={() => setCamera(true)}>
+                      <Camera size={16} /> {at("Покажи реплику в камеру", "Sign it to the camera", "Камераға көрсетіңіз")}
+                    </button>
+                  )}
+                  <button className="button primary" onClick={() => { setPicked(null); setI((n) => n + 1); }}>{at("Дальше", "Next", "Келесі")} <ArrowRight size={16} /></button>
+                </div>
+                {signed.has(i) && (
+                  <p className="vocab-feedback ok"><Check size={18} /> {at("Камера узнала вашу реплику", "The camera recognized your reply", "Камера жауабыңызды таныды")}</p>
+                )}
               </>
             )}
           </section>
+          {picked && camera && (
+            <section className="ksl-dialog-camera">
+              <WordPracticeCamera
+                target={toModel(turn.answer)}
+                choices={[turn.answer, ...turn.distractors].map(toModel)}
+                loadModel={loadKslWordModel}
+                display={textOf}
+                onCorrect={() => setSigned((s) => new Set(s).add(i))}
+              />
+              <p className="fs-credit">
+                {at(
+                  "ИИ выбирает из вариантов этой реплики. Он учился на видео носителей ҚЖЯ и на новых людях угадывает примерно 6 раз из 10 — если не узнал, повторите чётче и медленнее.",
+                  "The AI picks among this turn's options. Trained on Kazakh signer videos, it is right about 6 times in 10 on new people.",
+                  "ЖИ осы репликаның нұсқаларынан таңдайды. Жаңа адамдарда шамамен 10-нан 6 рет дұрыс табады.",
+                )}
+              </p>
+            </section>
+          )}
         </div>
       )}
       <p className="fs-credit">

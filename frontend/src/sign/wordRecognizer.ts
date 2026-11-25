@@ -47,10 +47,21 @@ export function loadWordModel(): Promise<WordModel> {
   return loading;
 }
 
-/** Kazakh sign words (ksl-words-v1): the three frozen RSL words-v5 networks,
- * each with a Kazakh output layer learned on SURDO.KZ and «Саусақтар сөйлейді»
- * clips (ml/ksl/ksl_words_probe.py). Same features, averaged like the RSL ensemble. */
-export const KSL_WORD_MODEL_URLS = ["/models/ksl/ksl-words-v1.json", "/models/ksl/ksl-words-v1-m1.json", "/models/ksl/ksl-words-v1-m2.json"];
+/** Kazakh sign words + everyday phrases (ksl-words-v2): the three frozen RSL
+ * words-v5 networks, each with a Kazakh output layer learned on SURDO.KZ,
+ * «Саусақтар сөйлейді» and the «Оян, Qazaqstan» phrases (ml/ksl/train_ksl_phrases.py).
+ * Same features, averaged like the RSL ensemble. */
+export const KSL_WORD_MODEL_URLS = ["/models/ksl/ksl-words-v2.json", "/models/ksl/ksl-words-v2-m1.json", "/models/ksl/ksl-words-v2-m2.json"];
+
+/** Kazakh phrase/word text as shown in lessons and dialogues → model label
+ * (same rule as phrase_label in ml/ksl/train_ksl_phrases.py; punctuation and case
+ * are already ignored by normalizeSignText). */
+export function kslModelLabel(text: string, labels: readonly string[]) {
+  const key = normalizeSignText(text);
+  if (labels.some((l) => normalizeSignText(l) === key)) return text;
+  const squeezed = key.replace(/\s+/gu, "");
+  return labels.find((l) => normalizeSignText(l).replace(/\s+/gu, "") === squeezed) ?? text;
+}
 let kslLoading: Promise<WordModel> | null = null;
 export function loadKslWordModel(): Promise<WordModel> {
   kslLoading ??= Promise.all(
