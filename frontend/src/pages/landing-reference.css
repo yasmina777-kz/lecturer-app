@@ -366,3 +366,27 @@
   & .mentor-hero-art { width: calc(100% + 40px); }
  }
 }
+
+/* «Два языка» — РЖЯ and ҚЖЯ side by side. */
+:root .landing-surface[data-product-ui][data-product-theme] .landing-site {
+  & .languages-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 28px; }
+  & .language-card { display: flex; flex-direction: column; gap: 20px; padding: 28px; border: 1px solid var(--p-line); border-radius: 28px; background: var(--p-surface); min-width: 0; }
+  & .language-card header { display: flex; align-items: center; gap: 14px; }
+  & .language-card h3 { margin: 0; font-size: 24px; }
+  & .language-code { display: grid; place-items: center; flex-shrink: 0; min-width: 64px; height: 44px; padding: 0 12px; border-radius: 14px; background: var(--p-blue-soft); color: var(--p-blue); font-weight: 700; }
+  & .language-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  & .language-stats div { display: grid; gap: 4px; padding: 14px 16px; border-radius: 18px; background: var(--p-blue-soft); }
+  & .language-stats strong { font-size: 30px; line-height: 1; color: var(--p-blue); }
+  & .language-stats span { font-size: 14px; color: var(--p-muted); }
+  & .language-card ul { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+  & .language-card li { display: flex; gap: 10px; align-items: flex-start; line-height: 1.45; }
+  & .language-card li svg { flex-shrink: 0; margin-top: 3px; color: var(--p-blue); }
+  & .language-card .mentor-text-link { margin-top: auto; }
+  & .languages-note { margin: 18px 0 0; color: var(--p-muted); font-size: 15px; }
+}
+@media (max-width: 800px) {
+  :root .landing-surface[data-product-ui][data-product-theme] .landing-site {
+    & .languages-grid { grid-template-columns: 1fr; }
+    & .language-card { padding: 22px; }
+  }
+}

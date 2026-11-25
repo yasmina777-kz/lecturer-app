@@ -67,6 +67,7 @@ export default function LandingPage() {
             <a href="#about-project">
               {at("О проекте", "About", "Жоба туралы")}
             </a>
+            <a href="#languages">{at("Два языка", "Two languages", "Екі тіл")}</a>
             <a href="#possibilities">{t("Возможности")}</a>
             <a href="#experience">{t("Как это работает")}</a>
             <a href="#for-you">{t("Для кого")}</a>
@@ -188,6 +189,93 @@ export default function LandingPage() {
               {at("В своём темпе", "At your own pace", "Өз қарқыныңызбен")}
             </div>
           </div>
+          <section id="languages" className="mentor-section languages-section" data-reveal>
+            <div className="mentor-section-heading">
+              <span className="mentor-kicker">
+                {at("Два языка — одна платформа", "Two languages, one platform", "Екі тіл — бір платформа")}
+              </span>
+              <h2>
+                {at("Русский и казахский", "Russian and Kazakh", "Орыс және қазақ")}
+                <br />
+                <span>
+                  {at("жестовые языки в одном месте.", "sign languages in one place.", "ым тілдері бір жерде.")}
+                </span>
+              </h2>
+              <p>
+                {at(
+                  "Переключатель РЖЯ / ҚЖЯ меняет уроки, словарь, азбуку, диалоги и ИИ-проверку. Учите один язык или оба сразу.",
+                  "The РЖЯ / ҚЖЯ switch changes lessons, dictionary, alphabet, dialogues and the AI check. Learn one language or both.",
+                  "РЖЯ / ҚЖЯ ауыстырғышы сабақтарды, сөздікті, әліпбиді, диалогтарды және ЖИ тексеруін өзгертеді. Бір тілді немесе екеуін бірге үйреніңіз.",
+                )}
+              </p>
+            </div>
+            <div className="languages-grid">
+              {[
+                {
+                  code: "РЖЯ",
+                  name: at("Русский жестовый язык", "Russian Sign Language", "Орыс ым тілі"),
+                  stats: [
+                    ["33", at("буквы азбуки", "alphabet letters", "әліпби әрпі")],
+                    ["1000", at("слов знает ИИ", "words the AI knows", "сөзді ЖИ таниды")],
+                  ],
+                  items: [
+                    at("Уроки по темам с видео носителей (Slovo, Bukva)", "Topic lessons with native-signer videos (Slovo, Bukva)", "Ым иелерінің бейнелерімен тақырыптық сабақтар (Slovo, Bukva)"),
+                    at("ИИ-проверка букв и слов камерой", "Camera AI check of letters and words", "Әріптер мен сөздерді камерамен ЖИ тексеруі"),
+                    at("Диалоги на бытовые темы", "Everyday dialogues", "Күнделікті тақырыптағы диалогтар"),
+                    at("3D-аватар: пауза, замедление, поворот", "3D avatar: pause, slow motion, rotation", "3D аватар: кідіріс, баяулату, бұру"),
+                  ],
+                },
+                {
+                  code: "ҚЖЯ",
+                  name: at("Казахский жестовый язык", "Kazakh Sign Language", "Қазақ ым тілі"),
+                  stats: [
+                    ["42", at("буквы азбуки", "alphabet letters", "әліпби әрпі")],
+                    ["751", at("жест словаря SURDO.KZ", "signs from SURDO.KZ", "SURDO.KZ ымы")],
+                  ],
+                  items: [
+                    at("Уроки по темам: каждое слово показывает носитель", "Topic lessons: every word shown by a native signer", "Тақырыптық сабақтар: әр сөзді ым иесі көрсетеді"),
+                    at("Видеоуроки преподавателей «Саусақтар сөйлейді» и фразы «Оян, Qazaqstan»", "Teacher video lessons «Саусақтар сөйлейді» and «Оян, Qazaqstan» phrases", "«Саусақтар сөйлейді» бейнесабақтары және «Оян, Qazaqstan» сөйлемдері"),
+                    at("3 диалога: камера проверяет вашу реплику", "3 dialogues: the camera checks your reply", "3 диалог: камера жауабыңызды тексереді"),
+                    at("ИИ узнаёт 736 слов, 12 фраз и казахские буквы", "The AI knows 736 words, 12 phrases and Kazakh letters", "ЖИ 736 сөзді, 12 сөйлемді және қазақ әріптерін таниды"),
+                  ],
+                },
+              ].map((lang) => (
+                <article className="language-card" key={lang.code}>
+                  <header>
+                    <span className="language-code">{lang.code}</span>
+                    <h3>{lang.name}</h3>
+                  </header>
+                  <div className="language-stats">
+                    {lang.stats.map(([n, label]) => (
+                      <div key={label}>
+                        <strong>{n}</strong>
+                        <span>{label}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <ul>
+                    {lang.items.map((item) => (
+                      <li key={item}>
+                        <Check size={17} />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <Link to={destination} className="mentor-text-link">
+                    {user ? at("Открыть уроки", "Open lessons", "Сабақтарды ашу") : at("Начать бесплатно", "Start for free", "Тегін бастау")}
+                    <ArrowUpRight size={18} />
+                  </Link>
+                </article>
+              ))}
+            </div>
+            <p className="languages-note">
+              {at(
+                "Распознавание работает прямо в браузере: видео с камеры никуда не отправляется.",
+                "Recognition runs right in your browser: camera video never leaves your device.",
+                "Тану браузердің ішінде жұмыс істейді: камера бейнесі ешқайда жіберілмейді.",
+              )}
+            </p>
+          </section>
           <section id="possibilities" className="mentor-section" data-reveal>
             <div className="mentor-section-heading">
               <span className="mentor-kicker">
@@ -275,9 +363,9 @@ export default function LandingPage() {
                     "Сөйлемдер мен танысу",
                   ),
                   text: at(
-                    "Повторите фразу перед зеркалом и сравните с видеообразцом. Для всех 33 отдельных букв доступна экспериментальная ИИ-проверка по короткому видео.",
-                    "Practise in front of a mirror and compare with the reference. Experimental AI checking from short videos is available for all 33 isolated letters.",
-                    "Айна алдында қайталап, бейнеүлгімен салыстырыңыз. Барлық 33 жеке әріпке қысқа бейне арқылы тәжірибелік ЖИ тексеруі бар.",
+                    "Повторите фразу и проверьте себя камерой: ИИ узнаёт буквы и слова на РЖЯ и ҚЖЯ, а в казахских диалогах — целые реплики.",
+                    "Repeat the phrase and check yourself with the camera: the AI recognizes letters and words in RSL and KSL, and whole replies in the Kazakh dialogues.",
+                    "Сөйлемді қайталап, өзіңізді камерамен тексеріңіз: ЖИ РЖЯ мен ҚЖЯ әріптері мен сөздерін, ал қазақ диалогтарында тұтас жауаптарды таниды.",
                   ),
                   action: at(
                     "Посмотреть практику",
@@ -779,9 +867,9 @@ export default function LandingPage() {
                     "Қалай бастауға болады?",
                   ),
                   at(
-                    "Откройте «Посмотреть модуль». Сейчас доступна пробная 3D-анимация фразы «Как тебя зовут?».",
-                    "Open Explore the signing avatar. A trial 3D animation of “What is your name?” is currently available.",
-                    "«Аватардың ымдарын көру» сілтемесін ашыңыз. Қазір «Сенің атың кім?» сынақ 3D анимациясы бар.",
+                    "Создайте аккаунт, выберите язык переключателем РЖЯ / ҚЖЯ и откройте первый урок. Без регистрации можно посмотреть 3D-аватара.",
+                    "Create an account, pick a language with the РЖЯ / ҚЖЯ switch and open the first lesson. The 3D avatar is available without signing up.",
+                    "Аккаунт ашып, РЖЯ / ҚЖЯ ауыстырғышымен тілді таңдаңыз да, алғашқы сабақты ашыңыз. 3D аватарды тіркелмей-ақ көруге болады.",
                   ),
                 ],
                 [
@@ -815,9 +903,9 @@ export default function LandingPage() {
                     "Бұл толық курс па?",
                   ),
                   at(
-                    "Пока нет. Анимация — прототип, её форму кистей, направление движения и мимику ещё должен проверить носитель жестового языка. Для обучения сверяйтесь с видеообразцом человека.",
-                    "Not yet. The animation is a prototype: an RSL signer still needs to review hand shapes, movement and facial expression. Use the human reference video when learning.",
-                    "Әзірге жоқ. Анимация — прототип: қол пішіні, қимыл және мимиканы маман тексеруі керек. Үйрену үшін адамның бейнеүлгісіне сүйеніңіз.",
+                    "Для обоих языков уже есть курс: уроки по темам, словарь, азбука, диалоги и тесты. Он не заменяет занятия с преподавателем. 3D-аватар пока прототип, поэтому для точной формы жеста сверяйтесь с видео носителей.",
+                    "Both languages already have a course: topic lessons, dictionary, alphabet, dialogues and quizzes. It does not replace a teacher. The 3D avatar is still a prototype, so check exact hand shapes against the native-signer videos.",
+                    "Екі тілге де курс бар: тақырыптық сабақтар, сөздік, әліпби, диалогтар және тесттер. Ол оқытушыны алмастырмайды. 3D аватар әзірге прототип, сондықтан ымның нақты пішінін ым иелерінің бейнелерімен салыстырыңыз.",
                   ),
                 ],
                 [
@@ -827,9 +915,9 @@ export default function LandingPage() {
                     "AI компоненті қайда?",
                   ),
                   at(
-                    "В тренажёре работает классификатор 33 букв и примеров «нет жеста», обученный на 1 530 видео Bukva. Он обрабатывает короткие записи на вашем устройстве без API-ключей. На 612 тестовых видео других людей точность составила 76,5%. Слова, фразы и грамматику модель пока не распознаёт.",
-                    "Practice includes a classifier for 33 letters and no-sign examples, trained on 1,530 Bukva videos. It processes short recordings on your device without API keys. Accuracy on 612 held-out videos of other signers was 76.5%. Words, phrases and grammar are not recognized yet.",
-                    "Жаттығуда 1 530 Bukva бейнесінде үйретілген 33 әріп пен «ым жоқ» мысалдарының классификаторы бар. Қысқа бейнені құрылғыда API кілтінсіз өңдейді. Басқа адамдардың 612 тест бейнесіндегі дәлдігі — 76,5%. Сөздер, сөйлемдер және грамматика әлі танылмайды.",
+                    "Камера проверяет, как вы показываете жест. ИИ работает прямо в браузере, без API-ключей, видео никуда не отправляется. РЖЯ: 33 буквы и 1000 слов; на людях, которых ИИ не видел, слово узнаётся с первой попытки в 62,6% случаев. ҚЖЯ: 42 буквы, 736 слов и 12 бытовых фраз; в уроке ИИ находит нужное слово в 60% случаев, в диалоге реплику — в 57%. Связную речь и грамматику модель пока не распознаёт.",
+                    "The camera checks how you sign. The AI runs in your browser without API keys and video never leaves your device. RSL: 33 letters and 1,000 words; on people the AI has never seen, the word is right on the first guess 62.6% of the time. KSL: 42 letters, 736 words and 12 everyday phrases; in a lesson the AI finds the right word 60% of the time, in a dialogue the right reply 57%. Continuous signing and grammar are not recognized yet.",
+                    "Камера ымды қалай көрсететініңізді тексереді. ЖИ браузерде API кілтінсіз жұмыс істейді, бейне ешқайда жіберілмейді. РЖЯ: 33 әріп және 1000 сөз; ЖИ көрмеген адамдарда сөз бірінші болжаммен 62,6% жағдайда танылады. ҚЖЯ: 42 әріп, 736 сөз және 12 күнделікті сөйлем; сабақта ЖИ дұрыс сөзді 60%, диалогта дұрыс жауапты 57% жағдайда табады. Байланысқан сөйлеу мен грамматика әлі танылмайды.",
                   ),
                 ],
                 [
