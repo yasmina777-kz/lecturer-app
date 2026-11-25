@@ -21,6 +21,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import train_ksl_words as K  # noqa: E402
 from train_ksl_words import ROOT, T, augment, resample, score, window  # noqa: E402
 from seqnet import export, reference_forward  # noqa: E402
+from import_word_recordings import load_own  # noqa: E402
 
 MEMBERS = [ROOT / f'frontend/public/models/rsl/{n}.json' for n in
            ('words-v5-classifier', 'words-v5-seed7-classifier', 'words-v5-seed1234-classifier')]
@@ -49,9 +50,11 @@ def features(net, mean, std, X, rng, copies):
 
 
 def fit_head(F, Y, classes, epochs=40, seed=0):
+    return fit_head_xy(torch.from_numpy(np.concatenate(F)).float(), torch.from_numpy(np.tile(Y, len(F))), classes, epochs, seed)
+
+
+def fit_head_xy(x, y, classes, epochs=40, seed=0):
     torch.manual_seed(seed)
-    x = torch.from_numpy(np.concatenate(F)).float()
-    y = torch.from_numpy(np.tile(Y, len(F)))
     head = nn.Linear(x.shape[1], classes)
     opt = torch.optim.AdamW(head.parameters(), 3e-3, weight_decay=1e-2)
     for _ in range(epochs):
@@ -68,21 +71,27 @@ def main(mode):
     clips, meta = K.load_data()
     labels = sorted({m['label'] for m in meta if m['source'] == 'surdo'})
     li = {l: i for i, l in enumerate(labels)}
+    own_x, own_meta = load_own()  # recordings from /help-ksl (import_word_recordings.py)
+    keep = [i for i, m in enumerate(own_meta) if m['label'] in li]
+    clips += [own_x[i] for i in keep]
+    meta += [own_meta[i] for i in keep]
+    people = sorted({m['signer'] for m in meta if m['source'] == 'own'})
+    print('own recordings', len(keep), 'people', len(people), flush=True)
     lessons = K.lessons_of(set(labels))
-    tr = [i for i, m in enumerate(meta) if m['source'] == 'surdo']
+    tr = [i for i, m in enumerate(meta) if m['source'] in ('surdo', 'own')]
     te = [i for i, m in enumerate(meta) if m['source'] == 'sausaq' and m['label'] in li]
     if mode == 'final':
         tr = tr + te
     Xtr, Ytr = [clips[i] for i in tr], np.array([li[meta[i]['label']] for i in tr])
     Xte, Yte = [clips[i] for i in te], np.array([li[meta[i]['label']] for i in te])
     kinds = np.array([meta[i]['kind'] for i in te])
-    nets, heads, Pproto, Phead = [], [], [], []
+    nets, heads, Pproto, Phead, feats = [], [], [], [], []
     for path in MEMBERS:
         K.BASE = path
         net, mean, std = K.base_model(len(labels))
         F = features(net, mean, std, Xtr, np.random.default_rng(0), AUG)
         head = fit_head(F, Ytr, len(labels))
-        nets.append((net, mean, std)); heads.append(head)
+        nets.append((net, mean, std)); heads.append(head); feats.append(F)
         if mode == 'eval':
             E = embed_raw(net, np.stack([(resample(c, T) - mean) / std for c in Xte]).astype(np.float32))
             proto = np.zeros((len(labels), E.shape[1]), np.float32)
@@ -95,17 +104,35 @@ def main(mode):
                 Phead.append(torch.softmax(head(torch.from_numpy(E)), 1).numpy())
         print('member', path.name, round(time.monotonic() - t0), flush=True)
     if mode == 'eval':
+        tag = f' (+ own recordings: {len(people)} people)' if people else ''
         res = [
-            score(Pproto[0], Yte, labels, lessons, 'D: prototypes, 1 RSL model'),
-            score(np.mean(Pproto, 0), Yte, labels, lessons, 'E: prototypes, 3 RSL models'),
-            score(Phead[0], Yte, labels, lessons, 'F: frozen RSL + Kazakh head, 1 model'),
-            score(np.mean(Phead, 0), Yte, labels, lessons, 'G: frozen RSL + Kazakh head, 3 models'),
+            score(Pproto[0], Yte, labels, lessons, 'D: prototypes, 1 RSL model' + tag),
+            score(np.mean(Pproto, 0), Yte, labels, lessons, 'E: prototypes, 3 RSL models' + tag),
+            score(Phead[0], Yte, labels, lessons, 'F: frozen RSL + Kazakh head, 1 model' + tag),
+            score(np.mean(Phead, 0), Yte, labels, lessons, 'G: frozen RSL + Kazakh head, 3 models' + tag),
         ]
         P = np.mean(Phead, 0)
         for k in ('card', 'closeup'):
-            res.append(score(P[kinds == k], Yte[kinds == k], labels, lessons, f'G on {k} shots'))
+            res.append(score(P[kinds == k], Yte[kinds == k], labels, lessons, f'G on {k} shots' + tag))
+        # Leave-one-person-out on own recordings: train without that person (+ Sausaq), test on them.
+        for person in people:
+            out = np.array([meta[tr[i]]['signer'] == person for i in range(len(tr))])
+            test = [clips[tr[i]] for i in np.flatnonzero(out)]
+            ytest = Ytr[out]
+            Pp = []
+            for (net, mean, std), F in zip(nets, feats):
+                F2 = [f[~out] for f in F]
+                E = embed_raw(net, np.stack([(resample(c, T) - mean) / std for c in test]).astype(np.float32))
+                F2 = F2 + [embed_raw(net, np.stack([(resample(c, T) - mean) / std for c in Xte]).astype(np.float32))]
+                Y2 = [Ytr[~out]] * (len(F2) - 1) + [Yte]
+                x = torch.from_numpy(np.concatenate(F2)).float()
+                y = torch.from_numpy(np.concatenate(Y2))
+                h = fit_head_xy(x, y, len(labels))
+                with torch.no_grad():
+                    Pp.append(torch.softmax(h(torch.from_numpy(E)), 1).numpy())
+            res.append(score(np.mean(Pp, 0), ytest, labels, lessons, f'G on own recordings of {person} (not trained on them)'))
         rep = json.loads((ROOT / 'docs/ksl-words-v1-eval.json').read_text()) if (ROOT / 'docs/ksl-words-v1-eval.json').exists() else {}
-        rep['frozen_rsl'] = res
+        rep['frozen_rsl' + ('_with_own' if people else '')] = res
         (ROOT / 'docs/ksl-words-v1-eval.json').write_text(json.dumps(rep, ensure_ascii=False, indent=1))
         return
     # export: each member = frozen RSL body + its Kazakh output layer

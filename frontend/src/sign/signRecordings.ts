@@ -7,6 +7,8 @@
 export type Take = {
   id: string;
   label: string;
+  /** Sign language; missing = "rsl" (takes made before Kazakh was added). */
+  lang?: "rsl" | "ksl";
   participant: string;
   region?: string;
   createdAt: string;

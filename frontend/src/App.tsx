@@ -1,3 +1,4 @@
+import { ProductSurface } from "./components/ProductSurface";
 import { t } from "./i18n";
 import {
   BrowserRouter,
@@ -32,6 +33,7 @@ const CoursePage = lazyPage(() => import("./pages/Course").then(m => ({default:m
 const CourseUnitPage = lazyPage(() => import("./pages/Course").then(m => ({default:m.CourseUnitPage})));
 const KazakhTeacherLessonPage = lazyPage(() => import("./pages/KazakhTeacher").then(m => ({default:m.KazakhTeacherLessonPage})));
 const KazakhPhrasesPage = lazyPage(() => import("./pages/KazakhTeacher").then(m => ({default:m.KazakhPhrasesPage})));
+const KazakhDialoguePage = lazyPage(() => import("./pages/KazakhDialogues").then(m => ({default:m.KazakhDialoguePage})));
 const KazakhLessonPage = lazyPage(() => import("./pages/KazakhCourse").then(m => ({default:m.KazakhLessonPage})));
 const KazakhSignPage = lazyPage(() => import("./pages/KazakhSign").then(m => ({default:m.KazakhSignPage})));
 const CulturePage = lazyPage(() => import("./pages/Culture").then(m => ({default:m.CulturePage})));
@@ -101,6 +103,7 @@ export function App() {
         <Route path="/gesture-preview" element={<GesturePreviewPage />} />
         <Route path="/avatar-study" element={<Navigate to="/" replace />} />
         <Route path="/welcome" element={<Navigate to="/" replace />} />
+        <Route path="/help-ksl" element={<ProductSurface className="rs-public-surface"><RecordSignsPage lang="ksl" /></ProductSurface>} />
         <Route path="/login" element={<AuthPage key="login" />} />
         <Route path="/register" element={<AuthPage key="register" signup />} />
         <Route element={<ProtectedRoute />}>
@@ -126,6 +129,7 @@ export function App() {
             <Route path="understanding/phrases" element={<PhraseUnderstandingPage />} />
             <Route path="learn-test" element={<LevelTestPage />} />
             <Route path="course" element={<CoursePage />} />
+            <Route path="course/kz/dialogue/:id" element={<KazakhDialoguePage />} />
             <Route path="course/kz/phrases" element={<KazakhPhrasesPage />} />
             <Route path="course/kz/teacher/:vid" element={<KazakhTeacherLessonPage />} />
             <Route path="course/kz/:id" element={<KazakhLessonPage />} />

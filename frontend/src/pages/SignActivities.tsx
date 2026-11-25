@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { KazakhDialogueCards } from "./KazakhDialogues";
 import {
   ArrowLeft,
   ArrowRight,
@@ -130,13 +131,19 @@ export function SignDialoguesPage() {
         <div className="ksl-warn ksl-phrases-inline" role="note">
           <span>
             {at(
-              "Казахские фразы («Сәлеметсіз бе!», «Рахмет!», «Маған көмектесе аласыз ба?») показывают сурдопереводчик и глухие жители Астаны: откройте «Фразы ҚЖЯ». Сценарии диалогов ниже пока на жестах РЖЯ.",
-              "Kazakh phrases are in «Kazakh SL phrases». The dialogue scenarios below still use Russian SL signs.",
-              "Қазақ сөйлемдерін («Сәлеметсіз бе!», «Рахмет!») аудармашы мен Астананың естімейтін тұрғындары көрсетеді: «ҚЫТ сөйлемдері» бөлімін ашыңыз. Төмендегі диалогтар әзірге орыс ым тілінде.",
+              "Казахские фразы («Сәлеметсіз бе!», «Рахмет!», «Маған көмектесе аласыз ба?») показывают сурдопереводчик и глухие жители Астаны: откройте «Фразы ҚЖЯ». Ниже — три казахских диалога, а под ними сценарии на жестах РЖЯ.",
+              "Kazakh phrases are in «Kazakh SL phrases». Below: three Kazakh dialogues, then the Russian SL scenarios.",
+              "Қазақ сөйлемдерін («Сәлеметсіз бе!», «Рахмет!») аудармашы мен Астананың естімейтін тұрғындары көрсетеді: «ҚЫТ сөйлемдері» бөлімін ашыңыз. Төменде — үш қазақ диалогы, одан кейін орыс ым тіліндегі сценарийлер.",
             )}
           </span>
           <Link className="button primary" to="/course/kz/phrases">{at("Фразы ҚЖЯ", "Kazakh SL phrases", "ҚЫТ сөйлемдері")}</Link>
         </div>
+      )}
+      {sl === "ksl" && !selected && (
+        <section className="ksl-ksl-dialogues">
+          <h2>{at("Диалоги на казахском жестовом языке", "Kazakh SL dialogues", "Қазақ ым тіліндегі диалогтар")}</h2>
+          <KazakhDialogueCards />
+        </section>
       )}
       {selected ? (
         <DialogueSession

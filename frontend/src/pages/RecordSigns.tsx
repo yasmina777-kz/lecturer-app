@@ -1,4 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { getSignLang } from "../sign/signLanguage";
+import { KslVideo, kslLessons, loadKslCatalog, ruOf, type KslEntry } from "./KazakhCourse";
 import { Camera, Square, Download, Trash2, Shuffle, Upload, Video } from "lucide-react";
 import { useLiveLetters } from "../sign/useLiveLetters";
 import type { Landmark } from "../sign/phraseCapture";
@@ -16,13 +19,21 @@ import "../components/word-practice.css";
 /** Collect our own training data: a signer shows each word several times;
  * only hand and body landmarks are kept (no video), in this browser, until
  * exported. More different signers = better recognition for everyone. */
-const GOAL = 5;
+const RSL_GOAL = 5;
+/** Kazakh: a priority list of words (the course order) and 3 takes each. */
+const KSL_GOAL = 3;
 const PRE_MS = 300, GONE_MS = 600, MAX_MS = 6000, MIN_HAND_MS = 400;
 const PROFILE = "rsl-record-profile-v1";
 
 type Frame = { now: number; row: ReturnType<typeof frameRow>; hand: boolean };
 
-export function RecordSignsPage() {
+/** lang="ksl": the public page /help-ksl for friends without an account. */
+export function RecordSignsPage({ lang: forced }: { lang?: "ksl" } = {}) {
+  const [params] = useSearchParams();
+  const ksl = forced === "ksl" || params.get("lang") === "ksl" || (params.get("lang") !== "rsl" && getSignLang() === "ksl");
+  const GOAL = ksl ? KSL_GOAL : RSL_GOAL;
+  const lang = ksl ? "ksl" : "rsl";
+  const [kslEntries, setKslEntries] = useState<Map<string, KslEntry>>(new Map());
   const [labels, setLabels] = useState<string[]>([]);
   const [assets, setAssets] = useState<MotionAsset[]>([]);
   const [words, setWords] = useState<DictionaryEntry[]>([]);
@@ -47,9 +58,21 @@ export function RecordSignsPage() {
   const take = useRef<{ start: number; lastHand: number; handMs: number } | null>(null);
   const recorder = useRef<MediaRecorder | null>(null);
   const [videos, setVideos] = useState<SignVideo[]>([]);
-  const withVideo = profile.videoConsent && !!videoType();
+  const withVideo = !ksl && profile.videoConsent && !!videoType();
 
   useEffect(() => {
+    if (ksl) {
+      Promise.all([loadKslCatalog(), listTakes()])
+        .then(([cat, saved]) => {
+          // Course order: the first lessons (questions, family, numbers…) are what learners practise first.
+          const list = kslLessons(cat.entries).flatMap((l) => l.words);
+          setKslEntries(new Map(list.map((e) => [e.label, e])));
+          setLabels(list.map((e) => e.label));
+          setTakes(saved);
+        })
+        .catch(() => setError("Не удалось загрузить список жестов. Обновите страницу."));
+      return () => stream.current?.getTracks().forEach((t) => t.stop());
+    }
     Promise.all([
       loadWordModel(),
       fetch("/avatars/sign-motion/catalog.json").then((r) => r.json()),
@@ -76,7 +99,7 @@ export function RecordSignsPage() {
       })
       .catch(() => setError("Не удалось загрузить список жестов. Обновите страницу."));
     return () => stream.current?.getTracks().forEach((t) => t.stop());
-  }, []);
+  }, [ksl]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     try {
       localStorage.setItem(PROFILE, JSON.stringify(profile));
@@ -85,11 +108,13 @@ export function RecordSignsPage() {
     }
   }, [profile]);
 
+  /** Takes of the sign language on this page (old RSL takes have no lang). */
+  const mine = useMemo(() => takes.filter((t) => (t.lang ?? "rsl") === lang), [takes, lang]);
   const count = useMemo(() => {
     const c = new Map<string, number>();
-    for (const t of takes) if (t.participant === profile.participant) c.set(t.label, (c.get(t.label) ?? 0) + 1);
+    for (const t of mine) if (t.participant === profile.participant) c.set(t.label, (c.get(t.label) ?? 0) + 1);
     return c;
-  }, [takes, profile.participant]);
+  }, [mine, profile.participant]);
   const next = () => {
     const todo = labels.filter((l) => (count.get(l) ?? 0) < GOAL && l !== current);
     if (todo.length) setCurrent(todo[0]);
@@ -137,6 +162,7 @@ export function RecordSignsPage() {
     const saved: Take = {
       id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
       label: current,
+      ...(ksl ? { lang: "ksl" as const } : {}),
       participant: profile.participant.trim(),
       ...(profile.region.trim() ? { region: profile.region.trim() } : {}),
       createdAt: new Date().toISOString(),
@@ -215,18 +241,19 @@ export function RecordSignsPage() {
     setRecording(false);
   }
   async function undo() {
-    const mine = takes.filter((t) => t.label === current && t.participant === profile.participant.trim());
-    const last = mine[mine.length - 1];
+    const own = mine.filter((t) => t.label === current && t.participant === profile.participant.trim());
+    const last = own[own.length - 1];
     if (!last) return;
     await deleteTake(last.id);
     setTakes((list) => list.filter((t) => t.id !== last.id));
     setFlash("Последний повтор удалён");
   }
   function exportAll() {
-    const file = new Blob([JSON.stringify({ format: "rsl-takes-v1", exportedAt: new Date().toISOString(), takes })], { type: "application/json" });
+    const file = new Blob([JSON.stringify({ format: "rsl-takes-v1", lang, exportedAt: new Date().toISOString(), takes: mine })], { type: "application/json" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(file);
-    a.download = `rsl-recordings-${new Date().toISOString().slice(0, 10)}.json`;
+    const who = profile.participant.trim().replace(/[^\p{L}\p{N}]+/gu, "-") || "participant";
+    a.download = `${lang}-recordings-${who}-${new Date().toISOString().slice(0, 10)}.json`;
     a.click();
     URL.revokeObjectURL(a.href);
   }
@@ -245,14 +272,23 @@ export function RecordSignsPage() {
   }
 
   const done = labels.filter((l) => (count.get(l) ?? 0) >= GOAL).length;
-  const shown = labels.filter((l) => !search || l.toLocaleLowerCase("ru").includes(search.toLocaleLowerCase("ru"))).slice(0, 300);
+  const shown = labels
+    .filter((l) => !search || l.toLocaleLowerCase("ru").includes(search.toLocaleLowerCase("ru")) || (ksl && (ruOf(l) ?? "").toLocaleLowerCase("ru").includes(search.toLocaleLowerCase("ru"))))
+    .slice(0, 300);
+  const kslSample = ksl ? kslEntries.get(current) : undefined;
   const n = count.get(current) ?? 0;
   return (
-    <div className="sign-workspace avatar-review record-signs">
+    <div className={`sign-workspace avatar-review record-signs${forced ? " rs-public" : ""}`}>
       <header className="ar-head">
         <div>
-          <p className="ar-eyebrow">Помощь проекту</p>
-          <h1>Запись жестов для обучения</h1>
+          <p className="ar-eyebrow">Помощь проекту · {ksl ? "казахский жестовый язык (ҚЖЯ)" : "русский жестовый язык (РЖЯ)"}</p>
+          <h1>{ksl ? "Запись казахских жестов для обучения ИИ" : "Запись жестов для обучения"}</h1>
+          {ksl && (
+            <p className="ar-lead rs-ksl-goal">
+              Сейчас ИИ знает каждое казахское слово только по одному-трём носителям и узнаёт жест урока в 60% случаев. Каждый новый
+              человек делает распознавание точнее для всех. Цель: <b>первые 30 слов списка по {GOAL} повтора</b> (около 15 минут).
+            </p>
+          )}
           <p className="ar-lead">
             Покажите жест перед камерой {GOAL} раз: поднимите руки, покажите, опустите. Каждый повтор сохраняется сам. Видео не
             записывается и никуда не отправляется — сохраняются только точки рук и плеч. Чем больше разных людей запишут жесты, тем
@@ -260,7 +296,7 @@ export function RecordSignsPage() {
           </p>
         </div>
         <div className="ar-progress">
-          <b>{takes.filter((t) => t.participant === profile.participant.trim()).length}</b>
+          <b>{mine.filter((t) => t.participant === profile.participant.trim()).length}</b>
           <span>повторов записано</span>
           <div className="ar-bar">
             <i className="ok" style={{ width: `${(done / Math.max(1, labels.length)) * 100}%` }} />
@@ -292,11 +328,11 @@ export function RecordSignsPage() {
               onChange={(e) => setProfile({ ...profile, region: e.target.value })}
             />
           </label>
-          <label className="rs-check">
+          {!ksl && <label className="rs-check">
             <input type="checkbox" checked={profile.videoConsent} onChange={(e) => setProfile({ ...profile, videoConsent: e.target.checked })} />
             Необязательно: я согласен(на), чтобы для каждого слова сохранялось одно видео со мной (с лицом) — по нему аватар научится
             показывать жест правильно. Видео остаётся в этом браузере, пока я сам(а) не скачаю и не передам его автору платформы.
-          </label>
+          </label>}
           <label className="rs-check">
             <input type="checkbox" checked={profile.consent} onChange={(e) => setProfile({ ...profile, consent: e.target.checked })} />
             Я согласен(на), что записи движений моих рук и плеч (без видео и без лица) будут использованы для обучения распознавания
@@ -315,7 +351,7 @@ export function RecordSignsPage() {
               {shown.map((l) => (
                 <li key={l}>
                   <button aria-current={l === current} onClick={() => setCurrent(l)}>
-                    <span>{l}</span>
+                    <span>{l}{ksl && ruOf(l) ? <small className="rs-ru"> {ruOf(l)}</small> : null}</span>
                     <small className="rs-count">{count.get(l) ?? 0}/{GOAL}</small>
                   </button>
                 </li>
@@ -324,7 +360,10 @@ export function RecordSignsPage() {
           </aside>
           <section className="ar-main ar-card">
             <div className="ar-title">
-              <h2>{current || "…"}</h2>
+              <h2>
+                {current || "…"}
+                {ksl && ruOf(current) && <small className="rs-ru"> — {ruOf(current)}</small>}
+              </h2>
               <button className="ar-nav" onClick={next} aria-label="Другое слово" title="Другое слово">
                 <Shuffle size={16} />
               </button>
@@ -337,7 +376,13 @@ export function RecordSignsPage() {
             <div className="ar-compare">
               <figure>
                 <figcaption>Как показывают (образец)</figcaption>
-                {plan ? <SignSequencePlayer key={current} plan={plan} only="video" /> : <p className="ar-empty">Видео-образца нет</p>}
+                {ksl ? (
+                  kslSample ? <KslVideo id={kslSample.youtube} /> : <p className="ar-empty">Видео-образца нет</p>
+                ) : plan ? (
+                  <SignSequencePlayer key={current} plan={plan} only="video" />
+                ) : (
+                  <p className="ar-empty">Видео-образца нет</p>
+                )}
               </figure>
               <figure>
                 <figcaption>Вы {recording && <b className="rs-rec">● запись</b>}</figcaption>
@@ -382,7 +427,10 @@ export function RecordSignsPage() {
       )}
 
       <footer className="ar-foot ar-card">
-        <p>Записи хранятся в этом браузере. Когда закончите, нажмите «Скачать записи» и отправьте файл автору платформы.</p>
+        <p>
+          Записи хранятся в этом браузере. Когда закончите, нажмите «Скачать записи» и отправьте файл автору платформы
+          {ksl ? " (например, в Telegram). В файле только числа — координаты точек рук и плеч." : "."}
+        </p>
         <div>
           {videos.length > 0 && (
             <button className="ar-download" onClick={downloadVideos}>
@@ -393,8 +441,8 @@ export function RecordSignsPage() {
             <Upload size={16} /> Загрузить файл
             <input type="file" accept="application/json" onChange={(e) => importFile(e.target.files?.[0])} />
           </label>
-          <button className="ar-download" onClick={exportAll} disabled={!takes.length}>
-            <Download size={16} /> Скачать записи
+          <button className="ar-download" onClick={exportAll} disabled={!mine.length}>
+            <Download size={16} /> Скачать записи ({mine.length})
           </button>
         </div>
       </footer>

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Check, CheckCircle2, MessageCircle, RotateCcw, Users, Video, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, CheckCircle2, HeartHandshake, MessageCircle, RotateCcw, Users, Video, X } from "lucide-react";
 import { at } from "../i18n/automation";
 import { useLanguage } from "../i18n";
 import { shuffle } from "../sign/activities";
@@ -8,6 +8,7 @@ import "./sign-workspace.css";
 import "./sign-vocabulary.css";
 import "./fingerspell.css";
 import "./course.css";
+import { KazakhDialogueCards } from "./KazakhDialogues";
 
 /** Kazakh SL video lessons from YouTube (embedded, never copied):
  * «Саусақтар сөйлейді» topic lessons with two Kazakh teachers, and
@@ -83,6 +84,25 @@ export function KazakhTeacherSection() {
         </div>
         <ArrowRight size={18} />
       </Link>
+      <Link className="panel ksl-phrases-card ksl-help-card card-motion" to="/record-signs?lang=ksl">
+        <HeartHandshake size={22} />
+        <div>
+          <strong>{at("Помогите обучить ИИ казахским жестам", "Help train the AI on Kazakh signs", "ЖИ-ді қазақ ымдарына үйретуге көмектесіңіз")}</strong>
+          <span>
+            {at(
+              "15 минут: покажите 30 слов по 3 раза перед камерой. Видео не записывается, сохраняются только точки рук. Ссылка для друзей без регистрации: /help-ksl",
+              "15 minutes: 30 words × 3 in front of the camera. Only hand points are saved. Link for friends: /help-ksl",
+              "15 минут: 30 сөзді 3 реттен көрсетіңіз. Тек қол нүктелері сақталады. Достарға сілтеме: /help-ksl",
+            )}
+          </span>
+        </div>
+        <ArrowRight size={18} />
+      </Link>
+      <h2 className="ksl-teacher-h">
+        <MessageCircle size={18} /> {at("Диалоги на ҚЖЯ", "Kazakh SL dialogues", "ҚЫТ диалогтары")}
+        <small>{at("из реальных видео казахских носителей", "from real Kazakh signer videos", "қазақ ым тілі иелерінің бейнелерінен")}</small>
+      </h2>
+      <KazakhDialogueCards />
       <h2 className="ksl-teacher-h">
         <Video size={18} /> {at("Видеоуроки с преподавателем", "Video lessons with a teacher", "Мұғаліммен бейнесабақтар")}
         <small>«Саусақтар сөйлейді», {at("Актобе", "Aktobe", "Ақтөбе")}</small>

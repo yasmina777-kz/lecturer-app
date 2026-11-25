@@ -16,3 +16,8 @@
 .record-signs .rs-actions { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
 .record-signs .ar-btn:disabled { opacity: .45; cursor: default; transform: none; }
 .record-signs .rs-light { padding: 10px 14px; border-radius: 12px; background: rgba(47, 107, 255, .08); color: var(--p-text); text-align: left; line-height: 1.45; }
+.record-signs .rs-ru { color: var(--p-muted, #5b6472); font-weight: 400; font-size: .8em; }
+.record-signs .rs-ksl-goal { background: #e8f4ff; border-radius: 10px; padding: 8px 12px; }
+.record-signs .ksl-yt { width: 100%; aspect-ratio: 4 / 3; border: 0; border-radius: 12px; background: #000; }
+.record-signs.rs-public { max-width: 1180px; margin: 0 auto; padding: 24px 16px 40px; }
+.rs-public-surface { min-height: 100vh; background: var(--p-bg); color: var(--p-text); }

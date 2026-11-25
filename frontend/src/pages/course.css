@@ -838,3 +838,6 @@
 .ksl-teacher-card span { color: var(--p-muted, #5b6472); font-size: .85rem; }
 .ksl-phrases-inline { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; }
 .ksl-quiz-video .ksl-mask-phrase { position: absolute; left: 0; top: 15%; width: 36%; height: 32%; background: #0f3c52; border-radius: 0 0 12px 0; }
+.ksl-dialog-empty { width: 100%; box-sizing: border-box; display: grid; place-items: center; aspect-ratio: 16 / 9; border-radius: 14px; background: var(--p-soft, #eef2f7); color: var(--p-muted, #5b6472); font-weight: 600; }
+.ksl-ksl-dialogues { margin-bottom: 18px; }
+.ksl-ksl-dialogues h2 { font-size: 1.1rem; margin: 0 0 10px; }
