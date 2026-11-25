@@ -13,6 +13,7 @@ import {
   renderSilhouette,
   type KslModel,
 } from "../sign/kslSilhouette";
+import { SURDO_LETTER } from "../sign/kslLetters";
 import "./sign-workspace.css";
 import "./sign-vocabulary.css";
 import "./fingerspell.css";
@@ -24,8 +25,6 @@ const ref = (c: string) => `/models/ksl/ref/${c.codePointAt(0)!.toString(16).pad
 const SAMPLES = "ksl-letter-samples-v1";
 /** «Саусақтар сөйлейді» (Aktobe) lesson per letter on YouTube: [video id, second where the correct (✓) demonstration starts]. */
 const LESSON: Record<string, [string, number]> = {"И": ["90xdTon6er4", 9], "Ц": ["issSBk8pVWs", 9], "І": ["jCjee4V5UVE", 9], "А": ["x3QXeIERykg", 9], "Б": ["J0CpWOkifnQ", 9], "В": ["Cd5aaLlLIZ8", 9], "Г": ["BbJH-E1WGgM", 9], "Д": ["LoVHXR-FSzQ", 10], "Ж": ["korruiQvtr8", 9], "З": ["_1b3Nk0Fh_A", 9], "К": ["-WdIUDCvg3Y", 9], "Л": ["ULxmWy7elBg", 9], "М": ["qK-E3KALqFs", 9], "Н": ["hyST3J_p518", 9], "О": ["joEhvTHSsJw", 9], "П": ["sQEoBqjnDcY", 9], "Р": ["E8A3wUmV7jU", 9], "С": ["WHEyI_Dve94", 9], "Т": ["0smyRYW6-cA", 9], "У": ["wpoD2haG7W4", 9], "Ф": ["CZGQNB-3DGY", 9], "Х": ["bPcDJcnY_94", 9], "Ч": ["NErs_OeKi1Y", 9], "Ш": ["pijPLPAp2EE", 9], "Ы": ["7e_satlQKKA", 9], "Э": ["LK1coYwUT5s", 9], "Ю": ["S_izKezgfVo", 9], "Я": ["A7zExUfbhP0", 9], "Ғ": ["Xou3tSuwaAE", 9], "Қ": ["MYWYthN7AGk", 9], "Ң": ["YyQ7RPgoi6I", 9], "Ү": ["wtKosfU8HkY", 9], "Ұ": ["f02AJ4ylhHY", 9], "Ә": ["KOsEb_t5RTs", 9], "Ө": ["aZaSYg_wJYw", 9], "Й": ["-irYZUsDEfc", 9], "Ё": ["WeDg28ZgtIs", 9]};
-/** SURDO.KZ front-view letter clip (Kazakh signer) on YouTube. */
-const SURDO_LETTER: Record<string, string> = {"А": "LBFsmk7kooQ", "Б": "jhmtdinluLk", "В": "11T1owDlWC0", "Г": "0mJupwZb8vk", "Ғ": "mm4kD30r89I", "Д": "qa0EMegWkIA", "Е": "qMoUuPFr5jM", "Ё": "Fj_OY85_qrM", "Ә": "vXc_OMRw-ek", "Ж": "rXDZ8zqm3xA", "З": "bNMINs-A4mk", "И": "QF6zMkgKMnM", "Й": "iAnraRHKWY0", "І": "W2PfoWp5pkU", "К": "JqAFpKZI0wk", "Қ": "dnWpJDEdsqw", "Л": "QngmH9wHZ_0", "М": "wCq4QB_3hSU", "Н": "JV09jOl-uD4", "Ң": "r_gKsFMNxyc", "О": "YShMbUzOqck", "П": "kJAUxA91eyg", "Р": "63Xslfr4VD8", "С": "1qnhE4-pguo", "Т": "GTQDY9f7UrM", "У": "q_isprC03eg", "Ұ": "XDbmRsxCuIY", "Ф": "rZ5di9-JZng", "Х": "6UuINqsH3x0", "Ц": "nZ9Co_XsKSM", "Ч": "nBRRAjiNovo", "Щ": "mMXq280DxoU", "Ъ": "UTSetRhp_DM", "Ы": "L3LthsEXGxQ", "Ь": "ExmRc38dZNc", "Э": "LY8MpyT3YD4", "Ю": "STAM0ogTyRo", "Я": "jEPbSLxActg", "Һ": "zySXMQue2gA", "Ө": "BIlIbNiHJSo", "Ш": "ONLARL5Jjnk"};
 const BUKVA_CLIP = (c: string) => `/research/rsl/alphabet/${c.codePointAt(0)!.toString(16).padStart(4, "0")}.mp4`;
 
 /** A person showing the letter: our own Bukva clip for shared letters, the
@@ -120,7 +119,7 @@ export function KazakhSignPage() {
           </button>
         ))}
       </div>
-      {tab === "alphabet" && <Alphabet onPractice={(l) => setParams({ tab: "trainer", letter: l })} />}
+      {tab === "alphabet" && <Alphabet initial={params.get("letter") ?? "Ә"} onPractice={(l) => setParams({ tab: "trainer", letter: l })} />}
       {tab === "trainer" && <Trainer initial={params.get("letter") ?? "Ә"} />}
       {tab === "why" && <Why />}
       {tab === "analogs" && <Analogs />}
@@ -135,8 +134,8 @@ export function KazakhSignPage() {
   );
 }
 
-function Alphabet({ onPractice }: { onPractice: (l: string) => void }) {
-  const [pick, setPick] = useState("Ә");
+function Alphabet({ initial, onPractice }: { initial: string; onPractice: (l: string) => void }) {
+  const [pick, setPick] = useState(KAZAKH_LETTERS.includes(initial) ? initial : "Ә");
   return (
     <div className="ksl-alphabet">
       <section className="panel ksl-grid-panel">

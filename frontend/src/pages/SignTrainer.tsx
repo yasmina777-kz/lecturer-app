@@ -26,7 +26,6 @@ import {
 } from "lucide-react";
 import { at } from "../i18n/automation";
 import { exercises, courseLevels, recognitionLetters, alphabet } from "../sign/exercises";
-import { lessons } from "../sign/catalog";
 import { animationTime, playbackDuration } from "../sign/playback";
 import { Loading } from "../components/UI";
 import type { GestureAngle } from "../components/GestureMentor3D";
@@ -50,14 +49,78 @@ const Camera = lazyPage(() =>
     default: m.TemporalSignCamera,
   })),
 );
+const KazakhStage = lazyPage(() =>
+  import("./KazakhLearn").then((m) => ({ default: m.KazakhStage })),
+);
 import { SignActionCards } from "../components/SignActionCards";
+import { LetterTile, StageTabs } from "../components/LetterTile";
+import { useSignLang, wordText } from "../sign/signLanguage";
+import { courseUnits, unitPhoto } from "../sign/courseUnits";
+import { Check } from "lucide-react";
+import "./course.css";
+
+/** РЖЯ levels 2–3: the course units (A1 for first words, A2–B1 for
+ * comprehension and communication) as picture cards. */
+function RslUnits({ stage }: { stage: number }) {
+  const units = stage === 2 ? courseUnits("A1") : [...courseUnits("A2"), ...courseUnits("B1")];
+  let progress: Record<string, { done?: boolean }> = {};
+  try {
+    progress = JSON.parse(localStorage.getItem("rsl-course-v1") ?? "{}") ?? {};
+  } catch {
+    /* storage may be disabled */
+  }
+  const next = units.find((u) => !progress[u.id]?.done) ?? units[0];
+  return (
+    <>
+      <Link className="ksl-continue card-motion" to={`/course/${next.id}`}>
+        <span className="ksl-continue-icon"><Play size={20} /></span>
+        <div>
+          <strong>{at("Следующий урок", "Next lesson", "Келесі сабақ")}: {next.title}</strong>
+          <span>
+            {at("Пройдено", "Done", "Өтілді")} {units.filter((u) => progress[u.id]?.done).length} / {units.length}
+          </span>
+        </div>
+        <ArrowRight size={18} />
+      </Link>
+      <div className="ksl-topic-grid">
+        {units.map((u, i) => {
+          const done = !!progress[u.id]?.done;
+          return (
+            <Link key={u.id} className={`ksl-topic-card card-motion${done ? " done" : ""}`} to={`/course/${u.id}`}>
+              <span className="ksl-topic-media">
+                <img src={unitPhoto(u.id)} alt="" loading="lazy" />
+                <span className="ksl-topic-num">{i + 1}</span>
+                {done && <span className="ksl-topic-done"><Check size={14} /> {at("Пройден", "Done", "Өтті")}</span>}
+              </span>
+              <span className="ksl-topic-body">
+                <strong>{u.title}</strong>
+                <span className="ksl-topic-words">
+                  {u.words.slice(0, 3).map((w) => wordText(w, "rsl")).join(" · ")}
+                  {u.words.length > 3 ? ` +${u.words.length - 3}` : ""}
+                </span>
+              </span>
+            </Link>
+          );
+        })}
+      </div>
+    </>
+  );
+}
 import { ActivityLinks } from "./SignActivities";
 export function SignCourseCatalog() {
   const [params] = useSearchParams();
+  const [lang] = useSignLang();
   const stage = courseLevels().find(
     (l) => l.id === Number(params.get("stage")),
   );
   if (!stage) return <LearningHome />;
+  // ҚЖЯ has its own levels (Kazakh alphabet, SURDO.KZ topics, phrases and dialogues).
+  if (lang === "ksl")
+    return (
+      <Suspense fallback={<Loading />}>
+        <KazakhStage stage={stage.id} />
+      </Suspense>
+    );
   return (
     <div className="sign-workspace sign-course-workspace">
       {stage && (
@@ -165,70 +228,29 @@ export function SignCourseCatalog() {
         </div>
       ) : (
         <>
-          <div className="sign-exercise-cards sign-reading-cards">
-            {lessons()
-              .filter(
-                (lesson) =>
-                  lesson.level === stage.id && lesson.kind === "reading",
-              )
-              .map((lesson) => (
-                <Link
-                  className="panel sign-exercise-card"
-                  to={`/learn/${lesson.id}`}
-                  key={lesson.id}
-                >
-                  <div className="sign-exercise-thumb">
-                    {lesson.image && (
-                      <img src={lesson.image} alt="" loading="lazy" />
-                    )}
-                  </div>
-                  <div>
-                    <span className="eyebrow">
-                      {at("УРОК", "LESSON", "САБАҚ")} · {lesson.minutes}{" "}
-                      {at("мин", "min", "мин")}
-                    </span>
-                    <h2>{lesson.title}</h2>
-                    <p>{lesson.description}</p>
-                    <span className="sign-level-link">
-                      {at("Открыть урок", "Open lesson", "Сабақты ашу")}
-                      <ArrowRight size={16} />
-                    </span>
-                  </div>
-                </Link>
-              ))}
-          </div>
-          <div className="sign-exercise-cards">
-            {exercises()
-              .filter((e) => e.level === stage.id)
-              .map((e) => (
-                <Link
-                  className="panel sign-exercise-card"
-                  to={`/practice?exercise=${e.id}`}
-                  key={e.id}
-                >
-                  <div
-                    className={`sign-exercise-thumb${e.letter && alphabetIllustration(e.letter) ? " sign-exercise-thumb--illustrated" : ""}`}
-                  >
-                    {e.letter && alphabetIllustration(e.letter) ? (
-                      <AlphabetCardArt letter={e.letter} />
-                    ) : e.letter ? (
-                      <b>{e.letter}</b>
-                    ) : (
-                      <img src="/images/avatars/mira-portrait-v3.png" alt="" />
-                    )}
-                    <Play size={24} />
-                  </div>
-                  <div>
-                    <h2>{e.title}</h2>
-                    <p>{e.hint}</p>
-                    <span className="sign-level-link">
-                      {at("Смотреть аватара", "Watch avatar", "Аватарды көру")}
-                      <ArrowRight size={17} />
-                    </span>
-                  </div>
-                </Link>
-              ))}
-          </div>
+          <StageTabs levels={courseLevels()} current={stage.id} />
+          {exercises().some((e) => e.level === stage.id && e.letter) && (
+            <div className="letter-tiles">
+              {exercises()
+                .filter((e) => e.level === stage.id && e.letter)
+                .map((e) => (
+                  <LetterTile
+                    key={e.id}
+                    letter={e.letter!}
+                    to={`/practice?exercise=${e.id}`}
+                    caption={at("Аватар · камера", "Avatar · camera", "Аватар · камера")}
+                    media={
+                      alphabetIllustration(e.letter!) ? (
+                        <img src={alphabetIllustration(e.letter!)} alt="" loading="lazy" />
+                      ) : (
+                        <b className="letter-tile-big">{e.letter}</b>
+                      )
+                    }
+                  />
+                ))}
+            </div>
+          )}
+          {stage.id >= 2 && <RslUnits stage={stage.id} />}
         </>
       )}
       {!stage && (

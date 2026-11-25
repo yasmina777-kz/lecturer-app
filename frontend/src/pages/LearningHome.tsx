@@ -20,7 +20,10 @@ import { courseLevels } from "../sign/exercises";
 import { useSignProgress } from "../sign/useProgress";
 import { useActivityProgress } from "../sign/useActivities";
 import { reviewItems } from "../sign/activities";
-import { lessonIds } from "../sign/catalog";import { useSignLang } from "../sign/signLanguage";
+import { lessonIds } from "../sign/catalog";
+import { useSignLang } from "../sign/signLanguage";
+import { kslLevels } from "./KazakhLearn";
+import { HeartHandshake, Info } from "lucide-react";
 
 
 /** Static mentor portrait (same person as the home page hero). */
@@ -38,6 +41,8 @@ export function LearningMentorPreview() {
 
 export function LearningHome() {
   const [sl] = useSignLang();
+  const ksl = sl === "ksl";
+  const levels = ksl ? kslLevels() : courseLevels();
   const { progress } = useSignProgress();
   const { attempts } = useActivityProgress();
   const reviewCount = reviewItems(attempts).size;
@@ -97,7 +102,7 @@ export function LearningHome() {
           <img
             className="learning-hero-artwork"
             src="/images/learning/hero.png"
-            alt={at("Изучайте русский жестовый язык", "Learn Russian Sign Language", "Орыс ым тілін үйреніңіз")}
+            alt=""
           />
         </div>
       </section>
@@ -115,13 +120,13 @@ export function LearningHome() {
               )}
             </h2>
           </div>
-          <Link className="text-link" to="/practice">
-            {at("Все упражнения", "All exercises", "Барлық жаттығулар")}
+          <Link className="text-link" to={ksl ? "/course" : "/practice"}>
+            {ksl ? at("Все уроки ҚЖЯ", "All Kazakh SL lessons", "Барлық ҚЫТ сабақтары") : at("Все упражнения", "All exercises", "Барлық жаттығулар")}
             <ArrowRight size={17} />
           </Link>
         </div>
         <div className="learning-levels">
-          {courseLevels().map((level, index) => (
+          {levels.map((level, index) => (
             <Link
               className="learning-level"
               key={level.id}
@@ -162,7 +167,7 @@ export function LearningHome() {
                 "Аватар, ракурстар және баяулату әр қимылды түсінуге көмектеседі.",
               )}
             </p>
-            <Link to="/practice" className="button secondary">
+            <Link to={ksl ? "/kazakh?tab=trainer" : "/practice"} className="button secondary">
               {at("Перейти к практике", "Open practice", "Жаттығуға өту")}
               <ArrowRight size={17} />
             </Link>
@@ -180,6 +185,67 @@ export function LearningHome() {
           <h2 id="learning-activities-title">
             {at("Следующие этапы", "Next stages", "Келесі кезеңдер")}
           </h2>
+          {ksl ? (
+            <>
+              <Link to="/course/kz/phrases">
+                <MessageCircle size={21} />
+                <div>
+                  <strong>{at("Фразы на каждый день", "Everyday phrases", "Күнделікті сөйлемдер")}</strong>
+                  <span>{at("14 фраз «Оян, Qazaqstan»: смотрите и проходите тест", "14 «Оян, Qazaqstan» phrases with a quiz", "«Оян, Qazaqstan» 14 сөйлемі: көріп, тест тапсырыңыз")}</span>
+                </div>
+                <ArrowUpRight size={18} />
+              </Link>
+              <Link to="/course/kz/dialogue/tanysu">
+                <Users size={21} />
+                <div>
+                  <strong>{at("Диалоги на ҚЖЯ", "Kazakh SL dialogues", "ҚЫТ диалогтары")}</strong>
+                  <span>{at("Знакомство, помощь, приветствия — камера проверяет реплику", "Meeting, asking for help, greetings — the camera checks your reply", "Танысу, көмек, амандасу — камера жауапты тексереді")}</span>
+                </div>
+                <ArrowUpRight size={18} />
+              </Link>
+              <Link to="/kazakh?tab=trainer">
+                <Type size={21} />
+                <div>
+                  <strong>{at("Тренажёр азбуки", "Alphabet trainer", "Әліпби жаттықтырғышы")}</strong>
+                  <span>{at("42 буквы с проверкой камерой", "42 letters with a camera check", "42 әріп, камерамен тексеру")}</span>
+                </div>
+                <ArrowUpRight size={18} />
+              </Link>
+              <Link to="/fingerspell">
+                <Eye size={21} />
+                <div>
+                  <strong>{at("Чтение дактиля", "Reading fingerspelling", "Дактильді оқу")}</strong>
+                  <span>{at("Казахские слова по буквам", "Kazakh words letter by letter", "Қазақ сөздері әріптермен")}</span>
+                </div>
+                <ArrowUpRight size={18} />
+              </Link>
+              <Link to="/kazakh?tab=why">
+                <Info size={21} />
+                <div>
+                  <strong>{at("РЖЯ и ҚЖЯ: в чём разница", "RSL vs Kazakh SL", "ОЫТ пен ҚЫТ айырмасы")}</strong>
+                  <span>{at("Общие и казахские буквы, аналоги платформы", "Shared and Kazakh letters, similar platforms", "Ортақ және қазақ әріптері, аналогтар")}</span>
+                </div>
+                <ArrowUpRight size={18} />
+              </Link>
+              <Link to="/culture">
+                <Users size={21} />
+                <div>
+                  <strong>{at("Культура и этикет глухих", "Deaf culture and etiquette", "Естімейтіндер мәдениеті мен әдебі")}</strong>
+                  <span>{at("С чего начинают любой курс жестового языка", "Where every sign language course starts", "Кез келген ым тілі курсы осыдан басталады")}</span>
+                </div>
+                <ArrowUpRight size={18} />
+              </Link>
+              <Link to="/record-signs?lang=ksl">
+                <HeartHandshake size={21} />
+                <div>
+                  <strong>{at("Помочь обучить ИИ", "Help train the AI", "ЖИ-ді үйретуге көмектесу")}</strong>
+                  <span>{at("Покажите 30 слов камере — только точки рук, без видео", "Sign 30 words — hand points only, no video", "30 сөзді көрсетіңіз — тек қол нүктелері")}</span>
+                </div>
+                <ArrowUpRight size={18} />
+              </Link>
+            </>
+          ) : (
+            <>
           <Link to="/grammar">
             <GraduationCap size={21} />
             <div>
@@ -278,6 +344,8 @@ export function LearningHome() {
             </div>
             <ArrowUpRight size={18} />
           </Link>
+            </>
+          )}
         </section>
       </div>
       <section
@@ -288,21 +356,23 @@ export function LearningHome() {
           "Пайдалы материалдар",
         )}
       >
-        <Link to="/text-to-sign?tab=dictionary">
+        <Link to={ksl ? "/vocab" : "/text-to-sign?tab=dictionary"}>
           <Type size={21} />
           <div>
             <h3>{at("Открыть словарь", "Open dictionary", "Сөздікті ашу")}</h3>
             <p>
-              {at(
-                "Слова, выражения и все 33 буквы",
-                "Words, expressions and all 33 letters",
-                "Сөздер, тіркестер және 33 әріп",
-              )}
+              {ksl
+                ? at("751 жест SURDO.KZ и 42 буквы", "751 SURDO.KZ signs and 42 letters", "SURDO.KZ 751 ымы және 42 әріп")
+                : at(
+                    "Слова, выражения и все 33 буквы",
+                    "Words, expressions and all 33 letters",
+                    "Сөздер, тіркестер және 33 әріп",
+                  )}
             </p>
           </div>
           <ArrowRight size={18} />
         </Link>
-        <Link to="/learn/alphabet-intro">
+        <Link to={ksl ? "/kazakh?tab=why" : "/learn/alphabet-intro"}>
           <BookOpen size={21} />
           <div>
             <h3>

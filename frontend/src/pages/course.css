@@ -849,3 +849,27 @@
   gap: 8px;
   min-width: 0;
 }
+
+/* /learn in ҚЖЯ mode (KazakhLearn.tsx) */
+.ksl-stage-legend { display: flex; align-items: center; gap: 8px; margin: 0 0 12px; color: var(--p-muted); font-size: 14px; }
+.letter-tile-badge.static { position: static; }
+.ksl-continue { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; padding: 16px 18px; border: 1px solid var(--p-line); border-radius: 22px; background: var(--p-blue-soft, #eef3ff); color: var(--p-text); text-decoration: none; }
+.ksl-continue > svg { color: var(--p-blue); flex-shrink: 0; }
+.ksl-continue > div { display: grid; gap: 2px; flex: 1; min-width: 0; }
+.ksl-continue > div span { color: var(--p-muted); font-size: 14px; }
+.ksl-continue-icon { display: grid; place-items: center; flex-shrink: 0; width: 44px; height: 44px; border-radius: 14px; background: var(--p-blue); color: #fff; }
+.ksl-topic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+.ksl-topic-card { display: flex; flex-direction: column; min-width: 0; overflow: hidden; border: 1px solid var(--p-line); border-radius: 22px; background: var(--p-surface); color: inherit; text-decoration: none; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.ksl-topic-card:hover, .ksl-topic-card:focus-visible { transform: translateY(-3px); border-color: color-mix(in srgb, var(--p-blue) 45%, transparent); box-shadow: 0 14px 32px -18px color-mix(in srgb, var(--p-blue) 60%, transparent); }
+.ksl-topic-media { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #e9eef8; }
+.ksl-topic-media img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.15); transition: transform .35s ease; }
+.ksl-topic-card:hover .ksl-topic-media img { transform: scale(1.22); }
+.ksl-topic-num { position: absolute; top: 10px; left: 10px; display: grid; place-items: center; min-width: 30px; height: 30px; padding: 0 8px; border-radius: 10px; background: rgba(17, 17, 17, .78); color: #fff; font-weight: 700; font-size: 14px; }
+.ksl-topic-done { position: absolute; top: 10px; right: 10px; display: inline-flex; align-items: center; gap: 4px; padding: 4px 9px; border-radius: 999px; background: #16a34a; color: #fff; font-size: 12px; font-weight: 600; }
+.ksl-topic-body { display: grid; gap: 6px; padding: 14px 16px 16px; }
+.ksl-topic-body strong { font-size: 17px; line-height: 1.3; }
+.ksl-topic-words { color: var(--p-muted); font-size: 13px; line-height: 1.4; }
+.ksl-topic-card.done { border-color: color-mix(in srgb, #16a34a 40%, var(--p-line)); }
+@media (max-width: 540px) { .ksl-topic-grid { grid-template-columns: 1fr 1fr; gap: 12px; } .ksl-topic-body { padding: 10px 12px 12px; } .ksl-topic-body strong { font-size: 15px; } }
+:root .app-shell .ksl-stage .panel.panel { background: var(--p-surface, var(--sw-soft)); color: var(--sw-ink); border: 1px solid var(--sw-border, var(--line)); }
+:root .app-shell .ksl-stage .panel :is(h2, strong) { color: var(--sw-ink); }

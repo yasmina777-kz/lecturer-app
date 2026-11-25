@@ -82,7 +82,7 @@ export function kslLessons(entries: KslEntry[]): KslLesson[] {
   return out;
 }
 export const topicName = (t: string) => at(TOPIC_RU[t] ?? t, TOPIC_RU[t] ?? t, t);
-const readProgress = (): Record<number, number> => {
+export const readProgress = (): Record<number, number> => {
   try {
     return JSON.parse(localStorage.getItem(PROGRESS) ?? "{}");
   } catch {

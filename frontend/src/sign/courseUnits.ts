@@ -611,3 +611,13 @@ function unitsB1(): CourseUnit[] {
     },
   ];
 }
+
+// Illustrated scenes of people signing, picked to match each lesson's topic.
+const UNIT_PHOTO: Record<number, number> = { 13: 22, 14: 32, 15: 7, 16: 30, 113: 21, 114: 29, 115: 7, 116: 16, 117: 31, 118: 22, 119: 20, 120: 15, 209: 1, 210: 32, 211: 21, 212: 29,
+  1: 1, 2: 17, 3: 7, 4: 29, 5: 27, 6: 24, 7: 25, 8: 21, 9: 30, 10: 10, 11: 22, 12: 32,
+  101: 23, 102: 20, 103: 31, 104: 28, 105: 12, 106: 29, 107: 27, 108: 26, 109: 8, 110: 11, 111: 32, 112: 2,
+  201: 5, 202: 6, 203: 18, 204: 9, 205: 3, 206: 4, 207: 19, 208: 16,
+};
+const scene = (n: number) => `/illustrations/sign-phrases/phrase-${String(n).padStart(2, "0")}.jpg`;
+/** Illustration for a course unit card. */
+export const unitPhoto = (id: number) => scene(UNIT_PHOTO[id] ?? 1);
