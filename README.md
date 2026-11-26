@@ -4,6 +4,45 @@
 
 React + TypeScript + ASP.NET Core 8 + Entity Framework Core. Интерактивные лекции, векторный AI-аватар, голосовые вопросы и практика на русском, английском и казахском.
 
+## Запуск для соавторов (Windows и Mac)
+
+Если проект «не запускается» после клонирования, почти всегда не хватает одной из программ ниже.
+
+1. Установите:
+   - **Git**;
+   - **.NET SDK 8** (именно SDK, не Runtime): https://dotnet.microsoft.com/download/dotnet/8.0;
+   - **Node.js 22 LTS** (подходит 20.19+): https://nodejs.org;
+   - **Python 3** (на Windows при установке отметьте «Add python.exe to PATH»).
+
+   Проверка в терминале: `dotnet --version` (8.x), `node -v` (v20.19+ или v22+), `python3 --version` (на Windows `python --version`).
+2. Склонируйте только последнюю версию. В полной истории около 700 МБ, а так скачивание идёт в разы быстрее:
+   `git clone --depth 1 https://github.com/yasmina777-kz/lecturer-app.git`
+3. Запустите:
+   - **Windows**: двойной щелчок по `start.bat`;
+   - **Mac**: двойной щелчок по `start.command` или `python3 scripts/launch.py`.
+
+   Первый запуск сам выполнит `npm ci` и `dotnet build`, это займёт несколько минут.
+4. Откройте http://localhost:5173. База у каждого своя и сначала пустая: зарегистрируйтесь заново. Аккаунты с чужого компьютера не переносятся.
+
+Вручную, в двух терминалах из корня проекта:
+
+```
+dotnet run --project backend/src/Lecturer.Api --urls http://localhost:5050
+cd frontend && npm ci && npm run dev
+```
+
+Частые ошибки:
+
+| Сообщение | Что сделать |
+|---|---|
+| `dotnet: command not found` / «Установите .NET SDK 8» | Установить .NET SDK 8 и перезапустить терминал |
+| `Vite requires Node.js version 20.19+` или ошибки `rolldown` | Обновить Node.js до 22 LTS, удалить `frontend/node_modules`, запустить снова |
+| `npm ERR! ... package.json` в корне | Команды npm запускать в папке `frontend` |
+| `address already in use :5050` / `:5173` | Закрыть другой запущенный экземпляр проекта |
+| `git clone` обрывается или идёт очень долго | Клонировать с `--depth 1` |
+| Сайт открылся, но вход не работает | Бэкенд не запущен (окно с `dotnet run` должно быть открыто) |
+| Нет ответов AI / озвучки Azure | Это нормально без ключей. Ключи не хранятся в Git, каждый вводит свои через `configure-ai.command` или `.env` |
+
 ## Быстрый запуск на Mac
 
 Нужны .NET SDK 8, Node.js 20.19+ (или 22.12+) и Python 3.

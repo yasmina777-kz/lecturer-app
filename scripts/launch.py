@@ -15,7 +15,7 @@ try:
     ENV = load_environment(ROOT, dict(os.environ))
 except (ValueError, OSError) as error:
     sys.exit(str(error))
-DOTNET = shutil.which('dotnet') or str(Path.home() / '.dotnet/dotnet')
+DOTNET = shutil.which('dotnet') or str(Path.home() / '.dotnet' / ('dotnet.exe' if os.name == 'nt' else 'dotnet'))
 NPM = shutil.which('npm')
 if not NPM:
     versions = sorted((Path.home() / '.nvm/versions/node').glob('*/bin/npm'))
@@ -70,31 +70,42 @@ ENV.setdefault('ASPNETCORE_ENVIRONMENT', 'Development')
 ENV['ASPNETCORE_URLS'] = 'http://localhost:5050'
 processes = []
 
+WINDOWS = os.name == 'nt'
+# Own process group per child, so Ctrl+C / stop() ends the whole tree on every OS.
+GROUP = {'creationflags': subprocess.CREATE_NEW_PROCESS_GROUP} if WINDOWS else {'start_new_session': True}
+
+def kill(proc, hard=False):
+    if WINDOWS:
+        subprocess.run(['taskkill', '/PID', str(proc.pid), '/T'] + (['/F'] if hard else []), capture_output=True)
+    else:
+        os.killpg(proc.pid, signal.SIGKILL if hard else signal.SIGTERM)
+
 def stop(*_):
     for proc in processes:
         if proc.poll() is None:
-            os.killpg(proc.pid, signal.SIGTERM)
+            kill(proc)
     for proc in processes:
         try:
             proc.wait(timeout=8)
         except subprocess.TimeoutExpired:
-            os.killpg(proc.pid, signal.SIGKILL)
+            kill(proc, hard=True)
     sys.exit(0)
 
 signal.signal(signal.SIGINT, stop)
-signal.signal(signal.SIGTERM, stop)
+if not WINDOWS:
+    signal.signal(signal.SIGTERM, stop)
 try:
-    processes.append(subprocess.Popen([DOTNET, 'run', '--no-build'], cwd=API, env=ENV, start_new_session=True))
-    krsl_python = ROOT / 'ml/krsl/.venv/bin/python'
+    processes.append(subprocess.Popen([DOTNET, 'run', '--no-build'], cwd=API, env=ENV, **GROUP))
+    krsl_python = ROOT / ('ml/krsl/.venv/Scripts/python.exe' if WINDOWS else 'ml/krsl/.venv/bin/python')
     if krsl_python.exists() and (ROOT / 'ml/krsl/data/checkpoint.pt').exists():
         import socket
         with socket.socket() as check:
             running = check.connect_ex(('127.0.0.1', 5070)) == 0
         if not running:
-            processes.append(subprocess.Popen([str(krsl_python), str(ROOT / 'ml/krsl/server.py')], cwd=ROOT, env=ENV, start_new_session=True))
+            processes.append(subprocess.Popen([str(krsl_python), str(ROOT / 'ml/krsl/server.py')], cwd=ROOT, env=ENV, **GROUP))
     else:
         print('Распознавание фраз KRSL не установлено. Инструкция: ml/krsl/README.md', flush=True)
-    processes.append(subprocess.Popen([NPM, 'run', 'dev'], cwd=ROOT / 'frontend', env=ENV, start_new_session=True))
+    processes.append(subprocess.Popen([NPM, 'run', 'dev'], cwd=ROOT / 'frontend', env=ENV, **GROUP))
     print('\nОткройте http://localhost:5173\nОстановка: Ctrl+C\n', flush=True)
     import time
     while all(proc.poll() is None for proc in processes):
