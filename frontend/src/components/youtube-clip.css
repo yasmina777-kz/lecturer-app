@@ -1,5 +1,5 @@
 /* Shared YouTube player: one player per place, poster until it really plays. */
-.yt-clip { position: relative; overflow: hidden; background: #0f1626; }
+.yt-clip { position: relative; width: 100%; overflow: hidden; background: #0f1626; }
 .yt-clip-host, .yt-clip-host > iframe, .yt-clip-host > div { position: absolute; inset: 0; width: 100% !important; height: 100% !important; border: 0; }
 .yt-clip > img.yt-clip-poster { position: absolute; inset: 0; width: 100%; height: 100%; max-height: none; object-fit: cover; border-radius: 0; pointer-events: none; transition: opacity .25s ease; }
 .yt-clip > img.yt-clip-poster.is-hidden { opacity: 0; }
