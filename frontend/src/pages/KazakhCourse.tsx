@@ -126,7 +126,7 @@ export function KazakhCourseList() {
   const done = lessons.filter((l) => progress[l.id] !== undefined).length;
   return (
     <>
-      <section className="panel ksl-course-intro">
+      <section className="ksl-course-intro ksl-banner">
         <div>
           <strong>
             {at(
@@ -141,8 +141,11 @@ export function KazakhCourseList() {
               "Videos of Kazakh signers from the SURDO.KZ dictionary (supported by the Ministry of Education).",
               "SURDO.KZ сөздігіндегі қазақ ым тілі иелерінің бейнелері (ҚР БҒМ қолдауымен).",
             )}{" "}
-            {at("Пройдено", "Done", "Өтілді")}: {done} / {lessons.length}
           </span>
+          <span className="ksl-banner-progress">
+            <i style={{ width: `${(done / lessons.length) * 100}%` }} />
+          </span>
+          <small>{at("Пройдено", "Done", "Өтілді")}: {done} / {lessons.length}</small>
         </div>
         <Link className="button primary" to={`/course/kz/${next.id}`}>
           <Play size={16} /> {done ? at("Продолжить", "Continue", "Жалғастыру") : at("Начать", "Start", "Бастау")}
@@ -153,9 +156,14 @@ export function KazakhCourseList() {
       <div className="course-units">
         {lessons.map((l) => (
           <Link key={l.id} className={`panel course-unit card-motion${progress[l.id] !== undefined ? " done" : ""}${l.id === next.id ? " current" : ""}`} to={`/course/kz/${l.id}`}>
+            <div className="course-unit-thumb">
+              {topicImage(l.topic) && <img src={topicImage(l.topic)!} alt="" loading="lazy" />}
+              <span className="course-unit-num">{progress[l.id] !== undefined ? <Check size={16} /> : l.id}</span>
+              {l.id === next.id && progress[l.id] === undefined && <span className="course-unit-now">{at("Сейчас", "Now", "Қазір")}</span>}
+            </div>
             <div className="course-unit-body">
               <strong>
-                {l.id}. {topicName(l.topic)}
+                {topicName(l.topic)}
                 {l.parts > 1 ? ` · ${l.part}/${l.parts}` : ""}
               </strong>
               <span>{at(`${l.words.length} жестов`, `${l.words.length} signs`, `${l.words.length} ым`)}</span>

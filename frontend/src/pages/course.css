@@ -897,3 +897,89 @@ button.ksl-topic-card { padding: 0; text-align: left; font: inherit; cursor: poi
 .ksl-dict-n { min-width: 26px; color: var(--p-muted); font-size: 13px; font-variant-numeric: tabular-nums; }
 .ksl-dict-w { display: grid; flex: 1; min-width: 0; font-weight: 600; }
 .ksl-dict-w small { color: var(--p-muted); font-weight: 400; font-size: 13px; }
+
+/* ---- Course hero with a real photo (replaces the avatar) ---- */
+.course .course-hero.course-hero-photo {
+  grid-template-columns: minmax(0, 1fr);
+  min-height: 300px;
+  overflow: hidden;
+  isolation: isolate;
+  background: #eef2f6;
+  color: #14171f;
+}
+.course-hero-photo .course-hero-photo-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: -2;
+  width: 58%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+}
+.course-hero-photo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, #eef2f6 0%, #eef2f6 42%, rgba(238, 242, 246, .55) 52%, rgba(238, 242, 246, 0) 64%);
+}
+.course-hero-photo .course-hero-text { max-width: 540px; }
+.course-hero-photo h1, .course-hero-photo .text-link { color: #14171f; }
+.course-hero-photo p { color: #3b4454; }
+.course-hero-photo .course-sl-switch button { background: rgba(255, 255, 255, .85); color: #14171f; }
+@media (max-width: 760px) {
+  .course-hero-photo .course-hero-photo-bg { width: 100%; opacity: .25; }
+  .course-hero-photo::before { background: rgba(238, 242, 246, .7); }
+}
+
+/* ---- Tinted cards (not monotone) ---- */
+.course .course-before-card.tint-teal { background: linear-gradient(135deg, #e3f6f4, #fff 70%); }
+.course .course-before-card.tint-teal .course-before-icon { background: #00a39b; color: #fff; }
+.course .course-before-card.tint-amber { background: linear-gradient(135deg, #fff2dc, #fff 70%); }
+.course .course-before-card.tint-amber .course-before-icon { background: #e59a1a; color: #fff; }
+
+.ksl-banner {
+  padding: 22px 26px;
+  border-radius: 24px;
+  background:
+    radial-gradient(120% 140% at 100% 0%, rgba(255, 255, 255, .18), transparent 55%),
+    linear-gradient(120deg, #00838f, #00a8a0 55%, #2bc4a8);
+  color: #fff;
+  box-shadow: 0 16px 36px -24px rgba(0, 120, 120, .8);
+}
+.ksl-banner strong { font-size: 1.15rem; }
+.ksl-course-intro.ksl-banner span, .ksl-banner small { color: rgba(255, 255, 255, .88); }
+.ksl-banner-progress { display: block; height: 8px; margin-top: 8px; border-radius: 99px; background: rgba(255, 255, 255, .28); overflow: hidden; max-width: 420px; }
+.ksl-banner-progress i { display: block; height: 100%; min-width: 8px; border-radius: inherit; background: #fff; }
+.ksl-banner .button.primary { background: #fff; border-color: transparent; color: #00777f; }
+:root .product-ui[data-product-ui][data-product-theme] .ksl-banner .button.primary { background: #fff; color: #00777f; }
+
+.ksl-feature-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+.ksl-phrases-card { padding: 18px 20px; border-radius: 22px; }
+.ksl-feature-icon { display: grid; place-items: center; flex-shrink: 0; width: 46px; height: 46px; border-radius: 14px; background: #2f6bff; color: #fff; }
+.ksl-phrases-card.tint-blue { background: linear-gradient(135deg, #e7eeff, #fff 75%); }
+.ksl-phrases-card.tint-rose { background: linear-gradient(135deg, #ffe8ee, #fff 75%); }
+.ksl-phrases-card.tint-rose .ksl-feature-icon { background: #e5486f; }
+.ksl-phrases-card > svg { flex-shrink: 0; }
+
+.ksl-dialogue-grid { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+.ksl-dialogue-card { gap: 8px; padding: 18px; border-radius: 22px; }
+.ksl-dialogue-card.tone-0 { background: linear-gradient(160deg, #e3f6f4, #fff 65%); }
+.ksl-dialogue-card.tone-0 .ksl-feature-icon { background: #00a39b; }
+.ksl-dialogue-card.tone-1 { background: linear-gradient(160deg, #efe9ff, #fff 65%); }
+.ksl-dialogue-card.tone-1 .ksl-feature-icon { background: #7a5af5; }
+.ksl-dialogue-card.tone-2 { background: linear-gradient(160deg, #fff2dc, #fff 65%); }
+.ksl-dialogue-card.tone-2 .ksl-feature-icon { background: #e59a1a; }
+.ksl-dialogue-card .ksl-feature-icon { width: 40px; height: 40px; border-radius: 12px; }
+.ksl-dialogue-card span:last-child { font-weight: 600; color: var(--p-text, #14171f); }
+
+/* KSL lesson cards reuse the RSL unit card with a topic photo */
+.course .course-units .course-unit-thumb img + .course-unit-num { z-index: 1; }
+
+/* Dark theme: keep tinted cards readable */
+[data-product-theme="dark"] .course .course-before-card.tint-teal,
+[data-product-theme="dark"] .course .course-before-card.tint-amber,
+[data-product-theme="dark"] .ksl-phrases-card.tint-blue,
+[data-product-theme="dark"] .ksl-phrases-card.tint-rose,
+[data-product-theme="dark"] .ksl-dialogue-card { background: var(--p-surface); }

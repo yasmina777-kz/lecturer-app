@@ -310,29 +310,20 @@ export function CoursePage() {
   const next = units.find((u) => !progress[u.id]?.done) ?? units[units.length - 1];
   const count = (l: CefrLevel) => (l === "B2" ? [0, 0] : [courseUnits(l).filter((u) => progress[u.id]?.done).length, courseUnits(l).length]);
   const doneCount = units.filter((u) => progress[u.id]?.done).length;
-  const [sl, chooseSl] = useChooseSignLang();
+  const [sl] = useChooseSignLang();
   const kz = sl === "ksl";
   return (
     <div className="sign-workspace vocab course" data-level={level}>
       <PlacementPrompt hasHistory={Object.keys(progress).length > 0} />
-      <section className="course-hero course-anim">
+      <section className="course-hero course-anim course-hero-photo">
+        <img className="course-hero-photo-bg" src={kz ? "/images/courses/ksl.webp" : "/images/courses/rsl.webp"} alt="" />
         <div className="course-hero-text">
-          <span className="eyebrow">{at("КУРС ПО ШАГАМ", "STEP-BY-STEP COURSE", "ҚАДАМДЫҚ КУРС")} · {level} · {meta.name}</span>
+          <span className="eyebrow">{at("КУРС ПО ШАГАМ", "STEP-BY-STEP COURSE", "ҚАДАМДЫҚ КУРС")} · {kz ? "ҚЖЯ" : `${level} · ${meta.name}`}</span>
           <h1>
             {kz
               ? at("Казахский жестовый язык с нуля", "Kazakh Sign Language from zero", "Нөлден бастап қазақ ым тілі")
               : at("Русский жестовый язык с нуля", "Russian Sign Language from zero", "Нөлден бастап орыс ым тілі")}
           </h1>
-          <div className="course-sl-switch" role="radiogroup" aria-label={at("Какой жестовый язык учим", "Which sign language", "Қай ым тілін үйренеміз")}>
-            <button role="radio" aria-checked={!kz} onClick={() => chooseSl("rsl")}>
-              <strong>🇷🇺 РЖЯ</strong>
-              <span>{at("Русский жестовый · уроки на русском", "Russian SL · lessons in Russian", "Орыс ым тілі · сабақтар орысша")}</span>
-            </button>
-            <button role="radio" aria-checked={kz} onClick={() => chooseSl("ksl")}>
-              <strong>🇰🇿 ҚЖЯ</strong>
-              <span>{at("Казахский жестовый · уроки на казахском", "Kazakh SL · lessons in Kazakh", "Қазақ ым тілі · сабақтар қазақша")}</span>
-            </button>
-          </div>
           <p>
             {at(
               "Учитесь по шагам: смотрите жесты носителей, проверяйте себя, показывайте в камеру и закрепляйте в диалогах.",
@@ -347,7 +338,7 @@ export function CoursePage() {
                   "Сабақтар қазақ ым тілі иелерінің бейнелеріне негізделген (SURDO.KZ сөздігі), әліпби — 42 әріп.",
                 )}
           </p>
-          <div className="course-hero-actions">
+          {!kz && <div className="course-hero-actions">
             {next && (
               <Link className="button primary course-cta" style={{ background: "var(--lvl)", borderColor: "transparent", color: "#fff" }} to={`/course/${next.id}`}>
                 <Play size={18} /> {doneCount ? at("Продолжить", "Continue", "Жалғастыру") : at("Начать", "Start", "Бастау")}: {next.title}
@@ -359,12 +350,7 @@ export function CoursePage() {
                 <Award size={16} /> {at(`Итоговый тест ${level}`, `${level} test`, `${level} тесті`)}
               </Link>
             )}
-          </div>
-        </div>
-        <div className="course-hero-art" aria-hidden="true">
-          <div className="course-blob" />
-          <img src="/images/landing-v2/mentor-wave.webp" alt="" />
-          <span className="course-bubble">{at("Привет! 👋", "Hi! 👋", "Сәлем! 👋")}</span>
+          </div>}
         </div>
       </section>
 
@@ -373,11 +359,11 @@ export function CoursePage() {
           <section className="course-before">
             <h2>{at("Перед стартом", "Before you start", "Бастамас бұрын")}</h2>
             <div className="course-before-grid">
-              <Link className="panel course-before-card" to="/kazakh">
+              <Link className="panel course-before-card tint-teal" to="/kazakh">
                 <span className="course-before-icon"><Hand size={20} /></span>
                 <span><strong>{at("Казахский дактиль", "Kazakh fingerspelling", "Қазақ дактилі")}</strong><span>{at("42 буквы, проверка камерой", "42 letters, camera check", "42 әріп, камерамен тексеру")}</span></span>
               </Link>
-              <Link className="panel course-before-card" to="/culture">
+              <Link className="panel course-before-card tint-amber" to="/culture">
                 <span className="course-before-icon"><Users size={20} /></span>
                 <span><strong>{at("Культура и этикет глухих", "Deaf culture", "Керең мәдениеті")}</strong><span>{at("Как общаться уважительно", "Respectful communication", "Әдеп")}</span></span>
               </Link>

@@ -188,16 +188,23 @@ export function SignVocabularyPage() {
 function KazakhVocabulary() {
   return (
     <div className="sign-workspace vocab fingerspell course">
-      <div className="page-heading">
-        <div>
-          <span className="eyebrow">ҚЖЯ</span>
+      <section className="course-hero course-anim vocab-hero3 vocab-hero-photo">
+        <img className="vocab-hero-photo-bg" src="/images/landing-v2/hands-detail.webp" alt="" />
+        <div className="course-hero-text">
+          <span className="eyebrow">{at("СЛОВАРНЫЙ ЗАПАС · ҚЖЯ", "VOCABULARY · KSL", "СӨЗДІК ҚОР · ҚЫТ")} · 751 {at("жест", "signs", "ым")} · 27 {at("тем", "topics", "тақырып")}</span>
           <h1>{at("Тренажёр слов ҚЖЯ", "Kazakh SL word trainer", "Қазақ ым тілі сөздерінің жаттықтырғышы")}</h1>
-          <p>
-            {at("Повторяйте жесты по темам; проверка с вариантами ответа — в уроках курса.", "Review signs by topic; quizzes are in the course lessons.", "Ымдарды тақырып бойынша қайталаңыз; тест — курс сабақтарында.")}{" "}
-            <Link className="text-link" to="/course">{at("К урокам ҚЖЯ", "To Kazakh SL lessons", "ҚЫТ сабақтарына")}</Link>
-          </p>
+          <p>{at("Выберите тему и смотрите жесты носителей SURDO.KZ. Проверка с вариантами ответа и камерой — в уроках курса.", "Pick a topic and watch SURDO.KZ signers. Quizzes and camera checks are in the course lessons.", "Тақырып таңдап, SURDO.KZ ым иелерін көріңіз. Тест пен камера — курс сабақтарында.")}</p>
+          <div className="course-hero-actions">
+            <Link className="button primary course-cta" to="/course">
+              <Play size={18} /> {at("К урокам ҚЖЯ", "To Kazakh SL lessons", "ҚЫТ сабақтарына")}
+            </Link>
+          </div>
         </div>
-      </div>
+        <ul className="vocab-hero-facts" aria-hidden="true">
+          <li><b>27</b>{at("тем словаря", "dictionary topics", "сөздік тақырыбы")}</li>
+          <li><b>8</b>{at("слов за урок", "words a lesson", "сөз бір сабақта")}</li>
+        </ul>
+      </section>
       <KazakhDictionary />
     </div>
   );

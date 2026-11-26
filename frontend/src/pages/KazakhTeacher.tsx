@@ -70,8 +70,9 @@ export function KazakhTeacherSection() {
   if (!data) return null;
   return (
     <section className="ksl-teacher-section">
-      <Link className="panel ksl-phrases-card card-motion" to="/course/kz/phrases">
-        <MessageCircle size={22} />
+      <div className="ksl-feature-row">
+      <Link className="panel ksl-phrases-card tint-blue card-motion" to="/course/kz/phrases">
+        <span className="ksl-feature-icon"><MessageCircle size={22} /></span>
         <div>
           <strong>{at("Фразы на каждый день", "Everyday phrases", "Күнделікті сөйлемдер")}</strong>
           <span>
@@ -84,8 +85,8 @@ export function KazakhTeacherSection() {
         </div>
         <ArrowRight size={18} />
       </Link>
-      <Link className="panel ksl-phrases-card ksl-help-card card-motion" to="/record-signs?lang=ksl">
-        <HeartHandshake size={22} />
+      <Link className="panel ksl-phrases-card ksl-help-card tint-rose card-motion" to="/record-signs?lang=ksl">
+        <span className="ksl-feature-icon"><HeartHandshake size={22} /></span>
         <div>
           <strong>{at("Помогите обучить ИИ казахским жестам", "Help train the AI on Kazakh signs", "ЖИ-ді қазақ ымдарына үйретуге көмектесіңіз")}</strong>
           <span>
@@ -98,6 +99,7 @@ export function KazakhTeacherSection() {
         </div>
         <ArrowRight size={18} />
       </Link>
+      </div>
       <h2 className="ksl-teacher-h">
         <MessageCircle size={18} /> {at("Диалоги на ҚЖЯ", "Kazakh SL dialogues", "ҚЫТ диалогтары")}
         <small>{at("из реальных видео казахских носителей", "from real Kazakh signer videos", "қазақ ым тілі иелерінің бейнелерінен")}</small>

@@ -79,10 +79,10 @@ function clipIndex(phrases: Phrase[], lessons: TeacherLesson[]) {
 /** Cards for the course page and the Dialogues page (ҚЖЯ). */
 export function KazakhDialogueCards() {
   return (
-    <div className="ksl-teacher-grid">
-      {KSL_SCENARIOS.map((s) => (
-        <Link key={s.id} className="panel ksl-teacher-card card-motion" to={`/course/kz/dialogue/${s.id}`}>
-          <MessageCircle size={20} />
+    <div className="ksl-teacher-grid ksl-dialogue-grid">
+      {KSL_SCENARIOS.map((s, k) => (
+        <Link key={s.id} className={`panel ksl-teacher-card ksl-dialogue-card tone-${k % 3} card-motion`} to={`/course/kz/dialogue/${s.id}`}>
+          <span className="ksl-feature-icon"><MessageCircle size={20} /></span>
           <strong>{at(s.title[0], s.title[0], s.title[1])}</strong>
           <span>{at(s.about[0], s.about[0], s.about[1])}</span>
           <span>{at(`${s.turns.length} реплик`, `${s.turns.length} turns`, `${s.turns.length} реплика`)}</span>
