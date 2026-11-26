@@ -5,7 +5,7 @@
 //   node promo-video/render-overview-ad.mjs            → AI-Mentor-overview-ad-9x16.mp4
 //   node promo-video/render-overview-ad.mjs preview 2,9,16,24
 import { chromium } from "../frontend/node_modules/playwright/index.mjs";
-import { mkdirSync, readdirSync, rmSync } from "node:fs";
+import { mkdirSync, readdirSync, readFileSync, rmSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 
 const ROOT = new URL("../", import.meta.url).pathname;
@@ -14,7 +14,7 @@ const FFMPEG = ROOT + "ml/rsl/.venv/lib/python3.12/site-packages/imageio_ffmpeg/
 
 // rec: recording id · from: second inside it · zoom: [x, y, scale] start → end (fractions of the frame)
 const PLAN = [
-  { id: "intro", len: 3.4 },
+  { id: "intro", len: 4.3 },
   { id: "langs", len: 6, rec: "courses", from: 0,
     h1: "Жестовый язык —", h2: "на русском и казахском", p: "Два отдельных курса: своя азбука, словарь и прогресс.",
     chips: ["РЖЯ · 33 буквы", "ҚЖЯ · 42 буквы"] },
@@ -22,9 +22,11 @@ const PLAN = [
     h1: "Открой урок —", h2: "смотри и повторяй", p: "Видео носителей языка: каждый жест можно пересмотреть и замедлить." },
   { id: "practice", len: 6, rec: "practice", from: 0.3,
     h1: "Практикуйся —", h2: "проверь себя", p: "Узнай жест по видео — ответ проверится сразу." },
-  { id: "avatar", len: 6.5, rec: "avatar", from: 0.4,
-    h1: "Аватар покажет —", h2: "любое слово жестами", p: "Напиши «Привет» — 3D-аватар покажет жест." },
+  { id: "avatar", len: 6.5, rec: "avatar", from: 4.25,
+    inset: { at: 1.0, left: 640, top: 1120, w: 400, h: 528, crop: [0.6, 0.19, 0.27, 0.57], tag: "3D-АВАТАР" },
+    h1: "Аватар покажет —", h2: "слово жестами", p: "Напиши «Привет» — 3D-аватар покажет жест." },
   { id: "ai", len: 8, rec: "ai", from: 0.4,
+    inset: { at: 1.6, left: 620, top: 1100, w: 420, h: 560, cam: true, tag: "● КАМЕРА" },
     h1: "ИИ проверяет —", h2: "твой жест", p: "Покажи жест в камеру: ИИ распознаёт движение рук и сразу отвечает.",
     verdict: "Жест «Привет» узнан", verdictAt: 4.8 },
   { id: "outro", len: 4.6 },
@@ -36,7 +38,9 @@ const rec = Object.fromEntries([...new Set(PLAN.filter((s) => s.rec).map((s) => 
 
 const browser = await chromium.launch({ channel: "chrome", headless: true });
 const page = await browser.newPage({ viewport: { width: 1080, height: 1920 } });
-await page.addInitScript(([s, r]) => { window.SCENES = s; window.RECFRAMES = r; }, [scenes, rec]);
+const handsData = { privet: JSON.parse(readFileSync(B + "hands/privet.json", "utf8")) };
+const camFrames = readdirSync(B + "overview/cam").length;
+await page.addInitScript(([s, r, h, c]) => { window.SCENES = s; window.RECFRAMES = r; window.HANDS = h; window.CAMFRAMES = c; }, [scenes, rec, handsData, camFrames]);
 await page.goto("file://" + B + "overview-ad.html");
 await page.waitForLoadState("networkidle");
 await page.evaluate(() => document.fonts.ready);

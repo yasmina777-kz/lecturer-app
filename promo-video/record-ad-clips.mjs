@@ -169,7 +169,7 @@ await record("practice", 6.5, async () => {
 });
 
 // Avatar: type «Привет» on the translate page, the 3D avatar signs it.
-await record("avatar", 7.5, async () => {
+await record("avatar", 10, async () => {
   await page.goto(BASE + "/text-to-sign"); await sleep(1500);
   await page.evaluate(() => localStorage.setItem("rsl-player-mode-v2", "avatar"));
   await page.reload(); await sleep(5000);
@@ -178,9 +178,14 @@ await record("avatar", 7.5, async () => {
   await page.keyboard.type("Привет", { delay: 120 });
   await sleep(300);
   await clickOn(page.locator("button.tts-go"), 650);
-  await sleep(800);
+  // Slower, looping playback reads smoother on video.
+  const speed = page.locator(".sign-sequence-controls select").first();
+  await speed.waitFor({ timeout: 5000 }).catch(() => {});
+  await speed.selectOption(".75").catch(() => {});
+  await page.locator('.sign-sequence-controls input[type="checkbox"]').first().check().catch(() => {});
+  await sleep(500);
   await glide(1150, 420, 700);
-  await sleep(3600);
+  await sleep(6200);
 });
 await page.evaluate(() => localStorage.setItem("rsl-player-mode-v2", "video"));
 
