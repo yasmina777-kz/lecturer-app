@@ -289,4 +289,20 @@ await record("avatar1", 9, async () => {
 });
 await page.evaluate(() => localStorage.setItem("rsl-player-mode-v2", "video"));
 
+// Levels: learn from zero — A1 → A2 → B1 on the RSL course page.
+await record("levels", 8, async () => {
+  await lang("rsl");
+  await page.goto(BASE + "/course?level=A1"); await sleep(3500);
+  await page.evaluate(() => scrollTo(0, 0));
+  await keepIn(page.locator(".course-levels").first(), 40);
+  await sleep(400);
+}, async () => {
+  await hover(page.locator('.course-levels button[data-level="A1"]'), 600);
+  await sleep(900);
+  await clickOn(page.locator('.course-levels button[data-level="A2"]'), 650);
+  await sleep(1700);
+  await clickOn(page.locator('.course-levels button[data-level="B1"]'), 650);
+  await sleep(2200);
+});
+
 await browser.close();

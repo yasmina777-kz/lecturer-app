@@ -1,7 +1,7 @@
-// Short 9:16 promo (~53 s): hallway clip → generated cinematic scenes → short
-// platform overview (4 sections) → practice → greeting → walking together → logo.
-// Voice: en-US-BrianMultilingualNeural speaking Russian
-//   VOICE=en-US-BrianMultilingualNeural RATE=+0% PITCH=+0Hz .venv/bin/python edge_voice.py short-lines.json build/shortvo
+// Short 9:16 promo (~57 s): hallway clip → generated cinematic scenes → short
+// platform overview (courses, levels from zero, lesson, avatar, AI check) → practice → greeting → walking together → logo.
+// Voice: ru-RU-DmitryNeural (pronunciation checked with Whisper)
+//   VOICE=ru-RU-DmitryNeural RATE=+6% PITCH=+0Hz .venv/bin/python edge_voice.py short-lines.json build/shortvo
 //   SHORT=1 node promo-video/render-overview-ad.mjs   (build/ovadshort)
 //   node promo-video/render-final3.mjs                → AI-Mentor-promo-short-9x16.mp4
 import { chromium } from "../frontend/node_modules/playwright/index.mjs";
@@ -14,12 +14,14 @@ const FFMPEG = ROOT + "ml/rsl/.venv/lib/python3.12/site-packages/imageio_ffmpeg/
 const PY = ROOT + "ml/rsl/.venv/bin/python";
 const LINES = JSON.parse(readFileSync(ROOT + "promo-video/short-lines.json", "utf8"));
 const DUR = JSON.parse(readFileSync(B + "shortvo/trimmed.json", "utf8"));
-const text = (id) => LINES.find((l) => l.id === id).say.replace(/Эй Ай Ментор/g, "AI Mentor").replace("Трёхмерный", "3D-");
+const text = (id) => LINES.find((l) => l.id === id).say.replace(/Эй Ай Ментором/g, "AI Mentor").replace(/Эй Ай Ментор/g, "AI Mentor").replace("Трёхмерный", "3D-");
 
 const ovTotal = readdirSync(B + "ovadframes").length;
 const ovCut = Math.round(34.7 * 30);
 const ovShort = readdirSync(B + "ovadshort").length;
-const TL = { B: 5.4, C: 8.8, D: 12.2 };
+const TL = { B: 5.4 };
+TL.C = TL.B + 0.25 + DUR.sign + 0.35;
+TL.D = TL.C + 0.2 + DUR.phone + 0.45;
 TL.E = TL.D + 0.2 + DUR.think + 0.3;
 TL.F = TL.E + 0.2 + DUR.intro + 0.3;
 TL.G = TL.F + ovShort / 30;
@@ -33,8 +35,8 @@ TL.SC = [["s1", TL.B, TL.C, 1.04, 1.12, 0, -2, 0], ["s2", TL.C, TL.D, 1.10, 1.02
   ["s4", TL.E, TL.F, 1.12, 1.02, 2, 0, 0], ["s7", S7, S6, 1.02, 1.10, 0, 2, 0], ["s6", S6, S8, 1.06, 1.14, 0, 0, -2],
   ["s8", S8, S9, 1.10, 1.02, 0, 0, 1], ["s9", S9, TL.I, 1.02, 1.10, 0, 0, -2]];
 const plan = [
-  ["think", TL.D + 0.2], ["intro", TL.E + 0.2],
-  ["langs", TL.F + 0.3], ["lesson", TL.F + 3.4], ["avatar", TL.F + 7.6], ["ai", TL.F + 11.2],
+  ["sign", TL.B + 0.25], ["phone", TL.C + 0.2], ["think", TL.D + 0.2], ["intro", TL.E + 0.2],
+  ["langs", TL.F + 0.3], ["levels", TL.F + 3.5], ["lesson", TL.F + 8.7], ["avatar", TL.F + 12.9], ["ai", TL.F + 16.5],
   ["practice", S7 + 0.25], ["meet", S6 + 0.4], ["outro", TL.I + 0.2],
 ];
 let prevEnd = 0;

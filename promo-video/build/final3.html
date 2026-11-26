@@ -50,8 +50,6 @@ window.render=function(t){
   if(t>=T.F&&t<T.G){$('ov').src=`ovadshort/${pad(Math.min(T.ovShort-1,Math.floor((t-T.F)*30)))}.jpg`;$('ov').style.opacity=1;$('shade').style.opacity=0;}
   if(t>=T.I){$('ov').src=`ovadframes/${pad(Math.min(T.ovTotal-1,T.ovCut+Math.floor((t-T.I)*30)))}.jpg`;$('ov').style.opacity=ease((t-T.I)/.4);}
   // captions per beat
-  if(t>=T.B&&t<T.C)$('cap').innerHTML='Она отвечает на жестовом языке…<br><em>а он не понимает</em>',$('cap').style.opacity=win(t,T.B+.4,T.C);
-  if(t>=T.C&&t<T.D)$('cap').innerHTML='Ей пришлось написать<br>ответ в телефоне',$('cap').style.opacity=win(t,T.C+.4,T.D);
   
   if(t>=T.L0&&t<T.L1){$('labelT').textContent='Несколько занятий спустя';$('label').style.opacity=win(t,T.L0+.3,T.L1);$('chipT').textContent='👋 Привет!';$('chip').style.opacity=win(t,T.L0+1.0,T.L1);}
   // voice-over subtitles (outside the overview, which has its own headings)

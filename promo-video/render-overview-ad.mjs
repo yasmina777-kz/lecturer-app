@@ -37,6 +37,7 @@ const PLAN = [
 const SHORT = process.env.SHORT === "1";
 const PLAN_SHORT = [
   { ...PLAN.find((p) => p.id === "langs"), len: 3.3, from: 1.3 },
+  { id: "levels", len: 5.2, rec: "levels", from: 0.7, h1: "С нуля —", h2: "по уровням A1 → A2 → B1", p: "От азбуки и первых слов до свободного рассказа на жестовом языке." },
   { ...PLAN.find((p) => p.id === "lesson"), len: 4.2, from: 2.9 },
   { ...PLAN.find((p) => p.id === "avatar"), len: 3.6, from: 4.0 },
   { ...PLAN.find((p) => p.id === "ai"), len: 5.0, from: 1.2, verdictAt: 3.4 },
