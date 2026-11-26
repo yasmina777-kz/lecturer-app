@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { ArrowLeft, ArrowRight, Camera, Check, CheckCircle2, Home, MessagesSquare, Play, Search, Sprout, Turtle, UserRound, X } from "lucide-react";
 import { WordPracticeCamera } from "../components/WordPracticeCamera";
+import { YouTubeClip, loadYouTubeApi } from "../components/YouTubeClip";
 import { loadKslWordModel } from "../sign/wordRecognizer";
 import { KazakhTeacherSection, KslClip, teacherSegment, useTeacherLessons } from "./KazakhTeacher";
 import { at } from "../i18n/automation";
@@ -114,16 +115,7 @@ const saveProgress = (id: number, score: number) => {
 };
 
 export function KslVideo({ id, slow = false }: { id: string; slow?: boolean }) {
-  return (
-    <iframe
-      key={id}
-      className="ksl-yt"
-      src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&rel=0&playsinline=1&modestbranding=1`}
-      title={slow ? "slow" : "sign"}
-      allow="autoplay; encrypted-media; picture-in-picture"
-      allowFullScreen
-    />
-  );
+  return <YouTubeClip id={id} loop className="ksl-yt" title={slow ? "slow" : "sign"} />;
 }
 
 /** Lesson list shown on the course page in ҚЖЯ mode. */
@@ -189,6 +181,8 @@ export function KslTopicCards({ lessons, progress, next }: { lessons: KslLesson[
 
 export function KazakhCourseList() {
   const { data, error } = useKslCatalog();
+  // Warm the YouTube player script before the first lesson opens.
+  useEffect(() => void loadYouTubeApi(), []);
   const lessons = useMemo(() => (data ? kslLessons(data.entries) : []), [data]);
   const [params, setParams] = useSearchParams();
   const progress = readProgress();

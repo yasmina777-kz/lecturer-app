@@ -123,11 +123,11 @@ export function KazakhTranslate({ tab, setTab }: { tab: Tab; setTab: (t: Tab) =>
       {cur ? (
         <section className="panel ksl-tr-player">
           {cur.kind === "phrase" ? (
-            <KslClip key={at_} id={cur.phrase.youtube} start={cur.phrase.start} end={cur.phrase.end} />
+            <KslClip replay={at_} id={cur.phrase.youtube} start={cur.phrase.start} end={cur.phrase.end} />
           ) : cur.kind === "clip" ? (
-            <KslClip key={at_} id={cur.youtube} start={cur.start} end={cur.end} />
+            <KslClip replay={at_} id={cur.youtube} start={cur.start} end={cur.end} />
           ) : cur.kind === "letter" && !SURDO_LETTER[cur.letter] ? (
-            <KslClip key={at_} id={LETTER_FALLBACK[cur.letter][0]} start={LETTER_FALLBACK[cur.letter][1]} />
+            <KslClip replay={at_} id={LETTER_FALLBACK[cur.letter][0]} start={LETTER_FALLBACK[cur.letter][1]} />
           ) : (
             <KslVideo key={`${at_}-${title(cur)}`} id={cur.kind === "sign" ? cur.entry.youtube : SURDO_LETTER[(cur as { letter: string }).letter]} />
           )}

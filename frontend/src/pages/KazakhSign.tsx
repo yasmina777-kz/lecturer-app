@@ -1,3 +1,4 @@
+import { YouTubeClip } from "../components/YouTubeClip";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { ArrowLeft, Camera, CameraOff, Check, Download, Hand, Info, Scale, Type } from "lucide-react";
@@ -36,13 +37,7 @@ function LetterDemo({ letter, compact = false }: { letter: string; compact?: boo
   if (surdo)
     return (
       <div className={cls}>
-        <iframe
-          key={letter}
-          src={`https://www.youtube-nocookie.com/embed/${surdo}?autoplay=1&mute=1&loop=1&playlist=${surdo}&rel=0&playsinline=1&modestbranding=1`}
-          title={`${letter} — SURDO.KZ`}
-          allow="autoplay; encrypted-media; picture-in-picture"
-          allowFullScreen
-        />
+        <YouTubeClip id={surdo} loop title={`${letter} — SURDO.KZ`} />
         <small>
           {at("Показывает носитель казахского жестового языка (SURDO.KZ).", "Shown by a Kazakh signer (SURDO.KZ).", "Қазақ ым тілін білетін адам көрсетеді (SURDO.KZ).")}
           {lesson && (
@@ -59,13 +54,7 @@ function LetterDemo({ letter, compact = false }: { letter: string; compact?: boo
   if (lesson)
     return (
       <div className={cls}>
-        <iframe
-          key={letter}
-          src={`https://www.youtube-nocookie.com/embed/${lesson[0]}?start=${lesson[1]}&rel=0&playsinline=1&modestbranding=1`}
-          title={`${letter} — «Саусақтар сөйлейді»`}
-          allow="autoplay; encrypted-media; picture-in-picture"
-          allowFullScreen
-        />
+        <YouTubeClip id={lesson[0]} start={lesson[1]} loop={false} title={`${letter} — «Саусақтар сөйлейді»`} />
         <small>{at("Видеоурок «Саусақтар сөйлейді» (Актобе), YouTube. Смотрите показ с зелёной галочкой ✓", "«Саусақтар сөйлейді» lesson (Aktobe), YouTube. Watch the demo marked ✓", "«Саусақтар сөйлейді» бейнесабағы (Ақтөбе). ✓ белгісі бар көрсетілімді қараңыз")}</small>
       </div>
     );

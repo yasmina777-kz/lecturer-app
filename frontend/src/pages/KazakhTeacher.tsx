@@ -9,6 +9,7 @@ import "./sign-vocabulary.css";
 import "./fingerspell.css";
 import "./course.css";
 import { KazakhDialogueCards } from "./KazakhDialogues";
+import { YouTubeClip } from "../components/YouTubeClip";
 
 /** Kazakh SL video lessons from YouTube (embedded, never copied):
  * «Саусақтар сөйлейді» topic lessons with two Kazakh teachers, and
@@ -48,18 +49,7 @@ export function teacherSegment(data: Data | null, label: string): (TeacherWord &
 
 /** A piece of a YouTube video (official player, start/end in seconds). */
 export function KslClip({ id, start, end, wide = true, replay = 0 }: { id: string; start?: number; end?: number; wide?: boolean; replay?: number }) {
-  const s = start !== undefined ? `&start=${Math.floor(start)}` : "";
-  const e = end !== undefined ? `&end=${Math.ceil(end)}` : "";
-  return (
-    <iframe
-      key={`${id}-${start}-${replay}`}
-      className={`ksl-yt${wide ? " wide" : ""}`}
-      src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&rel=0&playsinline=1&modestbranding=1${s}${e}`}
-      title="sign"
-      allow="autoplay; encrypted-media; picture-in-picture"
-      allowFullScreen
-    />
-  );
+  return <YouTubeClip id={id} start={start} end={end} loop={false} replay={replay} className={`ksl-yt${wide ? " wide" : ""}`} />;
 }
 
 const kkRu = (kk: string, ru: string, showRu: boolean) => (showRu ? `${kk} — ${ru}` : kk);
