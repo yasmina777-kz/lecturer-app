@@ -46,7 +46,6 @@
   transform: translateY(-4px);
   box-shadow: 0 22px 44px -24px rgba(20, 23, 31, .45);
 }
-.sign-course-card.is-current { border-color: color-mix(in srgb, var(--p-blue, #2e6bff) 55%, transparent); }
 .sign-course-media {
   position: relative;
   display: grid;
