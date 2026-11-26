@@ -348,7 +348,7 @@ export function SignDictionaryPage() {
     setSelected(entry);
     setRun((v) => v + 1);
     requestAnimationFrame(() =>
-      sequenceRef.current?.scrollIntoView({
+      (matchMedia("(max-width: 900px)").matches ? sequenceRef.current : null)?.scrollIntoView({
         behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
           ? "auto"
           : "smooth",
@@ -364,7 +364,7 @@ export function SignDictionaryPage() {
     setMessage("");
     setRun((n) => n + 1);
     requestAnimationFrame(() =>
-      sequenceRef.current?.scrollIntoView({ block: "nearest", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }),
+      (matchMedia("(max-width: 900px)").matches ? sequenceRef.current : null)?.scrollIntoView({ block: "nearest", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }),
     );
   }
   function analyse() {
@@ -393,7 +393,7 @@ export function SignDictionaryPage() {
     setRun((v) => v + 1);
     setSelected(null);
     requestAnimationFrame(() =>
-      sequenceRef.current?.scrollIntoView({
+      (matchMedia("(max-width: 900px)").matches ? sequenceRef.current : null)?.scrollIntoView({
         behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
           ? "auto"
           : "smooth",
@@ -641,24 +641,28 @@ export function SignDictionaryPage() {
       {tab === "phrases" && (
         <section className="panel sign-phrase-workspace" data-workspace-enter>
           <div className="sign-phrase-library">
-            <label htmlFor="phrase-topic">
+            <label>
               {at(
                 "Готовые фразы · 32 примера",
                 "Ready phrases · 32 examples",
                 "Дайын сөйлемдер · 32 мысал",
               )}
             </label>
-            <select
-              id="phrase-topic"
-              value={phraseGroup}
-              onChange={(e) => setPhraseGroup(Number(e.target.value))}
-            >
+            <div className="sign-phrase-topics" role="tablist" id="phrase-topic">
               {phraseGroups.map((group, i) => (
-                <option key={group.title[0]} value={i}>
+                <button
+                  key={group.title[0]}
+                  type="button"
+                  role="tab"
+                  aria-selected={phraseGroup === i}
+                  className={`tone-${i % 5}`}
+                  onClick={() => setPhraseGroup(i)}
+                >
                   {at(group.title[0], group.title[1], group.title[2])}
-                </option>
+                  <small>{group.phrases.length}</small>
+                </button>
               ))}
-            </select>
+            </div>
             <p>
               {at(
                 "Нажмите на фразу — справа покажут её жесты по порядку.",
@@ -667,7 +671,7 @@ export function SignDictionaryPage() {
               )}
             </p>
           </div>
-          <div className="sign-phrase-tiles">
+          <div className={`sign-phrase-tiles tone-${phraseGroup % 5}`}>
             {phraseGroups[phraseGroup].phrases.map((v) => (
               <button
                 key={v}
@@ -679,7 +683,7 @@ export function SignDictionaryPage() {
                   setRun((n) => n + 1);
                   setSelected(null);
                   requestAnimationFrame(() =>
-                    sequenceRef.current?.scrollIntoView({
+                    (matchMedia("(max-width: 900px)").matches ? sequenceRef.current : null)?.scrollIntoView({
                       behavior: window.matchMedia(
                         "(prefers-reduced-motion: reduce)",
                       ).matches
@@ -695,11 +699,8 @@ export function SignDictionaryPage() {
                 </span>
                 <span className="sign-phrase-caption">
                   <strong>{v}</strong>
-                  <span>
-                    {at("Смотреть показ", "Watch signs", "Көрсетілімді қарау")}
-                    <ArrowRight size={16} />
-                  </span>
                 </span>
+                <ArrowRight size={16} className="sign-phrase-arrow" aria-hidden="true" />
               </button>
             ))}
           </div>

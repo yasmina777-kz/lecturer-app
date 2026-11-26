@@ -803,3 +803,119 @@
 }
 .text-sign-page .tts-card-head { flex-wrap: wrap; row-gap: 8px; }
 .text-sign-page .tts-card { min-width: 0; }
+
+/* ---- РЖЯ translate: sticky player, compact phrases and dictionary (no endless scrolling) ---- */
+@media (min-width: 901px) {
+  :root .product-ui[data-product-ui][data-product-theme] .text-sign-page--phrases > .text-sign-player {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+    position: sticky;
+    top: 12px;
+    align-self: start;
+    z-index: 2;
+  }
+  :root .product-ui[data-product-ui][data-product-theme] .text-sign-page--dictionary > .text-sign-player {
+    grid-column: 2;
+    grid-row: 1 / span 7;
+    position: sticky;
+    top: 12px;
+    align-self: start;
+    z-index: 2;
+  }
+  :root .product-ui[data-product-ui][data-product-theme] .text-sign-page--phrases > .sign-phrase-workspace,
+  :root .product-ui[data-product-ui][data-product-theme] .text-sign-page--dictionary > .sign-dictionary-filter,
+  :root .product-ui[data-product-ui][data-product-theme] .text-sign-page--dictionary > .sign-dictionary-grid,
+  :root .product-ui[data-product-ui][data-product-theme] .text-sign-page--dictionary > .sign-dictionary-result:not(.text-sign-player),
+  :root .product-ui[data-product-ui][data-product-theme] .text-sign-page--dictionary > .button.secondary,
+  :root .product-ui[data-product-ui][data-product-theme] .text-sign-page--dictionary > p[role="status"] {
+    grid-column: 1;
+  }
+  :root .product-ui[data-product-ui][data-product-theme] .text-sign-page--phrases > .sign-dictionary-result:not(.text-sign-player),
+  :root .product-ui[data-product-ui][data-product-theme] .text-sign-page--phrases > .sign-workspace-meta,
+  :root .product-ui[data-product-ui][data-product-theme] .text-sign-page--dictionary > .sign-workspace-meta { grid-column: 1; }
+  :root .product-ui[data-product-ui][data-product-theme] .text-sign-page--dictionary > .sign-action-cards { grid-column: 1; grid-row: 1; }
+  :root .product-ui[data-product-ui][data-product-theme] .text-sign-page--dictionary > .sign-workspace-meta { grid-row: 2; }
+  :root .product-ui[data-product-ui][data-product-theme] .text-sign-page--dictionary > .sign-dictionary-filter { grid-row: 3; }
+  :root .product-ui[data-product-ui][data-product-theme] .text-sign-page--dictionary > .sign-dictionary-grid { grid-row: 4; grid-template-columns: repeat(auto-fill, minmax(116px, 1fr)); }
+  :root .product-ui[data-product-ui][data-product-theme] .text-sign-page--dictionary > .sign-dictionary-result:not(.text-sign-player) { grid-row: 5; }
+  :root .product-ui[data-product-ui][data-product-theme] .text-sign-page--dictionary > .button.secondary,
+  :root .product-ui[data-product-ui][data-product-theme] .text-sign-page--dictionary > p[role="status"] { grid-row: 6; }
+}
+
+/* Phrase topics as colored pills */
+.sign-phrase-topics { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 4px; }
+.sign-phrase-topics button {
+  --tone: #2f6bff;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border: 1px solid var(--p-line, #e5e7ee);
+  border-radius: 999px;
+  background: var(--p-surface, #fff);
+  color: var(--p-text, #14171f);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.sign-phrase-topics button small {
+  padding: 1px 7px;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--tone) 14%, transparent);
+  color: var(--tone);
+  font-size: 11px;
+}
+.sign-phrase-topics button[aria-selected="true"] { border-color: var(--tone); background: var(--tone); color: #fff; }
+.sign-phrase-topics button[aria-selected="true"] small { background: rgba(255, 255, 255, .25); color: #fff; }
+.tone-0 { --tone: #2f6bff; }
+.tone-1 { --tone: #00a39b; }
+.tone-2 { --tone: #7a5af5; }
+.tone-3 { --tone: #e5486f; }
+.tone-4 { --tone: #e59a1a; }
+
+:root .product-ui[data-product-ui][data-product-theme] .text-sign-page .sign-phrase-tiles {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+}
+:root .product-ui[data-product-ui][data-product-theme] .text-sign-page .sign-phrase-tiles > button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 0;
+  padding: 10px 12px;
+  border-radius: 14px;
+  text-align: left;
+}
+:root .product-ui[data-product-ui][data-product-theme] .text-sign-page .sign-phrase-tiles > button:hover { border-color: var(--tone); }
+:root .product-ui[data-product-ui][data-product-theme] .text-sign-page .sign-phrase-play {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  background: var(--tone);
+  color: #fff;
+}
+:root .product-ui[data-product-ui][data-product-theme] .text-sign-page .sign-phrase-caption { flex: 1; min-width: 0; }
+:root .product-ui[data-product-ui][data-product-theme] .text-sign-page .sign-phrase-caption strong { font-size: .95rem; line-height: 1.3; }
+.sign-phrase-arrow { flex-shrink: 0; color: var(--tone); opacity: .7; }
+
+/* Dictionary: smaller cards, more per row */
+:root .product-ui[data-product-ui][data-product-theme] .text-sign-page .sign-dictionary-grid {
+  grid-template-columns: repeat(auto-fill, minmax(116px, 1fr));
+  gap: 10px;
+}
+:root .product-ui[data-product-ui][data-product-theme] .text-sign-page .sign-word-card { padding: 8px !important; gap: 4px; border-radius: 16px; }
+:root .product-ui[data-product-ui][data-product-theme] .text-sign-page .sign-word-card img,
+:root .product-ui[data-product-ui][data-product-theme] .text-sign-page .sign-letter-cover { height: 96px; }
+:root .product-ui[data-product-ui][data-product-theme] .text-sign-page .sign-word-card .alphabet-card-art { height: 110px; }
+:root .product-ui[data-product-ui][data-product-theme] .text-sign-page .sign-word-card .alphabet-card-art img { height: 100%; }
+:root .product-ui[data-product-ui][data-product-theme] .text-sign-page .sign-word-card strong { font-size: 15px; }
+:root .product-ui[data-product-ui][data-product-theme] .text-sign-page .sign-word-card small { display: none; }
+:root .product-ui[data-product-ui][data-product-theme] .text-sign-page .sign-word-card > span:last-child { font-size: 11px; padding-bottom: 4px; }
+:root .product-ui[data-product-ui][data-product-theme] .text-sign-page .sign-phrase-library { display: block; }
+:root .product-ui[data-product-ui][data-product-theme] .text-sign-page .sign-phrase-library > label { display: block; font-weight: 700; font-size: 16px; }
+:root .product-ui[data-product-ui][data-product-theme] .text-sign-page .sign-phrase-library > p { margin: 6px 0 12px; }
+@media (min-width: 901px) {
+  :root .product-ui[data-product-ui][data-product-theme] .text-sign-page--phrases { grid-template-rows: auto auto auto 1fr; }
+  :root .product-ui[data-product-ui][data-product-theme] .text-sign-page--dictionary { grid-template-rows: auto auto auto auto auto auto 1fr; }
+}
