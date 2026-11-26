@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Camera, Check, CheckCircle2, Play, Search, Turtle, UserRound, X } from "lucide-react";
+import { Link, useParams, useSearchParams } from "react-router-dom";
+import { ArrowLeft, ArrowRight, Camera, Check, CheckCircle2, Home, MessagesSquare, Play, Search, Sprout, Turtle, UserRound, X } from "lucide-react";
 import { WordPracticeCamera } from "../components/WordPracticeCamera";
 import { loadKslWordModel } from "../sign/wordRecognizer";
 import { KazakhTeacherSection, KslClip, teacherSegment, useTeacherLessons } from "./KazakhTeacher";
@@ -81,6 +81,17 @@ export function kslLessons(entries: KslEntry[]): KslLesson[] {
   }
   return out;
 }
+/** Kazakh course levels: the 27 dictionary topics in three steps of nine. */
+export const KSL_LEVELS = () => [
+  { id: "A1", name: at("Основы", "Basics", "Негіз"), desc: at("Вопросы, семья, числа, цвета, время, еда, чувства, животные, одежда", "Questions, family, numbers, colours, time, food, feelings, animals, clothes", "Сұрақ, отбасы, сан, түс, уақыт, тамақ, сезім, жануар, киім"), from: 0 },
+  { id: "A2", name: at("Быт", "Everyday life", "Тұрмыс"), desc: at("Здоровье, город, транспорт, посуда, учёба, профессии, спорт, действия", "Health, city, transport, dishes, study, jobs, sport, actions", "Денсаулық, қала, көлік, ыдыс, оқу, мамандық, спорт, әрекет"), from: 9 },
+  { id: "B1", name: at("Общество", "Society", "Қоғам"), desc: at("Меры, природа, техника, предметы, страны, символы, деньги, право, религия", "Measures, nature, technology, subjects, countries, symbols, money, law, religion", "Өлшем, табиғат, техника, пән, ел, рәміз, қаржы, құқық, дін"), from: 18 },
+] as const;
+export const kslTopicLevel = (topic: string) => {
+  const i = ORDER.indexOf(topic);
+  return i < 0 || i >= 18 ? "B1" : i >= 9 ? "A2" : "A1";
+};
+
 /** Generated illustration for a topic (public/images/ksl-topics, ORDER index). */
 export const topicImage = (t: string) => {
   const i = ORDER.indexOf(t);
@@ -136,7 +147,7 @@ export function KslTopicCards({ lessons, progress, next }: { lessons: KslLesson[
           <div key={topic} className={`panel course-unit card-motion${done === list.length ? " done" : ""}${current ? " current" : ""}`}>
             <Link className="course-unit-thumb" to={`/course/kz/${go.id}`}>
               {topicImage(topic) && <img src={topicImage(topic)!} alt="" loading="lazy" />}
-              <span className="course-unit-num">{done === list.length ? <Check size={16} /> : k + 1}</span>
+              <span className="course-unit-num">{done === list.length ? <Check size={16} /> : (ORDER.indexOf(topic) + 1 || k + 1)}</span>
               {current && <span className="course-unit-now">{at("Сейчас", "Now", "Қазір")}</span>}
             </Link>
             <div className="course-unit-body">
@@ -179,11 +190,16 @@ export function KslTopicCards({ lessons, progress, next }: { lessons: KslLesson[
 export function KazakhCourseList() {
   const { data, error } = useKslCatalog();
   const lessons = useMemo(() => (data ? kslLessons(data.entries) : []), [data]);
+  const [params, setParams] = useSearchParams();
   const progress = readProgress();
   if (error) return <p className="translate-status error">{at("Не удалось загрузить казахский словарь.", "Could not load the Kazakh dictionary.", "Қазақ сөздігі жүктелмеді.")}</p>;
   if (!data) return <p>…</p>;
   const next = lessons.find((l) => progress[l.id] === undefined) ?? lessons[0];
   const done = lessons.filter((l) => progress[l.id] !== undefined).length;
+  const levels = KSL_LEVELS();
+  const level = levels.find((l) => l.id === params.get("level"))?.id ?? kslTopicLevel(next.topic);
+  const levelLessons = lessons.filter((l) => kslTopicLevel(l.topic) === level);
+  const levelNext = levelLessons.find((l) => progress[l.id] === undefined) ?? levelLessons[0];
   return (
     <>
       <section className="ksl-course-intro ksl-banner">
@@ -211,9 +227,28 @@ export function KazakhCourseList() {
           <Play size={16} /> {done ? at("Продолжить", "Continue", "Жалғастыру") : at("Начать", "Start", "Бастау")}
         </Link>
       </section>
+      <div className="course-levels ksl-levels" role="tablist" aria-label={at("Уровень", "Level", "Деңгей")}>
+        {levels.map((l, i) => {
+          const own = lessons.filter((x) => kslTopicLevel(x.topic) === l.id);
+          const d = own.filter((x) => progress[x.id] !== undefined).length;
+          const Icon = [Sprout, Home, MessagesSquare][i];
+          return (
+            <button key={l.id} role="tab" data-level={l.id} aria-selected={l.id === level} onClick={() => setParams({ level: l.id }, { replace: true })} className="course-anim" style={{ "--i": i } as React.CSSProperties}>
+              <span className="course-level-icon"><Icon size={20} /></span>
+              <span className="course-level-text">
+                <strong>{l.id} <em>{l.name}</em></strong>
+                <span>{l.desc}</span>
+              </span>
+              <span className={`course-level-count${d === own.length ? " full" : ""}`}>{d === own.length ? <Check size={14} /> : `${d}/${own.length}`}</span>
+            </button>
+          );
+        })}
+      </div>
+      <h2 className="ksl-teacher-h">
+        {at(`Уровень ${level}: уроки по темам SURDO.KZ`, `Level ${level}: SURDO.KZ topic lessons`, `${level} деңгейі: SURDO.KZ тақырыптары`)}
+      </h2>
+      <KslTopicCards lessons={levelLessons} progress={progress} next={levelNext} />
       <KazakhTeacherSection />
-      <h2 className="ksl-teacher-h">{at("Уроки по темам словаря SURDO.KZ", "Topic lessons (SURDO.KZ)", "SURDO.KZ сөздігі бойынша сабақтар")}</h2>
-      <KslTopicCards lessons={lessons} progress={progress} next={next} />
     </>
   );
 }
