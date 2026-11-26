@@ -2,7 +2,7 @@
 read-aloud service (edge-tts; no key, unofficial — fine for a study / non-commercial
 video, for paid ads use an official Azure Speech key).
   promo-video/.venv/bin/python promo-video/edge_voice.py ad2-lines.json build/ad2vo"""
-import json, subprocess, sys, time, wave
+import json, os, subprocess, sys, time, wave
 from pathlib import Path
 
 D = Path(__file__).resolve().parent
@@ -13,7 +13,7 @@ dur = {}
 for l in lines:
     mp3, wav = out / f"{l['id']}.mp3", out / f"{l['id']}.wav"
     for attempt in range(6):
-        subprocess.run([str(D / '.venv/bin/edge-tts'), '--voice', 'ru-RU-SvetlanaNeural', '--rate=-4%', '--pitch=-4Hz',
+        subprocess.run([str(D / '.venv/bin/edge-tts'), '--voice', os.environ.get('VOICE', 'ru-RU-SvetlanaNeural'), f"--rate={os.environ.get('RATE', '-4%')}", f"--pitch={os.environ.get('PITCH', '-4Hz')}",
                         '--text', l['say'], '--write-media', str(mp3)], capture_output=True)
         if mp3.exists() and mp3.stat().st_size > 2000:
             break
