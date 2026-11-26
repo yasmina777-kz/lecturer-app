@@ -110,3 +110,4 @@ promo-video/.venv/
 !promo-video/build/final2.html
 promo-video/voice-samples/
 !promo-video/build/final3.html
+!promo-video/build/final-kz.html

@@ -42,17 +42,28 @@ const PLAN_SHORT = [
   { ...PLAN.find((p) => p.id === "avatar"), len: 3.6, from: 4.0 },
   { ...PLAN.find((p) => p.id === "ai"), len: 5.0, from: 1.2, verdictAt: 3.4 },
 ];
-const USE = SHORT ? PLAN_SHORT : PLAN;
+// KZ=1: the Kazakh promo — ҚЖЯ course, Kazakh interface (record-kz-clips.mjs), Kazakh headings.
+const KZ = process.env.KZ === "1";
+const PLAN_KZ = [
+  { id: "langs", len: 3.6, rec: "courses", from: 0.8, h1: "Ым тілі —", h2: "орыс және қазақ тілдерінде", p: "Екі бөлек курс: өз әліпбиі, сөздігі және үлгерімі.", chips: ["РЖЯ · 33 әріп", "ҚЖЯ · 42 әріп"] },
+  { id: "levels", len: 5.2, rec: "levels", from: 0.6, h1: "Нөлден бастап —", h2: "A1 → A2 → B1 деңгейлері", p: "Әліпби мен алғашқы сөздерден еркін әңгімеге дейін." },
+  { id: "alphabet", len: 3.8, rec: "alphabet", from: 0.5, h1: "Қазақ әліпбиі —", h2: "42 әріп", p: "Әр әріпті қазақ ым тілін білетін адам көрсетеді." },
+  { id: "lesson", len: 6.4, rec: "lesson", from: 3.8, h1: "Сабақ —", h2: "қара және өзіңді тексер", p: "SURDO.KZ бейнелері, содан кейін қысқа тест." },
+  { id: "translate", len: 3.8, rec: "translate", from: 6.9, h1: "Мәтінді жаз —", h2: "ыммен көрсетеміз", p: "«Сәлеметсіз бе» деп жаз — ым тілінде көрсетіледі." },
+  { id: "ai", len: 5.0, rec: "ai", from: 1.2, h1: "ЖИ тексереді —", h2: "сенің ымыңды", p: "Ымды камераға көрсет: ЖИ қол қимылын танып, бірден жауап береді.", verdict: "«Сәлем» ымы танылды", verdictAt: 3.4 },
+];
+const USE = KZ ? PLAN_KZ : SHORT ? PLAN_SHORT : PLAN;
+const PREFIX = KZ ? "rec-kz-" : "rec-ad-";
 let t = 0;
 const scenes = USE.map((s) => { const o = { ...s, start: t, end: t + s.len }; t += s.len; return o; });
 const total = t;
-const rec = Object.fromEntries([...new Set(USE.filter((s) => s.rec).map((s) => s.rec))].map((id) => [id, readdirSync(`${B}overview/rec-ad-${id}`).length]));
+const rec = Object.fromEntries([...new Set(USE.filter((s) => s.rec).map((s) => s.rec))].map((id) => [id, readdirSync(`${B}overview/${PREFIX}${id}`).length]));
 
 const browser = await chromium.launch({ channel: "chrome", headless: true });
 const page = await browser.newPage({ viewport: { width: 1080, height: 1920 } });
 const handsData = { privet: JSON.parse(readFileSync(B + "hands/privet.json", "utf8")) };
 const camFrames = readdirSync(B + "overview/cam").length;
-await page.addInitScript(([s, r, h, c]) => { window.SCENES = s; window.RECFRAMES = r; window.HANDS = h; window.CAMFRAMES = c; }, [scenes, rec, handsData, camFrames]);
+await page.addInitScript(([s, r, h, c, p]) => { window.SCENES = s; window.RECFRAMES = r; window.HANDS = h; window.CAMFRAMES = c; window.RECPREFIX = p; }, [scenes, rec, handsData, camFrames, PREFIX]);
 await page.goto("file://" + B + "overview-ad.html");
 await page.waitForLoadState("networkidle");
 await page.evaluate(() => document.fonts.ready);
@@ -62,11 +73,11 @@ if (process.argv[2] === "preview") {
   for (const x of process.argv[3].split(",").map(Number)) { await at(x); await page.screenshot({ path: `${B}ovad-${x}.jpg`, type: "jpeg", quality: 80 }); }
   console.log(scenes.map((s) => `${s.id}@${s.start}`).join(" "));
 } else {
-  const dir = B + (SHORT ? "ovadshort/" : "ovadframes/");
+  const dir = B + (KZ ? "ovadkz/" : SHORT ? "ovadshort/" : "ovadframes/");
   rmSync(dir, { recursive: true, force: true }); mkdirSync(dir);
   const n = Math.round(total * 30);
   for (let i = 0; i < n; i++) { await at(i / 30); await page.screenshot({ path: `${dir}${String(i).padStart(5, "0")}.jpg`, type: "jpeg", quality: 92 }); }
-  const out = ROOT + (SHORT ? "promo-video/build/overview-short.mp4" : "promo-video/AI-Mentor-overview-ad-9x16.mp4");
+  const out = ROOT + (KZ ? "promo-video/build/overview-kz.mp4" : SHORT ? "promo-video/build/overview-short.mp4" : "promo-video/AI-Mentor-overview-ad-9x16.mp4");
   execFileSync(FFMPEG, ["-hide_banner", "-loglevel", "error", "-y", "-framerate", "30", "-i", dir + "%05d.jpg",
     "-vf", "scale=in_range=full:out_range=tv,format=yuv420p", "-c:v", "libx264", "-preset", "slow", "-crf", "17", "-pix_fmt", "yuv420p", "-color_range", "tv", "-movflags", "+faststart", out]);
   console.log("VIDEO", out, total + "s");

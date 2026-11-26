@@ -74,7 +74,7 @@ window.render=function(t){
     rise($('h1'),ease((L-.05)/.5),24);rise($('h2'),ease((L-.22)/.5),24);$('p').style.opacity=ease((L-.45)/.5);
     const cp=back((L-.35)/.6);$('card').style.opacity=clamp(cp);$('card').style.transform=`translateY(${(1-cp)*80}px) scale(${.94+.06*clamp(cp)})`;
     const n=REC[sc.rec], f=clamp(Math.floor((sc.from+Math.max(0,L-.3))*30),0,n-1);
-    $('recImg').src=`overview/rec-ad-${sc.rec}/${pad(f)}.jpg`;
+    $('recImg').src=`overview/${window.RECPREFIX||'rec-ad-'}${sc.rec}/${pad(f)}.jpg`;
     const ch=$('secChips');if(ch.dataset.k!==sc.id){ch.dataset.k=sc.id;ch.innerHTML=(sc.chips||[]).map(c=>`<div class="chip"><span>●</span>${c}</div>`).join('')}
     [...ch.children].forEach((c,k)=>rise(c,back((L-1.1-k*.3)/.45)));
     const v=$('verdict');if(sc.verdict){$('vtext').textContent=sc.verdict;const q=back((L-sc.verdictAt)/.5);v.style.opacity=clamp(q);v.style.transform=`scale(${.7+.3*q})`}else v.style.opacity=0;
