@@ -14,16 +14,18 @@ const FFMPEG = ROOT + "ml/rsl/.venv/lib/python3.12/site-packages/imageio_ffmpeg/
 
 // rec: recording id · from: second inside it · zoom: [x, y, scale] start → end (fractions of the frame)
 const PLAN = [
-  { id: "langs", len: 7, rec: "4-start", from: 0, zoomAt: 0.6, zoom: [[0.19, 0.12, 1.36], [0.19, 0.12, 1.36]],
+  { id: "langs", len: 5.5, rec: "4-start", from: 0, zoomAt: 0.6, zoom: [[0.19, 0.12, 1.36], [0.19, 0.12, 1.36]],
     h1: "Жестовый язык —", h2: "на русском и казахском", p: "Два отдельных курса: своя азбука, словарь и прогресс.",
     chips: ["РЖЯ · 33 буквы", "ҚЖЯ · 42 буквы", "1 600+ жестов"] },
-  { id: "lesson", len: 8, rec: "5-practice", from: 0, zoomAt: 1.0, zoom: [[0.2, 0.18, 1.45], [0.22, 0.24, 1.6]],
+  { id: "lesson", len: 6.5, rec: "5-practice", from: 0, zoomAt: 1.0, zoom: [[0.17, 0.12, 1.38], [0.19, 0.16, 1.45]],
     h1: "Открой урок —", h2: "смотри и повторяй", p: "Видео носителей языка: каждый жест можно пересмотреть и замедлить." },
-  { id: "practice", len: 6, rec: "5-practice", from: 7.2, zoomAt: 1.0, zoom: [[0.2, 0.18, 1.45], [0.22, 0.24, 1.6]],
+  { id: "practice", len: 5, rec: "5-practice", from: 7.2, zoomAt: 1.0, zoom: [[0.17, 0.14, 1.38], [0.19, 0.17, 1.45]],
     h1: "Практикуйся —", h2: "проверь себя", p: "Узнай жест по видео — ответ проверится сразу." },
-  { id: "ai", len: 9, rec: "6-ai", from: 0, zoomAt: 5.4, zoom: [[0.42, 0.02, 1.75], [0.45, 0.26, 2.0]],
+  { id: "avatar", len: 6, rec: "7-avatar", from: 0.3, zoomAt: 1.6, zoom: [[0.19, 0.03, 1.37], [0.52, 0.29, 2.3]],
+    h1: "Аватар покажет —", h2: "фразу жестами", p: "Выбери готовую фразу или напиши свою — 3D-аватар покажет её жест за жестом." },
+  { id: "ai", len: 7, rec: "6-ai", from: 1.0, zoomAt: 4.1, zoom: [[0.41, 0.26, 1.8], [0.41, 0.13, 1.8]],
     h1: "ИИ проверяет —", h2: "твой жест", p: "Покажи жест в камеру: ИИ распознаёт движение рук и сразу отвечает.",
-    verdict: "Жест «Привет» узнан", verdictAt: 5.6 },
+    verdict: "Жест «Привет» узнан", verdictAt: 4.7 },
 ];
 let t = 0;
 const scenes = PLAN.map((s) => { const o = { ...s, start: t, end: t + s.len }; t += s.len; return o; });

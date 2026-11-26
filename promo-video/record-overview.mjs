@@ -196,6 +196,20 @@ await record("6-ai", 13, async () => {
   await sleep(2200);
 });
 
+// Extra (ad): the 3D avatar signs a ready phrase on the translate page.
+await record("7-avatar", 8, async () => {
+  await page.goto(BASE + "/text-to-sign?tab=phrases");
+  await sleep(3000);
+  await page.locator('[role="tab"]', { hasText: "Аватар" }).first().click();
+  await sleep(4000);
+}, async () => {
+  await clickOn(page.locator(".sign-phrase-tiles button", { hasText: "Как тебя зовут?" }).first(), 700);
+  await sleep(1200);
+  await glide(1250, 300, 700);
+  await sleep(5200);
+});
+await page.locator('[role="tab"]', { hasText: "Видео" }).first().click().catch(() => {});
+
 await browser.close();
 
 // One continuous overview with short white gaps between scenes.
