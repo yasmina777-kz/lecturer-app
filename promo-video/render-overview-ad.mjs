@@ -14,24 +14,24 @@ const FFMPEG = ROOT + "ml/rsl/.venv/lib/python3.12/site-packages/imageio_ffmpeg/
 
 // rec: recording id · from: second inside it · zoom: [x, y, scale] start → end (fractions of the frame)
 const PLAN = [
-  { id: "intro", len: 3.4 },
-  { id: "langs", len: 5, rec: "courses", from: 0,
+  { id: "intro", len: 2.6 },
+  { id: "langs", len: 3.8, rec: "courses", from: 1.2,
     h1: "Жестовый язык —", h2: "на русском и казахском", p: "Два отдельных курса: своя азбука, словарь и прогресс.",
     chips: ["РЖЯ · 33 буквы", "ҚЖЯ · 42 буквы"] },
-  { id: "rsl", len: 6, rec: "rsl-course", from: 0.2,
+  { id: "rsl", len: 4.2, rec: "rsl-course", from: 1.0,
     h1: "Курс РЖЯ —", h2: "48 уроков от A1 до B1", p: "Знакомство, семья, числа, кафе, здоровье — каждая тема с видео носителей." },
-  { id: "ksl", len: 6, rec: "ksl-alphabet", from: 0.2,
+  { id: "ksl", len: 4.2, rec: "ksl-alphabet", from: 0.8,
     h1: "Курс ҚЖЯ —", h2: "казахская азбука", p: "42 буквы: каждую показывает носитель казахского жестового языка." },
-  { id: "dict", len: 6, rec: "ksl-dict", from: 0.3,
+  { id: "dict", len: 4.2, rec: "ksl-dict", from: 1.0,
     h1: "Словарь —", h2: "751 жест по 27 темам", p: "Семья, числа, еда, транспорт — с видео носителей SURDO.KZ." },
-  { id: "lesson", len: 7, rec: "lesson2", from: 0.2,
+  { id: "lesson", len: 5.5, rec: "lesson2", from: 1.6,
     h1: "Урок —", h2: "смотри и проверяй себя", p: "Новые жесты на видео, потом тест: узнай жест — ответ проверится сразу." },
-  { id: "avatar", len: 5.5, rec: "avatar1", from: 4.1,
+  { id: "avatar", len: 4.2, rec: "avatar1", from: 4.0,
     h1: "Аватар покажет —", h2: "слово жестами", p: "Напиши «Привет» — 3D-аватар покажет жест." },
-  { id: "ai", len: 7.5, rec: "ai", from: 0.4,
+  { id: "ai", len: 6, rec: "ai", from: 1.2,
     h1: "ИИ проверяет —", h2: "твой жест", p: "Покажи жест в камеру: ИИ распознаёт движение рук и сразу отвечает.",
-    verdict: "Жест «Привет» узнан", verdictAt: 4.8 },
-  { id: "outro", len: 4.6 },
+    verdict: "Жест «Привет» узнан", verdictAt: 3.7 },
+  { id: "outro", len: 3.4 },
 ];
 let t = 0;
 const scenes = PLAN.map((s) => { const o = { ...s, start: t, end: t + s.len }; t += s.len; return o; });
