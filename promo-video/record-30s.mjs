@@ -1,4 +1,4 @@
-// 30-second silent overview (landing → course → lesson → AI camera check): real platform,
+// 30-second silent overview of the platform (course → lesson → translate → AI camera check): real platform,
 // visible cursor with click ripples, no voice-over. The camera scene feeds a
 // real RSL signer clip («Привет!», Slovo dataset) as the webcam, so the AI
 // check you see is the actual in-browser recognition.
@@ -127,16 +127,10 @@ async function record(id, length, prepare, act) {
 
 const XF = 0.45; // crossfade between parts, seconds
 
-// A — landing page, scrolled through (≈8.4 s)
-await record("a-landing", 7.9, async () => { await page.goto(BASE + "/"); await sleep(3500); }, async () => {
-  await glide(560, 420, 500);
-  await sleep(300);
-  await scroll(4200, 3500);
-  await sleep(200);
-});
-
 // B — courses: choose РЖЯ, open the course and the lesson list (≈6.6 s)
-await record("b-course", 6.6, async () => { await page.goto(BASE + "/learn"); await sleep(3000); }, async () => {
+await record("b-course", 7.4, async () => { await page.goto(BASE + "/learn"); await sleep(3000); }, async () => {
+  await glide(560, 300, 500);
+  await sleep(300);
   await clickOn(page.locator(".sign-course-card.is-rsl"), 650);
   await sleep(1300);
   await clickOn(page.locator(".learning-intro-actions a.button.primary"), 600);
@@ -165,6 +159,14 @@ await record("c-lesson", 7.6, async () => { await page.goto(BASE + "/course/1");
     if (await btn.count()) await clickOn(btn, 550);
   }
   await sleep(900);
+});
+
+// E — translate: a ready phrase is shown sign by sign (≈7.8 s)
+await record("e-translate", 7.8, async () => { await page.goto(BASE + "/text-to-sign?tab=phrases"); await sleep(3500); }, async () => {
+  await clickOn(page.locator(".sign-phrase-tiles button", { hasText: "Как тебя зовут?" }).first(), 700);
+  await sleep(2600);
+  await glide(1180, 420, 700);
+  await sleep(2000);
 });
 
 // D — AI checks «Привет» through the camera (≈8.8 s)
