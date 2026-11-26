@@ -356,6 +356,7 @@ export function CoursePage() {
 
       {kz ? (
         <>
+          <KazakhCourseList />
           <section className="course-before">
             <h2>{at("Перед стартом", "Before you start", "Бастамас бұрын")}</h2>
             <div className="course-before-grid">
@@ -369,8 +370,6 @@ export function CoursePage() {
               </Link>
             </div>
           </section>
-          <h2 className="course-section-title">{at("Уроки казахского жестового языка", "Kazakh Sign Language lessons", "Қазақ ым тілі сабақтары")}</h2>
-          <KazakhCourseList />
         </>
       ) : (
       <>

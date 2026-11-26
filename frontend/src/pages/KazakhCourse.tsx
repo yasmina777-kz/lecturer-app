@@ -202,6 +202,23 @@ export function KazakhCourseList() {
   const levelNext = levelLessons.find((l) => progress[l.id] === undefined) ?? levelLessons[0];
   return (
     <>
+      <div className="course-levels ksl-levels" role="tablist" aria-label={at("Уровень", "Level", "Деңгей")}>
+        {levels.map((l, i) => {
+          const own = lessons.filter((x) => kslTopicLevel(x.topic) === l.id);
+          const d = own.filter((x) => progress[x.id] !== undefined).length;
+          const Icon = [Sprout, Home, MessagesSquare][i];
+          return (
+            <button key={l.id} role="tab" data-level={l.id} aria-selected={l.id === level} onClick={() => setParams({ level: l.id }, { replace: true })} className="course-anim" style={{ "--i": i } as React.CSSProperties}>
+              <span className="course-level-icon"><Icon size={20} /></span>
+              <span className="course-level-text">
+                <strong>{l.id} <em>{l.name}</em></strong>
+                <span>{l.desc}</span>
+              </span>
+              <span className={`course-level-count${d === own.length ? " full" : ""}`}>{d === own.length ? <Check size={14} /> : `${d}/${own.length}`}</span>
+            </button>
+          );
+        })}
+      </div>
       <section className="ksl-course-intro ksl-banner">
         <div>
           <strong>
@@ -227,23 +244,6 @@ export function KazakhCourseList() {
           <Play size={16} /> {done ? at("Продолжить", "Continue", "Жалғастыру") : at("Начать", "Start", "Бастау")}
         </Link>
       </section>
-      <div className="course-levels ksl-levels" role="tablist" aria-label={at("Уровень", "Level", "Деңгей")}>
-        {levels.map((l, i) => {
-          const own = lessons.filter((x) => kslTopicLevel(x.topic) === l.id);
-          const d = own.filter((x) => progress[x.id] !== undefined).length;
-          const Icon = [Sprout, Home, MessagesSquare][i];
-          return (
-            <button key={l.id} role="tab" data-level={l.id} aria-selected={l.id === level} onClick={() => setParams({ level: l.id }, { replace: true })} className="course-anim" style={{ "--i": i } as React.CSSProperties}>
-              <span className="course-level-icon"><Icon size={20} /></span>
-              <span className="course-level-text">
-                <strong>{l.id} <em>{l.name}</em></strong>
-                <span>{l.desc}</span>
-              </span>
-              <span className={`course-level-count${d === own.length ? " full" : ""}`}>{d === own.length ? <Check size={14} /> : `${d}/${own.length}`}</span>
-            </button>
-          );
-        })}
-      </div>
       <h2 className="ksl-teacher-h">
         {at(`Уровень ${level}: уроки по темам SURDO.KZ`, `Level ${level}: SURDO.KZ topic lessons`, `${level} деңгейі: SURDO.KZ тақырыптары`)}
       </h2>

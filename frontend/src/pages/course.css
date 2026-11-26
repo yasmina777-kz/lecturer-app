@@ -901,7 +901,7 @@ button.ksl-topic-card { padding: 0; text-align: left; font: inherit; cursor: poi
 /* ---- Course hero with a real photo (replaces the avatar) ---- */
 .course .course-hero.course-hero-photo {
   grid-template-columns: minmax(0, 1fr);
-  min-height: 300px;
+  min-height: 230px;
   overflow: hidden;
   isolation: isolate;
   background: #eef2f6;
@@ -1005,3 +1005,4 @@ button.ksl-topic-card { padding: 0; text-align: left; font: inherit; cursor: poi
 .ksl-parts a:hover { border-color: var(--p-blue, #2f6bff); }
 .ksl-parts a.next { border-color: var(--p-blue, #2f6bff); background: var(--p-blue, #2f6bff); color: #fff; }
 .ksl-parts a.done { border-color: color-mix(in srgb, #1f9d6a 40%, transparent); background: color-mix(in srgb, #1f9d6a 12%, transparent); color: #1f9d6a; }
+.ksl-levels { margin-top: 4px; }
