@@ -49,7 +49,7 @@ await ctx.grantPermissions(["camera"], { origin: BASE });
 await ctx.addInitScript(CURSOR);
 await ctx.addInitScript(() => {
   try {
-    localStorage.setItem("sign-language", "rsl");
+    if (!localStorage.getItem("sign-language")) localStorage.setItem("sign-language", "rsl");
     localStorage.setItem("rsl-player-mode-v1", "video");
   } catch {}
 });
@@ -60,6 +60,7 @@ await page.request.post(BASE + "/api/auth/register", {
 });
 await page.request.patch(BASE + "/api/auth/language", { data: { language: "ru" } }).catch(() => {});
 
+await page.goto(BASE + "/learn");
 const sleep = (ms) => page.waitForTimeout(ms);
 let mouse = { x: 800, y: 450 };
 async function glide(x, y, ms = 650) {
@@ -207,5 +208,85 @@ await record("ai", 9, async () => {
   await page.locator(".word-practice", { hasText: "Верно" }).waitFor({ timeout: 9000 }).catch(() => console.log("no verdict in time"));
   await sleep(2800);
 });
+
+const lang = (l) => page.evaluate((l) => localStorage.setItem("sign-language", l), l);
+
+// RSL course: the lesson cards by level.
+await record("rsl-course", 6.5, async () => { await page.goto(BASE + "/course?level=A1"); await sleep(3500); await page.evaluate(() => scrollTo(0, 0)); }, async () => {
+  await glide(700, 380, 700);
+  await sleep(500);
+  await keepIn(page.locator(".course-units").first(), 120);
+  await sleep(600);
+  await hover(page.locator(".course-units .course-unit").nth(1), 700);
+  await sleep(700);
+  await hover(page.locator(".course-units .course-unit").nth(2), 600);
+  await sleep(1200);
+});
+
+// Kazakh course: the 42-letter alphabet with signer photos.
+await record("ksl-alphabet", 6.5, async () => {
+  await lang("ksl");
+  await page.goto(BASE + "/learn?stage=1"); await sleep(4000);
+}, async () => {
+  await glide(640, 420, 700);
+  await sleep(600);
+  await scroll(380, 1600);
+  await sleep(400);
+  await hover(page.locator(".letter-tile", { hasText: "Ә" }).first(), 700);
+  await sleep(1600);
+});
+
+// Dictionary by topics: 27 topic cards with photos (751 SURDO.KZ signs).
+await record("ksl-dict", 6.5, async () => { await lang("ksl"); await page.goto(BASE + "/vocab"); await sleep(4500); }, async () => {
+  await glide(700, 520, 600);
+  await sleep(300);
+  await keepIn(page.locator(".ksl-topic-grid").first(), 150);
+  await sleep(300);
+  for (const t of ["Семья", "Числа", "Еда и быт"]) {
+    await hover(page.locator(".ksl-topic-card", { hasText: t }).first(), 600);
+    await sleep(500);
+  }
+  await scroll(260, 1200);
+  await sleep(700);
+});
+await lang("rsl");
+
+// RSL lesson: a different signer («имя»), then the quick check answered right.
+await record("lesson2", 7.5, async () => { await page.goto(BASE + "/course/1"); await sleep(3500); }, async () => {
+  await clickOn(page.locator(".course-chips button", { hasText: /^имя$/i }).first(), 650);
+  await sleep(1700);
+  await clickOn(page.locator(".fs-answer button.primary", { hasText: "Проверить себя" }), 650);
+  await page.locator(".fs-round video").waitFor({ timeout: 5000 }).catch(() => {});
+  await sleep(700);
+  const label = await page.evaluate(async () => {
+    const v = document.querySelector(".fs-round video");
+    const src = v ? new URL(v.currentSrc || v.src).pathname : "";
+    const list = await fetch("/research/rsl/words/catalog.json").then((r) => r.json());
+    const hit = list.find((e) => e.video === src || e.displayVideo === src);
+    return hit ? hit.label.replace(/[!?]$/, "") : "";
+  });
+  const btn = page.locator(".fs-round button", { hasText: new RegExp(`^\\s*${label}[!?]?\\s*$`, "i") }).first();
+  if (label && (await btn.count())) await clickOn(btn, 650);
+  await sleep(1500);
+});
+
+// Avatar: «Привет», signed once (0.75×, no repeat).
+await record("avatar1", 9, async () => {
+  await page.goto(BASE + "/text-to-sign"); await sleep(1500);
+  await page.evaluate(() => localStorage.setItem("rsl-player-mode-v2", "avatar"));
+  await page.reload(); await sleep(5000);
+}, async () => {
+  await clickOn(page.locator("textarea").first(), 600);
+  await page.keyboard.type("Привет", { delay: 110 });
+  await sleep(250);
+  await clickOn(page.locator("button.tts-go"), 600);
+  const speed = page.locator(".sign-sequence-controls select").first();
+  await speed.waitFor({ timeout: 5000 }).catch(() => {});
+  await speed.selectOption(".75").catch(() => {});
+  await sleep(400);
+  await glide(1150, 420, 700);
+  await sleep(5200);
+});
+await page.evaluate(() => localStorage.setItem("rsl-player-mode-v2", "video"));
 
 await browser.close();

@@ -21,25 +21,19 @@ html,body{width:1080px;height:1920px;overflow:hidden;font-family:Manrope,sans-se
 .chip{padding:18px 28px;border-radius:20px;background:#fff;box-shadow:0 12px 30px rgba(15,22,38,.1);font-size:30px;font-weight:800}
 .chip span{color:var(--blue);margin-right:10px}
 #secChips{position:absolute;left:60px;right:60px;top:1590px;justify-content:flex-start}
-.verdict{position:absolute;left:60px;top:1610px;padding:22px 30px;border-radius:22px;background:#fff;box-shadow:0 24px 60px rgba(15,22,38,.22);font-size:34px;font-weight:800;display:flex;align-items:center;gap:16px}
+.verdict{position:absolute;right:60px;top:1500px;padding:22px 30px;border-radius:22px;background:#fff;box-shadow:0 24px 60px rgba(15,22,38,.22);font-size:34px;font-weight:800;display:flex;align-items:center;gap:16px}
 .verdict i{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#1f9d6a;color:#fff;font-style:normal;font-size:30px}
-.inset{position:absolute;border-radius:26px;overflow:hidden;background:#eef1f6;border:6px solid #fff;box-shadow:0 30px 70px rgba(15,22,38,.28);opacity:0}
-.inset img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.inset .tag{position:absolute;left:16px;top:16px;padding:8px 14px;border-radius:12px;background:rgba(15,22,38,.72);color:#fff;font-weight:800;font-size:22px;letter-spacing:.04em}
-svg.hands{overflow:visible}svg.hands line{stroke:#2f5bea;stroke-width:9;stroke-linecap:round;opacity:.85}svg.hands circle{fill:#2f5bea}svg.hands circle.tip{fill:#ffb703}
 .center{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;text-align:center}
 </style></head>
 <body>
 <div id="bg"></div>
 
 <div class="layer" id="intro">
-  <div id="inScan" style="position:absolute;left:190px;top:300px;width:700px;height:860px;border-radius:40px;background:linear-gradient(180deg,rgba(47,91,234,.06),rgba(47,91,234,.02));border:3px dashed rgba(47,91,234,.25)"></div>
-  <svg class="hands" id="inHand" style="position:absolute;left:240px;top:340px" width="600" height="780"></svg>
-  <div id="inSee" style="position:absolute;left:0;right:0;top:1200px;text-align:center"><span id="inSeeT" style="display:inline-block;padding:18px 30px;border-radius:22px;background:#fff;box-shadow:0 16px 40px rgba(15,22,38,.14);font-size:36px;font-weight:800">ИИ видит жест…</span></div>
-  <div class="center" id="inBrand" style="top:760px;opacity:0">
-    <div id="inL" style="display:flex;align-items:center;gap:24px;font-size:92px;font-weight:800;letter-spacing:-.03em"><img src="logo.png" style="width:130px;height:130px;border-radius:34px">AI Mentor</div>
-    <div id="inT" style="margin-top:46px;font-size:58px;font-weight:800;line-height:1.15">Учим жестовый язык<br><span style="color:var(--blue)">с ИИ-наставником</span></div>
-    <div id="inP" style="margin-top:24px;font-size:32px;color:var(--muted);font-weight:600">на русском и казахском</div>
+  <div class="center" style="top:640px">
+    <img id="inLogo" src="logo.png" style="width:190px;height:190px;border-radius:50px;box-shadow:0 30px 70px rgba(47,91,234,.25)">
+    <div id="inT" style="margin-top:56px;font-size:70px;font-weight:800;line-height:1.1;letter-spacing:-.02em">Учим жестовый язык<br><span style="color:var(--blue)">с ИИ-наставником</span></div>
+    <div id="inP" style="margin-top:26px;font-size:32px;color:var(--muted);font-weight:600">русский и казахский жестовые языки</div>
+    <div class="chips" id="inC" style="margin-top:50px"><div class="chip"><span>●</span>Уроки</div><div class="chip"><span>●</span>Практика</div><div class="chip"><span>●</span>Аватар</div><div class="chip"><span>●</span>Проверка ИИ</div></div>
   </div>
 </div>
 
@@ -48,7 +42,6 @@ svg.hands{overflow:visible}svg.hands line{stroke:#2f5bea;stroke-width:9;stroke-l
   <div class="head"><h1 id="h1"></h1><h2 id="h2"></h2><p id="p"></p></div>
   <div class="card" id="card"><img id="recImg"></div>
   <div class="chips" id="secChips"></div>
-  <div class="inset" id="inset"><img id="insetImg"><div class="tag" id="insetTag"></div></div>
   <div class="verdict" id="verdict"><i>✓</i><span id="vtext"></span></div>
 </div>
 
@@ -64,20 +57,6 @@ svg.hands{overflow:visible}svg.hands line{stroke:#2f5bea;stroke-width:9;stroke-l
 const S = window.SCENES, REC = window.RECFRAMES;
 const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), ease=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2}, back=x=>{x=clamp(x);const c=1.6;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
 const $=id=>document.getElementById(id), pad=n=>String(n).padStart(5,'0');
-const HD=window.HANDS;
-HD.privet.frames=HD.privet.frames.map(fr=>fr&&fr.length>1?[fr.reduce((a,b)=>a[0][1]<b[0][1]?a:b)]:fr).filter(fr=>fr&&fr.length)
-  // drop edge-on frames (palm turned sideways reads as a glitch at this size)
-  .filter(fr=>{const r=HD.privet.w/HD.privet.h,h=fr[0].map(p=>[p[0]*r,p[1]]),[a,b,c]=[h[0],h[5],h[17]],area=Math.abs((b[0]-a[0])*(c[1]-a[1])-(c[0]-a[0])*(b[1]-a[1]))/2,d=Math.hypot(h[12][0]-h[0][0],h[12][1]-h[0][1]);return area/(d*d)>.07});
-const BONES=[[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[5,9],[9,10],[10,11],[11,12],[9,13],[13,14],[14,15],[15,16],[13,17],[17,18],[18,19],[19,20],[0,17]],TIPS=new Set([4,8,12,16,20]);
-// Each frame centred on its own hand (a little of the real sway kept), drawn large.
-function prep(d){if(d._prep)return d._prep;const r=d.w/d.h;const C=d.frames.map(fr=>{const h=fr[0],xs=h.map(p=>p[0]*r),ys=h.map(p=>p[1]);return[(Math.min(...xs)+Math.max(...xs))/2,(Math.min(...ys)+Math.max(...ys))/2,Math.max(Math.max(...xs)-Math.min(...xs),Math.max(...ys)-Math.min(...ys))]});
-  const sm=C.map((c,i)=>{let x=0,y=0,n=0;for(let k=-4;k<=4;k++){const q=C[Math.min(C.length-1,Math.max(0,i+k))];x+=q[0];y+=q[1];n++}return[x/n,y/n]});
-  const mx=sm.reduce((a,c)=>a+c[0],0)/sm.length,my=sm.reduce((a,c)=>a+c[1],0)/sm.length,size=[...C.map(c=>c[2])].sort((a,b)=>a-b)[Math.floor(C.length/2)];
-  return d._prep={sm,mx,my,size,r}}
-function hands(svg,d,f,W,H){const P0=prep(d),n=d.frames.length,lo=Math.floor(n*.12),hi=Math.floor(n*.72),sp=hi-lo,ph=f%(2*sp);f=lo+(ph<sp?ph:2*sp-ph);const a=Math.floor(f),u=f-a,b=Math.min(n-1,a+1),A=d.frames[a][0],B=d.frames[b][0]||A;
-  const k=.72*Math.min(W,H)/P0.size,cx=P0.sm[a][0]+(P0.sm[b][0]-P0.sm[a][0])*u,cy=P0.sm[a][1]+(P0.sm[b][1]-P0.sm[a][1])*u,ox=(cx-P0.mx)*k*.25,oy=(cy-P0.my)*k*.25;
-  const P=A.map((p,i)=>{const g=B[i]||p,x=(p[0]+(g[0]-p[0])*u)*P0.r,y=p[1]+(g[1]-p[1])*u;return[W/2+ox+(x-cx)*k,H/2+oy+(y-cy)*k]});
-  let s='';BONES.forEach(([i,j])=>s+=`<line x1="${P[i][0]}" y1="${P[i][1]}" x2="${P[j][0]}" y2="${P[j][1]}"/>`);P.forEach((p,i)=>s+=`<circle class="${TIPS.has(i)?'tip':''}" cx="${p[0]}" cy="${p[1]}" r="${TIPS.has(i)?17:12}"/>`);svg.innerHTML=s}
 const rise=(el,p,d=30)=>{el.style.opacity=clamp(p);el.style.transform=`translateY(${(1-p)*d}px)`};
 window.render=function(t){
   const i=Math.max(0,S.findIndex(s=>t<s.end)), sc=S[i]||S[S.length-1], L=t-sc.start, D=sc.end-sc.start;
@@ -86,12 +65,9 @@ window.render=function(t){
   ['intro','sec','outro'].forEach(k=>$(k).style.opacity=0);
   const lay=sc.id==='intro'||sc.id==='outro'?sc.id:'sec'; $(lay).style.opacity=vis;
   if(sc.id==='intro'){
-    const hv=ease(L/.4)*(1-ease((L-2.25)/.4));
-    hands($('inHand'),HD.privet,L*30*.8,600,780);
-    $('inHand').style.opacity=hv;$('inScan').style.opacity=hv;$('inScan').style.transform=`scale(${.96+.04*ease(L/.5)})`;
-    $('inSee').style.opacity=hv;$('inSeeT').innerHTML=L<1.5?'ИИ видит жест…':'<span style="color:#1f9d6a">✓</span> Привет';
-    const bp=back((L-2.6)/.6);$('inBrand').style.opacity=clamp(bp);$('inL').style.transform=`scale(${.8+.2*bp})`;
-    rise($('inT'),ease((L-3.0)/.5));$('inP').style.opacity=ease((L-3.3)/.5);
+    const p=back(L/.7);$('inLogo').style.opacity=clamp(p);$('inLogo').style.transform=`scale(${.4+.6*p}) rotate(${(1-clamp(p))*-20}deg)`;
+    rise($('inT'),ease((L-.45)/.55));$('inP').style.opacity=ease((L-.9)/.5);
+    [...$('inC').children].forEach((c,k)=>rise(c,back((L-1.3-k*.25)/.4)));
   }
   if(lay==='sec'){
     $('h1').textContent=sc.h1;$('h2').textContent=sc.h2;$('p').textContent=sc.p||'';
@@ -101,13 +77,6 @@ window.render=function(t){
     $('recImg').src=`overview/rec-ad-${sc.rec}/${pad(f)}.jpg`;
     const ch=$('secChips');if(ch.dataset.k!==sc.id){ch.dataset.k=sc.id;ch.innerHTML=(sc.chips||[]).map(c=>`<div class="chip"><span>●</span>${c}</div>`).join('')}
     [...ch.children].forEach((c,k)=>rise(c,back((L-1.1-k*.3)/.45)));
-    const ins=$('inset');
-    if(sc.inset){const q=back((L-sc.inset.at)/.55);ins.style.opacity=clamp(q);ins.style.transform=`translateY(${(1-q)*60}px) scale(${.85+.15*clamp(q)})`;
-      Object.assign(ins.style,{left:sc.inset.left+'px',top:sc.inset.top+'px',width:sc.inset.w+'px',height:sc.inset.h+'px'});$('insetTag').textContent=sc.inset.tag;
-      const im=$('insetImg');
-      if(sc.inset.cam){const k=Math.floor(Math.max(0,L-sc.inset.at)*30)%window.CAMFRAMES;im.src=`overview/cam/${pad(k+1)}.jpg`;im.style.cssText='';}
-      else{im.src=$('recImg').src;const [x,y,w,h]=sc.inset.crop;im.style.cssText=`inset:auto;object-fit:fill;width:${100/w}%;height:${100/h}%;left:${-x/w*100}%;top:${-y/h*100}%`;}
-    }else ins.style.opacity=0;
     const v=$('verdict');if(sc.verdict){$('vtext').textContent=sc.verdict;const q=back((L-sc.verdictAt)/.5);v.style.opacity=clamp(q);v.style.transform=`scale(${.7+.3*q})`}else v.style.opacity=0;
   }
   if(sc.id==='outro'){
