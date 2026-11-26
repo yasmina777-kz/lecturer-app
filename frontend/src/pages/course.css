@@ -983,3 +983,25 @@ button.ksl-topic-card { padding: 0; text-align: left; font: inherit; cursor: poi
 [data-product-theme="dark"] .ksl-phrases-card.tint-blue,
 [data-product-theme="dark"] .ksl-phrases-card.tint-rose,
 [data-product-theme="dark"] .ksl-dialogue-card { background: var(--p-surface); }
+
+/* KSL: lessons of one topic as numbered buttons inside the topic card */
+.ksl-topic-units .course-unit-thumb,
+.ksl-topic-units .course-unit-foot { color: inherit; text-decoration: none; }
+.ksl-parts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.ksl-parts a {
+  display: grid;
+  place-items: center;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 6px;
+  border: 1px solid var(--p-line, #e5e7ee);
+  border-radius: 10px;
+  background: var(--p-surface, #fff);
+  color: var(--p-text, #14171f);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.ksl-parts a:hover { border-color: var(--p-blue, #2f6bff); }
+.ksl-parts a.next { border-color: var(--p-blue, #2f6bff); background: var(--p-blue, #2f6bff); color: #fff; }
+.ksl-parts a.done { border-color: color-mix(in srgb, #1f9d6a 40%, transparent); background: color-mix(in srgb, #1f9d6a 12%, transparent); color: #1f9d6a; }

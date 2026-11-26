@@ -116,6 +116,66 @@ export function KslVideo({ id, slow = false }: { id: string; slow?: boolean }) {
 }
 
 /** Lesson list shown on the course page in ҚЖЯ mode. */
+/** One card per dictionary topic (its photo shown once); the topic's 8-word
+ * lessons are the numbered buttons inside. */
+export function KslTopicCards({ lessons, progress, next }: { lessons: KslLesson[]; progress: Record<number, number>; next: KslLesson }) {
+  const topics: { topic: string; list: KslLesson[] }[] = [];
+  for (const l of lessons) {
+    const t = topics.find((x) => x.topic === l.topic);
+    if (t) t.list.push(l);
+    else topics.push({ topic: l.topic, list: [l] });
+  }
+  return (
+    <div className="course-units ksl-topic-units">
+      {topics.map(({ topic, list }, k) => {
+        const done = list.filter((l) => progress[l.id] !== undefined).length;
+        const go = list.find((l) => progress[l.id] === undefined) ?? list[0];
+        const current = list.some((l) => l.id === next.id) && done < list.length;
+        const words = list.flatMap((l) => l.words);
+        return (
+          <div key={topic} className={`panel course-unit card-motion${done === list.length ? " done" : ""}${current ? " current" : ""}`}>
+            <Link className="course-unit-thumb" to={`/course/kz/${go.id}`}>
+              {topicImage(topic) && <img src={topicImage(topic)!} alt="" loading="lazy" />}
+              <span className="course-unit-num">{done === list.length ? <Check size={16} /> : k + 1}</span>
+              {current && <span className="course-unit-now">{at("Сейчас", "Now", "Қазір")}</span>}
+            </Link>
+            <div className="course-unit-body">
+              <strong>{topicName(topic)}</strong>
+              <span>
+                {at(`${words.length} жестов · ${list.length} ур.`, `${words.length} signs · ${list.length} lessons`, `${words.length} ым · ${list.length} сабақ`)}
+                {done ? ` · ${done}/${list.length}` : ""}
+              </span>
+              <div className="course-unit-words">
+                {words.slice(0, 4).map((w) => <i key={w.youtube}>{w.label.replace(/[!?]$/, "")}</i>)}
+                {words.length > 4 && <i>+{words.length - 4}</i>}
+              </div>
+              {list.length > 1 && (
+                <div className="ksl-parts" aria-label={at("Уроки темы", "Topic lessons", "Тақырып сабақтары")}>
+                  {list.map((l) => (
+                    <Link key={l.id} to={`/course/kz/${l.id}`} className={progress[l.id] !== undefined ? "done" : l.id === go.id ? "next" : ""}>
+                      {progress[l.id] !== undefined ? <Check size={13} /> : l.part}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+            <Link className="course-unit-foot" to={`/course/kz/${go.id}`}>
+              <span>
+                {done === list.length
+                  ? at("Пройдено", "Done", "Өтті")
+                  : done
+                    ? at(`Продолжить · урок ${go.part}`, `Continue · lesson ${go.part}`, `Жалғастыру · ${go.part}-сабақ`)
+                    : at("Начать", "Start", "Бастау")}
+              </span>
+              {done === list.length ? <Check size={16} /> : <ArrowRight size={16} />}
+            </Link>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export function KazakhCourseList() {
   const { data, error } = useKslCatalog();
   const lessons = useMemo(() => (data ? kslLessons(data.entries) : []), [data]);
@@ -153,32 +213,7 @@ export function KazakhCourseList() {
       </section>
       <KazakhTeacherSection />
       <h2 className="ksl-teacher-h">{at("Уроки по темам словаря SURDO.KZ", "Topic lessons (SURDO.KZ)", "SURDO.KZ сөздігі бойынша сабақтар")}</h2>
-      <div className="course-units">
-        {lessons.map((l) => (
-          <Link key={l.id} className={`panel course-unit card-motion${progress[l.id] !== undefined ? " done" : ""}${l.id === next.id ? " current" : ""}`} to={`/course/kz/${l.id}`}>
-            <div className="course-unit-thumb">
-              {topicImage(l.topic) && <img src={topicImage(l.topic)!} alt="" loading="lazy" />}
-              <span className="course-unit-num">{progress[l.id] !== undefined ? <Check size={16} /> : l.id}</span>
-              {l.id === next.id && progress[l.id] === undefined && <span className="course-unit-now">{at("Сейчас", "Now", "Қазір")}</span>}
-            </div>
-            <div className="course-unit-body">
-              <strong>
-                {topicName(l.topic)}
-                {l.parts > 1 ? ` · ${l.part}/${l.parts}` : ""}
-              </strong>
-              <span>{at(`${l.words.length} жестов`, `${l.words.length} signs`, `${l.words.length} ым`)}</span>
-              <div className="course-unit-words">
-                {l.words.slice(0, 4).map((w) => <i key={w.youtube}>{w.label.replace(/[!?]$/, "")}</i>)}
-                {l.words.length > 4 && <i>+{l.words.length - 4}</i>}
-              </div>
-            </div>
-            <div className="course-unit-foot">
-              <span>{progress[l.id] !== undefined ? at("Пройден", "Done", "Өтті") : l.id === next.id ? at("Продолжить", "Continue", "Жалғастыру") : at("Открыть", "Open", "Ашу")}</span>
-              {progress[l.id] !== undefined ? <Check size={16} /> : <ArrowRight size={16} />}
-            </div>
-          </Link>
-        ))}
-      </div>
+      <KslTopicCards lessons={lessons} progress={progress} next={next} />
     </>
   );
 }
