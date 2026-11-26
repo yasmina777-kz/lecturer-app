@@ -1,7 +1,7 @@
 // 9:16 site overview in the style of the vertical ad (light background, logo,
-// two-line heading, a card with the real platform recording), without the dark
-// problem intro and without narration. 30 s for the promo's 0:18–0:48.
-// Uses the desktop recordings from record-overview.mjs (build/overview/rec-*).
+// two-line heading, a card with the whole page recording, never cropped), without
+// the dark problem intro and without narration: logo → five features → ending.
+// Uses the clips from record-ad-clips.mjs (build/overview/rec-ad-*).
 //   node promo-video/render-overview-ad.mjs            → AI-Mentor-overview-ad-9x16.mp4
 //   node promo-video/render-overview-ad.mjs preview 2,9,16,24
 import { chromium } from "../frontend/node_modules/playwright/index.mjs";
@@ -14,23 +14,25 @@ const FFMPEG = ROOT + "ml/rsl/.venv/lib/python3.12/site-packages/imageio_ffmpeg/
 
 // rec: recording id · from: second inside it · zoom: [x, y, scale] start → end (fractions of the frame)
 const PLAN = [
-  { id: "langs", len: 5.5, rec: "4-start", from: 0, zoomAt: 0.6, zoom: [[0.19, 0.12, 1.36], [0.19, 0.12, 1.36]],
+  { id: "intro", len: 3.4 },
+  { id: "langs", len: 6, rec: "courses", from: 0,
     h1: "Жестовый язык —", h2: "на русском и казахском", p: "Два отдельных курса: своя азбука, словарь и прогресс.",
-    chips: ["РЖЯ · 33 буквы", "ҚЖЯ · 42 буквы", "1 600+ жестов"] },
-  { id: "lesson", len: 6.5, rec: "5-practice", from: 0, zoomAt: 1.0, zoom: [[0.17, 0.12, 1.38], [0.19, 0.16, 1.45]],
+    chips: ["РЖЯ · 33 буквы", "ҚЖЯ · 42 буквы"] },
+  { id: "lesson", len: 7, rec: "lesson", from: 0,
     h1: "Открой урок —", h2: "смотри и повторяй", p: "Видео носителей языка: каждый жест можно пересмотреть и замедлить." },
-  { id: "practice", len: 5, rec: "5-practice", from: 7.2, zoomAt: 1.0, zoom: [[0.17, 0.14, 1.38], [0.19, 0.17, 1.45]],
+  { id: "practice", len: 6, rec: "practice", from: 0.3,
     h1: "Практикуйся —", h2: "проверь себя", p: "Узнай жест по видео — ответ проверится сразу." },
-  { id: "avatar", len: 6, rec: "7-avatar", from: 0.3, zoomAt: 1.6, zoom: [[0.19, 0.03, 1.37], [0.52, 0.29, 2.3]],
-    h1: "Аватар покажет —", h2: "фразу жестами", p: "Выбери готовую фразу или напиши свою — 3D-аватар покажет её жест за жестом." },
-  { id: "ai", len: 7, rec: "6-ai", from: 1.0, zoomAt: 4.1, zoom: [[0.41, 0.26, 1.8], [0.41, 0.13, 1.8]],
+  { id: "avatar", len: 6.5, rec: "avatar", from: 0.4,
+    h1: "Аватар покажет —", h2: "любое слово жестами", p: "Напиши «Привет» — 3D-аватар покажет жест." },
+  { id: "ai", len: 8, rec: "ai", from: 0.4,
     h1: "ИИ проверяет —", h2: "твой жест", p: "Покажи жест в камеру: ИИ распознаёт движение рук и сразу отвечает.",
-    verdict: "Жест «Привет» узнан", verdictAt: 4.7 },
+    verdict: "Жест «Привет» узнан", verdictAt: 4.8 },
+  { id: "outro", len: 4.6 },
 ];
 let t = 0;
 const scenes = PLAN.map((s) => { const o = { ...s, start: t, end: t + s.len }; t += s.len; return o; });
 const total = t;
-const rec = Object.fromEntries([...new Set(PLAN.map((s) => s.rec))].map((id) => [id, readdirSync(`${B}overview/rec-${id}`).length]));
+const rec = Object.fromEntries([...new Set(PLAN.filter((s) => s.rec).map((s) => s.rec))].map((id) => [id, readdirSync(`${B}overview/rec-ad-${id}`).length]));
 
 const browser = await chromium.launch({ channel: "chrome", headless: true });
 const page = await browser.newPage({ viewport: { width: 1080, height: 1920 } });
