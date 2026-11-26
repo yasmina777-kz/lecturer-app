@@ -105,3 +105,4 @@ promo-video/build/*
 !promo-video/build/ad2.html
 promo-video/*.mp4
 promo-video/.venv/
+!promo-video/build/overview-ad.html

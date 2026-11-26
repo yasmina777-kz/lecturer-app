@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<title>AI Mentor overview 9:16</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#2f5bea;--ink:#0f1626;--muted:#7a8296}
+*{box-sizing:border-box;margin:0}
+html,body{width:1080px;height:1920px;overflow:hidden;font-family:Manrope,sans-serif;color:var(--ink);background:#f3f6fb}
+#bg{position:absolute;inset:0;background:radial-gradient(900px 700px at 82% 10%,rgba(47,91,234,.13),transparent 70%),radial-gradient(800px 700px at 8% 96%,rgba(47,91,234,.08),transparent 70%),linear-gradient(180deg,#f7f9fc,#eef2f9)}
+.brand{position:absolute;left:60px;top:76px;display:flex;align-items:center;gap:14px;font-weight:800;font-size:36px}
+.brand img{width:56px;height:56px;border-radius:15px}
+.head{position:absolute;left:60px;right:60px;top:470px}
+.head h1,.head h2{font-size:76px;font-weight:800;letter-spacing:-.02em;line-height:1.08}
+.head h2{color:var(--blue)}
+.head p{margin-top:28px;font-size:34px;color:var(--muted);font-weight:600;line-height:1.35;max-width:930px}
+.card{position:absolute;left:30px;width:1020px;height:760px;top:860px;border-radius:32px;overflow:hidden;background:#fff;box-shadow:0 40px 90px rgba(15,22,38,.16),0 2px 6px rgba(15,22,38,.06)}
+.card img{position:absolute;left:0;top:0;width:100%;transform-origin:0 0}
+.chips{position:absolute;left:60px;right:60px;top:1680px;display:flex;gap:18px;flex-wrap:wrap}
+.chip{padding:18px 28px;border-radius:20px;background:#fff;box-shadow:0 12px 30px rgba(15,22,38,.1);font-size:30px;font-weight:800}
+.chip span{color:var(--blue);margin-right:10px}
+.verdict{position:absolute;right:60px;top:1560px;padding:22px 30px;border-radius:22px;background:#fff;box-shadow:0 24px 60px rgba(15,22,38,.22);font-size:34px;font-weight:800;display:flex;align-items:center;gap:16px}
+.verdict i{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#1f9d6a;color:#fff;font-style:normal;font-size:30px}
+</style></head>
+<body>
+<div id="bg"></div>
+<div class="brand" id="brand"><img src="logo.png">AI Mentor</div>
+<div class="head"><h1 id="h1"></h1><h2 id="h2"></h2><p id="p"></p></div>
+<div class="card" id="card"><img id="recImg"></div>
+<div class="chips" id="chips"></div>
+<div class="verdict" id="verdict"><i>✓</i><span id="vtext"></span></div>
+<script>
+const S = window.SCENES, REC = window.RECFRAMES;
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), ease=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2}, back=x=>{x=clamp(x);const c=1.6;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const $=id=>document.getElementById(id), pad=n=>String(n).padStart(5,'0');
+window.render=function(t){
+  const i=Math.max(0,S.findIndex(s=>t<s.end)), sc=S[i]||S[S.length-1], L=t-sc.start, D=sc.end-sc.start;
+  const out=1-ease((L-(D-.35))/.35);
+  $('brand').style.opacity=ease(t/.5);
+  $('h1').textContent=sc.h1;$('h2').textContent=sc.h2;$('p').textContent=sc.p||'';
+  const hp=ease((L-.05)/.5);$('h1').style.opacity=hp*out;$('h1').style.transform=`translateY(${(1-hp)*24}px)`;
+  const hq=ease((L-.22)/.5);$('h2').style.opacity=hq*out;$('h2').style.transform=`translateY(${(1-hq)*24}px)`;
+  $('p').style.opacity=ease((L-.45)/.5)*out;
+  const cp=back((L-.35)/.6);$('card').style.opacity=clamp(cp)*out;$('card').style.transform=`translateY(${(1-cp)*80}px) scale(${.94+.06*clamp(cp)})`;
+  // recording inside the card: frame + slow zoom between two framings [x, y, scale]
+  const n=REC[sc.rec], f=clamp(Math.floor((sc.from+Math.max(0,L-.3))*30),0,n-1);
+  $('recImg').src=`overview/rec-${sc.rec}/${pad(f)}.jpg`;
+  const z=ease((L-sc.zoomAt)/1.2),[a,b]=sc.zoom,s=a[2]+(b[2]-a[2])*z;
+  $('recImg').style.transform=`scale(${s}) translate(${-(a[0]+(b[0]-a[0])*z)*100}%,${-(a[1]+(b[1]-a[1])*z)*100}%)`;
+  // chips under the card (languages scene)
+  const ch=$('chips');if(ch.dataset.k!==sc.id){ch.dataset.k=sc.id;ch.innerHTML=(sc.chips||[]).map(c=>`<div class="chip"><span>●</span>${c}</div>`).join('')}
+  [...ch.children].forEach((c,k)=>{const q=back((L-1.1-k*.35)/.45);c.style.opacity=clamp(q)*out;c.style.transform=`translateY(${(1-q)*30}px)`});
+  // AI verdict badge
+  const v=$('verdict');if(sc.verdict){$('vtext').textContent=sc.verdict;const q=back((L-sc.verdictAt)/.5);v.style.opacity=clamp(q)*out;v.style.transform=`scale(${.7+.3*q})`}else v.style.opacity=0;
+};
+window.render(0);
+</script></body></html>
