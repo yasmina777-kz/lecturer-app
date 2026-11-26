@@ -7,4 +7,4 @@ Generated with Figma AI (gpt-image-2.5-flare), resized to 1200px WebP. Decorativ
 
 # Kazakh SL topic tiles (`../ksl-topics/01–27.webp`)
 
-Same tool. Three 3×3 sheets of soft matte 3D clay still-lifes on pastel backgrounds, one per SURDO.KZ topic in the course ORDER (questions, family, numbers … religion), sliced along the white gutters and resized to 640×360 WebP.
+Same tool. Three 3×3 sheets of realistic editorial photographs (adult, muted ivory / beige / teal / slate grading), one per SURDO.KZ topic in the course ORDER (questions, family, numbers … religion), sliced along the white gutters and resized to 640×360 WebP. An earlier clay-illustration set was replaced as too childish.

@@ -312,7 +312,7 @@
   }
   & .learning-intro {
     position: relative;
-    min-height: clamp(390px, 36vw, 520px);
+    min-height: clamp(300px, 24vw, 420px);
     display: flex;
     align-items: center;
     margin: -12px -18px 30px 0;
@@ -3547,7 +3547,7 @@
 /* Learn home hero: shorter, one clean action row, a cue that the page goes on. */
 :root .product-ui[data-product-ui][data-product-theme] {
   & .learning-intro {
-    min-height: clamp(330px, 30vw, 440px);
+    min-height: clamp(300px, 24vw, 360px);
     margin-bottom: 18px;
   }
   & .learning-intro-actions {
@@ -3558,6 +3558,7 @@
     white-space: nowrap;
   }
   & .learning-scroll-cue {
+    display: none !important;
     position: absolute;
     left: 0;
     bottom: 10px;
