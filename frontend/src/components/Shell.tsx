@@ -1,4 +1,5 @@
-import { SignLangSwitcher } from "./SignLangSwitcher";
+import { SignLangSwitcher, useChooseSignLang } from "./SignLangSwitcher";
+import "../pages/sign-courses.css";
 import { ProductSurface } from "./ProductSurface";
 import { at } from "../i18n/automation";
 import { t } from "../i18n";
@@ -45,12 +46,18 @@ export function Shell() {
   const studying = path.startsWith("/learn") || path === "/vocab" || learnPaths.includes(path);
   useStudyTimer(studying);
   const translate = path === "/text-to-sign" || path === "/recognition";
+  const [signLang, chooseSignLang] = useChooseSignLang();
+  const inCourse =
+    (path.startsWith("/learn") && location.search !== "") ||
+    path.startsWith("/course") ||
+    path === "/kazakh" ||
+    learnPaths.includes(path);
   const nav = [
     {
       to: "/learn",
       label: at("Учиться", "Learn", "Оқу"),
       icon: BookOpen,
-      active: path.startsWith("/learn") || learnPaths.includes(path),
+      active: path === "/learn" && location.search === "",
     },
     {
       to: "/vocab",
@@ -125,6 +132,32 @@ export function Shell() {
               {label}
             </Link>
           ))}
+          <div className="sidebar-courses">
+            <span>{at("Мои курсы", "My courses", "Менің курстарым")}</span>
+            {(
+              [
+                ["rsl", "РЖЯ", at("Русский жестовый", "Russian Sign Language", "Орыс ым тілі")],
+                ["ksl", "ҚЖЯ", at("Казахский жестовый", "Kazakh Sign Language", "Қазақ ым тілі")],
+              ] as const
+            ).map(([code, tag, label]) => {
+              const on = inCourse && signLang === code;
+              return (
+                <Link
+                  key={code}
+                  to={`/learn?lang=${code}`}
+                  className={on ? "active" : undefined}
+                  aria-current={on ? "page" : undefined}
+                  onClick={() => {
+                    chooseSignLang(code);
+                    setMenu(false);
+                  }}
+                >
+                  <i>{tag}</i>
+                  {label}
+                </Link>
+              );
+            })}
+          </div>
           {user?.role === "Admin" && (
             <NavLink to="/admin" onClick={() => setMenu(false)}>
               <ShieldCheck size={19} />

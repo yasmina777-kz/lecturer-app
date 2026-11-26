@@ -51,7 +51,7 @@ export function KazakhStage({ stage }: { stage: number }) {
   const level = levels.find((l) => l.id === stage) ?? levels[0];
   return (
     <div className="sign-workspace sign-course-workspace ksl-stage">
-      <Link className="sign-back" to="/learn">
+      <Link className="sign-back" to="/learn?lang=ksl">
         <ArrowLeft size={18} />
         {at("Все уровни", "All levels", "Барлық деңгейлер")}
       </Link>

@@ -1,6 +1,7 @@
 import { PlacementPrompt } from "../components/PlacementPrompt";
 import { Link } from "react-router-dom";
 import {
+  ArrowLeft,
   ArrowRight,
   ArrowUpRight,
   BookOpen,
@@ -23,6 +24,7 @@ import { reviewItems } from "../sign/activities";
 import { lessonIds } from "../sign/catalog";
 import { useSignLang } from "../sign/signLanguage";
 import { kslLevels } from "./KazakhLearn";
+import "./sign-courses.css";
 import { HeartHandshake, Info } from "lucide-react";
 
 
@@ -53,6 +55,11 @@ export function LearningHome() {
     : "/practice?exercise=a";
   return (
     <div className="sign-workspace learning-home">
+      <Link className="courses-back" to="/learn">
+        <ArrowLeft size={16} />
+        {at("Все курсы", "All courses", "Барлық курстар")}
+        <b>{ksl ? "ҚЖЯ" : "РЖЯ"}</b>
+      </Link>
       <PlacementPrompt hasHistory={hasHistory} />
       <section className="learning-intro" aria-labelledby="learning-title">
         <div className="learning-intro-copy">

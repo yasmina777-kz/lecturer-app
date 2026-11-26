@@ -1,6 +1,8 @@
 import { readTests } from "../sign/levelTests";
 import { lazyPage } from "../lazyPage";
 import { LearningHome } from "./LearningHome";
+import { SignCourses } from "./SignCourses";
+import { useChooseSignLang } from "../components/SignLangSwitcher";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import {
   Link,
@@ -107,13 +109,25 @@ function RslUnits({ stage }: { stage: number }) {
   );
 }
 import { ActivityLinks } from "./SignActivities";
+/** A course home (/learn?lang=…): switches the studied language to it first. */
+function CourseHome({ lang }: { lang: "rsl" | "ksl" }) {
+  const [current, choose] = useChooseSignLang();
+  useEffect(() => {
+    if (current !== lang) choose(lang);
+  }, [lang]); // eslint-disable-line react-hooks/exhaustive-deps
+  return current === lang ? <LearningHome /> : <Loading />;
+}
 export function SignCourseCatalog() {
   const [params] = useSearchParams();
   const [lang] = useSignLang();
   const stage = courseLevels().find(
     (l) => l.id === Number(params.get("stage")),
   );
-  if (!stage) return <LearningHome />;
+  const want = params.get("lang");
+  if (!stage) {
+    if (want !== "rsl" && want !== "ksl") return <SignCourses />;
+    return <CourseHome lang={want} />;
+  }
   // ҚЖЯ has its own levels (Kazakh alphabet, SURDO.KZ topics, phrases and dialogues).
   if (lang === "ksl")
     return (
@@ -124,7 +138,7 @@ export function SignCourseCatalog() {
   return (
     <div className="sign-workspace sign-course-workspace">
       {stage && (
-        <Link className="sign-back" to="/learn">
+        <Link className="sign-back" to="/learn?lang=rsl">
           <ArrowLeft size={18} />
           {at("Все уровни", "All levels", "Барлық деңгейлер")}
         </Link>
