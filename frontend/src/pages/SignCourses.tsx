@@ -35,7 +35,7 @@ export function SignCourses() {
       title: at("Русский жестовый язык", "Russian Sign Language", "Орыс ым тілі"),
       sub: at("Уроки на русском", "Lessons in Russian", "Сабақтар орысша"),
       meta: at("33 буквы · 412 жестов · 3 уровня", "33 letters · 412 signs · 3 levels", "33 әріп · 412 ым · 3 деңгей"),
-      image: "/images/learning/hands-alphabet.png",
+      image: "/images/courses/rsl.webp",
       items: [
         [Type, at("Дактильная азбука", "Fingerspelling", "Дактиль әліпбиі")],
         [Hand, at("Слова по темам A1–B1", "Topic words A1–B1", "A1–B1 тақырыптық сөздер")],
@@ -49,7 +49,7 @@ export function SignCourses() {
       title: at("Казахский жестовый язык", "Kazakh Sign Language", "Қазақ ым тілі"),
       sub: at("Уроки на казахском", "Lessons in Kazakh", "Сабақтар қазақша"),
       meta: at("42 буквы · 751 жест · 3 уровня", "42 letters · 751 signs · 3 levels", "42 әріп · 751 ым · 3 деңгей"),
-      image: "/images/landing-v2/hand-circle.webp",
+      image: "/images/courses/ksl.webp",
       items: [
         [Type, at("Казахская азбука, 42 буквы", "Kazakh alphabet, 42 letters", "Қазақ әліпбиі, 42 әріп")],
         [Hand, at("Слова SURDO.KZ по темам", "SURDO.KZ topic words", "SURDO.KZ тақырыптық сөздері")],
