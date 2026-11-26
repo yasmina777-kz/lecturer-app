@@ -1425,3 +1425,76 @@
 :root .product-ui[data-product-ui][data-product-theme] .vocab-learn-camera--side .word-practice:has(.word-practice-view[hidden]) .word-practice-actions .button { grid-row: 2; }
 :root .product-ui[data-product-ui][data-product-theme] .vocab-learn-camera--side .word-practice-result.is-correct ol,
 :root .product-ui[data-product-ui][data-product-theme] .vocab-learn-camera--side .word-practice-result.is-correct ol span { color: rgba(255, 255, 255, .9); }
+
+/* RSL word trainer hero: real hands photo instead of the avatar. */
+.vocab .vocab-hero-photo {
+  grid-template-columns: minmax(0, 1fr);
+  min-height: 280px;
+  overflow: hidden;
+  isolation: isolate;
+  border: 0;
+  background: #e8f0f6;
+  color: #14171f;
+}
+.vocab .vocab-hero-photo .vocab-hero-photo-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: -2;
+  width: 60%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 45%;
+  transform: scaleX(-1);
+}
+.vocab .vocab-hero-photo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, #e8f0f6 0%, #e8f0f6 40%, rgba(232, 240, 246, .6) 50%, rgba(232, 240, 246, 0) 62%);
+}
+.vocab .vocab-hero-photo .course-hero-text { max-width: 470px; }
+.vocab .vocab-hero-photo .eyebrow { color: #1f4fd6; }
+.vocab .vocab-hero-photo h1,
+.vocab .vocab-hero-photo .text-link,
+.vocab .vocab-hero-photo .vocab-hero3-note { color: #14171f; }
+.vocab .vocab-hero-photo p { color: #3b4454; }
+.vocab-hero-facts {
+  position: absolute;
+  right: 24px;
+  bottom: 20px;
+  display: flex;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.vocab-hero-facts li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 230px;
+  padding: 8px 14px 8px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .82);
+  backdrop-filter: blur(10px);
+  color: #14171f;
+  font-size: 13px;
+  line-height: 1.25;
+}
+.vocab-hero-facts b {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #2f6bff;
+  color: #fff;
+  font-size: 15px;
+}
+@media (max-width: 760px) {
+  .vocab-hero-facts { display: none; }
+  .vocab .vocab-hero-photo::before { background: rgba(232, 240, 246, .9); }
+}

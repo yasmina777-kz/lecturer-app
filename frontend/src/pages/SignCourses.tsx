@@ -66,11 +66,6 @@ export function SignCourses() {
           <h1>{at("Курсы", "Courses", "Курстар")}</h1>
           <p>{at("У каждого языка своя азбука, словарь и прогресс.", "Each language has its own alphabet, dictionary and progress.", "Әр тілдің өз әліпбиі, сөздігі және үлгерімі бар.")}</p>
         </div>
-        <ul className="sign-courses-stats">
-          <li><b>2</b>{at("языка", "languages", "тіл")}</li>
-          <li><b>75</b>{at("букв", "letters", "әріп")}</li>
-          <li><b>1 160+</b>{at("жестов", "signs", "ым")}</li>
-        </ul>
       </header>
       <div className="sign-courses-grid">
         {courses.map((c) => {

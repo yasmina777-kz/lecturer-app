@@ -291,7 +291,8 @@ function Overview({
   })();
   return (
     <div className="sign-workspace vocab bento-page course" data-level="A1">
-      <section className="course-hero course-anim vocab-hero3">
+      <section className="course-hero course-anim vocab-hero3 vocab-hero-photo">
+        <img className="vocab-hero-photo-bg" src="/images/landing-v2/hands-detail.webp" alt="" />
         <div className="course-hero-text">
           <span className="eyebrow">{at("СЛОВАРНЫЙ ЗАПАС", "VOCABULARY", "СӨЗДІК ҚОР")} · {words.length} {at("жестов", "signs", "ым")} · {topics.length} {at("тем", "topics", "тақырып")}</span>
           <h1>{getSignLang() === "ksl" ? at("Тренажёр слов ҚЖЯ", "Kazakh SL word trainer", "Қазақ ым тілі сөздерінің жаттықтырғышы") : at("Тренажёр слов РЖЯ", "RSL word trainer", "Орыс ым тілі сөздерінің жаттықтырғышы")}</h1>
@@ -310,11 +311,10 @@ function Overview({
             )}
           </div>
         </div>
-        <div className="course-hero-art" aria-hidden="true">
-          <div className="course-blob" />
-          <img src="/images/landing-v2/mentor-pointing.webp" alt="" />
-          <span className="course-bubble">{at("8 слов за урок ✌️", "8 words a lesson ✌️", "Сабақта 8 сөз ✌️")}</span>
-        </div>
+        <ul className="vocab-hero-facts" aria-hidden="true">
+          <li><b>8</b>{at("слов за урок", "words a lesson", "сөз бір сабақта")}</li>
+          <li><b>4</b>{at("шага: смотрю, узнаю, нахожу, показываю", "steps: watch, recognize, find, sign", "қадам: көру, тану, табу, көрсету")}</li>
+        </ul>
       </section>
       <h2 className="vocab-section-title">{at("Темы", "Topics", "Тақырыптар")}</h2>
       <div className="vocab-topics vocab-topics-grid">

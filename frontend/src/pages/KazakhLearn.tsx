@@ -4,7 +4,7 @@ import { ArrowLeft, ArrowRight, Camera, Check, Play } from "lucide-react";
 import { at } from "../i18n/automation";
 import { LetterTile, StageTabs } from "../components/LetterTile";
 import { KSL_KAZAKH_ONLY, KSL_LETTERS, SURDO_LETTER } from "../sign/kslLetters";
-import { kslLessons, readProgress, topicName, useKslCatalog } from "./KazakhCourse";
+import { kslLessons, readProgress, topicImage, topicName, useKslCatalog } from "./KazakhCourse";
 import { KazakhTeacherSection } from "./KazakhTeacher";
 import "./sign-workspace.css";
 import "./course.css";
@@ -127,8 +127,8 @@ function Topics() {
           const done = progress[l.id] !== undefined;
           return (
             <Link key={l.id} className={`ksl-topic-card card-motion${done ? " done" : ""}`} to={`/course/kz/${l.id}`}>
-              <span className="ksl-topic-media">
-                <img src={`https://i.ytimg.com/vi/${l.words[0].youtube}/mqdefault.jpg`} alt="" loading="lazy" />
+              <span className={`ksl-topic-media${topicImage(l.topic) ? " is-art" : ""}`}>
+                <img src={topicImage(l.topic) ?? `https://i.ytimg.com/vi/${l.words[0].youtube}/mqdefault.jpg`} alt="" loading="lazy" />
                 <span className="ksl-topic-num">{l.id}</span>
                 {done && <span className="ksl-topic-done"><Check size={14} /> {at("Пройден", "Done", "Өтті")}</span>}
               </span>

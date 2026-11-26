@@ -6,7 +6,7 @@
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 16px 32px;
-  margin: 4px 0 24px;
+  margin: 0 0 18px;
 }
 .sign-courses-eyebrow { color: var(--p-blue, #2e6bff); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .sign-courses-head h1 { margin: 4px 0 6px; font-size: clamp(30px, 3.4vw, 40px); letter-spacing: -.02em; line-height: 1.1; }
@@ -27,7 +27,7 @@
 .sign-courses-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 28px;
+  gap: 24px;
 }
 .sign-course-card {
   display: flex;
@@ -51,7 +51,7 @@
   position: relative;
   display: grid;
   place-items: center;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 8;
   overflow: hidden;
   border-radius: 20px;
 }
@@ -109,11 +109,11 @@
   background: #fff;
   color: #14171f;
 }
-.sign-course-body { display: flex; flex-direction: column; gap: 6px; padding: 18px 12px 8px; }
-.sign-course-body strong { font-size: 24px; letter-spacing: -.01em; line-height: 1.2; }
+.sign-course-body { display: flex; flex-direction: column; gap: 4px; padding: 14px 10px 4px; }
+.sign-course-body strong { font-size: 22px; letter-spacing: -.01em; line-height: 1.2; }
 .sign-course-sub { color: var(--p-muted, #667085); font-size: 15px; }
 .sign-course-meta { color: var(--p-muted, #667085); font-size: 14px; }
-.sign-course-items { display: grid; gap: 8px; margin: 10px 0 4px; }
+.sign-course-items { display: grid; gap: 6px; margin: 8px 0 2px; }
 .sign-course-items span { display: flex; align-items: center; gap: 10px; font-size: 14px; }
 .sign-course-items svg {
   flex-shrink: 0;
@@ -129,8 +129,8 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-top: 10px;
-  padding-top: 16px;
+  margin-top: 8px;
+  padding-top: 12px;
   border-top: 1px solid var(--p-line, #e5e7ee);
   color: var(--p-blue, #2e6bff);
   font-weight: 700;

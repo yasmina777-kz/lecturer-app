@@ -81,6 +81,11 @@ export function kslLessons(entries: KslEntry[]): KslLesson[] {
   }
   return out;
 }
+/** Generated illustration for a topic (public/images/ksl-topics, ORDER index). */
+export const topicImage = (t: string) => {
+  const i = ORDER.indexOf(t);
+  return i < 0 ? null : `/images/ksl-topics/${String(i + 1).padStart(2, "0")}.webp`;
+};
 export const topicName = (t: string) => at(TOPIC_RU[t] ?? t, TOPIC_RU[t] ?? t, t);
 export const readProgress = (): Record<number, number> => {
   try {
@@ -386,8 +391,8 @@ export function KazakhDictionary() {
             const words = data.entries.filter((e) => e.topic === t);
             return (
               <button key={t} type="button" className="ksl-topic-card card-motion" onClick={() => pick(t)}>
-                <span className="ksl-topic-media">
-                  <img src={`https://i.ytimg.com/vi/${words[0].youtube}/mqdefault.jpg`} alt="" loading="lazy" />
+                <span className={`ksl-topic-media${topicImage(t) ? " is-art" : ""}`}>
+                  <img src={topicImage(t) ?? `https://i.ytimg.com/vi/${words[0].youtube}/mqdefault.jpg`} alt="" loading="lazy" />
                   <span className="ksl-topic-num">{at(`${words.length} жестов`, `${words.length} signs`, `${words.length} ым`)}</span>
                 </span>
                 <span className="ksl-topic-body">
