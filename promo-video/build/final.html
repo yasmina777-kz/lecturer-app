@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<title>AI Mentor promo 9:16</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#2f5bea;--ink:#0f1626;--muted:#7a8296}
+*{box-sizing:border-box;margin:0}
+html,body{width:1080px;height:1920px;overflow:hidden;font-family:Manrope,sans-serif;color:var(--ink);background:#000}
+.full{position:absolute;inset:0}
+#bgWrap{position:absolute;inset:0;overflow:hidden}
+#bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:50% 45%}
+#shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,0) 26%,rgba(0,0,0,0) 62%,rgba(0,0,0,.55));opacity:0}
+#ov{position:absolute;inset:0;width:100%;height:100%;opacity:0}
+/* light cards (same look as the overview) */
+#light{position:absolute;inset:0;opacity:0;background:radial-gradient(900px 700px at 82% 10%,rgba(47,91,234,.13),transparent 70%),radial-gradient(800px 700px at 8% 96%,rgba(47,91,234,.08),transparent 70%),linear-gradient(180deg,#f7f9fc,#eef2f9)}
+.q{position:absolute;left:80px;right:80px;opacity:0}
+#q1{top:560px;font-size:92px;font-weight:800;line-height:1.05;letter-spacing:-.03em}
+#q1 span{color:var(--blue)}
+#q2{top:860px;font-size:40px;font-weight:700;line-height:1.35;color:#3b4454}
+#q3{top:1040px;font-size:40px;font-weight:700;line-height:1.35;color:#3b4454}
+#q4{top:1260px;font-size:64px;font-weight:800;color:var(--blue)}
+/* narration captions (top) and dialogue subtitles (bottom) */
+#cap{position:absolute;left:70px;right:70px;top:170px;text-align:center;color:#fff;font-size:50px;font-weight:800;line-height:1.2;text-shadow:0 4px 24px rgba(0,0,0,.55);opacity:0}
+#cap small{display:block;margin-top:14px;font-size:32px;font-weight:600;opacity:.9}
+#sub{position:absolute;left:70px;right:70px;bottom:250px;text-align:center;opacity:0}
+#sub span{display:inline-block;padding:18px 30px;border-radius:22px;background:rgba(10,14,24,.72);color:#fff;font-size:42px;font-weight:700;line-height:1.3}
+#sub b{color:#ffd166}
+/* sign bubble: the hand as the AI sees it */
+#sign{position:absolute;width:250px;height:250px;border-radius:30px;background:rgba(255,255,255,.92);box-shadow:0 30px 80px rgba(0,0,0,.35);opacity:0}
+#sign svg{position:absolute;left:25px;top:12px}
+#signTag{position:absolute;left:0;right:0;bottom:-26px;text-align:center}
+#signTag span{display:inline-block;padding:9px 18px;border-radius:14px;background:#2f5bea;color:#fff;font-size:26px;white-space:nowrap;font-weight:800;box-shadow:0 12px 30px rgba(47,91,234,.4)}
+svg.hands{overflow:visible}svg.hands line{stroke:#2f5bea;stroke-width:9;stroke-linecap:round;opacity:.85}svg.hands circle{fill:#2f5bea}svg.hands circle.tip{fill:#ffb703}
+/* phone with the typed answer */
+#phone{position:absolute;left:300px;top:640px;width:480px;height:860px;border-radius:64px;background:#111;padding:18px;box-shadow:0 40px 100px rgba(0,0,0,.55);opacity:0}
+#phone .scr{position:absolute;inset:18px;border-radius:48px;background:linear-gradient(180deg,#f4f6fb,#e9eef7);overflow:hidden}
+#phone .notch{position:absolute;left:50%;top:14px;width:140px;height:34px;margin-left:-70px;border-radius:20px;background:#111}
+#phone .bar{position:absolute;left:0;right:0;top:64px;text-align:center;font-size:24px;font-weight:700;color:#6b7385}
+#phone .msg{position:absolute;left:28px;right:28px;top:150px;padding:26px 28px;border-radius:30px 30px 30px 8px;background:#fff;font-size:38px;font-weight:700;line-height:1.3;box-shadow:0 8px 24px rgba(15,22,38,.08)}
+#phone .typing{position:absolute;left:28px;top:150px;padding:22px 30px;border-radius:30px;background:#fff;font-size:44px;letter-spacing:6px;color:#9aa3b5}
+#label{position:absolute;right:50px;top:120px;text-align:right;opacity:0}
+#label span{display:inline-block;padding:14px 28px;border-radius:999px;background:rgba(255,255,255,.9);color:var(--ink);font-size:34px;font-weight:800;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+#fadeBlack{position:absolute;inset:0;background:#000;opacity:0}
+</style></head>
+<body>
+<div id="bgWrap"><img id="bg"></div>
+<div id="shade"></div>
+<img id="ov">
+<div id="light"></div>
+<div class="q" id="q1">А ты смог бы<br><span>ответить?</span></div>
+<div class="q" id="q2">Для глухих людей жестовый язык — родной.</div>
+<div class="q" id="q3">А слышащие почти никогда его не учат.</div>
+<div class="q" id="q4">С чего начать?</div>
+<div id="label"><span id="labelT"></span></div>
+<div id="cap"></div>
+<div id="sign"><svg class="hands" id="hand" width="200" height="210"></svg><div id="signTag"><span id="signT"></span></div></div>
+<div id="phone"><div class="scr"><div class="notch"></div><div class="bar">Сообщение</div><div class="typing" id="typing">•••</div><div class="msg" id="msg">Я не слышу 🙂<br>Следующая пара — в 305 аудитории, на 2 этаже.</div></div></div>
+<div id="sub"><span id="subT"></span></div>
+<div id="fadeBlack"></div>
+<script>
+const T=window.TL, HD=window.HANDS, pad=n=>String(n).padStart(5,'0');
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), ease=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2}, back=x=>{x=clamp(x);const c=1.6;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const $=id=>document.getElementById(id);
+const win=(t,a,b,f=.35)=>Math.min(ease((t-a)/f),1-ease((t-(b-f))/f)); // fade in at a, out by b
+// hand landmarks («Привет»): one raised hand, edge-on frames dropped, drawn centred and large
+HD.privet.frames=HD.privet.frames.map(fr=>fr&&fr.length>1?[fr.reduce((a,b)=>a[0][1]<b[0][1]?a:b)]:fr).filter(fr=>fr&&fr.length)
+  .filter(fr=>{const r=HD.privet.w/HD.privet.h,h=fr[0].map(p=>[p[0]*r,p[1]]),[a,b,c]=[h[0],h[5],h[17]],ar=Math.abs((b[0]-a[0])*(c[1]-a[1])-(c[0]-a[0])*(b[1]-a[1]))/2,d=Math.hypot(h[12][0]-h[0][0],h[12][1]-h[0][1]);return ar/(d*d)>.07});
+const BONES=[[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[5,9],[9,10],[10,11],[11,12],[9,13],[13,14],[14,15],[15,16],[13,17],[17,18],[18,19],[19,20],[0,17]],TIPS=new Set([4,8,12,16,20]);
+function prep(d){if(d._p)return d._p;const r=d.w/d.h;const C=d.frames.map(fr=>{const h=fr[0],xs=h.map(p=>p[0]*r),ys=h.map(p=>p[1]);return[(Math.min(...xs)+Math.max(...xs))/2,(Math.min(...ys)+Math.max(...ys))/2,Math.max(Math.max(...xs)-Math.min(...xs),Math.max(...ys)-Math.min(...ys))]});
+  const sm=C.map((c,i)=>{let x=0,y=0,n=0;for(let k=-4;k<=4;k++){const q=C[Math.min(C.length-1,Math.max(0,i+k))];x+=q[0];y+=q[1];n++}return[x/n,y/n]});
+  const mx=sm.reduce((a,c)=>a+c[0],0)/sm.length,my=sm.reduce((a,c)=>a+c[1],0)/sm.length,size=[...C.map(c=>c[2])].sort((a,b)=>a-b)[Math.floor(C.length/2)];return d._p={sm,mx,my,size,r}}
+function hands(svg,d,f,W,H){const P0=prep(d),n=d.frames.length,lo=Math.floor(n*.12),hi=Math.floor(n*.72),sp=hi-lo,ph=f%(2*sp);f=lo+(ph<sp?ph:2*sp-ph);const a=Math.floor(f),u=f-a,b=Math.min(n-1,a+1),A=d.frames[a][0],B=d.frames[b][0]||A;
+  const k=.72*Math.min(W,H)/P0.size,cx=P0.sm[a][0]+(P0.sm[b][0]-P0.sm[a][0])*u,cy=P0.sm[a][1]+(P0.sm[b][1]-P0.sm[a][1])*u,ox=(cx-P0.mx)*k*.25,oy=(cy-P0.my)*k*.25;
+  const P=A.map((p,i)=>{const g=B[i]||p,x=(p[0]+(g[0]-p[0])*u)*P0.r,y=p[1]+(g[1]-p[1])*u;return[W/2+ox+(x-cx)*k,H/2+oy+(y-cy)*k]});
+  let s='';BONES.forEach(([i,j])=>s+=`<line x1="${P[i][0]}" y1="${P[i][1]}" x2="${P[j][0]}" y2="${P[j][1]}"/>`);P.forEach((p,i)=>s+=`<circle class="${TIPS.has(i)?'tip':''}" cx="${p[0]}" cy="${p[1]}" r="${TIPS.has(i)?17:12}"/>`);svg.innerHTML=s}
+function sub(text,o){$('subT').innerHTML=text;$('sub').style.opacity=o}
+function cap(html,o){$('cap').innerHTML=html;$('cap').style.opacity=o}
+window.render=function(t){
+  ['shade','ov','light','q1','q2','q3','q4','label','cap','sign','phone','sub','fadeBlack'].forEach(k=>$(k).style.opacity=0);
+  const bg=$('bg'); bg.style.filter='none'; bg.style.transform='none'; $('cap').style.top='170px';
+  // A · the hallway question
+  if(t<T.B){bg.src=`final/wa1/${pad(Math.min(T.wa1-1,Math.floor(t*30)+1))}.jpg`;$('shade').style.opacity=1;
+    sub(t<2.3?'— Привет!':'— Привет! <b>Подскажешь</b>, где следующая пара?', win(t,.1,T.B-.3,.25));}
+  // B · she answers in sign language, he doesn't follow
+  else if(t<T.C){const L=t-T.B, f=Math.min(T.male-1,138+Math.floor(L*30*.6));bg.src=`final/male/${pad(f+1)}.jpg`;
+    bg.style.transform=`scale(${1+.04*L/6})`;$('shade').style.opacity=1;
+    const s=$('sign');Object.assign(s.style,{left:'690px',top:'34px'});$('cap').style.top='1440px';const sp=back((L-.3)/.5);s.style.opacity=clamp(sp)*(1-ease((L-5.4)/.4));s.style.transform=`scale(${.6+.4*sp})`;s.style.transformOrigin='50% 0';
+    hands($('hand'),HD.privet,L*30*.9,200,210);$('signT').textContent='отвечает жестами';
+    if(L<3.2)cap('Она отвечает<br>на жестовом языке…',win(L,.2,3.2));else cap('…а он не понимает',win(L,3.3,6,.3));}
+  // C · the answer typed on the phone
+  else if(t<T.D){$('cap').style.top='1580px';const L=t-T.C;bg.src=`final/male/${pad(T.male)}.jpg`;bg.style.transform=`scale(${1.04+.06*ease(L/5)})`;bg.style.filter=`blur(${6*ease(L/.8)}px) brightness(.8)`;
+    const p=back((L-.3)/.6);$('phone').style.opacity=clamp(p);$('phone').style.transform=`translateY(${(1-p)*220}px)`;
+    $('typing').style.opacity=L<1.5?1:0;$('msg').style.opacity=ease((L-1.5)/.3);$('msg').style.transform=`translateY(${(1-ease((L-1.5)/.3))*20}px)`;
+    cap(L<3.4?'Ей пришлось написать ответ':'Он поблагодарил…<small>но разговор на этом закончился</small>',L<3.4?win(L,.2,3.4):win(L,3.5,T.D-T.C,.3));}
+  // D · the question to the viewer
+  else if(t<T.E){const L=t-T.D;$('light').style.opacity=ease(L/.5);
+    [['q1',.3],['q2',1.6],['q3',2.6],['q4',3.8]].forEach(([k,a])=>{const p=ease((L-a)/.5);$(k).style.opacity=p*(1-ease((L-(T.E-T.D-.35))/.35));$(k).style.transform=`translateY(${(1-p)*30}px)`});}
+  // E · the platform overview
+  else if(t<T.F){const L=t-T.E;$('ov').src=`ovadframes/${pad(Math.min(T.ovCut-1,Math.floor(L*30)))}.jpg`;$('ov').style.opacity=1;}
+  // F · some lessons later: he greets her in sign
+  else if(t<T.G){const L=t-T.F;bg.src=`final/male/00001.jpg`;bg.style.transform=`scale(${1.02+.05*L/6})`;$('shade').style.opacity=1;
+    $('label').style.opacity=win(L,.1,T.G-T.F);$('labelT').textContent='Несколько занятий спустя';
+    const s=$('sign');Object.assign(s.style,{left:'150px',top:'34px'});const sp=back((L-.8)/.5);s.style.opacity=clamp(sp)*(1-ease((L-(T.G-T.F-.4))/.4));s.style.transform=`scale(${.6+.4*sp})`;s.style.transformOrigin='50% 0';
+    hands($('hand'),HD.privet,L*30*.9,200,210);$('signT').innerHTML=L<2.4?'показывает жест…':'✓ Привет';
+    sub(L<3.6?'👋 <b>Привет!</b>':'Она улыбается и отвечает — разговор начался',win(L,1.2,T.G-T.F-.2,.3));}
+  // G · logo
+  else{const L=t-T.G;$('ov').src=`ovadframes/${pad(Math.min(T.ovTotal-1,T.ovCut+Math.floor(L*30)))}.jpg`;$('ov').style.opacity=1;}
+  // short dips to black between the story beats
+  const cuts=[T.D,T.F,T.G];let fb=0;cuts.forEach(c=>{fb=Math.max(fb,1-Math.min(1,Math.abs(t-c)/.22))});$('fadeBlack').style.opacity=fb;
+};
+window.render(0);
+</script></body></html>
