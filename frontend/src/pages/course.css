@@ -1006,3 +1006,23 @@ button.ksl-topic-card { padding: 0; text-align: left; font: inherit; cursor: poi
 .ksl-parts a.next { border-color: var(--p-blue, #2f6bff); background: var(--p-blue, #2f6bff); color: #fff; }
 .ksl-parts a.done { border-color: color-mix(in srgb, #1f9d6a 40%, transparent); background: color-mix(in srgb, #1f9d6a 12%, transparent); color: #1f9d6a; }
 .ksl-levels { margin-top: 4px; }
+
+/* KSL course practice: tabs instead of one long list */
+.ksl-practice { display: grid; gap: 14px; margin: 28px 0 18px; padding: 22px; border: 1px solid var(--p-line, #e5e7ee); border-radius: 26px; background: var(--p-surface, #fff); }
+.ksl-practice-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.ksl-practice-head h2 { margin: 0; font-size: 1.4rem; }
+.ksl-practice-tabs { display: flex; flex-wrap: wrap; gap: 6px; padding: 4px; border-radius: 16px; background: var(--p-subtle, #f0f1f5); }
+.ksl-practice-tabs button { display: inline-flex; align-items: center; gap: 7px; padding: 9px 14px; border: 0; border-radius: 12px; background: transparent; color: var(--p-muted, #667085); font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; }
+.ksl-practice-tabs button small { padding: 1px 7px; border-radius: 99px; background: rgba(0, 0, 0, .06); font-size: 11px; }
+.ksl-practice-tabs button[aria-selected="true"] { background: var(--p-surface, #fff); color: var(--p-text, #14171f); box-shadow: 0 2px 8px rgba(15, 22, 38, .08); }
+.ksl-practice-note { margin: 0; color: var(--p-muted, #667085); font-size: 14px; }
+.ksl-phrase-chips { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; }
+.ksl-phrase-chips a { display: grid; gap: 2px; padding: 12px 14px; border: 1px solid var(--p-line, #e5e7ee); border-radius: 14px; color: inherit; text-decoration: none; }
+.ksl-phrase-chips a:hover { border-color: var(--p-blue, #2f6bff); }
+.ksl-phrase-chips small { color: var(--p-muted, #667085); }
+.ksl-practice-go { justify-self: start; }
+.ksl-help-strip { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 14px; background: color-mix(in srgb, #e5486f 8%, transparent); color: var(--p-text, #14171f); font-size: 14px; text-decoration: none; }
+.ksl-help-strip > svg:first-child { flex-shrink: 0; color: #e5486f; }
+.ksl-help-strip span { flex: 1; min-width: 0; }
+/* icons inside coloured squares stay white */
+.ksl-feature-icon svg { color: #fff; stroke: #fff; }

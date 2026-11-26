@@ -65,59 +65,76 @@ export function KslClip({ id, start, end, wide = true, replay = 0 }: { id: strin
 const kkRu = (kk: string, ru: string, showRu: boolean) => (showRu ? `${kk} — ${ru}` : kk);
 
 /** Cards on the course page (ҚЖЯ): everyday phrases + teacher video lessons. */
+/** Course practice: dialogues, teacher video lessons and everyday phrases as
+ * tabs (one list at a time), plus a slim "help train the AI" strip. */
 export function KazakhTeacherSection() {
   const { data } = useTeacherLessons();
+  const { language } = useLanguage();
+  const [tab, setTab] = useState<"dialogues" | "videos" | "phrases">("dialogues");
   if (!data) return null;
+  const phrases = [...new Map(data.phrases.items.map((p) => [p.kk, p])).values()];
+  const tabs = [
+    { id: "dialogues" as const, icon: MessageCircle, label: at("Диалоги", "Dialogues", "Диалогтар"), count: 3 },
+    { id: "videos" as const, icon: Video, label: at("Видеоуроки", "Video lessons", "Бейнесабақтар"), count: data.teacher.lessons.length },
+    { id: "phrases" as const, icon: Users, label: at("Фразы", "Phrases", "Сөйлемдер"), count: phrases.length },
+  ];
   return (
-    <section className="ksl-teacher-section">
-      <div className="ksl-feature-row">
-      <Link className="panel ksl-phrases-card tint-blue card-motion" to="/course/kz/phrases">
-        <span className="ksl-feature-icon"><MessageCircle size={22} /></span>
-        <div>
-          <strong>{at("Фразы на каждый день", "Everyday phrases", "Күнделікті сөйлемдер")}</strong>
-          <span>
-            {at(
-              `${data.phrases.items.length} фраз: «Сәлеметсіз бе!», «Рахмет!», «Маған көмектесе аласыз ба?». Показывают сурдопереводчик и глухие жители Астаны («Оян, Qazaqstan»).`,
-              `${data.phrases.items.length} phrases shown by an interpreter and deaf people of Astana («Оян, Qazaqstan»).`,
-              `${data.phrases.items.length} сөйлем: ым тілі аудармашысы мен Астананың естімейтін тұрғындары көрсетеді («Оян, Qazaqstan»).`,
-            )}
-          </span>
+    <section className="ksl-practice">
+      <div className="ksl-practice-head">
+        <h2>{at("Практика", "Practice", "Жаттығу")}</h2>
+        <div className="ksl-practice-tabs" role="tablist">
+          {tabs.map((t) => (
+            <button key={t.id} type="button" role="tab" aria-selected={tab === t.id} onClick={() => setTab(t.id)}>
+              <t.icon size={16} /> {t.label} <small>{t.count}</small>
+            </button>
+          ))}
         </div>
-        <ArrowRight size={18} />
-      </Link>
-      <Link className="panel ksl-phrases-card ksl-help-card tint-rose card-motion" to="/record-signs?lang=ksl">
-        <span className="ksl-feature-icon"><HeartHandshake size={22} /></span>
-        <div>
-          <strong>{at("Помогите обучить ИИ казахским жестам", "Help train the AI on Kazakh signs", "ЖИ-ді қазақ ымдарына үйретуге көмектесіңіз")}</strong>
-          <span>
-            {at(
-              "15 минут: покажите 30 слов по 3 раза перед камерой. Видео не записывается, сохраняются только точки рук. Ссылка для друзей без регистрации: /help-ksl",
-              "15 minutes: 30 words × 3 in front of the camera. Only hand points are saved. Link for friends: /help-ksl",
-              "15 минут: 30 сөзді 3 реттен көрсетіңіз. Тек қол нүктелері сақталады. Достарға сілтеме: /help-ksl",
-            )}
-          </span>
-        </div>
-        <ArrowRight size={18} />
-      </Link>
       </div>
-      <h2 className="ksl-teacher-h">
-        <MessageCircle size={18} /> {at("Диалоги на ҚЖЯ", "Kazakh SL dialogues", "ҚЫТ диалогтары")}
-        <small>{at("из реальных видео казахских носителей", "from real Kazakh signer videos", "қазақ ым тілі иелерінің бейнелерінен")}</small>
-      </h2>
-      <KazakhDialogueCards />
-      <h2 className="ksl-teacher-h">
-        <Video size={18} /> {at("Видеоуроки с преподавателем", "Video lessons with a teacher", "Мұғаліммен бейнесабақтар")}
-        <small>«Саусақтар сөйлейді», {at("Актобе", "Aktobe", "Ақтөбе")}</small>
-      </h2>
-      <div className="ksl-teacher-grid">
-        {data.teacher.lessons.map((l) => (
-          <Link key={l.youtube} className="panel ksl-teacher-card card-motion" to={`/course/kz/teacher/${l.youtube}`}>
-            <img src={`https://i.ytimg.com/vi/${l.youtube}/mqdefault.jpg`} alt="" loading="lazy" />
-            <strong>{at(l.ru, l.ru, l.kk)}</strong>
-            <span>{l.words.length ? at(`${l.words.length} жестов`, `${l.words.length} signs`, `${l.words.length} ым`) : at("урок целиком", "full lesson", "толық сабақ")}</span>
+      {tab === "dialogues" && (
+        <>
+          <p className="ksl-practice-note">{at("Ситуации из реальных видео казахских носителей: выберите ответ и покажите реплику в камеру.", "Situations from real Kazakh signer videos: pick the reply and sign it to the camera.", "Қазақ ым тілі иелерінің бейнелерінен: жауапты таңдап, камераға көрсетіңіз.")}</p>
+          <KazakhDialogueCards />
+        </>
+      )}
+      {tab === "videos" && (
+        <>
+          <p className="ksl-practice-note">«Саусақтар сөйлейді», {at("Актобе: уроки преподавателя по темам.", "Aktobe: a teacher's topic lessons.", "Ақтөбе: мұғалімнің тақырыптық сабақтары.")}</p>
+          <div className="ksl-teacher-grid">
+            {data.teacher.lessons.map((l) => (
+              <Link key={l.youtube} className="panel ksl-teacher-card card-motion" to={`/course/kz/teacher/${l.youtube}`}>
+                <img src={`https://i.ytimg.com/vi/${l.youtube}/mqdefault.jpg`} alt="" loading="lazy" />
+                <strong>{at(l.ru, l.ru, l.kk)}</strong>
+                <span>{l.words.length ? at(`${l.words.length} жестов`, `${l.words.length} signs`, `${l.words.length} ым`) : at("урок целиком", "full lesson", "толық сабақ")}</span>
+              </Link>
+            ))}
+          </div>
+        </>
+      )}
+      {tab === "phrases" && (
+        <>
+          <p className="ksl-practice-note">{at("Показывают сурдопереводчик и глухие жители Астаны («Оян, Qazaqstan»).", "Shown by an interpreter and deaf people of Astana («Оян, Qazaqstan»).", "Ым тілі аудармашысы мен Астананың естімейтін тұрғындары көрсетеді («Оян, Qazaqstan»).")}</p>
+          <div className="ksl-phrase-chips">
+            {phrases.map((p) => (
+              <Link key={p.kk} to="/course/kz/phrases">
+                <strong>{p.kk}</strong>
+                {language !== "kk" && <small>{p.ru}</small>}
+              </Link>
+            ))}
+          </div>
+          <Link className="button primary ksl-practice-go" to="/course/kz/phrases">
+            {at("Учить фразы", "Learn the phrases", "Сөйлемдерді үйрену")} <ArrowRight size={16} />
           </Link>
-        ))}
-      </div>
+        </>
+      )}
+      <Link className="ksl-help-strip" to="/record-signs?lang=ksl">
+        <HeartHandshake size={18} />
+        <span>
+          <b>{at("Помогите обучить ИИ казахским жестам", "Help train the AI on Kazakh signs", "ЖИ-ді қазақ ымдарына үйретуге көмектесіңіз")}</b>
+          {" · "}
+          {at("15 минут, сохраняются только точки рук. Ссылка для друзей: /help-ksl", "15 minutes, only hand points are saved. Link for friends: /help-ksl", "15 минут, тек қол нүктелері сақталады. Достарға: /help-ksl")}
+        </span>
+        <ArrowRight size={16} />
+      </Link>
     </section>
   );
 }
