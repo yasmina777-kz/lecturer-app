@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<title>AI Mentor promo 9:16 (voice)</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#2f5bea;--ink:#0f1626}
+*{box-sizing:border-box;margin:0}
+html,body{width:1080px;height:1920px;overflow:hidden;font-family:Manrope,sans-serif;background:#000}
+.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform-origin:50% 45%}
+#shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.42),rgba(0,0,0,0) 24%,rgba(0,0,0,0) 58%,rgba(0,0,0,.62));opacity:0}
+#ov{position:absolute;inset:0;width:100%;height:100%;opacity:0}
+#cap{position:absolute;left:70px;right:70px;top:150px;text-align:center;color:#fff;font-size:52px;font-weight:800;line-height:1.2;text-shadow:0 4px 24px rgba(0,0,0,.55);opacity:0}
+#cap em{font-style:normal;color:#9db6ff}
+#sub{position:absolute;left:60px;right:60px;bottom:230px;text-align:center;opacity:0}
+#sub span{display:inline-block;padding:18px 28px;border-radius:22px;background:rgba(10,14,24,.72);color:#fff;font-size:40px;font-weight:700;line-height:1.3}
+#sub b{color:#ffd166}
+#label{position:absolute;left:0;right:0;top:120px;text-align:center;opacity:0}
+#label span{display:inline-block;padding:14px 28px;border-radius:999px;background:rgba(255,255,255,.92);color:var(--ink);font-size:34px;font-weight:800;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+#chip{position:absolute;left:0;right:0;top:250px;text-align:center;opacity:0}
+#chip span{display:inline-block;padding:12px 22px;border-radius:16px;background:#2f5bea;color:#fff;font-size:32px;font-weight:800;box-shadow:0 12px 30px rgba(47,91,234,.45)}
+#black{position:absolute;inset:0;background:#000;opacity:0}
+</style></head>
+<body>
+<img class="bg" id="wa1"><img class="bg" id="s1" src="final/scenes/s1.png"><img class="bg" id="s2" src="final/scenes/s2.png"><img class="bg" id="s3" src="final/scenes/s3.png">
+<img class="bg" id="s4" src="final/scenes/s4.png"><img class="bg" id="s5" src="final/scenes/s5.png"><img class="bg" id="s6" src="final/scenes/s6.png">
+<div id="shade"></div>
+<img id="ov">
+<div id="label"><span id="labelT"></span></div>
+<div id="chip"><span id="chipT"></span></div>
+<div id="cap"></div>
+<div id="sub"><span id="subT"></span></div>
+<div id="black"></div>
+<script>
+const T=window.TL, pad=n=>String(n).padStart(5,'0'), $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), ease=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const win=(t,a,b,f=.35)=>Math.min(ease((t-a)/f),1-ease((t-(b-f))/f));
+// scenes: [id, start, end, zoom from→to, pan x from→to (%), pan y]
+const SC=[["s1",T.B,T.C,1.04,1.12,0,-2,0],["s2",T.C,T.D,1.10,1.02,-2,2,0],["s3",T.D,T.E,1.02,1.14,0,0,-3],["s4",T.E,T.F,1.12,1.02,2,0,0],["s5",T.G,T.H,1.02,1.10,0,-2,0],["s6",T.H,T.I,1.06,1.14,0,0,-2]];
+function vo(t){for(const l of T.vo){if(t>=l.at-.1&&t<l.at+l.dur+.35)return l}return null}
+window.render=function(t){
+  ['wa1','s1','s2','s3','s4','s5','s6'].forEach(k=>$(k).style.opacity=0);
+  ['shade','ov','label','chip','cap','sub','black'].forEach(k=>$(k).style.opacity=0);
+  // live hallway clip
+  if(t<T.B){const w=$('wa1');w.src=`final/wa1/${pad(Math.min(T.wa1,Math.floor(t*30)+1))}.jpg`;w.style.opacity=1;w.style.transform='none';$('shade').style.opacity=1;
+    $('subT').innerHTML=t<2.3?'— Привет!':'— Привет! <b>Подскажешь</b>, где следующая пара?';$('sub').style.opacity=win(t,.1,T.B-.3,.25);}
+  // generated scenes with a slow camera move, crossfaded
+  for(const [id,a,b,z0,z1,x0,x1,y]of SC){if(t<a-.4||t>b+.4)continue;const u=clamp((t-a)/(b-a)),e=u;const el=$(id);
+    el.style.opacity=Math.min(ease((t-a+.4)/.8),1-ease((t-b+.4)/.8));el.style.transform=`scale(${z0+(z1-z0)*e}) translate(${x0+(x1-x0)*e}%,${y*e}%)`;$('shade').style.opacity=Math.max(+$('shade').style.opacity,+el.style.opacity);}
+  // overview and its logo ending
+  if(t>=T.F&&t<T.G){$('ov').src=`ovadframes/${pad(Math.min(T.ovCut-1,Math.floor((t-T.F)*30)))}.jpg`;$('ov').style.opacity=1;$('shade').style.opacity=0;}
+  if(t>=T.I){$('ov').src=`ovadframes/${pad(Math.min(T.ovTotal-1,T.ovCut+Math.floor((t-T.I)*30)))}.jpg`;$('ov').style.opacity=ease((t-T.I)/.4);}
+  // captions per beat
+  if(t>=T.B&&t<T.C)$('cap').innerHTML='Она отвечает на жестовом языке…<br><em>а он не понимает</em>',$('cap').style.opacity=win(t,T.B+.4,T.C);
+  if(t>=T.C&&t<T.D)$('cap').innerHTML='Ей пришлось написать<br>ответ в телефоне',$('cap').style.opacity=win(t,T.C+.4,T.D);
+  if(t>=T.D+3.6&&t<T.E)$('cap').innerHTML='А ты смог бы <em>ответить?</em>',$('cap').style.opacity=win(t,T.D+3.6,T.E);
+  if(t>=T.H&&t<T.I){$('labelT').textContent='Несколько занятий спустя';$('label').style.opacity=win(t,T.H+.3,T.I);$('chipT').textContent='👋 Привет!';$('chip').style.opacity=win(t,T.H+1.2,T.I);}
+  // voice-over subtitles (outside the overview, which has its own headings)
+  const l=vo(t);if(l&&!(t>=T.F&&t<T.G)&&t<T.I){$('subT').textContent=l.text;$('sub').style.opacity=win(t,l.at-.1,l.at+l.dur+.35,.2);}
+  // dip to black into and out of the overview
+  let fb=0;[T.F,T.G].forEach(c=>{fb=Math.max(fb,1-Math.min(1,Math.abs(t-c)/.25))});$('black').style.opacity=fb;
+};
+window.render(0);
+</script></body></html>

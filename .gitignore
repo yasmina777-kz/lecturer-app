@@ -107,3 +107,4 @@ promo-video/*.mp4
 promo-video/.venv/
 !promo-video/build/overview-ad.html
 !promo-video/build/final.html
+!promo-video/build/final2.html
