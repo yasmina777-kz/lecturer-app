@@ -80,6 +80,9 @@ export function GestureMentor3D({
         "Қолдары мен саусақтары қозғалатын 3D тәлімгер",
       ),
     );
+    // Fades in once the rig is posed (no bind-pose frame, no hard pop).
+    renderer.domElement.style.opacity = "0";
+    renderer.domElement.style.transition = "opacity 220ms ease";
     mount.appendChild(renderer.domElement);
     const scene = new THREE.Scene();
     scene.add(new THREE.HemisphereLight(studio ? 0xfffaf5 : 0xfff5e7, studio ? 0x9a9691 : 0x657a91, studio ? 2.0 : 1.2));
@@ -317,6 +320,9 @@ export function GestureMentor3D({
             o.frustumCulled = false;
           }
         });
+        // Hidden until the first motion pose is applied: rendering the freshly
+        // loaded rig earlier flashes its bind (T) pose for a frame.
+        model.visible = false;
         scene.add(model);
         model.traverse((o) => {
           if (o instanceof THREE.Mesh && o.morphTargetDictionary && Object.keys(o.morphTargetDictionary).length)
@@ -394,12 +400,17 @@ export function GestureMentor3D({
         setLoading(false);
         readyCallback.current?.(true);
         mount.dataset.model = modelUrl.includes("woman01") ? "woman01-studio-v3" : "blender-mira-v3-soft";
+        if (playback) playback.update(current.current.time, current.current.playbackState ?? "paused", 0);
+        else mixer.setTime(Math.min(clipDuration, Math.max(0, current.current.time)));
+        model.visible = true;
         pose(current.current.time);
+        renderer.domElement.style.opacity = "1";
       })
       .catch(() => {
         if (alive) {
           setLoading(false);
           setError(true);
+          renderer.domElement.style.opacity = "1";
         }
       });
     return () => {
