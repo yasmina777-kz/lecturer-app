@@ -1,12 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  ArrowDown,
   ArrowRight,
   ArrowUpRight,
   Check,
   FileText,
-  Pause,
   Play,
   Plus,
 } from "lucide-react";
@@ -15,7 +13,6 @@ import "./landing-page.css";
 import "./landing-reference.css";
 import "./landing-motion.css";
 import "./landing-refresh.css";
-import { LandingGlow } from "../components/LandingGlow";
 import { Brand } from "../components/UI";
 import { ThemeSwitcher } from "../components/ThemeSwitcher";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
@@ -112,90 +109,38 @@ export default function LandingPage() {
           </div>
         </header>
         <main>
-          <section className="mentor-hero">
-            <div className="mentor-hero-copy">
-              <span className="mentor-kicker">
-                <span />{" "}
-                {at(
-                  "Ваш наставник по языку жестов",
-                  "Your sign language mentor",
-                  "Ым тілі бойынша тәлімгеріңіз",
-                )}
-              </span>
-              <h1 className="mentor-warm-title">
-                {at(
-                  "Изучайте\nрусский и казахский\nжестовые языки",
-                  "Learn\nRussian and Kazakh\nSign Languages",
-                  "Орыс және қазақ\nым тілдерін\nүйреніңіз",
-                )}
-              </h1>
-              <p>
-                {at(
-                  "Видео носителей языка, 3D-аватар и проверка жестов через камеру. Уроки от алфавита до первых диалогов — в своём темпе.",
-                  "Native signer videos, a 3D avatar and camera checks of your signs. Lessons from the alphabet to first dialogues — at your own pace.",
-                  "Ана тілі иелерінің бейнелері, 3D-аватар және камерамен ымды тексеру. Әліпбиден алғашқы диалогтарға дейін — өз қарқыныңызбен.",
-                )}
-              </p>
-              <div className="mentor-hero-actions">
-                <Link to="/gesture-preview" className="button secondary">
+          <section className="lp-hero">
+            <div className="lp-scene">
+              <img className="lp-scene-img" src="/images/landing-v2/hero-meadow.webp" alt="" />
+              <div className="lp-scene-copy">
+                <img className="lp-mark" src="/images/brand/ai-mentor-symbol-v1.png" width={44} height={44} alt="" aria-hidden="true" />
+                <h1>
+                  {at("Язык, который видно", "A language you can see", "Көзбен көретін тіл")}
+                </h1>
+                <p>
                   {at(
-                    "Посмотреть жесты аватара",
-                    "Explore the signing avatar",
-                    "Аватардың ымдарын көру",
+                    "Русский и казахский жестовые языки с нуля: видео носителей, 3D-аватар и проверка жестов камерой — от алфавита до первых диалогов.",
+                    "Russian and Kazakh sign languages from zero: native signer videos, a 3D avatar and camera checks — from the alphabet to first dialogues.",
+                    "Орыс және қазақ ым тілдері нөлден: ана тілі иелерінің бейнелері, 3D-аватар және камерамен тексеру — әліпбиден алғашқы диалогтарға дейін.",
                   )}
-                </Link>
-                <Link to={destination} className="mentor-cta">
-                  {user ? t("Продолжить обучение") : t("Начать обучение")}
-                  <ArrowUpRight size={20} />
-                </Link>
-                <a href="#experience" className="mentor-demo-link">
-                  <Play size={15} />
-                  {t("Посмотреть, как работает")}
-                </a>
+                </p>
+                <div className="lp-actions">
+                  <Link to={destination} className="lp-cta">
+                    {user ? t("Продолжить обучение") : t("Начать обучение")}
+                    <ArrowUpRight size={18} />
+                  </Link>
+                  <a href="#experience" className="lp-ghost">
+                    <Play size={14} />
+                    {t("Посмотреть, как работает")}
+                  </a>
+                </div>
               </div>
-              <dl className="hero-stats">
-                <div><dt>1 750+</dt><dd>{at("жестов на видео носителей", "signs on native signer video", "ана тілі иелерінің бейнесіндегі ым")}</dd></div>
-                <div><dt>2</dt><dd>{at("жестовых языка: РЖЯ и ҚЖЯ", "sign languages: RSL and KSL", "ым тілі: РЖЯ және ҚЖЯ")}</dd></div>
-                <div><dt>A1–B1</dt><dd>{at("уровни с нуля", "levels from zero", "нөлден деңгейлер")}</dd></div>
+              <dl className="lp-stats">
+                <div><dt>1 750+</dt><dd>{at("жестов на видео", "signs on video", "бейнедегі ым")}</dd></div>
+                <div><dt>РЖЯ · ҚЖЯ</dt><dd>{at("два жестовых языка", "two sign languages", "екі ым тілі")}</dd></div>
+                <div><dt>A1 → B1</dt><dd>{at("уровни с нуля", "levels from zero", "нөлден деңгейлер")}</dd></div>
               </dl>
             </div>
-            <div
-              id="mentor-avatar"
-              className="mentor-hero-art"
-              aria-label={at(
-                "Виртуальная наставница Мира",
-                "Mira, your virtual mentor",
-                "Мира виртуалды тәлімгеріңіз",
-              )}
-            >
-              <LandingGlow />
-              <img
-                className="landing-hero-image"
-                src="/images/landing-v2/mentor-cutout.webp"
-                alt=""
-              />
-              <div className="hero-chip hero-chip--check" aria-hidden="true">
-                <span className="hero-chip-icon"><Check size={16} /></span>
-                <span><b>«Привет»</b><small>{at("жест показан верно", "sign is correct", "ым дұрыс көрсетілді")}</small></span>
-              </div>
-              <div className="hero-chip hero-chip--level" aria-hidden="true">
-                <span className="hero-chip-levels"><i>A1</i><i>A2</i><i>B1</i></span>
-                <small>{at("от алфавита до диалогов", "from alphabet to dialogues", "әліпбиден диалогқа дейін")}</small>
-              </div>
-            </div>
-            <a className="mentor-scroll" href="#possibilities">
-              <ArrowDown size={15} />
-              {t("Знакомьтесь с AI Mentor")}
-            </a>
-            <button
-              className="mentor-motion-toggle"
-              type="button"
-              aria-pressed={motionPaused}
-              onClick={() => setMotionPaused(!motionPaused)}
-            >
-              {motionPaused ? <Play size={13} /> : <Pause size={13} />}
-              {motionPaused ? t("Включить анимацию") : t("Остановить анимацию")}
-            </button>
           </section>
           <div className="mentor-format-strip">
             <span>
