@@ -21,7 +21,6 @@ const SignLessonPage = lazyPage(() => import("./pages/SignWorkspace").then(m => 
 const AvatarReviewPage = lazyPage(() => import("./pages/AvatarReview").then(m => ({default:m.AvatarReviewPage})));
 const RecordSignsPage = lazyPage(() => import("./pages/RecordSigns").then(m => ({default:m.RecordSignsPage})));
 const SignTextPage = lazyPage(() => import("./pages/SignWorkspace").then(m => ({default:m.SignTextPage})));
-const SignRecognitionPage = lazyPage(() => import("./pages/SignRecognition").then(m => ({default:m.SignRecognitionPage})));
 const SignGrammarPage = lazyPage(() => import("./pages/SignGrammar").then(m => ({default:m.SignGrammarPage})));
 const SignVocabularyPage = lazyPage(() => import("./pages/SignVocabulary").then(m => ({default:m.SignVocabularyPage})));
 const SignPracticePage = lazyPage(() => import("./pages/SignWorkspace").then(m => ({default:m.SignPracticePage})));
@@ -120,7 +119,7 @@ export function App() {
             <Route path="create" element={<CreatePage />} />
             <Route path="lectures/:id" element={<PlayerRoute />} />
             <Route path="practice" element={<SignPracticePage />} />
-            <Route path="recognition" element={<SignRecognitionPage />} />
+            <Route path="recognition" element={<Navigate to="/text-to-sign" replace />} />
             <Route path="vocab" element={<SignVocabularyPage />} />
             <Route path="grammar" element={<SignGrammarPage />} />
             <Route path="dialogues" element={<SignDialoguesPage />} />

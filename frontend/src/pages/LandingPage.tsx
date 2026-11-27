@@ -14,6 +14,7 @@ import { ProductSurface } from "../components/ProductSurface";
 import "./landing-page.css";
 import "./landing-reference.css";
 import "./landing-motion.css";
+import "./landing-refresh.css";
 import { LandingWaves } from "../components/LandingWaves";
 import { Brand } from "../components/UI";
 import { ThemeSwitcher } from "../components/ThemeSwitcher";
@@ -29,6 +30,30 @@ export default function LandingPage() {
   const [motionPaused, setMotionPaused] = useState(false);
   const [audience, setAudience] = useState<"student" | "teacher">("student");
   const root = useRef<HTMLDivElement>(null);
+  const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState("");
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  useEffect(() => {
+    if (!("IntersectionObserver" in window)) return;
+    const ids = ["about-project", "languages", "possibilities", "experience", "for-you"];
+    const spy = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(e.target.id);
+        }),
+      { rootMargin: "-45% 0px -50% 0px" },
+    );
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) spy.observe(el);
+    });
+    return () => spy.disconnect();
+  }, []);
   useEffect(() => {
     if (!("IntersectionObserver" in window)) return;
     const observer = new IntersectionObserver(
@@ -59,18 +84,18 @@ export default function LandingPage() {
         className={`landing-site${motionPaused ? " motion-paused" : ""}`}
         ref={root}
       >
-        <header className="mentor-header">
+        <header className={`mentor-header${scrolled ? " is-scrolled" : ""}`}>
           <Link to="/" aria-label="AI Mentor">
             <Brand />
           </Link>
           <nav aria-label={t("Навигация по сайту")}>
-            <a href="#about-project">
+            <a href="#languages" className={active === "languages" ? "is-active" : undefined}>{at("Два языка", "Two languages", "Екі тіл")}</a>
+            <a href="#possibilities" className={active === "possibilities" ? "is-active" : undefined}>{t("Возможности")}</a>
+            <a href="#about-project" className={active === "about-project" ? "is-active" : undefined}>
               {at("О проекте", "About", "Жоба туралы")}
             </a>
-            <a href="#languages">{at("Два языка", "Two languages", "Екі тіл")}</a>
-            <a href="#possibilities">{t("Возможности")}</a>
-            <a href="#experience">{t("Как это работает")}</a>
-            <a href="#for-you">{t("Для кого")}</a>
+            <a href="#experience" className={active === "experience" ? "is-active" : undefined}>{t("Как это работает")}</a>
+            <a href="#for-you" className={active === "for-you" ? "is-active" : undefined}>{t("Для кого")}</a>
           </nav>
           <div className="mentor-header-actions">
             <ThemeSwitcher />
@@ -106,9 +131,9 @@ export default function LandingPage() {
               </h1>
               <p>
                 {at(
-                  "Пошаговые уроки, интерактивные упражнения и ваш учебный помощник",
-                  "Step-by-step lessons, interactive exercises and your learning companion",
-                  "Қадамдық сабақтар, интерактивті жаттығулар және оқу көмекшіңіз",
+                  "Видео носителей языка, 3D-аватар и проверка жестов через камеру. Уроки от алфавита до первых диалогов — в своём темпе.",
+                  "Native signer videos, a 3D avatar and camera checks of your signs. Lessons from the alphabet to first dialogues — at your own pace.",
+                  "Ана тілі иелерінің бейнелері, 3D-аватар және камерамен ымды тексеру. Әліпбиден алғашқы диалогтарға дейін — өз қарқыныңызбен.",
                 )}
               </p>
               <div className="mentor-hero-actions">
@@ -830,24 +855,6 @@ export default function LandingPage() {
             </div>
           </section>
           <LearningGallery />
-          <section className="mentor-language-section" data-reveal>
-            <div>
-              <span className="mentor-kicker">RU / EN / KZ</span>
-              <h2>{t("Ближе на вашем языке.")}</h2>
-              <p>
-                {at(
-                  "Выберите, что учить: русский жестовый язык (РЖЯ) или казахский (ҚЖЯ) — переключатель РЖЯ / ҚЖЯ меняет уроки, словарь и алфавит (33 или 42 буквы). Интерфейс — на русском, английском или казахском.",
-                  "Choose what to learn: Russian (RSL) or Kazakh Sign Language (KSL) — the РЖЯ / ҚЖЯ switch changes lessons, dictionary and alphabet (33 or 42 letters). The interface is in Russian, English or Kazakh.",
-                  "Не үйренетініңізді таңдаңыз: орыс ым тілі (ОЫТ) немесе қазақ ым тілі (ҚЫТ) — РЖЯ / ҚЖЯ ауыстырғышы сабақтарды, сөздікті және әліпбиді (33 немесе 42 әріп) өзгертеді. Интерфейс — орыс, ағылшын немесе қазақ тілінде.",
-                )}
-              </p>
-            </div>
-            <div className="language-art" aria-hidden="true">
-              <span>Понимать.</span>
-              <span>Understand.</span>
-              <span>Түсіну.</span>
-            </div>
-          </section>
           <section
             id="questions"
             className="mentor-section mentor-faq"

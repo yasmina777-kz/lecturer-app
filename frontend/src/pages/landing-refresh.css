@@ -1,0 +1,63 @@
+/* Landing refresh: the glass ribbon stays only in the hero (the design's signature);
+ * secondary cards get calm tinted surfaces. Sticky header with scroll state,
+ * entrance motion and an active-section indicator. */
+:root .landing-surface[data-product-ui][data-product-theme] .landing-site {
+  --lr-tint: color-mix(in srgb, var(--p-blue) 9%, var(--p-surface));
+  --lr-tint-2: color-mix(in srgb, var(--p-blue) 16%, var(--p-surface));
+
+  /* Fewer decorative ribbons */
+  & .project-mentor-visual { background: linear-gradient(165deg, var(--lr-tint), var(--lr-tint-2)); }
+  & .project-mentor-visual::before { display: none; }
+  & .universe-stage { background: linear-gradient(150deg, var(--lr-tint), var(--lr-tint-2)); }
+  & .audience-art { background: none; }
+
+  /* Header */
+  & .mentor-header {
+    position: sticky; top: 0; z-index: 40; isolation: isolate;
+    transition: min-height .3s ease, padding .3s ease;
+    animation: lr-header-in .7s cubic-bezier(.2,.7,.2,1) both;
+  }
+  & .mentor-header::before {
+    content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: calc(50% - 50vw); right: calc(50% - 50vw);
+    background: color-mix(in srgb, var(--p-bg) 93%, transparent);
+    backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4);
+    border-bottom: 1px solid var(--p-line);
+    opacity: 0; transition: opacity .3s ease;
+  }
+  & .mentor-header.is-scrolled { min-height: 60px; padding: 8px 0; }
+  & .mentor-header.is-scrolled::before { opacity: 1; }
+  & .mentor-header nav a {
+    color: var(--p-muted); transition: color .2s;
+    animation: lr-fade-down .6s cubic-bezier(.2,.7,.2,1) both;
+  }
+  & .mentor-header nav a:nth-child(1) { animation-delay: .08s; }
+  & .mentor-header nav a:nth-child(2) { animation-delay: .14s; }
+  & .mentor-header nav a:nth-child(3) { animation-delay: .2s; }
+  & .mentor-header nav a:nth-child(4) { animation-delay: .26s; }
+  & .mentor-header nav a:nth-child(5) { animation-delay: .32s; }
+  & .mentor-header nav a:hover, & .mentor-header nav a.is-active { color: var(--p-text); }
+  & .mentor-header nav a.is-active::after { transform: scaleX(1); }
+  & .mentor-header .mentor-signin { transition: transform .2s ease, box-shadow .2s ease; }
+  & .mentor-header .mentor-signin:hover { transform: translateY(-1px); box-shadow: 0 8px 20px #10182822; }
+  & .mentor-header .mentor-signin svg { transition: transform .2s ease; }
+  & .mentor-header .mentor-signin:hover svg { transform: translate(2px, -2px); }
+
+  /* Hero copy enters in sequence */
+  & .mentor-hero-copy > * { animation: lr-rise .8s cubic-bezier(.2,.7,.2,1) both; }
+  & .mentor-hero-copy > :nth-child(2) { animation-delay: .08s; }
+  & .mentor-hero-copy > :nth-child(3) { animation-delay: .16s; }
+  & .mentor-hero-copy > :nth-child(4) { animation-delay: .24s; }
+  & .mentor-hero-copy > :nth-child(5) { animation-delay: .32s; }
+  & .mentor-hero-copy > p { max-width: 520px; }
+  @media (max-width: 720px) {
+    & .mentor-header.is-scrolled nav { display: none; }
+    & .mentor-header nav { overflow-x: auto; scrollbar-width: none; flex-wrap: nowrap; }
+    & .mentor-header nav a { white-space: nowrap; }
+  }
+}
+@keyframes lr-header-in { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: none; } }
+@keyframes lr-fade-down { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+@keyframes lr-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  :root .landing-surface[data-product-ui][data-product-theme] .landing-site :is(.mentor-header, .mentor-header nav a, .mentor-hero-copy > *) { animation: none; }
+}

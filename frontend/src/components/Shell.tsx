@@ -1,4 +1,4 @@
-import { SignLangSwitcher, useChooseSignLang } from "./SignLangSwitcher";
+import { useChooseSignLang } from "./SignLangSwitcher";
 import "../pages/sign-courses.css";
 import { ProductSurface } from "./ProductSurface";
 import { at } from "../i18n/automation";
@@ -16,10 +16,7 @@ import {
 import {
   ArrowLeft,
   BookOpen,
-  CircleHelp,
   Languages,
-  ScanLine,
-  Type,
   UserRound,
   LogOut,
   Menu,
@@ -31,8 +28,6 @@ import {
 import { useStudyTimer } from "../sign/dailyGoal";
 import { useAuth } from "../context/AuthContext";
 import { Brand, ErrorMessage, messageOf } from "./UI";
-import { ThemeSwitcher } from "./ThemeSwitcher";
-import { LanguageSwitcher } from "./LanguageSwitcher";
 export function Shell() {
   const { user, logout } = useAuth();
   const [menu, setMenu] = useState(false);
@@ -45,7 +40,7 @@ export function Shell() {
   const learnPaths = ["/grammar", "/dialogues", "/understanding", "/practice"];
   const studying = path.startsWith("/learn") || path === "/vocab" || learnPaths.includes(path);
   useStudyTimer(studying);
-  const translate = path === "/text-to-sign" || path === "/recognition";
+  const translate = path === "/text-to-sign";
   const [signLang, chooseSignLang] = useChooseSignLang();
   const inCourse =
     (path.startsWith("/learn") && location.search !== "") ||
@@ -84,7 +79,6 @@ export function Shell() {
     path === "/text-to-sign" ||
     path === "/vocab" ||
     path === "/grammar" ||
-    path === "/recognition" ||
     path === "/dialogues" ||
     path.startsWith("/understanding") ||
     path === "/fingerspell" ||
@@ -166,14 +160,6 @@ export function Shell() {
           )}
         </nav>
         <div className="sidebar-bottom">
-          <NavLink to="/help" onClick={() => setMenu(false)}>
-            <CircleHelp size={18} />
-            {at(
-              "Что где находится",
-              "Where to find everything",
-              "Қай бөлімде не бар",
-            )}
-          </NavLink>
           <Link to="/" onClick={() => setMenu(false)}>
             <ArrowUpRight size={18} />
             {t("О проекте")}
@@ -210,7 +196,7 @@ export function Shell() {
         </div>
       </aside>
       <div className="app-main">
-        <header className="topbar">
+        <header className="topbar topbar-menu-only">
           <div className="topbar-left">
             <button
               className="icon-button menu-toggle"
@@ -220,11 +206,7 @@ export function Shell() {
               <Menu />
             </button>
           </div>
-          <div className="topbar-right">
-            <ThemeSwitcher />
-            <SignLangSwitcher />
-            <LanguageSwitcher />
-          </div>
+
         </header>
         <main className="main-content" ref={workspace}>
           <ErrorMessage message={error} />
@@ -233,18 +215,6 @@ export function Shell() {
               <ArrowLeft size={16} />
               {at("Учиться", "Learn", "Оқу")}
             </Link>
-          )}
-          {translate && (
-            <div className="translate-tabs" role="tablist">
-              <Link to="/text-to-sign" role="tab" aria-selected={path === "/text-to-sign"}>
-                <Type size={16} />
-                {at("Текст → жесты", "Text → signs", "Мәтін → ымдар")}
-              </Link>
-              <Link to="/recognition" role="tab" aria-selected={path === "/recognition"}>
-                <ScanLine size={16} />
-                {at("Жесты → текст", "Signs → text", "Ымдар → мәтін")}
-              </Link>
-            </div>
           )}
           <Outlet />
         </main>
