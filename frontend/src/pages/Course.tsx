@@ -1,3 +1,4 @@
+import { LevelTabBody } from "../components/LevelTab";
 import { unitPhoto } from "../sign/courseUnits";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
@@ -107,7 +108,6 @@ import {
   TrafficCone,
   Trees,
   TrendingUp,
-  Type,
   Umbrella,
   UserRound,
   Users,
@@ -376,15 +376,9 @@ export function CoursePage() {
       <div className="course-levels" role="tablist" aria-label={at("Уровень", "Level", "Деңгей")}>
         {LEVELS.map((l, i) => {
           const [d, t] = count(l.id);
-          const Icon = l.icon;
           return (
-            <button key={l.id} role="tab" data-level={l.id} aria-selected={l.id === level} onClick={() => setParams({ level: l.id })} className="course-anim" style={{ "--i": i } as React.CSSProperties}>
-              <span className="course-level-icon"><Icon size={20} /></span>
-              <span className="course-level-text">
-                <strong>{l.title} <em>{l.name}</em></strong>
-                <span>{l.desc}</span>
-              </span>
-              {t > 0 && <span className={`course-level-count${d === t ? " full" : ""}`}>{d === t ? <Check size={14} /> : `${d}/${t}`}</span>}
+            <button key={l.id} role="tab" data-level={l.id} aria-selected={l.id === level} onClick={() => setParams({ level: l.id })} className="course-anim lvl-tab" style={{ "--i": i } as React.CSSProperties}>
+              <LevelTabBody id={l.title} name={l.name} desc={l.desc} done={d} total={t} />
             </button>
           );
         })}
@@ -399,15 +393,16 @@ export function CoursePage() {
               <h2>{at("Перед стартом", "Before you start", "Бастамас бұрын")}</h2>
               <div className="course-before-grid">
                 {[
-                  { to: "/culture", icon: Users, t: at("Культура и этикет глухих", "Deaf culture", "Керең мәдениеті"), d: at("Как привлечь внимание и общаться уважительно", "Etiquette and respectful words", "Әдеп") },
+                  { to: "/culture", photo: "/images/rsl-units/18.webp", t: at("Культура и этикет глухих", "Deaf culture", "Керең мәдениеті"), d: at("Как привлечь внимание и общаться уважительно", "Etiquette and respectful words", "Әдеп") },
                   kz
-                    ? { to: "/kazakh", icon: Hand, t: at("Казахский дактиль", "Kazakh fingerspelling", "Қазақ дактилі"), d: at("42 буквы: + Ә Ғ Қ Ң Ө Ұ Ү Һ І, проверка камерой", "42 letters incl. Ә Ғ Қ Ң Ө Ұ Ү Һ І, camera check", "42 әріп: Ә Ғ Қ Ң Ө Ұ Ү Һ І, камерамен тексеру") }
-                    : { to: "/practice", icon: Hand, t: at("Азбука (дактиль)", "Alphabet", "Әліпби"), d: at("33 буквы — чтобы показать своё имя", "33 letters for your name", "33 әріп") },
-                  { to: "/fingerspell", icon: Type, t: at("Чтение дактиля", "Reading fingerspelling", "Дактильді оқу"), d: at("Понимать имена по буквам", "Understand spelled names", "Есімдерді түсіну") },
+                    ? { to: "/kazakh", photo: "/images/rsl-units/03.webp", t: at("Казахский дактиль", "Kazakh fingerspelling", "Қазақ дактилі"), d: at("42 буквы: + Ә Ғ Қ Ң Ө Ұ Ү Һ І, проверка камерой", "42 letters incl. Ә Ғ Қ Ң Ө Ұ Ү Һ І, camera check", "42 әріп: Ә Ғ Қ Ң Ө Ұ Ү Һ І, камерамен тексеру") }
+                    : { to: "/practice", photo: "/images/rsl-units/03.webp", t: at("Азбука (дактиль)", "Alphabet", "Әліпби"), d: at("33 буквы — чтобы показать своё имя", "33 letters for your name", "33 әріп") },
+                  { to: "/fingerspell", photo: "/images/rsl-units/15.webp", t: at("Чтение дактиля", "Reading fingerspelling", "Дактильді оқу"), d: at("Понимать имена по буквам", "Understand spelled names", "Есімдерді түсіну") },
                 ].map((c, i) => (
-                  <Link key={c.to} className="panel course-before-card course-anim" to={c.to} style={{ "--i": i + 4 } as React.CSSProperties}>
-                    <span className="course-before-icon"><c.icon size={20} /></span>
+                  <Link key={c.to} className="course-before-card before-photo course-anim" to={c.to} style={{ "--i": i + 4 } as React.CSSProperties}>
+                    <img src={c.photo} alt="" loading="lazy" />
                     <span><strong>{c.t}</strong><span>{c.d}</span></span>
+                    <ArrowRight size={18} aria-hidden="true" />
                   </Link>
                 ))}
               </div>
@@ -721,3 +716,4 @@ function SpeakStep({ task, onNext }: { task: string; onNext: () => void }) {
     </section>
   );
 }
+

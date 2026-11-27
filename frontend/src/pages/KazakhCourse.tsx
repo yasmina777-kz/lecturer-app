@@ -1,6 +1,7 @@
+import { LevelTabBody } from "../components/LevelTab";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Camera, Check, CheckCircle2, Home, MessagesSquare, Play, Search, Sprout, Turtle, UserRound, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Camera, Check, CheckCircle2, Play, Search, Turtle, UserRound, X } from "lucide-react";
 import { WordPracticeCamera } from "../components/WordPracticeCamera";
 import { YouTubeClip, loadYouTubeApi } from "../components/YouTubeClip";
 import { loadKslWordModel } from "../sign/wordRecognizer";
@@ -200,15 +201,9 @@ export function KazakhCourseList() {
         {levels.map((l, i) => {
           const own = lessons.filter((x) => kslTopicLevel(x.topic) === l.id);
           const d = own.filter((x) => progress[x.id] !== undefined).length;
-          const Icon = [Sprout, Home, MessagesSquare][i];
           return (
-            <button key={l.id} role="tab" data-level={l.id} aria-selected={l.id === level} onClick={() => setParams({ level: l.id }, { replace: true })} className="course-anim" style={{ "--i": i } as React.CSSProperties}>
-              <span className="course-level-icon"><Icon size={20} /></span>
-              <span className="course-level-text">
-                <strong>{l.id} <em>{l.name}</em></strong>
-                <span>{l.desc}</span>
-              </span>
-              <span className={`course-level-count${d === own.length ? " full" : ""}`}>{d === own.length ? <Check size={14} /> : `${d}/${own.length}`}</span>
+            <button key={l.id} role="tab" data-level={l.id} aria-selected={l.id === level} onClick={() => setParams({ level: l.id }, { replace: true })} className="course-anim lvl-tab" style={{ "--i": i } as React.CSSProperties}>
+              <LevelTabBody id={l.id} name={l.name} desc={l.desc} done={d} total={own.length} />
             </button>
           );
         })}

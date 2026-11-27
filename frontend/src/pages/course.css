@@ -1026,3 +1026,46 @@ button.ksl-topic-card { padding: 0; text-align: left; font: inherit; cursor: poi
 .ksl-help-strip span { flex: 1; min-width: 0; }
 /* icons inside coloured squares stay white */
 .ksl-feature-icon svg { color: #fff; stroke: #fff; }
+
+/* Levels as a quiet track: plain type, a thin progress line, a dark active state.
+ * No pastel icon tiles or coloured labels. */
+:root .product-ui[data-product-ui][data-product-theme] .course .course-levels {
+  gap: 0; padding: 6px; border-radius: 20px; background: var(--p-surface); border: 1px solid var(--p-line);
+  box-shadow: none;
+  & button.lvl-tab {
+    display: grid !important; grid-template-columns: minmax(0, 1fr) !important; align-content: start; gap: 4px; padding: 14px 16px; border: 0; border-radius: 14px;
+    background: transparent; box-shadow: none; text-align: left; color: var(--p-text); transform: none;
+    position: relative; transition: background .2s, color .2s;
+  }
+  & button.lvl-tab + button.lvl-tab::before {
+    content: ""; position: absolute; left: 0; top: 18px; bottom: 18px; width: 1px; background: var(--p-line);
+  }
+  & button.lvl-tab[aria-selected="true"]::before, & button.lvl-tab[aria-selected="true"] + button.lvl-tab::before { display: none; }
+  & button.lvl-tab:hover { background: var(--p-subtle); transform: none; }
+  & button.lvl-tab[aria-selected="true"] { background: var(--p-primary); color: var(--p-on-primary); box-shadow: none; outline: 0; }
+  & .lvl-head { display: flex; align-items: baseline; gap: 8px; }
+  & .lvl-head b { font-size: 22px; font-weight: 750; letter-spacing: -0.02em; }
+  & .lvl-head > span { font-size: 15px; font-weight: 600; }
+  & .lvl-done { margin-left: auto; color: #1f9d63; align-self: center; }
+  & .lvl-desc { font-size: 13px; line-height: 1.35; color: var(--p-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  & .lvl-progress { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+  & .lvl-bar { flex: 1; height: 3px; border-radius: 3px; background: var(--p-line); overflow: hidden; }
+  & .lvl-bar i { display: block; height: 100%; background: currentColor; border-radius: inherit; }
+  & .lvl-progress small { font-size: 12px; color: var(--p-muted); white-space: nowrap; }
+  & button.lvl-tab[aria-selected="true"] :is(.lvl-desc, .lvl-progress small) { color: color-mix(in srgb, var(--p-on-primary) 70%, transparent); }
+  & button.lvl-tab[aria-selected="true"] .lvl-bar { background: color-mix(in srgb, var(--p-on-primary) 25%, transparent); }
+}
+
+/* «Перед стартом»: real photos instead of icon tiles. */
+:root .product-ui[data-product-ui][data-product-theme] .course .course-before-card.before-photo {
+  display: grid !important; grid-template-columns: 72px minmax(0, 1fr) 18px !important; align-items: center; gap: 14px; padding: 10px 16px 10px 10px; border-radius: 18px;
+  background: var(--p-surface); border: 1px solid var(--p-line); box-shadow: none; color: var(--p-text); text-decoration: none;
+  transition: border-color .2s, transform .2s;
+  & img { width: 72px; height: 72px; border-radius: 12px; object-fit: cover; flex-shrink: 0; }
+  & > span { display: grid; gap: 3px; flex: 1; min-width: 0; }
+  & strong { font-size: 15px; line-height: 1.25; }
+  & > span > span { font-size: 13px; color: var(--p-muted); line-height: 1.35; }
+  & > svg { color: var(--p-muted); flex-shrink: 0; transition: transform .2s, color .2s; }
+  &:hover { border-color: var(--p-text); transform: translateY(-1px); }
+  &:hover > svg { color: var(--p-text); transform: translateX(3px) rotate(0); }
+}
