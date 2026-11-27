@@ -165,3 +165,15 @@
   .sign-course-body strong { font-size: 21px; }
 }
 
+
+/* Header art: the landing's reaching hands, faded into the page on the left. */
+.sign-courses-head { align-items: center; flex-wrap: nowrap; }
+.sign-courses-art {
+  flex: 1; max-width: 520px; height: 150px; border-radius: 22px; overflow: hidden; position: relative;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 30%);
+          mask-image: linear-gradient(90deg, transparent 0%, #000 30%);
+}
+.sign-courses-art img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 78%; display: block; animation: sign-courses-drift 18s ease-in-out infinite alternate; }
+@keyframes sign-courses-drift { from { transform: scale(1.02); } to { transform: scale(1.1); } }
+@media (prefers-reduced-motion: reduce) { .sign-courses-art img { animation: none; } }
+@media (max-width: 760px) { .sign-courses-art { display: none; } }
