@@ -143,11 +143,6 @@ export default function LandingPage() {
                   </a>
                 </div>
               </div>
-              <dl className="lp-stats">
-                <div><dt>33 + 42</dt><dd>{at("буквы дактиля РЖЯ и ҚЖЯ", "fingerspelling letters, RSL + KSL", "РЖЯ және ҚЖЯ дактиль әріптері")}</dd></div>
-                <div><dt>1 750+</dt><dd>{at("слов на видео носителей", "words on native signer video", "ана тілі иелерінің бейнесіндегі сөз")}</dd></div>
-                <div><dt>3</dt><dd>{at("уровня с нуля: A1, A2, B1", "levels from zero: A1, A2, B1", "нөлден деңгей: A1, A2, B1")}</dd></div>
-              </dl>
             </div>
           </section>
           <div className="mentor-format-strip">

@@ -1,7 +1,7 @@
 import { t } from "../i18n";
 import { at } from "../i18n/automation";
 import { useState, type FormEvent } from "react";
-import { Check, Save, UserRound, Settings2, Palette, CircleHelp, ArrowRight, Moon, Sun } from "lucide-react";
+import { Check, Save, UserRound, Palette, CircleHelp, ArrowRight, Moon, Sun } from "lucide-react";
 import { Link } from "react-router-dom";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import { SignLangSwitcher } from "../components/SignLangSwitcher";
@@ -93,79 +93,66 @@ export function SettingsPage() {
       setBusy(false);
     }
   }
+  const roleName = t(
+    user!.role === "Admin" ? "Администратор" : user!.role === "Lecturer" ? "Преподаватель" : "Студент",
+  );
   return (
-    <div className="profile-settings-page">
-      <div className="page-heading">
-        <div>
-          <span className="eyebrow">{t("ПУСТЬ ВСЁ БУДЕТ ПО-ВАШЕМУ")}</span>
-          <h1>{t("Настройки")}</h1>
-          <p>
-            {at(
-              "Ваш профиль. Скорость жестов можно менять в плеере занятия.",
-              "Your profile. Adjust signing speed in the lesson viewer.",
-              "Сіздің профиліңіз. Ым қарқынын сабақ ойнатқышында өзгертуге болады.",
-            )}
-          </p>
-        </div>
-        <Settings2
-          className="profile-heading-art"
-          size={88}
-          aria-hidden="true"
-        />
+    <div className="profile-settings-page settings-compact">
+      <div className="settings-head">
+        <h1>{t("Настройки")}</h1>
+        <p>
+          {at(
+            "Всё на одном экране: внешний вид, язык и профиль.",
+            "Everything on one screen: appearance, language and profile.",
+            "Барлығы бір экранда: сыртқы түрі, тіл және профиль.",
+          )}
+        </p>
       </div>
       <ErrorMessage message={error} />
-      {success && (
-        <div className="success-msg" role="status">
-          <Check size={18} />
-          {success}
-        </div>
-      )}
-      <div className="settings-layout settings-simple">
-        <form className="panel" onSubmit={profile}>
+      <div className="settings-grid">
+        <AppearancePanel />
+        <form className="panel settings-profile" onSubmit={profile}>
           <div className="profile-panel-heading">
             <span className="profile-panel-icon" aria-hidden="true">
-              <UserRound size={25} />
+              <UserRound size={22} />
             </span>
             <h2>{t("Личный профиль")}</h2>
           </div>
+          <div className="settings-person">
+            <span className="settings-avatar" aria-hidden="true">{(name || user!.email).trim().charAt(0).toUpperCase()}</span>
+            <span>
+              <b>{user!.email}</b>
+              <small id="profile-role-hint" title={t("Роль назначает только администратор через админ-панель.")}>{roleName}</small>
+            </span>
+          </div>
           <label>
             {t("Имя")}
-            <input
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              minLength={2}
-              maxLength={80}
-              autoComplete="name"
-            />
+            <span className="settings-name-row">
+              <input
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                  setSuccess("");
+                }}
+                required
+                minLength={2}
+                maxLength={80}
+                autoComplete="name"
+              />
+              <button className="button primary" disabled={busy || name.trim() === user!.fullName}>
+                {success ? <Check size={17} /> : <Save size={17} />}
+                {success ? at("Сохранено", "Saved", "Сақталды") : at("Сохранить", "Save", "Сақтау")}
+              </button>
+            </span>
           </label>
-          <label>
-            Email
-            <input value={user!.email} disabled type="email" />
-          </label>
-          <label>
-            {t("Роль")}
-            <input
-              value={t(
-                user!.role === "Admin"
-                  ? "Администратор"
-                  : user!.role === "Lecturer"
-                    ? "Преподаватель"
-                    : "Студент",
-              )}
-              readOnly
-              aria-describedby="profile-role-hint"
-            />
-          </label>
-          <p id="profile-role-hint" className="form-hint">
-            {t("Роль назначает только администратор через админ-панель.")}
+          <p className="form-hint">
+            {at(
+              "Скорость жестов меняется прямо в плеере занятия. Роль назначает администратор.",
+              "Signing speed is changed in the lesson player. Roles are assigned by an administrator.",
+              "Ым жылдамдығы сабақ ойнатқышында өзгереді. Рөлді әкімші тағайындайды.",
+            )}
           </p>
-          <button className="button primary" disabled={busy}>
-            <Save size={17} />
-            {t("Сохранить настройки")}
-          </button>
         </form>
-        <AppearancePanel />
       </div>
     </div>
   );
