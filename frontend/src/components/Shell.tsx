@@ -25,7 +25,10 @@ import {
   ArrowUpRight,
   Layers,
 } from "lucide-react";
-import { useStudyTimer } from "../sign/dailyGoal";
+import { useStudyTimer, useDailyGoal } from "../sign/dailyGoal";
+import { useSignProgress } from "../sign/useProgress";
+import { lessonIds } from "../sign/catalog";
+import { Flame } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { Brand, ErrorMessage, messageOf } from "./UI";
 export function Shell() {
@@ -42,6 +45,15 @@ export function Shell() {
   useStudyTimer(studying);
   const translate = path === "/text-to-sign";
   const [signLang, chooseSignLang] = useChooseSignLang();
+  const goal = useDailyGoal();
+  const { progress } = useSignProgress();
+  const rslDone = lessonIds.filter((id) => progress[id]).length;
+  let kslDone = 0;
+  try {
+    kslDone = Object.keys(JSON.parse(localStorage.getItem("ksl-course-progress-v1") ?? "{}")).length;
+  } catch {
+    /* no progress yet */
+  }
   const inCourse =
     (path.startsWith("/learn") && location.search !== "") ||
     path.startsWith("/course") ||
@@ -130,24 +142,34 @@ export function Shell() {
             <span>{at("Мои курсы", "My courses", "Менің курстарым")}</span>
             {(
               [
-                ["rsl", "РЖЯ", at("Русский жестовый", "Russian Sign Language", "Орыс ым тілі")],
-                ["ksl", "ҚЖЯ", at("Казахский жестовый", "Kazakh Sign Language", "Қазақ ым тілі")],
+                ["rsl", "РЖЯ", at("Русский жестовый", "Russian Sign Language", "Орыс ым тілі"), rslDone, lessonIds.length],
+                ["ksl", "ҚЖЯ", at("Казахский жестовый", "Kazakh Sign Language", "Қазақ ым тілі"), kslDone, 0],
               ] as const
-            ).map(([code, tag, label]) => {
+            ).map(([code, tag, label, done, total]) => {
               const on = inCourse && signLang === code;
               return (
                 <Link
                   key={code}
                   to={`/learn?lang=${code}`}
-                  className={on ? "active" : undefined}
+                  className={`sidebar-course${on ? " active" : ""}`}
                   aria-current={on ? "page" : undefined}
                   onClick={() => {
                     chooseSignLang(code);
                     setMenu(false);
                   }}
                 >
-                  <i>{tag}</i>
-                  {label}
+                  <span className="sidebar-course-thumb"><img src={`/images/courses/${code}.webp`} alt="" loading="lazy" /><i>{tag}</i></span>
+                  <span className="sidebar-course-text">
+                    <b>{label}</b>
+                    <small>
+                      {done
+                        ? at(`${done} ${done === 1 ? "урок" : "уроков"} пройдено`, `${done} lessons done`, `${done} сабақ өтілді`)
+                        : at("Ещё не начат", "Not started yet", "Әлі басталмаған")}
+                    </small>
+                    {total > 0 && (
+                      <span className="sidebar-course-bar" aria-hidden="true"><span style={{ width: `${Math.min(100, (100 * done) / total)}%` }} /></span>
+                    )}
+                  </span>
                 </Link>
               );
             })}
@@ -159,6 +181,27 @@ export function Shell() {
             </NavLink>
           )}
         </nav>
+        <div className="sidebar-goal">
+          <span
+            className="sidebar-goal-ring"
+            style={{ "--p": `${Math.min(100, (100 * goal.minutes) / goal.goal)}%` } as React.CSSProperties}
+            aria-hidden="true"
+          >
+            {goal.done ? "✓" : goal.minutes}
+          </span>
+          <span className="sidebar-goal-text">
+            <b>{goal.done ? at("Цель на сегодня выполнена", "Today’s goal done", "Бүгінгі мақсат орындалды") : at(`Сегодня ${goal.minutes} из ${goal.goal} мин`, `Today ${goal.minutes} of ${goal.goal} min`, `Бүгін ${goal.minutes} / ${goal.goal} мин`)}</b>
+            <small>
+              <Flame size={13} />
+              {goal.streak
+                ? at(`Серия: ${goal.streak} дн.`, `Streak: ${goal.streak} days`, `Қатарынан: ${goal.streak} күн`)
+                : at("Начните серию сегодня", "Start a streak today", "Бүгін бастаңыз")}
+            </small>
+          </span>
+          <Link className="sidebar-goal-go" to={`/learn?lang=${signLang}`} onClick={() => setMenu(false)}>
+            {at("Заниматься", "Practise", "Жаттығу")}
+          </Link>
+        </div>
         <div className="sidebar-bottom">
           <Link to="/" onClick={() => setMenu(false)}>
             <ArrowUpRight size={18} />
