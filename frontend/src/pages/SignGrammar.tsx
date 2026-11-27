@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { ArrowRight, Check, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen, Check, PlayCircle, Target, X } from "lucide-react";
 import { at } from "../i18n/automation";
 import { OrderTask, SignChain } from "../components/SignChain";
 import { GRAMMAR, type GrammarTask, type GrammarTrack } from "../sign/course";
 import "./sign-workspace.css";
 import "./sign-vocabulary.css";
 import "./sign-grammar.css";
+import "./grammar-steps.css";
 
 const KEY = "rsl-grammar-progress-v1";
 function readDone(): Record<string, number> {
@@ -28,9 +29,13 @@ export function SignGrammarPage() {
   const open = (lessonId: string, t = track) => setParams({ track: t, lesson: lessonId });
   const [example, setExample] = useState(0);
   const [results, setResults] = useState<Record<number, boolean>>({});
+  const [step, setStep] = useState<0 | 1 | 2>(0);
+  const [task, setTask] = useState(0);
   useEffect(() => {
     setExample(0);
     setResults({});
+    setStep(0);
+    setTask(0);
   }, [lesson.id]);
   const allAnswered = Object.keys(results).length === lesson.tasks.length;
   useEffect(() => {
@@ -65,57 +70,130 @@ export function SignGrammarPage() {
           </button>
         </div>
       </div>
-      <div className="grammar-layout">
-        <nav className="grammar-list" aria-label={at("Уроки грамматики", "Grammar lessons", "Грамматика сабақтары")}>
+      <div className="grammar-layout gr-layout">
+        <nav className="grammar-list gr-list" aria-label={at("Уроки грамматики", "Grammar lessons", "Грамматика сабақтары")}>
           {lessons.map((l, i) => (
             <button key={l.id} aria-current={l.id === lesson.id ? "page" : undefined} onClick={() => open(l.id)}>
-              <span>{i + 1}</span>
+              <span>{done[l.id] !== undefined ? <Check size={13} /> : i + 1}</span>
               {l.title}
-              {done[l.id] !== undefined && <Check size={15} className="grammar-done" />}
             </button>
           ))}
         </nav>
-        <section className="panel grammar-rule">
-          <div className="grammar-text">
-          <ul>
-            {lesson.points.map((p) => <li key={p}>{p}</li>)}
-          </ul>
-          {lesson.examples.length > 1 && (
-            <div className="vocab-chips">
-              {lesson.examples.map((e, i) => (
-                <button key={e.ru} aria-pressed={i === example} onClick={() => setExample(i)}>{e.ru}</button>
-              ))}
-            </div>
-          )}
-          <p className="grammar-example">
-            <strong>{ex.ru}</strong>
-            <span>{ex.gloss ?? ex.signs.map((s) => s.replace(/[!?]$/, "").toLocaleUpperCase("ru")).join(" + ")}</span>
-            {ex.tip && <em>{ex.tip}</em>}
-          </p>
-          </div>
-          <SignChain key={ex.ru} signs={ex.signs} compact />
-        </section>
-        <section className="panel grammar-tasks">
-          <h2>{at("Упражнения", "Exercises", "Жаттығулар")}</h2>
-          {lesson.tasks.map((t, i) => (
-            <div key={`${lesson.id}-${i}`} className="grammar-task">
-              {t.kind === "order" ? (
-                <OrderTask ru={t.ru} answer={t.answer} also={t.also} why={t.why} onResult={(ok) => setResults((r) => ({ ...r, [i]: ok }))} />
-              ) : (
-                <Choice task={t} onResult={(ok) => setResults((r) => ({ ...r, [i]: ok }))} />
-              )}
-            </div>
-          ))}
-          {allAnswered && (
-            <div className="grammar-next">
-              {lessons[index + 1] ? (
-                <button className="button primary" onClick={() => open(lessons[index + 1].id)}>
-                  {at("Следующая тема", "Next topic", "Келесі тақырып")}
+        <section className="gr-main">
+          <ol className="gr-steps">
+            {[
+              [BookOpen, at("Правило", "Rule", "Ереже")],
+              [PlayCircle, at("Пример", "Example", "Мысал")],
+              [Target, at("Упражнения", "Exercises", "Жаттығулар")],
+            ].map(([Icon, name], i) => {
+              const I = Icon as typeof BookOpen;
+              return (
+                <li key={i}>
+                  <button className={i === step ? "now" : i < step ? "done" : ""} onClick={() => setStep(i as 0 | 1 | 2)}>
+                    <span>{i < step ? <Check size={14} /> : <I size={15} />}</span>
+                    {name as string}
+                  </button>
+                </li>
+              );
+            })}
+          </ol>
+
+          {step === 0 && (
+            <div className="gr-card">
+              <ol className="gr-points">
+                {lesson.points.map((p) => {
+                  const cut = p.search(/[.!?:]\s/);
+                  const head = cut > 0 && cut < p.length - 2 ? p.slice(0, cut + 1) : p;
+                  const rest = head === p ? "" : p.slice(head.length).trim();
+                  return (
+                    <li key={p}>
+                      <span>{head}</span>
+                      {rest && (
+                        <details>
+                          <summary>{at("Подробнее", "More", "Толығырақ")}</summary>
+                          <p>{rest}</p>
+                        </details>
+                      )}
+                    </li>
+                  );
+                })}
+              </ol>
+              <div className="gr-actions">
+                <button className="button primary" onClick={() => setStep(1)}>
+                  {at("Посмотреть пример", "See an example", "Мысалды көру")}
                   <ArrowRight size={18} />
                 </button>
-              ) : (
-                <Link className="button primary" to="/vocab?mode=phrases&lesson=0">{at("К фразам", "To phrases", "Сөйлемдерге")}<ArrowRight size={18} /></Link>
+              </div>
+            </div>
+          )}
+
+          {step === 1 && (
+            <div className="gr-card gr-example">
+              {lesson.examples.length > 1 && (
+                <div className="gr-chips">
+                  {lesson.examples.map((e, i) => (
+                    <button key={e.ru} aria-pressed={i === example} onClick={() => setExample(i)}>{e.ru}</button>
+                  ))}
+                </div>
               )}
+              <div className="gr-example-body">
+                <div className="gr-example-text">
+                  <strong>{ex.ru}</strong>
+                  <div className="gr-gloss">
+                    {(ex.gloss ? ex.gloss.split(/\s*\+\s*/) : ex.signs.map((s) => s.replace(/[!?]$/, "").toLocaleUpperCase("ru"))).map((g, i) => (
+                      <span key={i}>{g}</span>
+                    ))}
+                  </div>
+                  {ex.tip && <p className="gr-tip">{ex.tip}</p>}
+                </div>
+                <SignChain key={ex.ru} signs={ex.signs} compact />
+              </div>
+              <div className="gr-actions">
+                <button className="button secondary" onClick={() => setStep(0)}><ArrowLeft size={18} />{at("К правилу", "Rule", "Ережеге")}</button>
+                <button className="button primary" onClick={() => setStep(2)}>
+                  {at("К упражнениям", "To exercises", "Жаттығуларға")}
+                  <ArrowRight size={18} />
+                </button>
+              </div>
+            </div>
+          )}
+
+          {step === 2 && (
+            <div className="gr-card gr-tasks">
+              <div className="gr-progress" aria-label={`${Math.min(task + 1, lesson.tasks.length)} / ${lesson.tasks.length}`}>
+                {lesson.tasks.map((_, i) => (
+                  <i key={i} className={results[i] === true ? "ok" : results[i] === false ? "no" : i === task ? "now" : ""} />
+                ))}
+                <small>{Math.min(task + 1, lesson.tasks.length)} / {lesson.tasks.length}</small>
+              </div>
+              {lesson.tasks.map((t, i) =>
+                i !== task ? null : (
+                  <div key={`${lesson.id}-${i}`} className="grammar-task">
+                    {t.kind === "order" ? (
+                      <OrderTask ru={t.ru} answer={t.answer} also={t.also} why={t.why} onResult={(ok) => setResults((r) => ({ ...r, [i]: ok }))} />
+                    ) : (
+                      <Choice task={t} onResult={(ok) => setResults((r) => ({ ...r, [i]: ok }))} />
+                    )}
+                  </div>
+                ),
+              )}
+              <div className="gr-actions">
+                {results[task] !== undefined && task + 1 < lesson.tasks.length && (
+                  <button className="button primary" onClick={() => setTask(task + 1)}>
+                    {at("Следующее задание", "Next task", "Келесі тапсырма")}
+                    <ArrowRight size={18} />
+                  </button>
+                )}
+                {allAnswered &&
+                  (lessons[index + 1] ? (
+                    <button className="button primary" onClick={() => open(lessons[index + 1].id)}>
+                      {at("Следующая тема", "Next topic", "Келесі тақырып")}
+                      <ArrowRight size={18} />
+                    </button>
+                  ) : (
+                    <Link className="button primary" to="/vocab?mode=phrases&lesson=0">{at("К фразам", "To phrases", "Сөйлемдерге")}<ArrowRight size={18} /></Link>
+                  ))}
+              </div>
             </div>
           )}
         </section>

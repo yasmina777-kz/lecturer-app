@@ -1,0 +1,68 @@
+/* Grammar: one step at a time — rule, example, exercises. */
+:root .product-ui[data-product-ui][data-product-theme] .grammar {
+  & .gr-layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 24px; align-items: start; }
+  & .gr-list { position: sticky; top: 16px; display: grid; gap: 2px; max-height: calc(100vh - 140px); overflow: auto; padding-right: 4px; }
+  & .gr-list button {
+    display: flex; align-items: center; gap: 10px; width: 100%; padding: 8px 10px; border: 0; border-radius: 10px;
+    background: transparent; color: var(--p-muted); font: inherit; font-size: 14px; line-height: 1.3; text-align: left; cursor: pointer;
+  }
+  & .gr-list button:hover { background: var(--p-subtle); color: var(--p-text); }
+  & .gr-list button > span {
+    flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center;
+    background: var(--p-subtle); color: var(--p-muted); font-size: 12px; font-weight: 700;
+  }
+  & .gr-list button[aria-current="page"] { background: var(--p-blue-soft); color: var(--p-text); font-weight: 600; box-shadow: none; border: 0; }
+  & .gr-list button[aria-current="page"] > span { background: var(--p-blue); color: #fff; }
+
+  & .gr-main { display: grid; gap: 14px; min-width: 0; }
+  & .gr-steps { list-style: none; margin: 0; padding: 4px; display: inline-flex; gap: 4px; justify-self: start; border-radius: 999px; background: var(--p-subtle); }
+  & .gr-steps button {
+    display: inline-flex; align-items: center; gap: 8px; height: 38px; padding: 0 16px 0 8px; border: 0; border-radius: 999px;
+    background: transparent; color: var(--p-muted); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+  }
+  & .gr-steps button > span { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--p-surface); }
+  & .gr-steps button.now { background: var(--p-surface); color: var(--p-text); box-shadow: 0 1px 4px #10182814; }
+  & .gr-steps button.now > span { background: var(--p-blue); color: #fff; }
+  & .gr-steps button.done > span { background: #1f9d63; color: #fff; }
+
+  & .gr-card { padding: 22px 24px; border-radius: 22px; background: var(--p-surface); border: 1px solid var(--p-line); color: var(--p-text); animation: gr-in .25s ease both; }
+  & .gr-points { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; counter-reset: gr; }
+  & .gr-points li { counter-increment: gr; position: relative; padding: 12px 14px 12px 48px; border-radius: 14px; background: var(--p-subtle); font-size: 16px; line-height: 1.45; }
+  & .gr-points li::before {
+    content: counter(gr); position: absolute; left: 14px; top: 12px; width: 24px; height: 24px; border-radius: 50%;
+    display: grid; place-items: center; background: var(--p-surface); color: var(--p-blue); font-size: 13px; font-weight: 800;
+  }
+  & .gr-points details { margin-top: 4px; }
+  & .gr-points summary { cursor: pointer; color: var(--p-blue); font-size: 13px; font-weight: 600; list-style: none; }
+  & .gr-points summary::-webkit-details-marker { display: none; }
+  & .gr-points details p { margin: 6px 0 0; color: var(--p-muted); font-size: 14.5px; }
+  & .gr-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; margin-top: 18px; }
+  & .gr-actions:empty { display: none; }
+  & .gr-actions .button { display: inline-flex; align-items: center; gap: 8px; height: 46px; padding: 0 20px; border-radius: 14px; }
+  & .gr-actions .button.primary { background: var(--p-blue); color: #fff; border: 0; }
+
+  & .gr-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  & .gr-chips button { height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--p-line); background: var(--p-surface); color: var(--p-text); font: inherit; font-size: 14px; cursor: pointer; }
+  & .gr-chips button[aria-pressed="true"] { background: var(--p-blue); border-color: var(--p-blue); color: #fff; }
+  & .gr-example-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 24px; align-items: start; }
+  & .gr-example-text strong { display: block; font-size: 24px; line-height: 1.25; letter-spacing: -0.01em; }
+  & .gr-gloss { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  & .gr-gloss span { padding: 6px 12px; border-radius: 10px; background: var(--p-blue-soft); color: var(--p-blue); font-weight: 750; font-size: 14px; letter-spacing: .02em; }
+  & .gr-tip { margin: 14px 0 0; color: var(--p-muted); font-size: 14.5px; line-height: 1.5; }
+
+  & .gr-progress { display: flex; align-items: center; gap: 6px; margin-bottom: 16px; }
+  & .gr-progress i { flex: 1; max-width: 60px; height: 6px; border-radius: 6px; background: var(--p-subtle); }
+  & .gr-progress i.now { background: var(--p-blue); }
+  & .gr-progress i.ok { background: #1f9d63; }
+  & .gr-progress i.no { background: #d04a35; }
+  & .gr-progress small { margin-left: 8px; color: var(--p-muted); font-size: 13px; }
+  & .gr-tasks .order-ru { font-size: 20px; font-weight: 650; margin: 0 0 12px; }
+
+  @media (max-width: 900px) {
+    & .gr-layout { grid-template-columns: 1fr; }
+    & .gr-list { position: static; display: flex; overflow-x: auto; max-height: none; gap: 6px; padding-bottom: 4px; }
+    & .gr-list button { width: auto; white-space: nowrap; }
+    & .gr-example-body { grid-template-columns: 1fr; }
+  }
+}
+@keyframes gr-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }

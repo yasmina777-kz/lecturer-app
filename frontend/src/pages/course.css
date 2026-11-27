@@ -1137,3 +1137,18 @@ button.ksl-topic-card { padding: 0; text-align: left; font: inherit; cursor: poi
   & .lvl-desc { max-width: 240px; font-size: 12.5px; color: var(--p-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; opacity: 0; height: 0; transition: opacity .2s; }
   & button.lvl-tab[aria-selected="true"] .lvl-desc { opacity: 1; height: auto; }
 }
+
+/* Levels v3: big typographic tabs — the level code is the tab, a short bar marks the current one. */
+:root .product-ui[data-product-ui][data-product-theme] .course .course-levels {
+  gap: 4px; padding: 0; border-bottom: 1px solid var(--p-line); margin-bottom: 18px;
+  & button.lvl-tab { justify-items: start; text-align: left; padding: 6px 14px 14px; gap: 2px; border-radius: 0; }
+  & .lvl-line, & .lvl-node, & .lvl-desc { display: none !important; }
+  & .lvl-label { margin: 0; display: flex; align-items: baseline; gap: 8px; font-size: 14px; color: var(--p-muted); }
+  & .lvl-label b { font-size: 30px; font-weight: 750; letter-spacing: -0.03em; color: color-mix(in srgb, var(--p-text) 35%, transparent); transition: color .2s; }
+  & .lvl-count { font-size: 12px; }
+  & button.lvl-tab::after { content: ""; position: absolute; left: 14px; right: 14px; bottom: -1px; height: 3px; border-radius: 3px 3px 0 0; background: transparent; transition: background .2s; }
+  & button.lvl-tab:hover .lvl-label b { color: var(--p-text); }
+  & button.lvl-tab[aria-selected="true"] .lvl-label b { color: var(--p-text); }
+  & button.lvl-tab[aria-selected="true"] .lvl-label { color: var(--p-text); }
+  & button.lvl-tab[aria-selected="true"]::after { background: var(--p-blue); }
+}

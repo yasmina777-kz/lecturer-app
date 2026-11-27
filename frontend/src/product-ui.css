@@ -61,7 +61,7 @@
   & .brand-link {
     display: block;
     padding: 0 12px;
-    margin: 0 0 42px;
+    margin: 0 0 24px;
   }
   & .brand {
     font-size: 21px;
@@ -3842,7 +3842,8 @@
     }
     &.sidebar-collapsed .sidebar :is(nav, .sidebar-bottom) > a svg { width: 17px; height: 17px; }
     &.sidebar-collapsed .sidebar .brand-symbol { width: 30px; height: 30px; }
-    &.sidebar-collapsed .sidebar nav { gap: 4px; margin-top: 14px; }
+    &.sidebar-collapsed .sidebar nav { gap: 2px; margin-top: 4px; }
+    &.sidebar-collapsed .sidebar .brand-link { margin: 0 0 16px; padding: 0; min-height: 0; }
     &.sidebar-collapsed .sidebar nav > a::after, &.sidebar-collapsed .sidebar .sidebar-courses a::after { display: none; }
     &.sidebar-collapsed .sidebar .sidebar-courses { width: 100%; padding-top: 10px; justify-items: center; }
     &.sidebar-collapsed .sidebar .sidebar-courses > span { display: none; }
