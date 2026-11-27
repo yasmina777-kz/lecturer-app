@@ -215,85 +215,79 @@ const LEVELS: { id: CefrLevel; title: string; name: string; desc: string; icon: 
 
 
 const B2_SKILLS = () => [
-  { icon: Video, title: at("Живая речь", "Natural speech", "Тірі сөйлеу"), text: at("Понимать длинные рассказы носителей в обычном темпе.", "Follow long stories at natural speed.", "Ұзын әңгімелерді түсіну.") },
-  { icon: Shapes, title: at("Классификаторы", "Classifiers", "Классификаторлар"), text: at("Показывать форму, размер и движение предметов руками.", "Show shape, size and motion with handshapes.", "Пішін мен қозғалысты көрсету.") },
-  { icon: Drama, title: at("Ролевой сдвиг", "Role shift", "Рөлдік ауысу"), text: at("Говорить «за героя» корпусом и взглядом, шутить, рассказывать.", "Speak as a character with body and gaze.", "Кейіпкер атынан сөйлеу.") },
-  { icon: Briefcase, title: at("Сложная лексика", "Advanced vocabulary", "Күрделі сөздік"), text: at("Работа, наука, медицина, право — тысячи жестов.", "Work, science, medicine, law — thousands of signs.", "Мыңдаған ым.") },
+  { photo: "/images/rsl-units/37.webp", title: at("Живая речь", "Natural speech", "Тірі сөйлеу"), text: at("Понимать длинные рассказы носителей в обычном темпе.", "Follow long stories at natural speed.", "Ұзын әңгімелерді түсіну.") },
+  { photo: "/images/rsl-units/38.webp", title: at("Классификаторы", "Classifiers", "Классификаторлар"), text: at("Показывать форму, размер и движение предметов руками.", "Show shape, size and motion with handshapes.", "Пішін мен қозғалысты көрсету.") },
+  { photo: "/images/rsl-units/39.webp", title: at("Ролевой сдвиг", "Role shift", "Рөлдік ауысу"), text: at("Говорить «за героя» корпусом и взглядом, шутить, рассказывать.", "Speak as a character with body and gaze.", "Кейіпкер атынан сөйлеу.") },
+  { photo: "/images/rsl-units/42.webp", title: at("Сложная лексика", "Advanced vocabulary", "Күрделі сөздік"), text: at("Работа, наука, медицина, право — тысячи жестов.", "Work, science, medicine, law — thousands of signs.", "Мыңдаған ым.") },
+];
+
+/** Photo link card shared by «Перед стартом», B2 next steps and extra practice. */
+function PhotoLink({ to, photo, title, text, i = 0 }: { to: string; photo: string; title: string; text: string; i?: number }) {
+  return (
+    <Link className="course-before-card before-photo course-anim" to={to} style={{ "--i": i } as React.CSSProperties}>
+      <img src={photo} alt="" loading="lazy" />
+      <span><strong>{title}</strong><span>{text}</span></span>
+      <ArrowRight size={18} aria-hidden="true" />
+    </Link>
+  );
+}
+
+const EXTRA_PRACTICE = () => [
+  { to: "/understanding", photo: "/images/rsl-units/08.webp", title: at("Понимание жестов", "Understanding signs", "Ымдарды түсіну"), text: at("Видео без подписи — выберите смысл", "Unlabelled video — pick the meaning", "Жазусыз бейне — мағынасын таңдаңыз") },
+  { to: "/dialogues", photo: "/images/rsl-units/25.webp", title: at("Диалоги", "Dialogues", "Диалогтар"), text: at("Бытовые сцены по ролям", "Everyday scenes, role by role", "Рөлдер бойынша көріністер") },
+  { to: "/grammar", photo: "/images/rsl-units/21.webp", title: at("Грамматика", "Grammar", "Грамматика"), text: at("Порядок жестов, вопросы, отрицание", "Sign order, questions, negation", "Ым тәртібі, сұрақ, болымсыздық") },
+  { to: "/numbers", photo: "/images/rsl-units/31.webp", title: at("Числа", "Numbers", "Сандар"), text: at("Цифры, цены, время", "Digits, prices, time", "Сандар, баға, уақыт") },
+  { to: "/face-trainer", photo: "/images/rsl-units/47.webp", title: at("Мимика", "Facial grammar", "Мимика"), text: at("Брови и взгляд в вопросах", "Brows and gaze in questions", "Сұрақтағы қас пен көзқарас") },
+  { to: "/live-practice", photo: "/images/rsl-units/17.webp", title: at("Живая практика", "Live practice", "Тірі тәжірибе"), text: at("Зеркало и где найти собеседников", "Mirror and where to find signers", "Айна және серіктестер") },
 ];
 
 function B2Roadmap({ count, onPick }: { count: (l: CefrLevel) => number[]; onPick: (l: CefrLevel) => void }) {
   const path = LEVELS.slice(0, 3);
   return (
-    <div className="b2 course-anim">
-      <section className="panel b2-path">
+    <div className="b2 b2-plain course-anim">
+      <section className="b2-track" aria-label={at("Ваш путь к B2", "Your path to B2", "B2-ге жол")}>
         <h2>{at("Ваш путь к B2", "Your path to B2", "B2-ге жол")}</h2>
-        <ol className="b2-steps">
+        <ol>
           {path.map((l) => {
             const [d, t] = count(l.id);
-            const pct = t ? Math.round((d / t) * 100) : 0;
-            const Icon = l.icon;
             return (
-              <li key={l.id} className={d === t && t ? "done" : ""} data-level={l.id}>
+              <li key={l.id}>
                 <button onClick={() => onPick(l.id)}>
-                  <span className="b2-step-icon">{d === t && t ? <Check size={22} /> : <Icon size={22} />}</span>
-                  <strong>{l.title}</strong>
-                  <small>{l.name}</small>
-                  <span className="b2-bar"><i style={{ width: `${pct}%` }} /></span>
-                  <small>{d}/{t}</small>
+                  <LevelTabBody id={l.title} name={l.name} desc={l.desc} done={d} total={t} />
                 </button>
               </li>
             );
           })}
-          <li className="goal" data-level="B2">
+          <li className="b2-goal">
             <div>
-              <span className="b2-step-icon"><Mountain size={22} /></span>
-              <strong>B2+</strong>
-              <small>{at("Свобода", "Fluency", "Еркіндік")}</small>
-              <span className="b2-flag"><Flag size={14} /> {at("цель", "goal", "мақсат")}</span>
+              <span className="lvl-head"><b>B2+</b><span>{at("Свобода", "Fluency", "Еркіндік")}</span></span>
+              <span className="lvl-desc">{at("Цель курса", "The goal", "Курстың мақсаты")}</span>
             </div>
           </li>
         </ol>
       </section>
 
       <h2 className="b2-heading">{at("Что умеет человек на B2", "What a B2 signer can do", "B2 деңгейінде не істей алады")}</h2>
-      <div className="b2-skills">
+      <div className="b2-skills b2-skills--photo">
         {B2_SKILLS().map((s) => (
-          <article key={s.title} className="panel b2-skill">
-            <span className="b2-skill-icon"><s.icon size={24} /></span>
+          <article key={s.title} className="b2-skill-photo">
+            <img src={s.photo} alt="" loading="lazy" />
             <h3>{s.title}</h3>
             <p>{s.text}</p>
           </article>
         ))}
       </div>
 
-      <section className="panel b2-why">
-        <span className="b2-skill-icon"><HeartHandshake size={24} /></span>
-        <div>
-          <h3>{at("Почему этого уровня ещё нет в курсе", "Why this level is not in the course yet", "Неге бұл деңгей әлі жоқ")}</h3>
-          <p>{at("Для B2 нужны длинные видео носителей и проверка преподавателем РЖЯ — в открытых данных их нет. Мы не хотим учить вас неправильно, поэтому честно ведём туда через живую практику.", "B2 needs long native-signer videos and a teacher's review, which open data lacks. Until then we guide you there through live practice.", "B2 үшін ана тілді адамдардың видеолары керек.")}</p>
-        </div>
-      </section>
+      <p className="b2-note">
+        <strong>{at("Почему этого уровня ещё нет в курсе. ", "Why this level is not in the course yet. ", "Неге бұл деңгей әлі жоқ. ")}</strong>
+        {at("Для B2 нужны длинные видео носителей и проверка преподавателем РЖЯ — в открытых данных их нет. Мы не хотим учить вас неправильно, поэтому честно ведём туда через живую практику.", "B2 needs long native-signer videos and a teacher's review, which open data lacks. Until then we guide you there through live practice.", "B2 үшін ана тілді адамдардың видеолары керек.")}
+      </p>
 
       <h2 className="b2-heading">{at("Что делать уже сейчас", "What to do now", "Қазір не істеу керек")}</h2>
-      <div className="b2-actions">
-        <Link className="panel b2-action" to="/course?level=B1">
-          <MessagesSquare size={22} />
-          <strong>{at("Пройти B1", "Finish B1", "B1 өту")}</strong>
-          <span>{at("Пространство, рассказ, мнение", "Space, story, opinion", "Кеңістік, әңгіме")}</span>
-          <ArrowRight size={18} />
-        </Link>
-        <Link className="panel b2-action" to="/understanding/phrases">
-          <Ear size={22} />
-          <strong>{at("Тренировать понимание", "Train understanding", "Түсінуді жаттықтыру")}</strong>
-          <span>{at("Смотреть фразы и понимать смысл", "Watch phrases, get the meaning", "Фразаларды түсіну")}</span>
-          <ArrowRight size={18} />
-        </Link>
-        <Link className="panel b2-action" to="/live-practice">
-          <UsersRound size={22} />
-          <strong>{at("Живая практика", "Live practice", "Тірі тәжірибе")}</strong>
-          <span>{at("Зеркало с носителем и где найти собеседников", "Mirror and where to find signers", "Айна және серіктестер")}</span>
-          <ArrowRight size={18} />
-        </Link>
+      <div className="course-before-grid">
+        <PhotoLink to="/course?level=B1" photo="/images/rsl-units/42.webp" title={at("Пройти B1", "Finish B1", "B1 өту")} text={at("Пространство, рассказ, мнение", "Space, story, opinion", "Кеңістік, әңгіме")} />
+        <PhotoLink to="/understanding/phrases" photo="/images/rsl-units/08.webp" title={at("Тренировать понимание", "Train understanding", "Түсінуді жаттықтыру")} text={at("Смотреть фразы и понимать смысл", "Watch phrases, get the meaning", "Фразаларды түсіну")} />
+        <PhotoLink to="/live-practice" photo="/images/rsl-units/17.webp" title={at("Живая практика", "Live practice", "Тірі тәжірибе")} text={at("Зеркало с носителем и где найти собеседников", "Mirror and where to find signers", "Айна және серіктестер")} />
       </div>
     </div>
   );
@@ -436,6 +430,14 @@ export function CoursePage() {
               );
             })}
           </div>
+          {!kz && (
+            <section className="course-extra">
+              <h2 className="course-section-title">{at("Дополнительная практика", "Extra practice", "Қосымша жаттығу")}</h2>
+              <div className="course-before-grid">
+                {EXTRA_PRACTICE().map((c, i) => <PhotoLink key={c.to} {...c} i={i} />)}
+              </div>
+            </section>
+          )}
         </>
       )}
       </>

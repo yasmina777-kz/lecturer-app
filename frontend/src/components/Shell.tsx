@@ -211,9 +211,9 @@ export function Shell() {
         <main className="main-content" ref={workspace}>
           <ErrorMessage message={error} />
           {learnPaths.includes(path) && (
-            <Link to="/learn" className="shell-back">
+            <Link to="/course" className="shell-back">
               <ArrowLeft size={16} />
-              {at("Учиться", "Learn", "Оқу")}
+              {at("К курсу", "Back to course", "Курсқа")}
             </Link>
           )}
           <Outlet />

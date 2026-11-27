@@ -774,7 +774,7 @@ export function SignUnderstandingPage() {
   }
   return (
     <div
-      className={`sign-workspace activity-workspace understanding-workspace ${!session ? "understanding-overview" : ""}`}
+      className={`sign-workspace activity-workspace understanding-workspace ${!session ? "und-overview" : ""}`}
     >
       {session ? (
         <UnderstandingSession
@@ -786,118 +786,61 @@ export function SignUnderstandingPage() {
         />
       ) : (
         <>
-          <div className="page-heading">
+          <header className="und-head">
             <div>
-              <span className="eyebrow">
-                {at(
-                  "СМОТРЕТЬ И ПОНИМАТЬ",
-                  "WATCH AND UNDERSTAND",
-                  "ҚАРАУ ЖӘНЕ ТҮСІНУ",
-                )}
-              </span>
-              <h1>
-                {at(
-                  "Что означает этот жест?",
-                  "What does this sign mean?",
-                  "Бұл ым нені білдіреді?",
-                )}
-              </h1>
+              <span className="und-kicker">{at("Смотреть и понимать", "Watch and understand", "Қарау және түсіну")}</span>
+              <h1>{at("Понимайте жесты других людей", "Understand other people’s signs", "Басқалардың ымын түсініңіз")}</h1>
               <p>
                 {at(
-                  "Смотрите видео человека без подписи и выбирайте значение. Здесь тренируется понимание чужих жестов — камера не нужна.",
-                  "Watch an unlabelled human video and choose its meaning. Practise understanding other people, without a camera.",
-                  "Адамның жазусыз бейнесін көріп, мағынасын таңдаңыз. Басқаның ымын түсінуді камерасыз жаттықтырыңыз.",
+                  "Носитель показывает жест или фразу без подписи — вы выбираете смысл. Камера не нужна.",
+                  "A signer shows a sign or a phrase without captions — you pick the meaning. No camera needed.",
+                  "Ана тілі иесі ымды жазусыз көрсетеді — сіз мағынасын таңдайсыз. Камера қажет емес.",
                 )}
               </p>
             </div>
+            <img className="und-head-photo" src="/images/rsl-units/08.webp" alt="" />
+          </header>
+          <div className="und-modes">
+            <section className="und-card und-card--main">
+              <img src="/images/rsl-units/37.webp" alt="" loading="lazy" />
+              <div className="und-card-body">
+                <span className="und-step">{at("Шаг 1 · отдельные жесты", "Step 1 · single signs", "1-қадам · жеке ымдар")}</span>
+                <h2>{at("Что означает этот жест?", "What does this sign mean?", "Бұл ым нені білдіреді?")}</h2>
+                <p>{at("8 коротких видео за раз. Видео можно пересматривать, ответ откроется после проверки.", "8 short videos per round. Replay freely; the answer shows after you check.", "Бір айналымда 8 бейне. Қайта көруге болады.")}</p>
+                <label className="und-topic">
+                  <span>{at("Тема", "Topic", "Тақырып")}</span>
+                  <select value={category} onChange={(e) => setCategory(e.target.value)}>
+                    <option value="all">{at("Все темы", "All topics", "Барлық тақырыптар")}</option>
+                    {categories.map((c) => (
+                      <option key={c}>{c}</option>
+                    ))}
+                  </select>
+                  <small>{pool.length} {at("видео", "videos", "бейне")}</small>
+                </label>
+                <div className="und-actions">
+                  <button className="button primary" onClick={() => start()}>
+                    <Play size={18} />
+                    {at("Начать", "Start", "Бастау")}
+                  </button>
+                  <button className="button secondary" id="review" disabled={!pool.some((e) => review.has(e.id))} onClick={() => start(true)}>
+                    <RotateCcw size={17} />
+                    {review.size
+                      ? at(`Повторить ошибки · ${review.size}`, `Review mistakes · ${review.size}`, `Қателерді қайталау · ${review.size}`)
+                      : at("Повторить ошибки", "Review mistakes", "Қателерді қайталау")}
+                  </button>
+                </div>
+              </div>
+            </section>
+            <Link className="und-card und-card--link" to="/understanding/phrases">
+              <img src="/images/rsl-units/25.webp" alt="" loading="lazy" />
+              <div className="und-card-body">
+                <span className="und-step">{at("Шаг 2 · целые фразы", "Step 2 · whole phrases", "2-қадам · тұтас сөйлемдер")}</span>
+                <h2>{at("Понимание фраз", "Understanding phrases", "Сөйлемдерді түсіну")}</h2>
+                <p>{at("Носитель показывает целое предложение — выберите, что он сказал.", "A signer shows a whole sentence — choose what they said.", "Тұтас сөйлемді түсіну.")}</p>
+                <span className="und-open">{at("Открыть", "Open", "Ашу")} <ArrowRight size={17} /></span>
+              </div>
+            </Link>
           </div>
-          <Link className="panel activity-start understanding-phrases-link" to="/understanding/phrases">
-            <div>
-              <h2>{at("Понимание фраз", "Understanding phrases", "Сөйлемдерді түсіну")}</h2>
-              <p>
-                {at(
-                  "Следующий шаг: носители показывают целую фразу — выберите её смысл.",
-                  "Next step: signers show a whole phrase — choose its meaning.",
-                  "Келесі қадам: тұтас сөйлемді түсіну.",
-                )}
-              </p>
-            </div>
-            <ArrowRight />
-          </Link>
-          <section className="panel activity-start">
-            <div>
-              <h2>
-                {at("Короткая тренировка", "A short practice", "Қысқа жаттығу")}
-              </h2>
-              <p>
-                {at(
-                  "До 8 заданий за занятие. Ответы появляются после проверки. Повторный просмотр разрешён.",
-                  "Up to 8 questions per session. Answers are revealed after checking. Replay as often as needed.",
-                  "Бір жаттығуда 8 тапсырмаға дейін. Жауап тексергеннен кейін ашылады. Қайта көруге болады.",
-                )}
-              </p>
-              <label>
-                {at("Тема", "Topic", "Тақырып")}
-                <select
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                >
-                  <option value="all">
-                    {at("Все темы", "All topics", "Барлық тақырыптар")}
-                  </option>
-                  {categories.map((c) => (
-                    <option key={c}>{c}</option>
-                  ))}
-                </select>
-              </label>
-              <p>
-                {pool.length}{" "}
-                {at(
-                  "видеообразцов в теме",
-                  "reference videos in this topic",
-                  "тақырыптағы бейнеүлгі",
-                )}
-              </p>
-            </div>
-            <div className="activity-start-actions">
-              <button className="button primary" onClick={() => start()}>
-                <Play size={19} />
-                {at("Начать тренировку", "Start practice", "Жаттығуды бастау")}
-              </button>
-              <button
-                className="button secondary"
-                id="review"
-                disabled={!pool.some((e) => review.has(e.id))}
-                onClick={() => start(true)}
-              >
-                <RotateCcw size={18} />
-                {at(
-                  "Повторить сложные",
-                  "Review difficult signs",
-                  "Қиын ымдарды қайталау",
-                )}
-              </button>
-              <p>
-                {review.size
-                  ? at(
-                      `${review.size} слов ждут повторения. В этот список попадают ошибки и ответы с подсказкой.`,
-                      `${review.size} words to review: mistakes and assisted answers.`,
-                      `${review.size} сөзді қайталау керек: қателер мен көмектесілген жауаптар.`,
-                    )
-                  : progress.attempts.some((a) => a.mode === "understanding")
-                    ? at(
-                        "Все отмеченные слова повторены без подсказки. Можно начать новую тренировку.",
-                        "All flagged words were reviewed without hints. Start another practice.",
-                        "Белгіленген сөздер көмексіз қайталанды. Жаңа жаттығуды бастауға болады.",
-                      )
-                    : at(
-                        "После первых заданий здесь появятся слова для повторения.",
-                        "Review words appear after your first attempts.",
-                        "Алғашқы тапсырмалардан кейін қайталайтын сөздер пайда болады.",
-                      )}
-              </p>
-            </div>
-          </section>
         </>
       )}
       {progress.error && <p role="alert">{progress.error}</p>}

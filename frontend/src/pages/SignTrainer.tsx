@@ -1,6 +1,5 @@
 import { readTests } from "../sign/levelTests";
 import { lazyPage } from "../lazyPage";
-import { LearningHome } from "./LearningHome";
 import { SignCourses } from "./SignCourses";
 import { useChooseSignLang } from "../components/SignLangSwitcher";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
@@ -9,6 +8,7 @@ import {
   useSearchParams,
   useLocation,
   useNavigate,
+  Navigate,
 } from "react-router-dom";
 import {
   ArrowLeft,
@@ -115,7 +115,8 @@ function CourseHome({ lang }: { lang: "rsl" | "ksl" }) {
   useEffect(() => {
     if (current !== lang) choose(lang);
   }, [lang]); // eslint-disable-line react-hooks/exhaustive-deps
-  return current === lang ? <LearningHome /> : <Loading />;
+  // One entry per course: the level-based course at /course.
+  return current === lang ? <Navigate to="/course" replace /> : <Loading />;
 }
 export function SignCourseCatalog() {
   const [params] = useSearchParams();
@@ -128,6 +129,8 @@ export function SignCourseCatalog() {
     if (want !== "rsl" && want !== "ksl") return <SignCourses />;
     return <CourseHome lang={want} />;
   }
+  // Old stage pages now live inside the course levels.
+  if (params.get("stage")) return <Navigate to={`/course?level=${stage.id >= 3 ? "A2" : "A1"}`} replace />;
   // ҚЖЯ has its own levels (Kazakh alphabet, SURDO.KZ topics, phrases and dialogues).
   if (lang === "ksl")
     return (

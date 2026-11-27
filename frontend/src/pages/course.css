@@ -1069,3 +1069,42 @@ button.ksl-topic-card { padding: 0; text-align: left; font: inherit; cursor: poi
   &:hover { border-color: var(--p-text); transform: translateY(-1px); }
   &:hover > svg { color: var(--p-text); transform: translateX(3px) rotate(0); }
 }
+
+/* B2 page in the same calm language as the level track. */
+:root .product-ui[data-product-ui][data-product-theme] .course .b2-plain {
+  display: grid; gap: 18px;
+  & .b2-track { padding: 20px; border-radius: 22px; background: var(--p-surface); border: 1px solid var(--p-line); }
+  & .b2-track h2 { margin: 0 0 14px; font-size: 20px; }
+  & .b2-track ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+  & .b2-track li > :is(button, div) {
+    width: 100%; height: 100%; display: grid; gap: 4px; align-content: start; padding: 14px 16px; text-align: left;
+    border: 1px solid var(--p-line); border-radius: 16px; background: var(--p-surface); color: var(--p-text); font: inherit;
+  }
+  & .b2-track li > button { cursor: pointer; transition: border-color .2s, background .2s; }
+  & .b2-track li > button:hover { border-color: var(--p-text); }
+  & .b2-track .b2-goal > div { background: var(--p-primary); color: var(--p-on-primary); border-color: var(--p-primary); }
+  & .b2-track .b2-goal .lvl-desc { color: color-mix(in srgb, var(--p-on-primary) 70%, transparent); }
+  & .lvl-head { display: flex; align-items: baseline; gap: 8px; }
+  & .lvl-head b { font-size: 22px; font-weight: 750; letter-spacing: -0.02em; }
+  & .lvl-head > span { font-size: 15px; font-weight: 600; }
+  & .lvl-done { margin-left: auto; color: #1f9d63; align-self: center; }
+  & .lvl-desc { font-size: 13px; line-height: 1.35; color: var(--p-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  & .lvl-progress { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+  & .lvl-bar { flex: 1; height: 3px; border-radius: 3px; background: var(--p-line); overflow: hidden; }
+  & .lvl-bar i { display: block; height: 100%; background: currentColor; }
+  & .lvl-progress small { font-size: 12px; color: var(--p-muted); }
+  & .b2-heading { margin: 10px 0 0; font-size: 22px; }
+  & .b2-skills--photo { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+  & .b2-skill-photo { margin: 0; padding: 10px 10px 16px; border-radius: 20px; background: var(--p-surface); border: 1px solid var(--p-line); }
+  & .b2-skill-photo img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 14px; margin-bottom: 12px; }
+  & .b2-skill-photo h3 { margin: 0 6px 4px; font-size: 16px; }
+  & .b2-skill-photo p { margin: 0 6px; font-size: 13.5px; line-height: 1.45; color: var(--p-muted); }
+  & .b2-note { margin: 0; padding: 16px 18px; border-radius: 16px; background: var(--p-subtle); color: var(--p-muted); font-size: 14px; line-height: 1.5; }
+  & .b2-note strong { color: var(--p-text); }
+  @media (max-width: 900px) {
+    & .b2-track ol, & .b2-skills--photo { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+}
+:root .product-ui[data-product-ui][data-product-theme] .course .course-extra { margin-top: 28px; }
+:root .product-ui[data-product-ui][data-product-theme] .course .course-before-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 900px) { :root .product-ui[data-product-ui][data-product-theme] .course .course-before-grid { grid-template-columns: 1fr; } }
