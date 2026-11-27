@@ -241,31 +241,9 @@ const EXTRA_PRACTICE = () => [
   { to: "/live-practice", photo: "/images/rsl-units/17.webp", title: at("Живая практика", "Live practice", "Тірі тәжірибе"), text: at("Зеркало и где найти собеседников", "Mirror and where to find signers", "Айна және серіктестер") },
 ];
 
-function B2Roadmap({ count, onPick }: { count: (l: CefrLevel) => number[]; onPick: (l: CefrLevel) => void }) {
-  const path = LEVELS.slice(0, 3);
+function B2Roadmap(_props: { count: (l: CefrLevel) => number[]; onPick: (l: CefrLevel) => void }) {
   return (
     <div className="b2 b2-plain course-anim">
-      <section className="b2-track" aria-label={at("Ваш путь к B2", "Your path to B2", "B2-ге жол")}>
-        <h2>{at("Ваш путь к B2", "Your path to B2", "B2-ге жол")}</h2>
-        <ol>
-          {path.map((l) => {
-            const [d, t] = count(l.id);
-            return (
-              <li key={l.id}>
-                <button onClick={() => onPick(l.id)}>
-                  <LevelTabBody id={l.title} name={l.name} desc={l.desc} done={d} total={t} />
-                </button>
-              </li>
-            );
-          })}
-          <li className="b2-goal">
-            <div>
-              <span className="lvl-head"><b>B2+</b><span>{at("Свобода", "Fluency", "Еркіндік")}</span></span>
-              <span className="lvl-desc">{at("Цель курса", "The goal", "Курстың мақсаты")}</span>
-            </div>
-          </li>
-        </ol>
-      </section>
 
       <h2 className="b2-heading">{at("Что умеет человек на B2", "What a B2 signer can do", "B2 деңгейінде не істей алады")}</h2>
       <div className="b2-skills b2-skills--photo">

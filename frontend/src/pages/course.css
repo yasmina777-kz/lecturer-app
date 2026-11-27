@@ -1109,3 +1109,31 @@ button.ksl-topic-card { padding: 0; text-align: left; font: inherit; cursor: poi
 :root .product-ui[data-product-ui][data-product-theme] .course .course-extra { margin-top: 28px; }
 :root .product-ui[data-product-ui][data-product-theme] .course .course-before-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 @media (max-width: 900px) { :root .product-ui[data-product-ui][data-product-theme] .course .course-before-grid { grid-template-columns: 1fr; } }
+
+/* Levels as a path: nodes on one line instead of cards. */
+:root .product-ui[data-product-ui][data-product-theme] .course .course-levels {
+  background: transparent; border: 0; padding: 10px 0 6px; border-radius: 0; gap: 12px;
+  display: grid !important; grid-template-columns: none !important; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr);
+  & button.lvl-tab {
+    position: relative; justify-items: center; text-align: center; gap: 3px; padding: 6px 4px 8px;
+    background: transparent !important; box-shadow: none !important; border-radius: 12px;
+  }
+  & button.lvl-tab::before { display: none !important; }
+  & button.lvl-tab:hover { background: transparent; }
+  & button.lvl-tab:hover .lvl-node { border-color: var(--p-blue); }
+  & .lvl-line { position: absolute; top: 16px; left: 50%; width: calc(100% + 12px); height: 3px; border-radius: 3px; background: var(--p-line); overflow: hidden; }
+  & .lvl-line i { display: block; height: 100%; background: var(--p-blue); border-radius: inherit; }
+  & button.lvl-tab:last-child .lvl-line { display: none; }
+  & .lvl-node {
+    position: relative; z-index: 1; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center;
+    background: var(--p-bg); border: 2px solid var(--p-line); color: #fff; transition: border-color .2s, background .2s, box-shadow .2s;
+  }
+  & .lvl-node.is-full { background: #1f9d63; border-color: #1f9d63; }
+  & button.lvl-tab[aria-selected="true"] .lvl-node { background: var(--p-blue); border-color: var(--p-blue); box-shadow: 0 0 0 6px color-mix(in srgb, var(--p-blue) 16%, transparent); }
+  & .lvl-label { margin-top: 8px; font-size: 14px; font-weight: 600; color: var(--p-muted); }
+  & .lvl-label b { font-size: 18px; font-weight: 750; color: var(--p-text); margin-right: 2px; }
+  & button.lvl-tab[aria-selected="true"] .lvl-label, & button.lvl-tab[aria-selected="true"] .lvl-label b { color: var(--p-blue); }
+  & .lvl-count { font-size: 12px; color: var(--p-muted); }
+  & .lvl-desc { max-width: 240px; font-size: 12.5px; color: var(--p-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; opacity: 0; height: 0; transition: opacity .2s; }
+  & button.lvl-tab[aria-selected="true"] .lvl-desc { opacity: 1; height: auto; }
+}
