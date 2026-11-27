@@ -166,14 +166,13 @@
 }
 
 
-/* Header art: the landing's reaching hands, faded into the page on the left. */
-.sign-courses-head { align-items: center; flex-wrap: nowrap; }
-.sign-courses-art {
-  flex: 1; max-width: 520px; height: 150px; border-radius: 22px; overflow: hidden; position: relative;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 30%);
-          mask-image: linear-gradient(90deg, transparent 0%, #000 30%);
+/* Header: a short on-topic line in the middle of the free space. */
+.sign-courses-head { display: grid; grid-template-columns: auto 1fr; align-items: center; }
+.sign-courses-quote {
+  justify-self: center; max-width: 440px; margin: 0; text-align: center;
+  font-size: 18px; line-height: 1.5; color: var(--p-text, #14171f); font-style: italic;
 }
-.sign-courses-art img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 78%; display: block; animation: sign-courses-drift 18s ease-in-out infinite alternate; }
-@keyframes sign-courses-drift { from { transform: scale(1.02); } to { transform: scale(1.1); } }
-@media (prefers-reduced-motion: reduce) { .sign-courses-art img { animation: none; } }
-@media (max-width: 760px) { .sign-courses-art { display: none; } }
+.sign-courses-quote::before, .sign-courses-quote::after { color: var(--p-blue, #2e6bff); font-style: normal; font-weight: 700; }
+.sign-courses-quote::before { content: "« "; }
+.sign-courses-quote::after { content: " »"; }
+@media (max-width: 760px) { .sign-courses-head { grid-template-columns: 1fr; } .sign-courses-quote { justify-self: start; text-align: left; font-size: 15px; } }
