@@ -3790,37 +3790,3 @@
     & .settings-grid { grid-template-columns: 1fr; }
   }
 }
-
-/* Sidebar: course mini cards with progress and the daily goal. */
-:root .product-ui[data-product-ui][data-product-theme] .sidebar {
-  & nav .sidebar-course { display: flex; align-items: center; gap: 10px; min-height: 0; padding: 8px; border-radius: 14px; border: 1px solid transparent; }
-  & nav .sidebar-course:hover { background: var(--p-surface); border-color: var(--p-line); }
-  & nav .sidebar-course.active { background: var(--p-surface); border-color: var(--p-blue); box-shadow: 0 4px 14px #2e6bff14; }
-  & .sidebar-course-thumb { position: relative; flex-shrink: 0; width: 40px; height: 40px; }
-  & .sidebar-course-thumb img { width: 40px; height: 40px; border-radius: 11px; object-fit: cover; display: block; }
-  & .sidebar-course-thumb i { position: absolute; right: -4px; bottom: -4px; width: auto; height: auto; padding: 1px 4px; border-radius: 5px; font-size: 8.5px; background: var(--p-surface); border: 1px solid var(--p-line); }
-  & nav .sidebar-course.active .sidebar-course-thumb i { background: var(--p-blue); color: #fff; border-color: var(--p-blue); }
-  & .sidebar-course-text { display: grid; gap: 3px; min-width: 0; flex: 1; }
-  & .sidebar-course-text b { font-size: 13px; font-weight: 650; color: var(--p-text); line-height: 1.2; }
-  & .sidebar-course-text small { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--p-muted); }
-  & .sidebar-course-bar { display: block; height: 4px; border-radius: 4px; background: var(--p-subtle); overflow: hidden; }
-  & .sidebar-course-bar span { display: block; height: 100%; background: var(--p-blue); border-radius: inherit; }
-  & .sidebar-goal {
-    margin-top: 14px; margin-bottom: 10px; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 8px 10px;
-    padding: 12px; border-radius: 16px; background: var(--p-surface); border: 1px solid var(--p-line);
-  }
-  & .sidebar-goal-ring {
-    width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 14px; color: var(--p-text);
-    background: radial-gradient(closest-side, var(--p-surface) 76%, transparent 78%), conic-gradient(var(--p-blue) var(--p), var(--p-subtle) 0);
-  }
-  & .sidebar-goal-text { display: grid; gap: 2px; min-width: 0; }
-  & .sidebar-goal-text b { font-size: 12.5px; line-height: 1.25; color: var(--p-text); }
-  & .sidebar-goal-text small { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--p-muted); }
-  & .sidebar-goal-text small svg { color: #f97316; }
-  & .sidebar-goal-go {
-    grid-column: 1 / -1; display: flex; justify-content: center; align-items: center; height: 34px; border-radius: 10px;
-    background: var(--p-blue); color: #fff; font-size: 13px; font-weight: 650; text-decoration: none;
-  }
-  & .sidebar-goal-go:hover { filter: brightness(1.08); }
-  & .sidebar-goal + .sidebar-bottom { margin-top: auto; }
-}
