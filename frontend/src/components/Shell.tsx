@@ -123,10 +123,10 @@ export function Shell() {
           type="button"
           className="icon-button sidebar-collapse"
           onClick={toggleSidebar}
-          aria-label={at("Скрыть меню", "Hide menu", "Мәзірді жасыру")}
-          title={at("Скрыть меню", "Hide menu", "Мәзірді жасыру")}
+          aria-label={collapsed ? at("Развернуть меню", "Expand menu", "Мәзірді ашу") : at("Свернуть меню", "Collapse menu", "Мәзірді жию")}
+          title={collapsed ? at("Развернуть меню", "Expand menu", "Мәзірді ашу") : at("Свернуть меню", "Collapse menu", "Мәзірді жию")}
         >
-          <PanelLeftClose size={18} />
+          {collapsed ? <PanelLeftOpen size={18} /> : <PanelLeftClose size={18} />}
         </button>
         <button
           className="icon-button close-menu"
@@ -148,6 +148,7 @@ export function Shell() {
               to={to}
               className={active ? "active" : undefined}
               aria-current={active ? "page" : undefined}
+              title={collapsed ? label : undefined}
               onClick={() => setMenu(false)}
             >
               <Icon size={19} />
@@ -169,6 +170,7 @@ export function Shell() {
                   to={`/learn?lang=${code}`}
                   className={on ? "active" : undefined}
                   aria-current={on ? "page" : undefined}
+                  title={collapsed ? label : undefined}
                   onClick={() => {
                     chooseSignLang(code);
                     setMenu(false);
@@ -223,17 +225,6 @@ export function Shell() {
           </div>
         </div>
       </aside>
-      {collapsed && (
-        <button
-          type="button"
-          className="sidebar-reopen"
-          onClick={toggleSidebar}
-          aria-label={at("Показать меню", "Show menu", "Мәзірді көрсету")}
-          title={at("Показать меню", "Show menu", "Мәзірді көрсету")}
-        >
-          <PanelLeftOpen size={18} />
-        </button>
-      )}
       <div className="app-main">
         <header className="topbar topbar-menu-only">
           <div className="topbar-left">

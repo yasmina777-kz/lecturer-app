@@ -66,13 +66,6 @@ export function SignCourses() {
           <h1>{at("Курсы", "Courses", "Курстар")}</h1>
           <p>{at("У каждого языка своя азбука, словарь и прогресс.", "Each language has its own alphabet, dictionary and progress.", "Әр тілдің өз әліпбиі, сөздігі және үлгерімі бар.")}</p>
         </div>
-        <p className="sign-courses-quote">
-          {at(
-            "Жестовый язык — не пантомима, а полноценный язык со своей грамматикой, юмором и диалектами.",
-            "Sign language is not mime — it is a full language with its own grammar, humour and dialects.",
-            "Ым тілі — пантомима емес, өз грамматикасы, әзілі мен диалектілері бар толыққанды тіл.",
-          )}
-        </p>
       </header>
       <div className="sign-courses-grid">
         {courses.map((c) => {

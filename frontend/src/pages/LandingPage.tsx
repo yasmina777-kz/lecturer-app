@@ -118,10 +118,6 @@ export default function LandingPage() {
             <div className={`lp-scene lp-scene--${heroScene}`}>
               <img className="lp-scene-img" src={`/images/landing-v2/hero-${heroScene}.webp`} alt="" />
               <div className="lp-scene-copy">
-                <span className="lp-kicker">
-                  <img src="/images/brand/ai-mentor-symbol-v1.png" width={22} height={22} alt="" aria-hidden="true" />
-                  {at("Русский и казахский жестовые языки", "Russian and Kazakh sign languages", "Орыс және қазақ ым тілдері")}
-                </span>
                 <h1>
                   {at("Понимать друг друга\nбез слов", "Understand each other\nwithout words", "Бірін-бірі\nсөзсіз түсіну")}
                 </h1>
