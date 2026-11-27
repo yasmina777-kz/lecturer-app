@@ -27,6 +27,11 @@ export default function LandingPage() {
   const [motionPaused, setMotionPaused] = useState(false);
   const [audience, setAudience] = useState<"student" | "teacher">("student");
   const root = useRef<HTMLDivElement>(null);
+  // Hero photo variants for comparison: /?hero=reach|dialog|hold|meadow
+  const heroScene = (() => {
+    const v = new URLSearchParams(window.location.search).get("hero");
+    return v && ["reach", "dialog", "hold", "meadow"].includes(v) ? v : "reach";
+  })();
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
   useEffect(() => {
@@ -110,35 +115,38 @@ export default function LandingPage() {
         </header>
         <main>
           <section className="lp-hero">
-            <div className="lp-scene">
-              <img className="lp-scene-img" src="/images/landing-v2/hero-meadow.webp" alt="" />
+            <div className={`lp-scene lp-scene--${heroScene}`}>
+              <img className="lp-scene-img" src={`/images/landing-v2/hero-${heroScene}.webp`} alt="" />
               <div className="lp-scene-copy">
-                <img className="lp-mark" src="/images/brand/ai-mentor-symbol-v1.png" width={44} height={44} alt="" aria-hidden="true" />
+                <span className="lp-kicker">
+                  <img src="/images/brand/ai-mentor-symbol-v1.png" width={22} height={22} alt="" aria-hidden="true" />
+                  {at("Русский и казахский жестовые языки", "Russian and Kazakh sign languages", "Орыс және қазақ ым тілдері")}
+                </span>
                 <h1>
-                  {at("Язык, который видно", "A language you can see", "Көзбен көретін тіл")}
+                  {at("Понимать друг друга\nбез слов", "Understand each other\nwithout words", "Бірін-бірі\nсөзсіз түсіну")}
                 </h1>
                 <p>
                   {at(
-                    "Русский и казахский жестовые языки с нуля: видео носителей, 3D-аватар и проверка жестов камерой — от алфавита до первых диалогов.",
-                    "Russian and Kazakh sign languages from zero: native signer videos, a 3D avatar and camera checks — from the alphabet to first dialogues.",
-                    "Орыс және қазақ ым тілдері нөлден: ана тілі иелерінің бейнелері, 3D-аватар және камерамен тексеру — әліпбиден алғашқы диалогтарға дейін.",
+                    "Короткие уроки с носителями языка, 3D-аватар, которого можно замедлить и повернуть, и камера, которая подскажет, верно ли вы показали жест.",
+                    "Short lessons with native signers, a 3D avatar you can slow down and rotate, and a camera that tells you whether your sign is right.",
+                    "Ана тілі иелерімен қысқа сабақтар, баяулатып әрі бұруға болатын 3D-аватар және ымды дұрыс көрсеткеніңізді айтатын камера.",
                   )}
                 </p>
                 <div className="lp-actions">
                   <Link to={destination} className="lp-cta">
-                    {user ? t("Продолжить обучение") : t("Начать обучение")}
+                    {user ? t("Продолжить обучение") : at("Начать бесплатно", "Start learning", "Оқуды бастау")}
                     <ArrowUpRight size={18} />
                   </Link>
                   <a href="#experience" className="lp-ghost">
                     <Play size={14} />
-                    {t("Посмотреть, как работает")}
+                    {at("Как проходит урок", "How a lesson works", "Сабақ қалай өтеді")}
                   </a>
                 </div>
               </div>
               <dl className="lp-stats">
-                <div><dt>1 750+</dt><dd>{at("жестов на видео", "signs on video", "бейнедегі ым")}</dd></div>
-                <div><dt>РЖЯ · ҚЖЯ</dt><dd>{at("два жестовых языка", "two sign languages", "екі ым тілі")}</dd></div>
-                <div><dt>A1 → B1</dt><dd>{at("уровни с нуля", "levels from zero", "нөлден деңгейлер")}</dd></div>
+                <div><dt>33 + 42</dt><dd>{at("буквы дактиля РЖЯ и ҚЖЯ", "fingerspelling letters, RSL + KSL", "РЖЯ және ҚЖЯ дактиль әріптері")}</dd></div>
+                <div><dt>1 750+</dt><dd>{at("слов на видео носителей", "words on native signer video", "ана тілі иелерінің бейнесіндегі сөз")}</dd></div>
+                <div><dt>3</dt><dd>{at("уровня с нуля: A1, A2, B1", "levels from zero: A1, A2, B1", "нөлден деңгей: A1, A2, B1")}</dd></div>
               </dl>
             </div>
           </section>
