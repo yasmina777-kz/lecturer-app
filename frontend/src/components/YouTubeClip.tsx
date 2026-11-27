@@ -10,6 +10,9 @@ type YTPlayer = {
   loadVideoById: (o: { videoId: string; startSeconds?: number; endSeconds?: number }) => void;
   seekTo: (s: number, allow: boolean) => void;
   playVideo: () => void;
+  pauseVideo: () => void;
+  getPlayerState: () => number;
+  setPlaybackQuality?: (q: string) => void;
   mute: () => void;
   destroy: () => void;
 };
@@ -86,7 +89,11 @@ export function YouTubeClip({
           playsinline: 1,
           rel: 0,
           modestbranding: 1,
-          controls: 1,
+          controls: 0,
+          disablekb: 1,
+          iv_load_policy: 3,
+          fs: 0,
+          vq: "hd1080",
           enablejsapi: 1,
           // Without the page origin the player cannot post its events back.
           origin: window.location.origin,
@@ -104,7 +111,10 @@ export function YouTubeClip({
             else e.target.playVideo();
           },
           onStateChange: (e: { data: number; target: YTPlayer }) => {
-            if (e.data === YT.PlayerState.PLAYING) setPlaying(true);
+            if (e.data === YT.PlayerState.PLAYING) {
+              setPlaying(true);
+              e.target.setPlaybackQuality?.("hd1080");
+            }
             if (e.data === YT.PlayerState.ENDED && clip.current.loop) {
               e.target.seekTo(clip.current.start ?? 0, true);
               e.target.playVideo();
@@ -130,7 +140,20 @@ export function YouTubeClip({
 
   return (
     <div className={`yt-clip ${className}`} title={title}>
+      {/* Rendered at three times the size and scaled down: YouTube picks the stream
+          quality from the player size, so a small player would get 240p. */}
       <div ref={host} className="yt-clip-host" />
+      <button
+        type="button"
+        className="yt-clip-hit"
+        aria-label="Пауза / продолжить"
+        onClick={() => {
+          const p = player.current;
+          if (!p || !ready.current) return;
+          if (p.getPlayerState() === 1) p.pauseVideo();
+          else p.playVideo();
+        }}
+      />
       <img
         className={`yt-clip-poster${playing ? " is-hidden" : ""}`}
         src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`}
