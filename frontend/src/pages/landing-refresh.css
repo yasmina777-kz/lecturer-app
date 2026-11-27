@@ -49,7 +49,49 @@
   & .mentor-hero-copy > :nth-child(4) { animation-delay: .24s; }
   & .mentor-hero-copy > :nth-child(5) { animation-delay: .32s; }
   & .mentor-hero-copy > p { max-width: 520px; }
+
+  /* Hero: stats and floating product chips */
+  & .hero-stats { display: flex; gap: 28px; margin: 34px 0 0; padding: 22px 0 0; border-top: 1px solid var(--p-line); max-width: 560px; }
+  & .hero-stats div { display: grid; gap: 4px; }
+  & .hero-stats dt { font-size: 28px; font-weight: 750; letter-spacing: -0.02em; color: var(--p-text); }
+  & .hero-stats dd { margin: 0; font-size: 13px; line-height: 1.35; color: var(--p-muted); max-width: 150px; }
+  & .landing-glow { z-index: 0; }
+  & .landing-hero-image { z-index: 1; }
+  & .hero-chip {
+    position: absolute; z-index: 2; display: flex; align-items: center; gap: 10px; padding: 12px 16px;
+    border-radius: 18px; background: color-mix(in srgb, var(--p-surface) 82%, transparent);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border: 1px solid color-mix(in srgb, var(--p-line) 70%, transparent);
+    box-shadow: 0 18px 40px #1a2a5a1f; color: var(--p-text);
+    animation: lr-chip-in .8s .5s cubic-bezier(.2,.7,.2,1) both, lr-float 6s 1.3s ease-in-out infinite alternate;
+  }
+  & .hero-chip small { display: block; font-size: 12px; color: var(--p-muted); }
+  & .hero-chip b { font-size: 15px; }
+  & .hero-chip--check { left: 14%; top: 34%; }
+  & .hero-chip--level { left: 4%; bottom: 20%; flex-direction: column; align-items: flex-start; gap: 6px; animation-delay: .75s, 2s; }
+  & .hero-chip-icon { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: #1f9d63; color: #fff; }
+  & .hero-chip-levels { display: flex; gap: 6px; }
+  & .hero-chip-levels i { font-style: normal; font-weight: 750; font-size: 13px; padding: 4px 10px; border-radius: 999px; background: var(--p-blue-soft); color: var(--p-blue); }
+  & .hero-chip-levels i:first-child { background: var(--p-blue); color: #fff; }
+  &.motion-paused .hero-chip { animation: none; }
+
+  /* Path cards: real photos instead of 3D hands */
+  & .feature-story { display: flex; flex-direction: column; min-height: 0; transition: transform .3s ease, box-shadow .3s ease; }
+  & .feature-story:hover { transform: translateY(-4px); box-shadow: 0 20px 40px #10182814; }
+  & .feature-story-image { position: relative; order: -1; width: auto; height: 210px; margin: 10px 10px 0; border-radius: 18px; overflow: hidden; }
+  & .feature-story-image img { object-fit: cover; object-position: center; transform: none; border-radius: 18px; }
+  & .feature-story:hover .feature-story-image img { transform: scale(1.04); }
+  & .feature-story-copy { padding: 20px 24px 22px; position: relative; }
+  & .feature-story-copy::before { position: static; margin-bottom: 12px; background: var(--p-blue); }
+
+  /* «Details» block: a real photo in the camera frame */
+  & .landing-detail-photo { inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 24px; }
+  & .stage-photo { object-fit: cover; border-radius: 18px; }
   @media (max-width: 720px) {
+    & .hero-chip { display: none; }
+    & .hero-stats { gap: 18px; }
+    & .hero-stats dt { font-size: 22px; }
+    & .feature-story-image { height: 190px; }
     & .mentor-header.is-scrolled nav { display: none; }
     & .mentor-header nav { overflow-x: auto; scrollbar-width: none; flex-wrap: nowrap; }
     & .mentor-header nav a { white-space: nowrap; }
@@ -57,6 +99,8 @@
 }
 @keyframes lr-header-in { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: none; } }
 @keyframes lr-fade-down { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+@keyframes lr-chip-in { from { opacity: 0; transform: translateY(16px) scale(.96); } to { opacity: 1; transform: none; } }
+@keyframes lr-float { from { translate: 0 0; } to { translate: 0 -8px; } }
 @keyframes lr-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) {
   :root .landing-surface[data-product-ui][data-product-theme] .landing-site :is(.mentor-header, .mentor-header nav a, .mentor-hero-copy > *) { animation: none; }

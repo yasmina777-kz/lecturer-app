@@ -1,0 +1,20 @@
+.landing-glow { position: absolute; inset: -6% -12% -4% -30%; z-index: 0; pointer-events: none; overflow: hidden;
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 60% 55%, #000 55%, transparent 100%);
+          mask-image: radial-gradient(ellipse 70% 70% at 60% 55%, #000 55%, transparent 100%); }
+.landing-glow > span { position: absolute; display: block; border-radius: 50%; will-change: transform; }
+.lg-halo { left: 38%; top: 8%; width: 52%; aspect-ratio: 1; background: radial-gradient(circle, #ffffff 0%, #eef3ff 40%, transparent 70%); filter: blur(10px); }
+.lg-field { filter: blur(70px); opacity: .85; }
+.lg-field--a { left: 30%; top: 18%; width: 46%; aspect-ratio: 1.2; background: #7aa0ff; animation: lg-drift-a 22s ease-in-out infinite alternate; }
+.lg-field--b { left: 58%; top: 34%; width: 38%; aspect-ratio: 1; background: #c4b2ff; opacity: .7; animation: lg-drift-b 26s ease-in-out infinite alternate; }
+.lg-field--c { left: 44%; top: 58%; width: 34%; aspect-ratio: 1.4; background: #ffd9c7; opacity: .55; animation: lg-drift-c 30s ease-in-out infinite alternate; }
+.lg-floor { left: 40%; bottom: -6%; width: 50%; height: 16%; background: radial-gradient(ellipse, #1a2a5a33, transparent 70%); filter: blur(12px); border-radius: 50%; }
+.lg-grain { inset: 0; border-radius: 0; opacity: .1; mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+[data-product-theme="dark"] .lg-halo { background: radial-gradient(circle, #3a4a8a 0%, #1d2550 40%, transparent 70%); }
+[data-product-theme="dark"] .lg-field { opacity: .55; }
+[data-product-theme="dark"] .lg-field--c { opacity: .25; }
+.motion-paused .landing-glow > span { animation-play-state: paused; }
+@keyframes lg-drift-a { to { transform: translate(-8%, 10%) scale(1.12); } }
+@keyframes lg-drift-b { to { transform: translate(10%, -12%) scale(.9); } }
+@keyframes lg-drift-c { to { transform: translate(-12%, -8%) scale(1.15); } }
+@media (prefers-reduced-motion: reduce) { .landing-glow > span { animation: none; } }

@@ -15,7 +15,7 @@ import "./landing-page.css";
 import "./landing-reference.css";
 import "./landing-motion.css";
 import "./landing-refresh.css";
-import { LandingWaves } from "../components/LandingWaves";
+import { LandingGlow } from "../components/LandingGlow";
 import { Brand } from "../components/UI";
 import { ThemeSwitcher } from "../components/ThemeSwitcher";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
@@ -153,15 +153,11 @@ export default function LandingPage() {
                   {t("Посмотреть, как работает")}
                 </a>
               </div>
-              <div className="mentor-hero-note">
-                <span>RU / EN / KZ</span>
-                <i />
-                {at(
-                  "Смотрите. Повторяйте. Общайтесь.",
-                  "Watch. Practise. Connect.",
-                  "Қараңыз. Қайталаңыз. Тілдесіңіз.",
-                )}
-              </div>
+              <dl className="hero-stats">
+                <div><dt>1 750+</dt><dd>{at("жестов на видео носителей", "signs on native signer video", "ана тілі иелерінің бейнесіндегі ым")}</dd></div>
+                <div><dt>2</dt><dd>{at("жестовых языка: РЖЯ и ҚЖЯ", "sign languages: RSL and KSL", "ым тілі: РЖЯ және ҚЖЯ")}</dd></div>
+                <div><dt>A1–B1</dt><dd>{at("уровни с нуля", "levels from zero", "нөлден деңгейлер")}</dd></div>
+              </dl>
             </div>
             <div
               id="mentor-avatar"
@@ -172,12 +168,20 @@ export default function LandingPage() {
                 "Мира виртуалды тәлімгеріңіз",
               )}
             >
-              <LandingWaves paused={motionPaused} />
+              <LandingGlow />
               <img
                 className="landing-hero-image"
                 src="/images/landing-v2/mentor-cutout.webp"
                 alt=""
               />
+              <div className="hero-chip hero-chip--check" aria-hidden="true">
+                <span className="hero-chip-icon"><Check size={16} /></span>
+                <span><b>«Привет»</b><small>{at("жест показан верно", "sign is correct", "ым дұрыс көрсетілді")}</small></span>
+              </div>
+              <div className="hero-chip hero-chip--level" aria-hidden="true">
+                <span className="hero-chip-levels"><i>A1</i><i>A2</i><i>B1</i></span>
+                <small>{at("от алфавита до диалогов", "from alphabet to dialogues", "әліпбиден диалогқа дейін")}</small>
+              </div>
             </div>
             <a className="mentor-scroll" href="#possibilities">
               <ArrowDown size={15} />
@@ -332,7 +336,7 @@ export default function LandingPage() {
             <div className="feature-stories">
               {[
                 {
-                  image: "landing-v2/hand-circle",
+                  image: "rsl-units/03",
                   step: 1,
                   title: at(
                     "Буквы и дактиль",
@@ -356,7 +360,7 @@ export default function LandingPage() {
                   ),
                 },
                 {
-                  image: "landing-v2/hand-open",
+                  image: "rsl-units/01",
                   step: 2,
                   title: at(
                     "Первые слова",
@@ -380,7 +384,7 @@ export default function LandingPage() {
                   ),
                 },
                 {
-                  image: "landing-v2/hand-v",
+                  image: "rsl-units/25",
                   step: 3,
                   title: at(
                     "Фразы и знакомство",
@@ -650,8 +654,8 @@ export default function LandingPage() {
                   ) : step === 2 ? (
                     <>
                       <img
-                        className="stage-hand"
-                        src="/images/landing-v2/hand-v.webp"
+                        className="stage-hand stage-photo"
+                        src="/images/landing-v2/hands-detail.webp"
                         alt=""
                       />
                       <h3>

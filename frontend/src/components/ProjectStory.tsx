@@ -185,8 +185,8 @@ export function ProjectStory({ destination }: { destination: string }) {
         <div className="universe-stage">
           <div className="detail-hand-frame">
             <img
-              className="landing-detail-hands"
-              src="/images/landing-v2/hand-v.webp"
+              className="landing-detail-hands landing-detail-photo"
+              src="/images/landing-v2/hands-detail.webp"
               alt=""
               loading="lazy"
             />
