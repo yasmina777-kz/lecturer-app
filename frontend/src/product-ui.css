@@ -3829,32 +3829,27 @@
 :root .product-ui[data-product-ui][data-product-theme] {
   & .sidebar { transition: width .22s ease, padding .22s ease; }
   & .app-main { transition: margin-left .22s ease, width .22s ease; }
-  & .sidebar .sidebar-collapse {
-    position: absolute; top: 24px; right: 10px; width: 32px; height: 32px; display: grid; place-items: center;
-    border: 0; border-radius: 9px; background: transparent; color: var(--p-muted); cursor: pointer;
-  }
-  & .sidebar .sidebar-collapse:hover { background: var(--p-subtle); color: var(--p-text); }
+  @media (min-width: 901px) { & .sidebar .brand-link { cursor: pointer; } }
   @media (min-width: 901px) {
-    &.sidebar-collapsed .sidebar { width: 76px; padding: 22px 12px 16px; align-items: center; overflow: hidden; }
-    &.sidebar-collapsed .app-main { margin-left: 76px; width: calc(100% - 76px); }
+    &.sidebar-collapsed .sidebar { width: 64px; padding: 22px 8px 16px; align-items: center; overflow: hidden; }
+    &.sidebar-collapsed .app-main { margin-left: 64px; width: calc(100% - 64px); }
     &.sidebar-collapsed .sidebar .brand > span { display: none; }
     &.sidebar-collapsed .sidebar .brand-link { justify-content: center; }
-    &.sidebar-collapsed .sidebar .sidebar-collapse { position: static; margin: 10px auto 6px; }
     &.sidebar-collapsed .sidebar nav { width: 100%; align-items: center; }
     &.sidebar-collapsed .sidebar :is(nav, .sidebar-bottom) > a,
     &.sidebar-collapsed .sidebar .sidebar-courses a {
-      width: 48px; height: 48px; min-height: 48px; padding: 0; justify-content: center; gap: 0; font-size: 0; border-radius: 14px; margin-inline: auto;
+      width: 38px; height: 38px; min-height: 38px; padding: 0; justify-content: center; gap: 0; font-size: 0; border-radius: 11px; margin-inline: auto;
     }
-    &.sidebar-collapsed .sidebar :is(nav, .sidebar-bottom) > a svg { width: 20px; height: 20px; }
+    &.sidebar-collapsed .sidebar :is(nav, .sidebar-bottom) > a svg { width: 17px; height: 17px; }
+    &.sidebar-collapsed .sidebar .brand-symbol { width: 30px; height: 30px; }
+    &.sidebar-collapsed .sidebar nav { gap: 4px; margin-top: 14px; }
     &.sidebar-collapsed .sidebar nav > a::after, &.sidebar-collapsed .sidebar .sidebar-courses a::after { display: none; }
     &.sidebar-collapsed .sidebar .sidebar-courses { width: 100%; padding-top: 10px; justify-items: center; }
     &.sidebar-collapsed .sidebar .sidebar-courses > span { display: none; }
-    &.sidebar-collapsed .sidebar .sidebar-courses i { width: 34px; height: 26px; font-size: 10px; }
+    &.sidebar-collapsed .sidebar .sidebar-courses i { width: 30px; height: 22px; font-size: 9px; }
+    &.sidebar-collapsed .sidebar .user-avatar { width: 30px; height: 30px; font-size: 13px; }
     &.sidebar-collapsed .sidebar .sidebar-bottom { width: 100%; display: grid; justify-items: center; gap: 8px; }
     &.sidebar-collapsed .sidebar .user-row { justify-content: center; padding: 8px 0 0; }
     &.sidebar-collapsed .sidebar .user-row > :not(.user-avatar) { display: none; }
-  }
-  @media (max-width: 900px) {
-    & .sidebar .sidebar-collapse { display: none; }
   }
 }

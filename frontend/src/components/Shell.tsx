@@ -24,8 +24,6 @@ import {
   X,
   ArrowUpRight,
   Layers,
-  PanelLeftClose,
-  PanelLeftOpen,
 } from "lucide-react";
 import { useStudyTimer } from "../sign/dailyGoal";
 import { useAuth } from "../context/AuthContext";
@@ -116,18 +114,21 @@ export function Shell() {
     >
       {menu && <div className="mobile-scrim" onClick={() => setMenu(false)} />}
       <aside className={`sidebar ${menu ? "open" : ""}`}>
-        <Link to="/learn" className="brand-link" onClick={() => setMenu(false)}>
+        <Link
+          to="/learn"
+          className="brand-link"
+          title={collapsed ? at("Развернуть меню", "Expand menu", "Мәзірді ашу") : at("Свернуть меню", "Collapse menu", "Мәзірді жию")}
+          onClick={(e) => {
+            // Desktop: the logo folds the sidebar in and out; on phones it opens the courses.
+            if (window.matchMedia("(min-width: 901px)").matches) {
+              e.preventDefault();
+              toggleSidebar();
+            }
+            setMenu(false);
+          }}
+        >
           <Brand />
         </Link>
-        <button
-          type="button"
-          className="icon-button sidebar-collapse"
-          onClick={toggleSidebar}
-          aria-label={collapsed ? at("Развернуть меню", "Expand menu", "Мәзірді ашу") : at("Свернуть меню", "Collapse menu", "Мәзірді жию")}
-          title={collapsed ? at("Развернуть меню", "Expand menu", "Мәзірді ашу") : at("Свернуть меню", "Collapse menu", "Мәзірді жию")}
-        >
-          {collapsed ? <PanelLeftOpen size={18} /> : <PanelLeftClose size={18} />}
-        </button>
         <button
           className="icon-button close-menu"
           onClick={() => setMenu(false)}
