@@ -24,6 +24,8 @@ import {
   X,
   ArrowUpRight,
   Layers,
+  PanelLeftClose,
+  PanelLeftOpen,
 } from "lucide-react";
 import { useStudyTimer } from "../sign/dailyGoal";
 import { useAuth } from "../context/AuthContext";
@@ -31,6 +33,23 @@ import { Brand, ErrorMessage, messageOf } from "./UI";
 export function Shell() {
   const { user, logout } = useAuth();
   const [menu, setMenu] = useState(false);
+  // Desktop: the sidebar can be hidden; remembered per browser.
+  const [collapsed, setCollapsed] = useState(() => {
+    try {
+      return localStorage.getItem("sidebar-collapsed") === "1";
+    } catch {
+      return false;
+    }
+  });
+  const toggleSidebar = () =>
+    setCollapsed((c) => {
+      try {
+        localStorage.setItem("sidebar-collapsed", c ? "0" : "1");
+      } catch {
+        /* still toggles for this visit */
+      }
+      return !c;
+    });
   const [error, setError] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
@@ -93,13 +112,22 @@ export function Shell() {
       : "div";
   return (
     <Surface
-      className={`app-shell ${/^\/lectures\/[^/]+$/.test(location.pathname) ? "player-shell" : ""}`}
+      className={`app-shell ${/^\/lectures\/[^/]+$/.test(location.pathname) ? "player-shell" : ""}${collapsed ? " sidebar-collapsed" : ""}`}
     >
       {menu && <div className="mobile-scrim" onClick={() => setMenu(false)} />}
       <aside className={`sidebar ${menu ? "open" : ""}`}>
         <Link to="/learn" className="brand-link" onClick={() => setMenu(false)}>
           <Brand />
         </Link>
+        <button
+          type="button"
+          className="icon-button sidebar-collapse"
+          onClick={toggleSidebar}
+          aria-label={at("Скрыть меню", "Hide menu", "Мәзірді жасыру")}
+          title={at("Скрыть меню", "Hide menu", "Мәзірді жасыру")}
+        >
+          <PanelLeftClose size={18} />
+        </button>
         <button
           className="icon-button close-menu"
           onClick={() => setMenu(false)}
@@ -195,6 +223,17 @@ export function Shell() {
           </div>
         </div>
       </aside>
+      {collapsed && (
+        <button
+          type="button"
+          className="sidebar-reopen"
+          onClick={toggleSidebar}
+          aria-label={at("Показать меню", "Show menu", "Мәзірді көрсету")}
+          title={at("Показать меню", "Show menu", "Мәзірді көрсету")}
+        >
+          <PanelLeftOpen size={18} />
+        </button>
+      )}
       <div className="app-main">
         <header className="topbar topbar-menu-only">
           <div className="topbar-left">
